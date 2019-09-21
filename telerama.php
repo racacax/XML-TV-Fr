@@ -247,7 +247,7 @@ foreach ($channels as $channel1) {
                                         echo $json[$channel1] . '-' . $date . ' : OK http://api.telerama.fr/v1/programmes/telechargement?dates=' . $date . '&id_chaines=' . $channel1 . '&nb_par_page=1&page=' . ($rr * 8 + $rr1) . '&api_cle=apitel-5304b49c90511&api_signature=' . $hash . '&appareil=android_tablette' . chr(10);
                                         $hs = "OK";
                                     } else {
-                                        $get3 = gzdecode(file_get_contents('epg/telerama/' . $hash, gzencode($get3)));
+                                        $get3 = gzdecode(file_get_contents('epg/telerama/' . $hash));
                                         echo $json[$channel1] . '-' . $date . ' : OK Page ' . ($rr * 8 + $rr1) . chr(10);
                                     }
                                     if (preg_match('(a pas de programmes)', $get3)) {
@@ -258,7 +258,7 @@ foreach ($channels as $channel1) {
                                 }
                             }
                         } else {
-                            $get3 = gzdecode(file_get_contents('epg/telerama/' . $hash, gzencode($get3)));
+                            $get3 = gzdecode(file_get_contents('epg/telerama/' . $hash));
                             $get1 = json_decode($get3, true);
                             echo $json[$channel1] . '-' . $date . ' : OK Page ' . ($rr) . chr(10);
                             $hs = "OK";
