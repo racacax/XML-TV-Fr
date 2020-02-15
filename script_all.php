@@ -116,7 +116,7 @@ foreach($channels as $key => $channel)
     fwrite($out,'<channel id="'.$key.'">
     <display-name>'.$name.'</display-name>
     <icon src="'.$icon.'" />
-  </channel>');
+  </channel>'.chr(10));
 }
 
 
