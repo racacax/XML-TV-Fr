@@ -79,10 +79,10 @@ foreach($channels_key as $channel)
                 $logs["failed_providers"][$classe] = true;
             }
             if(!$logs["channels"][$date][$channel]['success'])
-                echo " : HS - ".chr(10);
+                echo " : HS".chr(10);
         } else {
             $logs["channels"][$date][$channel]['provider'] = 'Cache';
-            echo " : OK Cache - ".chr(10);
+            echo " : OK Cache".chr(10);
             $logs["channels"][$date][$channel]['success'] = true;
 
         }
