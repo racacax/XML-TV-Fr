@@ -33,7 +33,12 @@ Le fichier config.json est au format JSON. Le champ days correspond au nombre de
 Pour démarrer la récupération du guide des programmes, lancez cette commande dans votre terminal (dans le dossier du programme).
 
     php script_all.php
+# Sortie
 
+##Logs
+Les logs sont stockés dans le dossier logs au format JSON.
+##XML TV
+Les fichiers de sorties XML sont stockés dans le dossier xmltv au format XML, ZIP et GZ.
 
 # Ajouter des services
 
@@ -43,3 +48,4 @@ La méthode *getPriority()* renverra un flottant de préférence entre 0 et 1 po
 La méthode   *constructEPG(channel,date)* construira un fichier XML pour une chaine à une date donnée. Elle retourne **true** si la tâche s'est déroulée avec succès, sinon **false**. Le fichier doit être stocké dans le dossier des XML temporaires et doit être de la forme **[ID de la chaine]_[Date].xml**. La méthode statique *generateFilePath(xmlpath,channel,date)* dela classe Utils le construit automatiquement.
 
 Attention, le nom de la classe du service doit correspondre à son nom de fichier. Bien que PHP, contrairement à Java autorise des noms différents, le programme ici ne le permet pas.
+
