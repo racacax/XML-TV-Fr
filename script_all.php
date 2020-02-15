@@ -57,7 +57,7 @@ foreach($channels_key as $channel)
 {
     if(isset($channels[$channel]["priority"]) && count($channels[$channel]["priority"]) > 0)
     {
-        $priority = $channels[$channel];
+        $priority = $channels[$channel]['priority'];
     } else {
         $priority = $classes_priotity;
     }
