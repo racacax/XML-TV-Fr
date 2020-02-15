@@ -44,8 +44,9 @@ class Telerama implements Provider
         if (!isset($date)) {
             $date = date('Y-m-d');
         }
-        if(!in_array($channel,self::$CHANNELS_LIST))
-            $channel_id = self::$CHANNELS_LIST[$channel];
+        if(!in_array($channel,self::$CHANNELS_KEY))
+            return false;
+        $channel_id = self::$CHANNELS_LIST[$channel];
 
 
 
