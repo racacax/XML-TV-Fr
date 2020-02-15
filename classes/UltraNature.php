@@ -29,6 +29,7 @@ class UltraNature implements Provider
             'Sun'=> array('0000 || Sports extrêmes','0130 || Programme inconnu','0700 || Paysages','0830 || Sports extrêmes','1030 || Découverte','1200 || Voyage','1330 || Animaux','1530 || Animaux','1730 || Découverte','1900 || Sports extrêmes','2100 || Sports extrêmes','2300 || Animaux')
         );
         $d = $days[date('D',strtotime($date))];
+        $date2 = date('Ymd',strtotime($date));
         for($j=0;$j<count($d);$j++)
         {
             $st = explode(' || ',$d[$j]);
@@ -37,9 +38,9 @@ class UltraNature implements Provider
             } else {
                 $st2 = '0000';
             }
-            $d1 = $date.$st[0].'00 '.date('O');
+            $d1 = $date2.$st[0].'00 '.date('O');
             if($st2!='0000') {
-                $d2 = $date . $st2 . '00 ' . date('O');
+                $d2 = $date2 . $st2 . '00 ' . date('O');
             } else {
                 $d2 = date('Ymd',strtotime($date)+86400) . $st2 . '00 ' . date('O');
             }
