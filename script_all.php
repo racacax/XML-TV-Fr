@@ -62,6 +62,7 @@ foreach($channels_key as $channel)
                     break;
                 }
                 $logs["channels"][$date][$channel]['failed_providers'][] = $classe;
+                $logs["channels"][$date][$channel]['success'] = false;
                 $logs["failed_providers"][$classe] = true;
             }
         } else {
@@ -101,7 +102,6 @@ foreach($channels as $key => $channel)
 foreach($files as $file){
     $in = fopen($file, "r");
     while ($line = fgets($in)){
-        print $file;
         fwrite($out, $line);
     }
     fclose($in);
