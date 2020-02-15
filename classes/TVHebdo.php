@@ -24,6 +24,8 @@ class TVHebdo implements Provider
 
     function constructEPG($channel, $date)
     {
+        $old_zone = date_default_timezone_get();
+        date_default_timezone_set('America/Montreal');
         if(!in_array($channel,self::$CHANNELS_KEY))
             return false;
         if(!file_exists(self::$TMP_PATH . $channel."_".$date.'.json'))
@@ -48,7 +50,9 @@ class TVHebdo implements Provider
             if(strlen($t8)>100)
             {
                 file_put_contents(self::$TMP_PATH . $channel."_".$date.'.json',$t8);
-            } else { return false; }
+            } else {
+                date_default_timezone_set($old_zone);
+                return false; }
         } else {
             $t8 = file_get_contents(self::$TMP_PATH . $channel."_".$date.'.json');
             $time = explode('|||||||||||||||||||||||',$t8)[0];
@@ -78,6 +82,7 @@ class TVHebdo implements Provider
 ');
             fclose( $fp );
         }
-    return true;
+        date_default_timezone_set($old_zone);
+        return true;
     }
 }
