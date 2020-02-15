@@ -48,7 +48,7 @@ foreach($channels_key as $channel)
     for($i=-1;$i<$DAY_LIMIT;$i++)
     {
         $date = date('Y-m-d',time()+86400*$i);
-        echo $channel." : ".$date.chr(10);
+        echo $channel." : ".$date;
         if(!file_exists(Utils::generateFilePath($XML_PATH,$channel,$date))) {
             $success = false;
             foreach ($priority as $classe) {
@@ -59,15 +59,18 @@ foreach($channels_key as $channel)
                 if(${$CLASS_PREFIX.$classe}->constructEPG($channel,$date))
                 {
                     $logs["channels"][$date][$channel]['success'] = true;
+                    echo " : OK - ".$classe.chr(10);
                     $logs["channels"][$date][$channel]['provider'] = $classe;
                     break;
                 }
                 $logs["channels"][$date][$channel]['failed_providers'][] = $classe;
                 $logs["channels"][$date][$channel]['success'] = false;
+                echo " : HS - ".chr(10);
                 $logs["failed_providers"][$classe] = true;
             }
         } else {
             $logs["channels"][$date][$channel]['provider'] = 'Cache';
+            echo " : OK Cache - ".chr(10);
             $logs["channels"][$date][$channel]['success'] = true;
 
         }
