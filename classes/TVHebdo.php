@@ -29,7 +29,7 @@ class TVHebdo implements Provider
         if(!file_exists(self::$TMP_PATH . $channel."_".$date.'.json'))
         {
             $ch1 = curl_init();
-            curl_setopt($ch1, CURLOPT_URL, 'http://www.ekamali.com/index.php?q='.urlencode('http://www.tvhebdo.com/horaire-tele/'.self::$CHANNELS_LIST[$channel].'/date/'.$date).'&hl=3');
+            curl_setopt($ch1, CURLOPT_URL, 'http://www.ekamali.com/index.php?q='.base64_encode('http://www.tvhebdo.com/horaire-tele/'.self::$CHANNELS_LIST[$channel].'/date/'.$date).'&hl=3ed');
             curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
             curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
@@ -59,7 +59,7 @@ class TVHebdo implements Provider
 
         for($j=0;$j<count($titre[2]);$j++)
         {
-            $prgm[] = date('YmdHis O',strtotime(date('Y-m-d').' '.$time[1][$j])+86400*$i).' || '.$titre[2][$j];
+            $prgm[] = date('YmdHis O',strtotime($date.' '.$time[1][$j])).' || '.$titre[2][$j];
         }
 
         for($j=0;$j<count($prgm)-1;$j++)
