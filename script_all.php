@@ -17,7 +17,6 @@ $PROVIDER = 'Provider';
 $UTILS = 'Provider';
 $classes_priotity = array();
 $XML_PATH = "channels/";
-$DAY_LIMIT = 8;
 $CLASS_PREFIX = "EPG_";
 $logs = array('channels'=>array(), 'xml'=>array(),'failed_providers'=>array());
 foreach($classes as $classe) {
@@ -34,6 +33,18 @@ usort($classes_priotity,"compare_classe");
 if(!file_exists('channels.json'))
 {
     echo 'channels.json manquant';
+}
+if(!file_exists('config.json'))
+{
+    $DAY_LIMIT = 8;
+} else {
+    $json = json_decode(file_get_contents('config.json'),true);
+    if(isset($json["days"]))
+    {
+        $DAY_LIMIT = $json["days"];
+    } else {
+        $DAY_LIMIT = 8;
+    }
 }
 $channels = json_decode(file_get_contents('channels.json'),true);
 $channels_key = array_keys($channels);
