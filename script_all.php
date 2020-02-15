@@ -74,7 +74,24 @@ foreach($channels_key as $channel)
 }
 $xmltv = glob('xmltv/xmltv*');
 foreach($xmltv as $file)
-    unlink($file);
+{
+    if(time()-filemtime($file) > 86400*5)
+        unlink($file);
+
+}
+
+if(file_exists("xmltv/xmltv.xml"))
+{
+    rename("xmltv/xmltv.xml","xmltv/xmltv_".date('Y-m-d H-i-s',"xmltv/xmltv.xml").".xml");
+}
+if(file_exists("xmltv/xmltv.zip"))
+{
+    rename("xmltv/xmltv.zip","xmltv/xmltv_".date('Y-m-d H-i-s',"xmltv/xmltv.zip").".zip");
+}
+if(file_exists("xmltv/xmltv.xml.gz"))
+{
+    rename("xmltv/xmltv.zip","xmltv/xmltv_".date('Y-m-d H-i-s',"xmltv/xmltv.xml.gz").".xml.gz");
+}
 
 $filepath = "xmltv/xmltv.xml";
 $files = glob($XML_PATH.'*');
