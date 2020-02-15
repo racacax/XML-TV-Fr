@@ -1,4 +1,9 @@
 <?php
+/*
+ * @version 0.1
+ * @author racacax
+ * @date 15/02/2020
+ */
 date_default_timezone_set('Europe/Paris');
 set_time_limit(0);
 function compare_classe($a,$b)

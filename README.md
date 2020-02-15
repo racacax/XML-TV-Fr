@@ -39,6 +39,9 @@ Pour démarrer la récupération du guide des programmes, lancez cette commande 
 Les logs sont stockés dans le dossier logs au format JSON.
 ## XML TV
 Les fichiers de sorties XML sont stockés dans le dossier xmltv au format XML, ZIP et GZ.
+Pour vérifier si celui-ci est valide, il suffit de lancer :
+`php xmlvalidator.php`
+Cette commande indiquera si le dernier fichier XML généré est valide.
 
 # Ajouter des services
 
