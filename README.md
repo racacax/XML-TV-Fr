@@ -35,9 +35,9 @@ Pour démarrer la récupération du guide des programmes, lancez cette commande 
     php script_all.php
 # Sortie
 
-##Logs
+## Logs
 Les logs sont stockés dans le dossier logs au format JSON.
-##XML TV
+## XML TV
 Les fichiers de sorties XML sont stockés dans le dossier xmltv au format XML, ZIP et GZ.
 
 # Ajouter des services
