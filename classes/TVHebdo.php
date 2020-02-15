@@ -39,7 +39,7 @@ class TVHebdo implements Provider
 //curl_setopt($ch1, CURLOPT_PROXY, '66.70.255.195:3128');
             $res1 = html_entity_decode(curl_exec($ch1),ENT_QUOTES);
             curl_close($ch1);
-            $res1 = explode('Mes<br>alertes courriel',$res1)[1];
+            @$res1 = explode('Mes<br>alertes courriel',$res1)[1];
             preg_match_all('/class="heure"\>(.*?)\<\/td\>/',$res1,$time);
             preg_match_all('/class="titre"\>(.*?)"\>(.*?)\<\/a\>/',$res1,$titre);
             $t8 = json_encode($time);
@@ -78,6 +78,6 @@ class TVHebdo implements Provider
 ');
             fclose( $fp );
         }
-
+    return true;
     }
 }
