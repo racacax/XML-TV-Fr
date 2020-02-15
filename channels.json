@@ -250,5 +250,5 @@
   "Voyage.fr": {},
   "W9.fr": {},
   "XXL.fr": {},
-  "UltraNature": {"priority":"UltraNature"}
+  "UltraNature": {"priority":["UltraNature"]}
 }
