@@ -11,3 +11,4 @@ if($xml->isValid())
 } else {
     echo "XML non valide";
 }
+echo chr(10);
