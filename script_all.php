@@ -106,7 +106,7 @@ if(file_exists("xmltv/xmltv.zip"))
 }
 if(file_exists("xmltv/xmltv.xml.gz"))
 {
-    rename("xmltv/xmltv.zip","xmltv/xmltv_".date('Y-m-d H-i-s',filemtime("xmltv/xmltv.xml.gz")).".xml.gz");
+    rename("xmltv/xmltv.xml.gz","xmltv/xmltv_".date('Y-m-d H-i-s',filemtime("xmltv/xmltv.xml.gz")).".xml.gz");
 }
 
 $filepath = "xmltv/xmltv.xml";
