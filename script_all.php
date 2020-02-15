@@ -19,6 +19,7 @@ $classes_priotity = array();
 $XML_PATH = "channels/";
 $DAY_LIMIT = 8;
 $CLASS_PREFIX = "EPG_";
+$logs = array('channels'=>array(), 'xml'=>array(),'failed_providers'=>array());
 foreach($classes as $classe) {
     require_once $classe;
     $class_name = explode('/',explode('.php',$classe)[0]);
@@ -56,17 +57,17 @@ foreach($channels_key as $channel)
                     ${$CLASS_PREFIX.$classe} = new $classe($XML_PATH);
                 if(${$CLASS_PREFIX.$classe}->constructEPG($channel,$date))
                 {
-                    echo $date." - ".$channel." : OK ".$classe.chr(10);
-                    $success = true;
+                    $logs["channels"][$date][$channel]['success'] = true;
+                    $logs["channels"][$date][$channel]['provider'] = $classe;
                     break;
                 }
-            }
-            if(!$success)
-            {
-                echo $date." - ".$channel." : HS".chr(10);
+                $logs["channels"][$date][$channel]['failed_providers'][] = $classe;
+                $logs["failed_providers"][$classe] = true;
             }
         } else {
-            echo $date." - ".$channel." : Cache".chr(10);
+            $logs["channels"][$date][$channel]['provider'] = 'Cache';
+            $logs["channels"][$date][$channel]['success'] = true;
+
         }
     }
 }
@@ -107,3 +108,20 @@ foreach($files as $file){
 }
 fwrite($out,'</tv>');
 fclose($out);
+file_put_contents('logs/logs'.date('YmdHis').'.json',json_encode($logs));
+$got = file_get_contents('xmltv/xmltv.xml');
+$got1 = gzencode($got,true);
+file_put_contents('xmltv/xmltv.xml.gz',$got1);
+echo "GZ : OK".chr(10);
+
+
+$zip = new ZipArchive();
+$filename = "xmltv/xmltv.zip";
+
+if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
+    echo "ZIP : HS".chr(10);
+} else {
+    echo "ZIP : OK".chr(10);
+}
+$zip->addFile("xmltv/xmltv.xml", "xmltv.xml");
+$zip->close();
