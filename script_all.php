@@ -121,7 +121,7 @@ foreach($files as $file){
         unlink($file);
 }
 $out = fopen($filepath, "w");
-fwrite($out,'<?xml version="1.0" encoding="ISO-8859-1"?>
+fwrite($out,'<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tv SYSTEM "xmltv.dtd">
 
 <tv source-info-url="http://allfrtv.com/" source-info-name="XML TV Fr" generator-info-name="XML TV Fr" generator-info-url="http://allfrtv.com/">
