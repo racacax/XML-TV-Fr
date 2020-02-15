@@ -48,7 +48,7 @@ foreach($channels_key as $channel)
     for($i=-1;$i<$DAY_LIMIT;$i++)
     {
         $date = date('Y-m-d',time()+86400*$i);
-        echo $channel." : ".$date;
+        echo $channel." : ".$date.chr(10);
         if(!file_exists(Utils::generateFilePath($XML_PATH,$channel,$date))) {
             $success = false;
             foreach ($priority as $classe) {
