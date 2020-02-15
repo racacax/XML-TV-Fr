@@ -98,15 +98,15 @@ foreach($xmltv as $file)
 
 if(file_exists("xmltv/xmltv.xml"))
 {
-    rename("xmltv/xmltv.xml","xmltv/xmltv_".date('Y-m-d H-i-s',"xmltv/xmltv.xml").".xml");
+    rename("xmltv/xmltv.xml","xmltv/xmltv_".date('Y-m-d H-i-s',filemtime("xmltv/xmltv.xml")).".xml");
 }
 if(file_exists("xmltv/xmltv.zip"))
 {
-    rename("xmltv/xmltv.zip","xmltv/xmltv_".date('Y-m-d H-i-s',"xmltv/xmltv.zip").".zip");
+    rename("xmltv/xmltv.zip","xmltv/xmltv_".date('Y-m-d H-i-s',filemtime("xmltv/xmltv.zip")).".zip");
 }
 if(file_exists("xmltv/xmltv.xml.gz"))
 {
-    rename("xmltv/xmltv.zip","xmltv/xmltv_".date('Y-m-d H-i-s',"xmltv/xmltv.xml.gz").".xml.gz");
+    rename("xmltv/xmltv.zip","xmltv/xmltv_".date('Y-m-d H-i-s',filemtime("xmltv/xmltv.xml.gz")).".xml.gz");
 }
 
 $filepath = "xmltv/xmltv.xml";
