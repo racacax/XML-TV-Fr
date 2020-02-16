@@ -1,6 +1,6 @@
 <?php
 /*
- * @version 0.1.1
+ * @version 0.1.2
  * @author racacax
  * @date 16/02/2020
  */
@@ -143,6 +143,8 @@ foreach($channels as $key => $channel)
 {
     @$icon = $channel['icon'];
     @$name = $channel['name'];
+    if(!isset($name))
+        $name = $key;
     fwrite($out,'<channel id="'.$key.'">
     <display-name>'.$name.'</display-name>
     <icon src="'.$icon.'" />
