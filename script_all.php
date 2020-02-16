@@ -1,11 +1,24 @@
 <?php
 /*
- * @version 0.1
+ * @version 0.1.1
  * @author racacax
- * @date 15/02/2020
+ * @date 16/02/2020
  */
 date_default_timezone_set('Europe/Paris');
 set_time_limit(0);
+if ( ! function_exists('glob_recursive'))
+{
+    // Does not support flag GLOB_BRACE
+    function glob_recursive($pattern, $flags = 0)
+    {
+        $files = glob($pattern, $flags);
+        foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir)
+        {
+            $files = array_merge($files, glob_recursive($dir.'/'.basename($pattern), $flags));
+        }
+        return $files;
+    }
+}
 function compare_classe($a,$b)
 {
     if(class_exists($a) && class_exists($b))
@@ -136,7 +149,14 @@ foreach($channels as $key => $channel)
   </channel>'.chr(10));
 }
 
-
+$tmp_files = glob_recursive('epg/*');
+foreach($tmp_files as $file)
+{
+    if(!is_dir($file) && time() - filemtime($file) > ($DAY_LIMIT+3)*86400)
+    {
+        unlink($file);
+    }
+}
 foreach($files as $file){
     $in = fopen($file, "r");
     while ($line = fgets($in)){
