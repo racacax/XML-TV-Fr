@@ -27,7 +27,10 @@ class TVHebdo implements Provider
         $old_zone = date_default_timezone_get();
         date_default_timezone_set('America/Montreal');
         if(!in_array($channel,self::$CHANNELS_KEY))
+        {
+            date_default_timezone_set($old_zone);
             return false;
+        }
         if(!file_exists(self::$TMP_PATH . $channel."_".$date.'.json'))
         {
             $ch1 = curl_init();
