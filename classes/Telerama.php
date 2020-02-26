@@ -166,7 +166,7 @@ class Telerama implements Provider
     </rating>
 </programme>
 ';
-                $str_put = str_replace(' ','',$str_put);
+                $str_put = str_replace("\0",'',$str_put);
                 $fp = fopen($xml_save, "a");
                 fputs($fp, $str_put);
             }
