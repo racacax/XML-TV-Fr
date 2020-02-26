@@ -154,8 +154,7 @@ class Telerama implements Provider
                     $balises_sup .= $int2;
                 }
 
-                $fp = fopen($xml_save, "a");
-                fputs($fp, '<programme start="' . date('YmdHis O', (strtotime($donnee["horaire"]["debut"]))) . '" stop="' . date('YmdHis O', (strtotime($donnee["horaire"]["fin"]))) . '" channel="' . $channel . '">
+                $str_put = '<programme start="' . date('YmdHis O', (strtotime($donnee["horaire"]["debut"]))) . '" stop="' . date('YmdHis O', (strtotime($donnee["horaire"]["fin"]))) . '" channel="' . $channel . '">
 	<title lang="fr">' . htmlspecialchars($donnee["titre"], ENT_XML1) . '</title>
 	<desc lang="fr">' . htmlspecialchars($descri, ENT_XML1) . '</desc>
 	<category lang="fr">' . htmlspecialchars($donnee["genre_specifique"], ENT_XML1) . '</category>'
@@ -166,7 +165,10 @@ class Telerama implements Provider
       <value>-' . htmlspecialchars($donnee["csa"], ENT_XML1) . '</value>
     </rating>
 </programme>
-');
+';
+                $str_put = str_replace(' ','',$str_put);
+                $fp = fopen($xml_save, "a");
+                fputs($fp, $str_put);
             }
             return true;
         }
