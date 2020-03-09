@@ -32,7 +32,7 @@ function compare_classe($a,$b)
 }
 $classes = glob('classes/*.php');
 $PROVIDER = 'Provider';
-$UTILS = 'Provider';
+$UTILS = 'Utils';
 $classes_priotity = array();
 $XML_PATH = "channels/";
 $CLASS_PREFIX = "EPG_";
