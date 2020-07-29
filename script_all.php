@@ -6,6 +6,7 @@
  */
 date_default_timezone_set('Europe/Paris');
 set_time_limit(0);
+ini_set('memory_limit', '-1'); // modify for resolve error Line173 : memory limit GZencode _ Ludis 20200729
 if ( ! function_exists('glob_recursive'))
 {
     // Does not support flag GLOB_BRACE
