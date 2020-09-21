@@ -39,7 +39,7 @@ class Orange implements Provider
 
         if(!file_exists(self::$TMP_PATH.'Orange'.base64_encode($channel).$date.'.json'))
         {
-            $url = 'https://rp-live.orange.fr/live-webapp/v3/applications/PC/programs?period='.$date.'&epgIds='.$channel_id.'&mco=OFR';
+            $url = 'https://rp-live.orange.fr/live-webapp/v3/applications/STB4PC/programs?period='.$date.'&epgIds='.$channel_id.'&mco=OFR';
             $ch1 = curl_init();
             curl_setopt($ch1, CURLOPT_URL, $url);
             curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);

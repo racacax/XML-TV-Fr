@@ -229,5 +229,14 @@
   "MBCMASR": "90530",
   "MBC3": "90531",
   "PANORAMAFILM": "90532",
-  "NTDTV": "90548"
+  "NTDTV": "90548",
+  "Telefoot": "3037",
+  "TelefootStadium1": "3038",
+  "TelefootStadium2": "3039",
+  "TelefootStadium3": "3040",
+  "TelefootStadium4": "3041",
+  "TelefootStadium5": "3042",
+  "TelefootStadium6": "3043",
+  "TelefootStadium7": "3044",
+  "TelefootStadium8": "3045"
 }
