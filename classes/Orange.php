@@ -67,7 +67,7 @@ class Orange implements Provider
 	<desc lang="fr">'.htmlspecialchars($val["synopsis"],ENT_XML1).'</desc>
 	<category lang="fr">'.htmlspecialchars($val["genre"],ENT_XML1).'</category>
 	<category lang="fr">'.htmlspecialchars($val["genreDetailed"],ENT_XML1).'</category>
-	<icon src="'.htmlspecialchars($val["covers"][1]["url"],ENT_XML1).'" />
+	<icon src="'.(!empty($val["covers"])?''.htmlspecialchars(end($val["covers"])["url"],ENT_XML1):'').'" />
 	<rating system="csa">
       <value>'.htmlspecialchars($csa,ENT_XML1).'</value>
     </rating>
@@ -82,7 +82,7 @@ class Orange implements Provider
 	<desc lang="fr">'.htmlspecialchars($val["synopsis"],ENT_XML1).'</desc>
 	<category lang="fr">'.htmlspecialchars($val["genre"],ENT_XML1).'</category>
 	<category lang="fr">'.htmlspecialchars($val["genreDetailed"],ENT_XML1).'</category>
-	<icon src="'.htmlspecialchars($val["covers"][1]["url"],ENT_XML1).'" />
+	<icon src="'.(!empty($val["covers"])?''.htmlspecialchars(end($val["covers"])["url"],ENT_XML1):'').'" />
 	<rating system="csa">
       <value>'.htmlspecialchars($csa,ENT_XML1).'</value>
     </rating>
