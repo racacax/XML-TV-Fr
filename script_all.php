@@ -51,12 +51,19 @@ foreach($classes as $classe) {
 usort($classes_priotity,"compare_classe");
 if(!file_exists('channels.json'))
 {
-    echo 'channels.json manquant';
+    if(!file_exists('channels_example.json')) {
+        echo 'channels.json manquant';
+    } else {
+        copy('channels_example.json', 'channels.json');
+    }
 }
-if(!file_exists('config.json'))
+if(!file_exists('config.json') & !file_exists('config_example.json'))
 {
     $DAY_LIMIT = 8;
 } else {
+    if(!file_exists('config.json') & file_exists('config_example.json')) {
+        copy('config_example.json', 'config.json');
+    }
     $json = json_decode(file_get_contents('config.json'),true);
     if(isset($json["days"]))
     {
