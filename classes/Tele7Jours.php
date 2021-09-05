@@ -60,6 +60,8 @@ class Tele7Jours implements Provider
             }
 
             $pop = 0;
+            if(!isset($get["grille"]["aDiffusion"]))
+                return false;
             foreach ($get["grille"]["aDiffusion"] as $val) {
                 $h = $val["heureDif"];
                 $h = str_replace('h', ':', $h);
