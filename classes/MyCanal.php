@@ -57,6 +57,7 @@ class MyCanal implements Provider
         $json = $res3["timeSlices"];
         if(isset(self::$PREVIOUS_SEGMENTS[$channel]))
             $previous = self::$PREVIOUS_SEGMENTS[$channel];
+        $count = 0;
         foreach ($json as $section) {
             foreach ($section["contents"] as $section2) {
                 if(isset($previous)) {
@@ -70,11 +71,15 @@ class MyCanal implements Provider
         ');
                 fclose($fp);
                 }
+                $count ++;
                 $previous = $section2;
             }
         }
         if(isset($previous))
             self::$PREVIOUS_SEGMENTS[$channel] = $previous;
+
+        if($count < 2)
+            return false;
         return true;
     }
 }

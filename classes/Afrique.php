@@ -49,8 +49,10 @@ class Afrique implements Provider
             unlink($xml_save);
         $res3 = json_decode($res3, true);
         $json = $res3["timeSlices"];
+        $count = 0;
         foreach ($json as $section) {
             foreach ($section["contents"] as $section2) {
+                $count++;
                 $fp = fopen($xml_save, "a");
                 fputs($fp, '<programme start="' . date('YmdHis O', ($section2["startTime"])) . '" stop="' . date('YmdHis O', $section2["endTime"]) . '" channel="' . $channel . '">
 	<title lang="fr">' . htmlspecialchars($section2["title"], ENT_XML1) . '</title>
@@ -62,6 +64,8 @@ class Afrique implements Provider
                 fclose($fp);
             }
         }
+        if($count < 2)
+            return false;
         return true;
     }
 }
