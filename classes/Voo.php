@@ -26,9 +26,9 @@ class Voo implements Provider
     {
         if(!in_array($channel,self::$CHANNELS_KEY))
             return false;
-        $date_start = date('Y-m-d', strtotime("now")).'T00:00:00Z';
-        $date_end = date('Y-m-d', strtotime("now") + 86400).'T02:00:00Z';
-        $end = strtotime("now");
+        $date_start = date('Y-m-d', strtotime($date)).'T00:00:00Z';
+        $date_end = date('Y-m-d', strtotime($date) + 86400).'T02:00:00Z';
+        $end = strtotime($date);
         $ch3 = curl_init();
         curl_setopt($ch3, CURLOPT_URL, 'https://publisher.voomotion.be/traxis/web/Channel/' . self::$CHANNELS_LIST[$channel] . '/Events/Filter/AvailabilityEnd%3C=' . $date_end . '%26%26AvailabilityStart%3E=' .$date_start.'/Sort/AvailabilityStart/Props/IsAvailable,Products,AvailabilityEnd,AvailabilityStart,ChannelId,AspectRatio,DurationInSeconds,Titles,Channels?output=json&Language=fr&Method=PUT');
         curl_setopt($ch3, CURLOPT_RETURNTRANSFER, 1);
