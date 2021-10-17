@@ -39,8 +39,8 @@ class TV5 implements Provider
 
         if(!file_exists(self::$TMP_PATH.'TV5'.base64_encode($channel).$date.'.json'))
         {
-            $start = date('Y-m-d')."T00:00:00";
-            $end = date('Y-m-d', strtotime("+1 day"))."T00:00:00";
+            $start = date('Y-m-d', strtotime($date))."T00:00:00";
+            $end = date('Y-m-d', strtotime($date) + 86400)."T00:00:00";
             $url = 'https://bo-apac.tv5monde.com/tvschedule/full?start='.$start.'&end='.$end.'&key='.$channel_id.'&timezone=Europe/Paris&language=EN';
             $ch1 = curl_init();
             curl_setopt($ch1, CURLOPT_URL, $url);
