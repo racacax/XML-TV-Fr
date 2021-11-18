@@ -1,8 +1,8 @@
 <?php
 /*
- * @version 0.1.2
+ * @version 0.1.3
  * @author racacax
- * @date 16/02/2020
+ * @date 18/11/2021
  */
 date_default_timezone_set('Europe/Paris');
 set_time_limit(0);
@@ -145,7 +145,7 @@ $out = fopen($filepath, "w");
 fwrite($out,'<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tv SYSTEM "xmltv.dtd">
 
-<tv source-info-url="http://allfrtv.com/" source-info-name="XML TV Fr" generator-info-name="XML TV Fr" generator-info-url="http://allfrtv.com/">
+<tv source-info-url="https://github.com/racacax/XML-TV-Fr" source-info-name="XML TV Fr" generator-info-name="XML TV Fr" generator-info-url="https://github.com/racacax/XML-TV-Fr">
   ');
 foreach($channels as $key => $channel)
 {
