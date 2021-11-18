@@ -64,14 +64,13 @@ class La1ere implements Provider
         for($i=0; $i<count($infos)-1; $i++) {
             $fp = fopen(Utils::generateFilePath($this->XML_PATH,$channel,$date),"a");
             if(strlen($infos[$i+1]["subtitle"])>0) {
-                $subtitle = '<sub-title lang="fr">'.$infos[$i+1]["subtitle"].'</sub-title>';
+                $subtitle = '<sub-title lang="fr">'.$infos[$i+1]["subtitle"].'</sub-title>'.chr(10)."	";
             } else {
                 $subtitle = '';
             }
             fputs($fp,'<programme start="'.$infos[$i]["hour"].'" stop="'.$infos[$i+1]["hour"].'" channel="'.$channel.'">
 	<title lang="fr">'.htmlspecialchars($infos[$i]["title"],ENT_XML1).'</title>
-	'.$subtitle.'
-	<desc lang="fr">Aucune description</desc>
+	'.$subtitle.'<desc lang="fr">Aucune description</desc>
 	<category lang="fr">Inconnu</category>
 </programme>
 ');
