@@ -51,7 +51,7 @@ class La1ere implements Provider
             foreach($programs as $program) {
                 preg_match('/\<span class=\"program-hour\".*?\>(.*?)\<\/span\>/',$program, $hour);
                 preg_match('/\<span class=\"program-name\".*?\>(.*?)\<\/span\>/',$program, $name);
-                preg_match('/\<span class=\"subtitle\".*?\>(.*?)\<\/span\>/',$program, $subtitle);
+                preg_match('/\<div class=\"subtitle\".*?\>(.*?)\<\/div\>/',$program, $subtitle);
                 if(isset($name[1])) {
                     $infos[] = array(
                         "hour" => date('YmdHis O', strtotime(date('Ymd', strtotime("now") + 86400 * $key) . ' ' . str_replace('H',':',$hour[1]))),
@@ -63,7 +63,7 @@ class La1ere implements Provider
         }
         for($i=0; $i<count($infos)-1; $i++) {
             $fp = fopen(Utils::generateFilePath($this->XML_PATH,$channel,$date),"a");
-            if(!is_null($infos[$i+1]["subtitle"])) {
+            if(strlen($infos[$i+1]["subtitle"])>0) {
                 $subtitle = '<sub-title lang="fr">'.$infos[$i+1]["subtitle"].'</sub-title>';
             } else {
                 $subtitle = '';
