@@ -1,6 +1,6 @@
 <?php
 /*
- * @version 0.1.3
+ * @version 0.2.0
  * @author racacax
  * @date 18/11/2021
  */
