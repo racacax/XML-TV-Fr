@@ -6,6 +6,15 @@ class Utils
         return $xmlpath.$channel."_".$date.".xml";
     }
 
+    public static function reformatXML($PATH) {
+        echo "\e[34m[EXPORT] \e[39mReformatage du XML...\n";
+        $domxml = new DOMDocument('1.0');
+        $domxml->preserveWhiteSpace = false;
+        $domxml->formatOutput = true;
+        /* @var $xml SimpleXMLElement */
+        $domxml->loadXML(file_get_contents($PATH));
+        $domxml->save($PATH);
+    }
     public static function validateXML($PATH) {
         echo "\e[34m[EXPORT] \e[39mValidation du fichier XML...\n";
         @$xml = XMLReader::open($PATH);
@@ -15,8 +24,10 @@ class Utils
         if($xml->isValid())
         {
             echo "\e[34m[EXPORT] \e[32mXML valide\e[39m\n";
+            return true;
         } else {
             echo "\e[34m[EXPORT] \e[31mXML non valide\e[39m\n";
+            return false;
         }
     }
 

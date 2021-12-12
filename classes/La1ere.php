@@ -61,22 +61,16 @@ class La1ere implements Provider
                 }
             }
         }
+        $channel_obj = new Channel($channel, Utils::generateFilePath($this->XML_PATH,$channel,$date));
         for($i=0; $i<count($infos)-1; $i++) {
-            $fp = fopen(Utils::generateFilePath($this->XML_PATH,$channel,$date),"a");
+            $program = $channel_obj->addProgram(strtotime($infos[$i]["hour"]), strtotime($infos[$i+1]["hour"]));
             if(strlen($infos[$i+1]["subtitle"])>0) {
-                $subtitle = '<sub-title lang="fr">'.$infos[$i+1]["subtitle"].'</sub-title>'.chr(10)."	";
-            } else {
-                $subtitle = '';
+                $program->addSubtitle($infos[$i+1]["subtitle"]);
             }
-            fputs($fp,'<programme start="'.$infos[$i]["hour"].'" stop="'.$infos[$i+1]["hour"].'" channel="'.$channel.'">
-	<title lang="fr">'.htmlspecialchars($infos[$i]["title"],ENT_XML1).'</title>
-	'.$subtitle.'<desc lang="fr">Aucune description</desc>
-	<category lang="fr">Inconnu</category>
-</programme>
-');
-
-            fclose( $fp );
+            $program->addTitle($infos[$i]["title"]);
+            $program->addCategory("Inconnu");
         }
+        $channel_obj->save();
         date_default_timezone_set($old_zone);
         return true;
     }

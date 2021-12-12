@@ -1,8 +1,8 @@
 <?php
 /*
- * @version 0.3.0
+ * @version 0.4.0
  * @author racacax
- * @date 28/11/2021
+ * @date 12/12/2021
  */
 
 $CONFIG = array( # /!\ Default configuration. Edit your config in config.json
@@ -63,8 +63,7 @@ function compare_classe($a,$b)
 }
 
 $classes = glob('classes/*.php');
-$PROVIDER = 'Provider';
-$UTILS = 'Utils';
+$NON_PROVIDER_CLASES = ["Provider", "Utils", "Program", "Channel"];
 $classes_priotity = array();
 $XML_PATH = "channels/";
 $CLASS_PREFIX = "EPG_";
@@ -73,7 +72,7 @@ foreach($classes as $classe) {
     require_once $classe;
     $class_name = explode('/',explode('.php',$classe)[0]);
     $class_name = $class_name[count($class_name)-1];
-    if(class_exists($class_name) && $class_name != $PROVIDER && $class_name != $UTILS)
+    if(class_exists($class_name) && !in_array($class_name, $NON_PROVIDER_CLASES))
     {
         if(method_exists(new $class_name($XML_PATH),'getPriority' ) && method_exists(new $class_name($XML_PATH),'constructEPG' ))
             $classes_priotity[] = $class_name;
@@ -102,18 +101,20 @@ Utils::generateXML($CONFIG, $XML_PATH);
 
 Utils::clearEPGCache($CONFIG);
 
-Utils::validateXML($CONFIG["output_path"]."/xmltv.xml");
+if(Utils::validateXML($CONFIG["output_path"]."/xmltv.xml")) {
+    Utils::reformatXML($CONFIG["output_path"]."/xmltv.xml");
 
-if($CONFIG["enable_gz"]) {
-    Utils::gzCompressXML($CONFIG["output_path"]);
-}
+    if ($CONFIG["enable_gz"]) {
+        Utils::gzCompressXML($CONFIG["output_path"]);
+    }
 
-if($CONFIG["enable_zip"]) {
-    Utils::zipCompressXML($CONFIG["output_path"]);
-}
+    if ($CONFIG["enable_zip"]) {
+        Utils::zipCompressXML($CONFIG["output_path"]);
+    }
 
-if($CONFIG["delete_raw_xml"]) {
-    echo "\e[34m[EXPORT] \e[39mSuppression du fichier XML brut\n";
-    unlink($CONFIG["output_path"]."/xmltv.xml");
+    if ($CONFIG["delete_raw_xml"]) {
+        echo "\e[34m[EXPORT] \e[39mSuppression du fichier XML brut\n";
+        unlink($CONFIG["output_path"] . "/xmltv.xml");
+    }
 }
 

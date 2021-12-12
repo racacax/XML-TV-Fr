@@ -4,7 +4,6 @@ require_once 'Utils.php';
 class Telerama implements Provider
 {
     private $XML_PATH;
-    private static $TMP_PATH = "epg/telerama/";
     private static $CHANNELS_LIST;
     private static $CHANNELS_KEY;
     private static $USER_AGENT = 'okhttp/3.12.3';
@@ -53,39 +52,33 @@ class Telerama implements Provider
         $url = '/v1/programmes/grille?appareil=' . self::$APPAREIL . '&date=' . $date . '&id_chaines=' .  $channel_id . '&nb_par_page=' .  self::$NB_PAGE . '&page=' .  self::$PAGE;
         $hash = self::signature($url);
         $url .= '&api_cle=' .  self::$API_CLE . '&api_signature=' . $hash;
-        if (file_exists(self::$TMP_PATH . $hash)) {
-            $get = file_get_contents(self::$TMP_PATH . $hash);
-            $json = json_decode($get, true);
-        } else {
-            $uu = curl_init(self::$HOST . $url);
-            curl_setopt($uu, CURLOPT_USERAGENT, self::$USER_AGENT);
-            curl_setopt($uu, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($uu, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($uu, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($uu, CURLOPT_SSL_VERIFYHOST, 0);
-            $get = curl_exec($uu);
-            curl_close($uu);
-            $json = json_decode($get, true);
+        $uu = curl_init(self::$HOST . $url);
+        curl_setopt($uu, CURLOPT_USERAGENT, self::$USER_AGENT);
+        curl_setopt($uu, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($uu, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($uu, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($uu, CURLOPT_SSL_VERIFYHOST, 0);
+        $get = curl_exec($uu);
+        curl_close($uu);
+        $json = json_decode($get, true);
 
-            if (isset($json['donnees'])) {
-                file_put_contents(self::$TMP_PATH . $hash, $get);
-            } else {
-                return false;
-            }
+        if (!isset($json['donnees'])) {
+            return false;
         }
         if (isset($json['donnees'])) {
+            $channel_obj = new Channel($channel, $xml_save);
             foreach ($json['donnees'] as $donnee) {
-                $balises_sup = '';
+                $program = $channel_obj->addProgram(strtotime($donnee["horaire"]["debut"]), strtotime($donnee["horaire"]["fin"]));
                 $descri = $donnee['resume'];
                 if (isset($donnee["serie"])) {
                     $descri = 'Saison ' . $donnee["serie"]["saison"] . ' Episode ' . $donnee["serie"]["numero_episode"] . chr(10) . $descri;
-                    $balises_sup .= chr(10) . '	<episode-num system="xmltv_ns">' . ($donnee["serie"]["saison"] - 1) . '.' . ($donnee["serie"]["numero_episode"] - 1) . '.</episode-num>';
+                    $program->setEpisodeNum($donnee["serie"]["saison"], $donnee["serie"]["numero_episode"]);
                 }
-                if (isset($donnee["soustitre"])) {
-                    $balises_sup .= chr(10) . '	<sub-title lang="fr">' . htmlspecialchars($donnee["soustitre"], ENT_XML1) . '</sub-title>';
+                if (isset($donnee["soustitre"]) && !empty($donnee["soustitre"])) {
+                   $program->addSubtitle($donnee["soustitre"]);
                 }
                 if (isset($donnee["vignettes"]["grande169"])) {
-                    $balises_sup .= chr(10) . '<icon src="' . htmlspecialchars($donnee["vignettes"]["grande169"], ENT_XML1) . '" />';
+                    $program->setIcon($donnee["vignettes"]["grande169"]);
                 }
                 if (isset($donnee["critique"])) {
                     $descri .= chr(10) . $donnee["critique"];
@@ -100,7 +93,6 @@ class Telerama implements Provider
 
                 if (isset($donnee["intervenants"])) {
                     $intervenants = array();
-                    $int2 = chr(10) . '	<credits>' . chr(10);
                     foreach ($donnee["intervenants"] as $intervenant) {
                         if (!$intervenant["libelle"]) {
                             $intervenant["libelle"] = 'Avec';
@@ -137,9 +129,8 @@ class Telerama implements Provider
                                 $libelle = 'director';
                             }
                         }
-                        $int2 = $int2 . '		<' . $libelle . '>' . htmlspecialchars($intervenant["prenom"] . ' ' . $intervenant["nom"] . $role, ENT_XML1) . '</' . $libelle . '>' . chr(10);
+                        $program->addCredit($intervenant["prenom"] . ' ' . $intervenant["nom"] . $role, $libelle);
                     }
-                    $int2 = $int2 . '	</credits>';
                     $keys = array_keys($intervenants);
                     for ($i = 0; $i < count($intervenants); $i++) {
                         $int = '';
@@ -151,27 +142,16 @@ class Telerama implements Provider
                         }
                         $descri .= chr(10) . $keys[$i] . ' : ' . $int;
                     }
-                    $balises_sup .= $int2;
                 }
-
-                $str_put = '<programme start="' . date('YmdHis O', (strtotime($donnee["horaire"]["debut"]))) . '" stop="' . date('YmdHis O', (strtotime($donnee["horaire"]["fin"]))) . '" channel="' . $channel . '">
-	<title lang="fr">' . htmlspecialchars($donnee["titre"], ENT_XML1) . '</title>
-	<desc lang="fr">' . htmlspecialchars($descri, ENT_XML1) . '</desc>
-	<category lang="fr">' . htmlspecialchars($donnee["genre_specifique"], ENT_XML1) . '</category>'
-                    .
-                    $balises_sup
-                    . '
-	<rating system="csa">
-      <value>-' . htmlspecialchars($donnee["csa"], ENT_XML1) . '</value>
-    </rating>
-</programme>
-';
-                $str_put = str_replace("\0",'',$str_put);
-                $fp = fopen($xml_save, "a");
-                fputs($fp, $str_put);
+                $program->addTitle($donnee["titre"]);
+                $program->addDesc(!empty($descri)? $descri: 'Pas de description');
+                $program->addCategory($donnee["genre_specifique"]);
+                $program->setRating("-".$donnee["csa"]);
             }
+            $channel_obj->save();
             return true;
         }
+        return false;
     }
 
 }

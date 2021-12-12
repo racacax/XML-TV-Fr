@@ -30,6 +30,7 @@ class UltraNature implements Provider
         );
         $d = $days[date('D',strtotime($date))];
         $date2 = date('Ymd',strtotime($date));
+        $channel_obj = new Channel($channel, Utils::generateFilePath($this->XML_PATH,"UltraNature",$date));
         for($j=0;$j<count($d);$j++)
         {
             $st = explode(' || ',$d[$j]);
@@ -44,16 +45,12 @@ class UltraNature implements Provider
             } else {
                 $d2 = date('Ymd',strtotime($date)+86400) . $st2 . '00 ' . date('O');
             }
-
-            $fp = fopen(Utils::generateFilePath($this->XML_PATH,"UltraNature",$date),"a");
-            fputs($fp,'<programme start="'.$d1.'" stop="'.$d2.'" channel="UltraNature">
-	<title lang="fr">'.htmlspecialchars($st[1],ENT_XML1).'</title>
-	<desc lang="fr">Aucune description</desc>
-	<category lang="fr">'.htmlspecialchars($st[1],ENT_XML1).'</category>
-</programme>
-');
-            fclose( $fp );
+            $program = $channel_obj->addProgram(strtotime($d1), strtotime($d2));
+            $program->addTitle($st[1]);
+            $program->addDesc('Aucune description');
+            $program->addCategory($st[1]);
         }
+        $channel_obj->save();
         return true;
     }
 }
