@@ -3,8 +3,6 @@ require_once 'Provider.php';
 require_once 'Utils.php';
 class Telerama extends AbstractProvider implements Provider
 {
-    private static $CHANNELS_LIST;
-    private static $CHANNELS_KEY;
     private static $USER_AGENT = 'okhttp/3.12.3';
     private static $API_CLE = 'apitel-g4aatlgif6qzf'; // apitel-5304b49c90511
     private static $HASH_KEY = 'uIF59SZhfrfm5Gb'; // Eufea9cuweuHeif
@@ -19,11 +17,7 @@ class Telerama extends AbstractProvider implements Provider
     }
     public function __construct()
     {
-        if(!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_telerama.json"))
-        {
-            self::$CHANNELS_LIST  = json_decode(file_get_contents("channels_per_provider/channels_telerama.json"), true);
-            self::$CHANNELS_KEY = array_keys(self::$CHANNELS_LIST);
-        }
+        parent::__construct("channels_per_provider/channels_telerama.json");
     }
     public function signature($url)
     {
@@ -39,9 +33,9 @@ class Telerama extends AbstractProvider implements Provider
         if (!isset($date)) {
             $date = date('Y-m-d');
         }
-        if(!in_array($channel,self::$CHANNELS_KEY))
+        if(!in_array($channel,$this->CHANNELS_KEY))
             return false;
-        $channel_id = self::$CHANNELS_LIST[$channel];
+        $channel_id = $this->CHANNELS_LIST[$channel];
 
 
 

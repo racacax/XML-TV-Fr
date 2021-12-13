@@ -3,8 +3,6 @@ require_once 'Provider.php';
 require_once 'Utils.php';
 class MyCanal extends AbstractProvider implements Provider
 {
-    private static $CHANNELS_LIST;
-    private static $CHANNELS_KEY;
     private static $PREVIOUS_SEGMENTS;
 
     public static function getPriority()
@@ -14,10 +12,7 @@ class MyCanal extends AbstractProvider implements Provider
 
     public function __construct()
     {
-        if (!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_mycanal.json")) {
-            self::$CHANNELS_LIST = json_decode(file_get_contents("channels_per_provider/channels_mycanal.json"), true);
-            self::$CHANNELS_KEY = array_keys(self::$CHANNELS_LIST);
-        }
+        parent::__construct("channels_per_provider/channels_mycanal.json");
         if(!isset(self::$PREVIOUS_SEGMENTS)) {
             self::$PREVIOUS_SEGMENTS = array();
         }
@@ -26,11 +21,11 @@ class MyCanal extends AbstractProvider implements Provider
     function constructEPG($channel, $date)
     {
         parent::constructEPG($channel, $date);
-        if(!in_array($channel,self::$CHANNELS_KEY))
+        if(!in_array($channel,$this->CHANNELS_KEY))
             return false;
         $day = (strtotime($date) - strtotime(date('Y-m-d')))/86400;
         $ch3 = curl_init();
-        curl_setopt($ch3, CURLOPT_URL, 'https://hodor.canalplus.pro/api/v2/mycanal/channels/b4c8b468c73dff714ba07307b8266833/'.self::$CHANNELS_LIST[$channel].'/broadcasts/day/'.($day));
+        curl_setopt($ch3, CURLOPT_URL, 'https://hodor.canalplus.pro/api/v2/mycanal/channels/b4c8b468c73dff714ba07307b8266833/'.$this->CHANNELS_LIST[$channel].'/broadcasts/day/'.($day));
         curl_setopt($ch3, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch3, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:49.0) Gecko/20100101 Firefox/49.0");
         curl_setopt($ch3, CURLOPT_SSL_VERIFYPEER, 0);

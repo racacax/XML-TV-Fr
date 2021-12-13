@@ -3,8 +3,6 @@ require_once 'Provider.php';
 require_once 'Utils.php';
 class Tele7Jours extends AbstractProvider implements Provider
 {
-    private static $CHANNELS_LIST;
-    private static $CHANNELS_KEY;
 
     public static function getPriority()
     {
@@ -12,19 +10,15 @@ class Tele7Jours extends AbstractProvider implements Provider
     }
     public function __construct()
     {
-        if(!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_tele7jours.json"))
-        {
-            self::$CHANNELS_LIST  = json_decode(file_get_contents("channels_per_provider/channels_tele7jours.json"), true);
-            self::$CHANNELS_KEY = array_keys(self::$CHANNELS_LIST);
-        }
+        parent::__construct("channels_per_provider/channels_tele7jours.json");
     }
 
     public function constructEPG($channel,$date)
     {
         parent::constructEPG($channel, $date);
-        if (!in_array($channel, self::$CHANNELS_KEY))
+        if (!in_array($channel, $this->CHANNELS_KEY))
             return false;
-        $channel_id = self::$CHANNELS_LIST[$channel];
+        $channel_id = $this->CHANNELS_LIST[$channel];
 
 
         $pl = 0;

@@ -3,8 +3,6 @@ require_once 'Provider.php';
 require_once 'Utils.php';
 class La1ere extends AbstractProvider implements Provider
 {
-    private static $CHANNELS_LIST;
-    private static $CHANNELS_KEY;
 
     public static function getPriority()
     {
@@ -13,10 +11,7 @@ class La1ere extends AbstractProvider implements Provider
 
     public function __construct()
     {
-        if (!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_1ere.json")) {
-            self::$CHANNELS_LIST = json_decode(file_get_contents("channels_per_provider/channels_1ere.json"), true);
-            self::$CHANNELS_KEY = array_keys(self::$CHANNELS_LIST);
-        }
+        parent::__construct("channels_per_provider/channels_1ere.json");
     }
 
     function constructEPG($channel, $date)
@@ -26,12 +21,12 @@ class La1ere extends AbstractProvider implements Provider
             return false;
         }
         $old_zone = date_default_timezone_get();
-        if(!in_array($channel,self::$CHANNELS_KEY))
+        if(!in_array($channel,$this->CHANNELS_KEY))
         {
             return false;
         }
-        date_default_timezone_set(self::$CHANNELS_LIST[$channel]["timezone"]);
-        $channel_id = self::$CHANNELS_LIST[$channel]['id'];
+        date_default_timezone_set($this->CHANNELS_LIST[$channel]["timezone"]);
+        $channel_id = $this->CHANNELS_LIST[$channel]['id'];
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_URL, "https://la1ere.francetvinfo.fr/$channel_id/emissions");
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);

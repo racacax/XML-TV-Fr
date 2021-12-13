@@ -3,8 +3,6 @@ require_once 'Provider.php';
 require_once 'Utils.php';
 class TVHebdo extends AbstractProvider implements Provider
 {
-    private static $CHANNELS_LIST;
-    private static $CHANNELS_KEY;
 
     public static function getPriority()
     {
@@ -13,10 +11,7 @@ class TVHebdo extends AbstractProvider implements Provider
 
     public function __construct()
     {
-        if (!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_tvhebdo.json")) {
-            self::$CHANNELS_LIST = json_decode(file_get_contents("channels_per_provider/channels_tvhebdo.json"), true);
-            self::$CHANNELS_KEY = array_keys(self::$CHANNELS_LIST);
-        }
+        parent::__construct("channels_per_provider/channels_tvhebdo.json");
     }
 
     function constructEPG($channel, $date)
@@ -24,13 +19,13 @@ class TVHebdo extends AbstractProvider implements Provider
         parent::constructEPG($channel, $date);
         $old_zone = date_default_timezone_get();
         date_default_timezone_set('America/Montreal');
-        if(!in_array($channel,self::$CHANNELS_KEY))
+        if(!in_array($channel,$this->CHANNELS_KEY))
         {
             date_default_timezone_set($old_zone);
             return false;
         }
         $ch1 = curl_init();
-        curl_setopt($ch1, CURLOPT_URL, 'http://www.ekamali.com/index.php?q='.base64_encode('http://www.tvhebdo.com/horaire-tele/'.self::$CHANNELS_LIST[$channel].'/date/'.$date).'&hl=3ed');
+        curl_setopt($ch1, CURLOPT_URL, 'http://www.ekamali.com/index.php?q='.base64_encode('http://www.tvhebdo.com/horaire-tele/'.$this->CHANNELS_LIST[$channel].'/date/'.$date).'&hl=3ed');
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
@@ -59,7 +54,7 @@ class TVHebdo extends AbstractProvider implements Provider
             $now = explode(' || ',$prgm[$j]);
             $after = explode(' || ',$prgm[$j+1])[0];
             $genre = 'Inconnu';
-            $id = self::$CHANNELS_LIST[$channel];
+            $id = $this->CHANNELS_LIST[$channel];
             if($id == "rds/RDS" || $id == "rds2/RDS2" || $id == "ris/RDSI" || $id == "tvas/TVASP" || $id == "tvs2/TVS2") { $genre = 'Sport'; }
             $program = $this->channelObj->addProgram($now[0], $after);
             $program->addTitle($now[1]);
