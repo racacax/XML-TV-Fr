@@ -8,12 +8,16 @@ class Channel {
     /**
      * Channel constructor.
      * @param $id
-     * @param $path
+     * @param $date
      */
-    public function __construct($id, $path)
+    public function __construct($id, $date)
     {
         $this->id = $id;
         $this->programs = [];
+
+        $path = Utils::generateFilePath($id,$date);
+        if(file_exists($path))
+            unlink($path);
         $this->fp = fopen($path, "a");
         $this->path = $path;
     }

@@ -1,9 +1,8 @@
 <?php
 require_once 'Provider.php';
 require_once 'Utils.php';
-class TVHebdo implements Provider
+class TVHebdo extends AbstractProvider implements Provider
 {
-    private $XML_PATH;
     private static $CHANNELS_LIST;
     private static $CHANNELS_KEY;
 
@@ -12,9 +11,8 @@ class TVHebdo implements Provider
         return 0.2;
     }
 
-    public function __construct($XML_PATH)
+    public function __construct()
     {
-        $this->XML_PATH = $XML_PATH;
         if (!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_tvhebdo.json")) {
             self::$CHANNELS_LIST = json_decode(file_get_contents("channels_per_provider/channels_tvhebdo.json"), true);
             self::$CHANNELS_KEY = array_keys(self::$CHANNELS_LIST);
@@ -23,6 +21,7 @@ class TVHebdo implements Provider
 
     function constructEPG($channel, $date)
     {
+        parent::constructEPG($channel, $date);
         $old_zone = date_default_timezone_get();
         date_default_timezone_set('America/Montreal');
         if(!in_array($channel,self::$CHANNELS_KEY))
@@ -55,7 +54,6 @@ class TVHebdo implements Provider
         {
             $prgm[] = strtotime($date.' '.$time[1][$j]).' || '.$titre[2][$j];
         }
-        $channel_obj = new Channel($channel, Utils::generateFilePath($this->XML_PATH,$channel,$date));
         for($j=0;$j<count($prgm)-1;$j++)
         {
             $now = explode(' || ',$prgm[$j]);
@@ -63,13 +61,13 @@ class TVHebdo implements Provider
             $genre = 'Inconnu';
             $id = self::$CHANNELS_LIST[$channel];
             if($id == "rds/RDS" || $id == "rds2/RDS2" || $id == "ris/RDSI" || $id == "tvas/TVASP" || $id == "tvs2/TVS2") { $genre = 'Sport'; }
-            $program = $channel_obj->addProgram($now[0], $after);
+            $program = $this->channelObj->addProgram($now[0], $after);
             $program->addTitle($now[1]);
             $program->addDesc("Aucune description");
             $program->addCategory($genre);
         }
         date_default_timezone_set($old_zone);
-        $channel_obj->save();
+        $this->channelObj->save();
         return true;
     }
 }

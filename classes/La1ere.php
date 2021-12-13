@@ -1,9 +1,8 @@
 <?php
 require_once 'Provider.php';
 require_once 'Utils.php';
-class La1ere implements Provider
+class La1ere extends AbstractProvider implements Provider
 {
-    private $XML_PATH;
     private static $CHANNELS_LIST;
     private static $CHANNELS_KEY;
 
@@ -12,9 +11,8 @@ class La1ere implements Provider
         return 0.3;
     }
 
-    public function __construct($XML_PATH)
+    public function __construct()
     {
-        $this->XML_PATH = $XML_PATH;
         if (!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_1ere.json")) {
             self::$CHANNELS_LIST = json_decode(file_get_contents("channels_per_provider/channels_1ere.json"), true);
             self::$CHANNELS_KEY = array_keys(self::$CHANNELS_LIST);
@@ -23,6 +21,7 @@ class La1ere implements Provider
 
     function constructEPG($channel, $date)
     {
+        parent::constructEPG($channel, $date);
         if($date != date('Y-m-d')) {
             return false;
         }
@@ -61,16 +60,15 @@ class La1ere implements Provider
                 }
             }
         }
-        $channel_obj = new Channel($channel, Utils::generateFilePath($this->XML_PATH,$channel,$date));
         for($i=0; $i<count($infos)-1; $i++) {
-            $program = $channel_obj->addProgram(strtotime($infos[$i]["hour"]), strtotime($infos[$i+1]["hour"]));
+            $program = $this->channelObj->addProgram(strtotime($infos[$i]["hour"]), strtotime($infos[$i+1]["hour"]));
             if(strlen($infos[$i+1]["subtitle"])>0) {
                 $program->addSubtitle($infos[$i+1]["subtitle"]);
             }
             $program->addTitle($infos[$i]["title"]);
             $program->addCategory("Inconnu");
         }
-        $channel_obj->save();
+        $this->channelObj->save();
         date_default_timezone_set($old_zone);
         return true;
     }

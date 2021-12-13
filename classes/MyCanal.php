@@ -1,9 +1,8 @@
 <?php
 require_once 'Provider.php';
 require_once 'Utils.php';
-class MyCanal implements Provider
+class MyCanal extends AbstractProvider implements Provider
 {
-    private $XML_PATH;
     private static $CHANNELS_LIST;
     private static $CHANNELS_KEY;
     private static $PREVIOUS_SEGMENTS;
@@ -13,9 +12,8 @@ class MyCanal implements Provider
         return 0.2;
     }
 
-    public function __construct($XML_PATH)
+    public function __construct()
     {
-        $this->XML_PATH = $XML_PATH;
         if (!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_mycanal.json")) {
             self::$CHANNELS_LIST = json_decode(file_get_contents("channels_per_provider/channels_mycanal.json"), true);
             self::$CHANNELS_KEY = array_keys(self::$CHANNELS_LIST);
@@ -27,6 +25,7 @@ class MyCanal implements Provider
 
     function constructEPG($channel, $date)
     {
+        parent::constructEPG($channel, $date);
         if(!in_array($channel,self::$CHANNELS_KEY))
             return false;
         $day = (strtotime($date) - strtotime(date('Y-m-d')))/86400;
@@ -44,19 +43,15 @@ class MyCanal implements Provider
         $res2 = json_decode($res3,true);
         if(!isset($res2['timeSlices']))
             return false;
-        $xml_save = Utils::generateFilePath($this->XML_PATH,$channel,$date);
-        if(file_exists($xml_save))
-            unlink($xml_save);
         $res3 = json_decode($res3, true);
         $json = $res3["timeSlices"];
         if(isset(self::$PREVIOUS_SEGMENTS[$channel]))
             $previous = self::$PREVIOUS_SEGMENTS[$channel];
         $count = 0;
-        $channel_obj = new Channel($channel, $xml_save);
         foreach ($json as $section) {
             foreach ($section["contents"] as $section2) {
                 if(isset($previous)) {
-                    $program = $channel_obj->addProgram($previous["startTime"] / 1000, $section2["startTime"] / 1000);
+                    $program = $this->channelObj->addProgram($previous["startTime"] / 1000, $section2["startTime"] / 1000);
                     $program->addTitle($previous["title"]." - ".@$previous["subtitle"]);
                     $program->addDesc("Aucune description");
                     $program->addCategory("Inconnu");
@@ -68,7 +63,7 @@ class MyCanal implements Provider
         }
         if(isset($previous))
             self::$PREVIOUS_SEGMENTS[$channel] = $previous;
-        $channel_obj->save();
+        $this->channelObj->save();
         if($count < 2)
             return false;
         return true;

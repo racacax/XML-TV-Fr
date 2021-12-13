@@ -30,11 +30,12 @@ foreach ($json as $key => $value) {
     $CONFIG[$key] = $value;
     echo "\e[95m($key) \e[39m=> \e[33m$value\e[39m, ";
 }
+define('CONFIG', $CONFIG);
 echo "\n";
 
 date_default_timezone_set('Europe/Paris');
-set_time_limit($CONFIG["time_limit"]);
-ini_set('memory_limit', $CONFIG["memory_limit"]); // modify for resolve error Line173 : memory limit GZencode _ Ludis 20200729
+set_time_limit(CONFIG["time_limit"]);
+ini_set('memory_limit', CONFIG["memory_limit"]); // modify for resolve error Line173 : memory limit GZencode _ Ludis 20200729
 
 if ( ! function_exists('glob_recursive'))
 {
@@ -63,10 +64,10 @@ function compare_classe($a,$b)
 }
 
 $classes = glob('classes/*.php');
-$NON_PROVIDER_CLASES = ["Provider", "Utils", "Program", "Channel"];
+$NON_PROVIDER_CLASES = ["Provider", "Utils", "Program", "Channel", "AbstractProvider"];
 $classes_priotity = array();
-$XML_PATH = "channels/";
-$CLASS_PREFIX = "EPG_";
+define('XML_PATH',"channels/");
+define('CLASS_PREFIX',"EPG_");
 echo "\e[36m[CHARGEMENT] \e[39mOrganisation des classes de Provider \n";
 foreach($classes as $classe) {
     require_once $classe;
@@ -74,7 +75,7 @@ foreach($classes as $classe) {
     $class_name = $class_name[count($class_name)-1];
     if(class_exists($class_name) && !in_array($class_name, $NON_PROVIDER_CLASES))
     {
-        if(method_exists(new $class_name($XML_PATH),'getPriority' ) && method_exists(new $class_name($XML_PATH),'constructEPG' ))
+        if(method_exists(new $class_name(),'getPriority' ) && method_exists(new $class_name(),'constructEPG' ))
             $classes_priotity[] = $class_name;
     }
 }
@@ -89,32 +90,32 @@ if(!file_exists('channels.json'))
     }
 }
 
-Utils::getChannelsEPG($classes_priotity,$XML_PATH, $CONFIG, $CLASS_PREFIX);
+Utils::getChannelsEPG($classes_priotity);
 
-Utils::clearOldXML($CONFIG);
+Utils::clearOldXML();
 
-Utils::moveOldXML($CONFIG);
+Utils::moveOldXML();
 
-Utils::clearXMLCache($CONFIG, $XML_PATH);
+Utils::clearXMLCache();
 
-Utils::generateXML($CONFIG, $XML_PATH);
+Utils::generateXML();
 
-Utils::clearEPGCache($CONFIG);
+Utils::clearEPGCache();
 
-if(Utils::validateXML($CONFIG["output_path"]."/xmltv.xml")) {
-    Utils::reformatXML($CONFIG["output_path"]."/xmltv.xml");
+if(Utils::validateXML()) {
+    Utils::reformatXML();
 
-    if ($CONFIG["enable_gz"]) {
-        Utils::gzCompressXML($CONFIG["output_path"]);
+    if (CONFIG["enable_gz"]) {
+        Utils::gzCompressXML();
     }
 
-    if ($CONFIG["enable_zip"]) {
-        Utils::zipCompressXML($CONFIG["output_path"]);
+    if (CONFIG["enable_zip"]) {
+        Utils::zipCompressXML();
     }
 
-    if ($CONFIG["delete_raw_xml"]) {
+    if (CONFIG["delete_raw_xml"]) {
         echo "\e[34m[EXPORT] \e[39mSuppression du fichier XML brut\n";
-        unlink($CONFIG["output_path"] . "/xmltv.xml");
+        unlink(CONFIG["output_path"] . "/xmltv.xml");
     }
 }
 

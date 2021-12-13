@@ -1,9 +1,8 @@
 <?php
 require_once 'Provider.php';
 require_once 'Utils.php';
-class Telerama implements Provider
+class Telerama extends AbstractProvider implements Provider
 {
-    private $XML_PATH;
     private static $CHANNELS_LIST;
     private static $CHANNELS_KEY;
     private static $USER_AGENT = 'okhttp/3.12.3';
@@ -18,9 +17,8 @@ class Telerama implements Provider
     {
         return 0.95;
     }
-    public function __construct($XML_PATH)
+    public function __construct()
     {
-        $this->XML_PATH = $XML_PATH;
         if(!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_telerama.json"))
         {
             self::$CHANNELS_LIST  = json_decode(file_get_contents("channels_per_provider/channels_telerama.json"), true);
@@ -37,9 +35,7 @@ class Telerama implements Provider
 
     public function constructEPG($channel,$date)
     {
-        $xml_save = Utils::generateFilePath($this->XML_PATH,$channel,$date);
-        if(file_exists( $xml_save))
-            unlink( $xml_save);
+        parent::constructEPG($channel, $date);
         if (!isset($date)) {
             $date = date('Y-m-d');
         }
@@ -66,9 +62,8 @@ class Telerama implements Provider
             return false;
         }
         if (isset($json['donnees'])) {
-            $channel_obj = new Channel($channel, $xml_save);
             foreach ($json['donnees'] as $donnee) {
-                $program = $channel_obj->addProgram(strtotime($donnee["horaire"]["debut"]), strtotime($donnee["horaire"]["fin"]));
+                $program = $this->channelObj->addProgram(strtotime($donnee["horaire"]["debut"]), strtotime($donnee["horaire"]["fin"]));
                 $descri = $donnee['resume'];
                 if (isset($donnee["serie"])) {
                     $descri = 'Saison ' . $donnee["serie"]["saison"] . ' Episode ' . $donnee["serie"]["numero_episode"] . chr(10) . $descri;
@@ -148,7 +143,7 @@ class Telerama implements Provider
                 $program->addCategory($donnee["genre_specifique"]);
                 $program->setRating("-".$donnee["csa"]);
             }
-            $channel_obj->save();
+            $this->channelObj->save();
             return true;
         }
         return false;

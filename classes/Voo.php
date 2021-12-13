@@ -1,16 +1,14 @@
 <?php
 require_once 'Provider.php';
 require_once 'Utils.php';
-class Voo implements Provider
+class Voo extends AbstractProvider implements Provider
 {
 
-    private $XML_PATH;
     private static $CHANNELS_LIST;
     private static $CHANNELS_KEY;
 
-    public function __construct($XML_PATH)
+    public function __construct()
     {
-        $this->XML_PATH = $XML_PATH;
         if (!isset(self::$CHANNELS_LIST)&& file_exists("channels_per_provider/channels_voo.json")) {
             self::$CHANNELS_LIST = json_decode(file_get_contents("channels_per_provider/channels_voo.json"), true);
             self::$CHANNELS_KEY = array_keys(self::$CHANNELS_LIST);
@@ -23,6 +21,7 @@ class Voo implements Provider
 
     function constructEPG($channel, $date)
     {
+        parent::constructEPG($channel, $date);
         if(!in_array($channel,self::$CHANNELS_KEY))
             return false;
         $date_start = date('Y-m-d', strtotime($date)).'T00:00:00Z';
@@ -45,26 +44,22 @@ class Voo implements Provider
         if (!isset($json["Events"]["Event"])) {
             return false;
         }
-        $xml_save = Utils::generateFilePath($this->XML_PATH,$channel,$date);
-        if(file_exists( $xml_save))
-            unlink( $xml_save);
-        $channelObj = new Channel($channel, $xml_save);
         foreach ($json["Events"]["Event"] as $event) {
             $start = strtotime($event["AvailabilityStart"]);
             if ($start > $end + 1) {
-                $program = $channelObj->addProgram($start, $end);
+                $program = $this->channelObj->addProgram($start, $end);
                 $program->addTitle("Pas de programme");
                 $program->addDesc("Pas de programme");
                 $program->addCategory("Inconnu");
             }
             $end = strtotime($event["AvailabilityEnd"]);
-            $program = $channelObj->addProgram($start, $end);
+            $program = $this->channelObj->addProgram($start, $end);
             $program->addTitle($event["Titles"]["Title"][0]["Name"]);
             $program->addDesc(@$event["Titles"]["Title"][0]["LongSynopsis"]);
             $program->addCategory(@$event["Titles"]["Title"][0]["Genres"]["Genre"][0]["Value"]);
             $program->setIcon(@$event["Titles"]["Title"][0]["Pictures"]["Picture"][0]["Value"]);
         }
-        $channelObj->save();
+        $this->channelObj->save();
         return true;
     }
 

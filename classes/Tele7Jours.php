@@ -1,9 +1,8 @@
 <?php
 require_once 'Provider.php';
 require_once 'Utils.php';
-class Tele7Jours implements Provider
+class Tele7Jours extends AbstractProvider implements Provider
 {
-    private $XML_PATH;
     private static $CHANNELS_LIST;
     private static $CHANNELS_KEY;
 
@@ -11,9 +10,8 @@ class Tele7Jours implements Provider
     {
         return 0.6;
     }
-    public function __construct($XML_PATH)
+    public function __construct()
     {
-        $this->XML_PATH = $XML_PATH;
         if(!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_tele7jours.json"))
         {
             self::$CHANNELS_LIST  = json_decode(file_get_contents("channels_per_provider/channels_tele7jours.json"), true);
@@ -23,10 +21,7 @@ class Tele7Jours implements Provider
 
     public function constructEPG($channel,$date)
     {
-        $xml_save = Utils::generateFilePath($this->XML_PATH, $channel, $date);
-        if (file_exists($xml_save))
-            unlink($xml_save);
-
+        parent::constructEPG($channel, $date);
         if (!in_array($channel, self::$CHANNELS_KEY))
             return false;
         $channel_id = self::$CHANNELS_LIST[$channel];
@@ -63,6 +58,8 @@ class Tele7Jours implements Provider
                 $v = $h[0] . $h[1];
                 if (strlen($val["soustitre"]) > 2) {
                     $subtitle = $val["soustitre"];
+                } else {
+                    $subtitle = '';
                 }
                 $tableau[] = (strtotime($date . ' ' . $h) + $pl) . ' || ' . $val["titre"] . ' || ' . $subtitle . ' || ' . $val["nature"] . ' || ' . $val["photo"] . ' || ' . $val["saison"] . ' || ' . $val["numEpi"];
                 $tableau = array_values(array_unique($tableau));
@@ -70,12 +67,10 @@ class Tele7Jours implements Provider
             }
         }
 
-
-        $channel_obj = new Channel($channel, $xml_save);
         for ($i2 = 0; $i2 < count($tableau) - 1; $i2++) {
             $o = explode(' || ', $tableau[$i2]);
             $o2 = explode(' || ', $tableau[$i2 + 1]);
-            $program = $channel_obj->addProgram($o[0], $o2[0]);
+            $program = $this->channelObj->addProgram($o[0], $o2[0]);
             $program->addTitle($o[1]);
             $program->addDesc("Aucune description");
             $program->addCategory($o[3]);
@@ -90,7 +85,7 @@ class Tele7Jours implements Provider
                 $program->setEpisodeNum($o[5], $o[6]);
             }
         }
-        $channel_obj->save();
+        $this->channelObj->save();
         return true;
     }
 

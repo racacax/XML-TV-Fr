@@ -5,9 +5,8 @@
  */
 require_once 'Provider.php';
 require_once 'Utils.php';
-class Orange implements Provider
+class Orange extends AbstractProvider implements Provider
 {
-    private $XML_PATH;
     private static $CHANNELS_LIST;
     private static $CHANNELS_KEY;
 
@@ -15,9 +14,8 @@ class Orange implements Provider
     {
         return 0.6;
     }
-    public function __construct($XML_PATH)
+    public function __construct()
     {
-        $this->XML_PATH = $XML_PATH;
         if(!isset(self::$CHANNELS_LIST) && file_exists("channels_per_provider/channels_orange.json"))
         {
             self::$CHANNELS_LIST  = json_decode(file_get_contents("channels_per_provider/channels_orange.json"), true);
@@ -27,10 +25,7 @@ class Orange implements Provider
 
     public function constructEPG($channel,$date)
     {
-        $xml_save = Utils::generateFilePath($this->XML_PATH, $channel, $date);
-        if (file_exists($xml_save))
-            unlink($xml_save);
-
+        parent::constructEPG($channel, $date);
         if (!in_array($channel, self::$CHANNELS_KEY))
             return false;
         $channel_id = self::$CHANNELS_LIST[$channel];
@@ -50,11 +45,10 @@ class Orange implements Provider
         {
             return false;
         }
-        $channel_obj = new Channel($channel, $xml_save);
         foreach($json as $val)
         {
             if($val["csa"] == "1") { $csa = 'TP'; } if($val["csa"] == "2") { $csa = '-10'; } if($val["csa"] == "3") { $csa = '-12'; } if($val["csa"] == "4") { $csa = '-16'; } if($val["csa"] == "5") { $csa = '-18'; }
-            $program = $channel_obj->addProgram($val["diffusionDate"], $val["diffusionDate"]+$val["duration"]);
+            $program = $this->channelObj->addProgram($val["diffusionDate"], $val["diffusionDate"]+$val["duration"]);
             $program->addDesc($val["synopsis"]);
             $program->addCategory($val["genre"]);
             $program->addCategory($val["genreDetailed"]);
@@ -72,7 +66,7 @@ class Orange implements Provider
 
 
         }
-        $channel_obj->save();
+        $this->channelObj->save();
         return true;
     }
 

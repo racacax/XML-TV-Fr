@@ -1,13 +1,11 @@
 <?php
 require_once 'Provider.php';
 require_once 'Utils.php';
-class UltraNature implements Provider
+class UltraNature extends AbstractProvider implements Provider
 {
-    private $XML_PATH;
 
-    public function __construct($XML_PATH)
+    public function __construct()
     {
-        $this->XML_PATH = $XML_PATH;
     }
 
     public static function getPriority()
@@ -17,6 +15,7 @@ class UltraNature implements Provider
 
     function constructEPG($channel, $date)
     {
+        parent::constructEPG($channel, $date);
         if($channel!="UltraNature")
             return false;
         $days = array(
@@ -30,7 +29,6 @@ class UltraNature implements Provider
         );
         $d = $days[date('D',strtotime($date))];
         $date2 = date('Ymd',strtotime($date));
-        $channel_obj = new Channel($channel, Utils::generateFilePath($this->XML_PATH,"UltraNature",$date));
         for($j=0;$j<count($d);$j++)
         {
             $st = explode(' || ',$d[$j]);
@@ -45,12 +43,12 @@ class UltraNature implements Provider
             } else {
                 $d2 = date('Ymd',strtotime($date)+86400) . $st2 . '00 ' . date('O');
             }
-            $program = $channel_obj->addProgram(strtotime($d1), strtotime($d2));
+            $program = $this->channelObj->addProgram(strtotime($d1), strtotime($d2));
             $program->addTitle($st[1]);
             $program->addDesc('Aucune description');
             $program->addCategory($st[1]);
         }
-        $channel_obj->save();
+        $this->channelObj->save();
         return true;
     }
 }

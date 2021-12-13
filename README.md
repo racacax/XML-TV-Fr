@@ -5,7 +5,7 @@ XML TV Fr est un service permettant de récupérer un guide des programmes au fo
 
 # Prérequis
 
-PHP >=5.4 avec les extensions
+PHP >=7.1.0 avec les extensions
  - curl
  - zip
  - mbstring

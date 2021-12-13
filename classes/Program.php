@@ -59,8 +59,8 @@ class Program {
     }
 
     /**
-     * @param mixed $title
-     * @param string $lang
+     * @param $name
+     * @param $type
      */
     public function addCredit($name, $type): void
     {
