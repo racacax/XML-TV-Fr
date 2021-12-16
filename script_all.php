@@ -2,7 +2,7 @@
 /*
  * @version 0.4.0
  * @author racacax
- * @date 12/12/2021
+ * @date 16/12/2021
  */
 
 $CONFIG = array( # /!\ Default configuration. Edit your config in config.json
@@ -16,6 +16,8 @@ $CONFIG = array( # /!\ Default configuration. Edit your config in config.json
     "enable_zip" => true, # enable zip compression for the XMLTV,
     "xml_cache_days" => 5 # How many days old XML are stored
 );
+
+chdir(__DIR__);
 
 
 echo "\e[36m[CHARGEMENT] \e[39mChargement du fichier de config\n";
