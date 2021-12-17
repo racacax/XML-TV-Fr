@@ -72,6 +72,23 @@ La méthode `getPriority()` renverra un flottant de préférence entre 0 et 1 po
 La méthode   `constructEPG(channel,date)` construira un fichier XML pour une chaine à une date donnée. Elle retourne `true` si la tâche s'est déroulée avec succès, sinon `false`.
 
 L'instance de chaque `Provider` par date possédera un attribut `channel` étant une instance de la classe Channel (si `constructEPG` appelle la classe parente). A cette instance de classe `Channel`, vous pourrez ajouter des programmes (instances de la classe `Program`) avec la méthode `addProgram($start, $end)` (`$start` et `$end` étant des timestamp UNIX) et sur l'instance de chaque programme, vous pourrez définir les infos telles que le titre, les catégories, ... Une fois l'ajout des programmes terminé, il suffira d'appeller la méthode `save()` de l'attribut `channel` pour enregistrer le fichier XML pour la chaine et la date en question.
+Exemple :
+```php
+
+    function constructEPG($channel, $date)
+    {
+        parent::constructEPG($channel, $date);
+        foreach($results as $result) {
+            $program = $this->channel->addProgram(strtotime($result['start']), strtotime($result['end']));
+            $program->addTitle($result["title"], "en"); // argument langue optionnel, par defaut = "fr"
+            $program->setIcon("myIconUrl");
+            $program->addCategory(...)
+            $program->addSubtitle(...)
+            ...
+        }   
+        $this->channel->save(); // sauvegarde le programme de la journée en XML
+    }
+```
 
 Attention, le nom de la classe du service doit correspondre à son nom de fichier. Bien que PHP, contrairement à Java autorise des noms différents, le programme ici ne le permet pas.
 
