@@ -27,7 +27,19 @@ Le champ priority donne un ordre de priorité différent de celui par défaut en
 
 ## Configuration du programme (config.json)
 
-Le fichier config.json est au format JSON. Le champ days correspond au nombre de jours suivant la date du jour que l'on souhaite obtenir.
+Le fichier config.json est au format JSON. 
+```json
+{
+  "days" : 1, // Nombre de jours de l'EPG
+  "cache_max_days": 8, // Nombre de jours de cache
+  "output_path": "./xmltv", // Chemin de destination du XML final
+  "time_limit": 0, // Temps d'éxécution max du script (0=illimité)
+  "memory_limit": -1, // Quantité de mémoire vive max (-1=illimité)
+  "delete_raw_xml": false, // Supprimer le XML brut après génération (true|false)
+  "enable_gz": false, // Activer la compression gz (true|false)
+  "enable_zip": true // Activer la compression zip (true|false)
+}
+```
 
 # Lancer le script
 Pour démarrer la récupération du guide des programmes, lancez cette commande dans votre terminal (dans le dossier du programme).
@@ -39,11 +51,12 @@ Il est possible de générer depuis votre navigateur le fichier channels.json. P
 
     php -S localhost:8080
 Note : le port 8080 peut être changé par un autre.
-Ouvrez ensuite dans votre navigateur http://localhost:8080/cli/ (port à modifier en fonction de celui indiqué dans la commande au dessus)
+
+Ouvrez ensuite dans votre navigateur http://localhost:8080/cli/ (port à modifier en fonction de celui indiqué dans la commande au dessus).
 # Sortie
 
 ## Logs
-Les logs sont stockés dans le dossier logs au format JSON.
+Les logs sont stockés dans le dossier logs au format JSON. Les derniers logs sont accessibles via le navigateur à l'adresse http://localhost:8080/cli/logs.php (à condition d'avoir lancé la commande précédente).
 ## XML TV
 Les fichiers de sorties XML sont stockés dans le dossier xmltv au format XML, ZIP et GZ.
 Cette commande indiquera si le dernier fichier XML généré est valide.
