@@ -19,6 +19,22 @@ abstract class AbstractProvider {
     }
 
     public function constructEPG($channel,$date) {
-        $this->channelObj = new Channel($channel, $date);
+        $this->channelObj = new Channel($channel, $date, get_class($this));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChannelsList()
+    {
+        return $this->CHANNELS_LIST;
+    }
+
+    /**
+     * @return array
+     */
+    public function getChannelsKey(): array
+    {
+        return $this->CHANNELS_KEY;
     }
 }

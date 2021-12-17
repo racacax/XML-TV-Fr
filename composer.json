@@ -1,6 +1,12 @@
 {
   "require": {
   "php": ">=7.1.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-zlib": "*",
+    "ext-curl": "*",
+    "ext-dom": "*",
+    "ext-simplexml": "*",
+    "ext-xmlreader": "*",
+    "ext-zip": "*"
   }
 }

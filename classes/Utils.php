@@ -1,4 +1,8 @@
 <?php
+function echoSilent($string) {
+    if(!SILENT)
+        echo $string;
+}
 class Utils
 {
     public static function generateFilePath($channel,$date)
@@ -7,7 +11,7 @@ class Utils
     }
 
     public static function reformatXML() {
-        echo "\e[34m[EXPORT] \e[39mReformatage du XML...\n";
+        echoSilent("\e[34m[EXPORT] \e[39mReformatage du XML...\n");
         $domxml = new DOMDocument('1.0');
         $domxml->preserveWhiteSpace = false;
         $domxml->formatOutput = true;
@@ -16,38 +20,38 @@ class Utils
         $domxml->save(CONFIG['output_path']."/xmltv.xml");
     }
     public static function validateXML() {
-        echo "\e[34m[EXPORT] \e[39mValidation du fichier XML...\n";
+        echoSilent("\e[34m[EXPORT] \e[39mValidation du fichier XML...\n");
         @$xml = XMLReader::open(CONFIG['output_path']."/xmltv.xml");
 
         $xml->setParserProperty(XMLReader::VALIDATE, true);
 
         if($xml->isValid())
         {
-            echo "\e[34m[EXPORT] \e[32mXML valide\e[39m\n";
+            echoSilent("\e[34m[EXPORT] \e[32mXML valide\e[39m\n");
             return true;
         } else {
-            echo "\e[34m[EXPORT] \e[31mXML non valide\e[39m\n";
+            echoSilent("\e[34m[EXPORT] \e[31mXML non valide\e[39m\n");
             return false;
         }
     }
 
     public static function gzCompressXML() {
-        echo "\e[34m[EXPORT] \e[39mCompression du XMLTV en GZ...\n";
+        echoSilent("\e[34m[EXPORT] \e[39mCompression du XMLTV en GZ...\n");
         $got = file_get_contents(CONFIG['output_path'].'/xmltv.xml');
         $got1 = gzencode($got,true);
         file_put_contents(CONFIG['output_path'].'/xmltv.xml.gz',$got1);
-        echo "\e[34m[EXPORT] \e[39mGZ : \e[32mOK\e[39m\n";
+        echoSilent("\e[34m[EXPORT] \e[39mGZ : \e[32mOK\e[39m\n");
     }
 
     public static function zipCompressXML() {
-        echo "\e[34m[EXPORT] \e[39mCompression du XMLTV en ZIP...\n";
+        echoSilent("\e[34m[EXPORT] \e[39mCompression du XMLTV en ZIP...\n");
         $zip = new ZipArchive();
         $filename = CONFIG['output_path']."/xmltv.zip";
 
         if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
-            echo "\e[34m[EXPORT] \e[39mZIP : \e[31mHS\e[39m\n";
+            echoSilent("\e[34m[EXPORT] \e[39mZIP : \e[31mHS\e[39m\n");
         } else {
-            echo "\e[34m[EXPORT] \e[39mZIP : \e[32mOK\e[39m\n";
+            echoSilent("\e[34m[EXPORT] \e[39mZIP : \e[32mOK\e[39m\n");
         }
         $zip->addFile(CONFIG['output_path']."/xmltv.xml", "xmltv.xml");
         $zip->close();
@@ -55,7 +59,7 @@ class Utils
     }
 
     public static function getChannelsEPG($classes_priotity) {
-        echo "\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes\n";
+        echoSilent("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes\n");
         $logs = array('channels'=>array(), 'xml'=>array(),'failed_providers'=>array());
         $channels = json_decode(file_get_contents('channels.json'),true);
         $channels_key = array_keys($channels);
@@ -70,8 +74,9 @@ class Utils
             for($i=-1;$i<CONFIG["days"];$i++)
             {
                 $date = date('Y-m-d',time()+86400*$i);
-                echo "\e[95m[EPG GRAB] \e[39m".$channel." : ".$date;
-                if(!file_exists(Utils::generateFilePath($channel,$date))) {
+                echoSilent("\e[95m[EPG GRAB] \e[39m".$channel." : ".$date);
+                $file = Utils::generateFilePath($channel,$date);
+                if(!file_exists($file)) {
                     $success = false;
                     foreach ($priority as $classe) {
                         if(!class_exists($classe))
@@ -81,8 +86,9 @@ class Utils
                         if(${CLASS_PREFIX.$classe}->constructEPG($channel,$date))
                         {
                             $logs["channels"][$date][$channel]['success'] = true;
-                            echo " | \e[32mOK\e[39m - ".$classe.chr(10);
+                            echoSilent(" | \e[32mOK\e[39m - ".$classe.chr(10));
                             $logs["channels"][$date][$channel]['provider'] = $classe;
+                            $logs["channels"][$date][$channel]['cache'] = false;
                             break;
                         }
                         $logs["channels"][$date][$channel]['failed_providers'][] = $classe;
@@ -90,18 +96,20 @@ class Utils
                         $logs["failed_providers"][$classe] = true;
                     }
                     if(!$logs["channels"][$date][$channel]['success'])
-                        echo " | \e[31mHS\e[39m".chr(10);
+                        echoSilent(" | \e[31mHS\e[39m".chr(10));
                 } else {
-                    $logs["channels"][$date][$channel]['provider'] = 'Cache';
-                    echo " | \e[33mOK \e[39m- Cache".chr(10);
+                    $provider = self::getProviderFromComment($file);
+                    $logs["channels"][$date][$channel]['provider'] = $provider;
+                    echoSilent(" | \e[33mOK \e[39m- $provider (Cache)".chr(10));
                     $logs["channels"][$date][$channel]['success'] = true;
+                    $logs["channels"][$date][$channel]['cache'] = true;
 
                 }
             }
         }
-        echo "\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n";
+        echoSilent("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
         $log_path = 'logs/logs'.date('YmdHis').'.json';
-        echo "\e[36m[LOGS] \e[39m Export des logs vers $log_path\n";
+        echoSilent("\e[36m[LOGS] \e[39m Export des logs vers $log_path\n");
         file_put_contents($log_path,json_encode($logs));
     }
 
@@ -113,6 +121,10 @@ class Utils
                 unlink($file);
 
         }
+    }
+
+    public static function getProviderFromComment($file) {
+        return @trim(explode('-->', explode('<!--', file_get_contents($file))[1])[0]);
     }
 
     public static function moveOldXML() {
@@ -133,21 +145,10 @@ class Utils
         }
     }
 
-    public static function clearEPGCache() {
-
-        $tmp_files = glob_recursive('epg/*');
-        foreach($tmp_files as $file)
-        {
-            if(!is_dir($file) && time() - filemtime($file) >= (CONFIG["cache_max_days"])*86400)
-            {
-                unlink($file);
-            }
-        }
-    }
 
     public static function generateXML() {
 
-        echo "\e[34m[EXPORT] \e[39mGénération du XML...\n";
+        echoSilent("\e[34m[EXPORT] \e[39mGénération du XML...\n");
         $channels = json_decode(file_get_contents('channels.json'),true);
         $filepath = CONFIG['output_path']."/xmltv.xml";
         $out = fopen($filepath, "w");
@@ -163,8 +164,8 @@ class Utils
             if(!isset($name))
                 $name = $key;
             fwrite($out,'<channel id="'.$key.'">
-    <display-name>'.$name.'</display-name>
-    <icon src="'.$icon.'" />
+    <display-name>'.htmlspecialchars($name, ENT_XML1).'</display-name>
+    <icon src="'.htmlspecialchars($icon, ENT_XML1).'" />
   </channel>'.chr(10));
         }
         $files = glob(XML_PATH.'*');
@@ -178,7 +179,72 @@ class Utils
         fwrite($out,'</tv>');
         fclose($out);
 
-        echo "\e[34m[EXPORT] \e[39mGénération du XML terminée\n";
+        echoSilent("\e[34m[EXPORT] \e[39mGénération du XML terminée\n");
     }
+
+    public static function loadConfig() {
+        $CONFIG = array( # /!\ Default configuration. Edit your config in config.json
+            "days"=>8, # Number of days XML TV Fr will try to get EPG
+            "output_path"=>"./xmltv", # Where xmltv files are stored
+            "time_limit"=> 0, # time limit for the EPG grab (0 = unlimited)
+            "memory_limit"=> -1, # memory limit for the EPG grab (-1 = unlimited)
+            "cache_max_days"=>8, # after how many days do we clear cache (0 = no cache)
+            "delete_raw_xml" => false, # delete xmltv.xml after EPG grab (if you want to provide only compressed XMLTV)
+            "enable_gz" => true, # enable gz compression for the XMLTV
+            "enable_zip" => true, # enable zip compression for the XMLTV,
+            "xml_cache_days" => 5 # How many days old XML are stored
+        );
+
+
+        echoSilent("\e[36m[CHARGEMENT] \e[39mChargement du fichier de config\n");
+        if(!file_exists('config.json') & file_exists('config_example.json')) {
+            echoSilent("\e[36m[CHARGEMENT] \e[33mFichier config.json absent, copie de config_example.json\e[39m\n");
+            copy('config_example.json', 'config.json');
+        }
+
+        echoSilent("\e[36m[CHARGEMENT] \e[39mListe des paramètres : ");
+        $json = json_decode(file_get_contents('config.json'),true);
+        foreach ($json as $key => $value) {
+            $CONFIG[$key] = $value;
+            echoSilent("\e[95m($key) \e[39m=> \e[33m$value\e[39m, ");
+        }
+        define('CONFIG', $CONFIG);
+
+        define('NON_PROVIDER_CLASES',["Provider", "Utils", "Program", "Channel", "AbstractProvider"]);
+        define('XML_PATH',"channels/");
+        define('CLASS_PREFIX',"EPG_");
+        echoSilent("\n");
+    }
+
+    public static function getClasses() {
+        function compare_classe($a,$b)
+        {
+            if(class_exists($a) && class_exists($b))
+            {
+                if(call_user_func($a. "::getPriority") > call_user_func($b. "::getPriority"))
+                    return -1;
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+        $classes = glob('classes/*.php');
+        $classes_priotity = array();
+        echoSilent("\e[36m[CHARGEMENT] \e[39mOrganisation des classes de Provider \n");
+        foreach($classes as $classe) {
+            require_once $classe;
+            $class_name = explode('/',explode('.php',$classe)[0]);
+            $class_name = $class_name[count($class_name)-1];
+            if(class_exists($class_name) && !in_array($class_name, NON_PROVIDER_CLASES))
+            {
+                if(method_exists(new $class_name(),'getPriority' ) && method_exists(new $class_name(),'constructEPG' ))
+                    $classes_priotity[] = $class_name;
+            }
+        }
+
+        usort($classes_priotity,"compare_classe");
+        return $classes_priotity;
+    }
+
 
 }

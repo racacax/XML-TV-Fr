@@ -33,22 +33,32 @@ Le fichier config.json est au format JSON. Le champ days correspond au nombre de
 Pour démarrer la récupération du guide des programmes, lancez cette commande dans votre terminal (dans le dossier du programme).
 
     php script_all.php
+    
+# Générer le fichier channels.json
+Il est possible de générer depuis votre navigateur le fichier channels.json. Pour cela, placez vous dans le dossier de travail du programme et lancez cette commande
+
+    php -S localhost:8080
+Note : le port 8080 peut être changé par un autre.
+Ouvrez ensuite dans votre navigateur http://localhost:8080/cli/ (port à modifier en fonction de celui indiqué dans la commande au dessus)
 # Sortie
 
 ## Logs
 Les logs sont stockés dans le dossier logs au format JSON.
 ## XML TV
 Les fichiers de sorties XML sont stockés dans le dossier xmltv au format XML, ZIP et GZ.
-Pour vérifier si celui-ci est valide, il suffit de lancer :
-`php xmlvalidator.php`
 Cette commande indiquera si le dernier fichier XML généré est valide.
 
 # Ajouter des services
 
-Il est possible d'ajouter des services autres que ceux fournis. Pour cela, il faut ajouter une classe dans le dossier classes qui implémente la classe Provider. 
+Il est possible d'ajouter des services autres que ceux fournis. Pour cela, il faut ajouter une classe dans le dossier classes qui implémente la classe Provider et étende la classe AbstractProvider. 
+
 Le constructeur aura le chemin des XML temporaires d'indiqué.
-La méthode *getPriority()* renverra un flottant de préférence entre 0 et 1 pour indiquer la priorité par rapport à d'autres services (comparez les valeurs des autres scripts pour vous situer).
-La méthode   *constructEPG(channel,date)* construira un fichier XML pour une chaine à une date donnée. Elle retourne **true** si la tâche s'est déroulée avec succès, sinon **false**. Le fichier doit être stocké dans le dossier des XML temporaires et doit être de la forme **[ID de la chaine]_[Date].xml**. La méthode statique *generateFilePath(xmlpath,channel,date)* dela classe Utils le construit automatiquement.
+
+La méthode `getPriority()` renverra un flottant de préférence entre 0 et 1 pour indiquer la priorité par rapport à d'autres services (comparez les valeurs des autres scripts pour vous situer).
+
+La méthode   `constructEPG(channel,date)` construira un fichier XML pour une chaine à une date donnée. Elle retourne `true` si la tâche s'est déroulée avec succès, sinon `false`.
+
+L'instance de chaque `Provider` par date possédera un attribut `channel` étant une instance de la classe Channel (si `constructEPG` appelle la classe parente). A cette instance de classe `Channel`, vous pourrez ajouter des programmes (instances de la classe `Program`) avec la méthode `addProgram($start, $end)` (`$start` et `$end` étant des timestamp UNIX) et sur l'instance de chaque programme, vous pourrez définir les infos telles que le titre, les catégories, ... Une fois l'ajout des programmes terminé, il suffira d'appeller la méthode `save()` de l'attribut `channel` pour enregistrer le fichier XML pour la chaine et la date en question.
 
 Attention, le nom de la classe du service doit correspondre à son nom de fichier. Bien que PHP, contrairement à Java autorise des noms différents, le programme ici ne le permet pas.
 

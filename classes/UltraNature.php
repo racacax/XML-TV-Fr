@@ -6,6 +6,7 @@ class UltraNature extends AbstractProvider implements Provider
 
     public function __construct()
     {
+        parent::__construct("channels_per_provider/channels_ultranature.json");
     }
 
     public static function getPriority()
@@ -16,7 +17,7 @@ class UltraNature extends AbstractProvider implements Provider
     function constructEPG($channel, $date)
     {
         parent::constructEPG($channel, $date);
-        if($channel!="UltraNature")
+        if($this->CHANNELS_LIST[$channel]!="UltraNature")
             return false;
         $days = array(
             'Mon'=> array('0000 || Voyage','0130 || Programme inconnu','0700 || Paysages','0830 || Animaux','1030 || Sports extrêmes','1200 || Découverte','1330 || Sports extrêmes','1530 || Découverte','1730 || Animaux','1900 || Voyage','2100 || Animaux','2300 || Sports extrêmes'),
