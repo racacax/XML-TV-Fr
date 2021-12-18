@@ -86,7 +86,7 @@ Exemple :
             $program->addSubtitle(...)
             ...
         }   
-        $this->channelObj->save(); // sauvegarde le programme de la journée en XML
+        return $this->channelObj->save(); // sauvegarde le programme de la journée en XML
     }
 ```
 
