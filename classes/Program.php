@@ -35,7 +35,7 @@ class Program {
      */
     public function getTitles()
     {
-        return self::listToMark($this->titles, "title");
+        return self::listToMark($this->titles, "title", "Aucun titre");
     }
 
     /**
@@ -53,7 +53,7 @@ class Program {
      */
     public function getDescs()
     {
-        return self::listToMark($this->descs, "desc");
+        return self::listToMark($this->descs, "desc", "Aucune description");
     }
 
     /**
@@ -91,9 +91,8 @@ class Program {
      */
     public function addDesc($desc, $lang="fr"): void
     {
-        if(empty($desc))
-            $desc = "Aucune description";
-        $this->descs[] = array("name"=>$desc, "lang"=>$lang);
+        if(!empty($desc))
+            $this->descs[] = array("name"=>$desc, "lang"=>$lang);
     }
 
     /**
@@ -101,7 +100,7 @@ class Program {
      */
     public function getCategories()
     {
-        return self::listToMark($this->categories, "category");
+        return self::listToMark($this->categories, "category", "Inconnu");
     }
 
     /**
@@ -230,10 +229,13 @@ class Program {
         return $this->channel->getFp();
     }
 
-    public static function listToMark($list, $tagName) {
+    public static function listToMark($list, $tagName, $stringIfEmpty = null) {
         $str = "";
         foreach($list as $elem) {
             $str .= '<'.$tagName.' lang="'.$elem["lang"].'">' . stringAsXML($elem['name']) . "</$tagName>\n";
+        }
+        if(empty($str) && isset($stringIfEmpty)) {
+            $str.= '<'.$tagName.' lang="fr">' . stringAsXML($stringIfEmpty) . "</$tagName>\n";
         }
         return trim($str);
     }
