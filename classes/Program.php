@@ -44,7 +44,8 @@ class Program {
      */
     public function addTitle($title, $lang="fr"): void
     {
-        $this->titles[] = array("name"=>$title, "lang"=>$lang);
+        if(!empty($title))
+            $this->titles[] = array("name"=>$title, "lang"=>$lang);
     }
 
     /**
