@@ -30,7 +30,7 @@ class Channel {
      * @return Program
      */
     public function addProgram($start, $end) {
-        $program = new Program($this->getFp(), $this, $start, $end);
+        $program = new Program($this, $start, $end);
         $this->programs[] = $program;
         return $program;
     }
@@ -51,20 +51,25 @@ class Channel {
         return $this->id;
     }
 
-    public function save() {
+    public function save($minimum=0) {
         fputs($this->getFp(), "<!-- $this->provider -->\n");
         foreach ($this->programs as $program) {
             $program->save();
         }
-        if(empty($this->programs)) {
+        if(count($this->programs) < $minimum) {
             @unlink($this->path);
+            return false;
         }
+        return true;
     }
 
-    private function getFp()
+    public function getFp()
     {
         if(!isset($this->fp))
             $this->fp = fopen($this->path, "a");
         return $this->fp;
+    }
+    public function getProgramCount() {
+        return count($this->getPrograms());
     }
 }

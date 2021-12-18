@@ -17,11 +17,9 @@ class TVHebdo extends AbstractProvider implements Provider
     function constructEPG($channel, $date)
     {
         parent::constructEPG($channel, $date);
-        $old_zone = date_default_timezone_get();
         date_default_timezone_set('America/Montreal');
         if(!in_array($channel,$this->CHANNELS_KEY))
         {
-            date_default_timezone_set($old_zone);
             return false;
         }
         $ch1 = curl_init();
@@ -42,7 +40,6 @@ class TVHebdo extends AbstractProvider implements Provider
         $t9 = json_encode($titre);
         $t8 = $t8.'|||||||||||||||||||||||'.$t9;
         if(strlen($t8)<=100){
-            date_default_timezone_set($old_zone);
             return false; }
 
         for($j=0;$j<count($titre[2]);$j++)
@@ -61,8 +58,6 @@ class TVHebdo extends AbstractProvider implements Provider
             $program->addDesc("Aucune description");
             $program->addCategory($genre);
         }
-        date_default_timezone_set($old_zone);
-        $this->channelObj->save();
-        return true;
+        return $this->channelObj->save();
     }
 }

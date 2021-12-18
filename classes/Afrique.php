@@ -45,9 +45,6 @@ class Afrique extends AbstractProvider implements Provider
                 $program->setIcon($section2["URLImage"]);
             }
         }
-        $this->channelObj->save();
-        if($count < 2)
-            return false;
-        return true;
+        return $this->channelObj->save();
     }
 }

@@ -1,6 +1,5 @@
 <?php
 class Program {
-    private $fp;
     private $channel;
     private $titles;
     private $descs;
@@ -15,14 +14,12 @@ class Program {
 
     /**
      * Program constructor.
-     * @param $fp
      * @param $channel
      * @param $start
      * @param $end
      */
-    public function __construct($fp, $channel, $start, $end)
+    public function __construct($channel, $start, $end)
     {
-        $this->fp = $fp;
         $this->channel = $channel;
         $this->titles = [];
         $this->categories = [];
@@ -75,7 +72,7 @@ class Program {
         if(!empty($this->credits)) {
             $str = '<credits>'.chr(10);
             foreach ($this->credits as $credit) {
-                $str.= '    <'.$credit['type'].'>'.self::stringAsXML($credit['name']).'</'.$credit['type'].'>'.chr(10);
+                $str.= '    <'.$credit['type'].'>'.stringAsXML($credit['name']).'</'.$credit['type'].'>'.chr(10);
             }
             $str.= '</credits>';
             return $str;
@@ -115,7 +112,7 @@ class Program {
     public function getIcon()
     {
         if(isset($this->icon) && strlen($this->icon) > 0) {
-            return '<icon src="' . self::stringAsXML($this->icon) . '" />';
+            return '<icon src="' . stringAsXML($this->icon) . '" />';
         }
         return "";
     }
@@ -180,7 +177,8 @@ class Program {
      */
     public function addSubtitle($subtitle, $lang="fr"): void
     {
-        $this->subtitles[] = array('name'=>$subtitle, "lang"=>$lang);
+        if(!empty($subtitle))
+            $this->subtitles[] = array('name'=>$subtitle, "lang"=>$lang);
     }
 
     /**
@@ -190,7 +188,7 @@ class Program {
     {
         if(isset($this->rating)) {
             return '<rating system="csa">
-      <value>'.self::stringAsXML($this->rating).'</value>
+      <value>'.stringAsXML($this->rating).'</value>
     </rating>';
         }
         return "";
@@ -218,17 +216,17 @@ class Program {
     }
 
     public function save() {
-        fputs($this->fp, $this->toString());
+        fputs($this->getFp(), $this->toString());
     }
 
-    private static function stringAsXML($string) {
-        return htmlspecialchars($string, ENT_XML1);
+    private function getFp() {
+        return $this->channel->getFp();
     }
 
     public static function listToMark($list, $tagName) {
         $str = "";
         foreach($list as $elem) {
-            $str .= '<'.$tagName.' lang="'.$elem["lang"].'">' . self::stringAsXML($elem['name']) . "</$tagName>\n";
+            $str .= '<'.$tagName.' lang="'.$elem["lang"].'">' . stringAsXML($elem['name']) . "</$tagName>\n";
         }
         return trim($str);
     }

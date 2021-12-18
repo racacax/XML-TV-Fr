@@ -20,7 +20,6 @@ class La1ere extends AbstractProvider implements Provider
         if($date != date('Y-m-d')) {
             return false;
         }
-        $old_zone = date_default_timezone_get();
         if(!in_array($channel,$this->CHANNELS_KEY))
         {
             return false;
@@ -63,8 +62,6 @@ class La1ere extends AbstractProvider implements Provider
             $program->addTitle($infos[$i]["title"]);
             $program->addCategory("Inconnu");
         }
-        $this->channelObj->save();
-        date_default_timezone_set($old_zone);
-        return true;
+        return $this->channelObj->save();
     }
 }

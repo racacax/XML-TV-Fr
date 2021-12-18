@@ -81,13 +81,17 @@ function getChannelsEPG($classes_priotity) {
                         break;
                     if(!isset(${CLASS_PREFIX.$classe}))
                         ${CLASS_PREFIX.$classe} = new $classe(XML_PATH);
+                    $old_zone = date_default_timezone_get();
                     if(${CLASS_PREFIX.$classe}->constructEPG($channel,$date))
                     {
                         $logs["channels"][$date][$channel]['success'] = true;
                         echoSilent(" | \e[32mOK\e[39m - ".$classe.chr(10));
                         $logs["channels"][$date][$channel]['provider'] = $classe;
                         $logs["channels"][$date][$channel]['cache'] = false;
+                        date_default_timezone_set($old_zone);
                         break;
+                    } else {
+                        date_default_timezone_set($old_zone);
                     }
                     $logs["channels"][$date][$channel]['failed_providers'][] = $classe;
                     $logs["channels"][$date][$channel]['success'] = false;
@@ -162,8 +166,8 @@ function generateXML() {
         if(!isset($name))
             $name = $key;
         fwrite($out,'<channel id="'.$key.'">
-    <display-name>'.htmlspecialchars($name, ENT_XML1).'</display-name>
-    <icon src="'.htmlspecialchars($icon, ENT_XML1).'" />
+    <display-name>'.stringAsXML($name).'</display-name>
+    <icon src="'.stringAsXML($icon).'" />
   </channel>'.chr(10));
     }
     $files = glob(XML_PATH.'*');
@@ -244,3 +248,7 @@ function getClasses() {
     return $classes_priotity;
 }
 
+
+function stringAsXML($string) {
+    return htmlspecialchars($string, ENT_XML1);
+}

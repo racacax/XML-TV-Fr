@@ -3,7 +3,7 @@ chdir(__DIR__."/..");
 require_once "classes/Utils.php";
 define('SILENT', true);
 loadConfig();
-require_once "cli/functions.php";
+require_once "tools/functions.php";
 $channels = getChannelsWithProvider();
 ?>
 <html>
@@ -62,7 +62,7 @@ $channels = getChannelsWithProvider();
         <tr class="channel" id="<?php echo $id; ?>" data-name="<?php echo $channel["key"]; ?>">
             <th><?php echo htmlentities($channel["key"]) ?></th>
             <th><input name="name" value="<?php echo htmlentities(@$channel["name"]) ?>" /></th>
-            <th><?php include "cli/select_template.php" ?></th>
+            <th><?php include "tools/select_template.php" ?></th>
             <th><input name="icon" value="<?php echo htmlentities(@$channel["icon"]) ?>" /></th>
             <th><input name="is_active" type="checkbox" <?php echo (@$channel["is_active"]) ? 'checked' : "" ?> /></th>
         </tr>
@@ -142,12 +142,8 @@ $channels = getChannelsWithProvider();
             type: "POST",
             url: "save_channels.php",
             data: JSON.stringify(json),
-            success: successFunc,
             dataType: "json"
-        });
-    }
-    function successFunc() {
-        alert("Sauvegardé")
+        }).always(function() { alert("Sauvegardé"); });
     }
 </script>
 </body>

@@ -57,8 +57,7 @@ class TV5 extends AbstractProvider implements Provider
 
 
         }
-        $this->channelObj->save();
-        return true;
+        return $this->channelObj->save();
     }
 
 

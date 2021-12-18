@@ -137,8 +137,7 @@ class Telerama extends AbstractProvider implements Provider
                 $program->addCategory($donnee["genre_specifique"]);
                 $program->setRating("-".$donnee["csa"]);
             }
-            $this->channelObj->save();
-            return true;
+            return $this->channelObj->save();
         }
         return false;
     }

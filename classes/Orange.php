@@ -60,8 +60,7 @@ class Orange extends AbstractProvider implements Provider
 
 
         }
-        $this->channelObj->save();
-        return true;
+        return $this->channelObj->save();
     }
 
 

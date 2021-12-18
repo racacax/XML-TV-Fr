@@ -49,7 +49,6 @@ class UltraNature extends AbstractProvider implements Provider
             $program->addDesc('Aucune description');
             $program->addCategory($st[1]);
         }
-        $this->channelObj->save();
-        return true;
+        return $this->channelObj->save();
     }
 }

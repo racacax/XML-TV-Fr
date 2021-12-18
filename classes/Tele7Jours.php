@@ -79,8 +79,7 @@ class Tele7Jours extends AbstractProvider implements Provider
                 $program->setEpisodeNum($o[5], $o[6]);
             }
         }
-        $this->channelObj->save();
-        return true;
+        return $this->channelObj->save();
     }
 
 

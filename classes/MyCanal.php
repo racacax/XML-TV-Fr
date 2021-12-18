@@ -58,9 +58,6 @@ class MyCanal extends AbstractProvider implements Provider
         }
         if(isset($previous))
             self::$PREVIOUS_SEGMENTS[$channel] = $previous;
-        $this->channelObj->save();
-        if($count < 2)
-            return false;
-        return true;
+        return $this->channelObj->save(2);
     }
 }
