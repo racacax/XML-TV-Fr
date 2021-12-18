@@ -1,8 +1,8 @@
 <?php
 /*
- * @version 0.4.0
+ * @version 1.0.0
  * @author racacax
- * @date 16/12/2021
+ * @date 18/12/2021
  */
 
 chdir(__DIR__);
