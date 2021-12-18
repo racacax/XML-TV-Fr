@@ -51,7 +51,7 @@ class Channel {
         return $this->id;
     }
 
-    public function save($minimum=0) {
+    public function save($minimum=1) {
         fputs($this->getFp(), "<!-- $this->provider -->\n");
         foreach ($this->programs as $program) {
             $program->save();
