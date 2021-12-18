@@ -61,7 +61,11 @@ class Program {
      */
     public function addCredit($name, $type): void
     {
-        $this->titles[] = array("name"=>$name, "type"=>$type);
+        if(!empty($name)) {
+            if(empty($type))
+                $type = "guest";
+            $this->titles[] = array("name" => $name, "type" => $type);
+        }
     }
 
     /**
@@ -86,6 +90,8 @@ class Program {
      */
     public function addDesc($desc, $lang="fr"): void
     {
+        if(empty($desc))
+            $desc = "Aucune description";
         $this->descs[] = array("name"=>$desc, "lang"=>$lang);
     }
 
