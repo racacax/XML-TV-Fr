@@ -18,7 +18,7 @@ class Channel {
         $this->programs = [];
         $this->provider = $provider;
 
-        $path = Utils::generateFilePath($id,$date);
+        $path = generateFilePath($id,$date);
         if(file_exists($path))
             unlink($path);
         $this->path = $path;

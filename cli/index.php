@@ -2,7 +2,7 @@
 chdir(__DIR__."/..");
 require_once "classes/Utils.php";
 define('SILENT', true);
-Utils::loadConfig();
+loadConfig();
 require_once "cli/functions.php";
 $channels = getChannelsWithProvider();
 ?>

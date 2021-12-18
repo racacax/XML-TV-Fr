@@ -3,7 +3,7 @@ chdir(__DIR__."/..");
 require_once "classes/Utils.php";
 function getClassesCache() {
     if(!defined('CLASSES_CACHE'))
-        define('CLASSES_CACHE', Utils::getClasses());
+        define('CLASSES_CACHE', getClasses());
     return CLASSES_CACHE;
 }
 function sortActive($a, $b) {

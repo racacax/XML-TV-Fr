@@ -8,7 +8,7 @@
 chdir(__DIR__);
 require_once "classes/Utils.php";
 define('SILENT', false);
-Utils::loadConfig();
+loadConfig();
 
 date_default_timezone_set('Europe/Paris');
 set_time_limit(CONFIG["time_limit"]);
@@ -24,25 +24,25 @@ if(!file_exists('channels.json'))
     }
 }
 
-Utils::getChannelsEPG(Utils::getClasses());
+getChannelsEPG(getClasses());
 
-Utils::clearOldXML();
+clearOldXML();
 
-Utils::moveOldXML();
+moveOldXML();
 
-Utils::clearXMLCache();
+clearXMLCache();
 
-Utils::generateXML();
+generateXML();
 
-if(Utils::validateXML()) {
-    Utils::reformatXML();
+if(validateXML()) {
+    reformatXML();
 
     if (CONFIG["enable_gz"]) {
-        Utils::gzCompressXML();
+        gzCompressXML();
     }
 
     if (CONFIG["enable_zip"]) {
-        Utils::zipCompressXML();
+        zipCompressXML();
     }
 
     if (CONFIG["delete_raw_xml"]) {
