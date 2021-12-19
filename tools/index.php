@@ -66,7 +66,7 @@ $channels = getChannelsWithProvider();
             <th><?php echo htmlentities($channel["key"]) ?></th>
             <th><input name="name" value="<?php echo htmlentities(@$channel["name"]) ?>" /></th>
             <th><?php include "tools/select_template.php" ?></th>
-            <th><input name="icon" value="<?php echo htmlentities(@$channel["icon"]) ?>" /></th>
+            <th><?php if(isset($channel["icon"])) { ?> <img alt="Logo" src="<?php echo $channel["icon"]; ?>" style="max-width:200px; max-height:80px;width:auto; height:auto" /><br/><?php } ?><input name="icon" value="<?php echo htmlentities(@$channel["icon"]) ?>" /></th>
             <th><input name="is_active" type="checkbox" <?php echo (@$channel["is_active"]) ? 'checked' : "" ?> /></th>
         </tr>
     <?php
