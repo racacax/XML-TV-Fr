@@ -1,7 +1,21 @@
 <?php
+class MainProgram {
+    public static $customTextDisplayed = false;
+    public static $currentOutput = null;
+}
 function echoSilent($string) {
+    if(MainProgram::$customTextDisplayed) {
+        MainProgram::$customTextDisplayed = false;
+        echoSilent("\r".MainProgram::$currentOutput);
+    }
+    MainProgram::$currentOutput = $string;
     if(!SILENT)
         echo $string;
+}
+function displayTextOnCurrentLine($str) {
+    MainProgram::$customTextDisplayed = true;
+    if(!SILENT)
+        echo "\r".MainProgram::$currentOutput.$str;
 }
 function generateFilePath($channel,$date)
 {
@@ -19,17 +33,18 @@ function reformatXML() {
 }
 function validateXML() {
     echoSilent("\e[34m[EXPORT] \e[39mValidation du fichier XML...\n");
-    @$xml = XMLReader::open(CONFIG['output_path']."/xmltv.xml");
-
-    $xml->setParserProperty(XMLReader::VALIDATE, true);
-
-    if($xml->isValid())
-    {
+    libxml_use_internal_errors(true);
+    $xml = @simplexml_load_file(CONFIG['output_path'] . '/xmltv.xml');
+    if($xml === false) {
+        echoSilent("\e[34m[EXPORT] \e[31mXML non valide\e[39m\n");
+        foreach (libxml_get_errors() as $error) {
+            echo "\t", $error->message;
+        }
+        libxml_clear_errors();
+        return false;
+    } else {
         echoSilent("\e[34m[EXPORT] \e[32mXML valide\e[39m\n");
         return true;
-    } else {
-        echoSilent("\e[34m[EXPORT] \e[31mXML non valide\e[39m\n");
-        return false;
     }
 }
 
@@ -60,8 +75,8 @@ function getChannelsEPG($classes_priotity) {
     echoSilent("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes\n");
     $logs = array('channels'=>array(), 'xml'=>array(),'failed_providers'=>array());
     $channels = json_decode(file_get_contents('channels.json'),true);
-    $channels_key = array_keys($channels);
-    foreach($channels_key as $channel)
+    $channelsKeys = array_keys($channels);
+    foreach($channelsKeys as $channel)
     {
         if(isset($channels[$channel]["priority"]) && count($channels[$channel]["priority"]) > 0)
         {
@@ -147,11 +162,16 @@ function clearXMLCache() {
     }
 }
 
+function getDefaultChannelsInfos() {
+    return json_decode(file_get_contents('resources/default_channels_infos.json'),true);
+
+}
 
 function generateXML() {
 
     echoSilent("\e[34m[EXPORT] \e[39mGénération du XML...\n");
     $channels = json_decode(file_get_contents('channels.json'),true);
+    $defaultChannelsInfos = getDefaultChannelsInfos();
     $filepath = CONFIG['output_path']."/xmltv.xml";
     $out = fopen($filepath, "w");
     fwrite($out,'<?xml version="1.0" encoding="UTF-8"?>
@@ -162,12 +182,16 @@ function generateXML() {
     foreach($channels as $key => $channel)
     {
         @$icon = $channel['icon'];
+        if(empty($icon))
+            $icon = @$defaultChannelsInfos[$key]['icon'];
         @$name = $channel['name'];
+        if(empty($name))
+            $name = @$defaultChannelsInfos[$key]['name'];
         if(!isset($name))
             $name = $key;
         fwrite($out,'<channel id="'.$key.'">
     <display-name>'.stringAsXML($name).'</display-name>
-    <icon src="'.stringAsXML($icon).'" />
+    '.(!(empty($icon)) ? '<icon src="'.stringAsXML($icon).'" />' : '').'
   </channel>'.chr(10));
     }
     $files = glob(XML_PATH.'*');
@@ -250,5 +274,5 @@ function getClasses() {
 
 
 function stringAsXML($string) {
-    return htmlspecialchars($string, ENT_XML1);
+    return str_replace('"','&quot;',htmlspecialchars($string, ENT_XML1));
 }

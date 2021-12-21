@@ -22,7 +22,7 @@ function getChannelsWithProvider() {
     $channels = array();
     foreach (getClassesCache() as $classe) {
         $instance = new $classe();
-        foreach($instance->getChannelsKey() as $channel) {
+        foreach(array_keys($instance->getChannelsList()) as $channel) {
             if(!isset($channels[$channel])) {
                 $channels[$channel] = array("key"=>$channel, "available_providers"=>[$classe]);
             } else {

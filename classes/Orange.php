@@ -20,9 +20,9 @@ class Orange extends AbstractProvider implements Provider
     public function constructEPG($channel,$date)
     {
         parent::constructEPG($channel, $date);
-        if (!in_array($channel, $this->CHANNELS_KEY))
+        if (!$this->channelExists($channel))
             return false;
-        $channel_id = $this->CHANNELS_LIST[$channel];
+        $channel_id = $this->channelsList[$channel];
 
 
         $url = 'https://rp-live.orange.fr/live-webapp/v3/applications/STB4PC/programs?period='.$date.'&epgIds='.$channel_id.'&mco=OFR';
@@ -41,7 +41,13 @@ class Orange extends AbstractProvider implements Provider
         }
         foreach($json as $val)
         {
-            if($val["csa"] == "1") { $csa = 'TP'; } if($val["csa"] == "2") { $csa = '-10'; } if($val["csa"] == "3") { $csa = '-12'; } if($val["csa"] == "4") { $csa = '-16'; } if($val["csa"] == "5") { $csa = '-18'; }
+            switch(@$val["csa"]) {
+                case '2': $csa = '-10'; break;
+                case '3': $csa = '-12'; break;
+                case '4': $csa = '-16'; break;
+                case '5': $csa = '-18'; break;
+                default: $csa = 'Tout public';  break;
+            }
             $program = $this->channelObj->addProgram($val["diffusionDate"], $val["diffusionDate"]+$val["duration"]);
             $program->addDesc($val["synopsis"]);
             $program->addCategory($val["genre"]);

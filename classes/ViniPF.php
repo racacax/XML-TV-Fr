@@ -17,11 +17,13 @@ class ViniPF extends AbstractProvider implements Provider
     function constructEPG($channel, $date)
     {
         parent::constructEPG($channel, $date);
-        if(!in_array($channel,$this->CHANNELS_KEY))
+        if(!$this->channelExists($channel))
             return false;
         $debut = strtotime($date); // to be synchronized with Paris timezone to avoid overlaping on french channels if multiple providers
         date_default_timezone_set("Pacific/Tahiti");
-        for($i=0; $i <12; $i++) {
+        $count = 12;
+        for($i=0; $i <$count; $i++) {
+            displayTextOnCurrentLine(" ".round($i*100/$count, 2)." %");
             $dateDebut = '{"dateDebut":"'.date('c',$debut + 3600*2*$i).'"}';
             if(!isset(self::$cache_per_day[md5($dateDebut)])) {
                 $ch3 = curl_init();
@@ -40,7 +42,7 @@ class ViniPF extends AbstractProvider implements Provider
             }
             $array = self::$cache_per_day[md5($dateDebut)];
             foreach($array["programmes"] as $viniChannel) {
-                if($viniChannel["nid"] == $this->CHANNELS_LIST[$channel]) {
+                if($viniChannel["nid"] == $this->channelsList[$channel]) {
                     foreach($viniChannel["programmes"] as $programme) {
                         $program = $this->channelObj->addProgram($programme["timestampDeb"], $programme['timestampFin']);
                         $program->addTitle($programme['titreP']);

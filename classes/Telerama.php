@@ -33,9 +33,9 @@ class Telerama extends AbstractProvider implements Provider
         if (!isset($date)) {
             $date = date('Y-m-d');
         }
-        if(!in_array($channel,$this->CHANNELS_KEY))
+        if(!$this->channelExists($channel))
             return false;
-        $channel_id = $this->CHANNELS_LIST[$channel];
+        $channel_id = $this->channelsList[$channel];
 
 
 
@@ -135,7 +135,12 @@ class Telerama extends AbstractProvider implements Provider
                 $program->addTitle($donnee["titre"]);
                 $program->addDesc(!empty($descri)? $descri: 'Pas de description');
                 $program->addCategory($donnee["genre_specifique"]);
-                $program->setRating("-".$donnee["csa"]);
+                if($donnee["csa"] == "TP") {
+                    $rating = "Tout public";
+                } else {
+                    $rating = "-".$donnee["csa"];
+                }
+                $program->setRating($rating);
             }
             return $this->channelObj->save();
         }

@@ -11,6 +11,8 @@ class Program {
     private $subtitles;
     private $rating;
     private $credits;
+    private $year;
+    private static $RATINGS_PICTO;
 
     /**
      * Program constructor.
@@ -20,6 +22,8 @@ class Program {
      */
     public function __construct($channel, $start, $end)
     {
+        if(!isset(self::$RATINGS_PICTO))
+            self::$RATINGS_PICTO = json_decode(file_get_contents("resources/ratings_picto.json"), true);
         $this->channel = $channel;
         $this->titles = [];
         $this->categories = [];
@@ -28,6 +32,10 @@ class Program {
         $this->credits = [];
         $this->start = $start;
         $this->end = $end;
+    }
+
+    private function getPictoFromRatingSystem($rating, $system) {
+        return @self::$RATINGS_PICTO[strtolower($system)][strtolower($rating)];
     }
 
     /**
@@ -65,7 +73,7 @@ class Program {
         if(!empty($name)) {
             if(empty($type))
                 $type = "guest";
-            $this->titles[] = array("name" => $name, "type" => $type);
+            $this->credits[] = array("name" => $name, "type" => $type);
         }
     }
 
@@ -166,7 +174,15 @@ class Program {
      */
     public function setEpisodeNum($season, $episode): void
     {
-        $this->episode_num = @($season-1).'.'.@($episode-1);
+        if(!isset($season) && !isset($episode))
+            return;
+        $season = @(intval($season)-1);
+        $episode = @(intval($episode)-1);
+        if($season < 0)
+            $season = 0;
+        if($episode < 0)
+            $episode = 0;
+        $this->episode_num = $season.'.'.$episode;
     }
 
     /**
@@ -193,9 +209,11 @@ class Program {
     public function getRating()
     {
         if(isset($this->rating)) {
-            return '<rating system="csa">
-      <value>'.stringAsXML($this->rating).'</value>
-    </rating>';
+            $picto = $this->getPictoFromRatingSystem($this->rating[0], $this->rating[1]);
+            return '<rating system="'.stringAsXML($this->rating[1]).'">
+      <value>'.stringAsXML($this->rating[0]).'</value>'
+      .(!is_null($picto) ? '<icon src="'.stringAsXML($picto).'" />' : '').
+      '</rating>';
         }
         return "";
     }
@@ -203,9 +221,9 @@ class Program {
     /**
      * @param mixed $rating
      */
-    public function setRating($rating): void
+    public function setRating($rating, $system="CSA"): void
     {
-        $this->rating = $rating;
+        $this->rating = [$rating, $system];
     }
 
     public function toString() {
@@ -217,6 +235,7 @@ class Program {
     '.$this->getEpisodeNum().'
     '.$this->getCredits().'
     '.$this->getIcon().'
+    '.$this->getYear().'
     '.$this->getRating().'</programme>
 ';
     }
@@ -238,6 +257,24 @@ class Program {
             $str.= '<'.$tagName.' lang="fr">' . stringAsXML($stringIfEmpty) . "</$tagName>\n";
         }
         return trim($str);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getYear()
+    {
+        if(isset($year))
+            return '<year>'.stringAsXML($this->year).'</year>';
+    }
+
+    /**
+     * @param mixed $year
+     */
+    public function setYear($year): void
+    {
+        if(!empty($year))
+            $this->year = $year;
     }
 
 }

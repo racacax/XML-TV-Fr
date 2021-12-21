@@ -1,63 +1,118 @@
 <?php
-require_once 'Provider.php';
-require_once 'Utils.php';
-class MyCanal extends AbstractProvider implements Provider
-{
-    private static $PREVIOUS_SEGMENTS;
+// Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
+class MyCanal extends AbstractProvider implements Provider {
+    private static $apiKey = '4ca2e967e4ca296ab18dab5432f906ac';
 
-    public static function getPriority()
-    {
-        return 0.2;
+    public static function getPriority() {
+        return 0.70;
     }
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct("channels_per_provider/channels_mycanal.json");
-        if(!isset(self::$PREVIOUS_SEGMENTS)) {
-            self::$PREVIOUS_SEGMENTS = array();
-        }
     }
 
-    function constructEPG($channel, $date)
-    {
+    public function constructEPG($channel, $date) {
         parent::constructEPG($channel, $date);
-        if(!in_array($channel,$this->CHANNELS_KEY))
+        if(!$this->channelExists($channel))
             return false;
-        $day = (strtotime($date) - strtotime(date('Y-m-d')))/86400;
-        $ch3 = curl_init();
-        curl_setopt($ch3, CURLOPT_URL, 'https://hodor.canalplus.pro/api/v2/mycanal/channels/b4c8b468c73dff714ba07307b8266833/'.$this->CHANNELS_LIST[$channel].'/broadcasts/day/'.($day));
-        curl_setopt($ch3, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch3, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:49.0) Gecko/20100101 Firefox/49.0");
-        curl_setopt($ch3, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch3, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch3, CURLOPT_FOLLOWLOCATION, 1);
-        $res3 = curl_exec($ch3);
-        curl_close($ch3);
-        $res3 = str_replace('{resolutionXY}', '300x200', $res3);
-        $res3 = str_replace('{imageQualityPercentage}', '80', $res3);
-        $res2 = json_decode($res3,true);
-        if(!isset($res2['timeSlices']))
-            return false;
-        $res3 = json_decode($res3, true);
-        $json = $res3["timeSlices"];
-        if(isset(self::$PREVIOUS_SEGMENTS[$channel]))
-            $previous = self::$PREVIOUS_SEGMENTS[$channel];
-        $count = 0;
-        foreach ($json as $section) {
-            foreach ($section["contents"] as $section2) {
-                if(isset($previous)) {
-                    $program = $this->channelObj->addProgram($previous["startTime"] / 1000, $section2["startTime"] / 1000);
-                    $program->addTitle($previous["title"]." - ".@$previous["subtitle"]);
-                    $program->addDesc("Aucune description");
-                    $program->addCategory("Inconnu");
-                    $program->setIcon(@$previous["URLImage"]);
-                }
-                $count ++;
-                $previous = $section2;
-            }
+        $channelId = $this->getChannelsList()[$channel];
+        $day = (strtotime($date) - strtotime(date('Y-m-d'))) / 86400;
+
+        $curl = curl_init('https://hodor.canalplus.pro/api/v2/mycanal/channels/' . self::$apiKey . '/' . $channelId . '/broadcasts/day/' . $day);
+        $curl1 = curl_init('https://hodor.canalplus.pro/api/v2/mycanal/channels/' . self::$apiKey . '/' . $channelId . '/broadcasts/day/' . ($day + 1));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl1, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl1, CURLOPT_FOLLOWLOCATION, true);
+        $curl_multi = curl_multi_init();
+        curl_multi_add_handle($curl_multi, $curl);
+        curl_multi_add_handle($curl_multi, $curl1);
+
+        do {
+            curl_multi_exec($curl_multi, $running);
+        } while($running > 0);
+
+        $get = curl_multi_getcontent($curl);
+        $get2 = curl_multi_getcontent($curl1);
+
+        curl_multi_remove_handle($curl_multi, $curl);
+        curl_close($curl);
+        curl_multi_remove_handle($curl_multi, $curl1);
+        curl_close($curl1);
+        curl_multi_close($curl_multi);
+
+        $json = json_decode($get, true);
+        $json2 = json_decode($get2, true);
+
+        if(!isset($json['timeSlices']) || empty($json['timeSlices'])) return false;
+
+        $all = [];
+        foreach($json['timeSlices'] as $section) {
+            $all = array_merge($all, $section['contents']);
         }
-        if(isset($previous))
-            self::$PREVIOUS_SEGMENTS[$channel] = $previous;
-        return $this->channelObj->save(2);
+
+        if(@$nd = $json2['timeSlices'][0]['contents'][0]) $all[] = $nd;
+
+        $programs = [];
+        $lastTime = 0;
+        $count = count($all);
+        foreach($all as $index => $program) {
+            displayTextOnCurrentLine(" ".round($index*100/$count, 2)." %");
+            $curld = curl_init($program['onClick']['URLPage']);
+            curl_setopt($curld, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curld, CURLOPT_FOLLOWLOCATION, 1);
+            $getd = curl_exec($curld);
+            curl_close($curld);
+
+            $detail = json_decode($getd, true);
+
+            $startTime = $program['startTime'] / 1000;
+
+            $parentalRating = $detail['episodes']['contents'][0]['parentalRatings'][0]['value'] ?? @$detail['detail']['informations']['parentalRatings'][0]['value'];
+
+            switch($parentalRating) {
+                case '2': $csa = '-10'; break;
+                case '3': $csa = '-12'; break;
+                case '4': $csa = '-16'; break;
+                case '5': $csa = '-18'; break;
+                default: $csa = 'Tout public';  break;
+            }
+
+            $icon = $detail['episodes']['contents'][0]['URLImage'] ?? @$detail['detail']['informations']['URLImage'];
+            $icon = str_replace(array('{resolutionXY}', '{imageQualityPercentage}'), array('640x360', '80'), $icon);
+
+            $programs[$startTime] = [
+                'startTime'     => $startTime,
+                'channel'       => $channel,
+                'title'         => $detail['tracking']['dataLayer']['content_title'],
+                'subTitle'      => @$detail['episodes']['contents'][0]['subtitle'],
+                'description'   => $detail['episodes']['contents'][0]['summary'] ?? @$detail['detail']['informations']['summary'],
+                'season'        => @$detail['detail']['selectedEpisode']['seasonNumber'],
+                'episode'       => @$detail['detail']['selectedEpisode']['episodeNumber'],
+                'genre'         => $detail['tracking']['dataLayer']['genre'],
+                'genreDetailed' => $detail['tracking']['dataLayer']['subgenre'],
+                'icon'          => $icon,
+                'year'          => @$detail['detail']['informations']['productionYear'],
+                'csa'           => $csa
+            ];
+
+            if($lastTime > 0) {
+                $lastProgram = $programs[$lastTime];
+                $programObj = $this->channelObj->addProgram($lastProgram['startTime'], $startTime);
+                $programObj->addTitle($lastProgram['title']);
+                $programObj->addSubtitle($lastProgram['subTitle']);
+                $programObj->addDesc($lastProgram['description']);
+                $programObj->setEpisodeNum($lastProgram['season'], $lastProgram['episode']);
+                $programObj->addCategory($lastProgram['genre']);
+                $programObj->addCategory($lastProgram['genreDetailed']);
+                $programObj->setIcon($lastProgram['icon']);
+                $programObj->setYear($lastProgram['year']);
+                $programObj->setRating($lastProgram['csa']);
+            }
+
+            $lastTime = $startTime;
+        }
+
+        return $this->channelObj->save();
     }
 }

@@ -21,13 +21,13 @@ class TV5 extends AbstractProvider implements Provider
     {
         parent::constructEPG($channel, $date);
 
-        if (!in_array($channel, $this->CHANNELS_KEY))
+        if (!$this->channelExists($channel))
             return false;
-        $channel_id = $this->CHANNELS_LIST[$channel];
+        $channel_id = $this->channelsList[$channel];
 
 
         $start = date('Y-m-d', strtotime($date))."T00:00:00";
-        $end = date('Y-m-d', strtotime($date) + 86400)."T00:00:00";
+        $end = date('Y-m-d', strtotime($date . ' + 1 days'))."T00:00:00";
         $url = 'https://bo-apac.tv5monde.com/tvschedule/full?start='.$start.'&end='.$end.'&key='.$channel_id.'&timezone=Europe/Paris&language=EN';
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_URL, $url);

@@ -16,9 +16,9 @@ class Tele7Jours extends AbstractProvider implements Provider
     public function constructEPG($channel,$date)
     {
         parent::constructEPG($channel, $date);
-        if (!in_array($channel, $this->CHANNELS_KEY))
+        if (!$this->channelExists($channel))
             return false;
-        $channel_id = $this->CHANNELS_LIST[$channel];
+        $channel_id = $this->channelsList[$channel];
 
 
         $pl = 0;

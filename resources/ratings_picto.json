@@ -1,0 +1,30 @@
+{
+  "csa": {
+    "-10": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png",
+    "-12": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png",
+    "-16": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Moins16.svg/200px-Moins16.svg.png",
+    "-18": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Moins18.svg/200px-Moins18.svg.png"
+  },
+  "fcc": {
+    "tv-y": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/TV-Y_icon.svg/200px-TV-Y_icon.svg.png",
+    "tv-y7": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/TV-Y7_icon.svg/800px-TV-Y7_icon.svg.png",
+    "tv-g": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/TV-G_icon.svg/800px-TV-G_icon.svg.png",
+    "tv-pg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/TV-PG_icon.svg/800px-TV-PG_icon.svg.png",
+    "tv-14": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/TV-14_icon.svg/800px-TV-14_icon.svg.png",
+    "tv-ma": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/TV-MA_icon.svg/800px-TV-MA_icon.svg.png"
+  },
+  "rcq": {
+    "g": "https://en-academic.com/pictures/enwiki/54/60px-Quebecrating-G.png",
+    "13": "https://en-academic.com/pictures/enwiki/54/60px-Quebecrating-13.png",
+    "16": "https://en-academic.com/pictures/enwiki/54/60px-Quebecrating-16.png",
+    "18": "https://en-academic.com/pictures/enwiki/54/60px-Quebecrating-18.png"
+  },
+  "chvrs": {
+    "g": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Canadian_Rating_G.png/200px-Canadian_Rating_G.png",
+    "pg": "https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/Canadian_Rating_PG.png/200px-Canadian_Rating_PG.png",
+    "14a": "https://upload.wikimedia.org/wikipedia/en/thumb/2/20/Canadian_Rating_14A.png/200px-Canadian_Rating_14A.png",
+    "18a": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Canadian_Rating_18A.png/200px-Canadian_Rating_18A.png",
+    "r": "https://upload.wikimedia.org/wikipedia/en/thumb/6/66/Canadian_Rating_R.png/200px-Canadian_Rating_R.png",
+    "a": "https://upload.wikimedia.org/wikipedia/en/thumb/7/78/Canadian_Rating_A.png/200px-Canadian_Rating_A.png"
+  }
+}

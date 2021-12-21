@@ -17,7 +17,7 @@ class UltraNature extends AbstractProvider implements Provider
     function constructEPG($channel, $date)
     {
         parent::constructEPG($channel, $date);
-        if(@$this->CHANNELS_LIST[$channel]!="UltraNature")
+        if(@$this->channelsList[$channel]!="UltraNature")
             return false;
         $days = array(
             'Mon'=> array('0000 || Voyage','0130 || Programme inconnu','0700 || Paysages','0830 || Animaux','1030 || Sports extrêmes','1200 || Découverte','1330 || Sports extrêmes','1530 || Découverte','1730 || Animaux','1900 || Voyage','2100 || Animaux','2300 || Sports extrêmes'),

@@ -58,15 +58,24 @@ $channels = getChannelsWithProvider();
     </tr>
     <?php
     $ids = [];
+    $channelsDefaultInfos = getDefaultChannelsInfos();
     foreach ($channels as $channel) {
         $id = md5($channel["key"]);
         $ids[] = $id;
+        $is_default = false;
+        $defaultName = @$channelsDefaultInfos[$channel['key']]['name'];
+        if(!isset($channel['icon']) || empty($channel['icon'])) {
+            $icon = @$channelsDefaultInfos[$channel['key']]['icon'];
+            $is_default = true;
+        } else {
+            $icon = $channel['icon'];
+        }
         ?>
         <tr class="channel" id="<?php echo $id; ?>" data-name="<?php echo $channel["key"]; ?>">
             <th><?php echo htmlentities($channel["key"]) ?></th>
-            <th><input name="name" value="<?php echo htmlentities(@$channel["name"]) ?>" /></th>
+            <th><?php if(!empty($defaultName)) { echo '<strong>Nom par défaut : </strong>'.$defaultName.'<br/>'; } ?><input name="name" value="<?php echo htmlentities(@$channel["name"]) ?>" /></th>
             <th><?php include "tools/select_template.php" ?></th>
-            <th><?php if(isset($channel["icon"])) { ?> <img alt="Logo" src="<?php echo $channel["icon"]; ?>" style="max-width:200px; max-height:80px;width:auto; height:auto" /><br/><?php } ?><input name="icon" value="<?php echo htmlentities(@$channel["icon"]) ?>" /></th>
+            <th><?php if(isset($icon)) { ?> <?php if($is_default) { echo '(Logo par défaut)<br/>'; } ?><img alt="Logo" src="<?php echo $icon; ?>" style="max-width:200px; max-height:80px;width:auto; height:auto" /><br/><?php } ?><input name="icon" value="<?php echo htmlentities(@$channel["icon"]) ?>" /></th>
             <th><input name="is_active" type="checkbox" <?php echo (@$channel["is_active"]) ? 'checked' : "" ?> /></th>
         </tr>
     <?php

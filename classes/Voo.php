@@ -16,13 +16,13 @@ class Voo extends AbstractProvider implements Provider
     function constructEPG($channel, $date)
     {
         parent::constructEPG($channel, $date);
-        if(!in_array($channel,$this->CHANNELS_KEY))
+        if(!$this->channelExists($channel))
             return false;
         $date_start = date('Y-m-d', strtotime($date)).'T00:00:00Z';
         $date_end = date('Y-m-d', strtotime($date) + 86400).'T02:00:00Z';
         $end = strtotime($date);
         $ch3 = curl_init();
-        curl_setopt($ch3, CURLOPT_URL, 'https://publisher.voomotion.be/traxis/web/Channel/' . $this->CHANNELS_LIST[$channel] . '/Events/Filter/AvailabilityEnd%3C=' . $date_end . '%26%26AvailabilityStart%3E=' .$date_start.'/Sort/AvailabilityStart/Props/IsAvailable,Products,AvailabilityEnd,AvailabilityStart,ChannelId,AspectRatio,DurationInSeconds,Titles,Channels?output=json&Language=fr&Method=PUT');
+        curl_setopt($ch3, CURLOPT_URL, 'https://publisher.voomotion.be/traxis/web/Channel/' . $this->channelsList[$channel] . '/Events/Filter/AvailabilityEnd%3C=' . $date_end . '%26%26AvailabilityStart%3E=' .$date_start.'/Sort/AvailabilityStart/Props/IsAvailable,Products,AvailabilityEnd,AvailabilityStart,ChannelId,AspectRatio,DurationInSeconds,Titles,Channels?output=json&Language=fr&Method=PUT');
         curl_setopt($ch3, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch3, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:49.0) Gecko/20100101 Firefox/49.0");
         curl_setopt($ch3, CURLOPT_SSL_VERIFYPEER, 0);

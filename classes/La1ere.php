@@ -20,12 +20,12 @@ class La1ere extends AbstractProvider implements Provider
         if($date != date('Y-m-d')) {
             return false;
         }
-        if(!in_array($channel,$this->CHANNELS_KEY))
+        if(!$this->channelExists($channel))
         {
             return false;
         }
-        date_default_timezone_set($this->CHANNELS_LIST[$channel]["timezone"]);
-        $channel_id = $this->CHANNELS_LIST[$channel]['id'];
+        date_default_timezone_set($this->channelsList[$channel]["timezone"]);
+        $channel_id = $this->channelsList[$channel]['id'];
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_URL, "https://la1ere.francetvinfo.fr/$channel_id/emissions");
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
@@ -38,7 +38,7 @@ class La1ere extends AbstractProvider implements Provider
         $days = explode('<div class="guide">', $res1);
         $infos = [];
         unset($days[0]);
-        array_values($days);
+        $days = array_values($days);
         foreach($days as $key => $day) {
             $programs = explode('</li>', $day);
             foreach($programs as $program) {
