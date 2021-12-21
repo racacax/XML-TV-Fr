@@ -6,7 +6,7 @@ class Tebeosud extends AbstractProvider implements Provider
 
     public static function getPriority()
     {
-        return 0.9;
+        return 0.2;
     }
     public function __construct()
     {
