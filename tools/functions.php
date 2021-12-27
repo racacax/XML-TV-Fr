@@ -24,7 +24,7 @@ function getChannelsWithProvider() {
         $instance = new $classe();
         foreach(array_keys($instance->getChannelsList()) as $channel) {
             if(!isset($channels[$channel])) {
-                $channels[$channel] = array("key"=>$channel, "available_providers"=>[$classe]);
+                $channels[$channel] = array("is_dummy"=>false, "key"=>$channel, "available_providers"=>[$classe]);
             } else {
                 $channels[$channel]["available_providers"][] = $classe;
             }
@@ -33,6 +33,9 @@ function getChannelsWithProvider() {
     foreach(getCurrentChannels() as $channel => $value) {
         if(isset($channels[$channel])) {
             $channels[$channel] = array_merge($channels[$channel], $value, array('is_active'=>true));
+        } else {
+            $channels[$channel] = $value;
+            $channels[$channel] = array_merge($channels[$channel], $value, array("is_dummy"=>true, "key"=>$channel, "available_providers"=>[], 'is_active'=>true));
         }
     }
     usort($channels,"sortActive");

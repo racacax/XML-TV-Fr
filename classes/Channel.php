@@ -51,6 +51,16 @@ class Channel {
         return $this->id;
     }
 
+
+
+    public function toString() {
+        $str = '';
+        foreach ($this->programs as $program) {
+            $str.= $program->toString();
+        }
+        return $str;
+    }
+
     public function save($minimum=1) {
         fputs($this->getFp(), "<!-- $this->provider -->\n");
         foreach ($this->programs as $program) {

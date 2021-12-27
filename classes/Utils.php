@@ -2,6 +2,7 @@
 class MainProgram {
     public static $customTextDisplayed = false;
     public static $currentOutput = null;
+    public static $dummyEPG = "";
 }
 function echoSilent($string) {
     if(MainProgram::$customTextDisplayed) {
@@ -108,6 +109,8 @@ function getChannelsEPG($classes_priotity) {
                     } else {
                         date_default_timezone_set($old_zone);
                     }
+                    if(CONFIG['enable_dummy'])
+                        MainProgram::$dummyEPG .= createDummyEPG($channel, $date);
                     $logs["channels"][$date][$channel]['failed_providers'][] = $classe;
                     $logs["channels"][$date][$channel]['success'] = false;
                     $logs["failed_providers"][$classe] = true;
@@ -202,6 +205,7 @@ function generateXML() {
         }
         fclose($in);
     }
+    fwrite($out, MainProgram::$dummyEPG);
     fwrite($out,'</tv>');
     fclose($out);
 
@@ -218,7 +222,8 @@ function loadConfig() {
         "delete_raw_xml" => false, # delete xmltv.xml after EPG grab (if you want to provide only compressed XMLTV)
         "enable_gz" => true, # enable gz compression for the XMLTV
         "enable_zip" => true, # enable zip compression for the XMLTV,
-        "xml_cache_days" => 5 # How many days old XML are stored
+        "xml_cache_days" => 5, # How many days old XML are stored
+        "enable_dummy" => false # Add a dummy EPG if channel not found
     );
 
 
@@ -275,4 +280,14 @@ function getClasses() {
 
 function stringAsXML($string) {
     return str_replace('"','&quot;',htmlspecialchars($string, ENT_XML1));
+}
+
+function createDummyEPG($channel, $date) {
+    $channelObj = new Channel($channel, $date, "Dummy");
+    for($i=0; $i<12; $i++) {
+        $time = strtotime($date)+$i*2*3600;
+        $program = $channelObj->addProgram($time, $time + 2 * 3600);
+        $program->addTitle("Aucun programme");
+    }
+    return $channelObj->toString();
 }

@@ -7,5 +7,6 @@
   "delete_raw_xml": false,
   "enable_gz": true,
   "enable_zip": true,
-  "xml_cache_days": 5
+  "xml_cache_days": 5,
+  "enable_dummy":  false
 }
