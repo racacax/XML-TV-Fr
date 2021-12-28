@@ -7,14 +7,9 @@ require_once 'Provider.php';
 require_once 'Utils.php';
 class Orange extends AbstractProvider implements Provider
 {
-
-    public static function getPriority()
-    {
-        return 0.6;
-    }
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_orange.json");
+        parent::__construct("channels_per_provider/channels_orange.json", 0.95);
     }
 
     public function constructEPG($channel,$date)

@@ -4,14 +4,9 @@ require_once 'Utils.php';
 class Afrique extends AbstractProvider implements Provider
 {
 
-    public static function getPriority()
-    {
-        return 0.2;
-    }
-
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_afrique.json");
+        parent::__construct("channels_per_provider/channels_afrique.json", 0.2);
     }
 
     function constructEPG($channel, $date)

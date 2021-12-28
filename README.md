@@ -37,7 +37,9 @@ Le fichier config.json est au format JSON.
   "memory_limit": -1, // Quantité de mémoire vive max (-1=illimité)
   "delete_raw_xml": false, // Supprimer le XML brut après génération (true|false)
   "enable_gz": false, // Activer la compression gz (true|false)
-  "enable_zip": true // Activer la compression zip (true|false)
+  "enable_zip": true // Activer la compression zip (true|false),
+  "enable_dummy" => false, // Afficher un EPG mire en cas d'absence de guide pour une chaine 
+  "custom_priority_orders" => {"Telerama": 0.2, "UltraNature": 0.5} // Modifier l'ordre de priorité pour certains services globalement
 }
 ```
 
@@ -67,7 +69,7 @@ Il est possible d'ajouter des services autres que ceux fournis. Pour cela, il fa
 
 Le constructeur aura le chemin des XML temporaires d'indiqué.
 
-La méthode `getPriority()` renverra un flottant de préférence entre 0 et 1 pour indiquer la priorité par rapport à d'autres services (comparez les valeurs des autres scripts pour vous situer).
+La méthode `getPriority()` renverra un flottant de préférence entre 0 et 1 pour indiquer la priorité par rapport à d'autres services (comparez les valeurs des autres scripts pour vous situer). L'ordre de priorité doit être indiqué dans le second paramètre du constructeur parent. La méthode `getPriority()` est déjà implémentée dans la classe abstraite.
 
 La méthode   `constructEPG(channel,date)` construira un fichier XML pour une chaine à une date donnée. Elle retourne `true` si la tâche s'est déroulée avec succès, sinon `false`.
 

@@ -3,12 +3,8 @@
 class MyCanal extends AbstractProvider implements Provider {
     private static $apiKey = '4ca2e967e4ca296ab18dab5432f906ac';
 
-    public static function getPriority() {
-        return 0.70;
-    }
-
     public function __construct() {
-        parent::__construct("channels_per_provider/channels_mycanal.json");
+        parent::__construct("channels_per_provider/channels_mycanal.json", 0.7);
     }
 
     public function constructEPG($channel, $date) {

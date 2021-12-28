@@ -11,13 +11,9 @@ class Telerama extends AbstractProvider implements Provider
     private static $NB_PAGE = '800000';
     private static $PAGE = 1;
 
-    public static function getPriority()
-    {
-        return 0.95;
-    }
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_telerama.json");
+        parent::__construct("channels_per_provider/channels_telerama.json", 0.80);
     }
     public function signature($url)
     {
@@ -74,6 +70,7 @@ class Telerama extends AbstractProvider implements Provider
                 }
                 if (isset($donnee["annee_realisation"])) {
                     $descri .= chr(10) . 'Année de réalisation : ' . $donnee["annee_realisation"];
+                    $program->setYear($donnee["annee_realisation"]);
                 }
                 $descri = str_replace('<P>', '', $descri);
                 $descri = str_replace('</P>', '', $descri);

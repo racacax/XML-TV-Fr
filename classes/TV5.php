@@ -8,13 +8,9 @@ require_once 'Utils.php';
 class TV5 extends AbstractProvider implements Provider
 {
 
-    public static function getPriority()
-    {
-        return 0.6;
-    }
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_tv5.json");
+        parent::__construct("channels_per_provider/channels_tv5.json", 0.6);
     }
 
     public function constructEPG($channel,$date)

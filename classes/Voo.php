@@ -6,11 +6,7 @@ class Voo extends AbstractProvider implements Provider
 
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_voo.json");
-    }
-    public static function getPriority()
-    {
-        return 0.85;
+        parent::__construct("channels_per_provider/channels_voo.json", 0.85);
     }
 
     function constructEPG($channel, $date)

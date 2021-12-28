@@ -4,14 +4,9 @@ require_once 'Utils.php';
 class La1ere extends AbstractProvider implements Provider
 {
 
-    public static function getPriority()
-    {
-        return 0.3;
-    }
-
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_1ere.json");
+        parent::__construct("channels_per_provider/channels_1ere.json", 0.3);
     }
 
     function constructEPG($channel, $date)

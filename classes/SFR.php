@@ -3,12 +3,9 @@
 class SFR extends AbstractProvider implements Provider {
 
     private $jsonPerDay;
-    public static function getPriority() {
-        return 0.85;
-    }
 
     public function __construct() {
-        parent::__construct('channels_per_provider/channels_sfr.json');
+        parent::__construct('channels_per_provider/channels_sfr.json', 0.85);
         $this->jsonPerDay = [];
     }
 

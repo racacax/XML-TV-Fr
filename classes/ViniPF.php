@@ -4,14 +4,10 @@ require_once 'Utils.php';
 class ViniPF extends AbstractProvider implements Provider
 {
     private static $cache_per_day = array(); // ViniPF send all channels data for two hours. No need to request for every channel
-    public static function getPriority()
-    {
-        return 0.4;
-    }
 
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_vinipf.json");
+        parent::__construct("channels_per_provider/channels_vinipf.json", 0.4);
     }
 
     function constructEPG($channel, $date)

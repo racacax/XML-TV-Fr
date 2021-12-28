@@ -223,7 +223,8 @@ function loadConfig() {
         "enable_gz" => true, # enable gz compression for the XMLTV
         "enable_zip" => true, # enable zip compression for the XMLTV,
         "xml_cache_days" => 5, # How many days old XML are stored
-        "enable_dummy" => false # Add a dummy EPG if channel not found
+        "enable_dummy" => false, # Add a dummy EPG if channel not found
+        "custom_priority_orders" => [] # Add a custom priority order for a provider globally
     );
 
 

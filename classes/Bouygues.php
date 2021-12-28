@@ -2,12 +2,9 @@
 // Original script by lazel on https://github.com/lazel/XML-TV-Fr/blob/master/classes/Bouygues.php
 class Bouygues extends AbstractProvider implements Provider {
 
-    public static function getPriority() {
-        return 0.90;
-    }
 
     public function __construct() {
-        parent::__construct('channels_per_provider/channels_bouygues.json');
+        parent::__construct('channels_per_provider/channels_bouygues.json',0.9);
     }
 
     public function constructEPG($channel, $date) {

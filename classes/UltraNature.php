@@ -6,12 +6,7 @@ class UltraNature extends AbstractProvider implements Provider
 
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_ultranature.json");
-    }
-
-    public static function getPriority()
-    {
-        return 0.1;
+        parent::__construct("channels_per_provider/channels_ultranature.json", 0.1);
     }
 
     function constructEPG($channel, $date)

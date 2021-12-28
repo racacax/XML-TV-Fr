@@ -4,13 +4,9 @@ require_once 'Utils.php';
 class Tebeosud extends AbstractProvider implements Provider
 {
 
-    public static function getPriority()
-    {
-        return 0.2;
-    }
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_tebeosud.json");
+        parent::__construct("channels_per_provider/channels_tebeosud.json", 0.2);
     }
 
     public function constructEPG($channel,$date)

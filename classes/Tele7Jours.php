@@ -4,13 +4,9 @@ require_once 'Utils.php';
 class Tele7Jours extends AbstractProvider implements Provider
 {
 
-    public static function getPriority()
-    {
-        return 0.6;
-    }
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_tele7jours.json");
+        parent::__construct("channels_per_provider/channels_tele7jours.json", 0.6);
     }
 
     public function constructEPG($channel,$date)

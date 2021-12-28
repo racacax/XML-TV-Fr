@@ -82,4 +82,7 @@ class Channel {
     public function getProgramCount() {
         return count($this->getPrograms());
     }
+    public function popLastProgram() {
+        return array_pop($this->programs);
+    }
 }

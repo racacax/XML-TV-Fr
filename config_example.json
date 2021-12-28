@@ -8,5 +8,6 @@
   "enable_gz": true,
   "enable_zip": true,
   "xml_cache_days": 5,
-  "enable_dummy":  false
+  "enable_dummy":  false,
+  "custom_priority_orders": {}
 }

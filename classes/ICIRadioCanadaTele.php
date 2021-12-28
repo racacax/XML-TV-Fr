@@ -8,13 +8,9 @@ require_once 'Utils.php';
 class ICIRadioCanadaTele extends AbstractProvider implements Provider
 {
 
-    public static function getPriority()
-    {
-        return 0.6;
-    }
     public function __construct()
     {
-        parent::__construct("channels_per_provider/channels_iciradiocanada.json");
+        parent::__construct("channels_per_provider/channels_iciradiocanada.json", 0.6);
     }
 
     public function constructEPG($channel,$date)
