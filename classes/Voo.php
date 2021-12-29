@@ -49,8 +49,7 @@ class Voo extends AbstractProvider implements Provider
             $program->addCategory(@$event["Titles"]["Title"][0]["Genres"]["Genre"][0]["Value"]);
             $program->setIcon(@$event["Titles"]["Title"][0]["Pictures"]["Picture"][0]["Value"]);
         }
-        $this->channelObj->save();
-        return true;
+        return $this->channelObj->save();
     }
 
 }
