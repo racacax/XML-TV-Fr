@@ -34,6 +34,8 @@ class Orange extends AbstractProvider implements Provider
         {
             return false;
         }
+        if(isset($json['code']))
+            return false;
         foreach($json as $val)
         {
             switch(@$val["csa"]) {
