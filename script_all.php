@@ -23,31 +23,35 @@ if(!file_exists('channels.json'))
         copy('channels_example.json', 'channels.json');
     }
 }
+foreach(CONFIG['guides_to_generate'] as $guide) {
+    $xmlFile = $guide["filename"];
+    $channelsFile = $guide['channels'];
+    getChannelsEPG(getClasses(), $channelsFile);
 
-getChannelsEPG(getClasses());
+    clearOldXML();
 
-clearOldXML();
+    moveOldXML($xmlFile);
 
-moveOldXML();
+    clearXMLCache();
 
-clearXMLCache();
+    generateXML($channelsFile, $xmlFile);
 
-generateXML();
+    if (validateXML($xmlFile)) {
+        reformatXML($xmlFile);
 
-if(validateXML()) {
-    reformatXML();
+        if (CONFIG["enable_gz"]) {
+            gzCompressXML($xmlFile);
+        }
 
-    if (CONFIG["enable_gz"]) {
-        gzCompressXML();
-    }
+        if (CONFIG["enable_zip"]) {
+            zipCompressXML($xmlFile);
+        }
 
-    if (CONFIG["enable_zip"]) {
-        zipCompressXML();
-    }
+        if (CONFIG["delete_raw_xml"]) {
+            echo "\e[34m[EXPORT] \e[39mSuppression du fichier XML brut ($xmlFile)\n";
+            unlink(CONFIG["output_path"] . "/$xmlFile");
+        }
 
-    if (CONFIG["delete_raw_xml"]) {
-        echo "\e[34m[EXPORT] \e[39mSuppression du fichier XML brut\n";
-        unlink(CONFIG["output_path"] . "/xmltv.xml");
     }
 }
 

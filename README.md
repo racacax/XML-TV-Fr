@@ -38,8 +38,9 @@ Le fichier config.json est au format JSON.
   "delete_raw_xml": false, // Supprimer le XML brut après génération (true|false)
   "enable_gz": false, // Activer la compression gz (true|false)
   "enable_zip": true // Activer la compression zip (true|false),
-  "enable_dummy" => false, // Afficher un EPG mire en cas d'absence de guide pour une chaine 
-  "custom_priority_orders" => {"Telerama": 0.2, "UltraNature": 0.5} // Modifier l'ordre de priorité pour certains services globalement
+  "enable_dummy" : false, // Afficher un EPG mire en cas d'absence de guide pour une chaine 
+  "custom_priority_orders" : {"Telerama": 0.2, "UltraNature": 0.5}, // Modifier l'ordre de priorité pour certains services globalement
+  "guides_to_generate" : [{"channels": "./channels.json", "filename": "xmltv.xml"}] // liste des XML à générer. Pour chaque élément, `channels` indique le fichier des chaines et `filename` le nom du fichier de sortie
 }
 ```
 

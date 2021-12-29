@@ -9,5 +9,6 @@
   "enable_zip": true,
   "xml_cache_days": 5,
   "enable_dummy":  false,
-  "custom_priority_orders": {}
+  "custom_priority_orders": {},
+  "guides_to_generate": [{"channels": "./channels.json", "filename": "xmltv.xml"}]
 }

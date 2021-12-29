@@ -6,6 +6,7 @@ class Telecablesat extends AbstractProvider implements Provider
 
     private static $cache = []; // multiple channels are on the same page
     private static $BASE_URL = "https://tv-programme.telecablesat.fr";
+    private $loopCounter = 0;
     public function __construct()
     {
         parent::__construct("channels_per_provider/channels_telecablesat.json", 0.55);
@@ -24,8 +25,17 @@ class Telecablesat extends AbstractProvider implements Provider
         $channel_url = "https://tv-programme.telecablesat.fr/programmes-tele/?date=$date&page=$page";
         if(!isset(self::$cache[md5($channel_url)])) {
             $res1 = $this->getContentFromURL($channel_url);
+            if(empty($res1)) {
+                $this->loopCounter++;
+                if($this->loopCounter > 3)
+                    return false;
+                displayTextOnCurrentLine(" \e[31mRate limited, waiting 30s ($this->loopCounter)\e[39m");
+                sleep(30);
+                return $this->constructEPG($channel, $date);
+            }
             self::$cache[md5($channel_url)] = $res1;
         }
+        $this->loopCounter = 0;
         $content = self::$cache[md5($channel_url)];
         preg_match_all('/logos_chaines\/(.*?).png" title="(.*?)"/', $content, $channels);
         $channel_index = array_search($channel_id, $channels[1]);
