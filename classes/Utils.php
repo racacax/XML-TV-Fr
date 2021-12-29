@@ -51,7 +51,7 @@ function validateXML($file) {
 }
 
 function gzCompressXML($file) {
-    echoSilent("\e[34m[EXPORT] \e[39mCompression du XMLTV en GZ... ($file=\n");
+    echoSilent("\e[34m[EXPORT] \e[39mCompression du XMLTV en GZ... ($file)\n");
     $got = file_get_contents(CONFIG['output_path']."/$file");
     $got1 = gzencode($got,true);
     file_put_contents(CONFIG['output_path']."/$file.gz",$got1);
