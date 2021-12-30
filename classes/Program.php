@@ -47,7 +47,8 @@ class Program {
     }
 
     /**
-     * @param mixed $title
+     * Ajout d'un titre
+     * @param string $title
      * @param string $lang
      */
     public function addTitle($title, $lang="fr"): void
@@ -65,6 +66,7 @@ class Program {
     }
 
     /**
+     * Ajout d'un crédit (acteur, présentateur, ...)
      * @param $name
      * @param $type
      */
@@ -94,6 +96,7 @@ class Program {
     }
 
     /**
+     * Ajout d'un synopsis
      * @param mixed $desc
      * @param string $lang
      */
@@ -132,6 +135,7 @@ class Program {
     }
 
     /**
+     * Définition de l'icone du programme
      * @param mixed $icon
      */
     public function setIcon($icon): void
@@ -169,6 +173,7 @@ class Program {
     }
 
     /**
+     * Définition de la saison et de l'épisode du programme
      * @param $season
      * @param $episode
      */
@@ -194,6 +199,7 @@ class Program {
     }
 
     /**
+     * Ajout d'un sous-titre au programme
      * @param mixed $subtitle
      * @param string $lang
      */
@@ -219,6 +225,7 @@ class Program {
     }
 
     /**
+     * Définition du rating du programme (CSA -10 ans par exemple)
      * @param mixed $rating
      */
     public function setRating($rating, $system="CSA"): void
@@ -240,6 +247,9 @@ class Program {
 ';
     }
 
+    /**
+     * Sauvegarde du programme
+     */
     public function save() {
         fputs($this->getFp(), $this->toString());
     }
@@ -269,6 +279,7 @@ class Program {
     }
 
     /**
+     * Définition de l'année du programme
      * @param mixed $year
      */
     public function setYear($year): void
