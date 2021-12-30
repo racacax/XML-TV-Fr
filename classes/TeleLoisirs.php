@@ -31,7 +31,9 @@ class TeleLoisirs extends AbstractProvider implements Provider
             $genreFormat = trim(explode('</p>', explode('<p class="mainBroadcastCard-format">', $li)[1])[0]);
             $subtitle = @trim(explode('</p>', explode('<p class="mainBroadcastCard-subtitle">', $li)[1])[0]);
             $hour = explode('<', explode('>',explode('<p class="mainBroadcastCard-startingHour"', $li)[1])[1])[0];
-            $duration = explode('<', explode('<span class="mainBroadcastCard-durationContent">', $li)[1])[0];
+            $duration = @explode('<', explode('<span class="mainBroadcastCard-durationContent">', $li)[1])[0];
+            if(empty($duration))
+                return false;
             $duration = str_replace('min', '', $duration);
             $duration = explode('h', $duration);
             if(count($duration) == 2) {
