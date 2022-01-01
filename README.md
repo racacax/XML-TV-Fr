@@ -2,6 +2,8 @@
 
 XML TV Fr est un service permettant de récupérer un guide des programmes au format XMLTV.
 
+Site web et documentation : https://xmltvfr.fr/
+
 
 # Prérequis
 
