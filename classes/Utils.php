@@ -102,7 +102,7 @@ function getChannelsEPG($classes_priotity, $file) {
             $date = date('Y-m-d',time()+86400*$i);
             echoSilent("\e[95m[EPG GRAB] \e[39m".$channel." : ".$date);
             $file = generateFilePath($channel,$date);
-            if($date == date('Y-m-d'))
+            if($date == date('Y-m-d') && CONFIG['force_todays_grab'])
                 @unlink($file);
             if(!file_exists($file)) {
                 $success = false;
