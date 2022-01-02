@@ -57,6 +57,15 @@ function gzCompressXML($file) {
     file_put_contents(CONFIG['output_path']."/$file.gz",$got1);
     echoSilent("\e[34m[EXPORT] \e[39mGZ : \e[32mOK\e[39m ($file)\n");
 }
+function xzCompressXML($file) {
+    if(!isset(CONFIG['7zip_path'])) {
+        echoSilent("\e[34m[EXPORT] \e[31mImpossible d'exporter en XZ (chemin de 7zip non défini)\e[39m ($file)\n");
+    }
+    echoSilent("\e[34m[EXPORT] \e[39mCompression du XMLTV en XZ... ($file)\n");
+    $filenameSplited = explode('.', $file)[0];
+    $filename = CONFIG['output_path']."/$filenameSplited.xz";
+    exec('"'.CONFIG['7zip_path'].'" a -t7z "'.$filename.'" "'.CONFIG['output_path']."/$file".'"');
+}
 
 function zipCompressXML($file) {
     echoSilent("\e[34m[EXPORT] \e[39mCompression du XMLTV en ZIP... ($file)\n");
@@ -93,6 +102,8 @@ function getChannelsEPG($classes_priotity, $file) {
             $date = date('Y-m-d',time()+86400*$i);
             echoSilent("\e[95m[EPG GRAB] \e[39m".$channel." : ".$date);
             $file = generateFilePath($channel,$date);
+            if($date == date('Y-m-d'))
+                @unlink($file);
             if(!file_exists($file)) {
                 $success = false;
                 foreach ($priority as $classe) {
@@ -154,7 +165,7 @@ function getProviderFromComment($file) {
 
 function moveOldXML($xmlFile) {
     $splitedFile = explode('.', $xmlFile)[0];
-    foreach(["xml","zip","xml.gz"] as $ext) {
+    foreach(["xz", "xml","zip","xml.gz"] as $ext) {
 
         if(file_exists(CONFIG['output_path']."/$splitedFile.$ext"))
         {
@@ -228,10 +239,13 @@ function loadConfig() {
         "delete_raw_xml" => false, # delete xmltv.xml after EPG grab (if you want to provide only compressed XMLTV)
         "enable_gz" => true, # enable gz compression for the XMLTV
         "enable_zip" => true, # enable zip compression for the XMLTV,
+        "enable_xz" => false, # enable XZ compression for the XMLTV (need 7zip),
         "xml_cache_days" => 5, # How many days old XML are stored
         "enable_dummy" => false, # Add a dummy EPG if channel not found
         "custom_priority_orders" => [], # Add a custom priority order for a provider globally,
-        "guides_to_generate" => [array("channels"=>"./channels.json", "filename"=>"xmltv.xml")] # list of xmltv to generate
+        "guides_to_generate" => [array("channels"=>"./channels.json", "filename"=>"xmltv.xml")], # list of xmltv to generate
+        "7zip_path"=> null, # path of 7zip binary,
+        "force_todays_grab"=>false # ignore cache for today
     );
 
 

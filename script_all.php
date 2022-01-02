@@ -46,6 +46,10 @@ foreach(CONFIG['guides_to_generate'] as $guide) {
         if (CONFIG["enable_zip"]) {
             zipCompressXML($xmlFile);
         }
+        if (CONFIG["enable_xz"]) {
+            xzCompressXML($xmlFile);
+        }
+
 
         if (CONFIG["delete_raw_xml"]) {
             echo "\e[34m[EXPORT] \e[39mSuppression du fichier XML brut ($xmlFile)\n";
