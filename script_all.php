@@ -7,12 +7,12 @@
 
 chdir(__DIR__);
 require_once "classes/Utils.php";
-define('SILENT', false);
+define('XMLTVFR_SILENT', false);
 loadConfig();
 
 date_default_timezone_set('Europe/Paris');
-set_time_limit(CONFIG["time_limit"]);
-ini_set('memory_limit', CONFIG["memory_limit"]); // modify for resolve error Line173 : memory limit GZencode _ Ludis 20200729
+set_time_limit(XMLTVFR_CONFIG["time_limit"]);
+ini_set('memory_limit', XMLTVFR_CONFIG["memory_limit"]); // modify for resolve error Line173 : memory limit GZencode _ Ludis 20200729
 
 
 if(!file_exists('channels.json'))
@@ -23,7 +23,7 @@ if(!file_exists('channels.json'))
         copy('channels_example.json', 'channels.json');
     }
 }
-foreach(CONFIG['guides_to_generate'] as $guide) {
+foreach(XMLTVFR_CONFIG['guides_to_generate'] as $guide) {
     $xmlFile = $guide["filename"];
     $channelsFile = $guide['channels'];
     getChannelsEPG(getClasses(), $channelsFile);
@@ -39,21 +39,21 @@ foreach(CONFIG['guides_to_generate'] as $guide) {
     if (validateXML($xmlFile)) {
         reformatXML($xmlFile);
 
-        if (CONFIG["enable_gz"]) {
+        if (XMLTVFR_CONFIG["enable_gz"]) {
             gzCompressXML($xmlFile);
         }
 
-        if (CONFIG["enable_zip"]) {
+        if (XMLTVFR_CONFIG["enable_zip"]) {
             zipCompressXML($xmlFile);
         }
-        if (CONFIG["enable_xz"]) {
+        if (XMLTVFR_CONFIG["enable_xz"]) {
             xzCompressXML($xmlFile);
         }
 
 
-        if (CONFIG["delete_raw_xml"]) {
+        if (XMLTVFR_CONFIG["delete_raw_xml"]) {
             echo "\e[34m[EXPORT] \e[39mSuppression du fichier XML brut ($xmlFile)\n";
-            unlink(CONFIG["output_path"] . "/$xmlFile");
+            unlink(XMLTVFR_CONFIG["output_path"] . "/$xmlFile");
         }
 
     }

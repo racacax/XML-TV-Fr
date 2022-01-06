@@ -19,7 +19,7 @@ abstract class AbstractProvider {
     }
 
     public static function getPriority() {
-        return CONFIG['custom_priority_orders'][static::class] ?? self::$priority[static::class];
+        return XMLTVFR_CONFIG['custom_priority_orders'][static::class] ?? self::$priority[static::class];
     }
 
     public function constructEPG($channel,$date) {

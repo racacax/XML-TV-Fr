@@ -11,17 +11,17 @@ function echoSilent($string) {
         echoSilent("\r".MainProgram::$currentOutput);
     }
     MainProgram::$currentOutput = $string;
-    if(!SILENT)
+    if(!XMLTVFR_SILENT)
         echo $string;
 }
 function displayTextOnCurrentLine($str) {
     MainProgram::$customTextDisplayed = true;
-    if(!SILENT)
+    if(!XMLTVFR_SILENT)
         echo "\r".MainProgram::$currentOutput.$str;
 }
 function generateFilePath($channel,$date)
 {
-    return XML_PATH.$channel."_".$date.".xml";
+    return XMLTVFR_XML_PATH.$channel."_".$date.".xml";
 }
 
 function reformatXML($file) {
@@ -30,13 +30,13 @@ function reformatXML($file) {
     $domxml->preserveWhiteSpace = false;
     $domxml->formatOutput = true;
     /* @var $xml SimpleXMLElement */
-    $domxml->loadXML(file_get_contents(CONFIG['output_path']."/$file"));
-    $domxml->save(CONFIG['output_path']."/$file");
+    $domxml->loadXML(file_get_contents(XMLTVFR_CONFIG['output_path']."/$file"));
+    $domxml->save(XMLTVFR_CONFIG['output_path']."/$file");
 }
 function validateXML($file) {
     echoSilent("\e[34m[EXPORT] \e[39mValidation du fichier XML...\n");
     libxml_use_internal_errors(true);
-    $xml = @simplexml_load_file(CONFIG['output_path'] . '/'.$file);
+    $xml = @simplexml_load_file(XMLTVFR_CONFIG['output_path'] . '/'.$file);
     if($xml === false) {
         echoSilent("\e[34m[EXPORT] \e[31mXML non valide\e[39m ($file)\n");
         foreach (libxml_get_errors() as $error) {
@@ -52,33 +52,33 @@ function validateXML($file) {
 
 function gzCompressXML($file) {
     echoSilent("\e[34m[EXPORT] \e[39mCompression du XMLTV en GZ... ($file)\n");
-    $got = file_get_contents(CONFIG['output_path']."/$file");
+    $got = file_get_contents(XMLTVFR_CONFIG['output_path']."/$file");
     $got1 = gzencode($got,true);
-    file_put_contents(CONFIG['output_path']."/$file.gz",$got1);
+    file_put_contents(XMLTVFR_CONFIG['output_path']."/$file.gz",$got1);
     echoSilent("\e[34m[EXPORT] \e[39mGZ : \e[32mOK\e[39m ($file)\n");
 }
 function xzCompressXML($file) {
-    if(!isset(CONFIG['7zip_path'])) {
+    if(!isset(XMLTVFR_CONFIG['7zip_path'])) {
         echoSilent("\e[34m[EXPORT] \e[31mImpossible d'exporter en XZ (chemin de 7zip non défini)\e[39m ($file)\n");
     }
     echoSilent("\e[34m[EXPORT] \e[39mCompression du XMLTV en XZ... ($file)\n");
     $filenameSplited = explode('.', $file)[0];
-    $filename = CONFIG['output_path']."/$filenameSplited.xz";
-    exec('"'.CONFIG['7zip_path'].'" a -t7z "'.$filename.'" "'.CONFIG['output_path']."/$file".'"');
+    $filename = XMLTVFR_CONFIG['output_path']."/$filenameSplited.xz";
+    echoSilent("\e[34m[EXPORT] \e[39mRéponse de 7zip : ".exec('"'.XMLTVFR_CONFIG['7zip_path'].'" a -t7z "'.$filename.'" "'.XMLTVFR_CONFIG['output_path']."/$file".'"'));
 }
 
 function zipCompressXML($file) {
     echoSilent("\e[34m[EXPORT] \e[39mCompression du XMLTV en ZIP... ($file)\n");
     $zip = new ZipArchive();
     $filenameSplited = explode('.', $file)[0];
-    $filename = CONFIG['output_path']."/$filenameSplited.zip";
+    $filename = XMLTVFR_CONFIG['output_path']."/$filenameSplited.zip";
 
     if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
         echoSilent("\e[34m[EXPORT] \e[39mZIP : \e[31mHS\e[39m ($file)\n");
     } else {
         echoSilent("\e[34m[EXPORT] \e[39mZIP : \e[32mOK\e[39m ($file)\n");
     }
-    $zip->addFile(CONFIG['output_path']."/$file", "xmltv.xml");
+    $zip->addFile(XMLTVFR_CONFIG['output_path']."/$file", "xmltv.xml");
     $zip->close();
 
 }
@@ -97,22 +97,22 @@ function getChannelsEPG($classes_priotity, $file) {
         } else {
             $priority = $classes_priotity;
         }
-        for($i=-1;$i<CONFIG["days"];$i++)
+        for($i=-1;$i<XMLTVFR_CONFIG["days"];$i++)
         {
             $date = date('Y-m-d',time()+86400*$i);
             echoSilent("\e[95m[EPG GRAB] \e[39m".$channel." : ".$date);
             $file = generateFilePath($channel,$date);
-            if($date == date('Y-m-d') && CONFIG['force_todays_grab'] && (strtotime("now") - @intval(filemtime($file))) > 42800)
+            if($date == date('Y-m-d') && XMLTVFR_CONFIG['force_todays_grab'] && (strtotime("now") - @intval(filemtime($file))) > 42800)
                 @unlink($file);
             if(!file_exists($file)) {
                 $success = false;
                 foreach ($priority as $classe) {
                     if(!class_exists($classe))
                         break;
-                    if(!isset(${CLASS_PREFIX.$classe}))
-                        ${CLASS_PREFIX.$classe} = new $classe(XML_PATH);
+                    if(!isset(${XMLTVFR_CLASS_PREFIX.$classe}))
+                        ${XMLTVFR_CLASS_PREFIX.$classe} = new $classe(XMLTVFR_XML_PATH);
                     $old_zone = date_default_timezone_get();
-                    if(${CLASS_PREFIX.$classe}->constructEPG($channel,$date))
+                    if(${XMLTVFR_CLASS_PREFIX.$classe}->constructEPG($channel,$date))
                     {
                         $logs["channels"][$date][$channel]['success'] = true;
                         echoSilent(" | \e[32mOK\e[39m - ".$classe.chr(10));
@@ -124,7 +124,7 @@ function getChannelsEPG($classes_priotity, $file) {
                     } else {
                         date_default_timezone_set($old_zone);
                     }
-                    if(CONFIG['enable_dummy'])
+                    if(XMLTVFR_CONFIG['enable_dummy'])
                         MainProgram::$dummyEPG .= createDummyEPG($channel, $date);
                     $logs["channels"][$date][$channel]['failed_providers'][] = $classe;
                     $logs["channels"][$date][$channel]['success'] = false;
@@ -150,10 +150,10 @@ function getChannelsEPG($classes_priotity, $file) {
 }
 
 function clearOldXML() {
-    $xmltv = glob(CONFIG['output_path'].'/xmltv*');
+    $xmltv = glob(XMLTVFR_CONFIG['output_path'].'/xmltv*');
     foreach($xmltv as $file)
     {
-        if(time()-filemtime($file) >= 86400*CONFIG["xml_cache_days"])
+        if(time()-filemtime($file) >= 86400*XMLTVFR_CONFIG["xml_cache_days"])
             unlink($file);
 
     }
@@ -167,17 +167,17 @@ function moveOldXML($xmlFile) {
     $splitedFile = explode('.', $xmlFile)[0];
     foreach(["xz", "xml","zip","xml.gz"] as $ext) {
 
-        if(file_exists(CONFIG['output_path']."/$splitedFile.$ext"))
+        if(file_exists(XMLTVFR_CONFIG['output_path']."/$splitedFile.$ext"))
         {
-            rename(CONFIG['output_path']."/$splitedFile.$ext",CONFIG['output_path']."/{$splitedFile}_".date('Y-m-d_H-i-s',filemtime(CONFIG['output_path']."/$splitedFile.$ext")).".$ext");
+            rename(XMLTVFR_CONFIG['output_path']."/$splitedFile.$ext",XMLTVFR_CONFIG['output_path']."/{$splitedFile}_".date('Y-m-d_H-i-s',filemtime(XMLTVFR_CONFIG['output_path']."/$splitedFile.$ext")).".$ext");
         }
     }
 }
 
 function clearXMLCache() {
-    $files = glob(XML_PATH.'*');
+    $files = glob(XMLTVFR_XML_PATH.'*');
     foreach($files as $file){
-        if(time()-filemtime($file) >= 86400 * CONFIG['cache_max_days'])
+        if(time()-filemtime($file) >= 86400 * XMLTVFR_CONFIG['cache_max_days'])
             unlink($file);
     }
 }
@@ -192,11 +192,11 @@ function generateXML($channelsFile, $xmlFile) {
     echoSilent("\e[34m[EXPORT] \e[39mGénération du XML... ($xmlFile)\n");
     $channels = json_decode(file_get_contents($channelsFile),true);
     $defaultChannelsInfos = getDefaultChannelsInfos();
-    $filepath = CONFIG['output_path']."/$xmlFile";
+    $filepath = XMLTVFR_CONFIG['output_path']."/$xmlFile";
     $out = fopen($filepath, "w");
     fwrite($out,'<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tv SYSTEM "xmltv.dtd">
-
+<!-- Generated with XML TV Fr v'.XMLTVFR_VERSION.' -->
 <tv source-info-url="https://github.com/racacax/XML-TV-Fr" source-info-name="XML TV Fr" generator-info-name="XML TV Fr" generator-info-url="https://github.com/racacax/XML-TV-Fr">
   ');
     foreach($channels as $key => $channel)
@@ -264,11 +264,12 @@ function loadConfig() {
         }
         echoSilent("\e[95m($key) \e[39m=> \e[33m$value\e[39m, ");
     }
-    define('CONFIG', $CONFIG);
+    define('XMLTVFR_CONFIG', $CONFIG);
 
-    define('NON_PROVIDER_CLASES',["Provider", "Utils", "Program", "Channel", "AbstractProvider"]);
-    define('XML_PATH',"channels/");
-    define('CLASS_PREFIX',"EPG_");
+    define('XMLTVFR_NON_PROVIDER_CLASES',["Provider", "Utils", "Program", "Channel", "AbstractProvider"]);
+    define('XMLTVFR_XML_PATH',"channels/");
+    define('XMLTVFR_CLASS_PREFIX',"EPG_");
+    define('XMLTVFR_VERSION', "1.5.1");
     echoSilent("\n");
 }
 
@@ -293,7 +294,7 @@ function getClasses() {
         require_once $classe;
         $class_name = explode('/',explode('.php',$classe)[0]);
         $class_name = $class_name[count($class_name)-1];
-        if(class_exists($class_name) && !in_array($class_name, NON_PROVIDER_CLASES))
+        if(class_exists($class_name) && !in_array($class_name, XMLTVFR_NON_PROVIDER_CLASES))
         {
             if(method_exists(new $class_name(),'getPriority' ) && method_exists(new $class_name(),'constructEPG' ))
                 $classes_priotity[] = $class_name;

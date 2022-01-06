@@ -2,9 +2,9 @@
 chdir(__DIR__."/..");
 require_once "classes/Utils.php";
 function getClassesCache() {
-    if(!defined('CLASSES_CACHE'))
-        define('CLASSES_CACHE', getClasses());
-    return CLASSES_CACHE;
+    if(!defined('XMLTVFR_CLASSES_CACHE'))
+        define('XMLTVFR_CLASSES_CACHE', getClasses());
+    return XMLTVFR_CLASSES_CACHE;
 }
 function sortActive($a, $b) {
     if(@$a['is_active'] && !@$b['is_active'])

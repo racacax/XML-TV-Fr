@@ -1,7 +1,7 @@
 <?php
 chdir(__DIR__."/..");
 require_once "classes/Utils.php";
-define('SILENT', true);
+define('XMLTVFR_SILENT', true);
 loadConfig();
 require_once "tools/functions.php";
 $channels = getChannelsWithProvider();

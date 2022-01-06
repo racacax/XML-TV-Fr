@@ -10,8 +10,8 @@ class TVHebdo extends AbstractProvider implements Provider
     {
         parent::__construct("channels_per_provider/channels_tvhebdo.json", 0.2);
         $this->proxy = "http://www.ekamali.com/index.php";
-        if(isset(CONFIG['tvhebdo_proxy']))
-            $this->proxy = CONFIG['tvhebdo_proxy'];
+        if(isset(XMLTVFR_CONFIG['tvhebdo_proxy']))
+            $this->proxy = XMLTVFR_CONFIG['tvhebdo_proxy'];
     }
 
     protected function getContentFromURL($url) {
