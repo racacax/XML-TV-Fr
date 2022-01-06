@@ -66,6 +66,7 @@ class Channel {
         foreach ($this->programs as $program) {
             $program->save();
         }
+        fclose($this->getFp());
         if(count($this->programs) < $minimum) {
             @unlink($this->path);
             return false;
