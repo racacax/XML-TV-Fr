@@ -3,3 +3,5 @@ tmp/*
 var/*
 !var/cache/.keep
 vendor
+xmltv/*
+!xmltv/.keep

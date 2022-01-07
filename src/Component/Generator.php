@@ -147,16 +147,17 @@ class Generator
             $channels = json_decode(file_get_contents($guide['channels']),true);
             $defaultInfo = ChannelInformation::getInstance();
             $this->exporter->startExport($guide['filename']);
+            $listCacheKey = [];
             foreach($channels as $channelKey => $channelInfo) {
                 $icon = $channelInfo['icon'] ?? $defaultInfo->getDefaultIcon($channelKey);
                 $name = $channelInfo['name'] ?? $defaultInfo->getDefaultName($channelKey) ?? $channelKey;
                 $this->exporter->addChannel($channelKey, $name, $icon);
-                $listCacheKey = array_map(
+                $listCacheKey = array_merge($listCacheKey, array_map(
                     function(string $date) use ($channelKey) {
                         return sprintf("%s_%s.xml", $channelKey, $date);
                     },
                     $this->listDate
-                );
+                ));
             }
             foreach($listCacheKey as $keyCache) {
                 $this->exporter->addProgramsAsString(
@@ -164,103 +165,6 @@ class Generator
                 );
             }
             $this->exporter->stopExport();
-            die;
-
-
-
-            echoSilent("\e[34m[EXPORT] \e[39mGénération du XML... ($xmlFile)\n");
-            $channels = json_decode(file_get_contents($channelsFile),true);
-            $defaultChannelsInfos = getDefaultChannelsInfos();
-            $filepath = CONFIG['output_path']."/$xmlFile";
-            $out = fopen($filepath, "w");
-            fwrite($out,'<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tv SYSTEM "xmltv.dtd">
-<tv source-info-url="https://github.com/racacax/XML-TV-Fr" source-info-name="XML TV Fr" generator-info-name="XML TV Fr" generator-info-url="https://github.com/racacax/XML-TV-Fr">
-  ');
-            foreach($channels as $key => $channel)
-            {
-                fwrite($out,'<channel id="'.$key.'">
-    <display-name>'.stringAsXML($name).'</display-name>
-    '.(!(empty($icon)) ? '<icon src="'.stringAsXML($icon).'" />' : '').'
-  </channel>'.chr(10));
-            }
-            $files = MainProgram::$filesQueue;
-            foreach($files as $file){
-                $in = fopen($file, "r");
-                while ($line = fgets($in)){
-                    fwrite($out, $line);
-                }
-                fclose($in);
-            }
-            fwrite($out, MainProgram::$dummyEPG);
-            fwrite($out,'</tv>');
-            fclose($out);
-
-            echoSilent("\e[34m[EXPORT] \e[39mGénération du XML terminée ($xmlFile)\n");
-
-            Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
-
-
-            $logs = array('channels'=>array(), 'xml'=>array(),'failed_providers'=>array());
-
-            foreach($channels as $channelKey => $channelInfo) {
-                $providers = $this->getProviders($channelInfo["priority"] ?? []);
-                $current = new \DateTime();
-                $current->setTimestamp($this->begin->getTimestamp());
-
-                while ($current <= $this->end){
-                    $date = $current->format('Y-m-d');
-                    $current->modify('+1 day');
-                    $cacheKey = sprintf("%s_%s.xml", $channelKey, $date);
-                    if(!isset($logs["channels"][$date][$channelKey])){
-                        $logs["channels"][$date][$channelKey] = [
-                            'success' => false,
-                            'provider' => null,
-                            'cache'=> false,
-                            'failed_providers' => [],
-                        ];
-                    }
-                    Logger::log(sprintf("\e[95m[EPG GRAB] \e[39m%s : %s", $channelKey, $date));
-
-                    if ($this->cache->has($cacheKey)){
-                        Logger::log(" | \e[33mOK \e[39m- From Cache ".chr(10));
-                        continue;
-                    }
-                    $channelFound = false;
-                    foreach ($providers as $provider) {
-                        $old_zone = date_default_timezone_get();
-                        $channel = $provider->constructEPG($channelKey, $date);
-                        date_default_timezone_set($old_zone);
-                        if($channel !== false){
-                            $channelFound = true;
-                            $logs['channels'][$date][$channelKey] = [
-                                'success' => true,
-                                'provider' => get_class($provider),
-                                'cache'=> false,
-                            ];
-                            $this->cache->store($cacheKey, $this->formatter->formatChannel($channel, $provider));
-                            Logger::log(" | \e[32mOK\e[39m - ".Utils::extractProviderName($provider).chr(10));
-                            break ;
-                        }
-
-                        $logs['channels'][$date][$channelKey]['failed_providers'][] = get_class($provider);
-                        $logs['failed_providers'][get_class($provider)] = true;
-                    }
-
-                    if(!$channelFound) {
-                        if ($this->createEpgIfNotFound) {
-                            $this->cache->store($cacheKey, $this->formatter->formatChannel(new DummyChannel($channelKey, $date), null));
-                        }
-                        Logger::log(" | \e[31mHS\e[39m".chr(10));
-                    }
-                }
-            }
-            Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
-            $log_path = 'logs/logs'.date('YmdHis').'.json';
-            Logger::log("\e[36m[LOGS] \e[39m Export des logs vers $log_path\n");
-
-            //debug information
-            file_put_contents($log_path,json_encode($logs));
         }
     }
 
