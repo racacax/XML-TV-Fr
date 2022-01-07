@@ -1,0 +1,1829 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tv SYSTEM "resources/validation/xmltv.dtd">
+<tv source-info-url="https://github.com/racacax/XML-TV-Fr" source-info-name="XML TV Fr" generator-info-name="XML TV Fr" generator-info-url="https://github.com/racacax/XML-TV-Fr"><channel id="M6.fr"><display-name>M6</display-name><icon src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcqsTWUc0GnTr8FLzPJ93DpIIa4OGlWVNFRWV0KtnFCTmU3MH2pSPOpXrYXbY&amp;amp;s"/></channel><channel id="TF1.fr"><display-name>TF1</display-name><icon src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4u3EMdVyFA2uqIpbnwKBT1GRW9U-mA2jyCz28L2ieGx4vB9bKhpInhHCIqmk&amp;amp;s"/></channel><programme start="20220107223000 +0000" stop="20220108003500 +0000" channel="TF1.fr">
+<title lang="fr">Vendredi, tout est permis avec Arthur</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Après les fêtes de fin d'année, Arthur donne rendez-vous à ses invités pour une émission spéciale "Cocooning". Rien de mieux en effet, au coeur de l'hiver, que de se tenir chaud dans une ambiance décontractée et bienveillante. Au programme de ce rendez-vous hebdomadaire, de grands moments de...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_25959505.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108003500 +0000" stop="20220108004000 +0000" channel="TF1.fr">
+<title lang="fr">Tirage de l'Euro millions</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Consultez les derniers résultats d'EuroMillions ainsi que les codes gagnants My Million. Tous les mardi et vendredi, Elsa fayer ou Karine Ferri vous présentent les résultats des tirages officiels de My Million vers 20h50 puis EuroMillions vers 21h50. Découvrez les 5 numéros gagnants et les 2...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_11636224.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108004000 +0000" stop="20220108053000 +0000" channel="TF1.fr">
+<title lang="fr">Programmes de la nuit</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Retrouvez tous vos programmes de nuit.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_22269110.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108053000 +0000" stop="20220108071000 +0000" channel="TF1.fr">
+<title lang="fr">TFou</title>
+<category lang="fr">Jeunesse</category>
+<category lang="fr">Jeunesse Mag</category>
+<desc lang="fr">La tribu Monchhichi. Barbapapa en Famille. Alice et Lewis. Oum le dauphin blanc.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15604856.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108071000 +0000" stop="20220108094000 +0000" channel="TF1.fr">
+<title lang="fr">Téléshopping samedi</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. TV Achat</category>
+<desc lang="fr">Téléshopping s'invite dans le quotidien des Français, dès leur réveil, avec convivialité et bonne humeur. Marie-Ange...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_22933224.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108094000 +0000" stop="20220108105500 +0000" channel="TF1.fr">
+<title lang="fr">Génération Ushuaïa</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">A l'occasion des 200 ans de la découverte du continent, les aventuriers Laurence de la Ferrière et Eric Loizeau sont partis pour une expédition d'un mois et demi afin de faire un état des lieux écologique et géopolitique du continent blanc. L'Antarctique, considéré par la communauté...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_19740961.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108105500 +0000" stop="20220108110000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108110000 +0000" stop="20220108115000 +0000" channel="TF1.fr">
+<title lang="fr">Les douze coups de midi</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Qui sera le calife à la place du calife ? Chaque jour, à midi tapante, quatre candidats s'affrontent pour empocher les 30 000 euros de la cagnotte et décrocher l'étoile mystérieuse et ses cadeaux. Seule condition, bien répondre aux questions de culture générale.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805408.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108115000 +0000" stop="20220108115500 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108115500 +0000" stop="20220108120000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108120000 +0000" stop="20220108124000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">"LE 13h" est le journal télévisé préparé et présenté par la rédaction de TF1. Le journal de 13h vous informe de l'actualité régionale, nationale et internationale. Il permet également de mettre en valeur nos régions à travers des initiatives telles que "Coups de C?ur pour nos Marchés" ou "SOS...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805609.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108124000 +0000" stop="20220108135000 +0000" channel="TF1.fr">
+<title lang="fr">Grands reportages</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Depuis le XVe siècle, la route des diamants passe par Anvers, en Belgique. Celui qu'on appelle "le quartier des diamantaires" fait à peine un kilomètre carré mais on n'y compte pas moins de quatre bourses et 2500 sociétés spécialisées dans le diamant. Longtemps détenu par la communauté juive...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14396465.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108135000 +0000" stop="20220108151000 +0000" channel="TF1.fr">
+<title lang="fr">Reportages découverte</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Magazine de reportages.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14396465.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108151000 +0000" stop="20220108163000 +0000" channel="TF1.fr">
+<title lang="fr">Les docs du week-end</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Comment les vedettes de la téléréalité négocient-elles la fin des émissions qui les ont rendu célèbres ? Gros plan sur les parcours de plusieurs d'entre elles.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14830070.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108163000 +0000" stop="20220108174500 +0000" channel="TF1.fr">
+<title lang="fr">50mn Inside</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">50'INSIDE, c'est toute l'actualité des stars résumée, chaque samedi. Le rendez-vous glamour pour retrouver toujours...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_10837267.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108174500 +0000" stop="20220108185000 +0000" channel="TF1.fr">
+<title lang="fr">50mn Inside</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">50'INSIDE, c'est toute l'actualité des stars résumée, chaque samedi. Le rendez-vous glamour pour retrouver toujours...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_13209523.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108185000 +0000" stop="20220108185500 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108185500 +0000" stop="20220108190000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108190000 +0000" stop="20220108194000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">Journal télévisé de TF1 qui revient sur les faits marquants et les événements essentiels qui ont fait de cette journée une journée différente de toutes les autres.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15015553.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108194000 +0000" stop="20220108194500 +0000" channel="TF1.fr">
+<title lang="fr">Habitons demain</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Service</category>
+<desc lang="fr">Magazine de services.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14356972.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108194500 +0000" stop="20220108195500 +0000" channel="TF1.fr">
+<title lang="fr">Tirage du Loto</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Consultez les derniers résultats des LOTO®. Tous les lundi, mercredi et samedi vers 20h35, Jean-Pierre Foucault, Elsa Fayer, Christophe Beaugrand, Karine Ferri ou Iris Mittenaere vous présentent les résultats des tirages officiels du LOTO® (FDJ®). N'attendez plus, découvrez les 5 numéros gagnants...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15729663.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108195500 +0000" stop="20220108200000 +0000" channel="TF1.fr">
+<title lang="fr">Quotidien express</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Retrouvez les moments forts et les plus divertissants de l'émission Quotidien !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_13005077.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108200000 +0000" stop="20220108201000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108201000 +0000" stop="20220108223500 +0000" channel="TF1.fr">
+<title lang="fr">2001-2021: 20 ans d'émissions cultes</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">L'année 2001 a vu naître des programmes de divertissement devenus cultes : "Koh-Lanta", "Loft Story", "Star Academy", "Attention à la marche", "Stars à domicile", "Le Maillon faible", ou encore "Vis ma vie" fêtent aujourd'hui les 20 ans de leur première diffusion. Certaines font encore partie du...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_26078976.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108223500 +0000" stop="20220109010000 +0000" channel="TF1.fr">
+<title lang="fr">Le grand bêtisier</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Pour ce vendredi 31 décembre, une soirée exceptionnelle animée par Karine Ferri et Christophe Beaugrand, en compagnie de leurs nombreux invités. Un rendez-vous incontournable en attendant les douze coups de minuit pour terminer l'année 2021 en beauté et se projeter en 2022 dans la joie et la...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_25702396.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220108223500 +0000" stop="20220109010000 +0000" channel="TF1.fr">
+<title lang="fr">Le grand bêtisier</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Pour ce vendredi 31 décembre, une soirée exceptionnelle animée par Karine Ferri et Christophe Beaugrand, en compagnie de leurs nombreux invités. Un rendez-vous incontournable en attendant les douze coups de minuit pour terminer l'année 2021 en beauté et se projeter en 2022 dans la joie et la...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_25702396.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109010000 +0000" stop="20220109053000 +0000" channel="TF1.fr">
+<title lang="fr">Programmes de la nuit</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Retrouvez tous vos programmes de nuit.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_22269110.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109053000 +0000" stop="20220109090500 +0000" channel="TF1.fr">
+<title lang="fr">TFou</title>
+<category lang="fr">Jeunesse</category>
+<category lang="fr">Jeunesse Mag</category>
+<desc lang="fr">Blue's Clues &amp; You ! : Blue et ses amis en Famille. La tribu Monchhichi. Barbapapa. Loup. Alice et Lewis. Les schtroumpfs. Robin des bois. Ghost Force. Miraculous - Les aventures de Ladybug et Chat Noir.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15604856.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109090500 +0000" stop="20220109095500 +0000" channel="TF1.fr">
+<title lang="fr">Automoto</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Sur la base d'essai Automoto, chaque dimanche, Jean-Pierre Gagick accueille une invitée en plateau : la voiture star du moment, pour la passer au rayon X.Si c'est une sportive de rêve, elle sera chronométrée sur notre circuit, véritable juge de paix ultra-exigeant et impartial. Si c'est un...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_17408273.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109095500 +0000" stop="20220109100000 +0000" channel="TF1.fr">
+<title lang="fr">La grande odyssée</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Course de chiens de traîneau.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9987099.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109100000 +0000" stop="20220109110000 +0000" channel="TF1.fr">
+<title lang="fr">Téléfoot</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Au programme :- 1ère partie : Téléfoot, L'actu :Retrouvez les dernières actualités du week-end et de la semaine décryptées à travers les informations de la rédaction et l'expertise de nos consultants, une grande interview hebdomadaire ou encore des duplex avec les acteurs footballistiques du...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_10686904.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109110000 +0000" stop="20220109115000 +0000" channel="TF1.fr">
+<title lang="fr">Les douze coups de midi</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Qui sera le calife à la place du calife ? Chaque jour, à midi tapante, quatre candidats s'affrontent pour empocher les 30 000 euros de la cagnotte et décrocher l'étoile mystérieuse et ses cadeaux. Seule condition, bien répondre aux questions de culture générale.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805408.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109115000 +0000" stop="20220109115500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109115500 +0000" stop="20220109120000 +0000" channel="TF1.fr">
+<title lang="fr">Habitons demain</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Service</category>
+<desc lang="fr">Magazine de services.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14356972.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109120000 +0000" stop="20220109124000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">"LE 13h" est le journal télévisé préparé et présenté par la rédaction de TF1. Le journal de 13h vous informe de l'actualité régionale, nationale et internationale. Il permet également de mettre en valeur nos régions à travers des initiatives telles que "Coups de C?ur pour nos Marchés" ou "SOS...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805609.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109124000 +0000" stop="20220109135000 +0000" channel="TF1.fr">
+<title lang="fr">Grands reportages</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque année, cinq millions de Français se lancent dans la rénovation de leur habitat et la moitié reconnaît vivre de sacrées galères. Refaire un parquet, transformer la cuisine, ajouter une extension à la maison sont des travaux parfois d'envergure. Mais cela tourne parfois au cauchemar.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14396465.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109135000 +0000" stop="20220109151000 +0000" channel="TF1.fr">
+<title lang="fr">Reportages découverte</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">En France, 83% des entreprises sont familiales. Certaines se transmettent de génération en génération parfois depuis plusieurs siècles. Quel est le secret de cette longévité ? Comment transmet-on un savoir-faire ancestral et comment reçoit-on cet héritage ? Comment assure-t-on la pérennité de...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_17128014.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109151000 +0000" stop="20220109161500 +0000" channel="TF1.fr">
+<title lang="fr">Les docs du week-end</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Le dimanche, l'émission est présentée par Tatiana Silva et décryptera notre société et ses nouvelles tendances à...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14830070.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109161500 +0000" stop="20220109171500 +0000" channel="TF1.fr">
+<title lang="fr">Sept à huit life</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Sept à Huit Life privilégie la proximité et les rencontres dans tous les univers de la vie quotidienne. Cette heure...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_10074197.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109171500 +0000" stop="20220109184500 +0000" channel="TF1.fr">
+<title lang="fr">Sept à huit</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Une référence du news magazine. Chaque dimanche soir, Harry Roselmack plonge les téléspectateurs au c?ur de...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15592438.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109184500 +0000" stop="20220109185500 +0000" channel="TF1.fr">
+<title lang="fr">La grande odyssée</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Course de chiens de traîneau.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9987099.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109185500 +0000" stop="20220109190000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109190000 +0000" stop="20220109194000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">Journal télévisé de TF1 qui revient sur les faits marquants et les événements essentiels qui ont fait de cette journée une journée différente de toutes les autres.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15015553.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109194000 +0000" stop="20220109195000 +0000" channel="TF1.fr">
+<title lang="fr">TF1, rendez-vous sport</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Programme court et quotidien qui revient en images sur les moments forts de l'actualité sportive.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_10043272.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109195000 +0000" stop="20220109195500 +0000" channel="TF1.fr">
+<title lang="fr">Habitons demain</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Service</category>
+<desc lang="fr">Magazine de services.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14356972.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109195500 +0000" stop="20220109200000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109200000 +0000" stop="20220109201000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220109201000 +0000" stop="20220109225000 +0000" channel="TF1.fr">
+<title lang="fr">Kingsman : Le cercle d'or</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Action</category>
+<desc lang="fr">Deux espions britanniques sont amenés à s'associer à plusieurs de leurs confrères américains afin de mettre hors d'état de nuire une baronne de la drogue.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_12537465.jpg"/>
+<rating system="CSA"><value>-12</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png"/></rating>
+</programme><programme start="20220109225000 +0000" stop="20220109233500 +0000" channel="TF1.fr">
+<title lang="fr">Esprits criminels</title>
+<sub-title lang="fr">Les neuf cercles</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Alors que l'équipe part pour Seattle, pour arrêter un tueur en série, Garcia, de son côté, se rend au Texas. Elle veut parler avec Greg Baylor avant son exécution.</desc>
+<episode-num system="xmltv_ns">9.1.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_17076470.jpg"/>
+<rating system="CSA"><value>-12</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png"/></rating>
+</programme><programme start="20220109225000 +0000" stop="20220109233500 +0000" channel="TF1.fr">
+<title lang="fr">Esprits criminels</title>
+<sub-title lang="fr">Les neuf cercles</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Alors que l'équipe part pour Seattle, pour arrêter un tueur en série, Garcia, de son côté, se rend au Texas. Elle veut parler avec Greg Baylor avant son exécution.</desc>
+<episode-num system="xmltv_ns">9.1.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_11932392.jpg"/>
+<rating system="CSA"><value>-12</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png"/></rating>
+</programme><programme start="20220109233500 +0000" stop="20220110002500 +0000" channel="TF1.fr">
+<title lang="fr">Esprits criminels</title>
+<sub-title lang="fr">Représailles</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Hotch revient dans la brigade. Pendant ce temps, Prentiss est blessée au cours de l'évasion du prisonnier qu'elle escortait : le criminel doit être retrouvé.</desc>
+<episode-num system="xmltv_ns">4.10.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_16979343.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220110002500 +0000" stop="20220110011500 +0000" channel="TF1.fr">
+<title lang="fr">Les experts : Miami</title>
+<sub-title lang="fr">Le dernier fugitif</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Horatio doit retrouver un dangereux prisonnier qu'il escortait et qui a réussi à s'évader avec l'aide du pilote de l'avion dans lequel ils se trouvaient.</desc>
+<episode-num system="xmltv_ns">8.21.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_3416808.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220110011500 +0000" stop="20220110020500 +0000" channel="TF1.fr">
+<title lang="fr">Les experts : Miami</title>
+<sub-title lang="fr">Piqués au vif</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Les policiers Horatio et Natalia, qui ont échappé de peu à la mort, sont à la poursuite de Randy North, l'homme qui a tenté de les assassiner.</desc>
+<episode-num system="xmltv_ns">9.0.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_12194050.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220110020500 +0000" stop="20220110053000 +0000" channel="TF1.fr">
+<title lang="fr">Programmes de la nuit</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Retrouvez tous vos programmes de nuit.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_22269110.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110053000 +0000" stop="20220110072500 +0000" channel="TF1.fr">
+<title lang="fr">TFou</title>
+<category lang="fr">Jeunesse</category>
+<category lang="fr">Jeunesse Mag</category>
+<desc lang="fr">La tribu Monchhichi. Chuggington. Super Wings. Gus le chevalier minus. Paw Patrol, la Pat'Patrouille.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15678917.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110072500 +0000" stop="20220110073000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110073000 +0000" stop="20220110082000 +0000" channel="TF1.fr">
+<title lang="fr">Téléshopping</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. TV Achat</category>
+<desc lang="fr">Téléshopping s'invite dans le quotidien des Français, dès leur réveil, avec convivialité et bonne humeur. Marie-Ange...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805304.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110082000 +0000" stop="20220110082500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110082500 +0000" stop="20220110085500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110085500 +0000" stop="20220110092500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110092500 +0000" stop="20220110100000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110100000 +0000" stop="20220110105500 +0000" channel="TF1.fr">
+<title lang="fr">Les feux de l'amour</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">C'est le jour du procès de Nikki, Victoria et Sharon. Leurs avocats affrontent Christine. Mariah et Kyle demandent un donneur d'organe pour Lola, en direct sur G Buzz, ce qui calme les relations entre Arturo et Kyle. Arturo l'autorise à voir Lola. Kyle passe un test pour le don d'organe, mais lui...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_13600616.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110105500 +0000" stop="20220110110000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110110000 +0000" stop="20220110115500 +0000" channel="TF1.fr">
+<title lang="fr">Les douze coups de midi</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Qui sera le calife à la place du calife ? Chaque jour, à midi tapante, quatre candidats s'affrontent pour empocher les 30 000 euros de la cagnotte et décrocher l'étoile mystérieuse et ses cadeaux. Seule condition, bien répondre aux questions de culture générale.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805408.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110115500 +0000" stop="20220110120000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110120000 +0000" stop="20220110124000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">"LE 13h" est le journal télévisé préparé et présenté par la rédaction de TF1. Le journal de 13h vous informe de l'actualité régionale, nationale et internationale. Il permet également de mettre en valeur nos régions à travers des initiatives telles que "Coups de C?ur pour nos Marchés" ou "SOS...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805609.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110124000 +0000" stop="20220110124500 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110124500 +0000" stop="20220110125000 +0000" channel="TF1.fr">
+<title lang="fr">Au coeur des Restos du coeur</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Ce programme court montre l'étendue des actions des Restos du C?ur sur tout le territoire et le rôle des bénévoles sur le terrain.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_13302140.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110125000 +0000" stop="20220110125500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110125500 +0000" stop="20220110144000 +0000" channel="TF1.fr">
+<title lang="fr">Le frère disparu</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Suspense</category>
+<desc lang="fr">Au moment des funérailles de ses parents, une jeune femme retrouve son frère, qu'elle n'a plus revu depuis des années et qui annonce qu'il souhaite renouer avec elle.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_26110768.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220110144000 +0000" stop="20220110163000 +0000" channel="TF1.fr">
+<title lang="fr">Une intruse dans ma famille</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Suspense</category>
+<desc lang="fr">Après le décès soudain de sa mère, une jeune femme voit d'un mauvais oeil le jeu trouble de sa tante, qui tente de séduire son père, à peine veuf.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_17006487.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220110163000 +0000" stop="20220110170000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110170000 +0000" stop="20220110173000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110173000 +0000" stop="20220110181000 +0000" channel="TF1.fr">
+<title lang="fr">Ici tout commence</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">L'égo blessé de Clotilde la pousse à répandre des rumeurs sur son meilleur élève, quitte à retourner contre lui tous ses camarades de classe.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_18683262.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110181000 +0000" stop="20220110185500 +0000" channel="TF1.fr">
+<title lang="fr">Demain nous appartient</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">William commence à douter de la soeur d'Aurore. Celle-ci se retrouve dans une situation délicate. De leur côté, Noor et Cédric ne se supportent plus.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_22478759.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110185500 +0000" stop="20220110190000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110190000 +0000" stop="20220110194500 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">Journal télévisé de TF1 qui revient sur les faits marquants et les événements essentiels qui ont fait de cette journée une journée différente de toutes les autres.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_19779960.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110194500 +0000" stop="20220110195500 +0000" channel="TF1.fr">
+<title lang="fr">Tirage du Loto</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Consultez les derniers résultats des LOTO®. Tous les lundi, mercredi et samedi vers 20h35, Jean-Pierre Foucault, Elsa Fayer, Christophe Beaugrand, Karine Ferri ou Iris Mittenaere vous présentent les résultats des tirages officiels du LOTO® (FDJ®). N'attendez plus, découvrez les 5 numéros gagnants...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_7973524.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110195500 +0000" stop="20220110200000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110200000 +0000" stop="20220110201000 +0000" channel="TF1.fr">
+<title lang="fr">C'est Canteloup</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">S'il est une année que "C'est Canteloup" ne désirait pas manquer, c'est bien celle-ci ! Les Présidentielles avec leur lot de surprises, de rebondissements, leurs petits et grands moments, les déchirures, les trahisons constituent un terrain de jeu idéal pour Nicolas Canteloup et Alessandra...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_11286268.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110201000 +0000" stop="20220110210000 +0000" channel="TF1.fr">
+<title lang="fr">Sam</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Rires</category>
+<desc lang="fr">Suite à son accident, Xavier est amnésique. Véro se révèle incapable de s'occuper de lui et il ne reste plus que Sam pour gérer la situation.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_26130766.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110210000 +0000" stop="20220110221000 +0000" channel="TF1.fr">
+<title lang="fr">Sam</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Rires</category>
+<desc lang="fr">Les relations entre Anne-Marie et Sam sont de plus en plus tendues, tandis que la complicité entre Xavier et Félicia crève les yeux. Sam est jalouse.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_26079938.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220110221000 +0000" stop="20220110225500 +0000" channel="TF1.fr">
+<title lang="fr">New York Unité Spéciale</title>
+<sub-title lang="fr">Mères par procuration</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Un garçon de 6 ans est porté disparu après une fête sauvage organisée par sa mère, une femme riche qui ne semble pas obsédée par la sécurité de son enfant.</desc>
+<episode-num system="xmltv_ns">17.7.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_12527252.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220110225500 +0000" stop="20220110234500 +0000" channel="TF1.fr">
+<title lang="fr">New York Unité Spéciale</title>
+<sub-title lang="fr">Le Roi de Wall Street</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">L'équipe doit mener l'enquête sur une affaire très sensible, qui oppose deux personnalités new-yorkaises puissantes : une banquière de renom et un millionnaire.</desc>
+<episode-num system="xmltv_ns">17.13.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_12541369.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220110225500 +0000" stop="20220110234500 +0000" channel="TF1.fr">
+<title lang="fr">New York Unité Spéciale</title>
+<sub-title lang="fr">Le Roi de Wall Street</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">L'équipe doit mener l'enquête sur une affaire très sensible, qui oppose deux personnalités new-yorkaises puissantes : une banquière de renom et un millionnaire.</desc>
+<episode-num system="xmltv_ns">17.13.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_26060437.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220110234500 +0000" stop="20220111003500 +0000" channel="TF1.fr">
+<title lang="fr">New York Unité Spéciale</title>
+<sub-title lang="fr">À la folie</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Un petit garçon de 8 ans a été enlevé. Le rapt ayant été filmé, les enquêteurs soupçonnent les parents de l'enfant d'être impliqués dans le kidnapping.</desc>
+<episode-num system="xmltv_ns">10.23.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_14606916.jpg"/>
+<rating system="CSA"><value>-12</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png"/></rating>
+</programme><programme start="20220111003500 +0000" stop="20220111012500 +0000" channel="TF1.fr">
+<title lang="fr">Chicago Police Department</title>
+<sub-title lang="fr">Un secret dans les cendres</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Une série d'incendies criminels surviennent en ville. Les agents traquent le responsable. Halstead en fait une affaire personnelle, ce qui complique l'enquête.</desc>
+<episode-num system="xmltv_ns">5.1.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_16698291.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220111012500 +0000" stop="20220111053000 +0000" channel="TF1.fr">
+<title lang="fr">Programmes de la nuit</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Retrouvez tous vos programmes de nuit.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_22269110.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111053000 +0000" stop="20220111072500 +0000" channel="TF1.fr">
+<title lang="fr">TFou</title>
+<category lang="fr">Jeunesse</category>
+<category lang="fr">Jeunesse Mag</category>
+<desc lang="fr">La tribu Monchhichi. Chuggington. Super Wings. Gus le chevalier minus. Paw Patrol, la Pat'Patrouille.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15604856.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111072500 +0000" stop="20220111073000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111073000 +0000" stop="20220111082000 +0000" channel="TF1.fr">
+<title lang="fr">Téléshopping</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. TV Achat</category>
+<desc lang="fr">Téléshopping s'invite dans le quotidien des Français, dès leur réveil, avec convivialité et bonne humeur. Marie-Ange...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805304.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111082000 +0000" stop="20220111082500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111082500 +0000" stop="20220111085500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111085500 +0000" stop="20220111092500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111092500 +0000" stop="20220111100000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111100000 +0000" stop="20220111105500 +0000" channel="TF1.fr">
+<title lang="fr">Les feux de l'amour</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Le procès de Victoria, Nikki et Sharon est en cours. L'accusation interroge Mariah à la barre. C'est ensuite au tour de Michael. Il finit par lui demander qui lui a envoyé le lien de la vidéo. Kyle rencontre Ana et Devon...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_13600616.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111105500 +0000" stop="20220111110000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111110000 +0000" stop="20220111115500 +0000" channel="TF1.fr">
+<title lang="fr">Les douze coups de midi</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Qui sera le calife à la place du calife ? Chaque jour, à midi tapante, quatre candidats s'affrontent pour empocher les 30 000 euros de la cagnotte et décrocher l'étoile mystérieuse et ses cadeaux. Seule condition, bien répondre aux questions de culture générale.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805408.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111115500 +0000" stop="20220111120000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111120000 +0000" stop="20220111124000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">"LE 13h" est le journal télévisé préparé et présenté par la rédaction de TF1. Le journal de 13h vous informe de l'actualité régionale, nationale et internationale. Il permet également de mettre en valeur nos régions à travers des initiatives telles que "Coups de C?ur pour nos Marchés" ou "SOS...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805609.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111124000 +0000" stop="20220111124500 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111124500 +0000" stop="20220111125500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111125500 +0000" stop="20220111144000 +0000" channel="TF1.fr">
+<title lang="fr">Le mari de ma boss</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Suspense</category>
+<desc lang="fr">Une jeune femme qui s'est laissée séduire par une inconnu découvre peu après que c'est le mari de sa chef. Quand cette dernière est assassinée elle devient la principale suspecte.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_26111240.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220111144000 +0000" stop="20220111163000 +0000" channel="TF1.fr">
+<title lang="fr">Quelques milliards pour une veuve noire</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Suspense</category>
+<desc lang="fr">Une jeune femme enquête afin de venger son père, un riche politicien, tué peu après son mariage par sa dernière épouse, une veuve noire sans pitié.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_11624435.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220111163000 +0000" stop="20220111170000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111170000 +0000" stop="20220111173000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111173000 +0000" stop="20220111181000 +0000" channel="TF1.fr">
+<title lang="fr">Ici tout commence</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Alors qu'il se prépare pour le concours, Maxime découvre le véritable visage de l'une des concurrentes et remet en cause sa participation.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_25965060.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111181000 +0000" stop="20220111185500 +0000" channel="TF1.fr">
+<title lang="fr">Demain nous appartient</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Aurore retrouve une personne disparue depuis longtemps. Elle avoue la vérité à sa famille, sous le choc. Jordan continue de clamer son innocence.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_23833629.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111185500 +0000" stop="20220111190000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111190000 +0000" stop="20220111194500 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">Journal télévisé de TF1 qui revient sur les faits marquants et les événements essentiels qui ont fait de cette journée une journée différente de toutes les autres.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15015553.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111194500 +0000" stop="20220111195500 +0000" channel="TF1.fr">
+<title lang="fr">My Million</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Service</category>
+<desc lang="fr">Consultez les derniers résultats d'EuroMillions ainsi que les codes gagnants My Million. Tous les mardi et vendredi, Elsa fayer ou Karine Ferri vous présentent les résultats des tirages officiels de My Million vers 20h50 puis EuroMillions vers 21h50. Découvrez les 5 numéros gagnants et les 2...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_11636224.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111195500 +0000" stop="20220111200000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111200000 +0000" stop="20220111201000 +0000" channel="TF1.fr">
+<title lang="fr">C'est Canteloup</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">S'il est une année que "C'est Canteloup" ne désirait pas manquer, c'est bien celle-ci ! Les Présidentielles avec leur lot de surprises, de rebondissements, leurs petits et grands moments, les déchirures, les trahisons constituent un terrain de jeu idéal pour Nicolas Canteloup et Alessandra...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_11286268.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111201000 +0000" stop="20220111205500 +0000" channel="TF1.fr">
+<title lang="fr">S.W.A.T. *2017</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Une mission tragique amène chaque membre de l'équipe du S.W.A.T. à faire face à sa détresse émotionnelle, chacun à sa propre manière.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_25623635.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220111205500 +0000" stop="20220111214500 +0000" channel="TF1.fr">
+<title lang="fr">S.W.A.T. *2017</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Après la disparition d'une femme, la police de Los Angeles sollicite l'aide du S.W.A.T. pour tenter de résoudre cette affaire. La tension entre Chris et Street s'intensifie.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_25623538.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220111214500 +0000" stop="20220111223500 +0000" channel="TF1.fr">
+<title lang="fr">S.W.A.T. *2017</title>
+<sub-title lang="fr">Prendre sous son aile</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">L'équipe du S.W.A.T. peine à arrêter des spécialistes du car-jacking, qui utilisent des voitures de luxe ultra-puissantes pour commettre leurs braquages.</desc>
+<episode-num system="xmltv_ns">1.16.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_24473787.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220111223500 +0000" stop="20220111232500 +0000" channel="TF1.fr">
+<title lang="fr">S.W.A.T. *2017</title>
+<sub-title lang="fr">Semper fi</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Entre Hondo et Ruiz, son compatriote de la marine, les relations sont tendues. Parallèlement, l'équipe du S.W.A.T. pourchasse un condamné qui s'est évadé de prison grâce à des complices utilisant des armes militaires volées. De son côté, Chris apprend que son ex-partenaire de la brigade canine...</desc>
+<episode-num system="xmltv_ns">1.17.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_14331058.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220111223500 +0000" stop="20220111232500 +0000" channel="TF1.fr">
+<title lang="fr">S.W.A.T. *2017</title>
+<sub-title lang="fr">Semper fi</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Entre Hondo et Ruiz, son compatriote de la marine, les relations sont tendues. Parallèlement, l'équipe du S.W.A.T. pourchasse un condamné qui s'est évadé de prison grâce à des complices utilisant des armes militaires volées. De son côté, Chris apprend que son ex-partenaire de la brigade canine...</desc>
+<episode-num system="xmltv_ns">1.17.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_13179350.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220111232500 +0000" stop="20220112001500 +0000" channel="TF1.fr">
+<title lang="fr">S.W.A.T. *2017</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Lors d'une intervention sur un banal feu de benne à ordures, une brigade de sapeurs-pompiers est soudain prise pour cible par un tireur embusqué.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_25867656.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220112001500 +0000" stop="20220112002000 +0000" channel="TF1.fr">
+<title lang="fr">Tirage de l'Euro millions</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Consultez les derniers résultats d'EuroMillions ainsi que les codes gagnants My Million. Tous les mardi et vendredi, Elsa fayer ou Karine Ferri vous présentent les résultats des tirages officiels de My Million vers 20h50 puis EuroMillions vers 21h50. Découvrez les 5 numéros gagnants et les 2...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_12949244.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112002000 +0000" stop="20220112011000 +0000" channel="TF1.fr">
+<title lang="fr">S.W.A.T. *2017</title>
+<sub-title lang="fr">Le boy's club</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Deacon et son épouse se préparent à accueillir leur petit. Parallèlement, l'équipe s'efforce de neutraliser des individus ayant ouvert le feu en ville.</desc>
+<episode-num system="xmltv_ns">1.14.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_17137899.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220112011000 +0000" stop="20220112053000 +0000" channel="TF1.fr">
+<title lang="fr">Programmes de la nuit</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Retrouvez tous vos programmes de nuit.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_22269110.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112053000 +0000" stop="20220112072500 +0000" channel="TF1.fr">
+<title lang="fr">TFou</title>
+<category lang="fr">Jeunesse</category>
+<category lang="fr">Jeunesse Mag</category>
+<desc lang="fr">Splat &amp; Harry. Santiago des mers. Super Wings. Paw Patrol, la Pat'Patrouille.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15678917.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112072500 +0000" stop="20220112073000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112073000 +0000" stop="20220112082000 +0000" channel="TF1.fr">
+<title lang="fr">Téléshopping</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. TV Achat</category>
+<desc lang="fr">Téléshopping s'invite dans le quotidien des Français, dès leur réveil, avec convivialité et bonne humeur. Marie-Ange...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805304.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112082000 +0000" stop="20220112082500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112082500 +0000" stop="20220112085500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112085500 +0000" stop="20220112092500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112092500 +0000" stop="20220112100000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112100000 +0000" stop="20220112105500 +0000" channel="TF1.fr">
+<title lang="fr">Les feux de l'amour</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">C'est le procès de Sharon, Victoria et Nikki. Alors que Phyllis pense pouvoir aider les accusées avec son témoignage et plaider la légitime défense, celui-ci se révèle accablant...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_13600616.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112105500 +0000" stop="20220112110000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112110000 +0000" stop="20220112115500 +0000" channel="TF1.fr">
+<title lang="fr">Les douze coups de midi</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Qui sera le calife à la place du calife ? Chaque jour, à midi tapante, quatre candidats s'affrontent pour empocher les 30 000 euros de la cagnotte et décrocher l'étoile mystérieuse et ses cadeaux. Seule condition, bien répondre aux questions de culture générale.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805408.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112115500 +0000" stop="20220112120000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112120000 +0000" stop="20220112124000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">"LE 13h" est le journal télévisé préparé et présenté par la rédaction de TF1. Le journal de 13h vous informe de l'actualité régionale, nationale et internationale. Il permet également de mettre en valeur nos régions à travers des initiatives telles que "Coups de C?ur pour nos Marchés" ou "SOS...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805609.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112124000 +0000" stop="20220112124500 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112124500 +0000" stop="20220112125500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112125500 +0000" stop="20220112144000 +0000" channel="TF1.fr">
+<title lang="fr">Il était une fois au château de glace</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Passion</category>
+<desc lang="fr">Envoyée au Canada par l'agence de voyage pour laquelle elle travaille, une jeune femme ne tarde pas à tomber sous le charme du propriétaire d'un hôtel insolite.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_24448816.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112144000 +0000" stop="20220112163000 +0000" channel="TF1.fr">
+<title lang="fr">Coup de foudre au château de glace</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Passion</category>
+<desc lang="fr">Un hôtel entièrement sculpté dans la glace accueille un mariage de rêve. A cette occasion, une jeune femme rencontre un veuf et sa fille. L'entente est immédiate.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_13971214.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112163000 +0000" stop="20220112170000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112170000 +0000" stop="20220112173000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112173000 +0000" stop="20220112181000 +0000" channel="TF1.fr">
+<title lang="fr">Ici tout commence</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Maxime et Teyssier rencontrent des difficultés pour faire tomber Louis. A l'issue de la deuxième épreuve, le Chef Sarran et le jury sont face à un dilemme.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_18683262.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112181000 +0000" stop="20220112185500 +0000" channel="TF1.fr">
+<title lang="fr">Demain nous appartient</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Aurore fait de nouvelles découvertes qu'elle partage à Pierre et William. La police, de son côté, a repéré la prochaine cible du cambrioleur.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_22478759.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112185500 +0000" stop="20220112190000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112190000 +0000" stop="20220112194500 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">Journal télévisé de TF1 qui revient sur les faits marquants et les événements essentiels qui ont fait de cette journée une journée différente de toutes les autres.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_19779960.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112194500 +0000" stop="20220112195500 +0000" channel="TF1.fr">
+<title lang="fr">Tirage du Loto</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Consultez les derniers résultats des LOTO®. Tous les lundi, mercredi et samedi vers 20h35, Jean-Pierre Foucault, Elsa Fayer, Christophe Beaugrand, Karine Ferri ou Iris Mittenaere vous présentent les résultats des tirages officiels du LOTO® (FDJ®). N'attendez plus, découvrez les 5 numéros gagnants...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_7973524.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112195500 +0000" stop="20220112200000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112200000 +0000" stop="20220112201000 +0000" channel="TF1.fr">
+<title lang="fr">C'est Canteloup</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">S'il est une année que "C'est Canteloup" ne désirait pas manquer, c'est bien celle-ci ! Les Présidentielles avec leur lot de surprises, de rebondissements, leurs petits et grands moments, les déchirures, les trahisons constituent un terrain de jeu idéal pour Nicolas Canteloup et Alessandra...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_11286268.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220112201000 +0000" stop="20220112210500 +0000" channel="TF1.fr">
+<title lang="fr">The Undoing</title>
+<sub-title lang="fr">Ne pas nuire</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Grace entend la version de l'histoire rapportée par Jonathan et se retrouve suivie par un proche d'Elena. Comment Grace va-t-elle réagir à cette nouvelle situation ?</desc>
+<episode-num system="xmltv_ns">0.2.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_25965662.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220112210500 +0000" stop="20220112220500 +0000" channel="TF1.fr">
+<title lang="fr">The Undoing</title>
+<sub-title lang="fr">Ne pas voir le mal</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Haley Fitzgerald s'entretient avec les époux Fraser pour préparer le procès. A la demande de sa fille, Franklin paie la caution pour libérer son gendre.</desc>
+<episode-num system="xmltv_ns">0.3.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_18493844.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220112220500 +0000" stop="20220112225000 +0000" channel="TF1.fr">
+<title lang="fr">New York Unité Spéciale</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">L'équipe se rend à Central Park, où a eu lieu une agression. Les policiers mettent tout en oeuvre pour tenter de retrouver le coupable, mais leur travail est compromis.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_15088942.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220112225000 +0000" stop="20220112234500 +0000" channel="TF1.fr">
+<title lang="fr">New York Unité Spéciale</title>
+<sub-title lang="fr">Violence et préjugés</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Une conseillère municipale musulmane a été agressée dans une synagogue. L'unité spéciale recherche deux suspects, qui ont été aperçus fuyant la scène de crime.</desc>
+<episode-num system="xmltv_ns">19.22.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_14181544.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220112225000 +0000" stop="20220112234500 +0000" channel="TF1.fr">
+<title lang="fr">New York Unité Spéciale</title>
+<sub-title lang="fr">Violence et préjugés</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Une conseillère municipale musulmane a été agressée dans une synagogue. L'unité spéciale recherche deux suspects, qui ont été aperçus fuyant la scène de crime.</desc>
+<episode-num system="xmltv_ns">19.22.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_22067194.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220112234500 +0000" stop="20220113003000 +0000" channel="TF1.fr">
+<title lang="fr">New York Unité Spéciale</title>
+<sub-title lang="fr">Coup de folie</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Max Kleberg, un célèbre médecin, a été battu à mort. Sa femme, Peyton, a été violée. L'enquête s'avère difficile car les suspects ne manquent pas.</desc>
+<episode-num system="xmltv_ns">2.4.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_12422797.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220113003000 +0000" stop="20220113012000 +0000" channel="TF1.fr">
+<title lang="fr">New York Unité Spéciale</title>
+<sub-title lang="fr">Quand je serai grand</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">L'équipe est sur les traces d'un violeur en série. Un jeune policier réussit à l'appréhender, mais Jo Marlowe doute de la culpabilité de l'individu.</desc>
+<episode-num system="xmltv_ns">10.22.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_9567903.jpg"/>
+<rating system="CSA"><value>-12</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png"/></rating>
+</programme><programme start="20220113012000 +0000" stop="20220113053000 +0000" channel="TF1.fr">
+<title lang="fr">Programmes de la nuit</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Retrouvez tous vos programmes de nuit.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_22269110.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113053000 +0000" stop="20220113072500 +0000" channel="TF1.fr">
+<title lang="fr">TFou</title>
+<category lang="fr">Jeunesse</category>
+<category lang="fr">Jeunesse Mag</category>
+<desc lang="fr">La tribu Monchhichi. Chuggington. Super Wings. Gus le chevalier minus. Paw Patrol, la Pat'Patrouille.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15604856.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113072500 +0000" stop="20220113073000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113073000 +0000" stop="20220113082000 +0000" channel="TF1.fr">
+<title lang="fr">Téléshopping</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. TV Achat</category>
+<desc lang="fr">Téléshopping s'invite dans le quotidien des Français, dès leur réveil, avec convivialité et bonne humeur. Marie-Ange...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805304.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113082000 +0000" stop="20220113082500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113082500 +0000" stop="20220113085500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113085500 +0000" stop="20220113092500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113092500 +0000" stop="20220113100000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113100000 +0000" stop="20220113105500 +0000" channel="TF1.fr">
+<title lang="fr">Les feux de l'amour</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Summer raccompagne sa mère à son bureau et essaie de la rassurer suite à son témoignage. Lorsqu'elle y croise Kyle, elle lui annonce être compatible avec Lola...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_13600616.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113105500 +0000" stop="20220113110000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113110000 +0000" stop="20220113115500 +0000" channel="TF1.fr">
+<title lang="fr">Les douze coups de midi</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Qui sera le calife à la place du calife ? Chaque jour, à midi tapante, quatre candidats s'affrontent pour empocher les 30 000 euros de la cagnotte et décrocher l'étoile mystérieuse et ses cadeaux. Seule condition, bien répondre aux questions de culture générale.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805408.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113115500 +0000" stop="20220113120000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113120000 +0000" stop="20220113124000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">"LE 13h" est le journal télévisé préparé et présenté par la rédaction de TF1. Le journal de 13h vous informe de l'actualité régionale, nationale et internationale. Il permet également de mettre en valeur nos régions à travers des initiatives telles que "Coups de C?ur pour nos Marchés" ou "SOS...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805609.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113124000 +0000" stop="20220113124500 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113124500 +0000" stop="20220113125000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113125000 +0000" stop="20220113125500 +0000" channel="TF1.fr">
+<title lang="fr">Météo des neiges</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Toutes les informations sur l'enneigement dans les stations de ski et sur les chutes de neige dans les villes.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_10730117.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113125500 +0000" stop="20220113144000 +0000" channel="TF1.fr">
+<title lang="fr">Le berceau du secret</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Passion</category>
+<desc lang="fr">En l'absence de son mari, parti deux semaines en déplacement professionnel, une jeune femme a la désagréable impression d'être continuellement observée.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_24341950.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220113144000 +0000" stop="20220113163000 +0000" channel="TF1.fr">
+<title lang="fr">Mère porteuse pour star dangereuse</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Suspense</category>
+<desc lang="fr">Ayant perdu son travail, son petit ami et son appartement en une seule journée, une jeune femme accepte de devenir mère porteuse au profite d'une star.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_22119653.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220113163000 +0000" stop="20220113170000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113170000 +0000" stop="20220113173000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_16707824.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113173000 +0000" stop="20220113181000 +0000" channel="TF1.fr">
+<title lang="fr">Ici tout commence</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Pour contrer Louis, Teyssier et Maxime cherchent une nouvelle stratégie et de nouveaux alliés. En plein conflit, Hortense confie à Mehdi ses doutes sur leur relation. Décidée à ne pas se morfondre, Noémie organise une fête et remue le couteau dans la plaie de Gaëtan.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_25965060.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113181000 +0000" stop="20220113185500 +0000" channel="TF1.fr">
+<title lang="fr">Demain nous appartient</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Aurore est dans une situation périlleuse. Elle doit agir vite pour sauver sa s?ur. Timothée partage ses angoisses avec son père, qui prend les choses en main.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_26473891.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113185500 +0000" stop="20220113190000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113190000 +0000" stop="20220113194500 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">Journal télévisé de TF1 qui revient sur les faits marquants et les événements essentiels qui ont fait de cette journée une journée différente de toutes les autres.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15015553.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113194500 +0000" stop="20220113195500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113195500 +0000" stop="20220113201000 +0000" channel="TF1.fr">
+<title lang="fr">C'est Canteloup</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">S'il est une année que "C'est Canteloup" ne désirait pas manquer, c'est bien celle-ci ! Les Présidentielles avec leur lot de surprises, de rebondissements, leurs petits et grands moments, les déchirures, les trahisons constituent un terrain de jeu idéal pour Nicolas Canteloup et Alessandra...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_11286268.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220113201000 +0000" stop="20220113210000 +0000" channel="TF1.fr">
+<title lang="fr">Mon ange</title>
+<sub-title lang="fr">Mon ange</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">En suivant son intime conviction, Suzanne s'introduit chez le pharmacien de la ville, Eric Desner, qu'elle soupçonne de séquestrer sa fille.</desc>
+<episode-num system="xmltv_ns">0.2.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_23829384.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220113210000 +0000" stop="20220113220500 +0000" channel="TF1.fr">
+<title lang="fr">Mon ange</title>
+<sub-title lang="fr">Mon ange</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Suzanne tente de faire parler Stéphanie pour qu'elle lui révèle où sa fille est retenue prisonnière. Si près du but, Suzanne pourrait commettre l'irréparable.</desc>
+<episode-num system="xmltv_ns">0.3.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_23829474.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220113220500 +0000" stop="20220113225500 +0000" channel="TF1.fr">
+<title lang="fr">Esprits criminels</title>
+<sub-title lang="fr">La brebis galeuse</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Le BAU se rend à San Diego où les habitants d'un quartier bourgeois sont terrorisés par une série de cambriolages. Les voleurs sont aussi des assassins.</desc>
+<episode-num system="xmltv_ns">11.9.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_11110640.jpg"/>
+<rating system="CSA"><value>-12</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png"/></rating>
+</programme><programme start="20220113225500 +0000" stop="20220113234500 +0000" channel="TF1.fr">
+<title lang="fr">Esprits criminels</title>
+<sub-title lang="fr">Malheur conjugal</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Toute l'équipe se mobilise pour enquêter lorsque des cadavres d'hommes sont découverts : il n'y aucun moyen d'identifier les victimes avec certitude.</desc>
+<episode-num system="xmltv_ns">11.11.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_11110640.jpg"/>
+<rating system="CSA"><value>-12</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png"/></rating>
+</programme><programme start="20220113225500 +0000" stop="20220113234500 +0000" channel="TF1.fr">
+<title lang="fr">Esprits criminels</title>
+<sub-title lang="fr">Malheur conjugal</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Toute l'équipe se mobilise pour enquêter lorsque des cadavres d'hommes sont découverts : il n'y aucun moyen d'identifier les victimes avec certitude.</desc>
+<episode-num system="xmltv_ns">11.11.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_9360795.jpg"/>
+<rating system="CSA"><value>-12</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png"/></rating>
+</programme><programme start="20220113234500 +0000" stop="20220114003000 +0000" channel="TF1.fr">
+<title lang="fr">Esprits criminels</title>
+<sub-title lang="fr">Hanté</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Une fusillade dans une pharmacie a fait de nombreuses victimes : Hotch et ses hommes découvrent que le déséquilibré est lié à une affaire des années 70.</desc>
+<episode-num system="xmltv_ns">4.1.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_11716573.jpg"/>
+<rating system="CSA"><value>-12</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Moins12.svg/200px-Moins12.svg.png"/></rating>
+</programme><programme start="20220114003000 +0000" stop="20220114011500 +0000" channel="TF1.fr">
+<title lang="fr">Esprits criminels</title>
+<sub-title lang="fr">Promesse tenue</sub-title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Suspense</category>
+<desc lang="fr">Un homme est tué à son domicile. Un médecin annonce alors qu'il a été menacé quelques jours plus tôt et que ce meurtre pourrait être lié à ses problèmes.</desc>
+<episode-num system="xmltv_ns">4.0.</episode-num>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_10098604.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220114011500 +0000" stop="20220114053000 +0000" channel="TF1.fr">
+<title lang="fr">Programmes de la nuit</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Retrouvez tous vos programmes de nuit.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_22269110.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114053000 +0000" stop="20220114072500 +0000" channel="TF1.fr">
+<title lang="fr">TFou</title>
+<category lang="fr">Jeunesse</category>
+<category lang="fr">Jeunesse Mag</category>
+<desc lang="fr">La tribu Monchhichi. Chuggington. Super Wings. Gus le chevalier minus. Paw Patrol, la Pat'Patrouille.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15678917.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114072500 +0000" stop="20220114073000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114073000 +0000" stop="20220114082000 +0000" channel="TF1.fr">
+<title lang="fr">Téléshopping</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. TV Achat</category>
+<desc lang="fr">Le magazine de la consommation et des conseils d'achat, coaché par Marie-Ange Nardi et Alexandre Devoise.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805304.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114082000 +0000" stop="20220114082500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114082500 +0000" stop="20220114085500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114085500 +0000" stop="20220114092500 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114092500 +0000" stop="20220114100000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Téléréalité.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114100000 +0000" stop="20220114105500 +0000" channel="TF1.fr">
+<title lang="fr">Les feux de l'amour</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Summer et Kyle passent un accord pour se marier avant d'aller à l'hôpital pour que Summer soit la donneuse d'organe pour Lola. Kyle fait sa demande en mariage...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_13600616.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114105500 +0000" stop="20220114110000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114110000 +0000" stop="20220114115500 +0000" channel="TF1.fr">
+<title lang="fr">Les douze coups de midi</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Qui sera le calife à la place du calife ? Chaque jour, à midi tapante, quatre candidats s'affrontent pour empocher les 30 000 euros de la cagnotte et décrocher l'étoile mystérieuse et ses cadeaux. Seule condition, bien répondre aux questions de culture générale.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805408.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114115500 +0000" stop="20220114120000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114120000 +0000" stop="20220114124000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">"LE 13h" est le journal télévisé préparé et présenté par la rédaction de TF1. Le journal de 13h vous informe de l'actualité régionale, nationale et internationale. Il permet également de mettre en valeur nos régions à travers des initiatives telles que "Coups de C?ur pour nos Marchés" ou "SOS...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805609.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114124000 +0000" stop="20220114124500 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Chaque jour, Laurent Mariotte propose des recettes simples et savoureuses pour profiter des ingrédients de saison, en donnant la part belle aux produits locaux.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114124500 +0000" stop="20220114125000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114125000 +0000" stop="20220114125500 +0000" channel="TF1.fr">
+<title lang="fr">Météo des neiges</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Toutes les informations sur l'enneigement dans les stations de ski et sur les chutes de neige dans les villes.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_10730117.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114125500 +0000" stop="20220114144000 +0000" channel="TF1.fr">
+<title lang="fr">S'échapper à tout prix</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Suspense</category>
+<desc lang="fr">Une femme agent immobilier ambitieuse et sa fille sont pris en otage lors d'une journée portes ouvertes. Elles font tout pour déjouer les plans de leurs ravisseurs.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_26360451.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220114144000 +0000" stop="20220114163000 +0000" channel="TF1.fr">
+<title lang="fr">Prise au piège chez moi</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Suspense</category>
+<desc lang="fr">Après avoir rompu avec son petit ami, une étudiante tombe sous le charme de son logeur : mais celui-ci va bientôt montrer son vrai visage.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_20937135.jpg"/>
+<rating system="CSA"><value>-10</value><icon src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Moins10.svg/200px-Moins10.svg.png"/></rating>
+</programme><programme start="20220114163000 +0000" stop="20220114170000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114170000 +0000" stop="20220114173000 +0000" channel="TF1.fr">
+<title lang="fr">Familles nombreuses : la vie en XXL</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Ce docu-réalité suit le quotidien exceptionnel de plusieurs familles nombreuses.Avec ces familles tout est XXL !Partagez le quotidien de ces familles nombreuses où tout se vit en plus grand !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_20296920.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114173000 +0000" stop="20220114181000 +0000" channel="TF1.fr">
+<title lang="fr">Ici tout commence</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">Face à l'arrogance de Louis, Clotilde change de camp. Pour faire avancer leur couple, Hortense tente de se détacher de Mehdi qui remarque à peine son absence.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_18683262.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114181000 +0000" stop="20220114185500 +0000" channel="TF1.fr">
+<title lang="fr">Demain nous appartient</title>
+<category lang="fr">Série</category>
+<category lang="fr">Série Passion</category>
+<desc lang="fr">William est furieux contre la s?ur d'Aurore. La police progresse sur la piste du cambrioleur. Flore cherche du soutien auprès d'Anna, mais elle se sent trahie.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_22478759.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114185500 +0000" stop="20220114190000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114190000 +0000" stop="20220114194500 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">Journal télévisé de TF1 qui revient sur les faits marquants et les événements essentiels qui ont fait de cette journée une journée différente de toutes les autres.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_19779960.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114194500 +0000" stop="20220114195500 +0000" channel="TF1.fr">
+<title lang="fr">My Million</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Service</category>
+<desc lang="fr">Consultez les derniers résultats d'EuroMillions ainsi que les codes gagnants My Million. Tous les mardi et vendredi, Elsa fayer ou Karine Ferri vous présentent les résultats des tirages officiels de My Million vers 20h50 puis EuroMillions vers 21h50. Découvrez les 5 numéros gagnants et les 2...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_9983556.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114195500 +0000" stop="20220114200000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114200000 +0000" stop="20220114201000 +0000" channel="TF1.fr">
+<title lang="fr">C'est Canteloup</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Détournements d'images d'actualité, parodies, interviews décalées, Nicolas Canteloup propose une satire des faits marquants de la journée avec, pour signature, ses imitations des personnages qui font l'événement dans le monde de la politique, du spectacle et des médias.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_11286268.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114201000 +0000" stop="20220114223000 +0000" channel="TF1.fr">
+<title lang="fr">Ninja Warrior, le parcours des héros</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Cette année encore, des concurrents plus athlétiques les uns que les autres s'affrontent sur un parcours d'obstacles haut en couleur. A chaque passage de qualification, les candidats affrontent deux premières épreuves et doivent ensuite faire un choix entre le parcours A et le parcours B,...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_26163386.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114223000 +0000" stop="20220115003000 +0000" channel="TF1.fr">
+<title lang="fr">Vendredi, tout est permis avec Arthur</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Pour finir la semaine en beauté, dans une ambiance décontractée, les invités d'Arthur se laissent aller sur le thème du flirt. Humour potache, défis délirants : le cocktail est bien dosé et permet de passer deux heures en bonne compagnie pour rire sans arrières-pensées : un divertissement...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_9491352.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220114223000 +0000" stop="20220115003000 +0000" channel="TF1.fr">
+<title lang="fr">Vendredi, tout est permis avec Arthur</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Pour finir la semaine en beauté, dans une ambiance décontractée, les invités d'Arthur se laissent aller sur le thème du flirt. Humour potache, défis délirants : le cocktail est bien dosé et permet de passer deux heures en bonne compagnie pour rire sans arrières-pensées : un divertissement...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9491352.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115003000 +0000" stop="20220115003500 +0000" channel="TF1.fr">
+<title lang="fr">Tirage de l'Euro millions</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Consultez les derniers résultats d'EuroMillions ainsi que les codes gagnants My Million. Tous les mardi et vendredi, Elsa fayer ou Karine Ferri vous présentent les résultats des tirages officiels de My Million vers 20h50 puis EuroMillions vers 21h50. Découvrez les 5 numéros gagnants et les 2...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_11636224.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115003500 +0000" stop="20220115053000 +0000" channel="TF1.fr">
+<title lang="fr">Programmes de la nuit</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Retrouvez tous vos programmes de nuit.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_22269110.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115053000 +0000" stop="20220115071000 +0000" channel="TF1.fr">
+<title lang="fr">TFou</title>
+<category lang="fr">Jeunesse</category>
+<category lang="fr">Jeunesse Mag</category>
+<desc lang="fr">La tribu Monchhichi. Barbapapa en Famille. Alice et Lewis. Oum le dauphin blanc.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15604856.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115071000 +0000" stop="20220115094000 +0000" channel="TF1.fr">
+<title lang="fr">Téléshopping samedi</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. TV Achat</category>
+<desc lang="fr">Le magazine de la consommation et des conseils d'achat, coaché par Marie-Ange Nardi et Alexandre Devoise.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_19707507.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115094000 +0000" stop="20220115105500 +0000" channel="TF1.fr">
+<title lang="fr">Génération Ushuaïa</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Le photographe Laurent Baheux se rend au c?ur de la brousse africaine, sur la trace de trois félins fascinants : le lion, roi de la savane, le guépard, si rapide mais si vulnérable, et le léopard, prédateur silencieux et fantomatique. Il recherche l'émotion et la transmet à travers ses clichés.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_19740961.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115105500 +0000" stop="20220115110000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Laurent Mariotte donne toutes les astuces pour préparer de bons petits plats, comme un vrai chef, avec des ingrédients frais et de saison.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115110000 +0000" stop="20220115115000 +0000" channel="TF1.fr">
+<title lang="fr">Les douze coups de midi</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Qui sera le calife à la place du calife ? Chaque jour, à midi tapante, quatre candidats s'affrontent pour empocher les 30 000 euros de la cagnotte et décrocher l'étoile mystérieuse et ses cadeaux. Seule condition, bien répondre aux questions de culture générale.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_17137973.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115115000 +0000" stop="20220115115500 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Laurent Mariotte donne toutes les astuces pour préparer de bons petits plats, comme un vrai chef, avec des ingrédients frais et de saison.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115115500 +0000" stop="20220115120000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115120000 +0000" stop="20220115124000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">"LE 13h" est le journal télévisé préparé et présenté par la rédaction de TF1. Le journal de 13h vous informe de l'actualité régionale, nationale et internationale. Il permet également de mettre en valeur nos régions à travers des initiatives telles que "Coups de C?ur pour nos Marchés" ou "SOS...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15805609.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115124000 +0000" stop="20220115135000 +0000" channel="TF1.fr">
+<title lang="fr">Reportages découverte</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Un Français sur six est bénévole dans une association. On parle souvent des associations caritatives qui ont pignon sur rue. Pourtant ce sont près de 12 millions de bénévoles qui ?uvrent chaque année pour les autres, souvent dans l'anonymat et la discrétion. Mais qui sont ces héros et ces...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14396465.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115135000 +0000" stop="20220115151000 +0000" channel="TF1.fr">
+<title lang="fr">Grands reportages</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Magazine de reportages.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_19344241.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115151000 +0000" stop="20220115163000 +0000" channel="TF1.fr">
+<title lang="fr">Les docs du week-end</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Magazine de société.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14830070.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115163000 +0000" stop="20220115174500 +0000" channel="TF1.fr">
+<title lang="fr">50mn Inside</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">50'INSIDE, c'est toute l'actualité des stars résumée, chaque samedi. Le rendez-vous glamour pour retrouver toujours plus de news, d'interviews, d'actualité people en France et à l'étranger, de destinations de rêve et de reportages exclusifs au bout du monde pour partir à la rencontre de vos...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_10837267.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115174500 +0000" stop="20220115185000 +0000" channel="TF1.fr">
+<title lang="fr">50mn Inside</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">50'INSIDE, c'est toute l'actualité des stars résumée, chaque samedi. Le rendez-vous glamour pour retrouver toujours plus de news, d'interviews, d'actualité people en France et à l'étranger, de destinations de rêve et de reportages exclusifs au bout du monde pour partir à la rencontre de vos...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_13209523.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115185000 +0000" stop="20220115185500 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Laurent Mariotte donne toutes les astuces pour préparer de bons petits plats, comme un vrai chef, avec des ingrédients frais et de saison.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115185500 +0000" stop="20220115190000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115190000 +0000" stop="20220115194000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">Journal télévisé de TF1 qui revient sur les faits marquants et les événements essentiels qui ont fait de cette journée une journée différente de toutes les autres.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_15015553.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115194000 +0000" stop="20220115194500 +0000" channel="TF1.fr">
+<title lang="fr">Habitons demain</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Service</category>
+<desc lang="fr">Chaque week-end, l'humoriste et youtubeur Nicolas Meyrieux présente aux téléspectateurs une trouvaille ou un concept inattendus et innovants dans le domaine de l'habitat.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_14356972.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115194500 +0000" stop="20220115195500 +0000" channel="TF1.fr">
+<title lang="fr">Tirage du Loto</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Consultez les derniers résultats des LOTO®. Tous les lundi, mercredi et samedi vers 20h35, Jean-Pierre Foucault, Elsa Fayer, Christophe Beaugrand, Karine Ferri ou Iris Mittenaere vous présentent les résultats des tirages officiels du LOTO® (FDJ®). N'attendez plus, découvrez les 5 numéros gagnants...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_16973319.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115195500 +0000" stop="20220115200000 +0000" channel="TF1.fr">
+<title lang="fr">Quotidien express</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Retrouvez tous les soirs les moments forts et les plus divertissants de l'émission Quotidien !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_17407944.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115200000 +0000" stop="20220115201000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_COL_9285742.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115201000 +0000" stop="20220115213500 +0000" channel="TF1.fr">
+<title lang="fr">Le grand concours</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Avec la présence d'Anne Barrère, vice-présidente de la Fondation Hôpitaux et de Didier Deschamps, parrain de l'Opération Pièces Jaunes. Pour ce "Grand Concours des animateurs", Alessandra Sublet accueille des personnalités venues jouer au profit des Pièces Jaunes, association qui oeuvre pour...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_26308776.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115213500 +0000" stop="20220115225500 +0000" channel="TF1.fr">
+<title lang="fr">Le grand concours</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Plusieurs manches permettent de départager les candidats, interrogés sur des thèmes aussi divers que l'Histoire, la musique, le sport, l'art ou l'actualité. A chaque manche, plusieurs d'entre eux sont éliminés. Lors de la toute dernière manche, les trois derniers candidats en lice sont interrogés...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_26308779.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115225500 +0000" stop="20220116000500 +0000" channel="TF1.fr">
+<title lang="fr">2001-2021 : 20 ans d'émissions cultes</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Divertissement.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/169_EMI_26078976.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220115225500 +0000" stop="20220116000500 +0000" channel="TF1.fr">
+<title lang="fr">2001-2021 : 20 ans d'émissions cultes</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">Divertissement.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_26078976.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116000500 +0000" stop="20220116012000 +0000" channel="TF1.fr">
+<title lang="fr">2001-2021 : 20 ans d'émissions cultes</title>
+<category lang="fr">Divertissement</category>
+<desc lang="fr">En 2001, plusieurs programmes de divertissement ont vu le jour : "Koh-Lanta", "Loft Story", "Star Academy", "Attention à la marche", "Stars à domicile", "Le Maillon faible" ou encore "Vis ma vie". Toutes ces émissions fêtent les 20 ans de leur première diffusion. Certaines font encore partie de...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_22667202.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116012000 +0000" stop="20220116053000 +0000" channel="TF1.fr">
+<title lang="fr">Programmes de la nuit</title>
+<category lang="fr">Autre</category>
+<desc lang="fr">Retrouvez tous vos programmes de nuit.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_22269110.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116053000 +0000" stop="20220116090500 +0000" channel="TF1.fr">
+<title lang="fr">TFou</title>
+<category lang="fr">Jeunesse</category>
+<category lang="fr">Jeunesse Mag</category>
+<desc lang="fr">Blue's Clues &amp; You ! : Blue et ses amis. La tribu Monchhichi. Barbapapa en Famille. Loup. Alice et Lewis. Les schtroumpfs. Robin des bois. Ghost Force. Miraculous - Les aventures de Ladybug et Chat Noir.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15678917.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116090500 +0000" stop="20220116095500 +0000" channel="TF1.fr">
+<title lang="fr">Automoto</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Sur la base d'essai Automoto, chaque dimanche, Jean-Pierre Gagick accueille une invitée en plateau : la voiture star du moment, pour la passer au rayon X.Si c'est une sportive de rêve, elle sera chronométrée sur notre circuit, véritable juge de paix ultra-exigeant et impartial. Si c'est un...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_17408273.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116095500 +0000" stop="20220116100000 +0000" channel="TF1.fr">
+<title lang="fr">La grande odyssée</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Course de chiens de traîneau.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_16993973.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116100000 +0000" stop="20220116110000 +0000" channel="TF1.fr">
+<title lang="fr">Téléfoot</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Au programme :- 1ère partie : Téléfoot, L'actu :Retrouvez les dernières actualités du week-end et de la semaine décryptées à travers les informations de la rédaction et l'expertise de nos consultants, une grande interview hebdomadaire ou encore des duplex avec les acteurs footballistiques du...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_10686904.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116110000 +0000" stop="20220116115000 +0000" channel="TF1.fr">
+<title lang="fr">Les douze coups de midi</title>
+<category lang="fr">Divertissement</category>
+<category lang="fr">Jeu</category>
+<desc lang="fr">Qui sera le calife à la place du calife ? Chaque jour, à midi tapante, quatre candidats s'affrontent pour empocher les 30 000 euros de la cagnotte et décrocher l'étoile mystérieuse et ses cadeaux. Seule condition, bien répondre aux questions de culture générale.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_17137973.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116115000 +0000" stop="20220116115500 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116115500 +0000" stop="20220116120000 +0000" channel="TF1.fr">
+<title lang="fr">Habitons demain</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Service</category>
+<desc lang="fr">Chaque week-end, l'humoriste et youtubeur Nicolas Meyrieux présente aux téléspectateurs une trouvaille ou un concept inattendus et innovants dans le domaine de l'habitat.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14356972.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116120000 +0000" stop="20220116124000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">"LE 13h" est le journal télévisé préparé et présenté par la rédaction de TF1. Le journal de 13h vous informe de l'actualité régionale, nationale et internationale. Il permet également de mettre en valeur nos régions à travers des initiatives telles que "Coups de C?ur pour nos Marchés" ou "SOS...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_15805609.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116124000 +0000" stop="20220116135000 +0000" channel="TF1.fr">
+<title lang="fr">Grands reportages</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Magazine de reportages.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14396465.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116135000 +0000" stop="20220116151000 +0000" channel="TF1.fr">
+<title lang="fr">Reportages découverte</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Un reportage de Lily Eclimontont suivi ces entreprises familiales en pleine mutation. Du dirigeant au seuil de la retraite, aux premiers pas du jeune qui prépare la relève en passant par les changements opérés pour survivre? Une série inédite entrois épisodes pour mettre à l'honneur des...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_19254531.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116151000 +0000" stop="20220116161500 +0000" channel="TF1.fr">
+<title lang="fr">Les docs du week-end</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Le dimanche, l'émission est présentée par Tatiana Silva et décryptera notre société et ses nouvelles tendances à travers des reportages et des enquêtes sur la sécurité, la consommation ou encore l'actualité !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14830070.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116161500 +0000" stop="20220116171500 +0000" channel="TF1.fr">
+<title lang="fr">Sept à huit life</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Sept à Huit Life privilégie la proximité et les rencontres dans tous les univers de la vie quotidienne. Cette heure dédiée à la société française, ses tendances et ses évolutions, met en lumière des personnages et des histoires souvent étonnantes : la marque de fabrique de Sept à Huit !</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_17986636.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116171500 +0000" stop="20220116184500 +0000" channel="TF1.fr">
+<title lang="fr">Sept à huit</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Une référence du news magazine. Chaque dimanche soir, Harry Roselmack plonge les téléspectateurs au c?ur de l'événement, avec des reportages sur la société et les derniers faits marquants. L'émission met en évidence des histoires fortes et des témoignages souvent exclusifs. Une ouverture sur le...</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_17986541.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116184500 +0000" stop="20220116185500 +0000" channel="TF1.fr">
+<title lang="fr">La grande odyssée</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Course de chiens de traîneau.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_16993973.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116185500 +0000" stop="20220116190000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116190000 +0000" stop="20220116194000 +0000" channel="TF1.fr">
+<title lang="fr">Journal</title>
+<category lang="fr">Info-Météo</category>
+<category lang="fr">Information</category>
+<desc lang="fr">Journal télévisé de TF1 qui revient sur les faits marquants et les événements essentiels qui ont fait de cette journée une journée différente de toutes les autres.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_19779960.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116194000 +0000" stop="20220116194500 +0000" channel="TF1.fr">
+<title lang="fr">TF1, rendez-vous sport</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Sport</category>
+<desc lang="fr">Programme court et quotidien qui revient en images sur les moments forts de l'actualité sportive.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_10043272.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116194500 +0000" stop="20220116195000 +0000" channel="TF1.fr">
+<title lang="fr">Habitons demain</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Service</category>
+<desc lang="fr">Chaque week-end, l'humoriste et youtubeur Nicolas Meyrieux présente aux téléspectateurs une trouvaille ou un concept inattendus et innovants dans le domaine de l'habitat.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14356972.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116195000 +0000" stop="20220116200000 +0000" channel="TF1.fr">
+<title lang="fr">Petits plats en équilibre</title>
+<category lang="fr">Magazine</category>
+<category lang="fr">Mag. Société</category>
+<desc lang="fr">Laurent Mariotte donne toutes les astuces pour préparer de bons petits plats, comme un vrai chef, avec des ingrédients frais et de saison.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_14223378.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116200000 +0000" stop="20220116201000 +0000" channel="TF1.fr">
+<title lang="fr">Météo</title>
+<category lang="fr">Info-Météo</category>
+<desc lang="fr">Prévisions météorologiques en France par le service de TF1.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_COL_21154942.jpg"/>
+<rating system="CSA"><value>Tout public</value></rating>
+</programme><programme start="20220116201000 +0000" stop="20220116222000 +0000" channel="TF1.fr">
+<title lang="fr">Anna</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Suspense</category>
+<desc lang="fr">A la fin de la guerre froide, une jeune femme, capable d'endosser des personnalités multiples, est pourchassée par des espions.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_14902357.jpg"/>
+<rating system="CSA"><value>-12</value></rating>
+</programme><programme start="20220116222000 +0000" stop="20220117010000 +0000" channel="TF1.fr">
+<title lang="fr">Kingsman : Le cercle d'or</title>
+<category lang="fr">Film</category>
+<category lang="fr">Film Action</category>
+<desc lang="fr">Deux espions britanniques sont amenés à s'associer à plusieurs de leurs confrères américains afin de mettre hors d'état de nuire une baronne de la drogue.</desc>
+<icon src="https://proxymedia.woopic.com/340/p/43_EMI_12563107.jpg"/>
+<rating system="CSA"><value>-12</value></rating>
+</programme></tv>
