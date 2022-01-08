@@ -83,7 +83,7 @@ class XmlExporter
         $content = $this->content->saveXML();
         //currently, the dtd validation doesn't work
         //$this->content->validate();
-        if (in_array('xml', $this->outputFormat)) {
+        if (in_array('xml', $this->outputFormat) || in_array('xz', $this->outputFormat)) {
             file_put_contents($this->filePath, $content);
         }
         if (in_array('gz', $this->outputFormat)) {
@@ -112,11 +112,14 @@ class XmlExporter
                 Logger::log("\e[34m[EXPORT] \e[31mImpossible d'exporter en XZ (chemin de 7zip non défini)\e[39m\n");
                 return;
             }
-            file_put_contents($this->filePath, $content);
             $filename = $this->filePath.'.xz';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en XZ...\n");
             $result = exec('"' . $this->zipBinPath . '" a -t7z "' . $filename . '" "' . $this->filePath . '"');
             Logger::log("\e[34m[EXPORT] \e[39mRéponse de 7zip : $result");
+
+            if (!in_array('xml', $this->outputFormat)) {
+                unlink($this->filePath);
+            }
         }
     }
 
