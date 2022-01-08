@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 
+use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 
 class ViniPF extends AbstractProvider implements ProviderInterface
@@ -24,7 +25,7 @@ class ViniPF extends AbstractProvider implements ProviderInterface
         date_default_timezone_set("Pacific/Tahiti");
         $count = 12;
         for($i=0; $i <$count; $i++) {
-            displayTextOnCurrentLine(" ".round($i*100/$count, 2)." %");
+            Logger::updateLine(" ".round($i*100/$count, 2)." %");
             $dateDebut = '{"dateDebut":"'.date('c',$debut + 3600*2*$i).'"}';
             if(!isset(self::$cache_per_day[md5($dateDebut)])) {
                 $ch3 = curl_init();

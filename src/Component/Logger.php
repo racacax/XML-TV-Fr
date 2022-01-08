@@ -10,6 +10,10 @@ class Logger
      * @var string
      */
     private static $debugFolder;
+    /**
+     * @var string
+     */
+    private static $lastLog;
 
     public static function setLogLevel(string $level): void
     {
@@ -21,14 +25,27 @@ class Logger
 
         self::$debugFolder = rtrim($path, DIRECTORY_SEPARATOR);
     }
+    public static function getLastLog(): string
+    {
+        return self::$lastLog;
+    }
 
     public static function log(string $log): void
     {
+        self::$lastLog = $log;
         if (self::$level==='none') {
             return;
         }
 
         echo $log;
+    }
+
+    public static function updateLine(string $content): void
+    {
+        $previousLog = self::$lastLog;
+        self::log("\r".self::$lastLog . $content);
+
+        self::$lastLog = $previousLog;
     }
 
     public static function debug(string $content): void

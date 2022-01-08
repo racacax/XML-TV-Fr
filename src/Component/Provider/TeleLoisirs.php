@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 
+use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 
 class TeleLoisirs extends AbstractProvider implements ProviderInterface
@@ -27,7 +28,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
         unset($lis[0]);
         $count = count($lis);
         foreach($lis as $index => $li) {
-            displayTextOnCurrentLine(" ".round($index*100/$count, 2)." %");
+            Logger::updateLine(" ".round($index*100/$count, 2)." %");
             $li = explode('</li>', $li)[0];
             preg_match('/href="(.*?)" title="(.*?)"/', $li, $titlehref);
             preg_match('/srcset="(.*?)"/', $li, $img);

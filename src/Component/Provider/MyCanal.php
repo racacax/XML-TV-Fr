@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
-
+use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 
 // Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
@@ -61,7 +61,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface {
         $lastTime = 0;
         $count = count($all);
         foreach($all as $index => $program) {
-            displayTextOnCurrentLine(" ".round($index*100/$count, 2)." %");
+            Logger::updateLine(" ".round($index*100/$count, 2)." %");
             $curld = curl_init($program['onClick']['URLPage']);
             curl_setopt($curld, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curld, CURLOPT_FOLLOWLOCATION, 1);

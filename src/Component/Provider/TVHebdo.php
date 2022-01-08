@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 
+use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 
 class TVHebdo extends AbstractProvider implements ProviderInterface
@@ -54,7 +55,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
         $count = count($titre[2]);
         for($j=0;$j<$count;$j++)
         {
-            displayTextOnCurrentLine(" ".round($j*100/$count, 2)." %");
+            Logger::updateLine(" ".round($j*100/$count, 2)." %");
             $dateStart = strtotime($date.' '.$time[1][$j]);
             $titreProgram = $titre[2][$j];
             $url = $titre[1][$j];

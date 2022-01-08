@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 
+use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 
 class Tebeosud extends AbstractProvider implements ProviderInterface
@@ -51,7 +52,7 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
             preg_match_all('/\<td class="nom"\>\<a href="(.*?)"\>(.*?)\<\/a\>\<\/td\>/', $separateDays[$i], $infos2);
             $count2 = count($infos[1]);
             for($j=0; $j<$count2; $j++) {
-                displayTextOnCurrentLine(" $i/$count : ".round($j*100/$count2, 2)." %");
+                Logger::updateLine(" $i/$count : ".round($j*100/$count2, 2)." %");
                 $url = $infos[1][$j];
                 if($url[0] != 'h')
                     $url = 'https:'.$url;

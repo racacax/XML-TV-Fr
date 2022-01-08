@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 
+use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 
 class Telecablesat extends AbstractProvider implements ProviderInterface
@@ -34,7 +35,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                 $this->loopCounter++;
                 if($this->loopCounter > 3)
                     return false;
-                displayTextOnCurrentLine(" \e[31mRate limited, waiting 30s ($this->loopCounter)\e[39m");
+                Logger::updateLine(" \e[31mRate limited, waiting 30s ($this->loopCounter)\e[39m");
                 sleep(30);
                 return $this->constructEPG($channel, $date);
             }
@@ -56,7 +57,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                     return false;
                 $retry_counter = 0;
                 for($i=0; $i<$count; $i++) {
-                    displayTextOnCurrentLine(" ".round($i*100/$count, 2)." %");
+                    Logger::updateLine(" ".round($i*100/$count, 2)." %");
                     $program = $this->channelObj->addProgram(intval($times[1][$i]), intval($times[2][$i]));
                     $program->addTitle(trim($genresAndTitles[2][$i]));
                     $program->addCategory(trim($genresAndTitles[1][$i]));
@@ -69,7 +70,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                             continue;
                         }
                         $this->channelObj->popLastProgram();
-                        displayTextOnCurrentLine(" \e[31mRate limited, waiting 30s ($retry_counter)\e[39m");
+                        Logger::updateLine(" \e[31mRate limited, waiting 30s ($retry_counter)\e[39m");
                         sleep(30); // if we are rate limited by website
                         $i--;
                         continue;
