@@ -109,20 +109,21 @@ class Generator
                         $old_zone = date_default_timezone_get();
                         $channel = $provider->constructEPG($channelKey, $date);
                         date_default_timezone_set($old_zone);
-                        if($channel !== false){
-                            $channelFound = true;
-                            $logs['channels'][$date][$channelKey] = [
-                                'success' => true,
-                                'provider' => get_class($provider),
-                                'cache'=> false,
-                            ];
-                            $this->cache->store($cacheKey, $this->formatter->formatChannel($channel, $provider));
-                            Logger::log(" | \e[32mOK\e[39m - ".Utils::extractProviderName($provider).chr(10));
-                            break ;
+                        if ($channel === false || $channel->getProgramCount()>0){
+                            $logs['channels'][$date][$channelKey]['failed_providers'][] = get_class($provider);
+                            $logs['failed_providers'][get_class($provider)] = true;
+                            continue;
                         }
 
-                        $logs['channels'][$date][$channelKey]['failed_providers'][] = get_class($provider);
-                        $logs['failed_providers'][get_class($provider)] = true;
+                        $channelFound = true;
+                        $logs['channels'][$date][$channelKey] = [
+                            'success' => true,
+                            'provider' => get_class($provider),
+                            'cache'=> false,
+                        ];
+                        $this->cache->store($cacheKey, $this->formatter->formatChannel($channel, $provider));
+                        Logger::log(" | \e[32mOK\e[39m - ".Utils::extractProviderName($provider).chr(10));
+                        break ;
                     }
 
                     if(!$channelFound) {

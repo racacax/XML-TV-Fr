@@ -48,6 +48,8 @@ class XmlExporter
         $this->filePath = $filePath;
 
         $this->content = new \DOMDocument();
+        $this->content->preserveWhiteSpace = false;
+        $this->content->formatOutput = true;
         $this->content->loadXML('<?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE tv SYSTEM "resources/validation/xmltv.dtd">
     <!-- Generated with XML TV Fr v1.5.1 -->
@@ -80,7 +82,7 @@ class XmlExporter
 
     public function stopExport()
     {
-        $content = $this->content->saveXML();
+        $content = $this->content->loadXML($this->content->saveXML())->saveXML();
         //currently, the dtd validation doesn't work
         //$this->content->validate();
         if (in_array('xml', $this->outputFormat) || in_array('xz', $this->outputFormat)) {

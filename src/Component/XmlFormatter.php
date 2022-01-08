@@ -62,7 +62,7 @@ class XmlFormatter
         return trim(implode("\n", $content));
     }
 
-    public function buildCredits(array $credits): string
+    public function buildCredits(?array $credits): string
     {
         if(empty($this->credits)) {
             return '';
@@ -82,7 +82,7 @@ class XmlFormatter
      */
     public function buildEpisodeNum($episodeNum): string
     {
-        if(isset($episodeNum)) {
+        if(!empty($episodeNum)) {
             return '<episode-num system="xmltv_ns">'.$episodeNum.".</episode-num>";
         }
         return '';
@@ -91,7 +91,7 @@ class XmlFormatter
     /**
      * @return mixed
      */
-    public function buildIcon(string $icon): string
+    public function buildIcon(?string $icon): string
     {
         if(isset($icon) && strlen($icon) > 0) {
             return '<icon src="' . $this->stringAsXML($icon) . '" />';
