@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component;
 
 use racacax\XmlTv\StaticComponent\ChannelInformation;
+use racacax\XmlTv\ValueObject\DummyChannel;
 
 class Generator
 {
@@ -80,7 +81,6 @@ class Generator
     {
         foreach ($this->guides as $guide){
             $channels = json_decode(file_get_contents($guide['channels']),true);
-
             Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
 
 
@@ -134,19 +134,17 @@ class Generator
                 }
             }
             Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
-            $log_path = 'logs/logs'.date('YmdHis').'.json';
-            Logger::log("\e[36m[LOGS] \e[39m Export des logs vers $log_path\n");
-
-            //debug information
-            file_put_contents($log_path,json_encode($logs));
+            Logger::debug(json_encode($logs));
         }
     }
-    public function exportEpg()
+    public function exportEpg(string $exportPath)
     {
+        @mkdir($exportPath, 0777, true);
+
         foreach ($this->guides as $guide){
             $channels = json_decode(file_get_contents($guide['channels']),true);
             $defaultInfo = ChannelInformation::getInstance();
-            $this->exporter->startExport($guide['filename']);
+            $this->exporter->startExport($exportPath . $guide['filename']);
             $listCacheKey = [];
             foreach($channels as $channelKey => $channelInfo) {
                 $icon = $channelInfo['icon'] ?? $defaultInfo->getDefaultIcon($channelKey);
@@ -178,5 +176,10 @@ class Generator
     public function setCache(CacheFile $cache)
     {
         $this->cache = $cache;
+    }
+
+    public function clearCache(int $maxCacheDay)
+    {
+        $this->cache->clearCache($maxCacheDay);
     }
 }

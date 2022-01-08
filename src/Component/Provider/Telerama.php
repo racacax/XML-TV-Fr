@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Provider;
+namespace racacax\XmlTv\Component\Provider;
 
-use racacax\XmlTv\Component\AbstractProvider;
+
 use racacax\XmlTv\Component\ProviderInterface;
 
 class Telerama extends AbstractProvider implements ProviderInterface
@@ -29,7 +29,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
         return hash_hmac('sha1', $url, self::$HASH_KEY);
     }
 
-    public function constructEPG($channel,$date)
+    public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
         if (!isset($date)) {

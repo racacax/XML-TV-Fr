@@ -23,7 +23,7 @@ class Configurator
     /**
      * @var int
      */
-    private $cache_max_days;
+    private $cacheMaxDays;
     /**
      * @var bool
      */
@@ -72,8 +72,8 @@ class Configurator
     /**
      * @param int $nbDays Number of days XML TV will try to get EPG
      * @param string $outputPath Where xmltv files are stored
-     * @param int $timeLimit time limit for the EPG grab (0 = unlimited)
-     * @param int $memoryLimit memory limit for the EPG grab (-1 = unlimited)
+     * @param null|int $timeLimit time limit for the EPG grab (0 = unlimited)
+     * @param null|int $memoryLimit memory limit for the EPG grab (-1 = unlimited)
      * @param int $cache_max_days after how many days do we clear cache (0 = no cache)
      * @param bool $deleteRawXml delete xmltv.xml after EPG grab (if you want to provide only compressed XMLTV)
      * @param bool $enableGz enable gz compression for the XMLTV
@@ -99,7 +99,7 @@ class Configurator
         int $xmlCacheDays = 5,
         bool $enableDummy  = false,
         array $customPriorityOrders = [],
-        array $guides_to_generate = [array("channels"=>"var/channels.json", "filename"=>"xmltv.xml")],
+        array $guides_to_generate = [array("channels"=>"config/channels.json", "filename"=>"xmltv.xml")],
         ?string $zipBinPath = null,
         bool $forceTodayGrab =false,
         array $extraParams = []
@@ -113,7 +113,7 @@ class Configurator
 
         $this->nbDays = $nbDays;
         $this->outputPath = $outputPath;
-        $this->cache_max_days = $cache_max_days;
+        $this->cacheMaxDays = $cache_max_days;
         $this->deleteRawXml = $deleteRawXml;
         $this->enableGz = $enableGz;
         $this->enableZip = $enableZip;
@@ -192,9 +192,8 @@ class Configurator
             $outputFormat[] = 'zip';
         }
 
-        $generator->setExporter(new XmlExporter($this->outputPath, $outputFormat, $this->zipBinPath));
-        //todo cache folder
-        $generator->setCache(new CacheFile('hannels/'));
+        $generator->setExporter(new XmlExporter($outputFormat, $this->zipBinPath));
+        $generator->setCache(new CacheFile('var/cache'));
         $generator->addGuides($this->guidesToGenerate ?? []);
 
 
@@ -204,7 +203,7 @@ class Configurator
     /**
      * @return ProviderInterface[]
      */
-    private function getProviders():array
+    public function getProviders():array
     {
         $providersClass = Utils::getProviders();
         $providersObject = [];
@@ -221,5 +220,23 @@ class Configurator
 
         return $providersObject;
     }
+
+    /**
+     * @return string
+     */
+    public function getOutputPath(): string
+    {
+        return $this->outputPath;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCacheMaxDays(): int
+    {
+        return $this->cacheMaxDays;
+    }
+
+
 
 }

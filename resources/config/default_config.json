@@ -1,7 +1,7 @@
 {
   "days" : 8,
   "cache_max_days": 8,
-  "output_path": "./xmltv",
+  "output_path": "var/export/",
   "time_limit": null,
   "memory_limit": null,
   "delete_raw_xml": false,

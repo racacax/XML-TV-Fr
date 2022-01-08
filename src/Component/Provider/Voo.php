@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Provider;
+namespace racacax\XmlTv\Component\Provider;
 
-use racacax\XmlTv\Component\AbstractProvider;
+
 use racacax\XmlTv\Component\ProviderInterface;
 
 class Voo extends AbstractProvider implements ProviderInterface
@@ -14,7 +14,7 @@ class Voo extends AbstractProvider implements ProviderInterface
         parent::__construct("resources/channel_config/channels_voo.json", $priority ?? 0.85);
     }
 
-    function constructEPG($channel, $date)
+    public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
         if(!$this->channelExists($channel))

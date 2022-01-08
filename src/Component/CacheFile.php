@@ -14,12 +14,15 @@ class CacheFile
 
     public function __construct(string $basePath)
     {
-        $this->basePath = $basePath;
+        @mkdir($basePath,0777, true);
+
+        $this->basePath = rtrim($basePath,DIRECTORY_SEPARATOR);
     }
 
     public function store(string $key, string $content)
     {
-        $fileName = $this->basePath . $key;
+        $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
+
         if (false === file_put_contents($fileName, $content)) {
             throw new \Exception('Impossible to cache : ' . $key);
         }
@@ -34,7 +37,7 @@ class CacheFile
         if (isset($this->listFile[$key])) {
             return true;
         }
-        $fileName = $this->basePath . $key;
+        $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
         if (file_exists($fileName)){
             $this->listFile[$key] = [
                 'file'=> $fileName,
@@ -53,5 +56,16 @@ class CacheFile
         }
 
         return file_get_contents($this->listFile[$key]['file']);
+    }
+
+    public function clearCache(int $maxCacheDay): void
+    {
+        $files = glob($this->basePath.DIRECTORY_SEPARATOR.'*');
+
+        foreach($files as $file){
+            if (time()-filemtime($file) >= 86400 * $maxCacheDay){
+                unlink($file);
+            }
+        }
     }
 }

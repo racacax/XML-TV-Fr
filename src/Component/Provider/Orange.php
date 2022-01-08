@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Provider;
+namespace racacax\XmlTv\Component\Provider;
 
-use racacax\XmlTv\Component\AbstractProvider;
+
 use racacax\XmlTv\Component\ProviderInterface;
 
 /*
@@ -17,7 +17,7 @@ class Orange extends AbstractProvider implements ProviderInterface
         parent::__construct("resources/channel_config/channels_orange.json", $priority ?? 0.95);
     }
 
-    public function constructEPG($channel,$date)
+    public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel))

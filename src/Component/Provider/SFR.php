@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Provider;
+namespace racacax\XmlTv\Component\Provider;
 
-use racacax\XmlTv\Component\AbstractProvider;
+
 use racacax\XmlTv\Component\ProviderInterface;
 
 // Original script by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/SFR.php
@@ -17,7 +17,7 @@ class SFR extends AbstractProvider implements ProviderInterface {
         $this->jsonPerDay = [];
     }
 
-    public function constructEPG($channel, $date) {
+    public function constructEPG(string $channel, string $date) {
         parent::constructEPG($channel, $date);
         if(!$this->channelExists($channel))
             return false;

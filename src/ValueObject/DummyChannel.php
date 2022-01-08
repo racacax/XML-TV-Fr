@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Component;
+namespace racacax\XmlTv\ValueObject;
 
 class DummyChannel extends Channel {
-    public function __construct($id, $date)
+    public function __construct($id, string $icon, string $name, $date)
     {
-        parent::__construct($id);
+        parent::__construct($id, $icon, $name);
 
         for($i=0; $i<12; $i++) {
             $time = strtotime($date)+$i*2*3600;

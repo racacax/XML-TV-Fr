@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Provider;
+namespace racacax\XmlTv\Component\Provider;
 
-use racacax\XmlTv\Component\AbstractProvider;
+
 use racacax\XmlTv\Component\ProviderInterface;
 
 /*
@@ -18,7 +18,7 @@ class ICIRadioCanadaTele extends AbstractProvider implements ProviderInterface
         parent::__construct("resources/channel_config/channels_iciradiocanada.json", 0.6);
     }
 
-    public function constructEPG($channel,$date)
+    public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel))

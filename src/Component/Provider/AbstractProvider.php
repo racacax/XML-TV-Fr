@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Component;
+namespace racacax\XmlTv\Component\Provider;
+
+use racacax\XmlTv\Component\ChannelFactory;
+use racacax\XmlTv\ValueObject\Channel;
 
 abstract class AbstractProvider {
 
@@ -10,48 +13,49 @@ abstract class AbstractProvider {
      */
     protected $channelObj;
 
-    protected $channelsList;
+    /**
+     * @var array
+     */
+    protected $channelsList = [];
 
     protected static $priority;
 
     public function __construct($jsonPath, $priority)
     {
-        if (!isset($this->channelsList) && file_exists($jsonPath)) {
-            $constantHash = 'channelsList_'.md5($jsonPath);
-            //todo: to improve
-            if(defined($constantHash)) {
-                $this->channelsList = constant($constantHash);
-            } else {
-                $this->channelsList = json_decode(file_get_contents($jsonPath), true);
-                define($constantHash, $this->channelsList);
-            }
+        if (empty($this->channelsList) && file_exists($jsonPath)) {
+            $this->channelsList = json_decode(file_get_contents($jsonPath), true);
         }
         //todo: to improve
         self::$priority[static::class] = $priority;
     }
 
-    public static function getPriority() {
+    public static function getPriority(): float
+    {
         return self::$priority[static::class];
     }
 
-    public function constructEPG($channel,$date) {
-        $this->channelObj = new Channel($channel);
+    public function constructEPG(string $channel, string $date)
+    {
+        $this->channelObj = ChannelFactory::createChannel($channel);
+
         return $this->channelObj;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getChannelsList()
+    public function getChannelsList(): array
     {
         return $this->channelsList;
     }
 
-    public function channelExists($channel) {
+    public function channelExists($channel): bool
+    {
         return isset($this->getChannelsList()[$channel]);
     }
 
-    protected function getContentFromURL($url) {
+    protected function getContentFromURL($url): string
+    {
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_URL, $url);
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);

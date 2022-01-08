@@ -1,7 +1,4 @@
-tmp/*
-!tmp/.keep
-var/*
-!var/cache/.keep
+config/*
+!config/.keep
+var
 vendor
-xmltv/*
-!xmltv/.keep

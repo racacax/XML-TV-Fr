@@ -1,24 +1,60 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Component;
+namespace racacax\XmlTv\ValueObject;
 
 class Channel {
+    /**
+     * @var string
+     */
+    private $id;
+    /**
+     * @var string
+     */
+    private $icon;
+    /**
+     * @var string
+     */
+    private $name;
     /**
      * @var Program[]
      */
     private $programs;
-    private $fp;
-    private $id;
 
     /**
      * Channel constructor.
-     * @param $id
      */
-    public function __construct($id)
+    public function __construct(string $id, string $icon, string $name)
     {
         $this->id = $id;
+        $this->icon = $icon;
+        $this->name = $name;
         $this->programs = [];
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
     }
 
     /**
@@ -28,6 +64,7 @@ class Channel {
      */
     public function addProgram($start, $end): Program
     {
+        // change parameter, use Program instead of dates
         $program = new Program($start, $end);
         $this->programs[] = $program;
         return $program;
@@ -39,14 +76,6 @@ class Channel {
     public function getPrograms(): array
     {
         return $this->programs;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function getProgramCount() {

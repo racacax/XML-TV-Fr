@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
+use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\ValueObject\Channel;
+
 class XmlExporter
 {
 
@@ -10,14 +13,6 @@ class XmlExporter
      * @var XmlFormatter
      */
     private $formatter;
-    /**
-     * @var string
-     */
-    private $exportPath;
-    /**
-     * @var string
-     */
-    private $filename;
     /**
      * @var \DOMDocument
      */
@@ -30,18 +25,16 @@ class XmlExporter
      * @var string|null
      */
     private $sevenZipPath;
+    /**
+     * @var string
+     */
+    private $filePath;
 
-    public function __construct(string $exportPath, array $outputFormat, ?string $sevenZipPath)
+    public function __construct(array $outputFormat, ?string $sevenZipPath)
     {
         $this->formatter = new XmlFormatter();
-        $this->exportPath = $exportPath;
         $this->outputFormat = $outputFormat;
         $this->sevenZipPath = $sevenZipPath;
-    }
-
-    public function exportChannel(Channel $channel, string $date, ?ProviderInterface $provider)
-    {
-
     }
 
     public function getFormatter(): XmlFormatter
@@ -50,9 +43,9 @@ class XmlExporter
     }
 
 
-    public function startExport(string $filename)
+    public function startExport(string $filePath)
     {
-        $this->filename = $this->exportPath .'/'. $filename;
+        $this->filePath = $filePath;
 
         $this->content = new \DOMDocument();
         $this->content->loadXML('<?xml version="1.0" encoding="UTF-8"?>
@@ -91,17 +84,17 @@ class XmlExporter
         //currently, the dtd validation doesn't work
         //$this->content->validate();
         if (in_array('xml', $this->outputFormat)) {
-            file_put_contents($this->filename, $content);
+            file_put_contents($this->filePath, $content);
         }
         if (in_array('gz', $this->outputFormat)) {
-            $filename = $this->filename.'.gz';
+            $filename = $this->filePath.'.gz';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en GZ...\n");
             file_put_contents($filename, gzencode($content));
-            Logger::log("\e[34m[EXPORT] \e[39mGZ : \e[32mOK\e[39m ($this->filename.'.gz')\n");
+            Logger::log("\e[34m[EXPORT] \e[39mGZ : \e[32mOK\e[39m ($this->filePath.'.gz')\n");
         }
 
         if (in_array('zip', $this->outputFormat)) {
-            $filename = $this->filename.'.zip';
+            $filename = $this->filePath.'.zip';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en ZIP...\n");
             $zip = new \ZipArchive();
 
@@ -110,7 +103,7 @@ class XmlExporter
                 throw new \Exception('Impossible to create zip file '. $filename);
             }
             Logger::log("\e[34m[EXPORT] \e[39mZIP : \e[32mOK\e[39m ($filename)\n");
-            $zip->addFromString($this->filename, $content);
+            $zip->addFromString($this->filePath, $content);
             $zip->close();
         }
 
@@ -119,10 +112,10 @@ class XmlExporter
                 Logger::log("\e[34m[EXPORT] \e[31mImpossible d'exporter en XZ (chemin de 7zip non défini)\e[39m\n");
                 return;
             }
-            file_put_contents($this->filename, $content);
-            $filename = $this->filename.'.xz';
+            file_put_contents($this->filePath, $content);
+            $filename = $this->filePath.'.xz';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en XZ...\n");
-            $result = exec('"' . $this->zipBinPath . '" a -t7z "' . $filename . '" "' . $this->filename . '"');
+            $result = exec('"' . $this->zipBinPath . '" a -t7z "' . $filename . '" "' . $this->filePath . '"');
             Logger::log("\e[34m[EXPORT] \e[39mRéponse de 7zip : $result");
         }
     }

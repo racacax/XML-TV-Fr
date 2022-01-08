@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Provider;
+namespace racacax\XmlTv\Component\Provider;
 
-use racacax\XmlTv\Component\AbstractProvider;
+
 use racacax\XmlTv\Component\ProviderInterface;
 
 class TVHebdo extends AbstractProvider implements ProviderInterface
@@ -19,7 +19,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $this->proxy = $extraParam['tvhebdo_proxy'];
     }
 
-    protected function getContentFromURL($url) {
+    protected function getContentFromURL($url): string {
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_URL, $url);
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
@@ -33,7 +33,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
         return $res1;
     }
 
-    function constructEPG($channel, $date)
+    public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
         date_default_timezone_set('America/Montreal');

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Component;
+namespace racacax\XmlTv\ValueObject;
 
 class Program {
     private $titles;

@@ -1,8 +1,8 @@
 <?php
 
-
 namespace racacax\XmlTv\Component;
 
+use racacax\XmlTv\Component\ProviderInterface;
 
 /**
  * @author benoit

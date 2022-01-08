@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Provider;
+namespace racacax\XmlTv\Component\Provider;
 
-use racacax\XmlTv\Component\AbstractProvider;
+
 use racacax\XmlTv\Component\ProviderInterface;
 
 class TeleZ extends AbstractProvider implements ProviderInterface
@@ -15,7 +15,7 @@ class TeleZ extends AbstractProvider implements ProviderInterface
         parent::__construct("resources/channel_config/channels_telez.json", $priority ?? 0.5);
     }
 
-    function constructEPG($channel, $date)
+    public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
         if(!$this->channelExists($channel))
