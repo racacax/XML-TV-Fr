@@ -20,7 +20,7 @@ Un `composer install` est requis pour utiliser le script.
 
 Cette partie va vous permettre de configurer XML TV Fr.
 
-## Liste des chaines (channels.json)
+## Liste des chaines (config/channels.json)
 
 La liste des chaines doit être indiquée dans le fichier channels.json au format JSON. Chaque chaine correspond à l'ID d'une chaine (Exemple : France2.fr) présente dans les fichiers de chaines par services (dossier channels_by_providers).
 La structure d'un item se fait comme ceci :
@@ -30,7 +30,7 @@ La structure d'un item se fait comme ceci :
 Les champs name, icon et priority sont optionnels. 
 Le champ priority donne un ordre de priorité différent de celui par défaut en indiquant les noms des services (nom des classes dans le dossier classes). Dans l'exemple, Service1 sera appelé en premier et Service2 ne sera appelé que si Service1 échoue. Par exemple si on met en priorité Télérama puis Orange, Télérama sera lancé. Si aucun programme n'est trouvé sur Télérama, Orange est lancé, sinon on continue. Si aucun programme n'est trouvé sur tous les services, la chaine est indiquée HS pour le jour concerné.
 
-## Configuration du programme (config.json)
+## Configuration du programme (config/config.json)
 
 Le fichier config.json est au format JSON. 
 ```json
@@ -45,19 +45,19 @@ Le fichier config.json est au format JSON.
   "enable_zip": true // Activer la compression zip (true|false),
   "enable_dummy" : false, // Afficher un EPG mire en cas d'absence de guide pour une chaine 
   "custom_priority_orders" : {"Telerama": 0.2, "UltraNature": 0.5}, // Modifier l'ordre de priorité pour certains services globalement
-  "guides_to_generate" : [{"channels": "./channels.json", "filename": "xmltv.xml"}] // liste des XML à générer. Pour chaque élément, `channels` indique le fichier des chaines et `filename` le nom du fichier de sortie
+  "guides_to_generate" : [{"channels": "config/channels.json", "filename": "xmltv.xml"}] // liste des XML à générer. Pour chaque élément, `channels` indique le fichier des chaines et `filename` le nom du fichier de sortie
 }
 ```
 
 # Lancer le script
 Pour démarrer la récupération du guide des programmes, lancez cette commande dans votre terminal (dans le dossier du programme).
 ```shell
-php script_all.php
+php example/script_all.php
 ```
 # Générer le fichier channels.json
 Il est possible de générer depuis votre navigateur le fichier channels.json. Pour cela, placez vous dans le dossier de travail du programme et lancez cette commande
 ```shell
-php -S localhost:8080
+php -S localhost:8080 -t tools
 ```
 Note : le port 8080 peut être changé par un autre.
 
@@ -72,7 +72,7 @@ Cette commande indiquera si le dernier fichier XML généré est valide.
 
 # Ajouter des services
 
-Il est possible d'ajouter des services `Provider` autres que ceux fournis. Pour cela, il faut ajouter une classe dans le dossier `src/Component/Provider` qui implémente l'interface ProviderInterface et étendre la classe AbstractProvider. 
+Il est possible d'ajouter des services (`Provider`) autres que ceux fournis. Pour cela, il faut ajouter une classe dans le dossier `src/Component/Provider` qui implémente l'interface ProviderInterface et étendre la classe AbstractProvider. 
 
 Le constructeur aura le chemin des XML temporaires d'indiqué.
 

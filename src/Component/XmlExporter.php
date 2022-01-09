@@ -52,7 +52,7 @@ class XmlExporter
         $this->content->formatOutput = true;
         $this->content->loadXML('<?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE tv SYSTEM "resources/validation/xmltv.dtd">
-    <!-- Generated with XML TV Fr v1.5.1 -->
+    <!-- Generated with XML TV Fr v1.5.2 -->
     <tv/>');
         $this->content->documentElement->setAttribute('source-info-url', "https://github.com/racacax/XML-TV-Fr");
         $this->content->documentElement->setAttribute('source-info-name', "XML TV Fr");
