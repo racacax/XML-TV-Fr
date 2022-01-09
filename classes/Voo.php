@@ -16,7 +16,7 @@ class Voo extends AbstractProvider implements Provider
             return false;
         $date_start = date('Y-m-d', strtotime($date)).'T00:00:00Z';
         $date_end = date('Y-m-d', strtotime($date) + 86400).'T02:00:00Z';
-        $end = strtotime($date);
+        //$end = strtotime($date);
         $ch3 = curl_init();
         curl_setopt($ch3, CURLOPT_URL, 'https://publisher.voomotion.be/traxis/web/Channel/' . $this->channelsList[$channel] . '/Events/Filter/AvailabilityEnd%3C=' . $date_end . '%26%26AvailabilityStart%3E=' .$date_start.'/Sort/AvailabilityStart/Props/IsAvailable,Products,AvailabilityEnd,AvailabilityStart,ChannelId,AspectRatio,DurationInSeconds,Titles,Channels?output=json&Language=fr&Method=PUT');
         curl_setopt($ch3, CURLOPT_RETURNTRANSFER, 1);
@@ -36,12 +36,6 @@ class Voo extends AbstractProvider implements Provider
         }
         foreach ($json["Events"]["Event"] as $event) {
             $start = strtotime($event["AvailabilityStart"]);
-            if ($start > $end + 1) {
-                $program = $this->channelObj->addProgram($start, $end);
-                $program->addTitle("Pas de programme");
-                $program->addDesc("Pas de programme");
-                $program->addCategory("Inconnu");
-            }
             $end = strtotime($event["AvailabilityEnd"]);
             $program = $this->channelObj->addProgram($start, $end);
             $program->addTitle($event["Titles"]["Title"][0]["Name"]);

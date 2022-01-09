@@ -269,7 +269,7 @@ function loadConfig() {
     define('XMLTVFR_NON_PROVIDER_CLASES',["Provider", "Utils", "Program", "Channel", "AbstractProvider"]);
     define('XMLTVFR_XML_PATH',"channels/");
     define('XMLTVFR_CLASS_PREFIX',"EPG_");
-    define('XMLTVFR_VERSION', "1.5.1");
+    define('XMLTVFR_VERSION', "1.5.2");
     echoSilent("\n");
 }
 
