@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
-
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 class Tele7Jours extends AbstractProvider implements ProviderInterface
 {
 
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct("resources/channel_config/channels_tele7jours.json", $priority ?? 0.6);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_tele7jours.json"), $priority ?? 0.6);
     }
 
     public function constructEPG(string $channel, string $date)

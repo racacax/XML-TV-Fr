@@ -6,6 +6,7 @@ namespace racacax\XmlTv\Component\Provider;
 
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 class Telecablesat extends AbstractProvider implements ProviderInterface
 {
@@ -15,7 +16,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
     private $loopCounter = 0;
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct("resources/channel_config/channels_telecablesat.json", $priority ?? 0.55);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_telecablesat.json"), $priority ?? 0.55);
     }
 
     public function constructEPG(string $channel, string $date)

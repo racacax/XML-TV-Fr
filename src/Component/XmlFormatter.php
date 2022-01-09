@@ -3,6 +3,7 @@
 namespace racacax\XmlTv\Component;
 
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\StaticComponent\RatingPicto;
 
 /**
  * @author benoit
@@ -12,13 +13,14 @@ use racacax\XmlTv\Component\ProviderInterface;
  */
 class XmlFormatter
 {
-
     /**
-     * Formatter constructor
+     * @var RatingPicto
      */
+    private $ratingPicto;
+
     public function __construct()
     {
-        // TODO:
+        $this->ratingPicto = RatingPicto::getInstance();
     }
 
     public function formatChannel($channel, ?ProviderInterface $provider): string
@@ -116,17 +118,13 @@ class XmlFormatter
         if(!isset($rating)) {
             return '';
         }
-        $picto = $this->getPictoFromRatingSystem($rating[0], $rating[1]);
+        $pictoUrl = $this->ratingPicto->getPictoFromRatingSystem($rating[0], $rating[1]);
 
         return '<rating system="'.$this->stringAsXML($rating[1]).'"><value>'.$this->stringAsXML($rating[0]).'</value>'
-               .(!is_null($picto) ? '<icon src="'.$this->stringAsXML($picto).'" />' : '').
+               .(!is_null($pictoUrl) ? '<icon src="'.$this->stringAsXML($pictoUrl).'" />' : '').
                '</rating>';
     }
 
-    private function getPictoFromRatingSystem($rating, $system): ?string
-    {
-        return $this->ratting[strtolower($system)][strtolower($rating)] ?? null;
-    }
     private function stringAsXML($string) {
         return str_replace('"','&quot;',htmlspecialchars($string, ENT_XML1));
     }

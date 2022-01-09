@@ -5,6 +5,7 @@ namespace racacax\XmlTv\Component\Provider;
 
 
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 class TeleZ extends AbstractProvider implements ProviderInterface
 {
@@ -12,7 +13,7 @@ class TeleZ extends AbstractProvider implements ProviderInterface
 
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct("resources/channel_config/channels_telez.json", $priority ?? 0.5);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_telez.json"), $priority ?? 0.5);
     }
 
     public function constructEPG(string $channel, string $date)

@@ -5,6 +5,7 @@ namespace racacax\XmlTv\Component\Provider;
 
 
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 /*
  * @author Racacax
@@ -14,7 +15,7 @@ class Orange extends AbstractProvider implements ProviderInterface
 {
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct("resources/channel_config/channels_orange.json", $priority ?? 0.95);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_orange.json"), $priority ?? 0.95);
     }
 
     public function constructEPG(string $channel, string $date)

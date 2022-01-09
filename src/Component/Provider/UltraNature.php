@@ -5,13 +5,14 @@ namespace racacax\XmlTv\Component\Provider;
 
 
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 class UltraNature extends AbstractProvider implements ProviderInterface
 {
 
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct("resources/channel_config/channels_ultranature.json", $priority ?? 0.1);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_ultranature.json"), $priority ?? 0.1);
     }
 
     public function constructEPG(string $channel, string $date)

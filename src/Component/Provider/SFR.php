@@ -5,6 +5,7 @@ namespace racacax\XmlTv\Component\Provider;
 
 
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 // Original script by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/SFR.php
 class SFR extends AbstractProvider implements ProviderInterface {
@@ -13,7 +14,7 @@ class SFR extends AbstractProvider implements ProviderInterface {
 
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct('resources/channel_config/channels_sfr.json', $priority ?? 0.85);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath('channels_sfr.json'), $priority ?? 0.85);
         $this->jsonPerDay = [];
     }
 

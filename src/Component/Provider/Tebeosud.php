@@ -6,13 +6,14 @@ namespace racacax\XmlTv\Component\Provider;
 
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 class Tebeosud extends AbstractProvider implements ProviderInterface
 {
 
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct("resources/channel_config/channels_tebeosud.json", $priority ?? 0.2);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_tebeosud.json"), $priority ?? 0.2);
     }
 
     public function constructEPG(string $channel, string $date)

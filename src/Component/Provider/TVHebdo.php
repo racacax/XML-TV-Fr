@@ -6,6 +6,7 @@ namespace racacax\XmlTv\Component\Provider;
 
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 class TVHebdo extends AbstractProvider implements ProviderInterface
 {
@@ -14,7 +15,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
 
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct("resources/channel_config/channels_tvhebdo.json", $priority ?? 0.2);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_tvhebdo.json"), $priority ?? 0.2);
         $this->proxy = "http://www.ekamali.com/index.php";
         if(isset($extraParam['tvhebdo_proxy']))
             $this->proxy = $extraParam['tvhebdo_proxy'];

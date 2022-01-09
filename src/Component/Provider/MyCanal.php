@@ -5,6 +5,7 @@ namespace racacax\XmlTv\Component\Provider;
 
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 // Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
 class MyCanal extends AbstractProvider implements ProviderInterface {
@@ -12,7 +13,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface {
 
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct("resources/channel_config/channels_mycanal.json", $priority ?? 0.7);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_mycanal.json"), $priority ?? 0.7);
     }
 
     public function constructEPG(string $channel, string $date) {

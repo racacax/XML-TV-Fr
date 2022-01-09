@@ -6,6 +6,7 @@ namespace racacax\XmlTv\Component\Provider;
 
 
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 // Original script by lazel on https://github.com/lazel/XML-TV-Fr/blob/master/classes/Bouygues.php
 class Bouygues extends AbstractProvider implements ProviderInterface {
@@ -13,7 +14,7 @@ class Bouygues extends AbstractProvider implements ProviderInterface {
 
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct('resources/channel_config/channels_bouygues.json',$priority ?? 0.9);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath('channels_bouygues.json'),$priority ?? 0.9);
     }
 
     public function constructEPG(string $channel, string $date) {

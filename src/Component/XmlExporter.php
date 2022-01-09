@@ -82,7 +82,8 @@ class XmlExporter
 
     public function stopExport()
     {
-        $content = $this->content->loadXML($this->content->saveXML())->saveXML();
+        $this->content->loadXML($this->content->saveXML());
+        $content = $this->content->saveXML();
         //currently, the dtd validation doesn't work
         //$this->content->validate();
         if (in_array('xml', $this->outputFormat) || in_array('xz', $this->outputFormat)) {

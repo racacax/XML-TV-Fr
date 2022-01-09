@@ -16,7 +16,7 @@ class Utils {
             return self::$providers;
         }
 
-        $files = glob('src/Component/Provider/*.php');
+        $files = glob(__DIR__.'/Provider/*.php');
         foreach ($files as $provider) {
             require_once $provider;
         }

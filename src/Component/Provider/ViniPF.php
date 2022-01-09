@@ -6,6 +6,7 @@ namespace racacax\XmlTv\Component\Provider;
 
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\ResourcePath;
 
 class ViniPF extends AbstractProvider implements ProviderInterface
 {
@@ -13,7 +14,7 @@ class ViniPF extends AbstractProvider implements ProviderInterface
 
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct("resources/channel_config/channels_vinipf.json", $priority ?? 0.4);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_vinipf.json"), $priority ?? 0.4);
     }
 
     public function constructEPG(string $channel, string $date)
