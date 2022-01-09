@@ -1,10 +1,16 @@
 <?php
-chdir(__DIR__."/..");
-require_once "classes/Utils.php";
-define('XMLTVFR_SILENT', true);
-loadConfig();
-require_once "tools/functions.php";
+
+error_reporting(E_ALL);
+use racacax\XmlTv\Component\Logger;
+use racacax\XmlTv\StaticComponent\ChannelInformation;
+
+require_once '../vendor/autoload.php';
+require_once './functions.php';
+
+Logger::setLogLevel('none');
+
 $channels = getChannelsWithProvider();
+$channelsDefaultInfos = ChannelInformation::getInstance()->getChannelInfo();
 ?>
 <html>
 <head>
@@ -58,7 +64,6 @@ $channels = getChannelsWithProvider();
     </tr>
     <?php
     $ids = [];
-    $channelsDefaultInfos = getDefaultChannelsInfos();
     foreach ($channels as $channel) {
         $id = md5($channel["key"]);
         $ids[] = $id;
@@ -74,7 +79,7 @@ $channels = getChannelsWithProvider();
         <tr class="channel" id="<?php echo $id; ?>" data-name="<?php echo $channel["key"]; ?>">
             <th><?php echo htmlentities($channel["key"]) ?></th>
             <th><?php if(!empty($defaultName)) { echo '<strong>Nom par défaut : </strong>'.$defaultName.'<br/>'; } ?><input name="name" value="<?php echo htmlentities(@$channel["name"]) ?>" /></th>
-            <th><?php include "tools/select_template.php" ?></th>
+            <th><?php include "./select_template.php" ?></th>
             <th><?php if(isset($icon)) { ?> <?php if($is_default) { echo '(Logo par défaut)<br/>'; } ?><img alt="Logo" src="<?php echo $icon; ?>" style="max-width:200px; max-height:80px;width:auto; height:auto" /><br/><?php } ?><input name="icon" value="<?php echo htmlentities(@$channel["icon"]) ?>" /></th>
             <th><input name="is_active" type="checkbox" <?php echo (@$channel["is_active"]) ? 'checked' : "" ?> />
             <?php if($channel['is_dummy']) {
@@ -87,7 +92,7 @@ $channels = getChannelsWithProvider();
     ?>
 </table>
 <script>
-    let ids = <?php echo json_encode($ids); ?>;
+    let ids = <?= json_encode($ids) ?>;
     ids.forEach((id) => {
         $(document).ready(function(){
             $(document).click(function(event){
@@ -159,7 +164,11 @@ $channels = getChannelsWithProvider();
             url: "save_channels.php",
             data: JSON.stringify(json),
             dataType: "json"
-        }).always(function() { alert("Sauvegardé"); });
+        }).done(function() {
+            alert("Sauvegardé");
+        }).fail(function() {
+            alert("Impossible de sauvegarder");
+        })
     }
 </script>
 </body>
