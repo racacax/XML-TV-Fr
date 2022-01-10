@@ -65,7 +65,11 @@ class XmlExporter
 
         $channel = new \SimpleXMLElement('<channel/>');
         $channel->addAttribute('id', $channelKey);
-        $channel->addChild('display-name', $name);
+        $channel->addChild(
+            'display-name',
+            str_replace('"','&quot;',htmlspecialchars($name, ENT_XML1))
+        );
+
         if(!empty($icon)){
             $channel->addChild('icon')->addAttribute('src', $icon);
         }

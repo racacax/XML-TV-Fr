@@ -3,7 +3,7 @@
   "cache_max_days": 8,
   "output_path": "var/export/",
   "time_limit": null,
-  "memory_limit": null,
+  "memory_limit": -1,
   "delete_raw_xml": false,
   "enable_gz": true,
   "enable_xz":false,

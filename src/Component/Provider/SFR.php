@@ -34,7 +34,9 @@ class SFR extends AbstractProvider implements ProviderInterface {
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
             $get = curl_exec($curl);
             curl_close($curl);
-
+            if($get===false) {
+                return false;
+            }
             $json = json_decode($get, true);
             $this->jsonPerDay[$date] = $json;
         } else {

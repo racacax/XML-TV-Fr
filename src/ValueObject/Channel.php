@@ -9,11 +9,11 @@ class Channel {
      */
     private $id;
     /**
-     * @var string
+     * @var string|null
      */
     private $icon;
     /**
-     * @var string
+     * @var string|null
      */
     private $name;
     /**
@@ -24,7 +24,7 @@ class Channel {
     /**
      * Channel constructor.
      */
-    public function __construct(string $id, string $icon, string $name)
+    public function __construct(string $id, ?string $icon, ?string $name)
     {
         $this->id = $id;
         $this->icon = $icon;
@@ -36,23 +36,17 @@ class Channel {
     /**
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
-    public function getIcon()
+    public function getIcon() : ?string
     {
         return $this->icon;
     }

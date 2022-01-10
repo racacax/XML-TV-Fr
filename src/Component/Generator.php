@@ -85,8 +85,9 @@ class Generator
 
 
             $logs = array('channels'=>array(), 'xml'=>array(),'failed_providers'=>array());
-
+            $countChannel = 0;
             foreach($channels as $channelKey => $channelInfo) {
+                $countChannel++;
                 $providers = $this->getProviders($channelInfo["priority"] ?? []);
                 foreach($this->listDate as $date) {
                     $cacheKey = sprintf("%s_%s.xml", $channelKey, $date);
@@ -98,7 +99,7 @@ class Generator
                             'failed_providers' => [],
                         ];
                     }
-                    Logger::log(sprintf("\e[95m[EPG GRAB] \e[39m%s : %s", $channelKey, $date));
+                    Logger::log(sprintf("\e[95m[EPG GRAB] \e[39m%s (%d/%d) : %s", $channelKey, $countChannel, count($channels), $date));
 
                     if ($this->cache->has($cacheKey)){
                         Logger::log(" | \e[33mOK \e[39m- From Cache ".chr(10));
@@ -159,6 +160,9 @@ class Generator
                 ));
             }
             foreach($listCacheKey as $keyCache) {
+                if (!$this->cache->has($keyCache)){
+                    continue;
+                }
                 $this->exporter->addProgramsAsString(
                     $this->cache->get($keyCache)
                 );

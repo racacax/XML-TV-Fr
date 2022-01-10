@@ -33,12 +33,12 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             $li = explode('</li>', $li)[0];
             preg_match('/href="(.*?)" title="(.*?)"/', $li, $titlehref);
             preg_match('/srcset="(.*?)"/', $li, $img);
-            $img = str_replace('64x90', '640x360', explode(' ', @$img[1])[0]);
-            $genre = trim(explode('</div>', explode('<div class="mainBroadcastCard-genre">', $li)[1])[0]);
-            $genreFormat = trim(explode('</p>', explode('<p class="mainBroadcastCard-format">', $li)[1])[0]);
-            $subtitle = @trim(explode('</p>', explode('<p class="mainBroadcastCard-subtitle">', $li)[1])[0]);
-            $hour = explode('<', explode('>',explode('<p class="mainBroadcastCard-startingHour"', $li)[1])[1])[0];
-            $duration = @explode('<', explode('<span class="mainBroadcastCard-durationContent">', $li)[1])[0];
+            $img = str_replace('64x90', '640x360', explode(' ', @$img[1] ?? '')[0]);
+            $genre = trim(explode('</div>', explode('<div class="mainBroadcastCard-genre">', $li)[1] ?? '')[0]);
+            $genreFormat = trim(explode('</p>', explode('<p class="mainBroadcastCard-format">', $li)[1] ?? '')[0]);
+            $subtitle = @trim(explode('</p>', explode('<p class="mainBroadcastCard-subtitle">', $li)[1] ?? '')[0]);
+            $hour = explode('<', explode('>',explode('<p class="mainBroadcastCard-startingHour"', $li)[1] ?? '')[1])[0];
+            $duration = @explode('<', explode('<span class="mainBroadcastCard-durationContent">', $li)[1] ?? '')[0];
             if(empty($duration))
                 return false;
             $duration = str_replace('min', '', $duration);
@@ -54,7 +54,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             $detailJson = @explode('<script type="application/ld+json">', $detail)[1];
             if(isset($detailJson)) {
                 $detailJson = json_decode(explode('</script>', $detailJson)[0], true);
-                $synopsis = $detailJson['description'];
+                $synopsis = $detailJson['description'] ?? '';
                 if(isset($detailJson['review'])) {
                     $synopsis.= "\nCritique : \n";
                     $synopsis.=@($detailJson['review']['description'] ?? $detailJson['review']['reviewBody']) ;
@@ -71,7 +71,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                     }
                 }
             } else {
-                $synopsis = @trim(explode('<', explode('<div class="defaultStyleContentTags">', $detail)[1])[0]);
+                $synopsis = @trim(explode('<', explode('<div class="defaultStyleContentTags">', $detail)[1] ?? '')[0]);
             }
 
             $participants = explode('figcaption class="personCard-mediaLegend', $detail);
@@ -80,8 +80,8 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                 $synopsis .= "\nAvec :\n";
             }
             foreach ($participants as $participant) {
-                $name = trim(explode('<', explode('>', $participant)[2])[0]);
-                $role = trim(explode('<', explode('"personCard-mediaLegendRole">', $participant)[1])[0]);
+                $name = trim(explode('<', explode('>', $participant)[2] ?? '')[0]);
+                $role = trim(explode('<', explode('"personCard-mediaLegendRole">', $participant)[1] ?? '')[0]);
                 if ($role == "Présentateur") {
                     $tag = "presenter";
                 } elseif($role == "Réalisateur") {
