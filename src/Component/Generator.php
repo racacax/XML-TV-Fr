@@ -110,7 +110,7 @@ class Generator
                         $old_zone = date_default_timezone_get();
                         $channel = @$provider->constructEPG($channelKey, $date);
                         date_default_timezone_set($old_zone);
-                        if ($channel === false || $channel->getProgramCount() === 0){
+                        if (!isset($channel) || $channel === false || $channel->getProgramCount() === 0){
                             $logs['channels'][$date][$channelKey]['failed_providers'][] = get_class($provider);
                             $logs['failed_providers'][get_class($provider)] = true;
                             continue;
