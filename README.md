@@ -61,11 +61,11 @@ php -S localhost:8080 -t tools
 ```
 Note : le port 8080 peut être changé par un autre.
 
-Ouvrez ensuite dans votre navigateur http://localhost:8080/tools/ (port à modifier en fonction de celui indiqué dans la commande au dessus).
+Ouvrez ensuite dans votre navigateur http://localhost:8080/ (port à modifier en fonction de celui indiqué dans la commande au dessus).
 # Sortie
 
 ## Logs
-Les logs sont stockés dans le dossier logs au format JSON. Les derniers logs sont accessibles via le navigateur à l'adresse http://localhost:8080/tools/logs.php (à condition d'avoir lancé la commande précédente).
+Les logs sont stockés dans le dossier logs au format JSON. Les derniers logs sont accessibles via le navigateur à l'adresse http://localhost:8080/logs.php (à condition d'avoir lancé la commande précédente).
 ## XML TV
 Les fichiers de sorties XML sont stockés dans le dossier xmltv au format XML, ZIP et GZ.
 Cette commande indiquera si le dernier fichier XML généré est valide.

@@ -9,7 +9,7 @@ require_once './functions.php';
 
 Logger::setLogLevel('none');
 
-$channels = getChannelsWithProvider();
+$channels = getChannelsWithProvider(intval($_GET['index']) ?? 0);
 $channelsDefaultInfos = ChannelInformation::getInstance()->getChannelInfo();
 ?>
 <html>
@@ -52,6 +52,15 @@ $channelsDefaultInfos = ChannelInformation::getInstance()->getChannelInfo();
 </style>
 </head>
 <body>
+<?php $guides = getConfig()->getGuidesToGenerate(); ?>
+Guide courant : <?php echo $guides[intval($_GET['index'])]['channels']; ?><br/>
+<?php if(count($guides) > 1) { ?>Autres listes de chaines disponibles : <?php }
+foreach($guides as $key=> $guide) {
+    if($key != intval($_GET['index'])) {
+        echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?index='.$key.'">'.htmlentities($guide['channels']).'</a><br/>';
+    }
+}
+?>
 <input type="button" value="Sauvegarder" onclick="save()" /><br/>
 <span>Pour définir des choix de services différents ou restreints, déplacez et ordonnez à gauche ceux désirés (Plus haut = plus haute priorité). Laissez vide pour garder l'ordre par défaut des services.</span>
 <table id="channels">
@@ -161,7 +170,7 @@ $channelsDefaultInfos = ChannelInformation::getInstance()->getChannelInfo();
         });
         $.ajax({
             type: "POST",
-            url: "save_channels.php",
+            url: "save_channels.php?index=<?php echo $_GET['index']; ?>",
             data: JSON.stringify(json),
             dataType: "json"
         }).done(function() {

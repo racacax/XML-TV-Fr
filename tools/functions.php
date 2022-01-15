@@ -15,7 +15,7 @@ function sortActive($a, $b) {
     }
     return 0;
 }
-function getChannelsWithProvider() {
+function getChannelsWithProvider($index=0) {
     $channels = array();
     foreach (Utils::getProviders() as $classe) {
         $instance = new $classe();
@@ -30,7 +30,7 @@ function getChannelsWithProvider() {
             ];
         }
     }
-    foreach(getCurrentChannels() as $channel => $value) {
+    foreach(getCurrentChannels($index) as $channel => $value) {
         $defaultValue = !empty($channels[$channel]) ? array('is_active'=>true) : array("is_dummy"=>true, "key"=>$channel, "available_providers"=>[], 'is_active'=>true);
         $channels[$channel] = array_merge(
             $defaultValue,
@@ -43,8 +43,9 @@ function getChannelsWithProvider() {
     return $channels;
 }
 
-function getCurrentChannels() {
-    $json = json_decode(file_get_contents("../config/channels.json"), true);
+function getCurrentChannels($index=0) {
+    $channels = getConfig()->getGuidesToGenerate()[$index]['channels'];
+    $json = json_decode(file_get_contents("../".$channels), true);
     return $json;
 }
 function getProviderName(string $className): string
@@ -52,4 +53,8 @@ function getProviderName(string $className): string
     $tmp = explode('\\', $className);
 
     return end($tmp);
+}
+
+function getConfig() {
+    return \racacax\XmlTv\Configurator::initFromConfigFile("../config/config.json");
 }

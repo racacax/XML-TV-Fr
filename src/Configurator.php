@@ -16,6 +16,102 @@ class Configurator
      * @var int
      */
     private $nbDays;
+
+    /**
+     * @return int
+     */
+    public function getNbDays(): int
+    {
+        return $this->nbDays;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDeleteRawXml(): bool
+    {
+        return $this->deleteRawXml;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnableGz(): bool
+    {
+        return $this->enableGz;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnableZip(): bool
+    {
+        return $this->enableZip;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnableXz(): bool
+    {
+        return $this->enableXz;
+    }
+
+    /**
+     * @return int
+     */
+    public function getXmlCacheDays(): int
+    {
+        return $this->xmlCacheDays;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnableDummy(): bool
+    {
+        return $this->enableDummy;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomPriorityOrders(): array
+    {
+        return $this->customPriorityOrders;
+    }
+
+    /**
+     * @return array|\string[][]
+     */
+    public function getGuidesToGenerate()
+    {
+        return $this->guidesToGenerate;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getZipBinPath(): ?string
+    {
+        return $this->zipBinPath;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isForceTodayGrab(): bool
+    {
+        return $this->forceTodayGrab;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExtraParams(): array
+    {
+        return $this->extraParams;
+    }
     /**
      * @var string
      */
@@ -88,7 +184,7 @@ class Configurator
      */
     public function __construct(
         int $nbDays = 8,
-        string $outputPath = './xmltv',
+        string $outputPath = './xmltv/',
         ?int $timeLimit = null,
         ?int $memoryLimit = null,
         int $cache_max_days = 8,
