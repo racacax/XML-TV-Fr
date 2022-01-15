@@ -51,7 +51,7 @@ class XmlExporter
         $this->content->preserveWhiteSpace = false;
         $this->content->formatOutput = true;
         $this->content->loadXML('<?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE tv SYSTEM "xmltv.dtd">
+    <!DOCTYPE tv SYSTEM "resources/validation/xmltv.dtd">
     <!-- Generated with XML TV Fr v2.0.0 -->
     <tv/>');
         $this->content->documentElement->setAttribute('source-info-url', "https://github.com/racacax/XML-TV-Fr");
@@ -86,8 +86,12 @@ class XmlExporter
 
     public function stopExport()
     {
-        $this->content->loadXML($this->content->saveXML());
-        $content = $this->content->saveXML();
+        if($this->content->validate()) {
+            Logger::log("\e[34m[EXPORT] \e[32mXML Valide\e[39m\n");
+        } else {
+            throw new \Exception('XML Non valide');
+        }
+        $content = str_replace('"resources/validation/xmltv.dtd"', '"xmltv.dtd"',$this->content->saveXML());
         //currently, the dtd validation doesn't work
         //$this->content->validate();
         if (in_array('xml', $this->outputFormat) || in_array('xz', $this->outputFormat)) {
@@ -121,13 +125,13 @@ class XmlExporter
         }
 
         if (in_array('xz', $this->outputFormat)) {
-            if(empty($this->zipBinPath)) {
+            if(empty($this->sevenZipPath)) {
                 Logger::log("\e[34m[EXPORT] \e[31mImpossible d'exporter en XZ (chemin de 7zip non défini)\e[39m\n");
                 return;
             }
             $filename = $shortenedFilePath.'.xz';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en XZ...\n");
-            $result = exec('"' . $this->zipBinPath . '" a -t7z "' . $filename . '" "' . $this->filePath . '"');
+            $result = exec('"' . $this->sevenZipPath . '" a -t7z "' . $filename . '" "' . $this->filePath . '"');
             Logger::log("\e[34m[EXPORT] \e[39mRéponse de 7zip : $result");
 
             if (!in_array('xml', $this->outputFormat)) {

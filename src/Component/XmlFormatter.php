@@ -35,15 +35,13 @@ class XmlFormatter
             $content[] = '<programme start="'.date('YmdHis O',$program->getStart()).'" stop="'.date('YmdHis O',$program->getEnd()).'" channel="'.$channel->getId().'">';
             $content[] = $this->listToMark($program->getTitles(), "title", "Aucun titre");
             $content[] = $this->listToMark($program->getSubtitles(), "sub-title");
-            $content[] = $this->listToMark($program->getCategories(), "category", "Inconnu");
             $content[] = $this->listToMark($program->getDescs(), "desc", "Aucune description");
-            $content[] = $this->buildEpisodeNum($program->getEpisodeNum());
-
             $content[] = $this->buildCredits($program->getCredits());
+            $content[] = $this->listToMark($program->getCategories(), "category", "Inconnu");
             $content[] = $this->buildIcon($program->getIcon());
-            $content[] = $this->buildYear($program->getYear());
-            $content[] = $this->buildYear($program->getYear());
+            $content[] = $this->buildEpisodeNum($program->getEpisodeNum());
             $content[] = $this->buildRating($program->getRating());
+            //$content[] = $this->buildYear($program->getYear());
 
             $content[]= '</programme>';
 
