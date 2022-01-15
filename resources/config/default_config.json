@@ -11,7 +11,7 @@
   "xml_cache_days": 5,
   "enable_dummy":  false,
   "custom_priority_orders": {},
-  "guides_to_generate": [{"channels": "var/channels.json", "filename": "xmltv.xml"}],
+  "guides_to_generate": [{"channels": "config/channels.json", "filename": "xmltv.xml"}],
   "7zip_path": null,
   "force_todays_grab": false
 }

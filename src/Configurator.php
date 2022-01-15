@@ -162,7 +162,7 @@ class Configurator
             $data['xml_cache_days']??   5,
             $data['enable_dummy']??   false,
             $data['custom_priority_orders']??   [],
-            $data['guides_to_generate']?? [array('channels'=>'var/channels.json', 'filename'=>'xmltv.xml')],
+            $data['guides_to_generate']?? [array('channels'=>'config/channels.json', 'filename'=>'xmltv.xml')],
             $data['7zip_path']??   null,
             $data['force_todays_grab']??  false,
             []

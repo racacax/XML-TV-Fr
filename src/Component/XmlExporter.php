@@ -99,9 +99,15 @@ class XmlExporter
             file_put_contents($filename, gzencode($content));
             Logger::log("\e[34m[EXPORT] \e[39mGZ : \e[32mOK\e[39m ($this->filePath.'.gz')\n");
         }
-
+        $split_fp = explode('.', $this->filePath);
+        if(count($split_fp) == 1) {
+            $lengthToRemove = 0;
+        } else {
+            $lengthToRemove = strlen(end($split_fp));
+        }
+        $shortenedFilePath = substr($this->filePath,0, -$lengthToRemove);
         if (in_array('zip', $this->outputFormat)) {
-            $filename = $this->filePath.'.zip';
+            $filename = $shortenedFilePath.'.zip';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en ZIP...\n");
             $zip = new \ZipArchive();
 
@@ -119,7 +125,7 @@ class XmlExporter
                 Logger::log("\e[34m[EXPORT] \e[31mImpossible d'exporter en XZ (chemin de 7zip non défini)\e[39m\n");
                 return;
             }
-            $filename = $this->filePath.'.xz';
+            $filename = $shortenedFilePath.'.xz';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en XZ...\n");
             $result = exec('"' . $this->zipBinPath . '" a -t7z "' . $filename . '" "' . $this->filePath . '"');
             Logger::log("\e[34m[EXPORT] \e[39mRéponse de 7zip : $result");
