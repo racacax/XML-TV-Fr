@@ -1,7 +1,6 @@
 <?php
-
-chdir(__DIR__."/..");
-$files = glob('logs/*');
+require_once 'functions.php';
+$files = glob('../var/logs/*');
 $file = $files[count($files) -1];
 $json = json_decode(file_get_contents($file), true);
 ?>
@@ -31,7 +30,7 @@ $json = json_decode(file_get_contents($file), true);
         <?php
         foreach(array_keys($json['channels']) as $date) {
             $content = $json['channels'][$date][$channel];
-            echo '<th style="background: '.(($content['success']) ? 'green' : 'red').'">'.@$content['provider'].((@$content['cache']) ? ' (Cache)' : '').'</th>';
+            echo '<th style="background: '.(($content['success']) ? 'green' : 'red').'">'.getProviderName(@$content['provider'] ?? '').((@$content['cache']) ? ' (Cache)' : '').'</th>';
         }
         ?>
     </tr>

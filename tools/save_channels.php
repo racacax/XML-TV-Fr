@@ -1,4 +1,6 @@
 <?php
-chdir(__DIR__."/..");
 $data = file_get_contents('php://input');
-file_put_contents('channels.json', $data);
+if (!file_put_contents('../config/channels.json', $data)){
+    throw new \Exception('impossible to create file');
+}
+echo true;

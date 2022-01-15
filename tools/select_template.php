@@ -1,3 +1,6 @@
+<?php
+    $providersLabel = array_column($channel['available_providers'], 'label');
+?>
 <div class="multiselect">
     <div>
         <span>Services activés</span><br/>
@@ -5,7 +8,7 @@
         <?php
         if(isset($channel['priority'])) {
             foreach ($channel['priority'] as $key => $priority) {
-                if (in_array($priority, $channel['available_providers'])) {
+                if (in_array($priority, $providersLabel)) {
                     echo '<option data-results="' . $key . '" value="' . htmlentities($priority) . '">' . htmlentities($priority) . '</option>';
                 }
             }
@@ -23,9 +26,9 @@
      <span>Services disponibles</span><br/>
     <select multiple class="select-list select2" id="select2_<?php echo $id; ?>" size="10">
         <?php
-        foreach($channel['available_providers'] as $key => $provider) {
-            if(!isset($channel['priority']) || !in_array($provider, $channel['priority'])) {
-                echo '<option data-results="'.$key.'" value="'.htmlentities($provider).'">'.htmlentities($provider).'</option>';
+        foreach($providersLabel as $key => $providersLabel) {
+            if(!isset($channel['priority']) || !in_array($providersLabel, $channel['priority'])) {
+                echo '<option data-results="'.$key.'" value="'.htmlentities($providersLabel) . '">' . htmlentities($providersLabel) . '</option>';
             }
         }
         ?>

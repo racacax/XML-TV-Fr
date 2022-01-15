@@ -1,11 +1,8 @@
 <?php
-chdir(__DIR__."/..");
-require_once "classes/Utils.php";
-function getClassesCache() {
-    if(!defined('XMLTVFR_CLASSES_CACHE'))
-        define('XMLTVFR_CLASSES_CACHE', getClasses());
-    return XMLTVFR_CLASSES_CACHE;
-}
+
+use racacax\XmlTv\Component\Utils;
+use racacax\XmlTv\StaticComponent\ChannelInformation;
+
 function sortActive($a, $b) {
     if(@$a['is_active'] && !@$b['is_active'])
         return -1;
@@ -20,36 +17,39 @@ function sortActive($a, $b) {
 }
 function getChannelsWithProvider() {
     $channels = array();
-    foreach (getClassesCache() as $classe) {
+    foreach (Utils::getProviders() as $classe) {
         $instance = new $classe();
         foreach(array_keys($instance->getChannelsList()) as $channel) {
-            if(!isset($channels[$channel])) {
-                $channels[$channel] = array("is_dummy"=>false, "key"=>$channel, "available_providers"=>[$classe]);
-            } else {
-                $channels[$channel]["available_providers"][] = $classe;
+            if(empty($channels[$channel])) {
+                $channels[$channel] = array("is_dummy"=>false, "key"=>$channel, "available_providers"=>[]);
             }
+
+            $channels[$channel]["available_providers"][] = [
+                'className' => get_class($instance),
+                'label' => getProviderName(get_class($instance))
+            ];
         }
     }
     foreach(getCurrentChannels() as $channel => $value) {
-        if(isset($channels[$channel])) {
-            $channels[$channel] = array_merge($channels[$channel], $value, array('is_active'=>true));
-        } else {
-            $channels[$channel] = $value;
-            $channels[$channel] = array_merge($channels[$channel], $value, array("is_dummy"=>true, "key"=>$channel, "available_providers"=>[], 'is_active'=>true));
-        }
+        $defaultValue = !empty($channels[$channel]) ? array('is_active'=>true) : array("is_dummy"=>true, "key"=>$channel, "available_providers"=>[], 'is_active'=>true);
+        $channels[$channel] = array_merge(
+            $defaultValue,
+            $channels[$channel],
+            $value
+        );
     }
     usort($channels,"sortActive");
+
     return $channels;
-
-}
-
-function getProviderFromFileName($fileName) {
-    $fileName = explode('/', $fileName);
-    $fileName = $fileName[count($fileName) - 1];
-    return ucfirst(explode('.', explode('_', $fileName)[1])[0]);
 }
 
 function getCurrentChannels() {
-    $json = json_decode(file_get_contents("channels.json"), true);
+    $json = json_decode(file_get_contents("../config/channels.json"), true);
     return $json;
+}
+function getProviderName(string $className): string
+{
+    $tmp = explode('\\', $className);
+
+    return end($tmp);
 }

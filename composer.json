@@ -1,6 +1,6 @@
 {
   "require": {
-  "php": ">=7.1.0",
+    "php": ">=7.1.0",
     "ext-json": "*",
     "ext-zlib": "*",
     "ext-curl": "*",
@@ -9,5 +9,10 @@
     "ext-xmlreader": "*",
     "ext-zip": "*",
     "ext-libxml": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "racacax\\XmlTv\\": "src/"
+    }
   }
 }
