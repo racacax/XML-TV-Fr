@@ -86,10 +86,11 @@ class XmlExporter
 
     public function stopExport()
     {
+        $this->content->loadXML($this->content->saveXML());
         if($this->content->validate()) {
             Logger::log("\e[34m[EXPORT] \e[32mXML Valide\e[39m\n");
         } else {
-            throw new \Exception('XML Non valide');
+            Logger::log("\e[34m[EXPORT] \e[31mXML non valide selon xmltv.dtd\e[39m\n");
         }
         $content = str_replace('"resources/validation/xmltv.dtd"', '"xmltv.dtd"',$this->content->saveXML());
         //currently, the dtd validation doesn't work
