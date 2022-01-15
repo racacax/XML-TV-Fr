@@ -51,8 +51,8 @@ class XmlExporter
         $this->content->preserveWhiteSpace = false;
         $this->content->formatOutput = true;
         $this->content->loadXML('<?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE tv SYSTEM "resources/validation/xmltv.dtd">
-    <!-- Generated with XML TV Fr v1.5.2 -->
+    <!DOCTYPE tv SYSTEM "xmltv.dtd">
+    <!-- Generated with XML TV Fr v2.0.0 -->
     <tv/>');
         $this->content->documentElement->setAttribute('source-info-url', "https://github.com/racacax/XML-TV-Fr");
         $this->content->documentElement->setAttribute('source-info-name', "XML TV Fr");
@@ -103,7 +103,7 @@ class XmlExporter
         if(count($split_fp) == 1) {
             $lengthToRemove = 0;
         } else {
-            $lengthToRemove = strlen(end($split_fp));
+            $lengthToRemove = strlen(".".end($split_fp));
         }
         $shortenedFilePath = substr($this->filePath,0, -$lengthToRemove);
         if (in_array('zip', $this->outputFormat)) {
