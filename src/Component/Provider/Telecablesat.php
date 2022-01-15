@@ -60,8 +60,8 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                 for($i=0; $i<$count; $i++) {
                     Logger::updateLine(" ".round($i*100/$count, 2)." %");
                     $program = $this->channelObj->addProgram(intval($times[1][$i]), intval($times[2][$i]));
-                    $program->addTitle(trim($genresAndTitles[2][$i]));
-                    $program->addCategory(trim($genresAndTitles[1][$i]));
+                    $program->addTitle(trim($genresAndTitles[2][$i] ?? ''));
+                    $program->addCategory(trim($genresAndTitles[1][$i] ?? ''));
                     $program->setIcon("https:".$imgs[1][$i]);
                     $content = $this->getContentFromURL(self::$BASE_URL.$links[1][$i]);
                     if(empty($content)) {
@@ -102,7 +102,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                         $program->setIcon("https:".$imgs[1]);
                     $desc = '';
                     if(isset($resume[1])) {
-                        $desc.=trim($resume[1])."\n\n";
+                        $desc.=trim($resume[1] ?? '')."\n\n";
                     }
                     if(isset($critique[1])) {
                         $desc.="Critique : ".trim($critique[1])."\n\n";
