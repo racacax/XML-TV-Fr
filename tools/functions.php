@@ -34,7 +34,7 @@ function getChannelsWithProvider() {
         $defaultValue = !empty($channels[$channel]) ? array('is_active'=>true) : array("is_dummy"=>true, "key"=>$channel, "available_providers"=>[], 'is_active'=>true);
         $channels[$channel] = array_merge(
             $defaultValue,
-            $channels[$channel],
+            $channels[$channel] ?? [],
             $value
         );
     }
