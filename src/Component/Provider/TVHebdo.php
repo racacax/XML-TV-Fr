@@ -63,9 +63,9 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $content = $this->getContentFromURL($url);
             $infos = str_replace("\n", " ",explode('</h4>',explode('<h4>', $content)[1])[0]);
             $infos = explode(' - ', $infos);
-            $genre = trim($infos[0]);
+            $genre = @trim($infos[0]);
             $duration = @intval(explode(' ', trim($infos[1]))[0]);
-            $lang = trim(strtolower($infos[2]));
+            $lang = @trim(strtolower($infos[2]));
             $potentialYear = @strval(intval(trim($infos[3])));
             if(@trim($infos[3]) == $potentialYear) {
                 $year = $potentialYear;
