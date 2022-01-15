@@ -64,16 +64,16 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $infos = str_replace("\n", " ",explode('</h4>',explode('<h4>', $content)[1])[0]);
             $infos = explode(' - ', $infos);
             $genre = @trim($infos[0]);
-            $duration = @intval(explode(' ', trim($infos[1]))[0]);
+            $duration = @intval(explode(' ', @trim($infos[1]))[0]);
             $lang = @trim(strtolower($infos[2]));
-            $potentialYear = @strval(intval(trim($infos[3])));
+            $potentialYear = @strval(intval(@trim($infos[3])));
             if(@trim($infos[3]) == $potentialYear) {
                 $year = $potentialYear;
             } else {
                 $rating = @trim($infos[3]);
             }
             if(isset($infos[4])) {
-                $potentialYear = @intval(trim($infos[4]));
+                $potentialYear = @intval(@trim($infos[4]));
                 if(isset($potentialYear) && $potentialYear > 0) {
                     $year = $potentialYear;
                 }
@@ -89,7 +89,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $tmp_desc = '';
             $splited_desc = explode("\n", $desc);
             foreach($splited_desc as $line) {
-                $tmp_desc.=trim($line)."\n";
+                $tmp_desc.=@trim($line)."\n";
             }
             $desc = $tmp_desc;
             $program->addDesc($desc, $lang);
@@ -97,7 +97,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $current_role = "guest";
             $intervenants_split = explode('<br />', $intervenants);
             foreach ($intervenants_split as $line) {
-                $line = trim($line);
+                $line = @trim($line);
                 if($line == "Réalisation :") {
                     $current_role = "director";
                 } elseif(strpos($line, ':') !== false) {
