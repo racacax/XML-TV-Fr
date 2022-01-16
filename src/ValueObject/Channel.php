@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\ValueObject;
 
-class Channel {
+class Channel
+{
     /**
      * @var string
      */
@@ -46,7 +48,7 @@ class Channel {
         return $this->name;
     }
 
-    public function getIcon() : ?string
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
@@ -72,11 +74,13 @@ class Channel {
         return $this->programs;
     }
 
-    public function getProgramCount() {
+    public function getProgramCount()
+    {
         return count($this->getPrograms());
     }
 
-    public function popLastProgram() {
+    public function popLastProgram()
+    {
         return array_pop($this->programs);
     }
 }

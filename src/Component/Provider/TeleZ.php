@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
-
 
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
@@ -19,18 +19,19 @@ class TeleZ extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
-        if(!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
 
         $channelId = $this->getChannelsList()[$channel];
-        if(!isset(self::$cache_per_day[md5($date)])) {
+        if (!isset(self::$cache_per_day[md5($date)])) {
             $res3 = $this->getContentFromURL("https://api.telez.fr/schedule?full_day=1&date=$date");
             $json = json_decode($res3, true);
             self::$cache_per_day[md5($date)] = $json;
         }
         $array = self::$cache_per_day[md5($date)];
         foreach ($array['data'] as $c) {
-            if($c['channel']['id'] == $channelId) {
+            if ($c['channel']['id'] == $channelId) {
                 foreach ($c['programs'] as $program) {
                     $start = strtotime($program['onTime']);
                     $programObj = $this->channelObj->addProgram($start, $start + 60 * $program['duration']);

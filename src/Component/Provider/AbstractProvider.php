@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
@@ -6,8 +7,8 @@ namespace racacax\XmlTv\Component\Provider;
 use racacax\XmlTv\Component\ChannelFactory;
 use racacax\XmlTv\ValueObject\Channel;
 
-abstract class AbstractProvider {
-
+abstract class AbstractProvider
+{
     /**
      * @var Channel|null
      */
@@ -20,7 +21,7 @@ abstract class AbstractProvider {
 
     protected static $priority;
 
-    public function __construct($jsonPath, $priority)
+    public function __construct(string $jsonPath, float $priority)
     {
         if (empty($this->channelsList) && file_exists($jsonPath)) {
             $this->channelsList = json_decode(file_get_contents($jsonPath), true);
@@ -63,7 +64,7 @@ abstract class AbstractProvider {
         curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch1, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0');
-        $res1 = html_entity_decode(curl_exec($ch1),ENT_QUOTES);
+        $res1 = html_entity_decode(curl_exec($ch1), ENT_QUOTES);
         curl_close($ch1);
         return $res1;
     }

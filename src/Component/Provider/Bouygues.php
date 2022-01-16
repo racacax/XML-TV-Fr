@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
-
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 
 // Original script by lazel on https://github.com/lazel/XML-TV-Fr/blob/master/classes/Bouygues.php
-class Bouygues extends AbstractProvider implements ProviderInterface {
-
-
+class Bouygues extends AbstractProvider implements ProviderInterface
+{
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-        parent::__construct(ResourcePath::getInstance()->getChannelPath('channels_bouygues.json'),$priority ?? 0.9);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath('channels_bouygues.json'), $priority ?? 0.9);
     }
 
-    public function constructEPG(string $channel, string $date) {
+    public function constructEPG(string $channel, string $date)
+    {
         parent::constructEPG($channel, $date);
-        if(!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
 
         $channelId = $this->getChannelsList()[$channel];
 
@@ -38,28 +38,35 @@ class Bouygues extends AbstractProvider implements ProviderInterface {
 
         $json = json_decode($get, true);
 
-        if(!isset($json['channel'][0]['event']) || empty($json['channel'][0]['event'])) return false;
+        if (!isset($json['channel'][0]['event']) || empty($json['channel'][0]['event'])) {
+            return false;
+        }
 
 
-        foreach($json['channel'][0]['event'] as $program) {
+        foreach ($json['channel'][0]['event'] as $program) {
             $genre = @$program['programInfo']['genre'][0];
             $subGenre = @$program['programInfo']['subGenre'][0];
 
-            if(isset($program['parentalGuidance'])) {
+            if (isset($program['parentalGuidance'])) {
                 $csa = explode('.', $program['parentalGuidance']);
 
-                switch((int)end($csa)) {
+                switch ((int)end($csa)) {
                     case 2: $csa = '-10'; break;
                     case 3: $csa = '-12'; break;
                     case 4: $csa = '-16'; break;
                     case 5: $csa = '-18'; break;
                     default: $csa = 'Tout public';  break;
                 }
-            } else $csa = 'Tout public';
+            } else {
+                $csa = 'Tout public';
+            }
 
-            if(!is_null($genre) && !is_null($subGenre) && $genre == $subGenre) {
-                if(isset($program['programInfo']['genre'][1])) $genre = $program['programInfo']['genre'][1];
-                else $subGenre = null;
+            if (!is_null($genre) && !is_null($subGenre) && $genre == $subGenre) {
+                if (isset($program['programInfo']['genre'][1])) {
+                    $genre = $program['programInfo']['genre'][1];
+                } else {
+                    $subGenre = null;
+                }
             }
             $programObj = $this->channelObj->addProgram(strtotime($program['startTime']), strtotime($program['endTime']));
             $programObj->addTitle($program['programInfo']['longTitle']);
