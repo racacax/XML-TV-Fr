@@ -132,7 +132,7 @@ class XmlExporter
             $filename = $shortenedFilePath.'.xz';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en XZ...\n");
             $result = exec('"' . $this->sevenZipPath . '" a -t7z "' . $filename . '" "' . $this->filePath . '"');
-            Logger::log("\e[34m[EXPORT] \e[39mRéponse de 7zip : $result");
+            Logger::log("\e[34m[EXPORT] \e[39mRéponse de 7zip : $result\n");
 
             if (!in_array('xml', $this->outputFormat)) {
                 unlink($this->filePath);
