@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
@@ -8,7 +9,6 @@ use racacax\XmlTv\Component\ResourcePath;
 
 class Tele7Jours extends AbstractProvider implements ProviderInterface
 {
-
     public function __construct(?float $priority = null, array $extraParam = [])
     {
         parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_tele7jours.json"), $priority ?? 0.6);
@@ -17,8 +17,9 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
-        if (!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
         $channel_id = $this->channelsList[$channel];
 
 
@@ -38,12 +39,14 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             $get = str_replace(');', '', $get);
             $get2 = $get;
             $get = json_decode($get, true);
-            if (!isset($get))
+            if (!isset($get)) {
                 return false;
+            }
 
             $pop = 0;
-            if(!isset($get["grille"]["aDiffusion"]))
+            if (!isset($get["grille"]["aDiffusion"])) {
                 return false;
+            }
             foreach ($get["grille"]["aDiffusion"] as $val) {
                 $h = $val["heureDif"];
                 $h = str_replace('h', ':', $h);
@@ -69,7 +72,7 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             $program->addTitle($o[1]);
             $program->addDesc("Aucune description");
             $program->addCategory($o[3]);
-            if(!empty($o[2])) {
+            if (!empty($o[2])) {
                 $program->addSubtitle($o[2]);
             }
             $program->setIcon($o[4]);
@@ -82,6 +85,4 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         }
         return $this->channelObj;
     }
-
-
 }

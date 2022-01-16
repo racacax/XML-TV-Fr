@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
-class Utils {
-
+class Utils
+{
     /**
      * @var class-string<ProviderInterface>[]
      */
@@ -12,7 +13,7 @@ class Utils {
 
     public static function getProviders()
     {
-        if(isset(self::$providers)){
+        if (isset(self::$providers)) {
             return self::$providers;
         }
 

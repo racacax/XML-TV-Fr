@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
@@ -14,9 +15,9 @@ class CacheFile
 
     public function __construct(string $basePath)
     {
-        @mkdir($basePath,0777, true);
+        @mkdir($basePath, 0777, true);
 
-        $this->basePath = rtrim($basePath,DIRECTORY_SEPARATOR);
+        $this->basePath = rtrim($basePath, DIRECTORY_SEPARATOR);
     }
 
     public function store(string $key, string $content)
@@ -38,7 +39,7 @@ class CacheFile
             return true;
         }
         $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
-        if (file_exists($fileName)){
+        if (file_exists($fileName)) {
             $this->listFile[$key] = [
                 'file'=> $fileName,
                 'key' => $key
@@ -62,8 +63,8 @@ class CacheFile
     {
         $files = glob($this->basePath.DIRECTORY_SEPARATOR.'*');
 
-        foreach($files as $file){
-            if (time()-filemtime($file) >= 86400 * $maxCacheDay){
+        foreach ($files as $file) {
+            if (time()-filemtime($file) >= 86400 * $maxCacheDay) {
                 unlink($file);
             }
         }

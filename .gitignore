@@ -1,5 +1,7 @@
+bin
 config/*
 !config/.keep
 var
 vendor
 composer.lock
+.php-cs-fixer.cache

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
@@ -8,7 +9,8 @@ use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 
 // Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
-class MyCanal extends AbstractProvider implements ProviderInterface {
+class MyCanal extends AbstractProvider implements ProviderInterface
+{
     private static $apiKey = '4ca2e967e4ca296ab18dab5432f906ac';
 
     public function __construct(?float $priority = null, array $extraParam = [])
@@ -16,10 +18,12 @@ class MyCanal extends AbstractProvider implements ProviderInterface {
         parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_mycanal.json"), $priority ?? 0.7);
     }
 
-    public function constructEPG(string $channel, string $date) {
+    public function constructEPG(string $channel, string $date)
+    {
         parent::constructEPG($channel, $date);
-        if(!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
         $channelId = $this->getChannelsList()[$channel];
         $day = (strtotime($date) - strtotime(date('Y-m-d'))) / 86400;
 
@@ -35,7 +39,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface {
 
         do {
             curl_multi_exec($curl_multi, $running);
-        } while($running > 0);
+        } while ($running > 0);
 
         $get = curl_multi_getcontent($curl);
         $get2 = curl_multi_getcontent($curl1);
@@ -49,19 +53,23 @@ class MyCanal extends AbstractProvider implements ProviderInterface {
         $json = json_decode($get, true);
         $json2 = json_decode($get2, true);
 
-        if(!isset($json['timeSlices']) || empty($json['timeSlices'])) return false;
+        if (!isset($json['timeSlices']) || empty($json['timeSlices'])) {
+            return false;
+        }
 
         $all = [];
-        foreach($json['timeSlices'] as $section) {
+        foreach ($json['timeSlices'] as $section) {
             $all = array_merge($all, $section['contents']);
         }
 
-        if(@$nd = $json2['timeSlices'][0]['contents'][0]) $all[] = $nd;
+        if (@$nd = $json2['timeSlices'][0]['contents'][0]) {
+            $all[] = $nd;
+        }
 
         $programs = [];
         $lastTime = 0;
         $count = count($all);
-        foreach($all as $index => $program) {
+        foreach ($all as $index => $program) {
             Logger::updateLine(" ".round($index*100/$count, 2)." %");
             $curld = curl_init($program['onClick']['URLPage']);
             curl_setopt($curld, CURLOPT_RETURNTRANSFER, 1);
@@ -75,7 +83,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface {
 
             $parentalRating = $detail['episodes']['contents'][0]['parentalRatings'][0]['value'] ?? @$detail['detail']['informations']['parentalRatings'][0]['value'];
 
-            switch($parentalRating) {
+            switch ($parentalRating) {
                 case '2': $csa = '-10'; break;
                 case '3': $csa = '-12'; break;
                 case '4': $csa = '-16'; break;
@@ -101,7 +109,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface {
                 'csa'           => $csa
             ];
 
-            if($lastTime > 0) {
+            if ($lastTime > 0) {
                 $lastProgram = $programs[$lastTime];
                 $programObj = $this->channelObj->addProgram($lastProgram['startTime'], $startTime);
                 $programObj->addTitle($lastProgram['title']);

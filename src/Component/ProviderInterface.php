@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
 use racacax\XmlTv\ValueObject\Channel;
 
-interface ProviderInterface {
-
+interface ProviderInterface
+{
     public function __construct();
 
     /**
@@ -16,5 +17,5 @@ interface ProviderInterface {
      */
     public function constructEPG(string $channel, string $date);
 
-    static function getPriority(): float;
+    public static function getPriority(): float;
 }

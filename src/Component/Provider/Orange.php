@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
-
 
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
@@ -21,8 +21,9 @@ class Orange extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
-        if (!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
         $channel_id = $this->channelsList[$channel];
 
 
@@ -35,16 +36,15 @@ class Orange extends AbstractProvider implements ProviderInterface
         curl_setopt($ch1, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0");
         $res1 = curl_exec($ch1);
         curl_close($ch1);
-        $json = json_decode($res1,true);
-        if(preg_match('(Invalid request)',$res1) || preg_match('(504 Gateway Time-out)',$res1) || !isset($json))
-        {
+        $json = json_decode($res1, true);
+        if (preg_match('(Invalid request)', $res1) || preg_match('(504 Gateway Time-out)', $res1) || !isset($json)) {
             return false;
         }
-        if(isset($json['code']))
+        if (isset($json['code'])) {
             return false;
-        foreach($json as $val)
-        {
-            switch(@$val["csa"]) {
+        }
+        foreach ($json as $val) {
+            switch (@$val["csa"]) {
                 case '2': $csa = '-10'; break;
                 case '3': $csa = '-12'; break;
                 case '4': $csa = '-16'; break;
@@ -55,22 +55,22 @@ class Orange extends AbstractProvider implements ProviderInterface
             $program->addDesc($val["synopsis"]);
             $program->addCategory($val["genre"]);
             $program->addCategory($val["genreDetailed"]);
-            $program->setIcon((!empty($val["covers"])?''.end($val["covers"])["url"]:''));
+            $program->setIcon((!empty($val["covers"]) ? ''.end($val["covers"])["url"] : ''));
             $program->setRating($csa);
-            if(!isset($val["season"]))
-            {
+            if (!isset($val["season"])) {
                 $program->addTitle($val["title"]);
             } else {
-                if($val["season"]["number"] =="") { $val["season"]["number"] ='1';} if($val["episodeNumber"] =="") { $val["episodeNumber"] ='1';}
+                if ($val["season"]["number"] =="") {
+                    $val["season"]["number"] ='1';
+                }
+                if ($val["episodeNumber"] =="") {
+                    $val["episodeNumber"] ='1';
+                }
                 $program->addTitle($val["season"]["serie"]["title"]);
                 $program->setEpisodeNum($val["season"]["number"], $val["episodeNumber"]);
                 $program->addSubtitle($val["title"]);
             }
-
-
         }
         return $this->channelObj;
     }
-
-
 }
