@@ -12,6 +12,7 @@ class CacheFile
     private $basePath;
 
     private $listFile = [];
+    private $createdKeys = [];
 
     public function __construct(string $basePath)
     {
@@ -39,6 +40,11 @@ class CacheFile
             return true;
         }
         $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
+        if(count(explode(date('Y-m-d'), $key)) > 1 && !isset($this->createdKeys[$key])) {
+            unlink($fileName);
+            $this->createdKeys[$key] = true;
+            return false;
+        }
         if (file_exists($fileName)) {
             $this->listFile[$key] = [
                 'file'=> $fileName,

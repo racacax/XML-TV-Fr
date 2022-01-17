@@ -106,7 +106,7 @@ class Generator
                     }
                     Logger::log(sprintf("\e[95m[EPG GRAB] \e[39m%s (%d/%d) : %s", $channelKey, $countChannel, count($channels), $date));
 
-                    if ($this->cache->has($cacheKey) && !($this->forceTodaysGrab && date('Y-m-d') == $date)){
+                    if ($this->cache->has($cacheKey)){
                         Logger::log(" | \e[33mOK \e[39m- From Cache ".chr(10));
                         continue;
                     }
