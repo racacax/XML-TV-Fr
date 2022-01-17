@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv;
@@ -225,8 +226,7 @@ class Configurator
 
     public static function initFromConfigFile(string $filePath): self
     {
-
-        if (!file_exists($filePath)){
+        if (!file_exists($filePath)) {
             throw new \Exception('Config file not found');
         }
         $data = json_decode(file_get_contents($filePath), true);
@@ -235,10 +235,10 @@ class Configurator
 
         Logger::log("\e[36m[CHARGEMENT] \e[39mListe des paramètres : ");
         foreach ($data as $key => $value) {
-            if(is_array($value)) {
+            if (is_array($value)) {
                 $value = json_encode($value);
             }
-            if(is_bool($value)) {
+            if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
             Logger::log("\e[95m($key) \e[39m=> \e[33m$value\e[39m, ");
@@ -296,18 +296,17 @@ class Configurator
     /**
      * @return ProviderInterface[]
      */
-    public function getProviders():array
+    public function getProviders(): array
     {
         $providersClass = Utils::getProviders();
         $providersObject = [];
-        foreach($providersClass as $providerClass) {
+        foreach ($providersClass as $providerClass) {
             $tmp = explode('\\', $providerClass);
             $name = end($tmp);
             $providersObject[] = new $providerClass($this->customPriorityOrders[$name] ?? null, $this->extraParams);
-
         }
 
-        usort($providersObject, function (ProviderInterface $providerA, ProviderInterface $providerB){
+        usort($providersObject, function (ProviderInterface $providerA, ProviderInterface $providerB) {
             return $providerB::getPriority() <=> $providerA::getPriority();
         });
 
@@ -329,7 +328,4 @@ class Configurator
     {
         return $this->cacheMaxDays;
     }
-
-
-
 }

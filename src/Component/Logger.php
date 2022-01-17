@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
@@ -21,7 +22,7 @@ class Logger
     }
     public static function setLogFolder(string $path): void
     {
-        @mkdir($path,0777, true);
+        @mkdir($path, 0777, true);
 
         self::$debugFolder = rtrim($path, DIRECTORY_SEPARATOR);
     }
@@ -62,7 +63,7 @@ class Logger
     public static function clearLog(): void
     {
         array_map(
-            function($file){
+            function ($file) {
                 unlink($file);
             },
             glob(self::$debugFolder.DIRECTORY_SEPARATOR.'*')

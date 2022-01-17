@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\StaticComponent;
 
 use racacax\XmlTv\Component\ResourcePath;
 
-final  class ChannelInformation
+final class ChannelInformation
 {
     private static $instance;
     private $channelInfo;
@@ -33,5 +34,4 @@ final  class ChannelInformation
     {
         return $this->channelInfo[$channelKey]['name'] ?? null;
     }
-
 }

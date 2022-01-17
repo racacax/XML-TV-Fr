@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
-
 
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
@@ -20,15 +20,16 @@ class ViniPF extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
-        if(!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
         $debut = strtotime($date); // to be synchronized with Paris timezone to avoid overlaping on french channels if multiple providers
         date_default_timezone_set("Pacific/Tahiti");
         $count = 12;
-        for($i=0; $i <$count; $i++) {
+        for ($i=0; $i <$count; $i++) {
             Logger::updateLine(" ".round($i*100/$count, 2)." %");
-            $dateDebut = '{"dateDebut":"'.date('c',$debut + 3600*2*$i).'"}';
-            if(!isset(self::$cache_per_day[md5($dateDebut)])) {
+            $dateDebut = '{"dateDebut":"'.date('c', $debut + 3600*2*$i).'"}';
+            if (!isset(self::$cache_per_day[md5($dateDebut)])) {
                 $ch3 = curl_init();
                 curl_setopt($ch3, CURLOPT_URL, 'https://programme-tv.vini.pf/programmesJSON');
                 curl_setopt($ch3, CURLOPT_RETURNTRANSFER, 1);
@@ -44,9 +45,9 @@ class ViniPF extends AbstractProvider implements ProviderInterface
                 self::$cache_per_day[md5($dateDebut)] = $json;
             }
             $array = self::$cache_per_day[md5($dateDebut)];
-            foreach($array["programmes"] as $viniChannel) {
-                if($viniChannel["nid"] == $this->channelsList[$channel]) {
-                    foreach($viniChannel["programmes"] as $programme) {
+            foreach ($array["programmes"] as $viniChannel) {
+                if ($viniChannel["nid"] == $this->channelsList[$channel]) {
+                    foreach ($viniChannel["programmes"] as $programme) {
                         $program = $this->channelObj->addProgram($programme["timestampDeb"], $programme['timestampFin']);
                         $program->addTitle($programme['titreP']);
                         $program->addSubtitle($programme['legendeP']);

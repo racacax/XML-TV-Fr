@@ -37,7 +37,7 @@ Le fichier config.json est au format JSON.
 {
   "days" : 1, // Nombre de jours de l'EPG
   "cache_max_days": 8, // Nombre de jours de cache
-  "output_path": "./xmltv", // Chemin de destination du XML final
+  "output_path": "./xmltv/", // Chemin de destination du XML final
   "time_limit": 0, // Temps d'éxécution max du script (0=illimité)
   "memory_limit": -1, // Quantité de mémoire vive max (-1=illimité)
   "delete_raw_xml": false, // Supprimer le XML brut après génération (true|false)

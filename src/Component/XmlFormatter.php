@@ -31,8 +31,8 @@ class XmlFormatter
             $content[] = '<!-- ' . get_class($provider) . ' -->';
         }
 
-        foreach($channel->getPrograms() as $program) {
-            $content[] = '<programme start="'.date('YmdHis O',$program->getStart()).'" stop="'.date('YmdHis O',$program->getEnd()).'" channel="'.$channel->getId().'">';
+        foreach ($channel->getPrograms() as $program) {
+            $content[] = '<programme start="'.date('YmdHis O', $program->getStart()).'" stop="'.date('YmdHis O', $program->getEnd()).'" channel="'.$channel->getId().'">';
             $content[] = $this->listToMark($program->getTitles(), "title", "Aucun titre");
             $content[] = $this->listToMark($program->getSubtitles(), "sub-title");
             $content[] = $this->listToMark($program->getDescs(), "desc", "Aucune description");
@@ -44,19 +44,19 @@ class XmlFormatter
             //$content[] = $this->buildYear($program->getYear());
 
             $content[]= '</programme>';
-
         }
 
         return implode("\n", array_filter($content));
     }
 
 
-    private function listToMark($list, $tagName, $stringIfEmpty = null) {
+    private function listToMark($list, $tagName, $stringIfEmpty = null)
+    {
         $content = [];
-        foreach($list as $elem) {
+        foreach ($list as $elem) {
             $content[]= '<'.$tagName.' lang="'.$elem["lang"].'">' . $this->stringAsXML($elem['name']) . "</$tagName>";
         }
-        if(empty($content) && isset($stringIfEmpty)) {
+        if (empty($content) && isset($stringIfEmpty)) {
             $content[]= '<'.$tagName.' lang="fr">' . $this->stringAsXML($stringIfEmpty) . "</$tagName>";
         }
         return trim(implode("\n", $content));
@@ -64,7 +64,7 @@ class XmlFormatter
 
     public function buildCredits(?array $credits): string
     {
-        if(empty($this->credits)) {
+        if (empty($this->credits)) {
             return '';
         }
 
@@ -82,7 +82,7 @@ class XmlFormatter
      */
     public function buildEpisodeNum($episodeNum): string
     {
-        if(!empty($episodeNum)) {
+        if (!empty($episodeNum)) {
             return '<episode-num system="xmltv_ns">'.$episodeNum.".</episode-num>";
         }
         return '';
@@ -93,7 +93,7 @@ class XmlFormatter
      */
     public function buildIcon(?string $icon): string
     {
-        if(isset($icon) && strlen($icon) > 0) {
+        if (isset($icon) && strlen($icon) > 0) {
             return '<icon src="' . $this->stringAsXML($icon) . '" />';
         }
         return "";
@@ -104,7 +104,7 @@ class XmlFormatter
      */
     public function buildYear(?string $year): string
     {
-        if(!isset($year)){
+        if (!isset($year)) {
             return '';
         }
 
@@ -113,7 +113,7 @@ class XmlFormatter
 
     public function buildRating($rating): string
     {
-        if(!isset($rating)) {
+        if (!isset($rating)) {
             return '';
         }
         $pictoUrl = $this->ratingPicto->getPictoFromRatingSystem($rating[0], $rating[1]);
@@ -123,7 +123,8 @@ class XmlFormatter
                '</rating>';
     }
 
-    private function stringAsXML($string) {
-        return str_replace('"','&quot;',htmlspecialchars($string, ENT_XML1));
+    private function stringAsXML($string)
+    {
+        return str_replace('"', '&quot;', htmlspecialchars($string, ENT_XML1));
     }
 }

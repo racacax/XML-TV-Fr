@@ -1,15 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
-
 
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 
 class La1ere extends AbstractProvider implements ProviderInterface
 {
-
     public function __construct(?float $priority = null, array $extraParam = [])
     {
         parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_1ere.json"), $priority ?? 0.3);
@@ -18,11 +17,10 @@ class La1ere extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
-        if($date != date('Y-m-d')) {
+        if ($date != date('Y-m-d')) {
             return false;
         }
-        if(!$this->channelExists($channel))
-        {
+        if (!$this->channelExists($channel)) {
             return false;
         }
         date_default_timezone_set($this->channelsList[$channel]["timezone"]);
@@ -34,30 +32,30 @@ class La1ere extends AbstractProvider implements ProviderInterface
         curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch1, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0');
-        $res1 = html_entity_decode(curl_exec($ch1),ENT_QUOTES);
+        $res1 = html_entity_decode(curl_exec($ch1), ENT_QUOTES);
         curl_close($ch1);
         $days = explode('<div class="guide">', $res1);
         $infos = [];
         unset($days[0]);
         $days = array_values($days);
-        foreach($days as $key => $day) {
+        foreach ($days as $key => $day) {
             $programs = explode('</li>', $day);
-            foreach($programs as $program) {
-                preg_match('/\<span class=\"program-hour\".*?\>(.*?)\<\/span\>/',$program, $hour);
-                preg_match('/\<span class=\"program-name\".*?\>(.*?)\<\/span\>/',$program, $name);
-                preg_match('/\<div class=\"subtitle\".*?\>(.*?)\<\/div\>/',$program, $subtitle);
-                if(isset($name[1])) {
+            foreach ($programs as $program) {
+                preg_match('/\<span class=\"program-hour\".*?\>(.*?)\<\/span\>/', $program, $hour);
+                preg_match('/\<span class=\"program-name\".*?\>(.*?)\<\/span\>/', $program, $name);
+                preg_match('/\<div class=\"subtitle\".*?\>(.*?)\<\/div\>/', $program, $subtitle);
+                if (isset($name[1])) {
                     $infos[] = array(
-                        "hour" => date('YmdHis O', strtotime(date('Ymd', strtotime("now") + 86400 * $key) . ' ' . str_replace('H',':',$hour[1]))),
+                        "hour" => date('YmdHis O', strtotime(date('Ymd', strtotime("now") + 86400 * $key) . ' ' . str_replace('H', ':', $hour[1]))),
                         "title" => $name[1],
                         "subtitle" => @$subtitle[1]
                     );
                 }
             }
         }
-        for($i=0; $i<count($infos)-1; $i++) {
+        for ($i=0; $i<count($infos)-1; $i++) {
             $program = $this->channelObj->addProgram(strtotime($infos[$i]["hour"]), strtotime($infos[$i+1]["hour"]));
-            if(strlen($infos[$i+1]["subtitle"])>0) {
+            if (strlen($infos[$i+1]["subtitle"])>0) {
                 $program->addSubtitle($infos[$i+1]["subtitle"]);
             }
             $program->addTitle($infos[$i]["title"]);

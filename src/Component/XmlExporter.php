@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
@@ -8,7 +9,6 @@ use racacax\XmlTv\ValueObject\Channel;
 
 class XmlExporter
 {
-
     /**
      * @var XmlFormatter
      */
@@ -58,19 +58,17 @@ class XmlExporter
         $this->content->documentElement->setAttribute('source-info-name', "XML TV Fr");
         $this->content->documentElement->setAttribute('generator-info-name', "XML TV Fr");
         $this->content->documentElement->setAttribute('generator-info-url', "https://github.com/racacax/XML-TV-Fr");
-
     }
     public function addChannel($channelKey, $name, $icon)
     {
-
         $channel = new \SimpleXMLElement('<channel/>');
         $channel->addAttribute('id', $channelKey);
         $channel->addChild(
             'display-name',
-            str_replace('"','&quot;',htmlspecialchars($name, ENT_XML1))
+            str_replace('"', '&quot;', htmlspecialchars($name, ENT_XML1))
         );
 
-        if(!empty($icon)){
+        if (!empty($icon)) {
             $channel->addChild('icon')->addAttribute('src', $icon);
         }
         $this->content->documentElement->appendChild($this->content->importNode(dom_import_simplexml($channel), true));
@@ -79,7 +77,7 @@ class XmlExporter
     public function addProgramsAsString(string $programs)
     {
         $root = simplexml_load_string("<root>$programs</root>");
-        foreach($root->children() as $child) {
+        foreach ($root->children() as $child) {
             $this->content->documentElement->appendChild($this->content->importNode(dom_import_simplexml($child), true));
         }
     }
@@ -87,12 +85,12 @@ class XmlExporter
     public function stopExport()
     {
         $this->content->loadXML($this->content->saveXML());
-        if($this->content->validate()) {
+        if ($this->content->validate()) {
             Logger::log("\e[34m[EXPORT] \e[32mXML Valide\e[39m\n");
         } else {
             Logger::log("\e[34m[EXPORT] \e[31mXML non valide selon xmltv.dtd\e[39m\n");
         }
-        $content = str_replace('"resources/validation/xmltv.dtd"', '"xmltv.dtd"',$this->content->saveXML());
+        $content = str_replace('"resources/validation/xmltv.dtd"', '"xmltv.dtd"', $this->content->saveXML());
 
         if (in_array('xml', $this->outputFormat) || in_array('xz', $this->outputFormat)) {
             file_put_contents($this->filePath, $content);
@@ -104,12 +102,12 @@ class XmlExporter
             Logger::log("\e[34m[EXPORT] \e[39mGZ : \e[32mOK\e[39m ($this->filePath.'.gz')\n");
         }
         $split_fp = explode('.', $this->filePath);
-        if(count($split_fp) == 1) {
+        if (count($split_fp) == 1) {
             $lengthToRemove = 0;
         } else {
             $lengthToRemove = strlen(".".end($split_fp));
         }
-        $shortenedFilePath = substr($this->filePath,0, -$lengthToRemove);
+        $shortenedFilePath = substr($this->filePath, 0, -$lengthToRemove);
         if (in_array('zip', $this->outputFormat)) {
             $filename = $shortenedFilePath.'.zip';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en ZIP...\n");
@@ -125,7 +123,7 @@ class XmlExporter
         }
 
         if (in_array('xz', $this->outputFormat)) {
-            if(empty($this->sevenZipPath)) {
+            if (empty($this->sevenZipPath)) {
                 Logger::log("\e[34m[EXPORT] \e[31mImpossible d'exporter en XZ (chemin de 7zip non défini)\e[39m\n");
                 return;
             }
@@ -139,5 +137,4 @@ class XmlExporter
             }
         }
     }
-
 }

@@ -1,24 +1,25 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
-
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 
-class Proximus extends AbstractProvider implements ProviderInterface {
-
-
+class Proximus extends AbstractProvider implements ProviderInterface
+{
     public function __construct(?float $priority = null, array $extraParam = [])
     {
         parent::__construct(ResourcePath::getInstance()->getChannelPath('channels_proximus.json'), $priority ?? 0.59);
     }
 
-    public function constructEPG(string $channel, string $date) {
+    public function constructEPG(string $channel, string $date)
+    {
         parent::constructEPG($channel, $date);
-        if(!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
 
         $channelId = $this->getChannelsList()[$channel];
         $timestamp = strtotime($date);
@@ -30,19 +31,23 @@ class Proximus extends AbstractProvider implements ProviderInterface {
 
         $programs = @$json['data']['schedulesByInterval'];
 
-        if(!isset($programs) || empty($programs)) return false;
+        if (!isset($programs) || empty($programs)) {
+            return false;
+        }
 
 
-        foreach($programs as $program) {
-            if(isset($program['parentalRating'])) {
-                switch($program['parentalRating']) {
+        foreach ($programs as $program) {
+            if (isset($program['parentalRating'])) {
+                switch ($program['parentalRating']) {
                     case '10': $csa = '-10'; break;
                     case '12': $csa = '-12'; break;
                     case '16': $csa = '-16'; break;
                     case '18': $csa = '-18'; break;
                     default: $csa = 'Tout public';  break;
                 }
-            } else $csa = 'Tout public';
+            } else {
+                $csa = 'Tout public';
+            }
             $programObj = $this->channelObj->addProgram($program['startTime'], $program['endTime']);
             $programObj->addTitle($program['title'] ?? '');
             $programObj->addDesc(@$program['description']);

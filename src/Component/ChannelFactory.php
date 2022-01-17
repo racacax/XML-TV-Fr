@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
@@ -8,7 +9,9 @@ use racacax\XmlTv\ValueObject\Channel;
 
 class ChannelFactory
 {
-    private function __construct(){}
+    private function __construct()
+    {
+    }
 
     public static function createChannel(string $channelKey): Channel
     {

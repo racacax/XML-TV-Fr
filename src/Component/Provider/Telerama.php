@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
-
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 
@@ -36,8 +35,9 @@ class Telerama extends AbstractProvider implements ProviderInterface
         if (!isset($date)) {
             $date = date('Y-m-d');
         }
-        if(!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
         $channel_id = $this->channelsList[$channel];
 
 
@@ -67,7 +67,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
                     $program->setEpisodeNum($donnee["serie"]["saison"], $donnee["serie"]["numero_episode"]);
                 }
                 if (isset($donnee["soustitre"]) && !empty($donnee["soustitre"])) {
-                   $program->addSubtitle($donnee["soustitre"]);
+                    $program->addSubtitle($donnee["soustitre"]);
                 }
                 if (isset($donnee["vignettes"]["grande169"])) {
                     $program->setIcon($donnee["vignettes"]["grande169"]);
@@ -137,9 +137,9 @@ class Telerama extends AbstractProvider implements ProviderInterface
                     }
                 }
                 $program->addTitle($donnee["titre"]);
-                $program->addDesc(!empty($descri)? $descri: 'Pas de description');
+                $program->addDesc(!empty($descri) ? $descri : 'Pas de description');
                 $program->addCategory($donnee["genre_specifique"]);
-                if($donnee["csa"] == "TP") {
+                if ($donnee["csa"] == "TP") {
                     $rating = "Tout public";
                 } else {
                     $rating = "-".$donnee["csa"];
@@ -150,5 +150,4 @@ class Telerama extends AbstractProvider implements ProviderInterface
         }
         return false;
     }
-
 }

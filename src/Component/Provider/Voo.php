@@ -1,15 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
-
 
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 
 class Voo extends AbstractProvider implements ProviderInterface
 {
-
     public function __construct(?float $priority = null, array $extraParam = [])
     {
         parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_voo.json"), $priority ?? 0.85);
@@ -18,8 +17,9 @@ class Voo extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
-        if(!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
         $date_start = date('Y-m-d', strtotime($date)).'T00:00:00Z';
         $date_end = date('Y-m-d', strtotime($date) + 86400).'T02:00:00Z';
         //$end = strtotime($date);
@@ -51,5 +51,4 @@ class Voo extends AbstractProvider implements ProviderInterface
         }
         return $this->channelObj;
     }
-
 }

@@ -20,7 +20,7 @@ abstract class AbstractProvider {
 
     protected static $priority;
 
-    public function __construct($jsonPath, $priority)
+    public function __construct(string $jsonPath, float $priority)
     {
         if (empty($this->channelsList) && file_exists($jsonPath)) {
             $this->channelsList = json_decode(file_get_contents($jsonPath), true);

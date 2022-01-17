@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
-
 
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
@@ -13,18 +13,17 @@ use racacax\XmlTv\Component\ResourcePath;
  */
 class ICIRadioCanadaTele extends AbstractProvider implements ProviderInterface
 {
-
     public function __construct(?float $priority = null, array $extraParam = [])
     {
-
-        parent::__construct(ResourcePath::getInstance()->getChannelPath( 'channels_iciradiocanada.json'), 0.6);
+        parent::__construct(ResourcePath::getInstance()->getChannelPath('channels_iciradiocanada.json'), 0.6);
     }
 
     public function constructEPG(string $channel, string $date)
     {
         parent::constructEPG($channel, $date);
-        if (!$this->channelExists($channel))
+        if (!$this->channelExists($channel)) {
             return false;
+        }
         $channel_id = $this->channelsList[$channel];
 
 
@@ -37,20 +36,17 @@ class ICIRadioCanadaTele extends AbstractProvider implements ProviderInterface
         curl_setopt($ch1, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0");
         $res1 = curl_exec($ch1);
         curl_close($ch1);
-        $json = @json_decode($res1,true);
-        if(!isset($json["data"]["broadcasts"]))
+        $json = @json_decode($res1, true);
+        if (!isset($json["data"]["broadcasts"])) {
             return false;
-        foreach($json["data"]["broadcasts"] as $broadcast)
-        {
+        }
+        foreach ($json["data"]["broadcasts"] as $broadcast) {
             $program = $this->channelObj->addProgram(strtotime($broadcast["startsAt"]), strtotime($broadcast["endsAt"]));
             $program->addCategory($broadcast["subtheme"]);
-            $program->setIcon(str_replace('{0}', "635", str_replace('{1}', '16x9',@$broadcast["pircture"]["url"])));
+            $program->setIcon(str_replace('{0}', "635", str_replace('{1}', '16x9', @$broadcast["pircture"]["url"])));
             $program->addTitle($broadcast["title"]);
             $program->addSubtitle($broadcast["subtitle"]);
-
         }
         return $this->channelObj;
     }
-
-
 }

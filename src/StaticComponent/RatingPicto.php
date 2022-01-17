@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\StaticComponent;
@@ -22,11 +23,10 @@ final class RatingPicto
 
     public function getPictoFromRatingSystem(?string $rating, ?string $system): ?string
     {
-        if(!isset($rating) || !isset($system)) {
+        if (!isset($rating) || !isset($system)) {
             return null;
         }
 
         return $this->ratingPictoInfo[strtolower($system)][strtolower($rating)] ?? null;
     }
-
 }

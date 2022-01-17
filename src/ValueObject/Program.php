@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\ValueObject;
 
-class Program {
+class Program
+{
     private $titles;
     private $descs;
     private $categories;
@@ -48,8 +50,9 @@ class Program {
      */
     public function addTitle($title, $lang="fr"): void
     {
-        if(!empty($title))
+        if (!empty($title)) {
             $this->titles[] = array("name"=>$title, "lang"=>$lang);
+        }
     }
 
     /**
@@ -67,9 +70,10 @@ class Program {
      */
     public function addCredit($name, $type): void
     {
-        if(!empty($name)) {
-            if(empty($type))
+        if (!empty($name)) {
+            if (empty($type)) {
                 $type = "guest";
+            }
             $this->credits[] = array("name" => $name, "type" => $type);
         }
     }
@@ -89,8 +93,9 @@ class Program {
      */
     public function addDesc($desc, $lang="fr"): void
     {
-        if(!empty($desc))
+        if (!empty($desc)) {
             $this->descs[] = array("name"=>$desc, "lang"=>$lang);
+        }
     }
 
     /**
@@ -106,8 +111,9 @@ class Program {
      */
     public function addCategory($category, $lang="fr"): void
     {
-        if(!empty($category))
+        if (!empty($category)) {
             $this->categories[] = array("name"=>$category, "lang"=>$lang);
+        }
     }
 
     /**
@@ -160,14 +166,17 @@ class Program {
      */
     public function setEpisodeNum($season, $episode): void
     {
-        if(!isset($season) && !isset($episode))
+        if (!isset($season) && !isset($episode)) {
             return;
+        }
         $season = @(intval($season)-1);
         $episode = @(intval($episode)-1);
-        if($season < 0)
+        if ($season < 0) {
             $season = 0;
-        if($episode < 0)
+        }
+        if ($episode < 0) {
             $episode = 0;
+        }
         $this->episode_num = $season.'.'.$episode;
     }
 
@@ -186,8 +195,9 @@ class Program {
      */
     public function addSubtitle($subtitle, $lang="fr"): void
     {
-        if(!empty($subtitle))
+        if (!empty($subtitle)) {
             $this->subtitles[] = array('name'=>$subtitle, "lang"=>$lang);
+        }
     }
 
     /**
@@ -221,8 +231,8 @@ class Program {
      */
     public function setYear($year): void
     {
-        if(!empty($year))
+        if (!empty($year)) {
             $this->year = $year;
+        }
     }
-
 }

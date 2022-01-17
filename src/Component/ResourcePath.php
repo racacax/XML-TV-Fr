@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
@@ -60,5 +61,4 @@ class ResourcePath
             ]
         );
     }
-
 }
