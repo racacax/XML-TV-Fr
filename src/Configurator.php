@@ -267,11 +267,8 @@ class Configurator
 
     public function getGenerator()
     {
-        $begin = new \DateTimeImmutable(date('Y-m-d'));
-        if (!$this->forceTodayGrab) {
-            $begin = $begin->add(new \DateInterval('P1D'));
-        }
-        $generator = new Generator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this->enableDummy);
+        $begin = new \DateTimeImmutable(date('Y-m-d', strtotime("-1 day")));
+        $generator = new Generator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this->enableDummy, $this->forceTodayGrab);
         $generator->setProviders($this->getProviders());
 
         $outputFormat = [];

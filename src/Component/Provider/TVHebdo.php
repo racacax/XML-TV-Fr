@@ -21,7 +21,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $this->proxy = $extraParam['tvhebdo_proxy'];
     }
 
-    protected function getContentFromURL($url): string {
+    protected function getContentFromURL($url, $headers = []): string {
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_URL, $url);
         curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);

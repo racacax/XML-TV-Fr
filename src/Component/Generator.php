@@ -14,6 +14,10 @@ class Generator
      */
     private $createEpgIfNotFound;
     /**
+     * @var bool
+     */
+    private $forceTodaysGrab;
+    /**
      * @var XmlExporter
      */
     private $exporter;
@@ -26,9 +30,10 @@ class Generator
      */
     private $cache;
 
-    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, bool $createEpgIfNotFound)
+    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, bool $createEpgIfNotFound, bool $forceTodaysGrab)
     {
         $this->createEpgIfNotFound = $createEpgIfNotFound;
+        $this->forceTodaysGrab = $forceTodaysGrab;
         $current = new \DateTime();
         $current->setTimestamp($start->getTimestamp());
         while ($current <= $stop) {
@@ -101,7 +106,7 @@ class Generator
                     }
                     Logger::log(sprintf("\e[95m[EPG GRAB] \e[39m%s (%d/%d) : %s", $channelKey, $countChannel, count($channels), $date));
 
-                    if ($this->cache->has($cacheKey)){
+                    if ($this->cache->has($cacheKey) && !($this->forceTodaysGrab && date('Y-m-d') == $date)){
                         Logger::log(" | \e[33mOK \e[39m- From Cache ".chr(10));
                         continue;
                     }

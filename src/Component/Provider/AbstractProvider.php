@@ -54,7 +54,7 @@ abstract class AbstractProvider {
         return isset($this->getChannelsList()[$channel]);
     }
 
-    protected function getContentFromURL($url): string
+    protected function getContentFromURL($url, $headers = []): string
     {
         $ch1 = curl_init();
         curl_setopt($ch1, CURLOPT_URL, $url);
@@ -62,7 +62,11 @@ abstract class AbstractProvider {
         curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch1, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0');
+        if(!empty($headers)) {
+            curl_setopt($ch1, CURLOPT_HTTPHEADER, $headers);
+        } else {
+            curl_setopt($ch1, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0');
+        }
         $res1 = html_entity_decode(curl_exec($ch1),ENT_QUOTES);
         curl_close($ch1);
         return $res1;
