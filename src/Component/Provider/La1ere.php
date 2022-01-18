@@ -4,36 +4,32 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
+use racacax\XmlTv\ValueObject\Channel;
+use racacax\XmlTv\ValueObject\Program;
 
 class La1ere extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_1ere.json"), $priority ?? 0.3);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_1ere.json'), $priority ?? 0.3);
     }
 
     public function constructEPG(string $channel, string $date)
     {
-        parent::constructEPG($channel, $date);
+        $channelObj = parent::constructEPG($channel, $date);
         if ($date != date('Y-m-d')) {
             return false;
         }
         if (!$this->channelExists($channel)) {
             return false;
         }
-        date_default_timezone_set($this->channelsList[$channel]["timezone"]);
-        $channel_id = $this->channelsList[$channel]['id'];
-        $ch1 = curl_init();
-        curl_setopt($ch1, CURLOPT_URL, "https://la1ere.francetvinfo.fr/$channel_id/emissions");
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch1, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0');
-        $res1 = html_entity_decode(curl_exec($ch1), ENT_QUOTES);
-        curl_close($ch1);
+        $content = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
+        $res1 = html_entity_decode($content, ENT_QUOTES); //TODO: @find if needed (next PR ?)
+        // no more change TimeZone
+        $timezone = new \DateTimeZone($this->channelsList[$channel]['timezone']);
         $days = explode('<div class="guide">', $res1);
         $infos = [];
         unset($days[0]);
@@ -45,22 +41,32 @@ class La1ere extends AbstractProvider implements ProviderInterface
                 preg_match('/\<span class=\"program-name\".*?\>(.*?)\<\/span\>/', $program, $name);
                 preg_match('/\<div class=\"subtitle\".*?\>(.*?)\<\/div\>/', $program, $subtitle);
                 if (isset($name[1])) {
-                    $infos[] = array(
-                        "hour" => date('YmdHis O', strtotime(date('Ymd', strtotime("now") + 86400 * $key) . ' ' . str_replace('H', ':', $hour[1]))),
-                        "title" => $name[1],
-                        "subtitle" => @$subtitle[1]
-                    );
+                    $dateTime = new \DateTimeImmutable(date('Ymd', strtotime('now') + 86400 * $key) . ' ' . str_replace('H', ':', $hour[1]), $timezone);
+                    $infos[] = [
+                        'hour' => $dateTime->format('YmdHis O'),
+                        'title' => $name[1],
+                        'subtitle' => @$subtitle[1]
+                    ];
                 }
             }
         }
         for ($i=0; $i<count($infos)-1; $i++) {
-            $program = $this->channelObj->addProgram(strtotime($infos[$i]["hour"]), strtotime($infos[$i+1]["hour"]));
-            if (strlen($infos[$i+1]["subtitle"])>0) {
-                $program->addSubtitle($infos[$i+1]["subtitle"]);
+            $program = new Program(strtotime($infos[$i]['hour']), strtotime($infos[$i+1]['hour']));
+            if (strlen($infos[$i+1]['subtitle'])>0) {
+                $program->addSubtitle($infos[$i+1]['subtitle']);
             }
-            $program->addTitle($infos[$i]["title"]);
-            $program->addCategory("Inconnu");
+            $program->addTitle($infos[$i]['title']);
+            $program->addCategory('Inconnu');
+            $channelObj->addProgram($program);
         }
-        return $this->channelObj;
+
+        return $channelObj;
+    }
+
+    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    {
+        $channel_id = $this->channelsList[$channel->getId()]['id'];
+
+        return "https://la1ere.francetvinfo.fr/$channel_id/emissions";
     }
 }

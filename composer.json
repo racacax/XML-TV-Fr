@@ -1,6 +1,32 @@
 {
+  "name": "racacax/xmltv",
+  "description": "Package permetant de generer un programme télé au format xmltv",
+  "homepage": "https://xmltvfr.fr/",
+  "readme": "https://github.com/racacax/XML-TV-Fr/blob/master/README.md",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Racacax",
+      "homepage": "https://github.com/racacax",
+      "role": "Creator & Developer"
+    },
+    {
+      "name": "Benoit382",
+      "homepage": "https://github.com/benoit382",
+      "role": "Developer PHP"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "racacax\\XmlTv\\": "src/",
+      "racacax\\XmlTvTest\\": "tests/"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.3",
     "ext-json": "*",
     "ext-zlib": "*",
     "ext-curl": "*",
@@ -8,17 +34,12 @@
     "ext-simplexml": "*",
     "ext-xmlreader": "*",
     "ext-zip": "*",
-    "ext-libxml": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "racacax\\XmlTv\\": "src/"
-    }
-  },
-  "config": {
-    "bin-dir": "bin"
+    "ext-libxml": "*",
+    "guzzlehttp/guzzle": "^7.4"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3.3"
+    "friendsofphp/php-cs-fixer": "^3.3",
+    "symfony/var-dumper": "^6.0",
+    "phpunit/phpunit": "^9.5"
   }
 }

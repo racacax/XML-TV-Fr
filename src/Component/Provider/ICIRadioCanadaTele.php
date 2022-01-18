@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
+use racacax\XmlTv\ValueObject\Channel;
+use racacax\XmlTv\ValueObject\Program;
 
 /*
  * @author Racacax
@@ -13,40 +16,43 @@ use racacax\XmlTv\Component\ResourcePath;
  */
 class ICIRadioCanadaTele extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        parent::__construct(ResourcePath::getInstance()->getChannelPath('channels_iciradiocanada.json'), 0.6);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_iciradiocanada.json'), $priority ?? 0.6);
     }
 
     public function constructEPG(string $channel, string $date)
     {
-        parent::constructEPG($channel, $date);
+        $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $channel_id = $this->channelsList[$channel];
 
-
-        $url = "https://services.radio-canada.ca/neuro/sphere/v1/tele/schedule/$date?regionId=$channel_id";
-        $ch1 = curl_init();
-        curl_setopt($ch1, CURLOPT_URL, $url);
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch1, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0");
-        $res1 = curl_exec($ch1);
-        curl_close($ch1);
-        $json = @json_decode($res1, true);
-        if (!isset($json["data"]["broadcasts"])) {
+        $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date))), true);
+        if (!isset($json['data']['broadcasts'])) {
             return false;
         }
-        foreach ($json["data"]["broadcasts"] as $broadcast) {
-            $program = $this->channelObj->addProgram(strtotime($broadcast["startsAt"]), strtotime($broadcast["endsAt"]));
-            $program->addCategory($broadcast["subtheme"]);
-            $program->setIcon(str_replace('{0}', "635", str_replace('{1}', '16x9', @$broadcast["pircture"]["url"])));
-            $program->addTitle($broadcast["title"]);
-            $program->addSubtitle($broadcast["subtitle"]);
+        foreach ($json['data']['broadcasts'] as $broadcast) {
+            $program = new Program(strtotime($broadcast['startsAt']), strtotime($broadcast['endsAt']));
+            $program->addCategory($broadcast['subtheme']);
+            $program->setIcon(str_replace('{0}', '635', str_replace('{1}', '16x9', @$broadcast['pircture']['url'] ?? '')));
+            $program->addTitle($broadcast['title']);
+            $program->addSubtitle($broadcast['subtitle']);
+
+            $channelObj->addProgram($program);
         }
-        return $this->channelObj;
+
+        return $channelObj;
+    }
+
+    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    {
+        $channel_id = $this->channelsList[$channel->getId()];
+
+        return sprintf(
+            'https://services.radio-canada.ca/neuro/sphere/v1/tele/schedule/%s?regionId=%s',
+            $date->format('Y-m-d'),
+            $channel_id
+        );
     }
 }

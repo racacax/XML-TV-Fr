@@ -12,13 +12,23 @@ class CacheFile
     private $basePath;
 
     private $listFile = [];
+    /**
+     * This var store all key created during the current process
+     * @var array
+     */
     private $createdKeys = [];
+    /**
+     * This bool help to ignore (and remove) the cache of the day
+     * @var bool
+     */
+    private $forceTodayGrab;
 
-    public function __construct(string $basePath)
+    public function __construct(string $basePath, bool $forceTodayGrab)
     {
         @mkdir($basePath, 0777, true);
 
         $this->basePath = rtrim($basePath, DIRECTORY_SEPARATOR);
+        $this->forceTodayGrab = $forceTodayGrab;
     }
 
     public function store(string $key, string $content)
@@ -28,6 +38,7 @@ class CacheFile
         if (false === file_put_contents($fileName, $content)) {
             throw new \Exception('Impossible to cache : ' . $key);
         }
+        $this->createdKeys[$key] = true;
         $this->listFile[$key] = [
             'file'=> $fileName,
             'key' => $key
@@ -40,9 +51,10 @@ class CacheFile
             return true;
         }
         $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
-        if(count(explode(date('Y-m-d'), $key)) > 1 && !isset($this->createdKeys[$key])) {
+        if ($this->forceTodayGrab && strpos($key, date('Y-m-d')) !== false && !isset($this->createdKeys[$key])) {
             @unlink($fileName);
             $this->createdKeys[$key] = true;
+
             return false;
         }
         if (file_exists($fileName)) {
@@ -50,6 +62,7 @@ class CacheFile
                 'file'=> $fileName,
                 'key' => $key
             ];
+
             return true;
         }
 

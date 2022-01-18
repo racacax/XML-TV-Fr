@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
-use racacax\XmlTv\Component\ProviderInterface;
-use racacax\XmlTv\ValueObject\Channel;
-
 class XmlExporter
 {
     /**
@@ -52,12 +49,12 @@ class XmlExporter
         $this->content->formatOutput = true;
         $this->content->loadXML('<?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE tv SYSTEM "resources/validation/xmltv.dtd">
-    <!-- Generated with XML TV Fr v2.1.2 -->
+    <!-- Generated with XML TV Fr v2.2.0 -->
     <tv/>');
-        $this->content->documentElement->setAttribute('source-info-url', "https://github.com/racacax/XML-TV-Fr");
-        $this->content->documentElement->setAttribute('source-info-name', "XML TV Fr");
-        $this->content->documentElement->setAttribute('generator-info-name', "XML TV Fr");
-        $this->content->documentElement->setAttribute('generator-info-url', "https://github.com/racacax/XML-TV-Fr");
+        $this->content->documentElement->setAttribute('source-info-url', 'https://github.com/racacax/XML-TV-Fr');
+        $this->content->documentElement->setAttribute('source-info-name', 'XML TV Fr');
+        $this->content->documentElement->setAttribute('generator-info-name', 'XML TV Fr');
+        $this->content->documentElement->setAttribute('generator-info-url', 'https://github.com/racacax/XML-TV-Fr');
     }
     public function addChannel($channelKey, $name, $icon)
     {
@@ -85,11 +82,13 @@ class XmlExporter
     public function stopExport()
     {
         $this->content->loadXML($this->content->saveXML());
+
         if ($this->content->validate()) {
             Logger::log("\e[34m[EXPORT] \e[32mXML Valide\e[39m\n");
         } else {
             Logger::log("\e[34m[EXPORT] \e[31mXML non valide selon xmltv.dtd\e[39m\n");
         }
+
         $content = str_replace('"resources/validation/xmltv.dtd"', '"xmltv.dtd"', $this->content->saveXML());
 
         if (in_array('xml', $this->outputFormat) || in_array('xz', $this->outputFormat)) {
@@ -105,7 +104,7 @@ class XmlExporter
         if (count($split_fp) == 1) {
             $lengthToRemove = 0;
         } else {
-            $lengthToRemove = strlen(".".end($split_fp));
+            $lengthToRemove = strlen('.'.end($split_fp));
         }
         $shortenedFilePath = substr($this->filePath, 0, -$lengthToRemove);
         if (in_array('zip', $this->outputFormat)) {
@@ -115,6 +114,7 @@ class XmlExporter
 
             if (true !== $zip->open($filename, \ZipArchive::CREATE)) {
                 Logger::log("\e[34m[EXPORT] \e[39mZIP : \e[31mHS\e[39m ($filename)\n");
+
                 throw new \Exception('Impossible to create zip file '. $filename);
             }
             Logger::log("\e[34m[EXPORT] \e[39mZIP : \e[32mOK\e[39m ($filename)\n");
@@ -125,6 +125,7 @@ class XmlExporter
         if (in_array('xz', $this->outputFormat)) {
             if (empty($this->sevenZipPath)) {
                 Logger::log("\e[34m[EXPORT] \e[31mImpossible d'exporter en XZ (chemin de 7zip non défini)\e[39m\n");
+
                 return;
             }
             $filename = $shortenedFilePath.'.xz';

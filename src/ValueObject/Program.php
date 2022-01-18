@@ -25,13 +25,13 @@ class Program
      */
     public function __construct($start, $end)
     {
+        $this->start = $start;
+        $this->end = $end;
         $this->titles = [];
         $this->categories = [];
         $this->descs = [];
         $this->subtitles = [];
         $this->credits = [];
-        $this->start = $start;
-        $this->end = $end;
     }
 
 
@@ -48,10 +48,10 @@ class Program
      * @param string $title
      * @param string $lang
      */
-    public function addTitle($title, $lang="fr"): void
+    public function addTitle($title, $lang = 'fr'): void
     {
         if (!empty($title)) {
-            $this->titles[] = array("name"=>$title, "lang"=>$lang);
+            $this->titles[] = ['name' => $title, 'lang' => $lang];
         }
     }
 
@@ -72,9 +72,9 @@ class Program
     {
         if (!empty($name)) {
             if (empty($type)) {
-                $type = "guest";
+                $type = 'guest';
             }
-            $this->credits[] = array("name" => $name, "type" => $type);
+            $this->credits[] = ['name' => $name, 'type' => $type];
         }
     }
 
@@ -91,10 +91,10 @@ class Program
      * @param mixed $desc
      * @param string $lang
      */
-    public function addDesc($desc, $lang="fr"): void
+    public function addDesc($desc, $lang = 'fr'): void
     {
         if (!empty($desc)) {
-            $this->descs[] = array("name"=>$desc, "lang"=>$lang);
+            $this->descs[] = ['name' => $desc, 'lang' => $lang];
         }
     }
 
@@ -109,10 +109,10 @@ class Program
     /**
      * @param mixed $category
      */
-    public function addCategory($category, $lang="fr"): void
+    public function addCategory($category, $lang = 'fr'): void
     {
         if (!empty($category)) {
-            $this->categories[] = array("name"=>$category, "lang"=>$lang);
+            $this->categories[] = ['name' => $category, 'lang' => $lang];
         }
     }
 
@@ -169,15 +169,15 @@ class Program
         if (!isset($season) && !isset($episode)) {
             return;
         }
-        $season = @(intval($season)-1);
-        $episode = @(intval($episode)-1);
+        $season = @(intval($season) - 1);
+        $episode = @(intval($episode) - 1);
         if ($season < 0) {
             $season = 0;
         }
         if ($episode < 0) {
             $episode = 0;
         }
-        $this->episode_num = $season.'.'.$episode;
+        $this->episode_num = $season . '.' . $episode;
     }
 
     /**
@@ -193,10 +193,10 @@ class Program
      * @param mixed $subtitle
      * @param string $lang
      */
-    public function addSubtitle($subtitle, $lang="fr"): void
+    public function addSubtitle($subtitle, $lang = 'fr'): void
     {
         if (!empty($subtitle)) {
-            $this->subtitles[] = array('name'=>$subtitle, "lang"=>$lang);
+            $this->subtitles[] = ['name' => $subtitle, 'lang' => $lang];
         }
     }
 
@@ -212,7 +212,7 @@ class Program
      * Définition du rating du programme (CSA -10 ans par exemple)
      * @param mixed $rating
      */
-    public function setRating($rating, $system="CSA"): void
+    public function setRating($rating, $system = 'CSA'): void
     {
         $this->rating = [$rating, $system];
     }

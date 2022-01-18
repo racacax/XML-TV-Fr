@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use GuzzleHttp\Client;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
+use racacax\XmlTv\ValueObject\Channel;
+use racacax\XmlTv\ValueObject\Program;
 
 class TeleLoisirs extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_teleloisirs.json"), $priority ?? 0.6);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_teleloisirs.json'), $priority ?? 0.6);
     }
 
     public function constructEPG(string $channel, string $date)
     {
-        parent::constructEPG($channel, $date);
+        $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $channel_url = "https://www.programme-tv.net/programme/chaine/$date/".$this->getChannelsList()[$channel];
-        $res1 = $this->getContentFromURL($channel_url);
+        $res1 = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
         $lis = explode('<li class="gridChannel-listItem">', $res1);
         unset($lis[0]);
         $count = count($lis);
         foreach ($lis as $index => $li) {
-            Logger::updateLine(" ".round($index*100/$count, 2)." %");
+            Logger::updateLine(' '.round($index*100/$count, 2).' %');
             $li = explode('</li>', $li)[0];
             preg_match('/href="(.*?)" title="(.*?)"/', $li, $titlehref);
             preg_match('/srcset="(.*?)"/', $li, $img);
@@ -48,7 +50,8 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                 $duration = 60 * intval($duration[0]);
             }
             $startDate = strtotime($date . ' ' . str_replace('h', ':', $hour));
-            $program = $this->channelObj->addProgram($startDate, $startDate + $duration);
+            $program = new Program($startDate, $startDate + $duration);
+            //@todo: add async
             $detail = $this->getContentFromURL($titlehref[1]);
             $detailJson = @explode('<script type="application/ld+json">', $detail)[1];
             if (isset($detailJson)) {
@@ -58,13 +61,13 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                     $synopsis.= "\nCritique : \n";
                     $synopsis.=@($detailJson['review']['description'] ?? $detailJson['review']['reviewBody']) ;
                     if (isset($detailJson['review']['reviewRating'])) {
-                        $synopsis.="\nNote : ".$detailJson['review']['reviewRating']['ratingValue']."/5";
+                        $synopsis.="\nNote : ".$detailJson['review']['reviewRating']['ratingValue'].'/5';
                     }
                 }
                 $program->setYear(@$detailJson['dateCreated']);
                 $program->setEpisodeNum(@$detailJson['partOfSeason']['seasonNumber'], @$detailJson['episodeNumber']);
                 foreach ($detailJson as $key => $value) {
-                    if (in_array($key, ["actor", "director"])) {
+                    if (in_array($key, ['actor', 'director'])) {
                         foreach ($value as $person) {
                             $program->addCredit($person['name'], $key);
                         }
@@ -82,12 +85,12 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             foreach ($participants as $participant) {
                 $name = trim(explode('<', explode('>', $participant)[2] ?? '')[0]);
                 $role = trim(explode('<', explode('"personCard-mediaLegendRole">', $participant)[1] ?? '')[0]);
-                if ($role == "Présentateur") {
-                    $tag = "presenter";
-                } elseif ($role == "Réalisateur") {
-                    $tag = "director";
+                if ($role == 'Présentateur') {
+                    $tag = 'presenter';
+                } elseif ($role == 'Réalisateur') {
+                    $tag = 'director';
                 } else {
-                    $tag = "guest";
+                    $tag = 'guest';
                 }
                 if (!isset($detailJson)) {
                     $program->addCredit($name, $tag);
@@ -101,7 +104,19 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             $program->addCategory($genreFormat);
             $program->setIcon($img);
             $program->addDesc($synopsis);
+
+            $channelObj->addProgram($program);
         }
-        return $this->channelObj;
+
+        return $channelObj;
+    }
+
+    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    {
+        return sprintf(
+            'https://www.programme-tv.net/programme/chaine/%s/%s',
+            $date->format('Y-m-d'),
+            $this->channelsList[$channel->getId()]
+        );
     }
 }

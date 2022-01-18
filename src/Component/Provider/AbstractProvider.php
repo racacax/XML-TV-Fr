@@ -1,17 +1,18 @@
 <?php
+
 declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ChannelFactory;
-use racacax\XmlTv\ValueObject\Channel;
 
-abstract class AbstractProvider {
-
+abstract class AbstractProvider
+{
     /**
-     * @var Channel|null
+     * @var Client
      */
-    protected $channelObj;
+    protected $client;
 
     /**
      * @var array
@@ -20,13 +21,14 @@ abstract class AbstractProvider {
 
     protected static $priority;
 
-    public function __construct(string $jsonPath, float $priority)
+    public function __construct(Client $client, string $jsonPath, float $priority)
     {
         if (empty($this->channelsList) && file_exists($jsonPath)) {
             $this->channelsList = json_decode(file_get_contents($jsonPath), true);
         }
         //todo: to improve
         self::$priority[static::class] = $priority;
+        $this->client = $client;
     }
 
     public static function getPriority(): float
@@ -36,9 +38,7 @@ abstract class AbstractProvider {
 
     public function constructEPG(string $channel, string $date)
     {
-        $this->channelObj = ChannelFactory::createChannel($channel);
-
-        return $this->channelObj;
+        return ChannelFactory::createChannel($channel);
     }
 
     /**
@@ -49,34 +49,21 @@ abstract class AbstractProvider {
         return $this->channelsList;
     }
 
-    public function channelExists($channel): bool
+    public function channelExists(string $channel): bool
     {
-        return isset($this->getChannelsList()[$channel]);
+        return isset($this->channelsList[$channel]);
     }
 
-    protected function getContentFromURL($url, $headers = []): string
+    protected function getContentFromURL($url, array $headers = []): string
     {
-        $ch1 = curl_init();
-        curl_setopt($ch1, CURLOPT_URL, $url);
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch1, CURLOPT_COOKIESESSION, true );
-        curl_setopt($ch1, CURLOPT_COOKIEJAR, 'var/cookie' );
-        curl_setopt($ch1, CURLOPT_COOKIEFILE, 'var/cookie' );
-        if(!empty($headers)) {
-            curl_setopt($ch1, CURLOPT_HTTPHEADER, $headers);
-        } else {
-            curl_setopt($ch1, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0');
+        if (empty($headers['User-Agent'])) {
+            $headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0';
         }
-        $return = curl_exec($ch1);
-        if(is_string($return)) {
-            $res1 = html_entity_decode($return, ENT_QUOTES);
-        } else {
-            $res1 ='';
-        }
-        curl_close($ch1);
-        return $res1;
+        $response = $this->client->get(
+            $url,
+            ['headers'=> $headers]
+        );
+
+        return $response->getBody()->getContents();
     }
 }

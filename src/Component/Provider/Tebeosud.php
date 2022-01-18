@@ -4,38 +4,32 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use GuzzleHttp\Client;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
+use racacax\XmlTv\ValueObject\Channel;
+use racacax\XmlTv\ValueObject\Program;
 
 class Tebeosud extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_tebeosud.json"), $priority ?? 0.2);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_tebeosud.json'), $priority ?? 0.2);
     }
 
     public function constructEPG(string $channel, string $date)
     {
-        parent::constructEPG($channel, $date);
+        $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
             return false;
         }
         if ($date != date('Y-m-d')) {
             return false;
         }
-        $channel_id = $this->channelsList[$channel];
 
+        $res1 = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
 
-        $url = "https://www.tebe$channel_id.bzh/le-programme";
-        $ch1 = curl_init();
-        curl_setopt($ch1, CURLOPT_URL, $url);
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch1, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0");
-        $res1 = curl_exec($ch1);
-        curl_close($ch1);
         if (count(explode('<span class="rouge">Programme</span>', $res1)) < 2) {
             return false;
         }
@@ -43,7 +37,7 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
         $day = explode(' ', explode('<h2>', $res1)[1])[1];
         if ($day == date('d')) {
             $startDate = date('Y-m-d');
-        } elseif ($day == date('d', strtotime("-1 days"))) {
+        } elseif ($day == date('d', strtotime('-1 days'))) {
             $startDate = date('Y-m-d', strtotime('-1 days'));
         } else {
             return false;
@@ -55,48 +49,52 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
             preg_match_all('/\<td class="nom"\>\<a href="(.*?)"\>(.*?)\<\/a\>\<\/td\>/', $separateDays[$i], $infos2);
             $count2 = count($infos[1]);
             for ($j=0; $j<$count2; $j++) {
-                Logger::updateLine(" $i/$count : ".round($j*100/$count2, 2)." %");
+                Logger::updateLine(" $i/$count : ".round($j*100/$count2, 2).' %');
                 $url = $infos[1][$j];
                 if ($url[0] != 'h') {
                     $url = 'https:'.$url;
                 }
-                $ch1 = curl_init();
-                curl_setopt($ch1, CURLOPT_URL, $url);
-                curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0);
-                curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
-                curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
-                curl_setopt($ch1, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0");
-                $res1 = curl_exec($ch1);
-                curl_close($ch1);
+                //reuse var
+                //@todo : use async
+                $res1 = $this->getContentFromURL($url);
                 preg_match('/\<p class="description"\>(.*?)\<\/p\>/', $res1, $desc);
                 preg_match('/meta property="og:image" content="(.*?)"/', $res1, $img);
                 if (isset($desc[1]) && $desc[1][0] == '(') {
                     $genre = ltrim(explode(',', $desc[1])[0], '(');
                 } else {
-                    $genre = "Inconnu";
+                    $genre = 'Inconnu';
                 }
                 if (isset($img[1]) && $img[1][0] != 'h') {
                     $img[1] = 'https:'.$img[1];
                 }
-                $currentProgram = array("startTime"=>strtotime($startDate." ".$infos[2][$j]),
-                                    "title"=>$infos2[2][$j],
-                                    "desc"=>@$desc[1],
-                                    "img"=>@$img[1],
-                                    "genre"=>$genre
-                );
+                $currentProgram = ['startTime'=>strtotime($startDate.' '.$infos[2][$j]),
+                    'title'=>$infos2[2][$j],
+                    'desc'=>@$desc[1],
+                    'img'=>@$img[1],
+                    'genre'=>$genre
+                ];
                 $programs[] = $currentProgram;
                 if (isset($lastTime)) {
                     $program = $programs[$lastTime];
-                    $programObj = $this->channelObj->addProgram($program["startTime"], $currentProgram['startTime']);
+                    $programObj = new Program($program['startTime'], $currentProgram['startTime']);
                     $programObj->addTitle($program['title']);
                     $programObj->addDesc($program['desc']);
                     $programObj->setIcon($program['img']);
                     $programObj->addCategory($program['genre']);
+
+                    $channelObj->addProgram($programObj);
                 }
                 $lastTime = count($programs) -1;
             }
         }
-        return $this->channelObj;
+
+        return $channelObj;
+    }
+
+    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    {
+        $channel_id = $this->channelsList[$channel->getId()];
+
+        return "https://www.tebe$channel_id.bzh/le-programme";
     }
 }

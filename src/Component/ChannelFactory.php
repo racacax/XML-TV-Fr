@@ -16,6 +16,7 @@ class ChannelFactory
     public static function createChannel(string $channelKey): Channel
     {
         $info = ChannelInformation::getInstance();
+
         return new Channel(
             $channelKey,
             $info->getDefaultIcon($channelKey),

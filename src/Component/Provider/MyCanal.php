@@ -4,54 +4,45 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise\Utils;
+use GuzzleHttp\Psr7\Response;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
+use racacax\XmlTv\ValueObject\Channel;
+use racacax\XmlTv\ValueObject\Program;
 
 // Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
 class MyCanal extends AbstractProvider implements ProviderInterface
 {
     private static $apiKey = '4ca2e967e4ca296ab18dab5432f906ac';
 
-    public function __construct(?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_mycanal.json"), $priority ?? 0.7);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal.json'), $priority ?? 0.7);
     }
 
     public function constructEPG(string $channel, string $date)
     {
-        parent::constructEPG($channel, $date);
+        $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $channelId = $this->getChannelsList()[$channel];
-        $day = (strtotime($date) - strtotime(date('Y-m-d'))) / 86400;
+        //@todo: add cache (next PR?)
+        $url1 = $this->generateUrl($channelObj, $datetime = new \DateTimeImmutable($date));
+        $url2 = $this->generateUrl($channelObj, $datetime->modify('+1 days'));
+        /**
+         * @var Response[]
+         */
+        $response = Utils::all([
+            '1' => $this->client->getAsync($url1),
+            '2' => $this->client->getAsync($url2)
+        ])->wait();
 
-        $curl = curl_init('https://hodor.canalplus.pro/api/v2/mycanal/channels/' . self::$apiKey . '/' . $channelId . '/broadcasts/day/' . $day);
-        $curl1 = curl_init('https://hodor.canalplus.pro/api/v2/mycanal/channels/' . self::$apiKey . '/' . $channelId . '/broadcasts/day/' . ($day + 1));
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl1, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curl1, CURLOPT_FOLLOWLOCATION, true);
-        $curl_multi = curl_multi_init();
-        curl_multi_add_handle($curl_multi, $curl);
-        curl_multi_add_handle($curl_multi, $curl1);
 
-        do {
-            curl_multi_exec($curl_multi, $running);
-        } while ($running > 0);
-
-        $get = curl_multi_getcontent($curl);
-        $get2 = curl_multi_getcontent($curl1);
-
-        curl_multi_remove_handle($curl_multi, $curl);
-        curl_close($curl);
-        curl_multi_remove_handle($curl_multi, $curl1);
-        curl_close($curl1);
-        curl_multi_close($curl_multi);
-
-        $json = json_decode($get, true);
-        $json2 = json_decode($get2, true);
+        $json = json_decode((string)$response['1']->getBody(), true);
+        $json2 = json_decode((string)$response['2']->getBody(), true);
 
         if (!isset($json['timeSlices']) || empty($json['timeSlices'])) {
             return false;
@@ -69,30 +60,47 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $programs = [];
         $lastTime = 0;
         $count = count($all);
+        $begin = microtime(true);
+        $promises = [];
         foreach ($all as $index => $program) {
-            Logger::updateLine(" ".round($index*100/$count, 2)." %");
-            $curld = curl_init($program['onClick']['URLPage']);
-            curl_setopt($curld, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curld, CURLOPT_FOLLOWLOCATION, 1);
-            $getd = curl_exec($curld);
-            curl_close($curld);
+            Logger::updateLine(' ' . round($index * 100 / $count, 2) . ' %');
+            $promises[$program['onClick']['URLPage']] = $this->client->getAsync($program['onClick']['URLPage']);
+        }
+        $response = Utils::all($promises)->wait();
 
-            $detail = json_decode($getd, true);
+        foreach ($all as $index => $program) {
+            Logger::updateLine(' '.round($index*100/$count, 2).' %');
+            $detail = json_decode((string)$response[$program['onClick']['URLPage']]->getBody(), true);
 
             $startTime = $program['startTime'] / 1000;
 
             $parentalRating = $detail['episodes']['contents'][0]['parentalRatings'][0]['value'] ?? @$detail['detail']['informations']['parentalRatings'][0]['value'];
 
             switch ($parentalRating) {
-                case '2': $csa = '-10'; break;
-                case '3': $csa = '-12'; break;
-                case '4': $csa = '-16'; break;
-                case '5': $csa = '-18'; break;
-                default: $csa = 'Tout public';  break;
+                case '2':
+                    $csa = '-10';
+
+                    break;
+                case '3':
+                    $csa = '-12';
+
+                    break;
+                case '4':
+                    $csa = '-16';
+
+                    break;
+                case '5':
+                    $csa = '-18';
+
+                    break;
+                default:
+                    $csa = 'Tout public';
+
+                    break;
             }
 
             $icon = $detail['episodes']['contents'][0]['URLImage'] ?? @$detail['detail']['informations']['URLImage'];
-            $icon = str_replace(array('{resolutionXY}', '{imageQualityPercentage}'), array('640x360', '80'), $icon);
+            $icon = str_replace(['{resolutionXY}', '{imageQualityPercentage}'], ['640x360', '80'], $icon);
 
             $programs[$startTime] = [
                 'startTime'     => $startTime,
@@ -111,7 +119,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
             if ($lastTime > 0) {
                 $lastProgram = $programs[$lastTime];
-                $programObj = $this->channelObj->addProgram($lastProgram['startTime'], $startTime);
+                $programObj = new Program($lastProgram['startTime'], $startTime);
                 $programObj->addTitle($lastProgram['title']);
                 $programObj->addSubtitle($lastProgram['subTitle']);
                 $programObj->addDesc($lastProgram['description']);
@@ -121,11 +129,22 @@ class MyCanal extends AbstractProvider implements ProviderInterface
                 $programObj->setIcon($lastProgram['icon']);
                 $programObj->setYear($lastProgram['year']);
                 $programObj->setRating($lastProgram['csa']);
+
+                $channelObj->addProgram($programObj);
             }
 
             $lastTime = $startTime;
         }
 
-        return $this->channelObj;
+        return $channelObj;
+    }
+
+
+    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    {
+        $channelId = $this->channelsList[$channel->getId()];
+        $day = ($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400;
+
+        return  'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . self::$apiKey . '/' . $channelId . '/broadcasts/day/'. $day;
     }
 }

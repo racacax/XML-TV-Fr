@@ -2,7 +2,6 @@
 
 namespace racacax\XmlTv\Component;
 
-use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\StaticComponent\RatingPicto;
 
 /**
@@ -33,11 +32,11 @@ class XmlFormatter
 
         foreach ($channel->getPrograms() as $program) {
             $content[] = '<programme start="'.date('YmdHis O', $program->getStart()).'" stop="'.date('YmdHis O', $program->getEnd()).'" channel="'.$channel->getId().'">';
-            $content[] = $this->listToMark($program->getTitles(), "title", "Aucun titre");
-            $content[] = $this->listToMark($program->getSubtitles(), "sub-title");
-            $content[] = $this->listToMark($program->getDescs(), "desc", "Aucune description");
+            $content[] = $this->listToMark($program->getTitles(), 'title', 'Aucun titre');
+            $content[] = $this->listToMark($program->getSubtitles(), 'sub-title');
+            $content[] = $this->listToMark($program->getDescs(), 'desc', 'Aucune description');
             $content[] = $this->buildCredits($program->getCredits());
-            $content[] = $this->listToMark($program->getCategories(), "category", "Inconnu");
+            $content[] = $this->listToMark($program->getCategories(), 'category', 'Inconnu');
             $content[] = $this->buildIcon($program->getIcon());
             $content[] = $this->buildEpisodeNum($program->getEpisodeNum());
             $content[] = $this->buildRating($program->getRating());
@@ -54,11 +53,12 @@ class XmlFormatter
     {
         $content = [];
         foreach ($list as $elem) {
-            $content[]= '<'.$tagName.' lang="'.$elem["lang"].'">' . $this->stringAsXML($elem['name']) . "</$tagName>";
+            $content[]= '<'.$tagName.' lang="'.$elem['lang'].'">' . $this->stringAsXML($elem['name']) . "</$tagName>";
         }
         if (empty($content) && isset($stringIfEmpty)) {
             $content[]= '<'.$tagName.' lang="fr">' . $this->stringAsXML($stringIfEmpty) . "</$tagName>";
         }
+
         return trim(implode("\n", $content));
     }
 
@@ -83,8 +83,9 @@ class XmlFormatter
     public function buildEpisodeNum($episodeNum): string
     {
         if (!empty($episodeNum)) {
-            return '<episode-num system="xmltv_ns">'.$episodeNum.".</episode-num>";
+            return '<episode-num system="xmltv_ns">'.$episodeNum.'.</episode-num>';
         }
+
         return '';
     }
 
@@ -96,7 +97,8 @@ class XmlFormatter
         if (isset($icon) && strlen($icon) > 0) {
             return '<icon src="' . $this->stringAsXML($icon) . '" />';
         }
-        return "";
+
+        return '';
     }
 
     /**

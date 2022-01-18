@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv;
 
+use GuzzleHttp\Client;
 use racacax\XmlTv\Component\CacheFile;
 use racacax\XmlTv\Component\Generator;
 use racacax\XmlTv\Component\Logger;
@@ -17,6 +18,63 @@ class Configurator
      * @var int
      */
     private $nbDays;
+    /**
+     * @var string
+     */
+    private $outputPath;
+    /**
+     * @var int
+     */
+    private $cacheMaxDays;
+    /**
+     * @var bool
+     */
+    private $deleteRawXml;
+    /**
+     * @var bool
+     */
+    private $enableGz;
+    /**
+     * @var bool
+     */
+    private $enableZip;
+    /**
+     * @var bool
+     */
+    private $enableXz;
+    /**
+     * @var int
+     */
+    private $xmlCacheDays;
+    /**
+     * @var bool
+     */
+    private $enableDummy;
+    /**
+     * @var array
+     */
+    private $customPriorityOrders;
+    /**
+     * @var array|\string[][]
+     */
+    private $guidesToGenerate;
+    /**
+     * @var string|null
+     */
+    private $zipBinPath;
+    /**
+     * @var bool
+     */
+    private $forceTodayGrab;
+    /**
+     * @var array
+     */
+    private $extraParams;
+
+    /**
+     * @var ProviderInterface[]
+     */
+    private $providerList;
 
     /**
      * @return int
@@ -113,58 +171,22 @@ class Configurator
     {
         return $this->extraParams;
     }
+
     /**
-     * @var string
+     * @return string
      */
-    private $outputPath;
+    public function getOutputPath(): string
+    {
+        return $this->outputPath;
+    }
+
     /**
-     * @var int
+     * @return int
      */
-    private $cacheMaxDays;
-    /**
-     * @var bool
-     */
-    private $deleteRawXml;
-    /**
-     * @var bool
-     */
-    private $enableGz;
-    /**
-     * @var bool
-     */
-    private $enableZip;
-    /**
-     * @var bool
-     */
-    private $enableXz;
-    /**
-     * @var int
-     */
-    private $xmlCacheDays;
-    /**
-     * @var bool
-     */
-    private $enableDummy;
-    /**
-     * @var array
-     */
-    private $customPriorityOrders;
-    /**
-     * @var array|\string[][]
-     */
-    private $guidesToGenerate;
-    /**
-     * @var string|null
-     */
-    private $zipBinPath;
-    /**
-     * @var bool
-     */
-    private $forceTodayGrab;
-    /**
-     * @var array
-     */
-    private $extraParams;
+    public function getCacheMaxDays(): int
+    {
+        return $this->cacheMaxDays;
+    }
 
     /**
      * @param int $nbDays Number of days XML TV will try to get EPG
@@ -185,20 +207,20 @@ class Configurator
      */
     public function __construct(
         int $nbDays = 8,
-        string $outputPath = './xmltv/',
+        string $outputPath = './var/export/',
         ?int $timeLimit = null,
         ?int $memoryLimit = null,
         int $cache_max_days = 8,
         bool $deleteRawXml = false,
-        bool $enableGz  = true,
-        bool $enableZip  = true,
-        bool $enableXz  = false,
+        bool $enableGz = true,
+        bool $enableZip = true,
+        bool $enableXz = false,
         int $xmlCacheDays = 5,
-        bool $enableDummy  = false,
+        bool $enableDummy = false,
         array $customPriorityOrders = [],
-        array $guides_to_generate = [array("channels"=>"config/channels.json", "filename"=>"xmltv.xml")],
+        array $guides_to_generate = [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
         ?string $zipBinPath = null,
-        bool $forceTodayGrab =false,
+        bool $forceTodayGrab = false,
         array $extraParams = []
     ) {
         if (isset($timeLimit)) {
@@ -246,30 +268,34 @@ class Configurator
         Logger::log("\n");
 
         return new Configurator(
-            $data['days']?? 8,
-            $data['output_path']?? './xmltv',
-            $data['time_limit']??  null,
-            $data['memory_limit']??  null,
-            $data['cache_max_days']?? 8,
-            $data['delete_raw_xml']??   false,
-            $data['enable_gz']??   true,
-            $data['enable_zip']??   true,
-            $data['enable_xz']??   false,
-            $data['xml_cache_days']??   5,
-            $data['enable_dummy']??   false,
-            $data['custom_priority_orders']??   [],
-            $data['guides_to_generate']?? [array('channels'=>'config/channels.json', 'filename'=>'xmltv.xml')],
-            $data['7zip_path']??   null,
-            $data['force_todays_grab']??  false,
+            $data['days'] ?? 8,
+            $data['output_path'] ?? './xmltv',
+            $data['time_limit'] ?? null,
+            $data['memory_limit'] ?? null,
+            $data['cache_max_days'] ?? 8,
+            $data['delete_raw_xml'] ?? false,
+            $data['enable_gz'] ?? true,
+            $data['enable_zip'] ?? true,
+            $data['enable_xz'] ?? false,
+            $data['xml_cache_days'] ?? 5,
+            $data['enable_dummy'] ?? false,
+            $data['custom_priority_orders'] ?? [],
+            $data['guides_to_generate'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
+            $data['7zip_path'] ?? null,
+            $data['force_todays_grab'] ?? false,
             []
         );
     }
 
     public function getGenerator()
     {
-        $begin = new \DateTimeImmutable(date('Y-m-d', strtotime("-1 day")));
-        $generator = new Generator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this->enableDummy, $this->forceTodayGrab);
-        $generator->setProviders($this->getProviders());
+        $begin = new \DateTimeImmutable(date('Y-m-d', strtotime('-1 day')));
+        $generator = new Generator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this->enableDummy);
+        $generator->setProviders(
+            $this->getProviders(
+                $this->getDefaultClient()
+            )
+        );
 
         $outputFormat = [];
         if (!$this->deleteRawXml) {
@@ -286,7 +312,7 @@ class Configurator
         }
 
         $generator->setExporter(new XmlExporter($outputFormat, $this->zipBinPath));
-        $generator->setCache(new CacheFile('var/cache'));
+        $generator->setCache(new CacheFile('var/cache', $this->forceTodayGrab));
         $generator->addGuides($this->guidesToGenerate ?? []);
 
 
@@ -296,36 +322,37 @@ class Configurator
     /**
      * @return ProviderInterface[]
      */
-    public function getProviders(): array
+    public function getProviders(Client $client): array
     {
+        if ($this->providerList) {
+            return $this->providerList;
+        }
+
         $providersClass = Utils::getProviders();
         $providersObject = [];
         foreach ($providersClass as $providerClass) {
             $tmp = explode('\\', $providerClass);
             $name = end($tmp);
-            $providersObject[] = new $providerClass($this->customPriorityOrders[$name] ?? null, $this->extraParams);
+            $providersObject[] = new $providerClass($client, $this->customPriorityOrders[$name] ?? null, $this->extraParams);
         }
 
         usort($providersObject, function (ProviderInterface $providerA, ProviderInterface $providerB) {
             return $providerB::getPriority() <=> $providerA::getPriority();
         });
 
-        return $providersObject;
+        return $this->providerList = $providersObject;
     }
 
-    /**
-     * @return string
-     */
-    public function getOutputPath(): string
+    public function getDefaultClient(): Client
     {
-        return $this->outputPath;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCacheMaxDays(): int
-    {
-        return $this->cacheMaxDays;
+        return new Client(
+            [
+                'verify' => false,
+                'http_errors' => false,
+                'headers' => [
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0',
+                ],
+            ]
+        );
     }
 }

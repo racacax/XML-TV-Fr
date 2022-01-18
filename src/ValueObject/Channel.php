@@ -53,17 +53,9 @@ class Channel
         return $this->icon;
     }
 
-    /**
-     * @param $start
-     * @param $end
-     * @return Program
-     */
-    public function addProgram($start, $end): Program
+    public function addProgram(Program $program): void
     {
-        // change parameter, use Program instead of dates
-        $program = new Program($start, $end);
         $this->programs[] = $program;
-        return $program;
     }
 
     /**

@@ -4,60 +4,84 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise\Utils;
+use GuzzleHttp\Psr7\Response;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
+use racacax\XmlTv\ValueObject\Channel;
+use racacax\XmlTv\ValueObject\Program;
 
 class ViniPF extends AbstractProvider implements ProviderInterface
 {
-    private static $cache_per_day = array(); // ViniPF send all channels data for two hours. No need to request for every channel
+    private static $cache_per_day = []; // ViniPF send all channels data for two hours. No need to request for every channel
 
-    public function __construct(?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        parent::__construct(ResourcePath::getInstance()->getChannelPath("channels_vinipf.json"), $priority ?? 0.4);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_vinipf.json'), $priority ?? 0.4);
     }
 
     public function constructEPG(string $channel, string $date)
     {
-        parent::constructEPG($channel, $date);
+        $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $debut = strtotime($date); // to be synchronized with Paris timezone to avoid overlaping on french channels if multiple providers
-        date_default_timezone_set("Pacific/Tahiti");
+
+        //@todo check
+        $timezone = new \DateTimeZone('Pacific/Tahiti');
+        $datetime = new \DateTimeImmutable($date.' 14:00:00', $timezone);
+
+        $promises = [];
         $count = 12;
         for ($i=0; $i <$count; $i++) {
-            Logger::updateLine(" ".round($i*100/$count, 2)." %");
-            $dateDebut = '{"dateDebut":"'.date('c', $debut + 3600*2*$i).'"}';
+            $currentDate = $datetime->modify(sprintf('+%d hours', $i*2));
+            $dateDebut = '{"dateDebut":"'.$currentDate->format('c').'"}';
             if (!isset(self::$cache_per_day[md5($dateDebut)])) {
-                $ch3 = curl_init();
-                curl_setopt($ch3, CURLOPT_URL, 'https://programme-tv.vini.pf/programmesJSON');
-                curl_setopt($ch3, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch3, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:49.0) Gecko/20100101 Firefox/49.0");
-                curl_setopt($ch3, CURLOPT_SSL_VERIFYPEER, 0);
-                curl_setopt($ch3, CURLOPT_SSL_VERIFYHOST, 0);
-                curl_setopt($ch3, CURLOPT_FOLLOWLOCATION, 0);
-                curl_setopt($ch3, CURLOPT_POST, 1);
-                curl_setopt($ch3, CURLOPT_POSTFIELDS, $dateDebut);
-                $res3 = curl_exec($ch3);
-                curl_close($ch3);
-                $json = json_decode($res3, true);
-                self::$cache_per_day[md5($dateDebut)] = $json;
+                $promises[] = $this->client->postAsync(
+                    $this->generateUrl($channelObj, new \DateTimeImmutable($date)),
+                    [
+                        'body'=>$dateDebut
+                    ]
+                )->then(function (Response $response) use ($dateDebut) {
+                    self::$cache_per_day[md5($dateDebut)] = json_decode((string)$response->getBody(), true);
+
+                    return $response;
+                });
+            }
+        }
+        Utils::all($promises)->wait();
+
+        for ($i=0; $i <$count; $i++) {
+            Logger::updateLine(' '.round($i*100/$count, 2).' %');
+            $currentDate = $datetime->modify(sprintf('+%d hours', $i*2));
+            $dateDebut = '{"dateDebut":"'.$currentDate->format('c').'"}';
+            if (empty(self::$cache_per_day[md5($dateDebut)])) {
+                continue;
             }
             $array = self::$cache_per_day[md5($dateDebut)];
-            foreach ($array["programmes"] as $viniChannel) {
-                if ($viniChannel["nid"] == $this->channelsList[$channel]) {
-                    foreach ($viniChannel["programmes"] as $programme) {
-                        $program = $this->channelObj->addProgram($programme["timestampDeb"], $programme['timestampFin']);
+            foreach ($array['programmes'] as $viniChannel) {
+                if ($viniChannel['nid'] == $this->channelsList[$channel]) {
+                    foreach ($viniChannel['programmes'] as $programme) {
+                        $program = new Program($programme['timestampDeb'], $programme['timestampFin']);
                         $program->addTitle($programme['titreP']);
                         $program->addSubtitle($programme['legendeP']);
-                        $program->addDesc($programme["desc"]);
+                        $program->addDesc($programme['desc']);
                         $program->setIcon($programme['srcP']);
-                        $program->addCategory($programme["categorieP"]);
+                        $program->addCategory($programme['categorieP']);
+
+                        $channelObj->addProgram($program);
                     }
                 }
             }
         }
-        return $this->channelObj;
+
+        return $channelObj;
+    }
+
+    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    {
+        return 'https://programme-tv.vini.pf/programmesJSON';
     }
 }
