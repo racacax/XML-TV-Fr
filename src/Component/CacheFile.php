@@ -41,7 +41,7 @@ class CacheFile
         }
         $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
         if(count(explode(date('Y-m-d'), $key)) > 1 && !isset($this->createdKeys[$key])) {
-            unlink($fileName);
+            @unlink($fileName);
             $this->createdKeys[$key] = true;
             return false;
         }

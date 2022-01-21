@@ -67,7 +67,7 @@ abstract class AbstractProvider {
         } else {
             curl_setopt($ch1, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0');
         }
-        $res1 = html_entity_decode(curl_exec($ch1),ENT_QUOTES);
+        $res1 = html_entity_decode(curl_exec($ch1) ?? '',ENT_QUOTES);
         curl_close($ch1);
         return $res1;
     }
