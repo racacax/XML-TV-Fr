@@ -40,6 +40,9 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
         );
         $res1 = html_entity_decode($res1, ENT_QUOTES);
         @$res1 = explode('Mes<br>alertes courriel', $res1)[1];
+        if (empty($res1)) {
+            return false;
+        }
         preg_match_all('/class="heure"\>(.*?)\<\/td\>/', $res1, $time);
         preg_match_all('/class="titre"\>.*?href="(.*?)"\>(.*?)\<\/a\>/', $res1, $titre);
         $t8 = json_encode($time);

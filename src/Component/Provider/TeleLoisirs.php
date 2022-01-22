@@ -113,6 +113,13 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
 
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
+        if ($date->format('Y-m-d') === date('Y-m-d')) {
+            return sprintf(
+                'https://www.programme-tv.net/programme/chaine/%s',
+                $this->channelsList[$channel->getId()]
+            );
+        }
+
         return sprintf(
             'https://www.programme-tv.net/programme/chaine/%s/%s',
             $date->format('Y-m-d'),

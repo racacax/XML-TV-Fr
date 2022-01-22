@@ -30,6 +30,9 @@ class TeleZ extends AbstractProvider implements ProviderInterface
         if (!isset(self::$cache_per_day[$url])) {
             $res3 = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
             $json = json_decode($res3, true);
+            if (empty($json)) {
+                return false;
+            }
             self::$cache_per_day[$url] = $json;
         }
         $array = self::$cache_per_day[$url];

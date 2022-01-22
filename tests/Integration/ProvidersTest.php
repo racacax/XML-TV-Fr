@@ -19,9 +19,15 @@ class ProvidersTest extends TestCase
         $channels = $provider->getChannelsList();
         $this->assertGreaterThanOrEqual(1, count($channels), 'Provider without channel');
         $channelObj = null;
+        $count = 0;
         foreach ($channels as $channelCode => $_) {
+            $count++;
             $channelObj = $provider->constructEPG($channelCode, date('Y-m-d'));
             if (false !== $channelObj && $channelObj->getProgramCount()>0) {
+                break;
+            }
+            // test only 3 channels
+            if ($count>=1) {
                 break;
             }
         }

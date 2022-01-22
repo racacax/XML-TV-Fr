@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\TooManyRedirectsException;
 use racacax\XmlTv\Component\ChannelFactory;
 
 abstract class AbstractProvider
@@ -57,12 +58,23 @@ abstract class AbstractProvider
     protected function getContentFromURL($url, array $headers = []): string
     {
         if (empty($headers['User-Agent'])) {
-            $headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0';
+            $headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0';
         }
-        $response = $this->client->get(
-            $url,
-            ['headers'=> $headers]
-        );
+        try {
+            $response = $this->client->get(
+                $url,
+                [
+                    'headers'=> $headers,
+                    'connect_timeout' => 1
+                ]
+            );
+        } catch (\Exception $e) {
+            // Hep to debug
+            // dump($e);
+            // No error accepted
+            return '';
+        }
+
 
         return $response->getBody()->getContents();
     }
