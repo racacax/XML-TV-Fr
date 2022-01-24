@@ -62,6 +62,9 @@ abstract class AbstractProvider {
         curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch1, CURLOPT_COOKIESESSION, true );
+        curl_setopt($ch1, CURLOPT_COOKIEJAR, 'var/cookie' );
+        curl_setopt($ch1, CURLOPT_COOKIEFILE, 'var/cookie' );
         if(!empty($headers)) {
             curl_setopt($ch1, CURLOPT_HTTPHEADER, $headers);
         } else {
