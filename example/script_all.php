@@ -13,20 +13,15 @@ if(!file_exists('config/channels.json')) {
     copy('resources/config/default_channels.json', 'config/channels.json');
 }
 
-//dd('move debugFile', 'move cache folder', 'change cache format', 'channel factory', 'clean cache', 'move tool folder', 'move output folder');
-
 Logger::setLogLevel('debug');
 Logger::setLogFolder('var/logs/');
 $configurator = Configurator::initFromConfigFile(
     'config/config.json'
 );
 $generator = $configurator->getGenerator();
+date_default_timezone_set('Europe/Paris');
 $generator->generateEpg();
 $generator->exportEpg($configurator->getOutputPath());
 $generator->clearCache($configurator->getCacheMaxDays());
 
 //Logger::clearLog();
-date_default_timezone_set('Europe/Paris');
-
-
-

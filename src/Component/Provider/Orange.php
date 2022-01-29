@@ -27,8 +27,6 @@ class Orange extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $channel_id = $this->channelsList[$channel];
-
         $response = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
         $json = json_decode($response, true);
         if (preg_match('(Invalid request)', $response) || preg_match('(504 Gateway Time-out)', $response) || !isset($json)) {
