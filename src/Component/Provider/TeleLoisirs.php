@@ -13,7 +13,7 @@ use racacax\XmlTv\ValueObject\Program;
 
 class TeleLoisirs extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_teleloisirs.json'), $priority ?? 0.6);
     }
@@ -54,7 +54,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             //@todo: add async
             $detail = $this->getContentFromURL($titlehref[1]);
             $detailJson = @explode('<script type="application/ld+json">', $detail)[1];
-            if (isset($detailJson)) {
+            if (!empty($detailJson)) {
                 $detailJson = json_decode(explode('</script>', $detailJson)[0], true);
                 $synopsis = $detailJson['description'] ?? '';
                 if (isset($detailJson['review'])) {

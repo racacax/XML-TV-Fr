@@ -1,6 +1,6 @@
 
 PHONY: quality
-quality: cs-fix test
+quality: cs-fix test phpstan
 
 
 PHONY: cs-fix
@@ -10,3 +10,7 @@ cs-fix:
 PHONY: test
 test:
 	bin/phpunit
+
+PHONY: phpstan
+phpstan:
+	bin/phpstan

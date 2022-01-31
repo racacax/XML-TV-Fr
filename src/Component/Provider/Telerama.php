@@ -12,7 +12,6 @@ use racacax\XmlTv\ValueObject\Program;
 
 class Telerama extends AbstractProvider implements ProviderInterface
 {
-    private static $USER_AGENT = 'okhttp/3.12.3';
     private static $API_CLE = 'apitel-g4aatlgif6qzf'; // apitel-5304b49c90511
     private static $HASH_KEY = 'uIF59SZhfrfm5Gb'; // Eufea9cuweuHeif
     private static $APPAREIL = 'android_tablette';
@@ -20,7 +19,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
     private static $NB_PAGE = '800000';
     private static $PAGE = 1;
 
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_telerama.json'), $priority ?? 0.80);
     }
@@ -36,9 +35,6 @@ class Telerama extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date)
     {
         $channelObj = parent::constructEPG($channel, $date);
-        if (!isset($date)) {
-            $date = date('Y-m-d');
-        }
         if (!$this->channelExists($channel)) {
             return false;
         }

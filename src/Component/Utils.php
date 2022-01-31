@@ -7,7 +7,7 @@ namespace racacax\XmlTv\Component;
 class Utils
 {
     /**
-     * @var class-string<ProviderInterface>[]
+     * @var class-string<ProviderInterface>[]|null
      */
     private static $providers;
 

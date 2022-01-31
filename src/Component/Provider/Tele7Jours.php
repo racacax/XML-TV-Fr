@@ -13,7 +13,7 @@ use racacax\XmlTv\ValueObject\Program;
 
 class Tele7Jours extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_tele7jours.json'), $priority ?? 0.6);
     }
@@ -24,7 +24,7 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $channel_id = $this->channelsList[$channel];
+        $tableau = [];
 
         $promises = [];
         for ($i = 1; $i <= 6; $i++) {

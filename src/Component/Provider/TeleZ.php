@@ -14,7 +14,7 @@ class TeleZ extends AbstractProvider implements ProviderInterface
 {
     private static $cache_per_day = []; // TeleZ sends all channels data for the day. No need to request for every channel
 
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_telez.json'), $priority ?? 0.5);
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTvTest\Integration;
 
 use PHPUnit\Framework\TestCase;
+use racacax\XmlTv\Component\Provider\PlutoTV;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Configurator;
 use racacax\XmlTv\ValueObject\Channel;
@@ -27,24 +28,31 @@ class ProvidersTest extends TestCase
                 break;
             }
             // test only 3 channels
-            if ($count>=1) {
+            if ($count>=3) {
                 break;
             }
         }
 
         $this->assertNotEmpty($channelObj, 'Error on provider : ' .get_class($provider));
-
+        /** @var Channel $channelObj */
         $this->assertSame(Channel::class, get_class($channelObj));
         $this->assertGreaterThan(1, $channelObj->getProgramCount(), 'Channel without programs');
     }
 
 
+    /**
+     * @return \Generator<ProviderInterface[]>
+     */
     public function dataProviderListProvider(): \Generator
     {
         $configurator = new Configurator();
         $providers = $configurator->getGenerator()->getProviders();
 
         foreach ($providers as $provider) {
+            // ignore PlutoTv
+            if (PlutoTV::class === get_class($provider)) {
+                continue;
+            }
             yield [$provider];
         }
     }

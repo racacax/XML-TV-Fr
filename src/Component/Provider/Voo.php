@@ -12,7 +12,7 @@ use racacax\XmlTv\ValueObject\Program;
 
 class Voo extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_voo.json'), $priority ?? 0.85);
     }

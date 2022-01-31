@@ -17,7 +17,7 @@ class ViniPF extends AbstractProvider implements ProviderInterface
 {
     private static $cache_per_day = []; // ViniPF send all channels data for two hours. No need to request for every channel
 
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_vinipf.json'), $priority ?? 0.4);
     }

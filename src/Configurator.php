@@ -55,7 +55,7 @@ class Configurator
      */
     private $customPriorityOrders;
     /**
-     * @var array|\string[][]
+     * @var array|string[][]
      */
     private $guidesToGenerate;
     /**
@@ -141,7 +141,7 @@ class Configurator
     }
 
     /**
-     * @return array|\string[][]
+     * @return array|string[][]
      */
     public function getGuidesToGenerate()
     {
@@ -201,7 +201,7 @@ class Configurator
      * @param int $xmlCacheDays How many days old XML are stored
      * @param bool $enableDummy Add a dummy EPG if channel not found
      * @param array $customPriorityOrders Add a custom priority order for a provider globally
-     * @param array|\string[][] $guides_to_generate list of xmltv to generate
+     * @param array|string[][] $guides_to_generate list of xmltv to generate
      * @param string|null $zipBinPath path of 7zip binary
      * @param bool $forceTodayGrab ignore cache for today
      */
@@ -313,7 +313,7 @@ class Configurator
 
         $generator->setExporter(new XmlExporter($outputFormat, $this->zipBinPath));
         $generator->setCache(new CacheFile('var/cache', $this->forceTodayGrab));
-        $generator->addGuides($this->guidesToGenerate ?? []);
+        $generator->addGuides($this->guidesToGenerate);
 
 
         return $generator;

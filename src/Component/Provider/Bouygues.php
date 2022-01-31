@@ -13,7 +13,7 @@ use racacax\XmlTv\ValueObject\Program;
 // Original script by lazel on https://github.com/lazel/XML-TV-Fr/blob/master/classes/Bouygues.php
 class Bouygues extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_bouygues.json'), $priority ?? 0.9);
     }

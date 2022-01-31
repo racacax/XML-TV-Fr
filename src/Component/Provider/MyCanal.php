@@ -18,7 +18,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 {
     private static $apiKey = '4ca2e967e4ca296ab18dab5432f906ac';
 
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal.json'), $priority ?? 0.7);
     }

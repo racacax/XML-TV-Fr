@@ -31,7 +31,7 @@ class XmlFormatter
         }
 
         foreach ($channel->getPrograms() as $program) {
-            $content[] = '<programme start="'.date('YmdHis O', $program->getStart()).'" stop="'.date('YmdHis O', $program->getEnd()).'" channel="'.$channel->getId().'">';
+            $content[] = '<programme start="'.$program->getStartFormatted().'" stop="'. $program->getEndFormatted().'" channel="'.$channel->getId().'">';
             $content[] = $this->listToMark($program->getTitles(), 'title', 'Aucun titre');
             $content[] = $this->listToMark($program->getSubtitles(), 'sub-title');
             $content[] = $this->listToMark($program->getDescs(), 'desc', 'Aucune description');
@@ -62,7 +62,7 @@ class XmlFormatter
         return trim(implode("\n", $content));
     }
 
-    public function buildCredits(?array $credits): string
+    private function buildCredits(?array $credits): string
     {
         if (empty($this->credits)) {
             return '';
@@ -77,10 +77,7 @@ class XmlFormatter
         return $str;
     }
 
-    /**
-     * @return mixed
-     */
-    public function buildEpisodeNum($episodeNum): string
+    private function buildEpisodeNum($episodeNum): string
     {
         if (!empty($episodeNum)) {
             return '<episode-num system="xmltv_ns">'.$episodeNum.'.</episode-num>';
@@ -89,10 +86,7 @@ class XmlFormatter
         return '';
     }
 
-    /**
-     * @return mixed
-     */
-    public function buildIcon(?string $icon): string
+    private function buildIcon(?string $icon): string
     {
         if (isset($icon) && strlen($icon) > 0) {
             return '<icon src="' . $this->stringAsXML($icon) . '" />';
@@ -101,9 +95,6 @@ class XmlFormatter
         return '';
     }
 
-    /**
-     * @return mixed
-     */
     public function buildYear(?string $year): string
     {
         if (!isset($year)) {
@@ -113,7 +104,7 @@ class XmlFormatter
         return '<year>'.$this->stringAsXML($year).'</year>';
     }
 
-    public function buildRating($rating): string
+    private function buildRating($rating): string
     {
         if (!isset($rating)) {
             return '';

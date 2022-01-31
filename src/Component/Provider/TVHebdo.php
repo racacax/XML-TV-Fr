@@ -71,7 +71,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $infos = explode(' - ', $infos);
             $genre = @trim($infos[0] ?? '');
             $duration = @intval(explode(' ', @trim($infos[1] ?? ''))[0]);
-            $lang = @trim(strtolower($infos[2]) ?? '');
+            $lang = @trim(strtolower($infos[2] ?? ''));
             $potentialYear = @strval(intval(@trim($infos[3] ?? '')));
             if (@trim($infos[3] ?? '') == $potentialYear) {
                 $year = $potentialYear;
@@ -79,8 +79,8 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
                 $rating = @trim($infos[3] ?? '');
             }
             if (isset($infos[4])) {
-                $potentialYear = @intval(@trim($infos[4] ?? ''));
-                if (isset($potentialYear) && $potentialYear > 0) {
+                $potentialYear = @intval(@trim($infos[4]));
+                if ($potentialYear > 0) {
                     $year = $potentialYear;
                 }
             }

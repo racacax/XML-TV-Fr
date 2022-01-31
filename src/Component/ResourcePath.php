@@ -7,7 +7,7 @@ namespace racacax\XmlTv\Component;
 class ResourcePath
 {
     /**
-     * @var ResourcePath
+     * @var ResourcePath|null
      */
     private static $instance;
     /**

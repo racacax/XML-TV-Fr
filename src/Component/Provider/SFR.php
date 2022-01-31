@@ -15,7 +15,7 @@ class SFR extends AbstractProvider implements ProviderInterface
 {
     private $jsonPerDay;
 
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_sfr.json'), $priority ?? 0.85);
         $this->jsonPerDay = [];
