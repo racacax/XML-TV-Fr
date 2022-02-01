@@ -10,7 +10,7 @@ class Logger
     /**
      * @var string
      */
-    private static $debugFolder;
+    private static $debugFolder = __DIR__.'/../../var/logs';
     /**
      * @var string
      */

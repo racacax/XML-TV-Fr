@@ -7,11 +7,13 @@ namespace racacax\XmlTvTest\Integration;
 use PHPUnit\Framework\TestCase;
 use racacax\XmlTv\Component\Provider\PlutoTV;
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\XmlFormatter;
 use racacax\XmlTv\Configurator;
 use racacax\XmlTv\ValueObject\Channel;
 
 class ProvidersTest extends TestCase
 {
+
     /**
      * @dataProvider dataProviderListProvider
      */
@@ -19,6 +21,7 @@ class ProvidersTest extends TestCase
     {
         $channels = $provider->getChannelsList();
         $this->assertGreaterThanOrEqual(1, count($channels), 'Provider without channel');
+        $formater = new XmlFormatter();
         $channelObj = null;
         $count = 0;
         foreach ($channels as $channelCode => $_) {
@@ -27,6 +30,7 @@ class ProvidersTest extends TestCase
             if (false !== $channelObj && $channelObj->getProgramCount()>0) {
                 break;
             }
+
             // test only 3 channels
             if ($count>=3) {
                 break;
@@ -37,6 +41,8 @@ class ProvidersTest extends TestCase
         /** @var Channel $channelObj */
         $this->assertSame(Channel::class, get_class($channelObj));
         $this->assertGreaterThan(1, $channelObj->getProgramCount(), 'Channel without programs');
+        // the goal of this application is to build xml, so we need to test the generation
+        $this->assertNotEmpty($formater->formatChannel($channelObj, $provider));
     }
 
 

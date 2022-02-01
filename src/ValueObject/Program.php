@@ -151,8 +151,15 @@ class Program
     {
         if (is_int($this->start)) {
             return date('YmdHis O', $this->start);
-        } elseif (\DateTimeImmutable::class === get_class($this->start)) {
-            return $this->start->format('YmdHis O');
+        } elseif (is_string($this->start)) {
+            if (intval($this->start) == $this->start) {
+                $this->start = intval($this->start);
+                return $this->getStartFormatted();
+            }
+        } else{
+            if (\DateTimeImmutable::class === get_class($this->start)) {
+                return $this->start->format('YmdHis O');
+            }
         }
 
         return $this->start;
@@ -169,9 +176,17 @@ class Program
     public function getEndFormatted(): string
     {
         if (is_int($this->end)) {
+            //Timezone issue
             return date('YmdHis O', $this->end);
-        } elseif (\DateTimeImmutable::class === get_class($this->end)) {
-            return $this->end->format('YmdHis O');
+        } elseif (is_string($this->end)) {
+            if (intval($this->end) == $this->end) {
+                $this->end = intval($this->end);
+                return $this->getStartFormatted();
+            }
+        } else{
+            if (\DateTimeImmutable::class === get_class($this->end)) {
+                return $this->end->format('YmdHis O');
+            }
         }
 
         return $this->end;
