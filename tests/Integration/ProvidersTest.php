@@ -13,7 +13,6 @@ use racacax\XmlTv\ValueObject\Channel;
 
 class ProvidersTest extends TestCase
 {
-
     /**
      * @dataProvider dataProviderListProvider
      */

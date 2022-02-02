@@ -154,9 +154,10 @@ class Program
         } elseif (is_string($this->start)) {
             if (intval($this->start) == $this->start) {
                 $this->start = intval($this->start);
+
                 return $this->getStartFormatted();
             }
-        } else{
+        } else {
             if (\DateTimeImmutable::class === get_class($this->start)) {
                 return $this->start->format('YmdHis O');
             }
@@ -181,9 +182,10 @@ class Program
         } elseif (is_string($this->end)) {
             if (intval($this->end) == $this->end) {
                 $this->end = intval($this->end);
+
                 return $this->getStartFormatted();
             }
-        } else{
+        } else {
             if (\DateTimeImmutable::class === get_class($this->end)) {
                 return $this->end->format('YmdHis O');
             }
