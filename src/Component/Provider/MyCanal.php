@@ -100,7 +100,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             }
 
             $icon = $detail['episodes']['contents'][0]['URLImage'] ?? @$detail['detail']['informations']['URLImage'];
-            $icon = str_replace(['{resolutionXY}', '{imageQualityPercentage}'], ['640x360', '80'], $icon);
+            $icon = str_replace(['{resolutionXY}', '{imageQualityPercentage}'], ['640x360', '80'], $icon ?? '');
 
             $programs[$startTime] = [
                 'startTime'     => $startTime,
