@@ -58,6 +58,17 @@ class Channel
         $this->programs[] = $program;
     }
 
+
+    public function orderProgram(): void
+    {
+        usort(
+            $this->programs,
+            function (Program $program1, Program $program2) {
+                return $program1->getStart() <=> $program2->getStart();
+            }
+        );
+    }
+
     /**
      * @return Program[]
      */

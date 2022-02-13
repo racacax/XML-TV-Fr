@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
+use racacax\XmlTv\Component\ChannelFactory;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
@@ -13,7 +14,7 @@ use racacax\XmlTv\ValueObject\Program;
 
 class PlutoTV extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_plutotv.json'), $priority ?? 0.10);
     }
@@ -21,7 +22,7 @@ class PlutoTV extends AbstractProvider implements ProviderInterface
     private function getSessionToken(): string
     {
         $content = $this->getContentFromURL('https://boot.pluto.tv/v4/start?appName=web&appVersion=5.107.0&deviceVersion=96.0.0&deviceModel=web&deviceMake=firefox&deviceType=web&clientID=245658c-6556-25563-8be6-586586353fgv&clientModelNumber=1.0.0&channelSlug=walker-texas-ranger-fr&serverSideAds=true&constraints=');
-        $json = @json_decode($content, true);
+        $json = json_decode($content, true);
 
         return $json['sessionToken'] ?? '';
     }
@@ -29,28 +30,23 @@ class PlutoTV extends AbstractProvider implements ProviderInterface
 
     public function constructEPG(string $channel, string $date)
     {
-        $channelObj = parent::constructEPG($channel, $date);
-        $sessionToken = $this->getSessionToken();
-        if (!$this->channelExists($channel) || empty($sessionToken)) {
+        if (!$this->channelExists($channel) || empty($sessionToken = $this->getSessionToken())) {
             return false;
         }
+        $channelObj = ChannelFactory::createChannel($channel);
 
         $headers = ['Authorization' => 'Bearer '.$sessionToken];
         $count = 6;
         for ($i=0; $i<$count; $i++) {
             Logger::updateLine(' '.round($i*100/$count, 2).' %');
-            $hour = strval($i*4);
-            if ($i < 3) {
-                $hour = '0'.$hour;
-            }
+            $hour = str_pad(strval($i*4), 2, '0', STR_PAD_LEFT);
             $content = $this->getContentFromURL(
                 sprintf($this->generateUrl($channelObj, new \DateTimeImmutable($date)), $hour),
                 $headers
             );
-
-            $epg = @json_decode($content, true);
-            if (!isset($epg['data'][0]['timelines'])) {
-                return false;
+            $epg = json_decode($content, true);
+            if (empty($epg['meta']['dataCount']) || empty($epg['data'][0]['timelines'])) {
+                continue;
             }
             foreach ($epg['data'][0]['timelines'] as $timeline) {
                 $programObj = new Program(strtotime($timeline['start']), strtotime($timeline['stop']));

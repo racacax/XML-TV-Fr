@@ -16,7 +16,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
     private static $cache = []; // multiple channels are on the same page
     private static $BASE_URL = 'https://tv-programme.telecablesat.fr';
     private $loopCounter = 0;
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_telecablesat.json'), $priority ?? 0.55);
     }
@@ -50,7 +50,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         $channel_index = array_search($channel_id, $channels[1]);
         if ($channel_index>=0) {
             $channel_content = @explode('<div class="row">', explode("<div class='paging'>", $content)[0])[$channel_index+1];
-            if (isset($channel_content)) {
+            if (!empty($channel_content)) {
                 preg_match_all('/data-start="(.*?)" data-end="(.*?)"/', $channel_content, $times);
                 preg_match_all('/data-src="(.*?)"/', $channel_content, $imgs);
                 preg_match_all('/<div class="hour-type">.*?<\/span>(.*?)<\/div>.*?<span class="title">(.*?)<\/span>/', $channel_content, $genresAndTitles);
@@ -94,7 +94,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                     preg_match('/itemprop="episodeNumber">(.*?)<\/span>/s', $content, $season);
                     preg_match('/<\/span>\\((.*?)\/<span itemprop="numberOfEpisodes">/s', $content, $episode);
                     $program->setEpisodeNum(@$season[1], @$episode[1]);
-                    $critique = @explode('<h2>Critique</h2>', $content)[1] ?? '';
+                    $critique = @explode('<h2>Critique</h2>', $content)[1] ?: '';
                     preg_match('/<p>(.*?)</s', $critique, $critique);
                     $resume = @explode('<h2>Résumé</h2>', $content)[1];
                     preg_match("/<p>(.*?)<\/p>/s", $resume, $resume);

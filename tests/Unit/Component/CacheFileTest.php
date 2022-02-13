@@ -19,7 +19,8 @@ class CacheFileTest extends TestCase
         parent::setUp();
 
         // Remove all file on the folder
-        foreach (glob($this->testFolder.'/*') as $file) {
+        $files = glob($this->testFolder.'/*') ?: [];
+        foreach ($files as $file) {
             unlink($file);
         }
     }

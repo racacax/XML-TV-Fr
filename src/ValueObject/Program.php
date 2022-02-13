@@ -10,7 +10,13 @@ class Program
     private $descs;
     private $categories;
     private $icon;
+    /**
+     * @var \DateTimeImmutable|string|number
+     */
     private $start;
+    /**
+     * @var \DateTimeImmutable|string|number
+     */
     private $end;
     private $episode_num;
     private $subtitles;
@@ -20,8 +26,8 @@ class Program
 
     /**
      * Program constructor.
-     * @param $start
-     * @param $end
+     * @param \DateTimeImmutable|string|number $start
+     * @param \DateTimeImmutable|string|number $end
      */
     public function __construct($start, $end)
     {
@@ -65,8 +71,8 @@ class Program
 
     /**
      * Ajout d'un crédit (acteur, présentateur, ...)
-     * @param $name
-     * @param $type
+     * @param mixed $name
+     * @param mixed $type
      */
     public function addCredit($name, $type): void
     {
@@ -141,6 +147,24 @@ class Program
         return $this->start;
     }
 
+    public function getStartFormatted(): string
+    {
+        if (is_int($this->start)) {
+            return date('YmdHis O', $this->start);
+        } elseif (is_string($this->start)) {
+            if (intval($this->start) == $this->start) {
+                $this->start = intval($this->start);
+
+                return $this->getStartFormatted();
+            }
+        } else {
+            if (\DateTimeImmutable::class === get_class($this->start)) {
+                return $this->start->format('YmdHis O');
+            }
+        }
+
+        return $this->start;
+    }
 
     /**
      * @return mixed
@@ -150,6 +174,25 @@ class Program
         return $this->end;
     }
 
+    public function getEndFormatted(): string
+    {
+        if (is_int($this->end)) {
+            //Timezone issue
+            return date('YmdHis O', $this->end);
+        } elseif (is_string($this->end)) {
+            if (intval($this->end) == $this->end) {
+                $this->end = intval($this->end);
+
+                return $this->getStartFormatted();
+            }
+        } else {
+            if (\DateTimeImmutable::class === get_class($this->end)) {
+                return $this->end->format('YmdHis O');
+            }
+        }
+
+        return $this->end;
+    }
 
     /**
      * @return mixed
@@ -161,8 +204,8 @@ class Program
 
     /**
      * Définition de la saison et de l'épisode du programme
-     * @param $season
-     * @param $episode
+     * @param mixed $season
+     * @param mixed $episode
      */
     public function setEpisodeNum($season, $episode): void
     {

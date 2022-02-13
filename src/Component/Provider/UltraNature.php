@@ -12,7 +12,7 @@ use racacax\XmlTv\ValueObject\Program;
 
 class UltraNature extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_ultranature.json'), $priority ?? 0.1);
     }
