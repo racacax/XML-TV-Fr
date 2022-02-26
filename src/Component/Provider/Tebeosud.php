@@ -115,7 +115,7 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
                     //$program->addCategory($program['genre']);
 
                     $channelObj->addProgram($program);
-                }, function (RequestException $e) use ($dataProgram, $channelObj) {
+                }, function (\Throwable $e) use ($dataProgram, $channelObj) {
                     $program = new Program($dataProgram['begin'], $dataProgram['end']);
                     $program->addTitle($dataProgram['title']);
                     $channelObj->addProgram($program);
