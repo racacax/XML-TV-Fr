@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\Psr7\Response;
 use racacax\XmlTv\Component\ProviderInterface;
@@ -113,6 +114,10 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
                     $program->setIcon($urlImage);
                     //$program->addCategory($program['genre']);
 
+                    $channelObj->addProgram($program);
+                }, function (RequestException $e) use ($dataProgram, $channelObj) {
+                    $program = new Program($dataProgram['begin'], $dataProgram['end']);
+                    $program->addTitle($dataProgram['title']);
                     $channelObj->addProgram($program);
                 });
         }

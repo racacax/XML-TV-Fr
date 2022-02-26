@@ -35,12 +35,14 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         /**
          * @var Response[]
          */
-        $response = Utils::all([
-            '1' => $this->client->getAsync($url1),
-            '2' => $this->client->getAsync($url2)
-        ])->wait();
-
-
+        try {
+            $response = Utils::all([
+                '1' => $this->client->getAsync($url1),
+                '2' => $this->client->getAsync($url2)
+            ])->wait();
+        } catch(\Throwable $t) {
+            return false;
+        }
         $json = json_decode((string)$response['1']->getBody(), true);
         $json2 = json_decode((string)$response['2']->getBody(), true);
 
@@ -66,7 +68,11 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             Logger::updateLine(' ' . round($index * 100 / $count, 2) . ' %');
             $promises[$program['onClick']['URLPage']] = $this->client->getAsync($program['onClick']['URLPage']);
         }
-        $response = Utils::all($promises)->wait();
+        try {
+            $response = Utils::all($promises)->wait();
+        } catch(\Throwable $t) {
+            return false;
+        }
 
         foreach ($all as $index => $program) {
             Logger::updateLine(' '.round($index*100/$count, 2).' %');
