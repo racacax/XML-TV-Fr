@@ -283,7 +283,7 @@ class Configurator
             $data['guides_to_generate'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
             $data['7zip_path'] ?? null,
             $data['force_todays_grab'] ?? false,
-            []
+            $data['extra_params'] ?? []
         );
     }
 

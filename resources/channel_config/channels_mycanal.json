@@ -1,270 +1,1074 @@
 {
-  "CanalPlusGrandEcran.fr": 900,
-  "France2.fr": 26,
-  "CNN.uk": 30,
-  "EurosportInternational1.fr": 101,
-  "UshuaiaTV.fr": 142,
-  "Arte.fr": 154,
-  "Classica.fr": 165,
-  "Penthouse.fr": 167,
-  "DiegoTV.fr": 184,
-  "DoraTV.fr": 185,
-  "BobTV.fr": 196,
-  "CanalPlusFamily.fr": 259,
-  "MezzoLive.fr": 268,
-  "DisneyJunior.fr": 274,
-  "DisneyChannel.fr": 282,
-  "ChaineEvenement.fr": 289,
-  "NatGeoWild.fr": 290,
-  "Teva.fr": 292,
-  "ParisPremiere.fr": 294,
-  "W9.fr": 296,
-  "NationalGeographic.fr": 302,
-  "France24.fr": 310,
-  "TF1.fr": 312,
-  "M6.fr": 313,
-  "Euronews.fr": 324,
-  "M6Music.fr": 352,
-  "serieclub.fr": 356,
-  "I24news.fr": 362,
-  "OCSMax.fr": 372,
-  "TCM.fr": 374,
-  "GolfPlus.fr": 378,
-  "beINSPORTS1.fr": 977,
-  "beINSPORTS2.fr": 978,
-  "Djazz.fr": 407,
-  "NonStopPeople.fr": 434,
-  "Eurosport2.fr": 436,
-  "Cherie25.fr": 440,
-  "LEquipe21.fr": 451,
-  "OCSChoc.fr": 466,
-  "OCSCity.fr": 467,
-  "OCSGeants.fr": 468,
-  "MTV.fr": 470,
-  "RTFrance.fr": 479,
-  "JOne.fr": 484,
-  "ParamountChannel.fr": 487,
-  "CartoonNetwork.fr": 502,
-  "Animaux.fr": 503,
-  "Action.fr": 504,
-  "RTL9.fr": 505,
-  "CStar.fr": 513,
-  "beINSPORTS3.fr": 979,
-  "Nickelodeon4Teen.fr": 518,
-  "TV5Monde.fr": 520,
-  "6ter.fr": 521,
-  "CanalJ.fr": 525,
-  "TF1SeriesFilms.fr": 526,
-  "NollywoodTV.fr": 527,
-  "Boing.fr": 529,
-  "Boomerang.fr": 530,
-  "DorcelTV.fr": 536,
-  "DorcelXXX.fr": 537,
-  "Equidia.fr": 540,
-  "FootPlus24.fr": 542,
-  "France3.fr": 543,
-  "France4.fr": 544,
-  "France5.fr": 545,
-  "Gulli.fr": 549,
-  "Histoire.fr": 550,
-  "InfosportPlus.fr": 551,
-  "LaChaineMeteo.fr": 552,
-  "LCI.fr": 553,
-  "LaChaineParlementaire.fr": 554,
-  "LibidoTV.fr": 555,
-  "MCM.fr": 556,
-  "RFMTV.fr": 557,
-  "Mezzo.fr": 560,
-  "Multisports1.fr": 562,
-  "Multisports2.fr": 563,
-  "Multisports3.fr": 564,
-  "Multisports4.fr": 565,
-  "Multisports5.fr": 566,
-  "Multisports6.fr": 567,
-  "NRJ12.fr": 568,
-  "NRJHits.fr": 569,
-  "NT1.fr": 570,
-  "Numero23.fr": 571,
-  "PinkX.fr": 575,
-  "Melody.fr": 580,
-  "TIJI.fr": 583,
-  "TMC.fr": 584,
-  "TraceUrban.fr": 585,
-  "TvBreizh.fr": 586,
-  "BBCWorldNews.uk": 589,
-  "Nickelodeon.fr": 591,
-  "GameOne.fr": 592,
-  "NickelodeonJunior.fr": 593,
-  "RMCDecouverte.fr": 595,
-  "beINSPORTSMAX4.fr": 980,
-  "beINSPORTSMAX5.fr": 981,
-  "beINSPORTSMAX6.fr": 982,
-  "beINSPORTSMAX7.fr": 983,
-  "beINSPORTSMAX8.fr": 603,
-  "beINSPORTSMAX9.fr": 604,
-  "beINSPORTSMAX10.fr": 605,
-  "AB1.fr": 611,
-  "ABMoteurs.fr": 612,
-  "Mangas.fr": 613,
-  "ScienceEtVieTV.fr": 614,
-  "XXL.fr": 616,
-  "TouteHistoire.fr": 620,
-  "BET.fr": 628,
-  "MTVHits.fr": 629,
-  "AstroCenter.fr": 632,
-  "BFMTV.fr": 633,
-  "Eurosport3601.fr": 635,
-  "Eurosport3602.fr": 636,
-  "Eurosport3603.fr": 637,
-  "Eurosport3604.fr": 638,
-  "ColmaxTV.fr": 643,
-  "BFMBusiness.fr": 645,
-  "Eurosport3605.fr": 650,
-  "Eurosport3606.fr": 651,
-  "Eurosport3607.fr": 652,
-  "Eurosport3608.fr": 653,
-  "CliqueTV.fr": 665,
-  "FranceInfo.fr": 670,
-  "ManX.fr": 672,
-  "TraceAfrica.fr": 674,
-  "AlJazeeraEnglish.uk": 675,
-  "Viceland.fr": 677,
-  "Museum.fr": 678,
-  "ChasseEtPeche.fr": 681,
-  "Toonami.fr": 683,
-  "PenthouseBlack.fr": 686,
-  "NovelasTV.fr": 693,
-  "WarnerTV.fr": 694,
-  "CStarHitsFrance.fr": 723,
-  "EvenementsSports4KUHD.fr": 726,
-  "RMCSport1.fr": 732,
-  "RMCSport2.fr": 733,
-  "RMCSportLive5.fr": 756,
-  "RMCSportLive6.fr": 757,
-  "RMCSportLive7.fr": 758,
-  "RMCSportLive8.fr": 759,
-  "RMCSportLive9.fr": 760,
-  "RMCSportLive10.fr": 761,
-  "RMCSportLive11.fr": 762,
-  "RMCSportLive12.fr": 763,
-  "RMCSportLive13.fr": 764,
-  "RMCSportLive14.fr": 765,
-  "RMCSportLive3.fr": 766,
-  "RMCSportLive4.fr": 767,
-  "Canal9.fr": 768,
-  "RTSUn.ch": 770,
-  "RTSDeux.ch": 771,
-  "CANALALPHANE.ch": 772,
-  "LaTele.ch": 773,
-  "LemanBleu.ch": 774,
-  "TeleBielingue.ch": 775,
-  "RSI1.ch": 776,
-  "RSI2.ch": 777,
-  "SRF1.ch": 778,
-  "SRF2.ch": 779,
-  "TraceLatina.fr": 784,
-  "OCSMax.ch": 787,
-  "OCSChoc.ch": 788,
-  "OCSGeants.ch": 789,
-  "OCSCity.ch": 790,
-  "ComedyCentral.fr": 806,
-  "OlympiaTV.fr": 813,
-  "CanalPlusPremierLeague.fr": 815,
-  "CanalPlusTop14.fr": 816,
-  "ES1.fr": 819,
-  "AlticeStudio.fr": 820,
-  "CanalPlusMotoGP.fr": 823,
-  "CanalPlusFormula1.fr": 824,
-  "CStar.ch": 832,
-  "BSmartTV.fr": 849,
-  "JacquieMichelTV.fr": 850,
-  "CanalPlusSport2.ch": 861,
-  "CanalPlusUHD.ch": 874,
-  "TEST1": 876,
-  "TEST2": 877,
-  "RougeTV.ch": 878,
-  "LFMTV.ch": 879,
-  "ONETV.ch": 880,
-  "EVENEMENTALACARTE.fr": 882,
-  "BLUEZOOM.ch": 893,
-  "CanalPlusLigue1.fr": 894,
-  "CanalPlusDocs.fr": 899,
-  "France3Picardie.fr": 920,
-  "France3FrancheComte.fr": 921,
-  "France3Aquitaine.fr": 922,
-  "France3BasseNormandie.fr": 923,
-  "France3Auvergne.fr": 924,
-  "France3Bourgogne.fr": 925,
-  "France3Alpes.fr": 926,
-  "France3NordPasDeCalais.fr": 927,
-  "France3Limousin.fr": 928,
-  "France3RhoneAlpes.fr": 929,
-  "France3ProvenceAlpes.fr": 930,
-  "France3Languedoc.fr": 931,
-  "France3Lorraine.fr": 932,
-  "France3PaysDeLaLoire.fr": 933,
-  "France3CotedAzur.fr": 934,
-  "France3Centre.fr": 935,
-  "France3ParisIdF.fr": 936,
-  "France3PoitouCharentes.fr": 937,
-  "France3ChampagneArdenne.fr": 938,
-  "France3Bretagne.fr": 939,
-  "France3HauteNormandie.fr": 940,
-  "France3Alsace.fr": 941,
-  "France3MidiPyrenees.fr": 942,
-  "France3CorseViaStella.fr": 943,
-  "CanalPlus.fr": 601,
-  "CanalPlusSport.fr": 177,
-  "CanalPlusUHD.fr": 728,
-  "CHAINE340": 340,
-  "CHAINE477": 477,
-  "CHAINE639": 639,
-  "CHAINE656": 656,
-  "CHAINE734": 734,
-  "CHAINE735": 735,
-  "CHAINE780": 780,
-  "CHAINE781": 781,
-  "CHAINE782": 782,
-  "CHAINE783": 783,
-  "CHAINE872": 872,
-  "CHAINE970": 970,
-  "CHAINE971": 971,
-  "CHAINE972": 972,
-  "CHAINE973": 973,
-  "CHAINE974": 974,
-  "CHAINE975": 975,
-  "CHAINE985": 985,
-  "CHAINE986": 986,
-  "CHAINE987": 987,
-  "CHAINE988": 988,
-  "CHAINE989": 989,
-  "CHAINE990": 990,
-  "CHAINE991": 991,
-  "CanalPlusCinema.fr": 198,
-  "CanalPlusDecale.fr": 257,
-  "PlanetePlus.fr": 270,
-  "CinePlusPremier.fr": 322,
-  "CinePlusEmotion.fr": 396,
-  "CinePlusFrisson.fr": 398,
-  "C8.fr": 450,
-  "CNews.fr": 480,
-  "CanalPlusSeries.fr": 481,
-  "CinePlusClassic.fr": 531,
-  "CinePlusClub.fr": 532,
-  "CinePlusFamiz.fr": 533,
-  "ComediePlus.fr": 534,
-  "PIWI.fr": 576,
-  "Seasons.fr": 577,
-  "TeleToonPlus.fr": 581,
-  "PLANETEJustice.fr": 587,
-  "PlaneteAction.fr": 588,
-  "PolarPlus.fr": 692,
-  "CanalPlus.ch": 825,
-  "CanalPlusDecale.ch": 826,
-  "CanalPlusCinema.ch": 827,
-  "CinePlusPremier.ch": 829,
-  "CinePlusFrisson.ch": 830,
-  "C8.ch": 831,
-  "CanalPlusSport.ch": 873,
-  "CHAINE828": 828
+  "CanalPlusGrandEcran.fr": {
+    "id": 900,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France2.fr": {
+    "id": 26,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CNN.uk": {
+    "id": 30,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "EurosportInternational1.fr": {
+    "id": 101,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "UshuaiaTV.fr": {
+    "id": 142,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Arte.fr": {
+    "id": 154,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Classica.fr": {
+    "id": 165,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Penthouse.fr": {
+    "id": 167,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "DiegoTV.fr": {
+    "id": 184,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "DoraTV.fr": {
+    "id": 185,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "BobTV.fr": {
+    "id": 196,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusFamily.fr": {
+    "id": 259,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "MezzoLive.fr": {
+    "id": 268,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "DisneyJunior.fr": {
+    "id": 274,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "DisneyChannel.fr": {
+    "id": 282,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ChaineEvenement.fr": {
+    "id": 289,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "NatGeoWild.fr": {
+    "id": 290,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Teva.fr": {
+    "id": 292,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ParisPremiere.fr": {
+    "id": 294,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "W9.fr": {
+    "id": 296,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "NationalGeographic.fr": {
+    "id": 302,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France24.fr": {
+    "id": 310,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TF1.fr": {
+    "id": 312,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "M6.fr": {
+    "id": 313,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Euronews.fr": {
+    "id": 324,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "M6Music.fr": {
+    "id": 352,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "serieclub.fr": {
+    "id": 356,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "I24news.fr": {
+    "id": 362,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "OCSMax.fr": {
+    "id": 372,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TCM.fr": {
+    "id": 374,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "GolfPlus.fr": {
+    "id": 378,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTS1.fr": {
+    "id": 977,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTS2.fr": {
+    "id": 978,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Djazz.fr": {
+    "id": 407,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "NonStopPeople.fr": {
+    "id": 434,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Eurosport2.fr": {
+    "id": 436,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Cherie25.fr": {
+    "id": 440,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "LEquipe21.fr": {
+    "id": 451,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "OCSChoc.fr": {
+    "id": 466,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "OCSCity.fr": {
+    "id": 467,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "OCSGeants.fr": {
+    "id": 468,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "MTV.fr": {
+    "id": 470,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RTFrance.fr": {
+    "id": 479,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "JOne.fr": {
+    "id": 484,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ParamountChannel.fr": {
+    "id": 487,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CartoonNetwork.fr": {
+    "id": 502,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Animaux.fr": {
+    "id": 503,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Action.fr": {
+    "id": 504,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RTL9.fr": {
+    "id": 505,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CStar.fr": {
+    "id": 513,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTS3.fr": {
+    "id": 979,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Nickelodeon4Teen.fr": {
+    "id": 518,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TV5Monde.fr": {
+    "id": 520,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "6ter.fr": {
+    "id": 521,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalJ.fr": {
+    "id": 525,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TF1SeriesFilms.fr": {
+    "id": 526,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "NollywoodTV.fr": {
+    "id": 527,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Boing.fr": {
+    "id": 529,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Boomerang.fr": {
+    "id": 530,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "DorcelTV.fr": {
+    "id": 536,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "DorcelXXX.fr": {
+    "id": 537,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Equidia.fr": {
+    "id": 540,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "FootPlus24.fr": {
+    "id": 542,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3.fr": {
+    "id": 543,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France4.fr": {
+    "id": 544,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France5.fr": {
+    "id": 545,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Gulli.fr": {
+    "id": 549,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Histoire.fr": {
+    "id": 550,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "InfosportPlus.fr": {
+    "id": 551,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "LaChaineMeteo.fr": {
+    "id": 552,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "LCI.fr": {
+    "id": 553,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "LaChaineParlementaire.fr": {
+    "id": 554,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "LibidoTV.fr": {
+    "id": 555,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "MCM.fr": {
+    "id": 556,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RFMTV.fr": {
+    "id": 557,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Mezzo.fr": {
+    "id": 560,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Multisports1.fr": {
+    "id": 562,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Multisports2.fr": {
+    "id": 563,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Multisports3.fr": {
+    "id": 564,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Multisports4.fr": {
+    "id": 565,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Multisports5.fr": {
+    "id": 566,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Multisports6.fr": {
+    "id": 567,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "NRJ12.fr": {
+    "id": 568,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "NRJHits.fr": {
+    "id": 569,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "NT1.fr": {
+    "id": 570,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Numero23.fr": {
+    "id": 571,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "PinkX.fr": {
+    "id": 575,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Melody.fr": {
+    "id": 580,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TIJI.fr": {
+    "id": 583,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TMC.fr": {
+    "id": 584,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TraceUrban.fr": {
+    "id": 585,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TvBreizh.fr": {
+    "id": 586,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "BBCWorldNews.uk": {
+    "id": 589,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Nickelodeon.fr": {
+    "id": 591,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "GameOne.fr": {
+    "id": 592,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "NickelodeonJunior.fr": {
+    "id": 593,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCDecouverte.fr": {
+    "id": 595,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTSMAX4.fr": {
+    "id": 980,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTSMAX5.fr": {
+    "id": 981,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTSMAX6.fr": {
+    "id": 982,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTSMAX7.fr": {
+    "id": 983,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTSMAX8.fr": {
+    "id": 603,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTSMAX9.fr": {
+    "id": 604,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "beINSPORTSMAX10.fr": {
+    "id": 605,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "AB1.fr": {
+    "id": 611,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ABMoteurs.fr": {
+    "id": 612,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Mangas.fr": {
+    "id": 613,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ScienceEtVieTV.fr": {
+    "id": 614,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "XXL.fr": {
+    "id": 616,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TouteHistoire.fr": {
+    "id": 620,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "BET.fr": {
+    "id": 628,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "MTVHits.fr": {
+    "id": 629,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "AstroCenter.fr": {
+    "id": 632,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "BFMTV.fr": {
+    "id": 633,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Eurosport3601.fr": {
+    "id": 635,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Eurosport3602.fr": {
+    "id": 636,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Eurosport3603.fr": {
+    "id": 637,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Eurosport3604.fr": {
+    "id": 638,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ColmaxTV.fr": {
+    "id": 643,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "BFMBusiness.fr": {
+    "id": 645,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Eurosport3605.fr": {
+    "id": 650,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Eurosport3606.fr": {
+    "id": 651,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Eurosport3607.fr": {
+    "id": 652,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Eurosport3608.fr": {
+    "id": 653,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CliqueTV.fr": {
+    "id": 665,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "FranceInfo.fr": {
+    "id": 670,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ManX.fr": {
+    "id": 672,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TraceAfrica.fr": {
+    "id": 674,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "AlJazeeraEnglish.uk": {
+    "id": 675,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Viceland.fr": {
+    "id": 677,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Museum.fr": {
+    "id": 678,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ChasseEtPeche.fr": {
+    "id": 681,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Toonami.fr": {
+    "id": 683,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "PenthouseBlack.fr": {
+    "id": 686,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "NovelasTV.fr": {
+    "id": 693,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "WarnerTV.fr": {
+    "id": 694,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CStarHitsFrance.fr": {
+    "id": 723,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "EvenementsSports4KUHD.fr": {
+    "id": 726,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSport1.fr": {
+    "id": 732,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSport2.fr": {
+    "id": 733,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive5.fr": {
+    "id": 756,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive6.fr": {
+    "id": 757,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive7.fr": {
+    "id": 758,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive8.fr": {
+    "id": 759,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive9.fr": {
+    "id": 760,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive10.fr": {
+    "id": 761,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive11.fr": {
+    "id": 762,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive12.fr": {
+    "id": 763,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive13.fr": {
+    "id": 764,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive14.fr": {
+    "id": 765,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive3.fr": {
+    "id": 766,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RMCSportLive4.fr": {
+    "id": 767,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Canal9.fr": {
+    "id": 768,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RTSUn.ch": {
+    "id": 770,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "RTSDeux.ch": {
+    "id": 771,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "CANALALPHANE.ch": {
+    "id": 772,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "LaTele.ch": {
+    "id": 773,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "LemanBleu.ch": {
+    "id": 774,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "TeleBielingue.ch": {
+    "id": 775,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "RSI1.ch": {
+    "id": 776,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "RSI2.ch": {
+    "id": 777,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "SRF1.ch": {
+    "id": 778,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "SRF2.ch": {
+    "id": 779,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "TraceLatina.fr": {
+    "id": 784,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "OCSMax.ch": {
+    "id": 787,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "OCSChoc.ch": {
+    "id": 788,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "OCSGeants.ch": {
+    "id": 789,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "OCSCity.ch": {
+    "id": 790,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "ComedyCentral.fr": {
+    "id": 806,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "OlympiaTV.fr": {
+    "id": 813,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusPremierLeague.fr": {
+    "id": 815,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusTop14.fr": {
+    "id": 816,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ES1.fr": {
+    "id": 819,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "AlticeStudio.fr": {
+    "id": 820,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusMotoGP.fr": {
+    "id": 823,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusFormula1.fr": {
+    "id": 824,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CStar.ch": {
+    "id": 832,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "BSmartTV.fr": {
+    "id": 849,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "JacquieMichelTV.fr": {
+    "id": 850,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusSport2.ch": {
+    "id": 861,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "CanalPlusUHD.ch": {
+    "id": 874,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "TEST1": {
+    "id": 876,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TEST2": {
+    "id": 877,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "RougeTV.ch": {
+    "id": 878,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "LFMTV.ch": {
+    "id": 879,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "ONETV.ch": {
+    "id": 880,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "EVENEMENTALACARTE.fr": {
+    "id": 882,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "BLUEZOOM.ch": {
+    "id": 893,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "CanalPlusLigue1.fr": {
+    "id": 894,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusDocs.fr": {
+    "id": 899,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Picardie.fr": {
+    "id": 920,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3FrancheComte.fr": {
+    "id": 921,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Aquitaine.fr": {
+    "id": 922,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3BasseNormandie.fr": {
+    "id": 923,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Auvergne.fr": {
+    "id": 924,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Bourgogne.fr": {
+    "id": 925,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Alpes.fr": {
+    "id": 926,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3NordPasDeCalais.fr": {
+    "id": 927,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Limousin.fr": {
+    "id": 928,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3RhoneAlpes.fr": {
+    "id": 929,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3ProvenceAlpes.fr": {
+    "id": 930,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Languedoc.fr": {
+    "id": 931,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Lorraine.fr": {
+    "id": 932,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3PaysDeLaLoire.fr": {
+    "id": 933,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3CotedAzur.fr": {
+    "id": 934,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Centre.fr": {
+    "id": 935,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3ParisIdF.fr": {
+    "id": 936,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3PoitouCharentes.fr": {
+    "id": 937,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3ChampagneArdenne.fr": {
+    "id": 938,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Bretagne.fr": {
+    "id": 939,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3HauteNormandie.fr": {
+    "id": 940,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3Alsace.fr": {
+    "id": 941,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3MidiPyrenees.fr": {
+    "id": 942,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "France3CorseViaStella.fr": {
+    "id": 943,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlus.fr": {
+    "id": 601,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusSport.fr": {
+    "id": 177,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusUHD.fr": {
+    "id": 728,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE340": {
+    "id": 340,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE477": {
+    "id": 477,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE639": {
+    "id": 639,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE656": {
+    "id": 656,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE734": {
+    "id": 734,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE735": {
+    "id": 735,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE780": {
+    "id": 780,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE781": {
+    "id": 781,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE782": {
+    "id": 782,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE783": {
+    "id": 783,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE872": {
+    "id": 872,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE970": {
+    "id": 970,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE971": {
+    "id": 971,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE972": {
+    "id": 972,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE973": {
+    "id": 973,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE974": {
+    "id": 974,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE975": {
+    "id": 975,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE985": {
+    "id": 985,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE986": {
+    "id": 986,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE987": {
+    "id": 987,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE988": {
+    "id": 988,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE989": {
+    "id": 989,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE990": {
+    "id": 990,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CHAINE991": {
+    "id": 991,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusCinema.fr": {
+    "id": 198,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusDecale.fr": {
+    "id": 257,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "PlanetePlus.fr": {
+    "id": 270,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CinePlusPremier.fr": {
+    "id": 322,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CinePlusEmotion.fr": {
+    "id": 396,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CinePlusFrisson.fr": {
+    "id": 398,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "C8.fr": {
+    "id": 450,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CNews.fr": {
+    "id": 480,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlusSeries.fr": {
+    "id": 481,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CinePlusClassic.fr": {
+    "id": 531,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CinePlusClub.fr": {
+    "id": 532,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CinePlusFamiz.fr": {
+    "id": 533,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "ComediePlus.fr": {
+    "id": 534,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "PIWI.fr": {
+    "id": 576,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "Seasons.fr": {
+    "id": 577,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "TeleToonPlus.fr": {
+    "id": 581,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "PLANETEJustice.fr": {
+    "id": 587,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "PlaneteAction.fr": {
+    "id": 588,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "PolarPlus.fr": {
+    "id": 692,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  },
+  "CanalPlus.ch": {
+    "id": 825,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "CanalPlusDecale.ch": {
+    "id": 826,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "CanalPlusCinema.ch": {
+    "id": 827,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "CinePlusPremier.ch": {
+    "id": 829,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "CinePlusFrisson.ch": {
+    "id": 830,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "C8.ch": {
+    "id": 831,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "CanalPlusSport.ch": {
+    "id": 873,
+    "apiKey": "c79623b30bce3142895f17881374565c"
+  },
+  "CHAINE828": {
+    "id": 828,
+    "apiKey": "4ca2e967e4ca296ab18dab5432f906ac"
+  }
 }
