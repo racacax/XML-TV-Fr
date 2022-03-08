@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ConnectException;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -24,13 +25,16 @@ class Voo extends AbstractProvider implements ProviderInterface
             return false;
         }
 
-        $response = $this->client->post(
-            $this->generateUrl($channelObj, new \DateTimeImmutable($date)),
-            [
-                'body' => '<SubQueryOptions><QueryOption path="Titles">/Props/Name,Pictures,ShortSynopsis,LongSynopsis,Genres,Events,SeriesCount,SeriesCollection</QueryOption><QueryOption path="Titles/Events">/Props/IsAvailable</QueryOption><QueryOption path="Products">/Props/ListPrice,OfferPrice,CouponCount,Name,EntitlementState,IsAvailable</QueryOption><QueryOption path="Channels">/Props/Products</QueryOption><QueryOption path="Channels/Products">/Filter/EntitlementEnd>2018-01-27T14:40:43Z/Props/EntitlementEnd,EntitlementState</QueryOption></SubQueryOptions>'
-            ]
-        );
-
+        try {
+            $response = $this->client->post(
+                $this->generateUrl($channelObj, new \DateTimeImmutable($date)),
+                [
+                    'body' => '<SubQueryOptions><QueryOption path="Titles">/Props/Name,Pictures,ShortSynopsis,LongSynopsis,Genres,Events,SeriesCount,SeriesCollection</QueryOption><QueryOption path="Titles/Events">/Props/IsAvailable</QueryOption><QueryOption path="Products">/Props/ListPrice,OfferPrice,CouponCount,Name,EntitlementState,IsAvailable</QueryOption><QueryOption path="Channels">/Props/Products</QueryOption><QueryOption path="Channels/Products">/Filter/EntitlementEnd>2018-01-27T14:40:43Z/Props/EntitlementEnd,EntitlementState</QueryOption></SubQueryOptions>'
+                ]
+            );
+        } catch (ConnectException $e) {
+            return false;
+        }
         $json = json_decode($response->getBody()->getContents(), true);
         if (!isset($json['Events']['Event'])) {
             return false;
