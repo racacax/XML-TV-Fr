@@ -183,7 +183,7 @@ class Program
             if (intval($this->end) == $this->end) {
                 $this->end = intval($this->end);
 
-                return $this->getStartFormatted();
+                return $this->getEndFormatted();
             }
         } else {
             if (\DateTimeImmutable::class === get_class($this->end)) {
