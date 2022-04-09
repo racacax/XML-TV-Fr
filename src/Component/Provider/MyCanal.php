@@ -16,10 +16,11 @@ use racacax\XmlTv\ValueObject\Program;
 // Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
 class MyCanal extends AbstractProvider implements ProviderInterface
 {
-    private static $apiKey;
+    protected $apiKey = 'f5de9d7dae900b3e531599b85796d131';
+    protected $region = '';
     public function __construct(Client $client, ?float $priority = null)
     {
-        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal.json'), $priority ?? 0.7);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath("channels_mycanal".$this->region.".json"), $priority ?? 0.7);
     }
 
     public function constructEPG(string $channel, string $date)
@@ -28,7 +29,6 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        self::$apiKey = $this->channelsList[$channel]['apiKey']; // different apiKey depending on countries
         //@todo: add cache (next PR?)
         $url1 = $this->generateUrl($channelObj, $datetime = new \DateTimeImmutable($date));
         $url2 = $this->generateUrl($channelObj, $datetime->modify('+1 days'));
@@ -148,9 +148,8 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
-        $channelId = $this->channelsList[$channel->getId()]['id'];
+        $channelId = $this->channelsList[$channel->getId()];
         $day = ($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400;
-
-        return  'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . self::$apiKey . '/' . $channelId . '/broadcasts/day/'. $day;
+        return  'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->apiKey . '/' . $channelId . '/broadcasts/day/'. $day;
     }
 }
