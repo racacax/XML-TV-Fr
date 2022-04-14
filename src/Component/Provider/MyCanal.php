@@ -32,6 +32,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         //@todo: add cache (next PR?)
         $url1 = $this->generateUrl($channelObj, $datetime = new \DateTimeImmutable($date));
         $url2 = $this->generateUrl($channelObj, $datetime->modify('+1 days'));
+
         try {
             /**
              * @var Response[]

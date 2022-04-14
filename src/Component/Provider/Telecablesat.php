@@ -96,7 +96,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                     $program->setEpisodeNum(@$season[1], @$episode[1]);
                     $critique = @explode('<h2>Critique</h2>', $content)[1] ?: '';
                     preg_match('/<p>(.*?)</s', $critique, $critique);
-                    $resume = @explode('<h2>Résumé</h2>', $content)[1]?: '';
+                    $resume = @explode('<h2>Résumé</h2>', $content)[1] ?: '';
                     preg_match("/<p>(.*?)<\/p>/s", $resume, $resume);
                     preg_match('/<h2 class="subtitle">(.*?)<\/h2>/s', $content, $subtitle);
                     preg_match('/itemprop="director">(.*?)<\/span>/s', $content, $directors);
