@@ -20,7 +20,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
     protected $region = '';
     public function __construct(Client $client, ?float $priority = null)
     {
-        parent::__construct($client, ResourcePath::getInstance()->getChannelPath("channels_mycanal".$this->region.".json"), $priority ?? 0.7);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal'.$this->region.'.json'), $priority ?? 0.7);
     }
 
     public function constructEPG(string $channel, string $date)
@@ -32,15 +32,15 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         //@todo: add cache (next PR?)
         $url1 = $this->generateUrl($channelObj, $datetime = new \DateTimeImmutable($date));
         $url2 = $this->generateUrl($channelObj, $datetime->modify('+1 days'));
-        /**
-         * @var Response[]
-         */
         try {
+            /**
+             * @var Response[]
+             */
             $response = Utils::all([
                 '1' => $this->client->getAsync($url1),
                 '2' => $this->client->getAsync($url2)
             ])->wait();
-        } catch(\Throwable $t) {
+        } catch (\Throwable $t) {
             return false;
         }
         $json = json_decode((string)$response['1']->getBody(), true);
@@ -68,9 +68,10 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             Logger::updateLine(' ' . round($index * 100 / $count, 2) . ' %');
             $promises[$program['onClick']['URLPage']] = $this->client->getAsync($program['onClick']['URLPage']);
         }
+
         try {
             $response = Utils::all($promises)->wait();
-        } catch(\Throwable $t) {
+        } catch (\Throwable $t) {
             return false;
         }
 
@@ -150,6 +151,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
     {
         $channelId = $this->channelsList[$channel->getId()];
         $day = ($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400;
+
         return  'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->apiKey . '/' . $channelId . '/broadcasts/day/'. $day;
     }
 }

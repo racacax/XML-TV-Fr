@@ -52,16 +52,10 @@ class ViniPF extends AbstractProvider implements ProviderInterface
             }
         }
         Utils::all($promises)->wait();
-
-        for ($i=0; $i <$count; $i++) {
-            Logger::updateLine(' '.round($i*100/$count, 2).' %');
-            $currentDate = $datetime->modify(sprintf('+%d hours', $i*2));
-            $dateDebut = '{"dateDebut":"'.$currentDate->format('c').'"}';
-            if (empty(self::$cache_per_day[md5($dateDebut)])) {
-                continue;
-            }
-            $array = self::$cache_per_day[md5($dateDebut)];
-            foreach ($array['programmes'] as $viniChannel) {
+        $count = 1;
+        foreach(self::$cache_per_day as $cacheData) {
+            Logger::updateLine(' '.round(count(self::$cache_per_day)*100/$count++, 2).' %');
+            foreach ($cacheData['programmes'] as $viniChannel) {
                 if ($viniChannel['nid'] == $this->channelsList[$channel]) {
                     foreach ($viniChannel['programmes'] as $programme) {
                         $program = new Program($programme['timestampDeb'], $programme['timestampFin']);

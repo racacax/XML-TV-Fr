@@ -95,14 +95,14 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                     preg_match('/<\/span>\\((.*?)\/<span itemprop="numberOfEpisodes">/s', $content, $episode);
                     $program->setEpisodeNum(@$season[1], @$episode[1]);
                     $critique = @explode('<h2>Critique</h2>', $content)[1] ?: '';
-                    preg_match('/<p>(.*?)</s', $critique ?? '', $critique);
-                    $resume = @explode('<h2>Résumé</h2>', $content)[1];
-                    preg_match("/<p>(.*?)<\/p>/s", $resume ?? '', $resume);
-                    preg_match('/<h2 class="subtitle">(.*?)<\/h2>/s', $content ?? '', $subtitle);
-                    preg_match('/itemprop="director">(.*?)<\/span>/s', $content ?? '', $directors);
-                    preg_match_all('/span itemprop="actor">(.*?)<\/span>(.*?)</s', $content ?? '', $actors);
-                    preg_match('/<div class="label w40">.*?Présentateur.*?<\/div>.*?<div class="text w60">(.*?)<\/div>/s', $content ?? '', $presenter);
-                    preg_match('/<div class="overlayerpicture">.*?<img class="lazy" alt=".*?" data-src="(.*?)"/s', $content ?? '', $imgs);
+                    preg_match('/<p>(.*?)</s', $critique, $critique);
+                    $resume = @explode('<h2>Résumé</h2>', $content)[1]?: '';
+                    preg_match("/<p>(.*?)<\/p>/s", $resume, $resume);
+                    preg_match('/<h2 class="subtitle">(.*?)<\/h2>/s', $content, $subtitle);
+                    preg_match('/itemprop="director">(.*?)<\/span>/s', $content, $directors);
+                    preg_match_all('/span itemprop="actor">(.*?)<\/span>(.*?)</s', $content, $actors);
+                    preg_match('/<div class="label w40">.*?Présentateur.*?<\/div>.*?<div class="text w60">(.*?)<\/div>/s', $content, $presenter);
+                    preg_match('/<div class="overlayerpicture">.*?<img class="lazy" alt=".*?" data-src="(.*?)"/s', $content, $imgs);
                     if (isset($subtitle[1])) {
                         $program->addSubtitle($subtitle[1]);
                     }

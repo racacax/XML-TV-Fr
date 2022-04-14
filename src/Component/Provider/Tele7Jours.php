@@ -34,9 +34,10 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             );
             $promises[$i] = $this->client->getAsync($url);
         }
+
         try {
             $response = Utils::all($promises)->wait();
-        } catch(\Throwable $t) {
+        } catch (\Throwable $t) {
             return false;
         }
 

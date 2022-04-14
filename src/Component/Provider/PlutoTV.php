@@ -14,11 +14,11 @@ use racacax\XmlTv\ValueObject\Program;
 
 class PlutoTV extends AbstractProvider implements ProviderInterface
 {
-    private static $proxy = ["",""];
+    private static $proxy = ['',''];
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_plutotv.json'), $priority ?? 0.10);
-        if(isset($extraParam['plutotv_proxy'])) {
+        if (isset($extraParam['plutotv_proxy'])) {
             self::$proxy = $extraParam['plutotv_proxy'];
         }
     }
@@ -26,8 +26,9 @@ class PlutoTV extends AbstractProvider implements ProviderInterface
     private function getSessionToken(): string
     {
         $url = 'https://boot.pluto.tv/v4/start?appName=web&appVersion=5.107.0&deviceVersion=96.0.0&deviceModel=web&deviceMake=firefox&deviceType=web&clientID=245658c-6556-25563-8be6-586586353fgv&clientModelNumber=1.0.0&channelSlug=walker-texas-ranger-fr&serverSideAds=true';
-        if(isset(self::$proxy[0]) && !empty(self::$proxy[0]))
+        if (isset(self::$proxy[0]) && !empty(self::$proxy[0])) {
             $url = urlencode(base64_encode($url));
+        }
         $url = self::$proxy[0].$url.self::$proxy[1];
         $content = $this->getContentFromURL($url);
         $json = json_decode($content, true);
@@ -82,8 +83,10 @@ class PlutoTV extends AbstractProvider implements ProviderInterface
         $dateStr = $date->format('Y-m-d');
 
         $url = "https://service-channels.clusters.pluto.tv/v2/guide/timelines?start={$dateStr}T%s:00:00.000Z&channelIds=$channelId&duration=240";
-        if(isset(self::$proxy[0]) && !empty(self::$proxy[0]))
+        if (isset(self::$proxy[0]) && !empty(self::$proxy[0])) {
             $url = urlencode(base64_encode($url));
+        }
+
         return self::$proxy[0].$url.self::$proxy[1];
     }
 }

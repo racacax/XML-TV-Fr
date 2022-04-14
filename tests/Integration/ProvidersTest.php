@@ -18,12 +18,13 @@ class ProvidersTest extends TestCase
      */
     public function testOneChannelOnAllProvider(ProviderInterface $provider): void
     {
-        $channels = $provider->getChannelsList();
+        $channels = array_keys($provider->getChannelsList());
+        shuffle($channels);
         $this->assertGreaterThanOrEqual(1, count($channels), 'Provider without channel');
         $formater = new XmlFormatter();
         $channelObj = null;
         $count = 0;
-        foreach ($channels as $channelCode => $_) {
+        foreach ($channels as $channelCode) {
             $count++;
             $channelObj = $provider->constructEPG($channelCode, date('Y-m-d'));
             if (false !== $channelObj && $channelObj->getProgramCount()>0) {
