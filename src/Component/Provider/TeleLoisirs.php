@@ -25,9 +25,10 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             return false;
         }
         $res1 = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
-        $lis = explode('<li class="gridChannel-listItem">', $res1);
+        $lis = explode('<li class="channelGrid-rows">', $res1);
         unset($lis[0]);
         $count = count($lis);
+
         foreach ($lis as $index => $li) {
             Logger::updateLine(' '.round($index*100/$count, 2).' %');
             $li = explode('</li>', $li)[0];

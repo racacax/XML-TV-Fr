@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\Psr7\Response;
 use racacax\XmlTv\Component\ProviderInterface;
