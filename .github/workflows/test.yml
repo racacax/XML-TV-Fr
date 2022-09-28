@@ -24,8 +24,8 @@ jobs:
             ${{ runner.os }}-php-
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
-      - name: Run cs fixer
-        run: bin/php-cs-fixer fix --dry-run --diff
+      #- name: Run cs fixer
+     #   run: bin/php-cs-fixer fix --dry-run --diff
       - name: Run phpstan
         run: bin/phpstan
       - name: Run test suite
