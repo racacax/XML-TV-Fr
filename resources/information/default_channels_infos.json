@@ -898,6 +898,10 @@
     "name": "Canal+ Sport 360",
     "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/6\/64\/Canal%2BSport_360.png"
   },
+  "CanalPlusFoot.fr": {
+    "name": "Canal+ Foot",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Canal%2BFoot.png/220px-Canal%2BFoot.png"
+  },
   "CanalPlusDocs.fr": {
     "name": "Canal+ Docs",
     "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/2\/27\/Canal%2B_Docs.png"
