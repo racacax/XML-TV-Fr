@@ -25,7 +25,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             return false;
         }
         $res1 = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
-        $lis = explode('<li class="channelGrid-rows">', $res1);
+        $lis = explode('<div class="mainBroadcastCard reverse" data-wide-target>', $res1);
         unset($lis[0]);
         $count = count($lis);
 
