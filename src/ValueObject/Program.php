@@ -241,8 +241,6 @@ class Program
         if (!empty($subtitle)) {
             $this->subtitles[] = ['name' => $subtitle, 'lang' => $lang];
         }
-        else{
-           $this->subtitles[] = ['name' => $eventName, 'lang' => $lang];
     }
 
     /**
