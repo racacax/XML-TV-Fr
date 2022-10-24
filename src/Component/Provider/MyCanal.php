@@ -16,7 +16,8 @@ use racacax\XmlTv\ValueObject\Program;
 // Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
 class MyCanal extends AbstractProvider implements ProviderInterface
 {
-    protected $apiKey = 'f5de9d7dae900b3e531599b85796d131';
+    //protected $apiKey = 'f5de9d7dae900b3e531599b85796d131';
+    protected $apiKey = '0b331b8ce682b569513cfb954fc5d1c9';
     protected $region = '';
     public function __construct(Client $client, ?float $priority = null)
     {
