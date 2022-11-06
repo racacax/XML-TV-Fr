@@ -107,6 +107,8 @@ class XmlExporter
             $lengthToRemove = strlen('.'.end($split_fp));
         }
         $shortenedFilePath = substr($this->filePath, 0, -$lengthToRemove);
+        $shortenedFileName = explode('/', $this->filePath);
+        $shortenedFileName = end($shortenedFileName);
         if (in_array('zip', $this->outputFormat)) {
             $filename = $shortenedFilePath.'.zip';
             Logger::log("\e[34m[EXPORT] \e[39mCompression du XMLTV en ZIP...\n");
@@ -118,7 +120,8 @@ class XmlExporter
                 throw new \Exception('Impossible to create zip file '. $filename);
             }
             Logger::log("\e[34m[EXPORT] \e[39mZIP : \e[32mOK\e[39m ($filename)\n");
-            $zip->addFromString($this->filePath, $content);
+
+            $zip->addFromString($shortenedFileName, $content);
             $zip->close();
         }
 
