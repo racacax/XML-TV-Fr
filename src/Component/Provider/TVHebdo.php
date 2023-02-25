@@ -19,7 +19,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_tvhebdo.json'), $priority ?? 0.2);
-        $this->proxy = 'http://www.ekamali.com/index.php';
+        $this->proxy = 'http://filter1600.thomasharrick.com/v1/index.php';
         if (isset($extraParam['tvhebdo_proxy'])) {
             $this->proxy = $extraParam['tvhebdo_proxy'];
         }
@@ -134,7 +134,6 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
         $url = 'http://www.tvhebdo.com/horaire-tele/'.$this->channelsList[$channel->getId()].'/date/'.$date->format('Y-m-d');
-
         return $this->proxy.'?q='.base64_encode($url).'&hl=3ed';
     }
 }

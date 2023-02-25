@@ -50,6 +50,6 @@ class Afrique extends AbstractProvider implements ProviderInterface
     {
         $day = ($date->getTimestamp() - strtotime(date('Y-m-d')))/86400;
 
-        return 'https://service.canal-overseas.com/ott-frontend/vector/83001/channel/' . $this->channelsList[$channel->getId()] . '/events?filter.day=' . $day;
+        return 'https://service.canal-overseas.com/ott-frontend/vector/63001/channel/' . $this->channelsList[$channel->getId()] . '/events?filter.day=' . $day;
     }
 }
