@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\Utils;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
@@ -39,7 +40,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             ['Referer'=>$this->proxy]
         );
         $res1 = html_entity_decode($res1, ENT_QUOTES);
-        @$res1 = explode('Mes<br>alertes courriel', $res1)[1];
+        @$res1 = explode('Mes<br>alertes courriel', $res1 ?? '')[1];
         if (empty($res1)) {
             return false;
         }
@@ -55,20 +56,25 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
         $count = count($titre[2]);
 
         $promises = [];
+        $promisesResolved = 0;
         for ($j=0;$j<$count;$j++) {
             $url          = $titre[1][$j];
-            $promises[$url] = $this->client->getAsync($url);
+            $promise = $this->client->getAsync($url);
+            $promise->then(function() use (&$promisesResolved, $count) {
+                $promisesResolved++;
+                Logger::updateLine(' '.round($promisesResolved*100/$count, 2).' %');
+            });
+            $promises[$url] = $promise;
         }
         $response = Utils::all($promises)->wait();
 
         for ($j=0;$j<$count;$j++) {
-            Logger::updateLine(' '.round($j*100/$count, 2).' %');
             $dateStart = (new \DateTimeImmutable($date.' '.$time[1][$j], $timezone))->getTimestamp();
             $titreProgram = $titre[2][$j];
             $url = $titre[1][$j];
             $content = (string)$response[$url]->getBody();
-            $infos = str_replace("\n", ' ', explode('</h4>', explode('<h4>', $content)[1])[0]);
-            $infos = explode(' - ', $infos);
+            $infos = str_replace("\n", ' ', explode('</h4>', explode('<h4>', $content)[1] ?? '')[0]);
+            $infos = explode(' - ', $infos ?? '');
             $genre = @trim($infos[0] ?? '');
             $duration = @intval(explode(' ', @trim($infos[1] ?? ''))[0]);
             $lang = @trim(strtolower($infos[2] ?? ''));
@@ -84,16 +90,16 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
                     $year = $potentialYear;
                 }
             }
-            $desc =@explode('</p>', explode('<p id="dd_desc">', $content)[1])[0];
+            $desc =@explode('</p>', explode('<p id="dd_desc">', $content ?? '')[1] ?? '')[0];
             if (isset($year)) {
                 $desc.= "\n\nAnnée : ".$year;
             }
-            $intervenants = @explode('</p>', explode('<p id="dd_inter">', $content)[1])[0];
+            $intervenants = @explode('</p>', explode('<p id="dd_inter">', $content ?? '')[1] ?? '')[0];
             $program = new Program($dateStart, $dateStart+$duration*60);
             $program->addTitle($titreProgram, $lang);
             $desc = str_replace('<br />', "\n", $desc.$intervenants);
             $tmp_desc = '';
-            $splited_desc = explode("\n", $desc);
+            $splited_desc = explode("\n", $desc ?? '');
             foreach ($splited_desc as $line) {
                 $tmp_desc.=@trim($line)."\n";
             }
@@ -101,7 +107,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $program->addDesc($desc, $lang);
             $program->addCategory($genre, $lang);
             $current_role = 'guest';
-            $intervenants_split = explode('<br />', $intervenants);
+            $intervenants_split = explode('<br />', $intervenants ?? '');
             foreach ($intervenants_split as $line) {
                 $line = @trim($line);
                 if ($line == 'Réalisation :') {
@@ -112,7 +118,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
                     $program->addCredit($line, $current_role);
                 }
             }
-            $img_zone = explode('<div id="dd_votes_container">', explode('<div id="dd_votes">', $content)[1])[0];
+            $img_zone = explode('<div id="dd_votes_container">', explode('<div id="dd_votes">', $content)[1] ?? '')[0];
             preg_match('/src="(.*?)"/', $img_zone, $img_url);
             $program->setIcon(@$img_url[1]);
             if (isset($rating) && strlen($rating) > 0 && strlen($rating) < 4) {
