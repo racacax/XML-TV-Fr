@@ -16,11 +16,23 @@ use racacax\XmlTv\ValueObject\Program;
 // Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
 class MyCanal extends AbstractProvider implements ProviderInterface
 {
-    protected $apiKey = '0b331b8ce682b569513cfb954fc5d1c9';
-    protected $region = '';
+    protected static $apiKey = [];
+    protected $region = 'fr';
     public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal'.$this->region.'.json'), $priority ?? 0.7);
+    }
+
+    protected function getApiKey() {
+        if(!isset(self::$apiKey[$this->region])) {
+            $result = $this->getContentFromURL("https://www.canalplus.com/" . $this->region . "/programme-tv/");
+            $token = @explode('"', explode('"token":"', $result)[1])[0];
+            if(empty($token)) {
+                throw new \Exception("Impossible to retrieve MyCanal API Key");
+            }
+            self::$apiKey[$this->region] = $token;
+        }
+        return self::$apiKey[$this->region];
     }
 
     public function constructEPG(string $channel, string $date)
@@ -153,6 +165,6 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $channelId = $this->channelsList[$channel->getId()];
         $day = ($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400;
 
-        return  'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->apiKey . '/' . $channelId . '/broadcasts/day/'. $day;
+        return  'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->getApiKey() . '/' . $channelId . '/broadcasts/day/'. $day;
     }
 }
