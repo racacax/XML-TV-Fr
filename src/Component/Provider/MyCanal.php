@@ -163,7 +163,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
         $channelId = $this->channelsList[$channel->getId()];
-        $day = ($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400;
+        $day = round(($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400);
 
         return  'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->getApiKey() . '/' . $channelId . '/broadcasts/day/'. $day;
     }
