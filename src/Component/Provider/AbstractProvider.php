@@ -83,7 +83,8 @@ abstract class AbstractProvider
                 $url,
                 [
                     'headers'=> $headers,
-                    'connect_timeout' => 1
+                    'connect_timeout' => 1,
+                    "timeout" => 10
                 ]
             );
         } catch (\Throwable $e) {
