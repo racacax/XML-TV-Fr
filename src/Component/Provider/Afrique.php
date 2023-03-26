@@ -48,7 +48,7 @@ class Afrique extends AbstractProvider implements ProviderInterface
 
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
-        $day = ($date->getTimestamp() - strtotime(date('Y-m-d')))/86400;
+        $day = round(($date->getTimestamp() - strtotime(date('Y-m-d')))/86400);
 
         return 'https://service.canal-overseas.com/ott-frontend/vector/63001/channel/' . $this->channelsList[$channel->getId()] . '/events?filter.day=' . $day;
     }
