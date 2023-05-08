@@ -25,13 +25,12 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             return false;
         }
         $res1 = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
-        $lis = explode('<li class="channelGrid-rows">', $res1);
+        $lis = explode('<div class="mainBroadcastCard reverse"', $res1);
         unset($lis[0]);
         $count = count($lis);
 
         foreach ($lis as $index => $li) {
             Logger::updateLine(' '.round($index*100/$count, 2).' %');
-            $li = explode('</li>', $li)[0];
             preg_match('/href="(.*?)" title="(.*?)"/', $li, $titlehref);
             preg_match('/srcset="(.*?)"/', $li, $img);
             $img = str_replace('64x90', '640x360', explode(' ', @$img[1] ?? '')[0]);

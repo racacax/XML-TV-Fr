@@ -18,8 +18,11 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 {
     protected static $apiKey = [];
     protected $region = 'fr';
-    public function __construct(Client $client, ?float $priority = null)
+    protected $proxy = null;
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
+        if(isset($extraParam["mycanal_proxy"]))
+            $this->proxy = $extraParam["mycanal_proxy"];
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal'.$this->region.'.json'), $priority ?? 0.7);
     }
 
@@ -165,6 +168,10 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $channelId = $this->channelsList[$channel->getId()];
         $day = round(($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400);
 
-        return  'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->getApiKey() . '/' . $channelId . '/broadcasts/day/'. $day;
+        $url = 'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->getApiKey() . '/' . $channelId . '/broadcasts/day/'. $day;
+        if(!is_null($this->proxy)) {
+            $url = $this->proxy[0].urlencode(base64_encode($url)).$this->proxy[1];
+        }
+        return $url;
     }
 }
