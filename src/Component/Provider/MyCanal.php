@@ -82,18 +82,32 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $promises = [];
         foreach ($all as $index => $program) {
             Logger::updateLine(' ' . round($index * 100 / $count, 2) . ' %');
-            $promises[$program['onClick']['URLPage']] = $this->client->getAsync($program['onClick']['URLPage']);
+            $url = $program['onClick']['URLPage'];
+            if(!is_null($this->proxy)) {
+                $url = $this->proxy[0].urlencode(base64_encode($url)).$this->proxy[1];
+            }
+
+            $promises[$program['onClick']['URLPage']] = $this->client->getAsync($url);
+            usleep(100000); # To avoid rate limit
         }
 
         try {
             $response = Utils::all($promises)->wait();
         } catch (\Throwable $t) {
-            return false;
+            ##return false; We allow failures on details
         }
 
         foreach ($all as $index => $program) {
             Logger::updateLine(' '.round($index*100/$count, 2).' %');
-            $detail = json_decode((string)$response[$program['onClick']['URLPage']]->getBody(), true);
+            $responseBody = null;
+            if(!is_null($response[$program['onClick']['URLPage']])) {
+                $responseBody = $response[$program['onClick']['URLPage']]->getBody();
+            }
+            if(!is_null($responseBody)) {
+                $detail = json_decode((string)$responseBody, true);
+            } else {
+                $detail = [];
+            }
 
             $startTime = $program['startTime'] / 1000;
 
@@ -124,12 +138,11 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
             $icon = $detail['episodes']['contents'][0]['URLImage'] ?? @$detail['detail']['informations']['URLImage'];
             $icon = str_replace(['{resolutionXY}', '{imageQualityPercentage}'], ['640x360', '80'], $icon ?? '');
-
             $programs[$startTime] = [
                 'startTime'     => $startTime,
                 'channel'       => $channel,
-                'title'         => $detail['tracking']['dataLayer']['content_title'],
-                'subTitle'      => @$detail['episodes']['contents'][0]['subtitle'],
+                'title'         => $detail['tracking']['dataLayer']['content_title'] ?? $program["title"],
+                'subTitle'      => @$detail['episodes']['contents'][0]['subtitle'] ?? $program["subtitle"],
                 'description'   => $detail['episodes']['contents'][0]['summary'] ?? @$detail['detail']['informations']['summary'],
                 'season'        => @$detail['detail']['selectedEpisode']['seasonNumber'],
                 'episode'       => @$detail['detail']['selectedEpisode']['episodeNumber'],
