@@ -112,7 +112,7 @@ class Generator
                         $old_zone = date_default_timezone_get();
                         try {
                             $channel = @$provider->constructEPG($channelKey, $date);
-                        } catch(\Exception $e) {
+                        } catch(\Throwable $e) {
                             $channel = false;
                         }
                         date_default_timezone_set($old_zone);
