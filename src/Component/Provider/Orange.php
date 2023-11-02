@@ -99,7 +99,7 @@ class Orange extends AbstractProvider implements ProviderInterface
     {
         $channelId = $this->channelsList[$channel->getId()];
 
-        return  'https://rp-live.orange.fr/live-webapp/v3/applications/STB4PC/programs?'.http_build_query([
+        return  'https://rp-ott-mediation-tv.woopic.com/api-gw/live/v3/applications/PC/programs?'.http_build_query([
             'period' => $date->format('Y-m-d'),
             'epgIds' => $channelId,
             'mco' => 'OFR'
