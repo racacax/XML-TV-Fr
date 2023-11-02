@@ -1,0 +1,2054 @@
+{
+  "CanalPlusGrandEcran.fr": {"id" : 900, "region": "fr"},
+  "France2.fr": {"id" : 26, "region": "fr"},
+  "CNN.uk": {"id" : 30, "region": "fr"},
+  "EurosportInternational1.fr": {"id" : 101, "region": "fr"},
+  "UshuaiaTV.fr": {"id" : 142, "region": "fr"},
+  "Arte.fr": {"id" : 154, "region": "fr"},
+  "Classica.fr": {"id" : 165, "region": "fr"},
+  "Penthouse.fr": {"id" : 167, "region": "fr"},
+  "DiegoTV.fr": {"id" : 184, "region": "fr"},
+  "DoraTV.fr": {"id" : 185, "region": "fr"},
+  "BobTV.fr": {"id" : 196, "region": "fr"},
+  "CanalPlusKIDS.fr": {"id" : 259, "region": "fr"},
+  "MezzoLive.fr": {"id" : 268, "region": "fr"},
+  "DisneyJunior.fr": {"id" : 274, "region": "fr"},
+  "DisneyChannel.fr": {"id" : 282, "region": "fr"},
+  "ChaineEvenement.fr": {"id" : 289, "region": "fr"},
+  "NatGeoWild.fr": {"id" : 290, "region": "fr"},
+  "Teva.fr": {"id" : 292, "region": "fr"},
+  "ParisPremiere.fr": {"id" : 294, "region": "fr"},
+  "W9.fr": {"id" : 296, "region": "fr"},
+  "NationalGeographic.fr": {"id" : 302, "region": "fr"},
+  "France24.fr": {"id" : 310, "region": "fr"},
+  "TF1.fr": {"id" : 312, "region": "fr"},
+  "M6.fr": {"id" : 313, "region": "fr"},
+  "Euronews.fr": {"id" : 324, "region": "fr"},
+  "M6Music.fr": {"id" : 352, "region": "fr"},
+  "serieclub.fr": {"id" : 356, "region": "fr"},
+  "I24news.fr": {"id" : 362, "region": "fr"},
+  "OCSMax.fr": {"id" : 372, "region": "fr"},
+  "TCM.fr": {"id" : 374, "region": "fr"},
+  "GolfPlus.fr": {"id" : 378, "region": "fr"},
+  "beINSPORTS1.fr": {"id" : 977, "region": "fr"},
+  "beINSPORTS2.fr": {"id" : 978, "region": "fr"},
+  "Djazz.fr": {"id" : 407, "region": "fr"},
+  "NonStopPeople.fr": {"id" : 434, "region": "fr"},
+  "Eurosport2.fr": {"id" : 436, "region": "fr"},
+  "Cherie25.fr": {"id" : 440, "region": "fr"},
+  "LEquipe21.fr": {"id" : 451, "region": "fr"},
+  "OCSPulp.fr": {"id" : 466, "region": "fr"},
+  "OCSGeants.fr": {"id" : 468, "region": "fr"},
+  "MTV.fr": {"id" : 470, "region": "fr"},
+  "RTFrance.fr": {"id" : 479, "region": "fr"},
+  "JOne.fr": {"id" : 484, "region": "fr"},
+  "ParamountChannel.fr": {"id" : 487, "region": "fr"},
+  "CartoonNetwork.fr": {"id" : 502, "region": "fr"},
+  "Animaux.fr": {"id" : 503, "region": "fr"},
+  "Action.fr": {"id" : 504, "region": "fr"},
+  "RTL9.fr": {"id" : 505, "region": "fr"},
+  "CStar.fr": {"id" : 513, "region": "fr"},
+  "beINSPORTS3.fr": {"id" : 979, "region": "fr"},
+  "Nickelodeon4Teen.fr": {"id" : 518, "region": "fr"},
+  "TV5Monde.fr": {"id" : 520, "region": "fr"},
+  "6ter.fr": {"id" : 521, "region": "fr"},
+  "CanalJ.fr": {"id" : 525, "region": "fr"},
+  "TF1SeriesFilms.fr": {"id" : 526, "region": "fr"},
+  "NollywoodTV.fr": {"id" : 527, "region": "fr"},
+  "Boing.fr": {"id" : 529, "region": "fr"},
+  "Boomerang.fr": {"id" : 530, "region": "fr"},
+  "DorcelTV.fr": {"id" : 536, "region": "fr"},
+  "DorcelXXX.fr": {"id" : 537, "region": "fr"},
+  "Equidia.fr": {"id" : 540, "region": "fr"},
+  "FootPlus24.fr": {"id" : 542, "region": "fr"},
+  "France3.fr": {"id" : 543, "region": "fr"},
+  "France4.fr": {"id" : 544, "region": "fr"},
+  "France5.fr": {"id" : 545, "region": "fr"},
+  "Gulli.fr": {"id" : 549, "region": "fr"},
+  "Histoire.fr": {"id" : 550, "region": "fr"},
+  "InfosportPlus.fr": {"id" : 551, "region": "fr"},
+  "LaChaineMeteo.fr": {"id" : 552, "region": "fr"},
+  "LCI.fr": {"id" : 553, "region": "fr"},
+  "LaChaineParlementaire.fr": {"id" : 554, "region": "fr"},
+  "LibidoTV.fr": {"id" : 555, "region": "fr"},
+  "MCM.fr": {"id" : 556, "region": "fr"},
+  "RFMTV.fr": {"id" : 557, "region": "fr"},
+  "Mezzo.fr": {"id" : 560, "region": "fr"},
+  "Multisports1.fr": {"id" : 562, "region": "fr"},
+  "Multisports2.fr": {"id" : 563, "region": "fr"},
+  "Multisports3.fr": {"id" : 564, "region": "fr"},
+  "Multisports4.fr": {"id" : 565, "region": "fr"},
+  "Multisports5.fr": {"id" : 566, "region": "fr"},
+  "Multisports6.fr": {"id" : 567, "region": "fr"},
+  "NRJ12.fr": {"id" : 568, "region": "fr"},
+  "NRJHits.fr": {"id" : 569, "region": "fr"},
+  "NT1.fr": {"id" : 570, "region": "fr"},
+  "Numero23.fr": {"id" : 571, "region": "fr"},
+  "PinkX.fr": {"id" : 575, "region": "fr"},
+  "Melody.fr": {"id" : 580, "region": "fr"},
+  "TIJI.fr": {"id" : 583, "region": "fr"},
+  "TMC.fr": {"id" : 584, "region": "fr"},
+  "TraceUrban.fr": {"id" : 585, "region": "fr"},
+  "TvBreizh.fr": {"id" : 586, "region": "fr"},
+  "BBCWorldNews.uk": {"id" : 589, "region": "fr"},
+  "Nickelodeon.fr": {"id" : 591, "region": "fr"},
+  "GameOne.fr": {"id" : 592, "region": "fr"},
+  "NickelodeonJunior.fr": {"id" : 593, "region": "fr"},
+  "RMCDecouverte.fr": {"id" : 595, "region": "fr"},
+  "beINSPORTSMAX4.fr": {"id" : 980, "region": "fr"},
+  "beINSPORTSMAX5.fr": {"id" : 981, "region": "fr"},
+  "beINSPORTSMAX6.fr": {"id" : 982, "region": "fr"},
+  "beINSPORTSMAX7.fr": {"id" : 983, "region": "fr"},
+  "beINSPORTSMAX8.fr": {"id" : 603, "region": "fr"},
+  "beINSPORTSMAX9.fr": {"id" : 604, "region": "fr"},
+  "beINSPORTSMAX10.fr": {"id" : 605, "region": "fr"},
+  "AB1.fr": {"id" : 611, "region": "fr"},
+  "ABMoteurs.fr": {"id" : 612, "region": "fr"},
+  "Mangas.fr": {"id" : 613, "region": "fr"},
+  "ScienceEtVieTV.fr": {"id" : 614, "region": "fr"},
+  "XXL.fr": {"id" : 616, "region": "fr"},
+  "TouteHistoire.fr": {"id" : 620, "region": "fr"},
+  "BET.fr": {"id" : 628, "region": "fr"},
+  "MTVHits.fr": {"id" : 629, "region": "fr"},
+  "AstroCenter.fr": {"id" : 632, "region": "fr"},
+  "BFMTV.fr": {"id" : 633, "region": "fr"},
+  "Eurosport3601.fr": {"id" : 635, "region": "fr"},
+  "Eurosport3602.fr": {"id" : 636, "region": "fr"},
+  "Eurosport3603.fr": {"id" : 637, "region": "fr"},
+  "Eurosport3604.fr": {"id" : 638, "region": "fr"},
+  "ColmaxTV.fr": {"id" : 643, "region": "fr"},
+  "BFMBusiness.fr": {"id" : 645, "region": "fr"},
+  "Eurosport3605.fr": {"id" : 650, "region": "fr"},
+  "Eurosport3606.fr": {"id" : 651, "region": "fr"},
+  "Eurosport3607.fr": {"id" : 652, "region": "fr"},
+  "Eurosport3608.fr": {"id" : 653, "region": "fr"},
+  "CliqueTV.fr": {"id" : 665, "region": "fr"},
+  "FranceInfo.fr": {"id" : 670, "region": "fr"},
+  "ManX.fr": {"id" : 672, "region": "fr"},
+  "TraceAfrica.fr": {"id" : 674, "region": "fr"},
+  "AlJazeeraEnglish.uk": {"id" : 675, "region": "fr"},
+  "Viceland.fr": {"id" : 677, "region": "fr"},
+  "Museum.fr": {"id" : 678, "region": "fr"},
+  "ChasseEtPeche.fr": {"id" : 681, "region": "fr"},
+  "Toonami.fr": {"id" : 683, "region": "fr"},
+  "PenthouseBlack.fr": {"id" : 686, "region": "fr"},
+  "NovelasTV.fr": {"id" : 693, "region": "fr"},
+  "WarnerTV.fr": {"id" : 694, "region": "fr"},
+  "CStarHitsFrance.fr": {"id" : 723, "region": "fr"},
+  "EvenementsSports4KUHD.fr": {"id" : 726, "region": "fr"},
+  "RMCSport1.fr": {"id" : 732, "region": "fr"},
+  "RMCSport2.fr": {"id" : 733, "region": "fr"},
+  "RMCSportLive5.fr": {"id" : 756, "region": "fr"},
+  "RMCSportLive6.fr": {"id" : 757, "region": "fr"},
+  "RMCSportLive7.fr": {"id" : 758, "region": "fr"},
+  "RMCSportLive8.fr": {"id" : 759, "region": "fr"},
+  "RMCSportLive9.fr": {"id" : 760, "region": "fr"},
+  "RMCSportLive10.fr": {"id" : 761, "region": "fr"},
+  "RMCSportLive11.fr": {"id" : 762, "region": "fr"},
+  "RMCSportLive12.fr": {"id" : 763, "region": "fr"},
+  "RMCSportLive13.fr": {"id" : 764, "region": "fr"},
+  "RMCSportLive14.fr": {"id" : 765, "region": "fr"},
+  "RMCSportLive3.fr": {"id" : 766, "region": "fr"},
+  "RMCSportLive4.fr": {"id" : 767, "region": "fr"},
+  "Canal9.fr": {"id" : 768, "region": "fr"},
+  "TraceLatina.fr": {"id" : 784, "region": "fr"},
+  "ComedyCentral.fr": {"id" : 806, "region": "fr"},
+  "OlympiaTV.fr": {"id" : 813, "region": "fr"},
+  "CanalPlusPremierLeague.fr": {"id" : 815, "region": "fr"},
+  "CanalPlusTop14.fr": {"id" : 816, "region": "fr"},
+  "ES1.fr": {"id" : 819, "region": "fr"},
+  "AlticeStudio.fr": {"id" : 820, "region": "fr"},
+  "CanalPlusMotoGP.fr": {"id" : 823, "region": "fr"},
+  "CanalPlusFormula1.fr": {"id" : 824, "region": "fr"},
+  "BSmartTV.fr": {"id" : 849, "region": "fr"},
+  "JacquieMichelTV.fr": {"id" : 850, "region": "fr"},
+  "TEST1": {"id" : 876, "region": "fr"},
+  "TEST2": {"id" : 877, "region": "fr"},
+  "EVENEMENTALACARTE.fr": {"id" : 882, "region": "fr"},
+  "CanalPlusLigue1.fr": {"id" : 894, "region": "fr"},
+  "CanalPlusDocs.fr": {"id" : 899, "region": "fr"},
+  "France3Picardie.fr": {"id" : 920, "region": "fr"},
+  "France3FrancheComte.fr": {"id" : 921, "region": "fr"},
+  "France3Aquitaine.fr": {"id" : 922, "region": "fr"},
+  "France3BasseNormandie.fr": {"id" : 923, "region": "fr"},
+  "France3Auvergne.fr": {"id" : 924, "region": "fr"},
+  "France3Bourgogne.fr": {"id" : 925, "region": "fr"},
+  "France3Alpes.fr": {"id" : 926, "region": "fr"},
+  "France3NordPasDeCalais.fr": {"id" : 927, "region": "fr"},
+  "France3Limousin.fr": {"id" : 928, "region": "fr"},
+  "France3RhoneAlpes.fr": {"id" : 929, "region": "fr"},
+  "France3ProvenceAlpes.fr": {"id" : 930, "region": "fr"},
+  "France3Languedoc.fr": {"id" : 931, "region": "fr"},
+  "France3Lorraine.fr": {"id" : 932, "region": "fr"},
+  "France3PaysDeLaLoire.fr": {"id" : 933, "region": "fr"},
+  "France3CotedAzur.fr": {"id" : 934, "region": "fr"},
+  "France3Centre.fr": {"id" : 935, "region": "fr"},
+  "France3ParisIdF.fr": {"id" : 936, "region": "fr"},
+  "France3PoitouCharentes.fr": {"id" : 937, "region": "fr"},
+  "France3ChampagneArdenne.fr": {"id" : 938, "region": "fr"},
+  "France3Bretagne.fr": {"id" : 939, "region": "fr"},
+  "France3HauteNormandie.fr": {"id" : 940, "region": "fr"},
+  "France3Alsace.fr": {"id" : 941, "region": "fr"},
+  "France3MidiPyrenees.fr": {"id" : 942, "region": "fr"},
+  "France3CorseViaStella.fr": {"id" : 943, "region": "fr"},
+  "CanalPlus.fr": {"id" : 601, "region": "fr"},
+  "CanalPlusSport.fr": {"id" : 177, "region": "fr"},
+  "CanalPlusUHD.fr": {"id" : 728, "region": "fr"},
+  "CHAINE340": {"id" : 340, "region": "fr"},
+  "CHAINE477": {"id" : 477, "region": "fr"},
+  "CHAINE639": {"id" : 639, "region": "fr"},
+  "CHAINE656": {"id" : 656, "region": "fr"},
+  "CHAINE734": {"id" : 734, "region": "fr"},
+  "CHAINE735": {"id" : 735, "region": "fr"},
+  "CHAINE780": {"id" : 780, "region": "fr"},
+  "CHAINE781": {"id" : 781, "region": "fr"},
+  "CHAINE782": {"id" : 782, "region": "fr"},
+  "CHAINE783": {"id" : 783, "region": "fr"},
+  "CHAINE872": {"id" : 872, "region": "fr"},
+  "CHAINE970": {"id" : 970, "region": "fr"},
+  "CHAINE971": {"id" : 971, "region": "fr"},
+  "CHAINE972": {"id" : 972, "region": "fr"},
+  "CHAINE973": {"id" : 973, "region": "fr"},
+  "CHAINE974": {"id" : 974, "region": "fr"},
+  "CHAINE975": {"id" : 975, "region": "fr"},
+  "CHAINE985": {"id" : 985, "region": "fr"},
+  "CHAINE986": {"id" : 986, "region": "fr"},
+  "CHAINE987": {"id" : 987, "region": "fr"},
+  "CHAINE988": {"id" : 988, "region": "fr"},
+  "CHAINE989": {"id" : 989, "region": "fr"},
+  "CHAINE990": {"id" : 990, "region": "fr"},
+  "CHAINE991": {"id" : 991, "region": "fr"},
+  "CanalPlusCinema.fr": {"id" : 198, "region": "fr"},
+  "CanalPlusDecale.fr": {"id" : 257, "region": "fr"},
+  "CanalPlusSport360.fr": {"id" : 83, "region": "fr"},
+  "CanalPlusFoot.fr": {"id" : 19, "region": "fr"},
+  "PlanetePlus.fr": {"id" : 270, "region": "fr"},
+  "CinePlusPremier.fr": {"id" : 322, "region": "fr"},
+  "CinePlusEmotion.fr": {"id" : 396, "region": "fr"},
+  "CinePlusFrisson.fr": {"id" : 398, "region": "fr"},
+  "C8.fr": {"id" : 450, "region": "fr"},
+  "CNews.fr": {"id" : 480, "region": "fr"},
+  "CanalPlusSeries.fr": {"id" : 481, "region": "fr"},
+  "CinePlusClassic.fr": {"id" : 531, "region": "fr"},
+  "CinePlusClub.fr": {"id" : 532, "region": "fr"},
+  "CinePlusFamiz.fr": {"id" : 533, "region": "fr"},
+  "ComediePlus.fr": {"id" : 534, "region": "fr"},
+  "PIWI.fr": {"id" : 576, "region": "fr"},
+  "Seasons.fr": {"id" : 577, "region": "fr"},
+  "TeleToonPlus.fr": {"id" : 581, "region": "fr"},
+  "PLANETEJustice.fr": {"id" : 587, "region": "fr"},
+  "PlaneteAction.fr": {"id" : 588, "region": "fr"},
+  "PolarPlus.fr": {"id" : 692, "region": "fr"},
+  "CHAINE828": {"id" : 828, "region": "fr"},
+  "CanalPlusBoxOffice.fr": {"id" : 1074, "region": "fr"},
+  "DAZN.fr": {"id" : 1077, "region": "fr"},
+  "RTSUn.ch": {"id" : 770, "region": "ch"},
+  "RTSDeux.ch": {"id" : 771, "region": "ch"},
+  "CANALALPHANE.ch": {"id" : 772, "region": "ch"},
+  "LaTele.ch": {"id" : 773, "region": "ch"},
+  "LemanBleu.ch": {"id" : 774, "region": "ch"},
+  "TeleBielingue.ch": {"id" : 775, "region": "ch"},
+  "RSI1.ch": {"id" : 776, "region": "ch"},
+  "RSI2.ch": {"id" : 777, "region": "ch"},
+  "SRF1.ch": {"id" : 778, "region": "ch"},
+  "SRF2.ch": {"id" : 779, "region": "ch"},
+  "OCSMax.ch": {"id" : 787, "region": "ch"},
+  "OCSChoc.ch": {"id" : 788, "region": "ch"},
+  "OCSGeants.ch": {"id" : 789, "region": "ch"},
+  "OCSCity.ch": {"id" : 790, "region": "ch"},
+  "CStar.ch": {"id" : 832, "region": "ch"},
+  "CanalPlusSport2.ch": {"id" : 861, "region": "ch"},
+  "CanalPlusUHD.ch": {"id" : 874, "region": "ch"},
+  "RougeTV.ch": {"id" : 878, "region": "ch"},
+  "LFMTV.ch": {"id" : 879, "region": "ch"},
+  "ONETV.ch": {"id" : 880, "region": "ch"},
+  "BLUEZOOM.ch": {"id" : 893, "region": "ch"},
+  "CanalPlus.ch": {"id" : 825, "region": "ch"},
+  "CanalPlusDecale.ch": {"id" : 826, "region": "ch"},
+  "CanalPlusCinema.ch": {"id" : 827, "region": "ch"},
+  "CinePlusPremier.ch": {"id" : 829, "region": "ch"},
+  "CinePlusFrisson.ch": {"id" : 830, "region": "ch"},
+  "C8.ch": {"id" : 831, "region": "ch"},
+  "CanalPlusSport.ch": {"id" : 873, "region": "ch"},
+  "13emeRue.af": {
+    "id": 180001,
+    "region": "bf"
+  },
+  "AB1.af": {
+    "id": 180003,
+    "region": "bf"
+  },
+  "Action.af": {
+    "id": 180004,
+    "region": "bf"
+  },
+  "ZacuTV.af": {
+    "id": 180005,
+    "region": "bf"
+  },
+  "Africa24Infinity.af": {
+    "id": 180006,
+    "region": "bf"
+  },
+  "BBCNews.af": {
+    "id": 180008,
+    "region": "bf"
+  },
+  "Africa24Sport.af": {
+    "id": 180009,
+    "region": "bf"
+  },
+  "CRTV.af": {
+    "id": 180010,
+    "region": "bf"
+  },
+  "WSport.af": {
+    "id": 180011,
+    "region": "bf"
+  },
+  "Africa24English.af": {
+    "id": 180012,
+    "region": "bf"
+  },
+  "LeralTV.af": {
+    "id": 180015,
+    "region": "bf"
+  },
+  "CanalPlusCinemaOuest.af": {
+    "id": 180016,
+    "region": "bf"
+  },
+  "RTG2.af": {
+    "id": 180017,
+    "region": "bf"
+  },
+  "CanalPlusPremiereOuest.af": {
+    "id": 180018,
+    "region": "bf"
+  },
+  "KabackTV.af": {
+    "id": 180019,
+    "region": "bf"
+  },
+  "InfoTV.af": {
+    "id": 180025,
+    "region": "bf"
+  },
+  "Cam10.af": {
+    "id": 180026,
+    "region": "bf"
+  },
+  "Dbs.af": {
+    "id": 180027,
+    "region": "bf"
+  },
+  "BosoloTV.af": {
+    "id": 180030,
+    "region": "bf"
+  },
+  "Rtce.af": {
+    "id": 180031,
+    "region": "bf"
+  },
+  "MalaikaTV.af": {
+    "id": 180032,
+    "region": "bf"
+  },
+  "Hk6.af": {
+    "id": 180033,
+    "region": "bf"
+  },
+  "HeritageTV.af": {
+    "id": 180034,
+    "region": "bf"
+  },
+  "DisneyChannel.af": {
+    "id": 180035,
+    "region": "bf"
+  },
+  "E.af": {
+    "id": 180036,
+    "region": "bf"
+  },
+  "Itv.af": {
+    "id": 180722,
+    "region": "bf"
+  },
+  "Eatv.af": {
+    "id": 180039,
+    "region": "bf"
+  },
+  "Euronews.af": {
+    "id": 180040,
+    "region": "bf"
+  },
+  "Eurosport1.af": {
+    "id": 180041,
+    "region": "bf"
+  },
+  "Eurosport2.af": {
+    "id": 180042,
+    "region": "bf"
+  },
+  "Tbc1.af": {
+    "id": 180043,
+    "region": "bf"
+  },
+  "France3.af": {
+    "id": 180045,
+    "region": "bf"
+  },
+  "France5.af": {
+    "id": 180046,
+    "region": "bf"
+  },
+  "SinemaZetu.af": {
+    "id": 180047,
+    "region": "bf"
+  },
+  "CNews.af": {
+    "id": 180048,
+    "region": "bf"
+  },
+  "InfosportPlus.af": {
+    "id": 180050,
+    "region": "bf"
+  },
+  "Utv.af": {
+    "id": 180051,
+    "region": "bf"
+  },
+  "Lci.af": {
+    "id": 180054,
+    "region": "bf"
+  },
+  "PolarPlus.af": {
+    "id": 180055,
+    "region": "bf"
+  },
+  "France2Int.af": {
+    "id": 180057,
+    "region": "bf"
+  },
+  "Mangas.af": {
+    "id": 180059,
+    "region": "bf"
+  },
+  "RtbZenith.af": {
+    "id": 180060,
+    "region": "bf"
+  },
+  "HopeTV.af": {
+    "id": 180061,
+    "region": "bf"
+  },
+  "Rtnk.af": {
+    "id": 180062,
+    "region": "bf"
+  },
+  "Mezzo.af": {
+    "id": 180063,
+    "region": "bf"
+  },
+  "HorebTV.af": {
+    "id": 180064,
+    "region": "bf"
+  },
+  "MtvFrance.af": {
+    "id": 180065,
+    "region": "bf"
+  },
+  "Tbc2.af": {
+    "id": 180066,
+    "region": "bf"
+  },
+  "Tfx.af": {
+    "id": 180067,
+    "region": "bf"
+  },
+  "KtnNews.af": {
+    "id": 180068,
+    "region": "bf"
+  },
+  "ORTM.af": {
+    "id": 180069,
+    "region": "bf"
+  },
+  "KtnHome.af": {
+    "id": 180070,
+    "region": "bf"
+  },
+  "PlanetePlus.af": {
+    "id": 180072,
+    "region": "bf"
+  },
+  "PlanetePlusAventure.af": {
+    "id": 180073,
+    "region": "bf"
+  },
+  "APlusBenin.af": {
+    "id": 180074,
+    "region": "bf"
+  },
+  "DisneyJunior.af": {
+    "id": 180075,
+    "region": "bf"
+  },
+  "RTS.sn": {
+    "id": 180076,
+    "region": "bf"
+  },
+  "RTL9.af": {
+    "id": 180077,
+    "region": "bf"
+  },
+  "Syfy.af": {
+    "id": 180078,
+    "region": "bf"
+  },
+  "TchadInfos.af": {
+    "id": 180079,
+    "region": "bf"
+  },
+  "SerieClub.af": {
+    "id": 180080,
+    "region": "bf"
+  },
+  "Tf1.af": {
+    "id": 180095,
+    "region": "bf"
+  },
+  "Tiji.af": {
+    "id": 180097,
+    "region": "bf"
+  },
+  "Tmc.af": {
+    "id": 180098,
+    "region": "bf"
+  },
+  "TV5MondeAfrique.fr": {
+    "id": 180105,
+    "region": "bf"
+  },
+  "Xxl.af": {
+    "id": 180110,
+    "region": "bf"
+  },
+  "France24.af": {
+    "id": 180114,
+    "region": "bf"
+  },
+  "TambarinHausaTV.af": {
+    "id": 180116,
+    "region": "bf"
+  },
+  "C8.af": {
+    "id": 180120,
+    "region": "bf"
+  },
+  "RTB.af": {
+    "id": 180121,
+    "region": "bf"
+  },
+  "2stv.sn": {
+    "id": 180122,
+    "region": "bf"
+  },
+  "CanalPlusSport2.af": {
+    "id": 180124,
+    "region": "bf"
+  },
+  "CanalPlusCinemaCentre.af": {
+    "id": 180125,
+    "region": "bf"
+  },
+  "PiwiPlus.af": {
+    "id": 180128,
+    "region": "bf"
+  },
+  "CanalPlusPremiereCentre.af": {
+    "id": 180129,
+    "region": "bf"
+  },
+  "GameOne.af": {
+    "id": 180136,
+    "region": "bf"
+  },
+  "UshuaiaTV.af": {
+    "id": 180138,
+    "region": "bf"
+  },
+  "PlanetePlusCrime.af": {
+    "id": 180142,
+    "region": "bf"
+  },
+  "CanalPlusFamilyCentre.af": {
+    "id": 180144,
+    "region": "bf"
+  },
+  "NationalGeographic.af": {
+    "id": 180145,
+    "region": "bf"
+  },
+  "MtvHits.af": {
+    "id": 180147,
+    "region": "bf"
+  },
+  "TeletoonPlus.af": {
+    "id": 180148,
+    "region": "bf"
+  },
+  "CanalPlusSport3.af": {
+    "id": 180149,
+    "region": "bf"
+  },
+  "DorcelTV.af": {
+    "id": 180154,
+    "region": "bf"
+  },
+  "Histoire.af": {
+    "id": 180158,
+    "region": "bf"
+  },
+  "Ratelki.af": {
+    "id": 180164,
+    "region": "bf"
+  },
+  "Africable.af": {
+    "id": 180166,
+    "region": "bf"
+  },
+  "Africa24.af": {
+    "id": 180168,
+    "region": "bf"
+  },
+  "EquinoxeTV.af": {
+    "id": 180170,
+    "region": "bf"
+  },
+  "RTI1.ci": {
+    "id": 180171,
+    "region": "bf"
+  },
+  "Canal2Inter.af": {
+    "id": 180172,
+    "region": "bf"
+  },
+  "LiptakoTV.af": {
+    "id": 180178,
+    "region": "bf"
+  },
+  "TraceUrbanAfrique.af": {
+    "id": 180186,
+    "region": "bf"
+  },
+  "Gabon1ere.af": {
+    "id": 180187,
+    "region": "bf"
+  },
+  "STV.af": {
+    "id": 180192,
+    "region": "bf"
+  },
+  "VoxAfrica.af": {
+    "id": 180193,
+    "region": "bf"
+  },
+  "RTG.af": {
+    "id": 180202,
+    "region": "bf"
+  },
+  "TeleCongo.af": {
+    "id": 180204,
+    "region": "bf"
+  },
+  "ORTB.af": {
+    "id": 180207,
+    "region": "bf"
+  },
+  "RTNC.af": {
+    "id": 180208,
+    "region": "bf"
+  },
+  "TraceAfricaAfrique.af": {
+    "id": 180214,
+    "region": "bf"
+  },
+  "VoirPlus.af": {
+    "id": 180215,
+    "region": "bf"
+  },
+  "Cstar.af": {
+    "id": 180217,
+    "region": "bf"
+  },
+  "NatGeoWild.af": {
+    "id": 180223,
+    "region": "bf"
+  },
+  "Nickelodeon.af": {
+    "id": 180224,
+    "region": "bf"
+  },
+  "Tfm.af": {
+    "id": 180234,
+    "region": "bf"
+  },
+  "TeleAfrica.af": {
+    "id": 180235,
+    "region": "bf"
+  },
+  "SaraouniaTV.af": {
+    "id": 180238,
+    "region": "bf"
+  },
+  "CanalEvenementAfrique.af": {
+    "id": 180245,
+    "region": "bf"
+  },
+  "RwandaTV.af": {
+    "id": 180251,
+    "region": "bf"
+  },
+  "MelodyDafrique.af": {
+    "id": 180265,
+    "region": "bf"
+  },
+  "TraceMboa.af": {
+    "id": 180266,
+    "region": "bf"
+  },
+  "NollywoodTV.af": {
+    "id": 180270,
+    "region": "bf"
+  },
+  "Rti2.af": {
+    "id": 180271,
+    "region": "bf"
+  },
+  "TVTogo.af": {
+    "id": 180272,
+    "region": "bf"
+  },
+  "Bone.af": {
+    "id": 180273,
+    "region": "bf"
+  },
+  "TeleSahel.af": {
+    "id": 180274,
+    "region": "bf"
+  },
+  "TVTchad.af": {
+    "id": 180275,
+    "region": "bf"
+  },
+  "AlJazeera.af": {
+    "id": 180277,
+    "region": "bf"
+  },
+  "Kto.af": {
+    "id": 180278,
+    "region": "bf"
+  },
+  "Iqraa.af": {
+    "id": 180279,
+    "region": "bf"
+  },
+  "CanalPlusEllesCentre.af": {
+    "id": 180302,
+    "region": "bf"
+  },
+  "ParamountTV.af": {
+    "id": 180303,
+    "region": "bf"
+  },
+  "NhkWorldTV.af": {
+    "id": 180307,
+    "region": "bf"
+  },
+  "AntenneA.af": {
+    "id": 180322,
+    "region": "bf"
+  },
+  "Lmtv.af": {
+    "id": 180323,
+    "region": "bf"
+  },
+  "TV10.af": {
+    "id": 180326,
+    "region": "bf"
+  },
+  "BblackAfrica.af": {
+    "id": 180327,
+    "region": "bf"
+  },
+  "APlus.af": {
+    "id": 180335,
+    "region": "bf"
+  },
+  "Bf1TV.af": {
+    "id": 180337,
+    "region": "bf"
+  },
+  "TVca.af": {
+    "id": 180339,
+    "region": "bf"
+  },
+  "TozaliTV.af": {
+    "id": 180341,
+    "region": "bf"
+  },
+  "GulliAfrica.af": {
+    "id": 180367,
+    "region": "bf"
+  },
+  "NovelasTV.af": {
+    "id": 180368,
+    "region": "bf"
+  },
+  "PacisTV.af": {
+    "id": 180371,
+    "region": "bf"
+  },
+  "MediaPrime.af": {
+    "id": 180372,
+    "region": "bf"
+  },
+  "ScienceEtVieTV.af": {
+    "id": 180373,
+    "region": "bf"
+  },
+  "EnglishClubTV.af": {
+    "id": 180374,
+    "region": "bf"
+  },
+  "FashionAfricaTV.af": {
+    "id": 180376,
+    "region": "bf"
+  },
+  "SENTV.af": {
+    "id": 180377,
+    "region": "bf"
+  },
+  "AsongaTV.af": {
+    "id": 180378,
+    "region": "bf"
+  },
+  "GolfeTV.af": {
+    "id": 180379,
+    "region": "bf"
+  },
+  "DigitalCongo.af": {
+    "id": 180380,
+    "region": "bf"
+  },
+  "Tele50.af": {
+    "id": 180381,
+    "region": "bf"
+  },
+  "Drtv.af": {
+    "id": 180383,
+    "region": "bf"
+  },
+  "TVMauritanie.af": {
+    "id": 180384,
+    "region": "bf"
+  },
+  "ElectronTV.af": {
+    "id": 180387,
+    "region": "bf"
+  },
+  "CanalPlusSport4.af": {
+    "id": 180393,
+    "region": "bf"
+  },
+  "CanalPlusSport5.af": {
+    "id": 180394,
+    "region": "bf"
+  },
+  "ZeeMagic.af": {
+    "id": 180396,
+    "region": "bf"
+  },
+  "ORTM2.af": {
+    "id": 180397,
+    "region": "bf"
+  },
+  "EvasionTV.af": {
+    "id": 180398,
+    "region": "bf"
+  },
+  "Rtd.af": {
+    "id": 180399,
+    "region": "bf"
+  },
+  "CanalPlusEllesOuest.af": {
+    "id": 180402,
+    "region": "bf"
+  },
+  "CanalPlusFamilyOuest.af": {
+    "id": 180403,
+    "region": "bf"
+  },
+  "OneTV.af": {
+    "id": 180404,
+    "region": "bf"
+  },
+  "SsmTV.af": {
+    "id": 180411,
+    "region": "bf"
+  },
+  "McrTV.af": {
+    "id": 180412,
+    "region": "bf"
+  },
+  "OmegaTV.af": {
+    "id": 180415,
+    "region": "bf"
+  },
+  "Etelevision.af": {
+    "id": 180421,
+    "region": "bf"
+  },
+  "EspaceTV.af": {
+    "id": 180425,
+    "region": "bf"
+  },
+  "Gabon24.af": {
+    "id": 180427,
+    "region": "bf"
+  },
+  "Nyota.af": {
+    "id": 180428,
+    "region": "bf"
+  },
+  "LedjelyTV.af": {
+    "id": 180446,
+    "region": "bf"
+  },
+  "Tgb.af": {
+    "id": 180499,
+    "region": "bf"
+  },
+  "Joliba.af": {
+    "id": 180527,
+    "region": "bf"
+  },
+  "Tivi5Monde.af": {
+    "id": 180545,
+    "region": "bf"
+  },
+  "Canal3Benin.af": {
+    "id": 180546,
+    "region": "bf"
+  },
+  "NbaTV.af": {
+    "id": 180555,
+    "region": "bf"
+  },
+  "BurkinaInfo.af": {
+    "id": 180556,
+    "region": "bf"
+  },
+  "VoxTV.af": {
+    "id": 180561,
+    "region": "bf"
+  },
+  "Automoto.af": {
+    "id": 180565,
+    "region": "bf"
+  },
+  "Trek.af": {
+    "id": 180566,
+    "region": "bf"
+  },
+  "JONE.af": {
+    "id": 180568,
+    "region": "bf"
+  },
+  "BantambaTV.af": {
+    "id": 180569,
+    "region": "bf"
+  },
+  "TraceMziki.af": {
+    "id": 180570,
+    "region": "bf"
+  },
+  "CNBCAfrica.af": {
+    "id": 180571,
+    "region": "bf"
+  },
+  "WALFTV.sn": {
+    "id": 180572,
+    "region": "bf"
+  },
+  "LTM.af": {
+    "id": 180573,
+    "region": "bf"
+  },
+  "IVOIRETVMusic.ci": {
+    "id": 180580,
+    "region": "bf"
+  },
+  "MandeTV.af": {
+    "id": 180585,
+    "region": "bf"
+  },
+  "NollywoodEpic.af": {
+    "id": 180600,
+    "region": "bf"
+  },
+  "CisTV.af": {
+    "id": 180602,
+    "region": "bf"
+  },
+  "Asfiyahi.af": {
+    "id": 180612,
+    "region": "bf"
+  },
+  "TF1SeriesFilms.af": {
+    "id": 180613,
+    "region": "bf"
+  },
+  "Wataaa.af": {
+    "id": 180614,
+    "region": "bf"
+  },
+  "TraceGospel.af": {
+    "id": 180620,
+    "region": "bf"
+  },
+  "TraceKitoko.af": {
+    "id": 180621,
+    "region": "bf"
+  },
+  "3tv.af": {
+    "id": 180623,
+    "region": "bf"
+  },
+  "CanalPlusSport1.af": {
+    "id": 180625,
+    "region": "bf"
+  },
+  "CanalPlusActionCentre.af": {
+    "id": 180626,
+    "region": "bf"
+  },
+  "Mishapi.af": {
+    "id": 180627,
+    "region": "bf"
+  },
+  "CanalPlusPopCentre.af": {
+    "id": 180628,
+    "region": "bf"
+  },
+  "LuxTV.af": {
+    "id": 180639,
+    "region": "bf"
+  },
+  "KalacTV.af": {
+    "id": 180640,
+    "region": "bf"
+  },
+  "NietaTV.af": {
+    "id": 180643,
+    "region": "bf"
+  },
+  "CanalPlusActionOuest.af": {
+    "id": 180645,
+    "region": "bf"
+  },
+  "CanalPlusPopOuest.af": {
+    "id": 180646,
+    "region": "bf"
+  },
+  "SavaneTV.af": {
+    "id": 180664,
+    "region": "bf"
+  },
+  "MoliereTV.af": {
+    "id": 180665,
+    "region": "bf"
+  },
+  "RTS2.sn": {
+    "id": 180666,
+    "region": "bf"
+  },
+  "MggTV.af": {
+    "id": 180667,
+    "region": "bf"
+  },
+  "CRTVNews.af": {
+    "id": 180668,
+    "region": "bf"
+  },
+  "CheriflaTV.af": {
+    "id": 180669,
+    "region": "bf"
+  },
+  "MuseumTV.af": {
+    "id": 180670,
+    "region": "bf"
+  },
+  "Canal2Movies.af": {
+    "id": 180671,
+    "region": "bf"
+  },
+  "Emci.af": {
+    "id": 180673,
+    "region": "bf"
+  },
+  "APlusIvoire.ci": {
+    "id": 180681,
+    "region": "bf"
+  },
+  "Vision4Rca.af": {
+    "id": 180682,
+    "region": "bf"
+  },
+  "Arewa24.af": {
+    "id": 180686,
+    "region": "bf"
+  },
+  "NovelasTVIvoire.af": {
+    "id": 180689,
+    "region": "bf"
+  },
+  "SaharaTV.af": {
+    "id": 180700,
+    "region": "bf"
+  },
+  "DorcelTVAfrica.af": {
+    "id": 180702,
+    "region": "bf"
+  },
+  "SunuYeuf.af": {
+    "id": 180710,
+    "region": "bf"
+  },
+  "Cuisines.af": {
+    "id": 180711,
+    "region": "bf"
+  },
+  "M6International.af": {
+    "id": 180712,
+    "region": "bf"
+  },
+  "TraceTeranga.af": {
+    "id": 180714,
+    "region": "bf"
+  },
+  "Nci.af": {
+    "id": 180715,
+    "region": "bf"
+  },
+  "Rtnb.af": {
+    "id": 180716,
+    "region": "bf"
+  },
+  "CrtvSport.af": {
+    "id": 180717,
+    "region": "bf"
+  },
+  "Tm1.af": {
+    "id": 180723,
+    "region": "bf"
+  },
+  "TouteLHistoire.af": {
+    "id": 180727,
+    "region": "bf"
+  },
+  "Pstv.af": {
+    "id": 180728,
+    "region": "bf"
+  },
+  "CanalPlusTop14.af": {
+    "id": 180739,
+    "region": "bf"
+  },
+  "FarinWata.af": {
+    "id": 180740,
+    "region": "bf"
+  },
+  "CanalPlusMotoGp.af": {
+    "id": 180743,
+    "region": "bf"
+  },
+  "CanalPlusFormula1.af": {
+    "id": 180744,
+    "region": "bf"
+  },
+  "Kc2.af": {
+    "id": 180747,
+    "region": "bf"
+  },
+  "TV1.af": {
+    "id": 180748,
+    "region": "bf"
+  },
+  "AuthenticTV.af": {
+    "id": 180749,
+    "region": "bf"
+  },
+  "FlashTV.af": {
+    "id": 180750,
+    "region": "bf"
+  },
+  "IsangoStarTV.af": {
+    "id": 180751,
+    "region": "bf"
+  },
+  "GenesisTV.af": {
+    "id": 180752,
+    "region": "bf"
+  },
+  "BtnTV.af": {
+    "id": 180753,
+    "region": "bf"
+  },
+  "LoveNature.af": {
+    "id": 180755,
+    "region": "bf"
+  },
+  "CartoonNetworkAfricaSa.af": {
+    "id": 180756,
+    "region": "bf"
+  },
+  "TntAfrica.af": {
+    "id": 180757,
+    "region": "bf"
+  },
+  "APlusKids.af": {
+    "id": 180758,
+    "region": "bf"
+  },
+  "Animaux.af": {
+    "id": 180759,
+    "region": "bf"
+  },
+  "CrimeDistrict.af": {
+    "id": 180760,
+    "region": "bf"
+  },
+  "La3.af": {
+    "id": 180761,
+    "region": "bf"
+  },
+  "LifeTV.af": {
+    "id": 180762,
+    "region": "bf"
+  },
+  "TV7.af": {
+    "id": 180763,
+    "region": "bf"
+  },
+  "Cvk.af": {
+    "id": 180764,
+    "region": "bf"
+  },
+  "Cdirect.af": {
+    "id": 180765,
+    "region": "bf"
+  },
+  "Albayane.af": {
+    "id": 180776,
+    "region": "bf"
+  },
+  "Lca.af": {
+    "id": 180777,
+    "region": "bf"
+  },
+  "RenouveauTV.af": {
+    "id": 180778,
+    "region": "bf"
+  },
+  "Rtds.af": {
+    "id": 180779,
+    "region": "bf"
+  },
+  "Canal3Burkina.af": {
+    "id": 180795,
+    "region": "bf"
+  },
+  "Sud1ere.af": {
+    "id": 180828,
+    "region": "bf"
+  },
+  "7info.af": {
+    "id": 180829,
+    "region": "bf"
+  },
+  "GabonCulture.af": {
+    "id": 180830,
+    "region": "bf"
+  },
+  "BloombergTV.af": {
+    "id": 180840,
+    "region": "bf"
+  },
+  "LampFallTV.af": {
+    "id": 180921,
+    "region": "bf"
+  },
+  "AlafiaTV.af": {
+    "id": 180922,
+    "region": "bf"
+  },
+  "TVC.af": {
+    "id": 180923,
+    "region": "bf"
+  },
+  "Dounia.af": {
+    "id": 180924,
+    "region": "bf"
+  },
+  "Bonferey.af": {
+    "id": 180925,
+    "region": "bf"
+  },
+  "SunnaTV.af": {
+    "id": 180926,
+    "region": "bf"
+  },
+  "TVge.af": {
+    "id": 180927,
+    "region": "bf"
+  },
+  "CapitalSanteTV.af": {
+    "id": 180928,
+    "region": "bf"
+  },
+  "MikubaTV.af": {
+    "id": 180929,
+    "region": "bf"
+  },
+  "DjomaTV.af": {
+    "id": 180930,
+    "region": "bf"
+  },
+  "LudikidsOi.af": {
+    "id": 180931,
+    "region": "bf"
+  },
+  "Vixen.af": {
+    "id": 180934,
+    "region": "bf"
+  },
+  "NickelodeonJr.af": {
+    "id": 180941,
+    "region": "bf"
+  },
+  "Rai.af": {
+    "id": 180947,
+    "region": "bf"
+  },
+  "NathanPlus.af": {
+    "id": 180959,
+    "region": "bf"
+  },
+  "NovelasCameroun.af": {
+    "id": 180971,
+    "region": "bf"
+  },
+  "MadiTV.af": {
+    "id": 180972,
+    "region": "bf"
+  },
+  "MabokeTV.af": {
+    "id": 180973,
+    "region": "bf"
+  },
+  "EcclesiaTV.af": {
+    "id": 180974,
+    "region": "bf"
+  },
+  "SosDocteurTV.af": {
+    "id": 180976,
+    "region": "bf"
+  },
+  "CanalPlusDocs.af": {
+    "id": 180980,
+    "region": "bf"
+  },
+  "TravelXP.af": {
+    "id": 180996,
+    "region": "bf"
+  },
+  "TraceChristmas.af": {
+    "id": 180000,
+    "region": "bf"
+  },
+  "CliqueTV.af": {
+    "id": 180615,
+    "region": "bf"
+  },
+
+  "Mbc1.frdrom": {
+    "id": 160000,
+    "region": "mg"
+  },
+  "13emeRue.frdrom": {
+    "id": 160001,
+    "region": "mg"
+  },
+  "Mbc2.frdrom": {
+    "id": 160003,
+    "region": "mg"
+  },
+  "Action.frdrom": {
+    "id": 160004,
+    "region": "mg"
+  },
+  "AntenneReunion.fr": {
+    "id": 160005,
+    "region": "mg"
+  },
+  "Mbc3.frdrom": {
+    "id": 160006,
+    "region": "mg"
+  },
+  "ArteFrance.frdrom": {
+    "id": 160007,
+    "region": "mg"
+  },
+  "BbcNews.frdrom": {
+    "id": 160008,
+    "region": "mg"
+  },
+  "Wsport.frdrom": {
+    "id": 160009,
+    "region": "mg"
+  },
+  "Mbc4.frdrom": {
+    "id": 160010,
+    "region": "mg"
+  },
+  "CanalJ.frdrom": {
+    "id": 160011,
+    "region": "mg"
+  },
+  "Mbc5.frdrom": {
+    "id": 160012,
+    "region": "mg"
+  },
+  "Mbc11.frdrom": {
+    "id": 160013,
+    "region": "mg"
+  },
+  "CanalPlusCinema.frdrom": {
+    "id": 160014,
+    "region": "mg"
+  },
+  "MbcHd.frdrom": {
+    "id": 160015,
+    "region": "mg"
+  },
+  "CanalPlus.frdrom": {
+    "id": 160020,
+    "region": "mg"
+  },
+  "CanalPlusSportHd.frdrom": {
+    "id": 160022,
+    "region": "mg"
+  },
+  "CinePlusClub.frdrom": {
+    "id": 160024,
+    "region": "mg"
+  },
+  "CinePlusEmotion.frdrom": {
+    "id": 160025,
+    "region": "mg"
+  },
+  "CinePlusFamiz.frdrom": {
+    "id": 160026,
+    "region": "mg"
+  },
+  "CinePlusFrisson.frdrom": {
+    "id": 160027,
+    "region": "mg"
+  },
+  "CinePlusPremierHd.frdrom": {
+    "id": 160028,
+    "region": "mg"
+  },
+  "ComediePlus.frdrom": {
+    "id": 160033,
+    "region": "mg"
+  },
+  "DisneyChannel.frdrom": {
+    "id": 160035,
+    "region": "mg"
+  },
+  "E!Entertainment.frdrom": {
+    "id": 160036,
+    "region": "mg"
+  },
+  "Equidia.frdrom": {
+    "id": 160037,
+    "region": "mg"
+  },
+  "Eurosport1Hd.frdrom": {
+    "id": 160041,
+    "region": "mg"
+  },
+  "Eurosport2.frdrom": {
+    "id": 160042,
+    "region": "mg"
+  },
+  "France3.frdrom": {
+    "id": 160045,
+    "region": "mg"
+  },
+  "France5.frdrom": {
+    "id": 160046,
+    "region": "mg"
+  },
+  "Cnews.frdrom": {
+    "id": 160048,
+    "region": "mg"
+  },
+  "InfosportPlus.frdrom": {
+    "id": 160050,
+    "region": "mg"
+  },
+  "Lci.frdrom": {
+    "id": 160054,
+    "region": "mg"
+  },
+  "LcpAssembleeNationale.frdrom": {
+    "id": 160055,
+    "region": "mg"
+  },
+  "LEquipe.frdrom": {
+    "id": 160056,
+    "region": "mg"
+  },
+  "M6Hd.frdrom": {
+    "id": 160057,
+    "region": "mg"
+  },
+  "RfmTV.frdrom": {
+    "id": 160061,
+    "region": "mg"
+  },
+  "Mezzo.frdrom": {
+    "id": 160063,
+    "region": "mg"
+  },
+  "MtvFrance.frdrom": {
+    "id": 160065,
+    "region": "mg"
+  },
+  "Tfx.frdrom": {
+    "id": 160067,
+    "region": "mg"
+  },
+  "ParisPremiere.frdrom": {
+    "id": 160070,
+    "region": "mg"
+  },
+  "PlanetePlus.frdrom": {
+    "id": 160072,
+    "region": "mg"
+  },
+  "PlanetePlusAventure.frdrom": {
+    "id": 160073,
+    "region": "mg"
+  },
+  "DisneyJunior.frdrom": {
+    "id": 160075,
+    "region": "mg"
+  },
+  "Rtl9.frdrom": {
+    "id": 160077,
+    "region": "mg"
+  },
+  "Syfy.frdrom": {
+    "id": 160078,
+    "region": "mg"
+  },
+  "Seasons.frdrom": {
+    "id": 160079,
+    "region": "mg"
+  },
+  "SerieClub.frdrom": {
+    "id": 160080,
+    "region": "mg"
+  },
+  "Reunion1ere.frdrom": {
+    "id": 160088,
+    "region": "mg"
+  },
+  "Teva.frdrom": {
+    "id": 160094,
+    "region": "mg"
+  },
+  "Tf1.frdrom": {
+    "id": 160095,
+    "region": "mg"
+  },
+  "Tmc.frdrom": {
+    "id": 160098,
+    "region": "mg"
+  },
+  "TraceUrban.frdrom": {
+    "id": 160102,
+    "region": "mg"
+  },
+  "TVBreizh.frdrom": {
+    "id": 160104,
+    "region": "mg"
+  },
+  "TV5MondeAfrique.frdrom": {
+    "id": 160105,
+    "region": "mg"
+  },
+  "TV5MondeFr.frdrom": {
+    "id": 160108,
+    "region": "mg"
+  },
+  "Xxl.frdrom": {
+    "id": 160110,
+    "region": "mg"
+  },
+  "France24.frdrom": {
+    "id": 160114,
+    "region": "mg"
+  },
+  "BeinSports1Hd.frdrom": {
+    "id": 160115,
+    "region": "mg"
+  },
+  "ZeeCinemaHd.frdrom": {
+    "id": 160117,
+    "region": "mg"
+  },
+  "Zing.frdrom": {
+    "id": 160118,
+    "region": "mg"
+  },
+  "ZeeTV.frdrom": {
+    "id": 160119,
+    "region": "mg"
+  },
+  "C8.frdrom": {
+    "id": 160120,
+    "region": "mg"
+  },
+  "CanalPlusSport2Hd\t.frdrom": {
+    "id": 160124,
+    "region": "mg"
+  },
+  "PiwiPlus.frdrom": {
+    "id": 160128,
+    "region": "mg"
+  },
+  "GameOne.frdrom": {
+    "id": 160136,
+    "region": "mg"
+  },
+  "Ushua\\u00cfaTV.frdrom": {
+    "id": 160138,
+    "region": "mg"
+  },
+  "W9.frdrom": {
+    "id": 160140,
+    "region": "mg"
+  },
+  "PlanetePlusCrime.frdrom": {
+    "id": 160142,
+    "region": "mg"
+  },
+  "NationalGeographicHd.frdrom": {
+    "id": 160145,
+    "region": "mg"
+  },
+  "Gulli.frdrom": {
+    "id": 160146,
+    "region": "mg"
+  },
+  "MtvHits.frdrom": {
+    "id": 160147,
+    "region": "mg"
+  },
+  "TeletoonPlus.frdrom": {
+    "id": 160148,
+    "region": "mg"
+  },
+  "CanalPlusSport3Hd\t.frdrom": {
+    "id": 160149,
+    "region": "mg"
+  },
+  "Kanalaustral.tv.frdrom": {
+    "id": 160153,
+    "region": "mg"
+  },
+  "DorcelHd.frdrom": {
+    "id": 160154,
+    "region": "mg"
+  },
+  "Histoire.frdrom": {
+    "id": 160158,
+    "region": "mg"
+  },
+  "CanalEvenementIndo.frdrom": {
+    "id": 160162,
+    "region": "mg"
+  },
+  "Africa24.frdrom": {
+    "id": 160168,
+    "region": "mg"
+  },
+  "France2.frdrom": {
+    "id": 160188,
+    "region": "mg"
+  },
+  "TVmalgache.frdrom": {
+    "id": 160194,
+    "region": "mg"
+  },
+  "Ortcomores.frdrom": {
+    "id": 160195,
+    "region": "mg"
+  },
+  "France4.frdrom": {
+    "id": 160196,
+    "region": "mg"
+  },
+  "TeleKreol.frdrom": {
+    "id": 160203,
+    "region": "mg"
+  },
+  "Mayotte1ere.frdrom": {
+    "id": 160206,
+    "region": "mg"
+  },
+  "StarPlus\t.frdrom": {
+    "id": 160213,
+    "region": "mg"
+  },
+  "TraceAfrica.frdrom": {
+    "id": 160214,
+    "region": "mg"
+  },
+  "Nrj12.frdrom": {
+    "id": 160216,
+    "region": "mg"
+  },
+  "Cstar.frdrom": {
+    "id": 160217,
+    "region": "mg"
+  },
+  "Colors.frdrom": {
+    "id": 160218,
+    "region": "mg"
+  },
+  "NatGeoWild.frdrom": {
+    "id": 160223,
+    "region": "mg"
+  },
+  "Nickelodeon.frdrom": {
+    "id": 160224,
+    "region": "mg"
+  },
+  "BeinSports2Hd.frdrom": {
+    "id": 160243,
+    "region": "mg"
+  },
+  "CanalPlusBoxOffice.frdrom": {
+    "id": 160263,
+    "region": "mg"
+  },
+  "Kto.frdrom": {
+    "id": 160278,
+    "region": "mg"
+  },
+  "Iqraa.frdrom": {
+    "id": 160279,
+    "region": "mg"
+  },
+  "PenthouseBlack.frdrom": {
+    "id": 160280,
+    "region": "mg"
+  },
+  "Stargold.frdrom": {
+    "id": 160300,
+    "region": "mg"
+  },
+  "VoirPlusOceanIndien.frdrom": {
+    "id": 160301,
+    "region": "mg"
+  },
+  "ParamountTV.frdrom": {
+    "id": 160303,
+    "region": "mg"
+  },
+  "Hustler.frdrom": {
+    "id": 160304,
+    "region": "mg"
+  },
+  "Cgtnfrancais.frdrom": {
+    "id": 160309,
+    "region": "mg"
+  },
+  "CanalPlusSeries.frdrom": {
+    "id": 160312,
+    "region": "mg"
+  },
+  "OcsMaxHd.frdrom": {
+    "id": 160316,
+    "region": "mg"
+  },
+  "OcsPulp.frdrom": {
+    "id": 160318,
+    "region": "mg"
+  },
+  "OcsGeants.frdrom": {
+    "id": 160319,
+    "region": "mg"
+  },
+  "CinePlusClassic.frdrom": {
+    "id": 160328,
+    "region": "mg"
+  },
+  "MaTV.frdrom": {
+    "id": 160329,
+    "region": "mg"
+  },
+  "TVPlus.frdrom": {
+    "id": 160330,
+    "region": "mg"
+  },
+  "KoloTV.frdrom": {
+    "id": 160331,
+    "region": "mg"
+  },
+  "Viva.frdrom": {
+    "id": 160333,
+    "region": "mg"
+  },
+  "MtvIndia.frdrom": {
+    "id": 160342,
+    "region": "mg"
+  },
+  "MbcSat.frdrom": {
+    "id": 160343,
+    "region": "mg"
+  },
+  "BeinSports3Hd.frdrom": {
+    "id": 160347,
+    "region": "mg"
+  },
+  "EnglishClubTV.frdrom": {
+    "id": 160374,
+    "region": "mg"
+  },
+  "CanalPlusSport4\t.frdrom": {
+    "id": 160393,
+    "region": "mg"
+  },
+  "CanalPlusSport5\t.frdrom": {
+    "id": 160394,
+    "region": "mg"
+  },
+  "CanalPlusKidsHd.frdrom": {
+    "id": 160401,
+    "region": "mg"
+  },
+  "Record.frdrom": {
+    "id": 160413,
+    "region": "mg"
+  },
+  "GolfPlusHd.frdrom": {
+    "id": 160414,
+    "region": "mg"
+  },
+  "APlus.frdrom": {
+    "id": 160416,
+    "region": "mg"
+  },
+  "NollywoodTVFrance.frdrom": {
+    "id": 160418,
+    "region": "mg"
+  },
+  "CanalPlusSport360.frdrom": {
+    "id": 160543,
+    "region": "mg"
+  },
+  "CanalPlusFoot.frdrom": {
+    "id": 160544,
+    "region": "mg"
+  },
+  "NovelasTV.frdrom": {
+    "id": 160547,
+    "region": "mg"
+  },
+  "BeinSportsMax4.frdrom": {
+    "id": 160558,
+    "region": "mg"
+  },
+  "BeinSportsMax5.frdrom": {
+    "id": 160559,
+    "region": "mg"
+  },
+  "SonyMax.frdrom": {
+    "id": 160560,
+    "region": "mg"
+  },
+  "Colmax.frdrom": {
+    "id": 160564,
+    "region": "mg"
+  },
+  "Automoto.frdrom": {
+    "id": 160565,
+    "region": "mg"
+  },
+  "Trek.frdrom": {
+    "id": 160566,
+    "region": "mg"
+  },
+  "Private.frdrom": {
+    "id": 160591,
+    "region": "mg"
+  },
+  "Tf1SeriesFilms.frdrom": {
+    "id": 160613,
+    "region": "mg"
+  },
+  "Wataaa.frdrom": {
+    "id": 160614,
+    "region": "mg"
+  },
+  "6ter.frdrom": {
+    "id": 160624,
+    "region": "mg"
+  },
+  "CanalPlusSport1.frdrom": {
+    "id": 160625,
+    "region": "mg"
+  },
+  "CPlusActionCentre.frdrom": {
+    "id": 160647,
+    "region": "mg"
+  },
+  "MuseumTV.frdrom": {
+    "id": 160670,
+    "region": "mg"
+  },
+  "FranceInfo:.frdrom": {
+    "id": 160704,
+    "region": "mg"
+  },
+  "Cuisines.frdrom": {
+    "id": 160711,
+    "region": "mg"
+  },
+  "Rta.frdrom": {
+    "id": 160726,
+    "region": "mg"
+  },
+  "OlympiaTV.frdrom": {
+    "id": 160731,
+    "region": "mg"
+  },
+  "CanalPlusPremierLeague.frdrom": {
+    "id": 160738,
+    "region": "mg"
+  },
+  "CanalPlusTop14.frdrom": {
+    "id": 160739,
+    "region": "mg"
+  },
+  "CanalPlusMotoGp.frdrom": {
+    "id": 160743,
+    "region": "mg"
+  },
+  "CanalPlusFormula1.frdrom": {
+    "id": 160744,
+    "region": "mg"
+  },
+  "Novegasy.frdrom": {
+    "id": 160799,
+    "region": "mg"
+  },
+  "TraceVanilla.frdrom": {
+    "id": 160800,
+    "region": "mg"
+  },
+  "LudikidsOi.frdrom": {
+    "id": 160931,
+    "region": "mg"
+  },
+  "ZeeThirai.frdrom": {
+    "id": 160932,
+    "region": "mg"
+  },
+  "Vixen.frdrom": {
+    "id": 160934,
+    "region": "mg"
+  },
+  "NickelodeonJr.frdrom": {
+    "id": 160941,
+    "region": "mg"
+  },
+  "UtsavBharat.frdrom": {
+    "id": 160943,
+    "region": "mg"
+  },
+  "Multisports1.frdrom": {
+    "id": 160955,
+    "region": "mg"
+  },
+  "Multisports2.frdrom": {
+    "id": 160956,
+    "region": "mg"
+  },
+  "Multisports3.frdrom": {
+    "id": 160957,
+    "region": "mg"
+  },
+  "Multisport4.frdrom": {
+    "id": 160958,
+    "region": "mg"
+  },
+  "BfmTV.frdrom": {
+    "id": 160963,
+    "region": "mg"
+  },
+  "BfmBusiness.frdrom": {
+    "id": 160964,
+    "region": "mg"
+  },
+  "RmcStory.frdrom": {
+    "id": 160965,
+    "region": "mg"
+  },
+  "KweziTV.af": {
+    "id": 160968,
+    "region": "mg"
+  },
+  "CanalPlusDocs.frdrom": {
+    "id": 160980,
+    "region": "mg"
+  },
+  "Travelxp.frdrom": {
+    "id": 160996,
+    "region": "mg"
+  },
+  "ChevalTV.frdrom": {
+    "id": 160997,
+    "region": "mg"
+  },
+  "MezzoLive.frdrom": {
+    "id": 160998,
+    "region": "mg"
+  },
+  "RmcDecouverte.frdrom": {
+    "id": 160999,
+    "region": "mg"
+  },
+  "TestDrom.frdrom": {
+    "id": 160636,
+    "region": "mg"
+  }
+}

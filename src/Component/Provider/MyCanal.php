@@ -17,13 +17,13 @@ use racacax\XmlTv\ValueObject\Program;
 class MyCanal extends AbstractProvider implements ProviderInterface
 {
     protected static $apiKey = [];
-    protected $region = 'fr';
+    protected $region = "fr";
     protected $proxy = null;
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         if(isset($extraParam["mycanal_proxy"]))
             $this->proxy = $extraParam["mycanal_proxy"];
-        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal'.$this->region.'.json'), $priority ?? 0.7);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal.json'), $priority ?? 0.7);
     }
 
     protected function getApiKey() {
@@ -44,6 +44,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
+        $this->region = $this->channelsList[$channel]["region"];
         //@todo: add cache (next PR?)
         $url1 = $this->generateUrl($channelObj, $datetime = new \DateTimeImmutable($date));
         $url2 = $this->generateUrl($channelObj, $datetime->modify('+1 days'));
@@ -178,7 +179,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
-        $channelId = $this->channelsList[$channel->getId()];
+        $channelId = $this->channelsList[$channel->getId()]["id"];
         $day = round(($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400);
 
         $url = 'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->getApiKey() . '/' . $channelId . '/broadcasts/day/'. $day;
