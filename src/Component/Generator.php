@@ -156,10 +156,15 @@ class Generator
             $defaultInfo = ChannelInformation::getInstance();
             $this->exporter->startExport($exportPath . $guide['filename']);
             $listCacheKey = [];
+            $listAliases = [];
             foreach ($channels as $channelKey => $channelInfo) {
                 $icon = $channelInfo['icon'] ?? $defaultInfo->getDefaultIcon($channelKey);
                 $name = $channelInfo['name'] ?? $defaultInfo->getDefaultName($channelKey) ?? $channelKey;
-                $this->exporter->addChannel($channelKey, $name, $icon);
+                $alias = $channelInfo['alias'] ?? $channelKey;
+                if($alias != $channelKey) {
+                    $listAliases[$channelKey] = $alias;
+                }
+                $this->exporter->addChannel($alias, $name, $icon);
                 $listCacheKey = array_merge($listCacheKey, array_map(
                     function (string $date) use ($channelKey) {
                         return sprintf('%s_%s.xml', $channelKey, $date);
@@ -171,8 +176,13 @@ class Generator
                 if (!$this->cache->has($keyCache)) {
                     continue;
                 }
+                $cache = $this->cache->get($keyCache);
+                $channelId = explode("_", $keyCache)[0];
+                if(array_key_exists($channelId, $listAliases)) {
+                    $cache = str_replace('channel="'.$channelId.'"', 'channel="'.$listAliases[$channelId].'"', $cache);
+                }
                 $this->exporter->addProgramsAsString(
-                    $this->cache->get($keyCache)
+                    $cache
                 );
             }
             $this->exporter->stopExport();
