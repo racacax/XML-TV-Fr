@@ -25,11 +25,11 @@ Cette partie va vous permettre de configurer XML TV Fr.
 La liste des chaines doit être indiquée dans le fichier channels.json au format JSON. Chaque chaine correspond à l'ID d'une chaine (Exemple : France2.fr) présente dans les fichiers de chaines par services (dossier channels_by_providers).
 La structure d'un item se fait comme ceci :
 ```json
-"IdDelaChaine":{"name":"Nom de la chaine","icon":"http://icone de la chaine","priority":["Service1","Service2"]}
+"IdDelaChaineDansLeProgramme":{"name":"Nom de la chaine","alias":"IDdeLaChaineDansLeXMLTV", "icon":"http://icone de la chaine","priority":["Service1","Service2"]}
 ```
-Les champs name, icon et priority sont optionnels. 
+Les champs name, icon, alias et priority sont optionnels. 
 Le champ priority donne un ordre de priorité différent de celui par défaut en indiquant les noms des services (nom des classes dans le dossier classes). Dans l'exemple, Service1 sera appelé en premier et Service2 ne sera appelé que si Service1 échoue. Par exemple si on met en priorité Télérama puis Orange, Télérama sera lancé. Si aucun programme n'est trouvé sur Télérama, Orange est lancé, sinon on continue. Si aucun programme n'est trouvé sur tous les services, la chaine est indiquée HS pour le jour concerné.
-
+Le champ alias permet de donner un ID alternatif à une chaine que celui renseigné par défaut. Si le champ est absent, c'est l'ID par défaut renseigné dans XML TV Fr qui sera affiché.
 ## Configuration du programme (config/config.json)
 
 Le fichier config.json est au format JSON. 
