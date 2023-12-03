@@ -16,9 +16,13 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
     private static $cache = []; // multiple channels are on the same page
     private static $BASE_URL = 'https://tv-programme.telecablesat.fr';
     private $loopCounter = 0;
-    public function __construct(Client $client, ?float $priority = null)
+    private static $proxy = ['',''];
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_telecablesat.json'), $priority ?? 0.55);
+        if (isset($extraParam['telecablesat_proxy'])) {
+            self::$proxy = $extraParam['telecablesat_proxy'];
+        }
     }
 
     public function constructEPG(string $channel, string $date)
@@ -30,8 +34,11 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         $channel_content = $this->channelsList[$channel];
         $channel_id = $channel_content['id'];
         $channel_url = $this->generateUrl($channelObj, new \DateTimeImmutable($date));
+        if (isset(self::$proxy[0]) && !empty(self::$proxy[0])) {
+            $channel_url = urlencode(base64_encode($channel_url));
+        }
         if (!isset(self::$cache[md5($channel_url)])) {
-            $res1 = $this->getContentFromURL($channel_url);
+            $res1 = $this->getContentFromURL(self::$proxy[0].$channel_url.self::$proxy[1]);
             if (empty($res1)) {
                 $this->loopCounter++;
                 if ($this->loopCounter > 3) {
@@ -68,7 +75,14 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                     $program->addTitle(trim($genresAndTitles[2][$i] ?? ''));
                     $program->addCategory(trim($genresAndTitles[1][$i] ?? ''));
                     $program->setIcon('https:'.$imgs[1][$i]);
-                    $content = $this->getContentFromURL(self::$BASE_URL.$links[1][$i]);
+
+                    if (isset(self::$proxy[0]) && !empty(self::$proxy[0])) {
+                        $f_url = urlencode(base64_encode(self::$BASE_URL.$links[1][$i]));
+                    } else {
+                        $f_url = self::$BASE_URL.$links[1][$i];
+                    }
+                    $content = $this->getContentFromURL(self::$proxy[0].$f_url.self::$proxy[1]);
+                    sleep(3);
                     if (empty($content)) {
                         $retry_counter++;
                         if ($retry_counter > 3) {

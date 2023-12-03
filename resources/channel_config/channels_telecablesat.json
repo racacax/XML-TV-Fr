@@ -37,7 +37,7 @@
   "CanalPlusCinema.fr": {
     "page": 1,
     "id": "33",
-    "alt": "Canal+ Cin\u00e9ma"
+    "alt": "Canal+ Cin\u00e9ma(s)"
   },
   "CanalPlusSport.fr": {
     "page": 1,
@@ -264,11 +264,6 @@
     "id": "734",
     "alt": "OCS G\u00e9ants"
   },
-  "AlticeStudio.fr": {
-    "page": 5,
-    "id": "2320",
-    "alt": "Altice Studio"
-  },
   "Action.fr": {
     "page": 5,
     "id": "10",
@@ -285,7 +280,7 @@
     "alt": "Novelas TV"
   },
   "APlusInternational.fr": {
-    "page": 6,
+    "page": 5,
     "id": "2049",
     "alt": "A+ International France"
   },
@@ -345,7 +340,7 @@
     "alt": "Discovery Science"
   },
   "DiscoveryInvestigation.fr": {
-    "page": 7,
+    "page": 6,
     "id": "2184",
     "alt": "Discovery Investigation"
   },
@@ -405,7 +400,7 @@
     "alt": "Men's UP TV"
   },
   "DemainTV.fr": {
-    "page": 8,
+    "page": 7,
     "id": "57",
     "alt": "Demain TV"
   },
@@ -465,7 +460,7 @@
     "alt": "Eurosport 2"
   },
   "beINSPORTS1.fr": {
-    "page": 9,
+    "page": 8,
     "id": "1290",
     "alt": "beIN SPORTS 1"
   },
@@ -525,7 +520,7 @@
     "alt": "RMC Sport 1 UHD"
   },
   "RMCSport2.fr": {
-    "page": 10,
+    "page": 9,
     "id": "2666",
     "alt": "RMC Sport 2"
   },
@@ -585,7 +580,7 @@
     "alt": "RMC Sport Live 9"
   },
   "LEquipe21.fr": {
-    "page": 11,
+    "page": 10,
     "id": "1401",
     "alt": "L'Equipe"
   },
@@ -645,7 +640,7 @@
     "alt": "MTV"
   },
   "StingrayBrava.fr": {
-    "page": 12,
+    "page": 11,
     "id": "835",
     "alt": "Stingray Brava"
   },
@@ -687,7 +682,7 @@
   "Toonami.fr": {
     "page": 12,
     "id": "2040",
-    "alt": "Toonami"
+    "alt": "Warner TV Next"
   },
   "JOne.fr": {
     "page": 12,
@@ -705,7 +700,7 @@
     "alt": "Mangas"
   },
   "Nickelodeon.fr": {
-    "page": 13,
+    "page": 12,
     "id": "473",
     "alt": "Nickelod\u00e9on"
   },
@@ -739,11 +734,6 @@
     "id": "229",
     "alt": "TIJI"
   },
-  "Boing.fr": {
-    "page": 13,
-    "id": "924",
-    "alt": "Boing"
-  },
   "LaUne.be": {
     "page": 13,
     "id": "164",
@@ -765,12 +755,12 @@
     "alt": "RTS 2"
   },
   "RAI1.it": {
-    "page": 14,
+    "page": 13,
     "id": "156",
     "alt": "Rai Uno"
   },
   "RAI2.it": {
-    "page": 14,
+    "page": 13,
     "id": "154",
     "alt": "Rai Due"
   },
@@ -825,12 +815,12 @@
     "alt": "BBC 1"
   },
   "BBC2.uk": {
-    "page": 15,
+    "page": 14,
     "id": "17",
     "alt": "BBC 2"
   },
   "CNN.uk": {
-    "page": 15,
+    "page": 14,
     "id": "53",
     "alt": "CNN"
   },
@@ -885,12 +875,12 @@
     "alt": "Be Cin\u00e9"
   },
   "BeSeries.be": {
-    "page": 16,
+    "page": 15,
     "id": "418",
     "alt": "Be S\u00e9ries"
   },
   "BX1.be": {
-    "page": 16,
+    "page": 15,
     "id": "382",
     "alt": "BX1"
   },
@@ -932,7 +922,7 @@
   "ClubRTL.be": {
     "page": 16,
     "id": "50",
-    "alt": "Club RTL"
+    "alt": "RTL Club"
   },
   "DisneyChannel.be": {
     "page": 16,
@@ -945,12 +935,12 @@
     "alt": "\u00e9\u00e9n"
   },
   "ElevenSports1FR.be": {
-    "page": 17,
+    "page": 16,
     "id": "2024",
     "alt": "Eleven Sports 1"
   },
   "ElevenSports2FR.be": {
-    "page": 17,
+    "page": 16,
     "id": "2025",
     "alt": "Eleven Sports 2"
   },
@@ -977,7 +967,7 @@
   "PlugRTL.be": {
     "page": 17,
     "id": "377",
-    "alt": "Plug RTL"
+    "alt": "RTL Plug"
   },
   "Proximus11.be": {
     "page": 17,
@@ -1005,12 +995,12 @@
     "alt": "RTC T\u00e9l\u00e9 Li\u00e8ge"
   },
   "TeleMB.be": {
-    "page": 18,
+    "page": 17,
     "id": "387",
     "alt": "T\u00e9l\u00e9 MB"
   },
   "TeleSambre.be": {
-    "page": 18,
+    "page": 17,
     "id": "383",
     "alt": "T\u00e9l\u00e9 Sambre"
   },
@@ -1065,12 +1055,12 @@
     "alt": "Pro7"
   },
   "CGTN.fr": {
-    "page": 19,
+    "page": 18,
     "id": "318",
     "alt": "CGTN"
   },
   "8MontBlanc.fr": {
-    "page": 19,
+    "page": 18,
     "id": "421",
     "alt": "8 Mont-Blanc"
   },
@@ -1125,12 +1115,12 @@
     "alt": "MAt\u00e9l\u00e9"
   },
   "AntenneReunion.fr": {
-    "page": 20,
+    "page": 19,
     "id": "436",
     "alt": "Antenne R\u00e9union"
   },
   "ATVGuadeloupe.fr": {
-    "page": 20,
+    "page": 19,
     "id": "1140",
     "alt": "ATV Guadeloupe"
   },
@@ -1185,12 +1175,12 @@
     "alt": "Saint-Pierre et Miquelon la 1\u00e8re"
   },
   "WallisEtFutuna1.fr": {
-    "page": 21,
+    "page": 20,
     "id": "519",
     "alt": "Wallis et Futuna la 1\u00e8re"
   },
   "XXL.fr": {
-    "page": 21,
+    "page": 20,
     "id": "218",
     "alt": "XXL"
   },
@@ -1245,12 +1235,12 @@
     "alt": "France 3 Bretagne"
   },
   "France3Centre.fr": {
-    "page": 22,
+    "page": 21,
     "id": "1928",
     "alt": "France 3 Centre-Val de Loire"
   },
   "France3ChampagneArdenne.fr": {
-    "page": 22,
+    "page": 21,
     "id": "1929",
     "alt": "France 3 Champagne-Ardennes"
   },
@@ -1305,12 +1295,12 @@
     "alt": "France 3 Normandie - Caen"
   },
   "France3ParisIdF.fr": {
-    "page": 23,
+    "page": 22,
     "id": "1939",
     "alt": "France 3 Paris Ile-de-France"
   },
   "France3PaysDeLaLoire.fr": {
-    "page": 23,
+    "page": 22,
     "id": "1940",
     "alt": "France 3 Pays de la Loire"
   },
@@ -1336,14 +1326,17 @@
   },
   "CanalPlusDocs.fr": {
     "id": 3347,
-    "page": 4
+    "page": 4,
+    "alt": "Canal+ DOCS"
   },
   "CanalPlusGrandEcran.fr": {
     "id": 3349,
-    "page": 4
+    "page": 4,
+    "alt": "Canal+ Grand Ecran"
   },
   "OCSCity.fr": {
     "id": 733,
-    "page": 5
+    "page": 5,
+    "alt": "OCS City"
   }
 }
