@@ -311,10 +311,6 @@
     "name": "BNNB",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQ0PfZiCkO-kW4v1sp-bmNw6XQwiP__WuSNjvIc6IkoYZAujhNAfzL2OaOz-A&amp;s"
   },
-  "BONE.af": {
-    "name": "BONE",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRqAo2oM8rtSwbqdwyWNdiNPc5mUnzVj9HXiYiLlG2A3_fWYY1pIqwk7Xjd&amp;s"
-  },
   "BRF.be": {
     "name": "BRF",
     "icon": "https:\/\/logos-download.com\/wp-content\/uploads\/2016\/06\/BRF_logo_logotype.png"
@@ -1774,10 +1770,6 @@
     "name": "Gabon24",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180427\/canal-ouah\/CHN43FB\/GABON24_NEW_myCANAL_640x480"
   },
-  "GabonTV.af": {
-    "name": "Gabon 1\u00e8re",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/GABON_1ERE_100x100_COULEUR.png"
-  },
   "GameOne.fr": {
     "name": "Game One",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-87.png"
@@ -3046,10 +3038,6 @@
     "name": "RTI1",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180171\/canal-ouah\/CHN43FB\/RTI1_myCANAL_640x480"
   },
-  "RTI2.ci": {
-    "name": "RTI2",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQh3m3Nisd7MD65UhPvUqdkh6V4SkM2bgh7jR7otFvabY5kor0QChEltq2bFw&amp;s"
-  },
   "RTL9.fr": {
     "name": "RTL9",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-115.png"
@@ -3065,10 +3053,6 @@
   "RTLTlvision.be": {
     "name": "RTL T\u00e9l\u00e9vision",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-166.png"
-  },
-  "RTNB.af": {
-    "name": "RTNB",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRUPRKQIDuKomy5jU2kuaiqcFu1YIHWHTJaEkEdok9vQAifYY6gm3BqAKDPDQ&amp;s"
   },
   "RTNC.af": {
     "name": "RTNC",
@@ -4261,10 +4245,6 @@
     "name": "TVM3",
     "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/385\/icon320_light.png?v2023_48_0"
   },
-  "TFX.fr": {
-    "name": "TFX",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/375\/icon320_light.png?v2023_48_0"
-  },
   "franceinfo.fr": {
     "name": "franceinfo",
     "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/437\/icon320_light.png?v2023_48_0"
@@ -4276,10 +4256,6 @@
   "beCuriousTV.ch": {
     "name": "beCuriousTV",
     "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/402\/icon320_light.png?v2023_48_0"
-  },
-  "TV8MontBlanc.ch": {
-    "name": "TV8 Mont Blanc",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/384\/icon320_light.png?v2023_48_0"
   },
   "3Plus.ch": {
     "name": "3+",
@@ -4605,10 +4581,6 @@
     "name": "MEZZO",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180063\/canal-ouah\/CHN43FB\/NEW_MEZZO_FN_BLANC_myCANAL_640x480"
   },
-  "MelodyDafrique.af": {
-    "name": "MELODY D'AFRIQUE",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180265\/canal-ouah\/CHN43FB\/MELODY_D_AFRIQUE_myCANAL_640x480"
-  },
   "CapitalSanteTV.af": {
     "name": "CAPITAL SANTE TV",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180928\/canal-ouah\/CHN43FB\/CAPITALSANTE_myCANAL_640x480"
@@ -4737,7 +4709,7 @@
     "name": "LMTV",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180323\/canal-ouah\/CHN43FB\/LMTV_myCANAL_640x480"
   },
-  "Rti2.af": {
+  "RTI2.ci": {
     "name": "RTI2",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180271\/canal-ouah\/CHN43FB\/New_RTI2_myCANAL_640x480"
   },
@@ -4756,10 +4728,6 @@
   "7info.af": {
     "name": "7INFO",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180829\/canal-ouah\/CHN43FB\/7INFO_NOIR_myCANAL_640x480"
-  },
-  "2stv.sn": {
-    "name": "2STV",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180122\/canal-ouah\/CHN43FB\/2STV_myCANAL_640x480"
   },
   "Tfm.af": {
     "name": "TFM",
@@ -5001,7 +4969,7 @@
     "name": "MCR TV",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180412\/canal-ouah\/CHN43FB\/MCRTV_myCANAL_640x480"
   },
-  "Bone.af": {
+  "BOne.af": {
     "name": "B-ONE",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180273\/canal-ouah\/CHN43FB\/BONE_NOIR_myCANAL_640x480"
   },
@@ -5101,7 +5069,7 @@
     "name": "PACIS TV",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180371\/canal-ouah\/CHN43FB\/PACISTV_myCANAL_640x480"
   },
-  "Rtnb.af": {
+  "RTNB.af": {
     "name": "RTNB",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180716\/canal-ouah\/CHN43FB\/RTNB_myCANAL_640x480"
   },
@@ -5249,10 +5217,6 @@
     "name": "ANTENNE REUNION",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160005\/canal-ouah\/CHN43FB\/ANTENNEREUNION_myCANAL_640x480"
   },
-  "Reunion1ere.frdrom": {
-    "name": "REUNION 1ERE",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160088\/canal-ouah\/CHN43FB\/REUNION_1ERE_FB_myCANAL_640x480"
-  },
   "TeleKreol.frdrom": {
     "name": "TELE KREOL",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160203\/canal-ouah\/CHN43FB\/TELEKREOL_myCANAL_640x480"
@@ -5261,17 +5225,9 @@
     "name": "KANALAUSTRAL.TV",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160153\/canal-ouah\/CHN43FB\/KANALAUSTRAL_myCANAL_640x480"
   },
-  "Mayotte1ere.frdrom": {
-    "name": "MAYOTTE 1ERE",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160206\/canal-ouah\/CHN43FB\/MAYOTTE_1ERE_FB_myCANAL_640x480"
-  },
   "KweziTV.af": {
     "name": "KWEZI",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160968\/canal-ouah\/CHN43FB\/KWEZI_myCANAL_640x480"
-  },
-  "Ortcomores.frdrom": {
-    "name": "ORTComores",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160195\/canal-ouah\/CHN43FB\/ORTC_myCANAL_640x480"
   },
   "MbcSat.frdrom": {
     "name": "MBC SAT",
@@ -5781,10 +5737,6 @@
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/ARTAFLAM1100x100couleur.png",
     "name": "ART AFLAM 1"
   },
-  "RTI1.af": {
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/RTI1100x100Couleur.png",
-    "name": "RTI 1"
-  },
   "ORTC.af": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/ORTC_color.png",
     "name": "ORTC"
@@ -6049,7 +6001,7 @@
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/ASHARQNEWS100x100COULEUR.png",
     "name": "Asharq News"
   },
-  "Welt.fr": {
+  "Welt.de": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/WELT_color.png",
     "name": "WELT"
   },
@@ -6269,10 +6221,6 @@
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/ETBBasque2022logo100x100couleur.png",
     "name": "etb basque"
   },
-  "RTLTelevision.de": {
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/RTLlogocollection06cmyk100x100.png",
-    "name": "RTL Television"
-  },
   "HelwaTV.af": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/100x100couleur.png",
     "name": "HELWA TV"
@@ -6292,10 +6240,6 @@
   "TeleGohelle.fr": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/TELEGOHELLE_color.png",
     "name": "TELEGOHELLE"
-  },
-  "CGTNFrancais.fr": {
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/CGTN_Francais_color.png",
-    "name": "CGTN-Fran\u00e7ais"
   },
   "ASTV.fr": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/ASTV100x100couleuir.png",

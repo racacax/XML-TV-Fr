@@ -550,7 +550,7 @@
     "id": 180121,
     "region": "bf"
   },
-  "2stv.sn": {
+  "2STV.sn": {
     "id": 180122,
     "region": "bf"
   },
@@ -710,7 +710,7 @@
     "id": 180251,
     "region": "bf"
   },
-  "MelodyDafrique.af": {
+  "MelodyDAfrique.af": {
     "id": 180265,
     "region": "bf"
   },
@@ -722,7 +722,7 @@
     "id": 180270,
     "region": "bf"
   },
-  "Rti2.af": {
+  "RTI2.ci": {
     "id": 180271,
     "region": "bf"
   },
@@ -730,7 +730,7 @@
     "id": 180272,
     "region": "bf"
   },
-  "Bone.af": {
+  "BOne.af": {
     "id": 180273,
     "region": "bf"
   },
@@ -1142,7 +1142,7 @@
     "id": 180715,
     "region": "bf"
   },
-  "Rtnb.af": {
+  "RTNB.af": {
     "id": 180716,
     "region": "bf"
   },
@@ -1575,7 +1575,7 @@
     "id": 160080,
     "region": "mg"
   },
-  "Reunion1ere.frdrom": {
+  "Reunion1.fr": {
     "id": 160088,
     "region": "mg"
   },
@@ -1707,7 +1707,7 @@
     "id": 160194,
     "region": "mg"
   },
-  "Ortcomores.frdrom": {
+  "ORTC.af": {
     "id": 160195,
     "region": "mg"
   },
@@ -1719,7 +1719,7 @@
     "id": 160203,
     "region": "mg"
   },
-  "Mayotte1ere.frdrom": {
+  "Mayotte1.fr": {
     "id": 160206,
     "region": "mg"
   },
