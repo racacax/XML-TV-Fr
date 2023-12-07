@@ -89,7 +89,7 @@ foreach($guides as $key=> $guide) {
             <th><?php echo htmlentities($channel["key"]) ?></th>
             <th><?php if(!empty($defaultName)) { echo '<strong>Nom par défaut : </strong>'.$defaultName.'<br/>'; } ?><input name="name" value="<?php echo htmlentities(@$channel["name"]) ?>" /></th>
             <th><?php include "./select_template.php" ?></th>
-            <th><?php if(isset($icon)) { ?> <?php if($is_default) { echo '(Logo par défaut)<br/>'; } ?><img alt="Logo" src="<?php echo $icon; ?>" style="max-width:200px; max-height:80px;width:auto; height:auto" /><br/><?php } ?><input name="icon" value="<?php echo htmlentities(@$channel["icon"]) ?>" /></th>
+            <th><?php if(isset($icon)) { ?> <?php if($is_default) { echo '(Logo par défaut)<br/>'; } ?><img loading="lazy" alt="Logo" src="<?php echo $icon; ?>" style="max-width:200px; max-height:80px;width:auto; height:auto" /><br/><?php } ?><input name="icon" value="<?php echo htmlentities(@$channel["icon"]) ?>" /></th>
             <th><input name="is_active" type="checkbox" <?php echo (@$channel["is_active"]) ? 'checked' : "" ?> />
             <?php if($channel['is_dummy']) {
                 ?><br/><b>Chaine vide</b><button onclick="document.getElementById('<?php echo $id; ?>').remove()">Supprimer</button><?php

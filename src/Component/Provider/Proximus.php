@@ -4,17 +4,45 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use _PHPStan_3bfe2e67c\Nette\Neon\Exception;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
 use racacax\XmlTv\ValueObject\Program;
+use racacax\XmlTv\Component\Utils;
 
 class Proximus extends AbstractProvider implements ProviderInterface
 {
+    private static ?string $VERSION;
+    private static array $HEADERS = ['Host: px-epg.azureedge.net',
+        'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0',
+        'Accept: */*',
+        'Accept-Language: fr-FR,fr-CA;q=0.8,en;q=0.5,en-US;q=0.3',
+        'Origin: https://www.pickx.be',
+        'Connection: keep-alive',
+        'Sec-Fetch-Dest: empty',
+        'Sec-Fetch-Mode: no-cors',
+        'Sec-Fetch-Site: cross-site',
+        'TE: trailers',
+        'Pragma: no-cache',
+        'Cache-Control: no-cache',
+        'Referer: https://www.pickx.be/'];
+
     public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_proximus.json'), $priority ?? 0.59);
+    }
+
+    private function getVersion()
+    {
+        if (!isset(self::$VERSION)) {
+            self::$VERSION = @json_decode(Utils::getContent("https://px-epg.azureedge.net/version", self::$HEADERS), true)["version"];
+            if (!isset(self::$VERSION)) {
+                throw new Exception("No access to Proximus API");
+            }
+        }
+        return self::$VERSION;
     }
 
     public function constructEPG(string $channel, string $date)
@@ -23,11 +51,11 @@ class Proximus extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $get = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
+        $get = Utils::getContent($this->generateUrl($channelObj, new \DateTimeImmutable($date)), self::$HEADERS);
 
         $json = json_decode($get, true);
 
-        $programs = @$json['data']['schedulesByInterval'];
+        $programs = $json;
 
         if (empty($programs)) {
             return false;
@@ -35,8 +63,8 @@ class Proximus extends AbstractProvider implements ProviderInterface
 
 
         foreach ($programs as $program) {
-            if (isset($program['parentalRating'])) {
-                switch ($program['parentalRating']) {
+            if (!empty($program['program']["VCHIP"])) {
+                switch ($program['program']["VCHIP"]) {
                     case '10':
                         $csa = '-10';
 
@@ -61,12 +89,14 @@ class Proximus extends AbstractProvider implements ProviderInterface
             } else {
                 $csa = 'Tout public';
             }
-            $programObj = new Program($program['startTime'], $program['endTime']);
-            $programObj->addTitle($program['title'] ?? '');
-            $programObj->addDesc(@$program['description']);
-            $programObj->addCategory(@$program['category']);
-            $programObj->addCategory(@$program['subcategory']);
-            $programObj->setIcon(@$program['images'][0]['url']);
+            $programObj = new Program(strtotime($program['programScheduleStart']), strtotime($program['programScheduleEnd']));
+            $programObj->addTitle($program['program']['title'] ?? 'Aucun titre');
+            $programObj->addDesc(@$program['program']['description'] ?? "Aucune description");
+            $programObj->addCategory(@$program['category'] ?? "Inconnu");
+            $programObj->addCategory(@$program['subCategory'] ?? "Inconnu");
+            if (isset($program["program"]["posterFileName"])) {
+                $programObj->setIcon("https://experience-cache.proximustv.be/posterserver/poster/EPG/" . $program["program"]["posterFileName"]);
+            }
             $programObj->setRating($csa);
 
             $channelObj->addProgram($programObj);
@@ -74,66 +104,10 @@ class Proximus extends AbstractProvider implements ProviderInterface
 
         return $channelObj;
     }
+
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
         $channelId = $this->getChannelsList()[$channel->getId()];
-
-        $query = <<<'GRAPHQL'
-query ($language: String!, $startTime: Int!, $endTime: Int!, $options: SchedulesByIntervalOptions) {
-    schedulesByInterval(language: $language, startTime: $startTime, endTime: $endTime, options: $options) {
-        trailId
-        accessLevel
-        programReferenceNumber
-        channelId
-        channel
-        title
-        startTime
-        endTime
-        timePeriod
-        image {
-        key
-        url
-        __typename
-        }
-        imageOnErrorHandler
-        parentalRating
-        detailUrl
-        ottBlackListed
-        cloudRecordable
-        grouped
-        description
-        shortDescription
-        category
-        translatedCategory
-        categoryId
-        formattedStartTime
-        formattedEndTime
-        subCategory
-        scheduleTimeFormat
-        links {
-        episodeNumber
-        id
-        seasonId
-        seasonName
-        seriesId
-        seriesTitle
-        title
-        type
-        __typename
-        }
-        seriesId
-        __typename
-    }
-}
-GRAPHQL;
-
-        $variables = json_encode([
-            'startTime'=> $date->getTimestamp(),
-            'endTime'=> $date->modify('+1 days')->getTimestamp(),
-            'language'=> 'fr',
-            'options'=> ['channelIds' => [$channelId]]
-        ]);
-
-        return  'https://api.proximusmwc.be/v2/graphql?'.http_build_query(['query'=>$query, 'variables'=>$variables]);
+        return 'https://px-epg.azureedge.net/airings/' . $this->getVersion() . '/' . $date->format("Y-m-d") . '/channel/' . $channelId . '?timezone=Europe%2FParis';
     }
 }

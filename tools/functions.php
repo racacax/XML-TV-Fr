@@ -17,8 +17,9 @@ function sortActive($a, $b) {
 }
 function getChannelsWithProvider($index=0) {
     $channels = array();
+    $client = getConfig()->getDefaultClient();
     foreach (Utils::getProviders() as $classe) {
-        $instance = new $classe();
+        $instance = new $classe($client);
         foreach(array_keys($instance->getChannelsList()) as $channel) {
             if(empty($channels[$channel])) {
                 $channels[$channel] = array("is_dummy"=>false, "key"=>$channel, "available_providers"=>[]);
