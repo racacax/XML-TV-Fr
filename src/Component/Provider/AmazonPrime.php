@@ -36,7 +36,7 @@ class AmazonPrime extends AbstractProvider implements ProviderInterface
             self::$cachedEpg = [];
             $get = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
             $get = explode('<p>Le Pass Ligue 1: Événements en direct et à venir</p>', $get);
-            if(empty($get)) {
+            if(count($get) < 2) {
                 return false;
             }
             $get = explode('</ul>', $get[1])[0];
@@ -52,7 +52,7 @@ class AmazonPrime extends AbstractProvider implements ProviderInterface
                 preg_match('/"location":"(.*?)"/', $detail, $location);
                 preg_match('/"synopsis":"(.*?)"/', $detail, $synopsis);
                 preg_match('/srcSet="(.*?)"/', $detail, $img);
-                $duration = (str_contains($title, "Multiplex")) ? 10800 : 8400;
+                $duration = str_contains($title, "Multiplex") ? 10800 : 8400; // Multiplex is ~3h, a match is ~2h20
                 $time[1] = str_replace(".", "", $time[1]);
                 foreach (self::$REPLACABLE_MONTHS as $m => $v) {
                     $time[1] = str_replace(" $m ", "-$v-", $time[1]);
@@ -63,7 +63,8 @@ class AmazonPrime extends AbstractProvider implements ProviderInterface
                     "synopsis" => $synopsis[1], "img" => explode(" ", $img[1])[0]];
                 $done = false;
                 foreach($times as $key => $v) {
-                    if(($v["startDate"] <= $time && $v["endDate"] >= $time) || ($v["startDate"] <= ($time + $duration) && $v["endDate"] >= ($time + $duration))) {
+                    if(($v["startDate"] <= $time && $v["endDate"] >= $time)
+                        || ($v["startDate"] <= ($time + $duration) && $v["endDate"] >= ($time + $duration))) {
                         $v["programs"][] = $data;
                         if($v["startDate"] > $data["startDate"]) {
                             $v["startDate"] = $data["startDate"];

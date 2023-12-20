@@ -6291,6 +6291,58 @@
   },
   "AmazonPrimeFusion.fr": {
     "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
-    "name": "Amazon Prime Fusion"
+    "name": "Amazon Prime (Fusion 1-9)"
+  },
+  "SkweekFusion.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek Fusion (1-12)"
+  },
+  "Skweek1.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 1"
+  },
+  "Skweek2.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 2"
+  },
+  "Skweek3.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 3"
+  },
+  "Skweek4.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 4"
+  },
+  "Skweek5.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 5"
+  },
+  "Skweek6.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 6"
+  },
+  "Skweek7.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 7"
+  },
+  "Skweek8.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 8"
+  },
+  "Skweek9.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 9"
+  },
+  "Skweek10.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 10"
+  },
+  "Skweek11.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 11"
+  },
+  "Skweek12.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/65/SWEEK-logo_noir.png",
+    "name": "Skweek 12"
   }
 }
