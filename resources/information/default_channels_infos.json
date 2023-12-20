@@ -6248,5 +6248,49 @@
   "ChannelOneRussia.ru": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/Channel_One_Russia_color.png",
     "name": "Channel One Russia"
+  },
+  "AmazonPrime1.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime 1"
+  },
+  "AmazonPrime2.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime 2"
+  },
+  "AmazonPrime3.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime 3"
+  },
+  "AmazonPrime4.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime 4"
+  },
+  "AmazonPrime5.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime 5"
+  },
+  "AmazonPrime6.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime 6"
+  },
+  "AmazonPrime7.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime 7"
+  },
+  "AmazonPrime8.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime 8"
+  },
+  "AmazonPrime9.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime 9"
+  },
+  "AmazonPrimeMultiplex.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime Multiplex"
+  },
+  "AmazonPrimeFusion.fr": {
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/640px-Amazon_Prime_Video_logo.svg.png",
+    "name": "Amazon Prime Fusion"
   }
 }
