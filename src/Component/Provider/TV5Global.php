@@ -33,7 +33,9 @@ class TV5Global extends AbstractProvider implements ProviderInterface
         unset($programs[0]);
         $timezone = explode('<div class="filter-country select">', $content)[1];
         $timezone = explode('<p>', $timezone)[1];
-        $timezone = explode(" ", $timezone)[1];
+        $timezone = explode(" (", $timezone)[0];
+        $timezone = explode(" ", $timezone);
+        $timezone = end($timezone);
         foreach ($programs as $p) {
             preg_match('/<p class="time-start">(.*?)<\/p>/s', $p, $startTime);
             preg_match('/<p class="time-duration">(.*?)<\/p>/s', $p, $duration);

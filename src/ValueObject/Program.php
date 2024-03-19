@@ -158,6 +158,9 @@ class Program
                 return $this->getStartFormatted();
             }
         } else {
+            if(!$this->start) {
+                return "20001212121200 +0100";
+            }
             if (\DateTimeImmutable::class === get_class($this->start)) {
                 return $this->start->format('YmdHis O');
             }
