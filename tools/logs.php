@@ -15,26 +15,29 @@ $json = json_decode(file_get_contents($file), true);
     </style>
 </head>
 <body>
+<?php foreach ($json as $key => $gr) { ?>
+        <?php echo $key; ?><br/>
 <table>
     <tr>
         <th>Chaine</th>
         <?php
-            foreach(array_keys($json['channels']) as $date) {
+            foreach(array_keys($gr['channels']) as $date) {
                 echo '<th>'.$date.'</th>';
             }
         ?>
     </tr>
-    <?php foreach(array_keys(array_values($json['channels'])[0]) as $channel) { ?>
+    <?php foreach(array_keys(array_values($gr['channels'])[0]) as $channel) { ?>
     <tr>
         <td><?php echo $channel; ?></td>
         <?php
-        foreach(array_keys($json['channels']) as $date) {
-            $content = $json['channels'][$date][$channel];
+        foreach(array_keys($gr['channels']) as $date) {
+            $content = $gr['channels'][$date][$channel];
             echo '<th style="background: '.(($content['success']) ? 'green' : 'red').'">'.getProviderName(@$content['provider'] ?? '').((@$content['cache']) ? ' (Cache)' : '').'</th>';
         }
         ?>
     </tr>
     <?php } ?>
 </table>
+<?php } ?>
 </body>
 </html>

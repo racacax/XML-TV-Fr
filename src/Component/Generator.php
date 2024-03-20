@@ -80,6 +80,7 @@ class Generator
 
     public function generateEpg()
     {
+        $logsFinal = [];
         foreach ($this->guides as $guide) {
             $channels = json_decode(file_get_contents($guide['channels']), true);
             Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
@@ -104,7 +105,8 @@ class Generator
 
                     if ($this->cache->has($cacheKey)) {
                         Logger::log(" | \e[33mOK \e[39m- From Cache ".chr(10));
-
+                        $logs['channels'][$date][$channelKey]["success"] = true;
+                        $logs['channels'][$date][$channelKey]["cache"] = true;
                         continue;
                     }
                     $channelFound = false;
@@ -144,8 +146,9 @@ class Generator
                 }
             }
             Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
-            Logger::debug(json_encode($logs));
+            $logsFinal[$guide["channels"]] = $logs;
         }
+        Logger::debug(json_encode($logsFinal));
     }
     public function exportEpg(string $exportPath)
     {
