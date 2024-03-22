@@ -89,6 +89,25 @@ class Program
      */
     public function getCredits()
     {
+        usort($this->credits, function($a, $b) {
+            $priority = [
+                'director' => 1,
+                'actor' => 2,
+                'writer' => 3,
+                'adapter' => 4,
+                'producer' => 5,
+                'composer' => 6,
+                'editor' => 7,
+                'presenter' => 8,
+                'commentator' => 9,
+                'guest' => 10
+            ];
+    
+            $priorityA = isset($priority[$a['type']]) ? $priority[$a['type']] : PHP_INT_MAX;
+            $priorityB = isset($priority[$b['type']]) ? $priority[$b['type']] : PHP_INT_MAX;
+    
+            return $priorityA - $priorityB;
+        });
         return $this->credits;
     }
 
