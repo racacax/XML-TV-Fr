@@ -72,6 +72,33 @@ class Bouygues extends AbstractProvider implements ProviderInterface
                 }
             }
             $programObj = new Program(strtotime($program['startTime']), strtotime($program['endTime']));
+            if (isset($program['programInfo']['character'])) {
+                foreach ($program['programInfo']['character'] as $intervenant) {
+                    $libelle = 'guest';
+                    if ($intervenant['function'] == 'Présentateur vedette' || $intervenant['function'] == 'Autre présentateur') {
+                        $libelle = 'presenter';
+                    }
+                    if($intervenant['function'] == "Producteur"){
+                        $libelle = 'producer';
+                    }
+                    if ($intervenant['function'] == 'Acteur') {
+                        $libelle = 'actor';
+                    }
+                    if ($intervenant['function'] == 'Réalisateur') {
+                        $libelle = 'director';
+                    }
+                    if ($intervenant['function'] == 'Scénariste' || $intervenant['function'] == 'Origine Scénario' || $intervenant['function'] == 'Scénario') {
+                        $libelle = 'writer';
+                    }
+                    if ($intervenant['function'] == 'Créateur') {
+                        $libelle = 'editor';
+                    }
+                    if ($intervenant['function'] == 'Musique') {
+                        $libelle = 'composer';
+                    }
+                    $programObj->addCredit($intervenant['firstName'] . ' ' . $intervenant['lastName'], $libelle);
+                }
+            }
             $programObj->addTitle($program['programInfo']['longTitle']);
             $programObj->addSubtitle(@$program['programInfo']['secondaryTitle']);
             $programObj->addDesc(@$program['programInfo']['longSummary'] ?? @$program['programInfo']['shortSummary']);
@@ -96,7 +123,7 @@ class Bouygues extends AbstractProvider implements ProviderInterface
             'startTime'=>$date->format('Y-m-d\T04:00:00\Z'),
             'endTime'=>$date->modify('+1 days')->format('Y-m-d\T03:59:59\Z')
         ];
-
+        var_dump('http://epg.cms.pfs.bouyguesbox.fr/cms/sne/live/epg/events.json?' . http_build_query($param));
         return 'http://epg.cms.pfs.bouyguesbox.fr/cms/sne/live/epg/events.json?' . http_build_query($param);
     }
 }
