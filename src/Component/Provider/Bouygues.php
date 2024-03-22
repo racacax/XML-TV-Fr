@@ -123,7 +123,6 @@ class Bouygues extends AbstractProvider implements ProviderInterface
             'startTime'=>$date->format('Y-m-d\T04:00:00\Z'),
             'endTime'=>$date->modify('+1 days')->format('Y-m-d\T03:59:59\Z')
         ];
-        var_dump('http://epg.cms.pfs.bouyguesbox.fr/cms/sne/live/epg/events.json?' . http_build_query($param));
         return 'http://epg.cms.pfs.bouyguesbox.fr/cms/sne/live/epg/events.json?' . http_build_query($param);
     }
 }
