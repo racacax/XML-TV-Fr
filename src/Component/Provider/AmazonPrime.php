@@ -46,8 +46,12 @@ class AmazonPrime extends AbstractProvider implements ProviderInterface
             foreach($programs as $program) {
                 preg_match('/aria-label="(.*?)"/', $program, $title);
                 preg_match('/href="(.*?)"/', $program, $detail);
-                $title = $title[1];
-                $detail = $this->getContentFromURL("https://www.primevideo.com".$detail[1]);
+                $title = $title[1] ?? "Aucun titre";
+                if(isset($detail[1])) {
+                    $detail = $this->getContentFromURL("https://www.primevideo.com".$detail[1]);
+                } else {
+                    continue;
+                }
                 preg_match('/"pageDateTimeBadge":"(.*?)"/', $detail, $time);
                 preg_match('/"location":"(.*?)"/', $detail, $location);
                 preg_match('/"synopsis":"(.*?)"/', $detail, $synopsis);

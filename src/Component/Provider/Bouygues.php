@@ -74,7 +74,7 @@ class Bouygues extends AbstractProvider implements ProviderInterface
             $programObj = new Program(strtotime($program['startTime']), strtotime($program['endTime']));
             if (isset($program['programInfo']['character'])) {
                 foreach ($program['programInfo']['character'] as $intervenant) {
-                    $programObj->addCredit($intervenant['firstName'] . ' ' . $intervenant['lastName'], $intervenant['function']);
+                    $programObj->addCredit($intervenant['firstName'] . ' ' . $intervenant['lastName'], $this->getCreditType($intervenant['function']));
                 }
             }
             $programObj->addTitle($program['programInfo']['longTitle']);
@@ -102,5 +102,41 @@ class Bouygues extends AbstractProvider implements ProviderInterface
             'endTime'=>$date->modify('+1 days')->format('Y-m-d\T03:59:59\Z')
         ];
         return 'http://epg.cms.pfs.bouyguesbox.fr/cms/sne/live/epg/events.json?' . http_build_query($param);
+    }
+
+    private function getCreditType(string $type): string
+    {
+        switch ($type) {
+            case 'Acteur':
+                $type = 'actor';
+                break;
+            case 'Réalisateur':
+                $type = 'director';
+                break;
+            case 'Scénariste':
+                $type = 'writer';
+                break;
+            case 'Producteur':
+                $type = 'producer';
+                break;
+            case 'Musique':
+                $type = 'composer';
+                break;
+            case 'Créateur':
+                $type = 'editor';
+                break;
+            case 'Présentateur vedette':
+            case 'Autre présentateur':
+                $type = 'presenter';
+                break;
+            case 'Commentateur':
+                $type = 'commentator';
+                break;
+            case 'Origine Scénario':
+            case 'Scénario':
+                $type = 'adapter';
+                break;
+        }
+        return $type;
     }
 }

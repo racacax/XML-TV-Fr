@@ -32,7 +32,7 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $res1 = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date))) ?? "";
+        $res1 = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
         $res1 = str_replace('"', "'", $res1);
         preg_match_all("/<p class='hour-program'>(.*?)<\/p>/s", $res1, $hours);
         preg_match_all("/<span class='video-card-date'>(.*?)<\/span>/s", $res1, $titles);
@@ -45,8 +45,11 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
             $start = strtotime($date." ".$hours[1][$i]);
             if($i == count($titles) - 1) {
                 $end = $start + intval(explode(":", end($durations[1]))[0]) * 60;
-            } else {
+            } else if(isset($hours[1][$i + 1])) {
                 $end = strtotime($date." ".$hours[1][$i + 1]);
+            }
+            if(!isset($end)) {
+                continue;
             }
             $program = new Program($start, $end);
             $program->addTitle(trim($titles[1][$i]));

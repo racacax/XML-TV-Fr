@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
-use _PHPStan_3bfe2e67c\Nette\Neon\Exception;
+use \Exception;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;

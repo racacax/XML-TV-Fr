@@ -77,49 +77,10 @@ class Program
     public function addCredit($name, $type = "guest"): void
     {
         if (!empty($name)) {
-            switch ($type) {
-            case 'actor':
-            case 'Acteur':
-                $type = 'actor';
-                break;
-            case 'director':
-            case 'Réalisateur':
-                $type = 'director';
-                break;
-            case 'writer':
-            case 'Scénariste':
-                $type = 'writer';
-                break;
-            case 'producer':
-            case 'Producteur':
-                $type = 'producer';
-                break;
-            case 'composer':
-            case 'Musique':
-                $type = 'composer';
-                break;
-            case 'editor':
-            case 'Créateur':
-                $type = 'editor';
-                break;
-            case 'presenter':
-            case 'Présentateur vedette':
-            case 'Autre présentateur':
-                $type = 'presenter';
-                break;
-            case 'commentator':
-            case 'Commentateur':
-                $type = 'commentator';
-                break;
-            case 'adapter':
-            case 'Origine Scénario':
-            case 'Scénario':
-                $type = 'adapter';
-                break;
-            default:
-                $type = 'guest';
-                break;
-            }           
+            if(!in_array($type, ["actor", "director", "writer", "producer",
+                "composer", "editor", "presenter", "commentator", "adapter"])) {
+                $type = "guest";
+            }
             $this->credits[] = ['name' => $name, 'type' => $type];
         }
     }

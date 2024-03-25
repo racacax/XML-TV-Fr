@@ -38,21 +38,21 @@ class PlayTV extends AbstractProvider implements ProviderInterface
         foreach ($json["data"] as $val) {
             $program = new Program(strtotime($val["start_at"]), strtotime($val["end_at"]));
 
-            $attrs = $val['media']['attrs'];
+            $attrs = $val['media']['attrs'] ?? [];
             $category = $val["media"]['path'][0]['category'] ?? 'Inconnu';
             $category[0] = strtoupper($category[0]);
             $program->addCategory($category);
             $program->addDesc($attrs["texts"]["long"] ?? $attrs["texts"]["short"] ?? 'Aucune description');
             $program->addTitle($val['title']);
-            if(!is_null($val["subtitle"])) {
+            if(isset($val["subtitle"])) {
                 $program->addSubtitle($val['subtitle']);
             }
-            if(!is_null($attrs["episode"])) {
+            if(isset($attrs["episode"])) {
                 $program->setEpisodeNum($attrs["season"] ?? '1', $attrs["episode"]);
             }
-            $images = $attrs["images"];
-            $image = $images['large'][0]["url"] ?? $images['thumbnail'][0]["url"];
-            if(!is_null($image)) {
+            $images = $attrs["images"] ?? [];
+            $image = $images['large'][0]["url"] ?? $images['thumbnail'][0]["url"] ?? null;
+            if(isset($image)) {
                 $program->setIcon($image);
             }
 

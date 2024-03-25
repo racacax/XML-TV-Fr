@@ -38,7 +38,11 @@ class SixPlay extends AbstractProvider implements ProviderInterface
             foreach ($json[$channelId] as $program) {
                 $genre = "Inconnu";
 
-                $csa = ($program["csa"]["age"] > 0) ? strval(-$program["csa"]["age"]) : "Tout public";
+                if(isset($program["csa"]) && $program["csa"]["age"] > 0) {
+                    $csa = strval(-$program["csa"]["age"]);
+                } else {
+                    $csa = "Tout public";
+                }
 
                 $image = null;
                 foreach($program["images"] as $im) {
