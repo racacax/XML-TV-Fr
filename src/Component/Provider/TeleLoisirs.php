@@ -33,7 +33,11 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             Logger::updateLine(' '.round($index*100/$count, 2).' %');
             preg_match('/href="(.*?)" title="(.*?)"/', $li, $titlehref);
             preg_match('/srcset="(.*?)"/', $li, $img);
-            $img = str_replace('64x90', '640x360', explode(' ', @$img[1] ?? '')[0]);
+            if(!isset($img[1])) {
+                $img = "";
+            } else {
+                $img = str_replace('64x90', '640x360', explode(' ', $img[1])[0]);
+            }
             $genre = trim(explode('</div>', explode('<div class="mainBroadcastCard-genre">', $li)[1] ?? '')[0]);
             $genreFormat = trim(explode('</p>', explode('<p class="mainBroadcastCard-format">', $li)[1] ?? '')[0]);
             $subtitle = @trim(explode('</p>', explode('<p class="mainBroadcastCard-subtitle">', $li)[1] ?? '')[0]);
