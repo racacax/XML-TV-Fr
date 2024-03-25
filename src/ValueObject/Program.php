@@ -74,12 +74,52 @@ class Program
      * @param mixed $name
      * @param mixed $type
      */
-    public function addCredit($name, $type): void
+    public function addCredit($name, $type = "guest"): void
     {
         if (!empty($name)) {
-            if (empty($type)) {
+            switch ($type) {
+            case 'actor':
+            case 'Acteur':
+                $type = 'actor';
+                break;
+            case 'director':
+            case 'Réalisateur':
+                $type = 'director';
+                break;
+            case 'writer':
+            case 'Scénariste':
+                $type = 'writer';
+                break;
+            case 'producer':
+            case 'Producteur':
+                $type = 'producer';
+                break;
+            case 'composer':
+            case 'Musique':
+                $type = 'composer';
+                break;
+            case 'editor':
+            case 'Créateur':
+                $type = 'editor';
+                break;
+            case 'presenter':
+            case 'Présentateur vedette':
+            case 'Autre présentateur':
+                $type = 'presenter';
+                break;
+            case 'commentator':
+            case 'Commentateur':
+                $type = 'commentator';
+                break;
+            case 'adapter':
+            case 'Origine Scénario':
+            case 'Scénario':
+                $type = 'adapter';
+                break;
+            default:
                 $type = 'guest';
-            }
+                break;
+            }           
             $this->credits[] = ['name' => $name, 'type' => $type];
         }
     }
@@ -231,16 +271,14 @@ class Program
      */
     public function setEpisodeNum($season, $episode): void
     {
-        if (!isset($season) && !isset($episode)) {
-            return;
-        }
-        $season = @(intval($season) - 1);
-        $episode = @(intval($episode) - 1);
-        if ($season < 0) {
+        if(!isset($season) && isset($episode)) {
             $season = 0;
         }
-        if ($episode < 0) {
+        if(!isset($episode) && isset($season)) {
             $episode = 0;
+        }
+        if (!isset($season) && !isset($episode)) {
+            return;
         }
         $this->episode_num = $season . '.' . $episode;
     }

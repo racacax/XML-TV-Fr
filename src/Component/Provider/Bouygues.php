@@ -74,29 +74,7 @@ class Bouygues extends AbstractProvider implements ProviderInterface
             $programObj = new Program(strtotime($program['startTime']), strtotime($program['endTime']));
             if (isset($program['programInfo']['character'])) {
                 foreach ($program['programInfo']['character'] as $intervenant) {
-                    $libelle = 'guest';
-                    if ($intervenant['function'] == 'Présentateur vedette' || $intervenant['function'] == 'Autre présentateur') {
-                        $libelle = 'presenter';
-                    }
-                    if($intervenant['function'] == "Producteur"){
-                        $libelle = 'producer';
-                    }
-                    if ($intervenant['function'] == 'Acteur') {
-                        $libelle = 'actor';
-                    }
-                    if ($intervenant['function'] == 'Réalisateur') {
-                        $libelle = 'director';
-                    }
-                    if ($intervenant['function'] == 'Scénariste' || $intervenant['function'] == 'Origine Scénario' || $intervenant['function'] == 'Scénario') {
-                        $libelle = 'writer';
-                    }
-                    if ($intervenant['function'] == 'Créateur') {
-                        $libelle = 'editor';
-                    }
-                    if ($intervenant['function'] == 'Musique') {
-                        $libelle = 'composer';
-                    }
-                    $programObj->addCredit($intervenant['firstName'] . ' ' . $intervenant['lastName'], $libelle);
+                    $programObj->addCredit($intervenant['firstName'] . ' ' . $intervenant['lastName'], $intervenant['function']);
                 }
             }
             $programObj->addTitle($program['programInfo']['longTitle']);
