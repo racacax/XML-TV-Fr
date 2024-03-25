@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use racacax\XmlTv\Component\Provider\AmazonPrime;
 use racacax\XmlTv\Component\Provider\PlutoTV;
 use racacax\XmlTv\Component\Provider\Skweek;
+use racacax\XmlTv\Component\Provider\Teleboy;
 use racacax\XmlTv\Component\Provider\TVHebdo;
 use racacax\XmlTv\Component\Provider\ViniPF;
 use racacax\XmlTv\Component\ProviderInterface;
@@ -75,7 +76,9 @@ class ProvidersTest extends TestCase
 
         foreach ($providers as $provider) {
             // ignore geoblocked and minor providers
-            if (in_array(get_class($provider), [PlutoTV::class, TVHebdo::class, AmazonPrime::class, Skweek::class])
+            if (in_array(get_class($provider), [
+                PlutoTV::class, TVHebdo::class, AmazonPrime::class, Skweek::class, Teleboy::class
+            ])
             ) {
                 continue;
             }
