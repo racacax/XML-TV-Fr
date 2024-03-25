@@ -271,14 +271,16 @@ class Program
      */
     public function setEpisodeNum($season, $episode): void
     {
-        if(!isset($season) && isset($episode)) {
-            $season = 0;
-        }
-        if(!isset($episode) && isset($season)) {
-            $episode = 0;
-        }
         if (!isset($season) && !isset($episode)) {
             return;
+        }
+        $season = @(intval($season) - 1);
+        $episode = @(intval($episode) - 1);
+        if ($season < 0) {
+            $season = 0;
+        }
+        if ($episode < 0) {
+            $episode = 0;
         }
         $this->episode_num = $season . '.' . $episode;
     }
