@@ -124,8 +124,8 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                         $program->setIcon('https:'.$imgs[1]);
                     }
                     $desc = '';
-                    if (isset($resume[1])) {
-                        $desc.=trim($resume[1] ?? '')."\n\n";
+                    if (!empty($resume[1])) {
+                        $desc.=trim($resume[1])."\n\n";
                     }
                     if (isset($critique[1])) {
                         $desc.='Critique : '.trim($critique[1])."\n\n";

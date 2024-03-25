@@ -40,7 +40,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             ['Referer'=>$this->proxy]
         );
         $res1 = html_entity_decode($res1, ENT_QUOTES);
-        @$res1 = explode('Mes<br>alertes courriel', $res1 ?? '')[1];
+        @$res1 = explode('Mes<br>alertes courriel', $res1)[1];
         if (empty($res1)) {
             return false;
         }
@@ -74,7 +74,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $url = $titre[1][$j];
             $content = (string)$response[$url]->getBody();
             $infos = str_replace("\n", ' ', explode('</h4>', explode('<h4>', $content)[1] ?? '')[0]);
-            $infos = explode(' - ', $infos ?? '');
+            $infos = explode(' - ', $infos);
             $genre = @trim($infos[0] ?? '');
             $duration = @intval(explode(' ', @trim($infos[1] ?? ''))[0]);
             $lang = @trim(strtolower($infos[2] ?? ''));
@@ -90,16 +90,16 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
                     $year = $potentialYear;
                 }
             }
-            $desc =@explode('</p>', explode('<p id="dd_desc">', $content ?? '')[1] ?? '')[0];
+            $desc =@explode('</p>', explode('<p id="dd_desc">', $content)[1] ?? '')[0];
             if (isset($year)) {
                 $desc.= "\n\nAnnée : ".$year;
             }
-            $intervenants = @explode('</p>', explode('<p id="dd_inter">', $content ?? '')[1] ?? '')[0];
+            $intervenants = @explode('</p>', explode('<p id="dd_inter">', $content)[1] ?? '')[0];
             $program = new Program($dateStart, $dateStart+$duration*60);
             $program->addTitle($titreProgram, $lang);
             $desc = str_replace('<br />', "\n", $desc.$intervenants);
             $tmp_desc = '';
-            $splited_desc = explode("\n", $desc ?? '');
+            $splited_desc = explode("\n", $desc);
             foreach ($splited_desc as $line) {
                 $tmp_desc.=@trim($line)."\n";
             }
@@ -107,7 +107,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $program->addDesc($desc, $lang);
             $program->addCategory($genre, $lang);
             $current_role = 'guest';
-            $intervenants_split = explode('<br />', $intervenants ?? '');
+            $intervenants_split = explode('<br />', $intervenants);
             foreach ($intervenants_split as $line) {
                 $line = @trim($line);
                 if ($line == 'Réalisation :') {

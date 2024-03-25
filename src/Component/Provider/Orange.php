@@ -65,7 +65,7 @@ class Orange extends AbstractProvider implements ProviderInterface
                 if ($val['season']['number'] =='') {
                     $val['season']['number'] ='1';
                 }
-                if ($val['episodeNumber'] =='') {
+                if (empty($val['episodeNumber'])) {
                     $val['episodeNumber'] ='1';
                 }
                 $program->addTitle($val['season']['serie']['title']);

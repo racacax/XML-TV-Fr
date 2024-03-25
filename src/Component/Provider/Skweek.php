@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
-use _PHPStan_3bfe2e67c\Nette\Neon\Exception;
+use \Exception;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
@@ -31,11 +31,12 @@ class Skweek extends AbstractProvider implements ProviderInterface
     private function setAPIKey() {
         $get = $this->getContentFromURL("https://app.skweek.tv/schedule");
         preg_match('/src="(.*?)app\.js"/', $get, $app);
-        $app[1] = end(@explode('src="', $app[1]));
+        $exp = explode('src="', $app[1]);
+        $app[1] = end($exp);
         $get = $this->getContentFromURL("https://app.skweek.tv$app[1]app.js");
         preg_match('/API_KEY:"(.*?)"/', $get, $key);
         preg_match('/OUTPUT_FOLDER:"(.*?)"/', $get, $version);
-        if(is_null($key[1])) {
+        if(!isset($key[1])) {
             throw new Exception("Error while getting API key");
         }
         self::$API_KEY = $key[1];
@@ -49,8 +50,8 @@ class Skweek extends AbstractProvider implements ProviderInterface
 
     }
     private function getAuthToken() {
-        if(is_null(self::$AUTH_TOKEN) || $this->isAuthTokenExpired()) {
-            if(is_null(self::$API_KEY)) {
+        if(!isset(self::$AUTH_TOKEN) || $this->isAuthTokenExpired()) {
+            if(!isset(self::$API_KEY)) {
                 $this->setAPIKey();
             }
             $response = $this->client->post("https://dce-frontoffice.imggaming.com/api/v2/login/guest/checkin",
@@ -77,7 +78,7 @@ class Skweek extends AbstractProvider implements ProviderInterface
                 ]]);
             $data = json_decode($response->getBody()->getContents(), true);
             self::$AUTH_TOKEN = $data["authorisationToken"];
-            if(is_null(self::$AUTH_TOKEN)) {
+            if(!isset(self::$AUTH_TOKEN)) {
                 throw new Exception("Error while getting authorisation token");
             }
         }
@@ -87,7 +88,7 @@ class Skweek extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date)
     {
         $channelObj = parent::constructEPG($channel, $date);
-        if(!is_null(self::$currentAllowedDate) && (self::$nextAllowedDate != $date && self::$currentAllowedDate != $date)) { # Multiple days are available in one request
+        if(isset(self::$currentAllowedDate) && (self::$nextAllowedDate != $date && self::$currentAllowedDate != $date)) { # Multiple days are available in one request
             return false;
         }
         if (!$this->channelExists($channel)) {

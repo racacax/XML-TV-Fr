@@ -49,17 +49,20 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
             $start = $date . " " . str_replace("h", ":", $start[1]);
             $program = new Program(strtotime($start), strtotime($start) + intval($duration) * 60);
 
-            $program->addCategory(end(@explode('>', $category[1] ?? 'Inconnu')));
-            $desc = end(@explode('>', $desc[1][1])) ?? 'Aucune description';
+            $exp = explode('>', $category[1] ?? 'Inconnu');
+            $program->addCategory(end($exp));
+            $exp = explode('>', $desc[1][1]);
+            $desc = end($exp);
+            if(empty($desc)) { $desc = "Aucune description"; }
             $program->addDesc($desc);
             $program->addTitle($titre[1] ?? 'Aucun titre');
-            if (!is_null($season[1])) {
+            if (isset($season[1])) {
                 $program->setEpisodeNum($season[1], explode('/', $season[2])[0]);
             }
-            if (!is_null($image[1])) {
+            if (isset($image[1])) {
                 $program->setIcon(str_replace('/p/p/', '/p/g/', $image[1]));
             }
-            switch ($csa[1]) {
+            switch ($csa[1] ?? "") {
                 case '2':
                     $csa = '-10';
 

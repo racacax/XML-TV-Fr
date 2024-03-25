@@ -64,7 +64,7 @@ class XmlFormatter
 
     private function buildCredits(?array $credits): string
     {
-        if (empty($this->credits)) {
+        if (empty($credits)) {
             return '';
         }
 
