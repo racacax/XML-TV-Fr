@@ -68,7 +68,9 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                 }
                 $retry_counter = 0;
                 for ($i=0; $i<$count; $i++) {
-                    Logger::updateLine(' '.round($i*100/$count, 2).' %');
+                    $percent = round($i*100/$count, 2)." % ($i/$count)";
+                    $this->setStatus($percent);
+                    Logger::updateLine(' '.$percent);
                     $channelObj->addProgram(
                         $program = new Program(intval($times[1][$i]), intval($times[2][$i]))
                     );
