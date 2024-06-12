@@ -85,7 +85,9 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $begin = microtime(true);
         $promises = [];
         foreach ($all as $index => $program) {
-            Logger::updateLine(' ' . round($index * 100 / $count, 2) . ' %');
+            $percent = round($index * 100 / $count, 2) . ' %';
+            Logger::updateLine(' ' . $percent);
+            $this->setStatus($percent);
             $url = $program['onClick']['URLPage'];
             if(!is_null($this->proxy)) {
                 $url = $this->proxy[0].urlencode(base64_encode($url)).$this->proxy[1];

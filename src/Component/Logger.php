@@ -69,4 +69,12 @@ class Logger
             glob(self::$debugFolder.DIRECTORY_SEPARATOR.'*')
         );
     }
+
+    /**
+     * @return string
+     */
+    public static function getLogLevel(): string
+    {
+        return self::$level;
+    }
 }

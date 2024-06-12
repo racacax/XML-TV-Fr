@@ -6,30 +6,47 @@ namespace racacax\XmlTv\Component;
 
 use racacax\XmlTv\StaticComponent\ChannelInformation;
 use racacax\XmlTv\ValueObject\DummyChannel;
+use function Amp\async;
+use function Amp\delay;
+use function DeepCopy\deep_copy;
 
 class Generator
 {
-    private $listDate = [];
+    /**
+     * @var array
+     */
+    private array $extraParams;
+
+    /**
+     * @var array
+     */
+    private array $listDate = [];
     /**
      * @var bool
      */
-    private $createEpgIfNotFound;
+    private bool $createEpgIfNotFound;
     /**
      * @var XmlExporter
      */
-    private $exporter;
+    private XmlExporter $exporter;
     /**
      * @var XmlFormatter
      */
-    private $formatter;
+    private XmlFormatter $formatter;
     /**
      * @var CacheFile
      */
-    private $cache;
+    private CacheFile $cache;
+    /**
+     * @var int
+     */
+    private int $threads;
 
-    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, bool $createEpgIfNotFound)
+    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, bool $createEpgIfNotFound, int $threads, array $extraParams)
     {
         $this->createEpgIfNotFound = $createEpgIfNotFound;
+        $this->extraParams = $extraParams;
+        $this->threads = $threads;
         $current = new \DateTime();
         $current->setTimestamp($start->getTimestamp());
         while ($current <= $stop) {
@@ -43,7 +60,7 @@ class Generator
     /**
      * @var ProviderInterface[] list of all provider
      */
-    private $providers;
+    private array $providers;
 
     public function addGuides(array $guidesAsArray)
     {
@@ -78,7 +95,11 @@ class Generator
         );
     }
 
-    public function generateEpg()
+    public function getExtraParams() {
+        return $this->extraParams;
+    }
+
+    private function generateEpgSingleThread()
     {
         $logsFinal = [];
         foreach ($this->guides as $guide) {
@@ -152,6 +173,102 @@ class Generator
         }
         Logger::debug(json_encode($logsFinal));
     }
+
+    private function generateEpgMultithread()
+    {
+        // TODO : reinstate Daily cache
+        $fn = function () {
+            $logsFinal = [];
+            $logLevel = Logger::getLogLevel();
+            Logger::setLogLevel("none");
+            foreach ($this->guides as $guide) {
+                $channels = json_decode(file_get_contents($guide['channels']), true);
+                Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
+
+                $threads = [];
+                $manager = new ChannelsManager($channels, $this);
+                for($i=0; $i< $this->threads; $i++) {
+                    $threads[] = new ChannelThread($manager, $this);
+                }
+
+                $view = function () use ($threads, $manager, $guide, $logLevel) {
+                    if($logLevel != "none") {
+                        while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) {
+                            echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
+                            echo Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue');
+                            echo Utils::colorize("Chaines récupérées : ", "cyan").$manager->getStatus()."   |   ".
+                                Utils::colorize("Fichier :", "cyan")." {$guide['channels']}\n";
+                            $i=1;
+                            foreach($threads as $thread) {
+                                echo "Thread $i : ";
+                                echo $thread->getString();
+                                echo "\n";
+                                $i++;
+                            }
+                            delay(0.1);
+                        }
+                    }
+                };
+                async($view);
+                $threadsStack = array_values($threads);
+                while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) { // Necessary if one channel fails
+
+                    delay(0.01);
+                    for($i=0; $i< count($threads); $i++) {
+                        $thread = $threadsStack[0];
+                        unset($threadsStack[0]);
+                        $threadsStack[] = $thread;
+                        $threadsStack = array_values($threadsStack);
+                        if(!$thread->isRunning()) {
+                            $channelData = $manager->shiftChannel();
+                            if(empty($channelData)) {
+                                break;
+                            }
+                            $thread->setChannel($channelData);
+                            $thread->start();
+                        }
+                    }
+                }
+
+                Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
+                $logsFinal[$guide["channels"]] = $manager->getLogs();
+            }
+            Logger::debug(json_encode($logsFinal));
+        };
+        $future = async($fn);
+        $future->await();
+
+
+    }
+
+    public function generateEpg() {
+        if($this->threads == 1) {
+            $this->generateEpgSingleThread();
+        } else {
+            $this->generateEpgMultithread();
+        }
+    }
+
+    public function getCache(): CacheFile
+    {
+        return $this->cache;
+    }
+
+    public function createEpgIfNotFound(): bool
+    {
+        return $this->createEpgIfNotFound;
+    }
+
+    public function getFormatter(): XmlFormatter
+    {
+        return $this->formatter;
+    }
+
+    public function getListDate(): array
+    {
+        return $this->listDate;
+    }
+
     public function exportEpg(string $exportPath)
     {
         @mkdir($exportPath, 0777, true);

@@ -35,7 +35,11 @@
     "ext-xmlreader": "*",
     "ext-zip": "*",
     "ext-libxml": "*",
-    "guzzlehttp/guzzle": "^7.4"
+    "guzzlehttp/guzzle": "^7.4",
+    "amphp/amp": "^3.0",
+    "amphp/parallel": "^2.2",
+    "ext-pcntl": "*",
+    "ext-posix": "*"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.3",
