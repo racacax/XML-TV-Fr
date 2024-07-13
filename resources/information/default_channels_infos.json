@@ -1074,8 +1074,8 @@
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-294.png"
   },
   "CinePlusPremier.ch": {
-    "name": "Cin\u00e9+ Premier (Suisse)",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/94856013"
+    "name": "OCS",
+    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~7246bab97d61b8e2.png/300x300/quality/100/cineplus-premier.png"
   },
   "CinePlusPremier.fr": {
     "name": "OCS",
@@ -5546,11 +5546,11 @@
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/82633075"
   },
   "CinePlusFamiz.frdrom": {
-    "name": "CINE+ FAMIZ",
+    "name": "CINE+ Family",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/82633079"
   },
   "CinePlusClub.frdrom": {
-    "name": "CINE+ CLUB",
+    "name": "CINE+ Festival",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/82633078"
   },
   "CinePlusClassic.frdrom": {
