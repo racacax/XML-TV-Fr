@@ -1042,16 +1042,16 @@
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-287.png"
   },
   "CinePlusClub.fr": {
-    "name": "Cin\u00e9+ Club",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-285.png"
+    "name": "Cin\u00e9+ Festival",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Cin%C3%A9%2BFestival2024.svg/500px-Cin%C3%A9%2BFestival2024.svg.png"
   },
   "CinePlusEmotion.fr": {
     "name": "Cin\u00e9+ Emotion",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-283.png"
   },
   "CinePlusFamiz.fr": {
-    "name": "Cin\u00e9+ Famiz",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-401.png"
+    "name": "Cin\u00e9+ Family",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Cin%C3%A9%2BFamily2024.svg/500px-Cin%C3%A9%2BFamily2024.svg.png"
   },
   "CinePlusFrisson.be": {
     "name": "Cin\u00e9+ Frisson (Belgique)",
@@ -1078,8 +1078,8 @@
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/94856013"
   },
   "CinePlusPremier.fr": {
-    "name": "Cin\u00e9+ Premier",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-282.png"
+    "name": "OCS",
+    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~7246bab97d61b8e2.png/300x300/quality/100/cineplus-premier.png"
   },
   "CinePlusStarAfrique.fr": {
     "name": "Cin\u00e9+ StarAfrique",
