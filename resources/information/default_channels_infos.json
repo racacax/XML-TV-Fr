@@ -4297,6 +4297,42 @@
     "name": "DAZN 1",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1077\/canal-ouah\/CHN43FB\/CHN43FB_1077_20231002"
   },
+  "DAZNLigue1.fr": {
+    "name": "DAZN Ligue 1 - Multiplex",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/400px-DAZN_Logo_Master.svg.png"
+  },
+  "DAZNLigue1M1.fr": {
+    "name": "DAZN Ligue 1 - Vendredi",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/400px-DAZN_Logo_Master.svg.png"
+  },
+  "DAZNLigue1M2.fr": {
+    "name": "DAZN Ligue 1 - Samedi 1er match",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/400px-DAZN_Logo_Master.svg.png"
+  },
+  "DAZNLigue1M3.fr": {
+    "name": "DAZN Ligue 1 - Samedi 2e match",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/400px-DAZN_Logo_Master.svg.png"
+  },
+  "DAZNLigue1M4.fr": {
+    "name": "DAZN Ligue 1 - Dimanche 1er match",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/400px-DAZN_Logo_Master.svg.png"
+  },
+  "DAZNLigue1M5.fr": {
+    "name": "DAZN Ligue 1 - Dimanche Multiplex 17h - 1",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/400px-DAZN_Logo_Master.svg.png"
+  },
+  "DAZNLigue1M6.fr": {
+    "name": "DAZN Ligue 1 - Dimanche Multiplex 17h - 2",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/400px-DAZN_Logo_Master.svg.png"
+  },
+  "DAZNLigue1M7.fr": {
+    "name": "DAZN Ligue 1 - Dimanche Multiplex 17h - 3",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/400px-DAZN_Logo_Master.svg.png"
+  },
+  "DAZNLigue1M8.fr": {
+    "name": "DAZN Ligue 1 - Dimanche dernier match",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DAZN_Logo_Master.svg/400px-DAZN_Logo_Master.svg.png"
+  },
   "CanalPlusPremiereOuest.af": {
     "name": "CANAL+ PREMIERE OUEST",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180018\/canal-ouah\/CHN43FB\/CANALPREMIERE_OUEST_myCANAL_640x480"
