@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace racacax\XmlTvTest\Integration;
 
 use PHPUnit\Framework\TestCase;
-use racacax\XmlTv\Component\Provider\AmazonPrime;
 use racacax\XmlTv\Component\Provider\PlutoTV;
 use racacax\XmlTv\Component\Provider\Skweek;
 use racacax\XmlTv\Component\Provider\Teleboy;
@@ -16,7 +15,9 @@ use racacax\XmlTv\Component\Utils;
 use racacax\XmlTv\Component\XmlFormatter;
 use racacax\XmlTv\Configurator;
 use racacax\XmlTv\ValueObject\Channel;
-
+/**
+ * @group integration
+ */
 class ProvidersTest extends TestCase
 {
     /**
@@ -77,7 +78,7 @@ class ProvidersTest extends TestCase
         foreach ($providers as $provider) {
             // ignore geoblocked and minor providers
             if (in_array(get_class($provider), [
-                PlutoTV::class, TVHebdo::class, AmazonPrime::class, Skweek::class, Teleboy::class
+                PlutoTV::class, TVHebdo::class, Skweek::class, Teleboy::class
             ])
             ) {
                 continue;

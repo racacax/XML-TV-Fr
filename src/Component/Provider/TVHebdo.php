@@ -20,7 +20,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_tvhebdo.json'), $priority ?? 0.2);
-        $this->proxy = 'http://filter1600.thomasharrick.com/v1/index.php';
+        $this->proxy = ['http://kdbase.com/dreamland/browse.php?u=', "&b=24"];
         if (isset($extraParam['tvhebdo_proxy'])) {
             $this->proxy = $extraParam['tvhebdo_proxy'];
         }
@@ -39,6 +39,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $this->generateUrl($channelObj, new \DateTimeImmutable($date)),
             ['Referer'=>$this->proxy]
         );
+        $res1 = str_replace('href="/', 'href="http://'.explode('/', $this->proxy[0])[2]."/", $res1);
         $res1 = html_entity_decode($res1, ENT_QUOTES);
         @$res1 = explode('Mes<br>alertes courriel', $res1)[1];
         if (empty($res1)) {
@@ -46,6 +47,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
         }
         preg_match_all('/class="heure"\>(.*?)\<\/td\>/', $res1, $time);
         preg_match_all('/class="titre"\>.*?href="(.*?)"\>(.*?)\<\/a\>/', $res1, $titre);
+
         $t8 = json_encode($time);
         $t9 = json_encode($titre);
         $t8 = $t8.'|||||||||||||||||||||||'.$t9;
@@ -58,7 +60,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
         $promises = [];
         $promisesResolved = 0;
         for ($j=0;$j<$count;$j++) {
-            $url          = $titre[1][$j];
+            $url = $titre[1][$j];
             $promise = $this->client->getAsync($url);
             $promise->then(function() use (&$promisesResolved, $count) {
                 $promisesResolved++;
@@ -140,6 +142,6 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
         $url = 'http://www.tvhebdo.com/horaire-tele/'.$this->channelsList[$channel->getId()].'/date/'.$date->format('Y-m-d');
-        return $this->proxy.'?q='.base64_encode($url).'&hl=3ed';
+        return $this->proxy[0].urlencode($url).$this->proxy[1];
     }
 }
