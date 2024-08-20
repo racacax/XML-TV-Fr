@@ -16,7 +16,7 @@ class Utils
 
     public static function generateHash(): string
     {
-        $dirs = ['config', 'example', 'resources', 'src', 'tests', 'tools', 'composer.json'];
+        $dirs = ['example', 'resources', 'src', 'tests', 'tools'];
         $hashes = '';
         foreach ($dirs as $dir) {
             $files = self::glob_recursive($dir);
