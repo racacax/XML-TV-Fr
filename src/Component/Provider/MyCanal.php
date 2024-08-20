@@ -143,7 +143,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
                 'startTime'     => $startTime,
                 'channel'       => $channel,
                 'title'         => $detail['tracking']['dataLayer']['content_title'] ?? $program["title"],
-                'subTitle'      => @$detail['episodes']['contents'][0]['subtitle'] ?? $program["subtitle"],
+                'subTitle'      => @$detail['episodes']['contents'][0]['subtitle'] ?? $program["subtitle"] ?? null,
                 'description'   => $detail['episodes']['contents'][0]['summary'] ?? @$detail['detail']['informations']['summary'],
                 'season'        => @$detail['detail']['selectedEpisode']['seasonNumber'],
                 'episode'       => @$detail['detail']['selectedEpisode']['episodeNumber'],
