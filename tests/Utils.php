@@ -18,16 +18,17 @@ class Utils
     public static function generateHash(): string
     {
         $dirs = ['example', 'resources', 'src', 'tests', 'tools'];
-        $hashes = '';
+        $hashes = [];
         foreach ($dirs as $dir) {
             $files = self::glob_recursive($dir.'/*');
             foreach ($files as $file) {
                 if (is_file($file)) {
-                    $hashes .= hash('sha256', str_replace("\r", '', file_get_contents($file)));
+                    $hashes[] = hash('sha256', str_replace("\r", '', file_get_contents($file)));
                 }
             }
         }
-
+        sort($hashes);
+        $hashes = join("", $hashes);
         return hash('sha256', $hashes);
     }
 }
