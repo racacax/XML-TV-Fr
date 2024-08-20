@@ -28,7 +28,8 @@ class Utils
             }
         }
         sort($hashes);
-        $hashes = join("", $hashes);
+        $hashes = join('', $hashes);
+
         return hash('sha256', $hashes);
     }
 }
