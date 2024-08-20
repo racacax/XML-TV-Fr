@@ -40,7 +40,7 @@ class CacheFile
         }
         $this->createdKeys[$key] = true;
         $this->listFile[$key] = [
-            'file'=> $fileName,
+            'file' => $fileName,
             'key' => $key
         ];
     }
@@ -59,7 +59,7 @@ class CacheFile
         }
         if (file_exists($fileName)) {
             $this->listFile[$key] = [
-                'file'=> $fileName,
+                'file' => $fileName,
                 'key' => $key
             ];
 
@@ -83,7 +83,7 @@ class CacheFile
         $files = glob($this->basePath.DIRECTORY_SEPARATOR.'*');
 
         foreach ($files as $file) {
-            if (time()-filemtime($file) >= 86400 * $maxCacheDay) {
+            if (time() - filemtime($file) >= 86400 * $maxCacheDay) {
                 unlink($file);
             }
         }

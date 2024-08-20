@@ -38,27 +38,27 @@ use racacax\XmlTv\ValueObject\Channel;
 class ProvidersTest extends TestCase
 {
     private static array $TESTED_PROVIDERS_CHANNELS = [
-        [Bouygues::class, ["channels" => ["TF1.fr"]]],
-        [DAZN::class, ["channels" => ["DAZNLigue1.fr"]]],
-        [ICIRadioCanadaTele::class, ["channels" => ["CBAFT.ca"]]],
-        [MyCanal::class, ["channels" => ["TF1.fr"]]],
-        [NouvelObs::class, ["channels" => ["TF1.fr"]]],
-       // [Orange::class, ["channels" => ["TF1.fr"]]],
-        [PlayTV::class, ["channels" => ["TF1.fr"]]],
-       // [Proximus::class, ["channels" => ["TF1.fr"]]],
-        [SFR::class, ["channels" => ["TF1.fr"]]],
-        [SixPlay::class, ["channels" => ["M6.fr"]]],
-        [Tebeosud::class, ["channels" => ["Tebeo.fr"]]],
-        [Tele7Jours::class, ["channels" => ["TF1.fr"]]],
-        [Telecablesat::class, ["channels" => ["BFMTV.fr"]]],
-        [TeleLoisirs::class, ["channels" => ["TF1.fr"]]],
-        [Telerama::class, ["channels" => ["TF1.fr"]]],
-        [TV5::class, ["channels" => ["TV5MondeAsie.fr"]]],
-        [TV5Global::class, ["channels" => ["TV5MondeAsie.fr"]]],
-        [Voo::class, ["channels" => ["TF1.fr"]]],
-        [TVHebdo::class, ["channels" => ["RDS.ca"]]],
+        [Bouygues::class, ['channels' => ['TF1.fr']]],
+        [DAZN::class, ['channels' => ['DAZNLigue1.fr']]],
+        [ICIRadioCanadaTele::class, ['channels' => ['CBAFT.ca']]],
+        [MyCanal::class, ['channels' => ['TF1.fr']]],
+        [NouvelObs::class, ['channels' => ['TF1.fr']]],
+        [Orange::class, ['channels' => ['TF1.fr']]],
+        [PlayTV::class, ['channels' => ['TF1.fr']]],
+        [Proximus::class, ['channels' => ['TF1.fr']]],
+        [SFR::class, ['channels' => ['TF1.fr']]],
+        [SixPlay::class, ['channels' => ['M6.fr']]],
+        [Tebeosud::class, ['channels' => ['Tebeo.fr']]],
+        [Tele7Jours::class, ['channels' => ['TF1.fr']]],
+        [Telecablesat::class, ['channels' => ['BFMTV.fr']]],
+        [TeleLoisirs::class, ['channels' => ['TF1.fr']]],
+        [Telerama::class, ['channels' => ['TF1.fr']]],
+        [TV5::class, ['channels' => ['TV5MondeAsie.fr']]],
+        [TV5Global::class, ['channels' => ['TV5MondeAsie.fr']]],
+        [Voo::class, ['channels' => ['TF1.fr']]],
+        [TVHebdo::class, ['channels' => ['RDS.ca']]],
     ];
-    private static array $IGNORED_PROVIDERS = [PlutoTV::class, Skweek::class, Teleboy::class, Proximus::class, Orange::class];
+    private static array $IGNORED_PROVIDERS = [PlutoTV::class, Skweek::class, Teleboy::class];
 
     /**
      * All Providers must have at least a channel to gather or to have specifically been ignored
@@ -73,7 +73,7 @@ class ProvidersTest extends TestCase
         foreach (self::$TESTED_PROVIDERS_CHANNELS as $data) {
             $this->assertGreaterThanOrEqual(count($data[1]['channels']), 1);
         }
-        $testedProviders = array_merge(array_map(function($p) { return $p[0]; }, self::$TESTED_PROVIDERS_CHANNELS), self::$IGNORED_PROVIDERS);
+        $testedProviders = array_merge(array_map(function ($p) { return $p[0]; }, self::$TESTED_PROVIDERS_CHANNELS), self::$IGNORED_PROVIDERS);
         sort($testedProviders);
         sort($allProviders);
         $this->assertEquals($allProviders, $testedProviders);
@@ -84,7 +84,7 @@ class ProvidersTest extends TestCase
      */
     public function testOneChannelOnAllProvider(string $provider, array $data): void
     {
-        $channels = $data["channels"];
+        $channels = $data['channels'];
         $configurator = new Configurator();
         $provider = new $provider($configurator->getDefaultClient());
         $formatter = new XmlFormatter();
@@ -129,6 +129,7 @@ class ProvidersTest extends TestCase
             $exp = explode('\\', $testItem[0]);
             $array[end($exp)] = $testItem;
         }
+
         return $array;
     }
 }

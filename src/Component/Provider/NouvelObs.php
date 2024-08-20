@@ -18,7 +18,6 @@ use racacax\XmlTv\ValueObject\Program;
 
 class NouvelObs extends AbstractProvider implements ProviderInterface
 {
-
     public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_nouvelobs.json'), $priority ?? 0.46);
@@ -46,14 +45,16 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
             preg_match('/class="titre b">(.*?)</', $val, $titre);
             preg_match('/prog" \/>(.*?)<br\/>/', $val, $category);
             preg_match('/<span class="b">Saison (.*?) : Episode (.*?)<\/span>/', $val, $season);
-            $start = $date . " " . str_replace("h", ":", $start[1]);
+            $start = $date . ' ' . str_replace('h', ':', $start[1]);
             $program = new Program(strtotime($start), strtotime($start) + intval($duration) * 60);
 
             $exp = explode('>', $category[1] ?? 'Inconnu');
             $program->addCategory(end($exp));
             $exp = explode('>', $desc[1][1]);
             $desc = end($exp);
-            if(empty($desc)) { $desc = "Aucune description"; }
+            if(empty($desc)) {
+                $desc = 'Aucune description';
+            }
             $program->addDesc($desc);
             $program->addTitle($titre[1] ?? 'Aucun titre');
             if (isset($season[1])) {
@@ -62,7 +63,7 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
             if (isset($image[1])) {
                 $program->setIcon(str_replace('/p/p/', '/p/g/', $image[1]));
             }
-            switch ($csa[1] ?? "") {
+            switch ($csa[1] ?? '') {
                 case '2':
                     $csa = '-10';
 
@@ -95,7 +96,8 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
         $channelId = $this->channelsList[$channel->getId()];
-        $date = $date->format("Y-m-d");
+        $date = $date->format('Y-m-d');
+
         return "https://programme-tv.nouvelobs.com/chaine/$channelId/$date.php";
     }
 }

@@ -17,7 +17,6 @@ use racacax\XmlTv\ValueObject\Program;
  */
 class PlayTV extends AbstractProvider implements ProviderInterface
 {
-
     public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_playtv.json'), $priority ?? 0.45);
@@ -35,23 +34,23 @@ class PlayTV extends AbstractProvider implements ProviderInterface
         if (empty($json['data'])) {
             return false;
         }
-        foreach ($json["data"] as $val) {
-            $program = new Program(strtotime($val["start_at"]), strtotime($val["end_at"]));
+        foreach ($json['data'] as $val) {
+            $program = new Program(strtotime($val['start_at']), strtotime($val['end_at']));
 
             $attrs = $val['media']['attrs'] ?? [];
-            $category = $val["media"]['path'][0]['category'] ?? 'Inconnu';
+            $category = $val['media']['path'][0]['category'] ?? 'Inconnu';
             $category[0] = strtoupper($category[0]);
             $program->addCategory($category);
-            $program->addDesc($attrs["texts"]["long"] ?? $attrs["texts"]["short"] ?? 'Aucune description');
+            $program->addDesc($attrs['texts']['long'] ?? $attrs['texts']['short'] ?? 'Aucune description');
             $program->addTitle($val['title']);
-            if(isset($val["subtitle"])) {
+            if(isset($val['subtitle'])) {
                 $program->addSubtitle($val['subtitle']);
             }
-            if(isset($attrs["episode"])) {
-                $program->setEpisodeNum($attrs["season"] ?? '1', $attrs["episode"]);
+            if(isset($attrs['episode'])) {
+                $program->setEpisodeNum($attrs['season'] ?? '1', $attrs['episode']);
             }
-            $images = $attrs["images"] ?? [];
-            $image = $images['large'][0]["url"] ?? $images['thumbnail'][0]["url"] ?? null;
+            $images = $attrs['images'] ?? [];
+            $image = $images['large'][0]['url'] ?? $images['thumbnail'][0]['url'] ?? null;
             if(isset($image)) {
                 $program->setIcon($image);
             }
@@ -67,9 +66,9 @@ class PlayTV extends AbstractProvider implements ProviderInterface
         $channelId = $this->channelsList[$channel->getId()];
 
         return  'https://api.playtv.fr/broadcasts?'.http_build_query([
-            "include" => "media",
+            'include' => 'media',
             'filter[channel_id]' => $channelId,
-            'filter[airing_between]' => $date->format("Y-m-d\T00:00:00\Z").",".$date->format("Y-m-d\T23:59:59\Z")
+            'filter[airing_between]' => $date->format("Y-m-d\T00:00:00\Z").','.$date->format("Y-m-d\T23:59:59\Z")
         ]);
     }
 }

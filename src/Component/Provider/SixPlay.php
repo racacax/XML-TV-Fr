@@ -36,18 +36,19 @@ class SixPlay extends AbstractProvider implements ProviderInterface
                 $page++;
             }
             foreach ($json[$channelId] as $program) {
-                $genre = "Inconnu";
+                $genre = 'Inconnu';
 
-                if(isset($program["csa"]) && $program["csa"]["age"] > 0) {
-                    $csa = strval(-$program["csa"]["age"]);
+                if(isset($program['csa']) && $program['csa']['age'] > 0) {
+                    $csa = strval(-$program['csa']['age']);
                 } else {
-                    $csa = "Tout public";
+                    $csa = 'Tout public';
                 }
 
                 $image = null;
-                foreach($program["images"] as $im) {
-                    if($im["role"] == "vignette") {
-                        $image = "https://images.6play.fr/v2/images/".$im["id"]."/raw";
+                foreach($program['images'] as $im) {
+                    if($im['role'] == 'vignette') {
+                        $image = 'https://images.6play.fr/v2/images/'.$im['id'].'/raw';
+
                         break;
                     }
                 }
@@ -66,12 +67,13 @@ class SixPlay extends AbstractProvider implements ProviderInterface
         return $channelObj;
     }
 
-    public function generateUrl(Channel $channel, \DateTimeImmutable $date, int $page=0): string
+    public function generateUrl(Channel $channel, \DateTimeImmutable $date, int $page = 0): string
     {
         $channelId = $this->channelsList[$channel->getId()];
         $startTime = $date->format('Y-m-d 00:00:00');
         $endTime = $date->modify('+1 days')->format('Y-m-d 23:59:59');
-        $offset = 100 * ($page -1);
+        $offset = 100 * ($page - 1);
+
         return "https://pc.middleware.6play.fr/6play/v2/platforms/m6group_web/services/m6replay/guidetv?channel=$channelId&from=$startTime&offset=$offset&limit=100&to=$endTime&with=realdiffusiondates";
     }
 }

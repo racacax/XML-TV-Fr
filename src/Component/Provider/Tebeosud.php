@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise\Utils;
-use GuzzleHttp\Psr7\Response;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -20,7 +18,6 @@ use racacax\XmlTv\ValueObject\Program;
  */
 class Tebeosud extends AbstractProvider implements ProviderInterface
 {
-
     public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_tebeosud.json'), $priority ?? 0.2);
@@ -41,12 +38,12 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
         if(count($titles[1]) == 0) {
             return false;
         }
-        for($i=0; $i < count($titles[1]); $i++) {
-            $start = strtotime($date." ".$hours[1][$i]);
+        for($i = 0; $i < count($titles[1]); $i++) {
+            $start = strtotime($date.' '.$hours[1][$i]);
             if($i == count($titles) - 1) {
-                $end = $start + intval(explode(":", end($durations[1]))[0]) * 60;
-            } else if(isset($hours[1][$i + 1])) {
-                $end = strtotime($date." ".$hours[1][$i + 1]);
+                $end = $start + intval(explode(':', end($durations[1]))[0]) * 60;
+            } elseif(isset($hours[1][$i + 1])) {
+                $end = strtotime($date.' '.$hours[1][$i + 1]);
             }
             if(!isset($end)) {
                 continue;
@@ -55,7 +52,7 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
             $program->addTitle(trim($titles[1][$i]));
             $program->addDesc('Aucune description');
             $program->setIcon($images[1][$i]);
-            $program->addCategory("Inconnu");
+            $program->addCategory('Inconnu');
 
             $channelObj->addProgram($program);
         }
@@ -68,6 +65,6 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
 
-        return "https://www.tebeo.bzh/programme/".($date->format("d-m-Y"))."/";
+        return 'https://www.tebeo.bzh/programme/'.($date->format('d-m-Y')).'/';
     }
 }

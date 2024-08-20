@@ -95,12 +95,13 @@ class Bouygues extends AbstractProvider implements ProviderInterface
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
         $param = [
-            'profile'=>'detailed',
-            'epgChannelNumber'=> $this->channelsList[$channel->getId()],
-            'eventCount'=>999,
-            'startTime'=>$date->format('Y-m-d\T04:00:00\Z'),
-            'endTime'=>$date->modify('+1 days')->format('Y-m-d\T03:59:59\Z')
+            'profile' => 'detailed',
+            'epgChannelNumber' => $this->channelsList[$channel->getId()],
+            'eventCount' => 999,
+            'startTime' => $date->format('Y-m-d\T04:00:00\Z'),
+            'endTime' => $date->modify('+1 days')->format('Y-m-d\T03:59:59\Z')
         ];
+
         return 'https://epg.cms.pfs.bouyguesbox.fr/cms/sne/live/epg/events.json?' . http_build_query($param);
     }
 
@@ -109,34 +110,44 @@ class Bouygues extends AbstractProvider implements ProviderInterface
         switch ($type) {
             case 'Acteur':
                 $type = 'actor';
+
                 break;
             case 'Réalisateur':
                 $type = 'director';
+
                 break;
             case 'Scénariste':
                 $type = 'writer';
+
                 break;
             case 'Producteur':
                 $type = 'producer';
+
                 break;
             case 'Musique':
                 $type = 'composer';
+
                 break;
             case 'Créateur':
                 $type = 'editor';
+
                 break;
             case 'Présentateur vedette':
             case 'Autre présentateur':
                 $type = 'presenter';
+
                 break;
             case 'Commentateur':
                 $type = 'commentator';
+
                 break;
             case 'Origine Scénario':
             case 'Scénario':
                 $type = 'adapter';
+
                 break;
         }
+
         return $type;
     }
 }

@@ -40,7 +40,7 @@ class Orange extends AbstractProvider implements ProviderInterface
             return false;
         }
         $response = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
-        if (false !== strpos($response, 'Invalid request') ||false !== strpos($response, '504 Gateway Time-out')) {
+        if (false !== strpos($response, 'Invalid request') || false !== strpos($response, '504 Gateway Time-out')) {
             return false;
         }
         $json = json_decode($response, true);
@@ -62,11 +62,11 @@ class Orange extends AbstractProvider implements ProviderInterface
             if (!isset($val['season'])) {
                 $program->addTitle($val['title']);
             } else {
-                if ($val['season']['number'] =='') {
-                    $val['season']['number'] ='1';
+                if ($val['season']['number'] == '') {
+                    $val['season']['number'] = '1';
                 }
                 if (empty($val['episodeNumber'])) {
-                    $val['episodeNumber'] ='1';
+                    $val['episodeNumber'] = '1';
                 }
                 $program->addTitle($val['season']['serie']['title']);
                 $program->setEpisodeNum($val['season']['number'], $val['episodeNumber']);

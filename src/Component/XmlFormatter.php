@@ -42,7 +42,7 @@ class XmlFormatter
             $content[] = $this->buildRating($program->getRating());
             //$content[] = $this->buildYear($program->getYear());
 
-            $content[]= '</programme>';
+            $content[] = '</programme>';
         }
 
         return implode("\n", array_filter($content));
@@ -53,10 +53,10 @@ class XmlFormatter
     {
         $content = [];
         foreach ($list as $elem) {
-            $content[]= '<'.$tagName.' lang="'.$elem['lang'].'">' . $this->stringAsXML($elem['name']) . "</$tagName>";
+            $content[] = '<'.$tagName.' lang="'.$elem['lang'].'">' . $this->stringAsXML($elem['name']) . "</$tagName>";
         }
         if (empty($content) && isset($stringIfEmpty)) {
-            $content[]= '<'.$tagName.' lang="fr">' . $this->stringAsXML($stringIfEmpty) . "</$tagName>";
+            $content[] = '<'.$tagName.' lang="fr">' . $this->stringAsXML($stringIfEmpty) . "</$tagName>";
         }
 
         return trim(implode("\n", $content));
@@ -70,9 +70,9 @@ class XmlFormatter
 
         $str = '<credits>'.chr(10);
         foreach ($credits as $credit) {
-            $str.= '    <'.$credit['type'].'>'.$this->stringAsXML($credit['name']).'</'.$credit['type'].'>'.chr(10);
+            $str .= '    <'.$credit['type'].'>'.$this->stringAsXML($credit['name']).'</'.$credit['type'].'>'.chr(10);
         }
-        $str.= '</credits>';
+        $str .= '</credits>';
 
         return $str;
     }

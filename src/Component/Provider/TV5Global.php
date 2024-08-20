@@ -31,19 +31,19 @@ class TV5Global extends AbstractProvider implements ProviderInterface
         }
 
         $content = html_entity_decode($this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)), [
-            "Host" => "www.tv5monde.com",
-            "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0",
-            "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-            "Accept-Language" => "fr-FR,fr-CA;q=0.8,en;q=0.5,en-US;q=0.3",
-            "DNT" => "1",
-            "Sec-GPC" => "1",
-            "Connection" => "keep-alive",
-            "Upgrade-Insecure-Requests" => "1",
-            "Sec-Fetch-Dest" => "document",
-            "Sec-Fetch-Mode" => "navigate",
-            "Sec-Fetch-Site" => "none",
-            "Sec-Fetch-User" => "?1",
-            "Priority" => "u=1"
+            'Host' => 'www.tv5monde.com',
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0',
+            'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Accept-Language' => 'fr-FR,fr-CA;q=0.8,en;q=0.5,en-US;q=0.3',
+            'DNT' => '1',
+            'Sec-GPC' => '1',
+            'Connection' => 'keep-alive',
+            'Upgrade-Insecure-Requests' => '1',
+            'Sec-Fetch-Dest' => 'document',
+            'Sec-Fetch-Mode' => 'navigate',
+            'Sec-Fetch-Site' => 'none',
+            'Sec-Fetch-User' => '?1',
+            'Priority' => 'u=1'
         ]));
         $programs = explode('<li class="hourly-list', $content);
         unset($programs[0]);
@@ -58,23 +58,25 @@ class TV5Global extends AbstractProvider implements ProviderInterface
             preg_match('/<h4 class="program-title">(.*?)<\/h4>/s', $p, $title);
             preg_match('/<p class="program-summary">(.*?)<\/p>/s', $p, $summary);
             preg_match('/src="(.*?)"/', $p, $image);
-            $startDate = strtotime($date . " " . $startTime[1]);
-            if (str_contains($duration[1], "mn")) {
-                $duration[1] = intval(explode("mn", $duration[1])[0]) * 60;
+            $startDate = strtotime($date . ' ' . $startTime[1]);
+            if (str_contains($duration[1], 'mn')) {
+                $duration[1] = intval(explode('mn', $duration[1])[0]) * 60;
             } else {
-                $duration[1] = explode("h", $duration[1]);
+                $duration[1] = explode('h', $duration[1]);
                 $duration[1] = intval($duration[1][0]) * 3600 + intval($duration[1][1]) * 60;
             }
             $endDate = $startDate + $duration[1];
-            $summary[1] = str_replace('<br />', '', $summary[1] ?? "");
+            $summary[1] = str_replace('<br />', '', $summary[1] ?? '');
             $program = new Program($startDate, $endDate);
-            $program->addTitle($title[1] ?? "Aucun titre");
+            $program->addTitle($title[1] ?? 'Aucun titre');
             $program->addDesc($summary[1]);
-            $program->addCategory($genre[1] ?? "Inconnu");
-            if (!empty($image))
+            $program->addCategory($genre[1] ?? 'Inconnu');
+            if (!empty($image)) {
                 $program->setIcon($image[1]);
+            }
             $channelObj->addProgram($program);
         }
+
         return $channelObj;
     }
 
@@ -82,6 +84,6 @@ class TV5Global extends AbstractProvider implements ProviderInterface
     {
         $channel_id = $this->channelsList[$channel->getId()];
 
-        return 'https://www.tv5monde.com/tv/programmes/' . $channel_id . '?day=' . $date->format("Y-m-d");
+        return 'https://www.tv5monde.com/tv/programmes/' . $channel_id . '?day=' . $date->format('Y-m-d');
     }
 }

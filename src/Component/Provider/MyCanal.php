@@ -17,24 +17,27 @@ use racacax\XmlTv\ValueObject\Program;
 class MyCanal extends AbstractProvider implements ProviderInterface
 {
     protected static $apiKey = [];
-    protected $region = "fr";
+    protected $region = 'fr';
     protected $proxy = null;
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        if(isset($extraParam["mycanal_proxy"]))
-            $this->proxy = $extraParam["mycanal_proxy"];
+        if(isset($extraParam['mycanal_proxy'])) {
+            $this->proxy = $extraParam['mycanal_proxy'];
+        }
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal.json'), $priority ?? 0.7);
     }
 
-    protected function getApiKey() {
+    protected function getApiKey()
+    {
         if(!isset(self::$apiKey[$this->region])) {
-            $result = $this->getContentFromURL("https://www.canalplus.com/" . $this->region . "/programme-tv/");
+            $result = $this->getContentFromURL('https://www.canalplus.com/' . $this->region . '/programme-tv/');
             $token = @explode('"', explode('"token":"', $result)[1])[0];
             if(empty($token)) {
-                throw new \Exception("Impossible to retrieve MyCanal API Key");
+                throw new \Exception('Impossible to retrieve MyCanal API Key');
             }
             self::$apiKey[$this->region] = $token;
         }
+
         return self::$apiKey[$this->region];
     }
 
@@ -44,7 +47,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $this->region = $this->channelsList[$channel]["region"];
+        $this->region = $this->channelsList[$channel]['region'];
         //@todo: add cache (next PR?)
         $url1 = $this->generateUrl($channelObj, $datetime = new \DateTimeImmutable($date));
         $url2 = $this->generateUrl($channelObj, $datetime->modify('+1 days'));
@@ -99,7 +102,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         }
 
         foreach ($all as $index => $program) {
-            Logger::updateLine(' '.round($index*100/$count, 2).' %');
+            Logger::updateLine(' '.round($index * 100 / $count, 2).' %');
             $responseBody = null;
             if(!is_null($response[$program['onClick']['URLPage']])) {
                 $responseBody = $response[$program['onClick']['URLPage']]->getBody();
@@ -142,8 +145,8 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             $programs[$startTime] = [
                 'startTime'     => $startTime,
                 'channel'       => $channel,
-                'title'         => $detail['tracking']['dataLayer']['content_title'] ?? $program["title"],
-                'subTitle'      => @$detail['episodes']['contents'][0]['subtitle'] ?? $program["subtitle"] ?? null,
+                'title'         => $detail['tracking']['dataLayer']['content_title'] ?? $program['title'],
+                'subTitle'      => @$detail['episodes']['contents'][0]['subtitle'] ?? $program['subtitle'] ?? null,
                 'description'   => $detail['episodes']['contents'][0]['summary'] ?? @$detail['detail']['informations']['summary'],
                 'season'        => @$detail['detail']['selectedEpisode']['seasonNumber'],
                 'episode'       => @$detail['detail']['selectedEpisode']['episodeNumber'],
@@ -179,13 +182,14 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
-        $channelId = $this->channelsList[$channel->getId()]["id"];
+        $channelId = $this->channelsList[$channel->getId()]['id'];
         $day = round(($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400);
 
         $url = 'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->getApiKey() . '/' . $channelId . '/broadcasts/day/'. $day;
         if(!is_null($this->proxy)) {
             $url = $this->proxy[0].urlencode(base64_encode($url)).$this->proxy[1];
         }
+
         return $url;
     }
 }

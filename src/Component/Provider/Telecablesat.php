@@ -55,8 +55,8 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         $content = self::$cache[md5($channel_url)];
         preg_match_all('/logos_chaines\/(.*?).png" title="(.*?)"/', $content, $channels);
         $channel_index = array_search($channel_id, $channels[1]);
-        if ($channel_index>=0) {
-            $channel_content = @explode('<div class="row">', explode("<div class='paging'>", $content)[0])[$channel_index+1];
+        if ($channel_index >= 0) {
+            $channel_content = @explode('<div class="row">', explode("<div class='paging'>", $content)[0])[$channel_index + 1];
             if (!empty($channel_content)) {
                 preg_match_all('/data-start="(.*?)" data-end="(.*?)"/', $channel_content, $times);
                 preg_match_all('/data-src="(.*?)"/', $channel_content, $imgs);
@@ -67,8 +67,8 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                     return false;
                 }
                 $retry_counter = 0;
-                for ($i=0; $i<$count; $i++) {
-                    Logger::updateLine(' '.round($i*100/$count, 2).' %');
+                for ($i = 0; $i < $count; $i++) {
+                    Logger::updateLine(' '.round($i * 100 / $count, 2).' %');
                     $channelObj->addProgram(
                         $program = new Program(intval($times[1][$i]), intval($times[2][$i]))
                     );
@@ -125,32 +125,32 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                     }
                     $desc = '';
                     if (!empty($resume[1])) {
-                        $desc.=trim($resume[1])."\n\n";
+                        $desc .= trim($resume[1])."\n\n";
                     }
                     if (isset($critique[1])) {
-                        $desc.='Critique : '.trim($critique[1])."\n\n";
+                        $desc .= 'Critique : '.trim($critique[1])."\n\n";
                     }
                     if (isset($directors[1])) {
                         $directors_split = explode(',', $directors[1]);
-                        $desc.= 'Réalisateur(s) : '.trim($directors[1])."\n";
+                        $desc .= 'Réalisateur(s) : '.trim($directors[1])."\n";
                         foreach ($directors_split as $director) {
                             $program->addCredit(trim($director), 'director');
                         }
                     }
                     if (isset($presenter[1])) {
                         $presenter_split = explode(',', $presenter[1]);
-                        $desc.= 'Présentateur(s) : '.trim($presenter[1])."\n";
+                        $desc .= 'Présentateur(s) : '.trim($presenter[1])."\n";
                         foreach ($presenter_split as $presenter) {
                             $program->addCredit(trim($presenter), 'presenter');
                         }
                     }
                     if (!empty($actors[1])) {
-                        $desc.='Acteurs : ';
-                        for ($j=0; $j<count($actors[1]); $j++) {
+                        $desc .= 'Acteurs : ';
+                        for ($j = 0; $j < count($actors[1]); $j++) {
                             $program->addCredit(trim($actors[1][$j]), 'actor');
-                            $desc.=trim($actors[1][$j].$actors[2][$j]).' ';
+                            $desc .= trim($actors[1][$j].$actors[2][$j]).' ';
                         }
-                        $desc.="\n";
+                        $desc .= "\n";
                     }
                     $program->addDesc($desc);
                     $retry_counter = 0;

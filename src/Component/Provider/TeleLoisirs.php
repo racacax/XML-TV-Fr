@@ -30,11 +30,11 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
         $count = count($lis);
 
         foreach ($lis as $index => $li) {
-            Logger::updateLine(' '.round($index*100/$count, 2).' %');
+            Logger::updateLine(' '.round($index * 100 / $count, 2).' %');
             preg_match('/href="(.*?)" title="(.*?)"/', $li, $titlehref);
             preg_match('/srcset="(.*?)"/', $li, $img);
             if(!isset($img[1])) {
-                $img = "";
+                $img = '';
             } else {
                 $img = str_replace('64x90', '640x360', explode(' ', $img[1])[0]);
             }
@@ -49,7 +49,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             $duration = str_replace('min', '', $duration);
             $duration = explode('h', $duration);
             if (count($duration) == 2) {
-                $duration = 60* intval($duration[1]) + 3600 * intval($duration[0]);
+                $duration = 60 * intval($duration[1]) + 3600 * intval($duration[0]);
             } else {
                 $duration = 60 * intval($duration[0]);
             }
@@ -62,10 +62,10 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                 $detailJson = json_decode(explode('</script>', $detailJson)[0], true);
                 $synopsis = $detailJson['description'] ?? '';
                 if (isset($detailJson['review'])) {
-                    $synopsis.= "\nCritique : \n";
-                    $synopsis.=@($detailJson['review']['description'] ?? $detailJson['review']['reviewBody']) ;
+                    $synopsis .= "\nCritique : \n";
+                    $synopsis .= @($detailJson['review']['description'] ?? $detailJson['review']['reviewBody']) ;
                     if (isset($detailJson['review']['reviewRating'])) {
-                        $synopsis.="\nNote : ".$detailJson['review']['reviewRating']['ratingValue'].'/5';
+                        $synopsis .= "\nNote : ".$detailJson['review']['reviewRating']['ratingValue'].'/5';
                     }
                 }
                 $program->setYear(@$detailJson['dateCreated']);
