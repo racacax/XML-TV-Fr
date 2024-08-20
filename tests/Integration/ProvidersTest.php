@@ -79,44 +79,44 @@ class ProvidersTest extends TestCase
         $this->assertEquals($allProviders, $testedProviders);
     }
 
-    //    /**
-    //     * @dataProvider dataProviderListProvider
-    //     */
-    //    public function testOneChannelOnAllProvider(string $provider, array $data): void
-    //    {
-    //        $channels = $data['channels'];
-    //        $configurator = new Configurator();
-    //        $provider = new $provider($configurator->getDefaultClient());
-    //        $formatter = new XmlFormatter();
-    //        $channelObj = null;
-    //        $count = 0;
-    //        foreach ($channels as $channelCode) {
-    //            $count++;
-    //            $channelObj = $provider->constructEPG($channelCode, date('Y-m-d'));
-    //            if (false !== $channelObj) {
-    //                if ($channelObj->getProgramCount() > 0) {
-    //                    break;
-    //                }
-    //
-    //                $this->addWarning(
-    //                    sprintf(
-    //                        'Provider "%s" has empty channel : "%s", it is normal ?',
-    //                        Utils::extractProviderName($provider),
-    //                        $channelCode
-    //                    )
-    //                );
-    //            }
-    //
-    //
-    //        }
-    //
-    //        $this->assertNotEmpty($channelObj, 'Error on provider : ' . get_class($provider));
-    //        /** @var Channel $channelObj */
-    //        $this->assertSame(Channel::class, get_class($channelObj));
-    //        // $this->assertGreaterThan(1, $channelObj->getProgramCount(), 'Channel '.$channelObj->getName().' without programs with provider '.get_class($provider));
-    //        // the goal of this application is to build xml, so we need to test the generation
-    //        $this->assertNotEmpty($formatter->formatChannel($channelObj, $provider));
-    //    }
+    /**
+     * @dataProvider dataProviderListProvider
+     */
+    public function testOneChannelOnAllProvider(string $provider, array $data): void
+    {
+        $channels = $data['channels'];
+        $configurator = new Configurator();
+        $provider = new $provider($configurator->getDefaultClient());
+        $formatter = new XmlFormatter();
+        $channelObj = null;
+        $count = 0;
+        foreach ($channels as $channelCode) {
+            $count++;
+            $channelObj = $provider->constructEPG($channelCode, date('Y-m-d'));
+            if (false !== $channelObj) {
+                if ($channelObj->getProgramCount() > 0) {
+                    break;
+                }
+
+                $this->addWarning(
+                    sprintf(
+                        'Provider "%s" has empty channel : "%s", it is normal ?',
+                        Utils::extractProviderName($provider),
+                        $channelCode
+                    )
+                );
+            }
+
+
+        }
+
+        $this->assertNotEmpty($channelObj, 'Error on provider : ' . get_class($provider));
+        /** @var Channel $channelObj */
+        $this->assertSame(Channel::class, get_class($channelObj));
+        // $this->assertGreaterThan(1, $channelObj->getProgramCount(), 'Channel '.$channelObj->getName().' without programs with provider '.get_class($provider));
+        // the goal of this application is to build xml, so we need to test the generation
+        $this->assertNotEmpty($formatter->formatChannel($channelObj, $provider));
+    }
 
 
     /**
