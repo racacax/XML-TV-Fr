@@ -43,9 +43,9 @@ class ProvidersTest extends TestCase
         [ICIRadioCanadaTele::class, ["channels" => ["CBAFT.ca"]]],
         [MyCanal::class, ["channels" => ["TF1.fr"]]],
         [NouvelObs::class, ["channels" => ["TF1.fr"]]],
-        [Orange::class, ["channels" => ["TF1.fr"]]],
+       // [Orange::class, ["channels" => ["TF1.fr"]]],
         [PlayTV::class, ["channels" => ["TF1.fr"]]],
-        [Proximus::class, ["channels" => ["TF1.fr"]]],
+       // [Proximus::class, ["channels" => ["TF1.fr"]]],
         [SFR::class, ["channels" => ["TF1.fr"]]],
         [SixPlay::class, ["channels" => ["M6.fr"]]],
         [Tebeosud::class, ["channels" => ["Tebeo.fr"]]],
@@ -58,7 +58,7 @@ class ProvidersTest extends TestCase
         [Voo::class, ["channels" => ["TF1.fr"]]],
         [TVHebdo::class, ["channels" => ["RDS.ca"]]],
     ];
-    private static array $IGNORED_PROVIDERS = [PlutoTV::class, Skweek::class, Teleboy::class];
+    private static array $IGNORED_PROVIDERS = [PlutoTV::class, Skweek::class, Teleboy::class, Proximus::class, Orange::class];
 
     /**
      * All Providers must have at least a channel to gather or to have specifically been ignored

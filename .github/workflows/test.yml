@@ -29,5 +29,5 @@ jobs:
       - name: Run phpstan
         run: bin/phpstan
       - name: Run test suite
-        run: bin/phpunit
+        run: bin/phpunit --debug
 
