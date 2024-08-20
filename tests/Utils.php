@@ -23,11 +23,11 @@ class Utils
             $files = self::glob_recursive($dir.'/*');
             foreach ($files as $file) {
                 if (is_file($file)) {
-                    $hashes .= hash('sha256', file_get_contents($file));
+                    $hashes .= md5(file_get_contents($file));
                 }
             }
         }
 
-        return hash('sha256', $hashes);
+        return md5($hashes);
     }
 }
