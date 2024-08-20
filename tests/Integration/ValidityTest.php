@@ -15,7 +15,8 @@ class ValidityTest extends TestCase
         $this->assertEquals(
             file_get_contents('integrity.sha256'),
             Utils::generateHash(),
-            "Hashes don't match. If all other tests passed, they will match in the next run."
+            "Hashes don't match. If all other tests passed, they will match in the next run.
+            If you're running from the pipeline, tests need to be run locally first to be validated."
         );
     }
 
