@@ -31,7 +31,7 @@ class Utils
             }
         ));
 
-        return self::$providers= $listProvider;
+        return self::$providers = $listProvider;
     }
 
     public static function extractProviderName(ProviderInterface $provider): string
@@ -41,7 +41,8 @@ class Utils
         return end($tmp);
     }
 
-    public static function getContent($url, $headers) {
+    public static function getContent($url, $headers)
+    {
         $timeout = 3;
         $ch = curl_init($url);
 
@@ -51,8 +52,7 @@ class Utils
         curl_setopt($ch, CURLOPT_REFERER, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        if (preg_match('`^https://`i', $url))
-        {
+        if (preg_match('`^https://`i', $url)) {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         }
@@ -63,6 +63,7 @@ class Utils
         $page_content = curl_exec($ch);
 
         curl_close($ch);
+
         return $page_content;
     }
 }

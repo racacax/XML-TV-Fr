@@ -73,7 +73,7 @@ class Generator
                 return
                    in_array(Utils::extractProviderName($provider), $list, true) ||
                    in_array(get_class($provider), $list, true)
-               ;
+                ;
             }
         );
     }
@@ -86,7 +86,7 @@ class Generator
             Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
 
 
-            $logs = ['channels'=>[], 'xml'=>[],'failed_providers'=>[]];
+            $logs = ['channels' => [], 'xml' => [],'failed_providers' => []];
             $countChannel = 0;
             foreach ($channels as $channelKey => $channelInfo) {
                 $countChannel++;
@@ -97,7 +97,7 @@ class Generator
                         $logs['channels'][$date][$channelKey] = [
                             'success' => false,
                             'provider' => null,
-                            'cache'=> false,
+                            'cache' => false,
                             'failed_providers' => [],
                         ];
                     }
@@ -105,13 +105,15 @@ class Generator
 
                     if ($this->cache->has($cacheKey)) {
                         Logger::log(" | \e[33mOK \e[39m- From Cache ".chr(10));
-                        $logs['channels'][$date][$channelKey]["success"] = true;
-                        $logs['channels'][$date][$channelKey]["cache"] = true;
+                        $logs['channels'][$date][$channelKey]['success'] = true;
+                        $logs['channels'][$date][$channelKey]['cache'] = true;
+
                         continue;
                     }
                     $channelFound = false;
                     foreach ($providers as $provider) {
                         $old_zone = date_default_timezone_get();
+
                         try {
                             $channel = @$provider->constructEPG($channelKey, $date);
                         } catch(\Throwable $e) {
@@ -129,7 +131,7 @@ class Generator
                         $logs['channels'][$date][$channelKey] = [
                             'success' => true,
                             'provider' => get_class($provider),
-                            'cache'=> false,
+                            'cache' => false,
                         ];
                         $this->cache->store($cacheKey, $this->formatter->formatChannel($channel, $provider));
                         Logger::log(" | \e[32mOK\e[39m - ".Utils::extractProviderName($provider).chr(10));
@@ -146,7 +148,7 @@ class Generator
                 }
             }
             Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
-            $logsFinal[$guide["channels"]] = $logs;
+            $logsFinal[$guide['channels']] = $logs;
         }
         Logger::debug(json_encode($logsFinal));
     }
@@ -180,7 +182,7 @@ class Generator
                     continue;
                 }
                 $cache = $this->cache->get($keyCache);
-                $channelId = explode("_", $keyCache)[0];
+                $channelId = explode('_', $keyCache)[0];
                 if(array_key_exists($channelId, $listAliases)) {
                     $cache = str_replace('channel="'.$channelId.'"', 'channel="'.$listAliases[$channelId].'"', $cache);
                 }

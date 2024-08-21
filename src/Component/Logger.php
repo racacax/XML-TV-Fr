@@ -34,7 +34,7 @@ class Logger
     public static function log(string $log): void
     {
         self::$lastLog = $log;
-        if (self::$level==='none') {
+        if (self::$level === 'none') {
             return;
         }
 

@@ -49,9 +49,9 @@ class PlutoTV extends AbstractProvider implements ProviderInterface
 
         $headers = ['Authorization' => 'Bearer '.$sessionToken];
         $count = 6;
-        for ($i=0; $i<$count; $i++) {
-            Logger::updateLine(' '.round($i*100/$count, 2).' %');
-            $hour = str_pad(strval($i*4), 2, '0', STR_PAD_LEFT);
+        for ($i = 0; $i < $count; $i++) {
+            Logger::updateLine(' '.round($i * 100 / $count, 2).' %');
+            $hour = str_pad(strval($i * 4), 2, '0', STR_PAD_LEFT);
             $content = $this->getContentFromURL(
                 sprintf($this->generateUrl($channelObj, new \DateTimeImmutable($date)), $hour),
                 $headers

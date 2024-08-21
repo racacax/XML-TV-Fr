@@ -74,12 +74,12 @@ class Program
      * @param mixed $name
      * @param mixed $type
      */
-    public function addCredit($name, $type = "guest"): void
+    public function addCredit($name, $type = 'guest'): void
     {
         if (!empty($name)) {
-            if(!in_array($type, ["actor", "director", "writer", "producer",
-                "composer", "editor", "presenter", "commentator", "adapter"])) {
-                $type = "guest";
+            if(!in_array($type, ['actor', 'director', 'writer', 'producer',
+                'composer', 'editor', 'presenter', 'commentator', 'adapter'])) {
+                $type = 'guest';
             }
             $this->credits[] = ['name' => $name, 'type' => $type];
         }
@@ -90,7 +90,7 @@ class Program
      */
     public function getCredits()
     {
-        usort($this->credits, function($a, $b) {
+        usort($this->credits, function ($a, $b) {
             $priority = [
                 'director' => 1,
                 'actor' => 2,
@@ -103,12 +103,13 @@ class Program
                 'commentator' => 9,
                 'guest' => 10
             ];
-    
+
             $priorityA = isset($priority[$a['type']]) ? $priority[$a['type']] : PHP_INT_MAX;
             $priorityB = isset($priority[$b['type']]) ? $priority[$b['type']] : PHP_INT_MAX;
-    
+
             return $priorityA - $priorityB;
         });
+
         return $this->credits;
     }
 
@@ -179,7 +180,7 @@ class Program
             }
         } else {
             if(!$this->start) {
-                return "20001212121200 +0100";
+                return '20001212121200 +0100';
             }
             if (\DateTimeImmutable::class === get_class($this->start)) {
                 return $this->start->format('YmdHis O');

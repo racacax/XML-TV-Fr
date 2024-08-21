@@ -82,9 +82,9 @@ abstract class AbstractProvider
             $response = $this->client->get(
                 $url,
                 [
-                    'headers'=> $headers,
+                    'headers' => $headers,
                     'connect_timeout' => 1,
-                    "timeout" => 20
+                    'timeout' => 20
                 ]
             );
         } catch (\Throwable $e) {

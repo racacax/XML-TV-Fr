@@ -9,6 +9,10 @@
          failOnRisky="true"
          failOnWarning="false"
          verbose="true">
+
+    <extensions>
+        <extension class="racacax\XmlTvTest\AllTestsPassedHook" />
+    </extensions>
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
