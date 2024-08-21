@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
-
-use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Client;
-use racacax\XmlTv\StaticComponent\ChannelInformation;
 use racacax\XmlTv\ValueObject\DummyChannel;
+
 use function Amp\async;
 use function Amp\delay;
 
@@ -27,43 +24,48 @@ class ChannelThread
     private bool $isRunning;
     private bool $hasStarted;
 
-    public function __construct(ChannelsManager $manager, Generator $generator) {
+    public function __construct(ChannelsManager $manager, Generator $generator)
+    {
         $this->manager = $manager;
         $this->generator = $generator;
         $this->isRunning = false;
         $this->hasStarted = false;
     }
 
-    public function setChannel(array $channelInfo) {
+    public function setChannel(array $channelInfo)
+    {
         $this->hasStarted = false;
         $this->status = "\e[35mDémarrage...e[39m";
-        $this->channel = $channelInfo["key"];
-        $this->info = $channelInfo["info"];
-        $this->failedProviders = $channelInfo["failedProviders"];
-        $this->datesGathered = $channelInfo["datesGathered"];
-        $this->extraParams = $channelInfo["extraParams"];
+        $this->channel = $channelInfo['key'];
+        $this->info = $channelInfo['info'];
+        $this->failedProviders = $channelInfo['failedProviders'];
+        $this->datesGathered = $channelInfo['datesGathered'];
+        $this->extraParams = $channelInfo['extraParams'];
     }
 
-    public function getString() {
+    public function getString()
+    {
         if(!$this->hasStarted || !$this->isRunning) {
-            return Utils::colorize("En pause...", "yellow");
+            return Utils::colorize('En pause...', 'yellow');
         }
-        $str = $this->getChannel()." - ".$this->getDate()." - ".$this->getProvider();
+        $str = $this->getChannel().' - '.$this->getDate().' - '.$this->getProvider();
         $status = $this->getStatus();
         if(isset($status)) {
-            $str.= " ".$status;
+            $str .= ' '.$status;
         }
+
         return $str;
     }
 
-    private function getChannelInfo() {
-        return json_encode(["key" => $this->channel, "info"=>$this->info, "extraParams"=>$this->extraParams]);
+    private function getChannelInfo()
+    {
+        return json_encode(['key' => $this->channel, 'info' => $this->info, 'extraParams' => $this->extraParams]);
     }
 
     private function run()
     {
-        $cacheInstance = new ProcessCache("cache");
-        $statusInstance = new ProcessCache("status");
+        $cacheInstance = new ProcessCache('cache');
+        $statusInstance = new ProcessCache('status');
         $providers = $this->generator->getProviders($this->info['priority'] ?? []);
         if(count($this->failedProviders) > 0) {
             $failedProviders = $this->generator->getProviders($this->failedProviders);
@@ -86,8 +88,9 @@ class ChannelThread
 
             if ($cache->has($cacheKey)) {
                 Logger::log(" | \e[33mOK \e[39m- From Cache " . chr(10));
-                $this->manager->setLogInfo($date, $this->channel, "success", true);
-                $this->manager->setLogInfo($date, $this->channel, "cache",true);
+                $this->manager->setLogInfo($date, $this->channel, 'success', true);
+                $this->manager->setLogInfo($date, $this->channel, 'cache', true);
+
                 continue;
             }
             $channelFound = false;
@@ -100,13 +103,14 @@ class ChannelThread
                     continue;
                 } elseif(!$this->manager->canUseProvider($providerClass)) {
                     $this->manager->addChannel($this->channel, $this->failedProviders, $this->datesGathered);
+
                     return;
                 } else {
                     $this->manager->addChannelToProvider($providerClass, $this->channel);
                     $this->provider = $providerClass;
                     $this->hasStarted = true;
                 }
-                $this->status = Utils::colorize("En cours...", "magenta");
+                $this->status = Utils::colorize('En cours...', 'magenta');
 
 
                 flush();
@@ -114,27 +118,28 @@ class ChannelThread
                 $fileName = bin2hex($bytes);
                 $p = PHP_BINARY;
                 $cmd = "$p src/manager.php $providerClass $date ".base64_encode($this->getChannelInfo())." $fileName";
-                if (substr(php_uname(), 0, 7) == "Windows"){
-                    pclose(popen("start /B ". $cmd, "r"));
+                if (substr(php_uname(), 0, 7) == 'Windows') {
+                    pclose(popen('start /B '. $cmd, 'r'));
                 } else {
-                    exec($cmd . " > /dev/null &");
+                    exec($cmd . ' > /dev/null &');
                 }
                 //echo "$p src/manager.php $providerClass $date ".base64_encode($this->getChannelInfo());
                 while (true) {
                     if(!$cacheInstance->exists($fileName)) {
                         if($statusInstance->exists($fileName)) {
-                            $this->status = Utils::colorize($statusInstance->pop($fileName), "magenta");
+                            $this->status = Utils::colorize($statusInstance->pop($fileName), 'magenta');
                         }
                         delay(0.01);
                     } else {
                         $channel = $cacheInstance->pop(strval($fileName));
                         $this->manager->removeChannelFromProvider($providerClass, $this->channel);
+
                         break;
                     }
                 }
                 //echo $this->channel." ".$date." o\n";
 
-                if ($channel == "false") {
+                if ($channel == 'false') {
                     $this->failedProviders[] = get_class($provider);
                     $this->manager->addFailedProvider(get_class($provider));
 
@@ -142,9 +147,9 @@ class ChannelThread
                 }
 
                 $channelFound = true;
-                $this->manager->setLogInfo($date, $this->channel, "success", true);
-                $this->manager->setLogInfo($date, $this->channel, "provider", get_class($provider));
-                $this->manager->setLogInfo($date, $this->channel, "failed_providers", $this->failedProviders);
+                $this->manager->setLogInfo($date, $this->channel, 'success', true);
+                $this->manager->setLogInfo($date, $this->channel, 'provider', get_class($provider));
+                $this->manager->setLogInfo($date, $this->channel, 'failed_providers', $this->failedProviders);
                 $cache->store($cacheKey, $channel);
                 //Logger::log(" | \e[32mOK\e[39m - " . Utils::extractProviderName($provider) . chr(10));
 
@@ -163,7 +168,8 @@ class ChannelThread
         $this->manager->incrChannelsDone();
     }
 
-    public function start() {
+    public function start()
+    {
         if(!$this->isRunning) {
             $this->isRunning = true;
             $fn = function () {
@@ -186,6 +192,7 @@ class ChannelThread
         if(isset($this->channel)) {
             return $this->channel;
         }
+
         return null;
     }
 
@@ -197,6 +204,7 @@ class ChannelThread
         if(isset($this->status)) {
             return $this->status;
         }
+
         return null;
     }
 
@@ -208,6 +216,7 @@ class ChannelThread
         if(isset($this->date)) {
             return $this->date;
         }
+
         return null;
     }
 

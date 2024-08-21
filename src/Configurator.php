@@ -116,8 +116,7 @@ class Configurator
         bool    $forceTodayGrab = false,
         int     $threads = 1,
         array   $extraParams = []
-    )
-    {
+    ) {
         if (isset($timeLimit)) {
             set_time_limit($timeLimit);
         }
@@ -179,7 +178,7 @@ class Configurator
             $data['guides_to_generate'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
             $data['7zip_path'] ?? null,
             $data['force_todays_grab'] ?? false,
-                $data['threads'] ?? 1,
+            $data['threads'] ?? 1,
             $data['extra_params'] ?? []
         );
     }

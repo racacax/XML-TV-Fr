@@ -6,9 +6,9 @@ namespace racacax\XmlTv\Component;
 
 use racacax\XmlTv\StaticComponent\ChannelInformation;
 use racacax\XmlTv\ValueObject\DummyChannel;
+
 use function Amp\async;
 use function Amp\delay;
-use function DeepCopy\deep_copy;
 
 class Generator
 {
@@ -95,7 +95,8 @@ class Generator
         );
     }
 
-    public function getExtraParams() {
+    public function getExtraParams()
+    {
         return $this->extraParams;
     }
 
@@ -180,25 +181,25 @@ class Generator
         $fn = function () {
             $logsFinal = [];
             $logLevel = Logger::getLogLevel();
-            Logger::setLogLevel("none");
+            Logger::setLogLevel('none');
             foreach ($this->guides as $guide) {
                 $channels = json_decode(file_get_contents($guide['channels']), true);
                 Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
 
                 $threads = [];
                 $manager = new ChannelsManager($channels, $this);
-                for($i=0; $i< $this->threads; $i++) {
+                for($i = 0; $i < $this->threads; $i++) {
                     $threads[] = new ChannelThread($manager, $this);
                 }
 
                 $view = function () use ($threads, $manager, $guide, $logLevel) {
-                    if($logLevel != "none") {
+                    if($logLevel != 'none') {
                         while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) {
                             echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
                             echo Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue');
-                            echo Utils::colorize("Chaines récupérées : ", "cyan").$manager->getStatus()."   |   ".
-                                Utils::colorize("Fichier :", "cyan")." {$guide['channels']}\n";
-                            $i=1;
+                            echo Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus().'   |   '.
+                                Utils::colorize('Fichier :', 'cyan')." {$guide['channels']}\n";
+                            $i = 1;
                             foreach($threads as $thread) {
                                 echo "Thread $i : ";
                                 echo $thread->getString();
@@ -214,7 +215,7 @@ class Generator
                 while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) { // Necessary if one channel fails
 
                     delay(0.01);
-                    for($i=0; $i< count($threads); $i++) {
+                    for($i = 0; $i < count($threads); $i++) {
                         $thread = $threadsStack[0];
                         unset($threadsStack[0]);
                         $threadsStack[] = $thread;
@@ -231,7 +232,7 @@ class Generator
                 }
 
                 Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
-                $logsFinal[$guide["channels"]] = $manager->getLogs();
+                $logsFinal[$guide['channels']] = $manager->getLogs();
             }
             Logger::debug(json_encode($logsFinal));
         };
@@ -241,7 +242,8 @@ class Generator
 
     }
 
-    public function generateEpg() {
+    public function generateEpg()
+    {
         if($this->threads == 1) {
             $this->generateEpgSingleThread();
         } else {

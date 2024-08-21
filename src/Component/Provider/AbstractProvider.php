@@ -41,7 +41,7 @@ abstract class AbstractProvider
         //todo: to improve
         self::$priority[static::class] = $priority;
         $this->client = $client;
-        $this->status = "";
+        $this->status = '';
     }
 
     public static function getPriority(): float
@@ -49,10 +49,11 @@ abstract class AbstractProvider
         return self::$priority[static::class];
     }
 
-    public function setStatus(string $status) {
+    public function setStatus(string $status)
+    {
         $this->status = $status;
-        if(defined("CHANNEL_PROCESS")) {
-            (new ProcessCache("status"))->save(CHANNEL_PROCESS, $this->status);
+        if(defined('CHANNEL_PROCESS')) {
+            (new ProcessCache('status'))->save(CHANNEL_PROCESS, $this->status);
         }
     }
 
