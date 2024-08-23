@@ -70,7 +70,7 @@ class DAZN extends AbstractProvider implements ProviderInterface
             $end = strtotime($match['date']) + self::$MATCH_DURATION;
             $entries = [['startTime' => $startCurrentDate, 'endTime' => min($start, $endCurrentDate), 'prefix' => 'Prochain match : '],
                 ['startTime' => $start, 'endTime' => $end, 'prefix' => ''],
-                ['startTime' => max($start, $startCurrentDate), 'endTime' => $endCurrentDate, 'prefix' => 'Match précédent : ']];
+                ['startTime' => max($end, $startCurrentDate), 'endTime' => $endCurrentDate, 'prefix' => 'Match précédent : ']];
             foreach ($entries as $entry) {
                 if($entry['startTime'] > $endCurrentDate || $entry['endTime'] < $startCurrentDate) {
                     continue;
