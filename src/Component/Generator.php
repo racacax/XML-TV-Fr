@@ -175,6 +175,58 @@ class Generator
         Logger::debug(json_encode($logsFinal));
     }
 
+    private function getUIClosure(array $threads, ChannelsManager $manager, array $guide, string $logLevel, int $index, int $guidesCount): \Closure
+    {
+        return function () use ($threads, $manager, $guide, $logLevel, $index, $guidesCount) {
+            if($logLevel != 'none') {
+                while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) {
+                    echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
+                    echo Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue');
+                    echo Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus().'   |   '.
+                        Utils::colorize('Fichier :', 'cyan')." {$guide['channels']} ($index/$guidesCount)\n";
+                    $i = 1;
+                    foreach($threads as $thread) {
+                        echo "Thread $i : ";
+                        echo $thread;
+                        echo "\n";
+                        $i++;
+                    }
+                    delay(0.1);
+                }
+            }
+        };
+    }
+
+    private function startThreadWatcher(string $generatorId): void
+    {
+        $p = PHP_BINARY;
+        $pid = getmypid();
+        $encodedId = base64_encode($generatorId);
+        $cmd = "$p src/Multithreading/thread_watcher.php $pid $encodedId";
+        Utils::startCmd($cmd);
+    }
+    private function generateChannels(array $threads, ChannelsManager $manager): void
+    {
+        $threadsStack = array_values($threads);
+        while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) { // Necessary if one channel fails
+
+            delay(0.01);
+            for($i = 0; $i < count($threads); $i++) {
+                $thread = $threadsStack[0];
+                unset($threadsStack[0]);
+                $threadsStack[] = $thread;
+                $threadsStack = array_values($threadsStack);
+                if(!$thread->isRunning()) {
+                    $channelData = $manager->shiftChannel();
+                    if(empty($channelData)) {
+                        break;
+                    }
+                    $thread->setChannel($channelData);
+                    $thread->start();
+                }
+            }
+        }
+    }
     private function generateEpgMultithread(): void
     {
         $generatorId = bin2hex(random_bytes(10));
@@ -182,69 +234,26 @@ class Generator
             $logsFinal = [];
             $logLevel = Logger::getLogLevel();
             Logger::setLogLevel('none');
-            foreach ($this->guides as $guide) {
+            $this->startThreadWatcher($generatorId);
+            $guidesCount = count($this->guides);
+            foreach ($this->guides as $index => $guide) {
                 $channels = json_decode(file_get_contents($guide['channels']), true);
-                Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
-
-                $p = PHP_BINARY;
-                $pid = getmypid();
-                $encodedId = base64_encode($generatorId);
-                $cmd = "$p src/thread_watcher.php $pid $encodedId";
-                Utils::startCmd($cmd);
                 $threads = [];
                 $manager = new ChannelsManager($channels, $this);
                 for($i = 0; $i < $this->nbThreads; $i++) {
                     $threads[] = new ChannelThread($manager, $this, $generatorId);
                 }
-
-                $view = function () use ($threads, $manager, $guide, $logLevel) {
-                    if($logLevel != 'none') {
-                        while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) {
-                            echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
-                            echo Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue');
-                            echo Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus().'   |   '.
-                                Utils::colorize('Fichier :', 'cyan')." {$guide['channels']}\n";
-                            $i = 1;
-                            foreach($threads as $thread) {
-                                echo "Thread $i : ";
-                                echo $thread;
-                                echo "\n";
-                                $i++;
-                            }
-                            delay(0.1);
-                        }
-                    }
-                };
+                $view = $this->getUIClosure($threads, $manager, $guide, $logLevel, $index, $guidesCount);
                 async($view);
-                $threadsStack = array_values($threads);
-                while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) { // Necessary if one channel fails
-
-                    delay(0.01);
-                    for($i = 0; $i < count($threads); $i++) {
-                        $thread = $threadsStack[0];
-                        unset($threadsStack[0]);
-                        $threadsStack[] = $thread;
-                        $threadsStack = array_values($threadsStack);
-                        if(!$thread->isRunning()) {
-                            $channelData = $manager->shiftChannel();
-                            if(empty($channelData)) {
-                                break;
-                            }
-                            $thread->setChannel($channelData);
-                            $thread->start();
-                        }
-                    }
-                }
-                Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
+                $this->generateChannels($threads, $manager);
                 $logsFinal[$guide['channels']] = $manager->getLogs();
             }
             Logger::setLogLevel($logLevel);
+            Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
             Logger::debug(json_encode($logsFinal));
         };
         $future = async($fn);
         $future->await();
-
-
     }
 
     public function generateEpg(): void
