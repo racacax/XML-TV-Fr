@@ -40,13 +40,13 @@ class Generator
     /**
      * @var int
      */
-    private int $threads;
+    private int $nbThreads;
 
-    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, bool $createEpgIfNotFound, int $threads, array $extraParams)
+    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, bool $createEpgIfNotFound, int $nbThreads, array $extraParams)
     {
         $this->createEpgIfNotFound = $createEpgIfNotFound;
         $this->extraParams = $extraParams;
-        $this->threads = $threads;
+        $this->nbThreads = $nbThreads;
         $current = new \DateTime();
         $current->setTimestamp($start->getTimestamp());
         while ($current <= $stop) {
@@ -56,13 +56,13 @@ class Generator
     }
 
 
-    public $guides;
+    public array $guides;
     /**
      * @var ProviderInterface[] list of all provider
      */
     private array $providers;
 
-    public function addGuides(array $guidesAsArray)
+    public function addGuides(array $guidesAsArray): void
     {
         $this->guides = $guidesAsArray;
     }
@@ -70,7 +70,7 @@ class Generator
     /**
      * @param ProviderInterface[] $providers
      */
-    public function setProviders(array $providers)
+    public function setProviders(array $providers): void
     {
         $this->providers = $providers;
     }
@@ -95,12 +95,12 @@ class Generator
         );
     }
 
-    public function getExtraParams()
+    public function getExtraParams(): array
     {
         return $this->extraParams;
     }
 
-    private function generateEpgSingleThread()
+    private function generateEpgSingleThread(): void
     {
         $logsFinal = [];
         foreach ($this->guides as $guide) {
@@ -175,10 +175,10 @@ class Generator
         Logger::debug(json_encode($logsFinal));
     }
 
-    private function generateEpgMultithread()
+    private function generateEpgMultithread(): void
     {
-        // TODO : reinstate Daily cache
-        $fn = function () {
+        $generatorId = bin2hex(random_bytes(10));
+        $fn = function () use ($generatorId) {
             $logsFinal = [];
             $logLevel = Logger::getLogLevel();
             Logger::setLogLevel('none');
@@ -186,10 +186,15 @@ class Generator
                 $channels = json_decode(file_get_contents($guide['channels']), true);
                 Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
 
+                $p = PHP_BINARY;
+                $pid = getmypid();
+                $encodedId = base64_encode($generatorId);
+                $cmd = "$p src/thread_watcher.php $pid $encodedId";
+                Utils::startCmd($cmd);
                 $threads = [];
                 $manager = new ChannelsManager($channels, $this);
-                for($i = 0; $i < $this->threads; $i++) {
-                    $threads[] = new ChannelThread($manager, $this);
+                for($i = 0; $i < $this->nbThreads; $i++) {
+                    $threads[] = new ChannelThread($manager, $this, $generatorId);
                 }
 
                 $view = function () use ($threads, $manager, $guide, $logLevel) {
@@ -202,7 +207,7 @@ class Generator
                             $i = 1;
                             foreach($threads as $thread) {
                                 echo "Thread $i : ";
-                                echo $thread->getString();
+                                echo $thread;
                                 echo "\n";
                                 $i++;
                             }
@@ -242,13 +247,15 @@ class Generator
 
     }
 
-    public function generateEpg()
+    public function generateEpg(): void
     {
-        if($this->threads == 1) {
+        ProviderCache::clearCache();
+        if($this->nbThreads == 1) {
             $this->generateEpgSingleThread();
         } else {
             $this->generateEpgMultithread();
         }
+        ProviderCache::clearCache();
     }
 
     public function getCache(): CacheFile
@@ -271,7 +278,10 @@ class Generator
         return $this->listDate;
     }
 
-    public function exportEpg(string $exportPath)
+    /**
+     * @throws \Exception
+     */
+    public function exportEpg(string $exportPath): void
     {
         @mkdir($exportPath, 0777, true);
 
@@ -313,19 +323,19 @@ class Generator
         }
     }
 
-    public function setExporter(XmlExporter $exporter)
+    public function setExporter(XmlExporter $exporter): void
     {
         $this->exporter = $exporter;
         $this->formatter = $exporter->getFormatter();
     }
 
 
-    public function setCache(CacheFile $cache)
+    public function setCache(CacheFile $cache): void
     {
         $this->cache = $cache;
     }
 
-    public function clearCache(int $maxCacheDay)
+    public function clearCache(int $maxCacheDay): void
     {
         $this->cache->clearCache($maxCacheDay);
     }

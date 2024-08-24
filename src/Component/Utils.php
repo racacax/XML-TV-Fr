@@ -245,4 +245,27 @@ class Utils
 
 
     }
+
+    public static function startCmd($cmd): void
+    {
+        if (str_starts_with(php_uname(), 'Windows')) {
+            pclose(popen('start /B '. $cmd, 'r'));
+        } else {
+            exec($cmd . ' > /dev/null &');
+        }
+    }
+
+
+    public static function recurseRmdir($dir): bool
+    {
+        if(file_exists($dir) && is_dir($dir)) {
+            $files = array_diff(scandir($dir), ['.', '..']);
+            foreach ($files as $file) {
+                (is_dir("$dir/$file") && !is_link("$dir/$file")) ? self::recurseRmdir("$dir/$file") : unlink("$dir/$file");
+            }
+
+            return rmdir($dir);
+        }
+        return false;
+    }
 }

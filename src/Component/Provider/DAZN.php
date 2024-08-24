@@ -43,7 +43,7 @@ class DAZN extends AbstractProvider implements ProviderInterface
         return $title;
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel|bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
@@ -86,7 +86,7 @@ class DAZN extends AbstractProvider implements ProviderInterface
         return $channelObj;
     }
 
-    private function getWeek(\DateTimeImmutable $date)
+    private function getWeek(\DateTimeImmutable $date): int
     {
         $timestamp = $date->getTimestamp();
         $value = 0;

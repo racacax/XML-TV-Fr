@@ -14,6 +14,7 @@ interface ProviderInterface
     public function constructEPG(string $channel, string $date);
 
     public static function getPriority(): float;
+    public function channelExists(string $channel): bool;
 
     public function getChannelsList(): array;
 

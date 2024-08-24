@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
-use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -30,7 +29,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
         $count = count($lis);
 
         foreach ($lis as $index => $li) {
-            Logger::updateLine(' '.round($index * 100 / $count, 2).' %');
+            $this->setStatus(round($index * 100 / $count, 2).' %');
             preg_match('/href="(.*?)" title="(.*?)"/', $li, $titlehref);
             preg_match('/srcset="(.*?)"/', $li, $img);
             if(!isset($img[1])) {

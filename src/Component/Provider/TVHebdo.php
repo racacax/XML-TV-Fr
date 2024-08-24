@@ -6,7 +6,6 @@ namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Utils;
-use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -63,7 +62,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             $promise = $this->client->getAsync($url);
             $promise->then(function () use (&$promisesResolved, $count) {
                 $promisesResolved++;
-                Logger::updateLine(' '.round($promisesResolved * 100 / $count, 2).' %');
+                $this->setStatus(round($promisesResolved * 100 / $count, 2).' %');
             });
             $promises[$url] = $promise;
         }

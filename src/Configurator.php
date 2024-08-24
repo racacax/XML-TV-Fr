@@ -14,61 +14,32 @@ use racacax\XmlTv\Component\XmlExporter;
 
 class Configurator
 {
-    /**
-     * @var int
-     */
     private int $nbDays;
-    /**
-     * @var string
-     */
+
     private string $outputPath;
-    /**
-     * @var int
-     */
+
     private int $cacheMaxDays;
-    /**
-     * @var bool
-     */
+
     private bool $deleteRawXml;
-    /**
-     * @var bool
-     */
+
     private bool $enableGz;
-    /**
-     * @var bool
-     */
+
     private bool $enableZip;
-    /**
-     * @var bool
-     */
+
     private bool $enableXz;
-    /**
-     * @var int
-     */
+
     private int $xmlCacheDays;
-    /**
-     * @var bool
-     */
+
     private bool $enableDummy;
-    /**
-     * @var array
-     */
+
     private array $customPriorityOrders;
-    /**
-     * @var array|string[][]
-     */
+
     private array $guidesToGenerate;
-    /**
-     * @var string|null
-     */
+
     private ?string $zipBinPath;
-    /**
-     * @var bool
-     */
+
     private bool $forceTodayGrab;
-    /**
-     * @var array
-     */
+
     private array $extraParams;
 
     /**
@@ -76,10 +47,7 @@ class Configurator
      */
     private array $providerList;
 
-    /**
-     * @var int
-     */
-    private int $threads;
+    private int $nbThreads;
 
     /**
      * @param int $nbDays Number of days XML TV will try to get EPG
@@ -114,7 +82,7 @@ class Configurator
         array   $guides_to_generate = [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
         ?string $zipBinPath = null,
         bool    $forceTodayGrab = false,
-        int     $threads = 1,
+        int     $nbThreads = 1,
         array   $extraParams = []
     ) {
         if (isset($timeLimit)) {
@@ -138,7 +106,7 @@ class Configurator
         $this->zipBinPath = $zipBinPath;
         $this->forceTodayGrab = $forceTodayGrab;
         $this->extraParams = $extraParams;
-        $this->threads = $threads;
+        $this->nbThreads = $nbThreads;
     }
 
     public static function initFromConfigFile(string $filePath): self
@@ -178,7 +146,7 @@ class Configurator
             $data['guides_to_generate'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
             $data['7zip_path'] ?? null,
             $data['force_todays_grab'] ?? false,
-            $data['threads'] ?? 1,
+            $data['nb_threads'] ?? 1,
             $data['extra_params'] ?? []
         );
     }
@@ -300,13 +268,13 @@ class Configurator
      */
     public function getThreads(): int
     {
-        return $this->threads;
+        return $this->nbThreads;
     }
 
     public function getGenerator()
     {
         $begin = new \DateTimeImmutable(date('Y-m-d', strtotime('-1 day')));
-        $generator = new Generator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this->enableDummy, $this->threads, $this->extraParams);
+        $generator = new Generator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this->enableDummy, $this->nbThreads, $this->extraParams);
         $generator->setProviders(
             $this->getProviders(
                 $this->getDefaultClient()

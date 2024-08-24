@@ -23,16 +23,18 @@ class ChannelThread
     private string $date;
     private bool $isRunning;
     private bool $hasStarted;
+    private string $generatorId;
 
-    public function __construct(ChannelsManager $manager, Generator $generator)
+    public function __construct(ChannelsManager $manager, Generator $generator, string $generatorId)
     {
         $this->manager = $manager;
         $this->generator = $generator;
         $this->isRunning = false;
         $this->hasStarted = false;
+        $this->generatorId = $generatorId;
     }
 
-    public function setChannel(array $channelInfo)
+    public function setChannel(array $channelInfo): void
     {
         $this->hasStarted = false;
         $this->status = "\e[35mDémarrage...e[39m";
@@ -43,7 +45,7 @@ class ChannelThread
         $this->extraParams = $channelInfo['extraParams'];
     }
 
-    public function getString()
+    public function __toString()
     {
         if(!$this->hasStarted || !$this->isRunning) {
             return Utils::colorize('En pause...', 'yellow');
@@ -80,7 +82,6 @@ class ChannelThread
         $progress = $total - count($dates);
         foreach ($dates as $date) {
             $progress++;
-            //echo $date;
             $this->date = $date." ($progress/$total)";
             $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
 
@@ -117,13 +118,9 @@ class ChannelThread
                 $bytes = random_bytes(10);
                 $fileName = bin2hex($bytes);
                 $p = PHP_BINARY;
-                $cmd = "$p src/manager.php $providerClass $date ".base64_encode($this->getChannelInfo())." $fileName";
-                if (substr(php_uname(), 0, 7) == 'Windows') {
-                    pclose(popen('start /B '. $cmd, 'r'));
-                } else {
-                    exec($cmd . ' > /dev/null &');
-                }
-                //echo "$p src/manager.php $providerClass $date ".base64_encode($this->getChannelInfo());
+                $cmd = "$p src/manager.php $providerClass $date ".base64_encode($this->getChannelInfo())." $fileName $this->generatorId";
+                Utils::startCmd($cmd);
+                $channel = 'false';
                 while (true) {
                     if(!$cacheInstance->exists($fileName)) {
                         if($statusInstance->exists($fileName)) {
@@ -131,13 +128,13 @@ class ChannelThread
                         }
                         delay(0.01);
                     } else {
-                        $channel = $cacheInstance->pop(strval($fileName));
+                        $channel = $cacheInstance->pop($fileName);
                         $this->manager->removeChannelFromProvider($providerClass, $this->channel);
 
                         break;
                     }
                 }
-                //echo $this->channel." ".$date." o\n";
+
 
                 if ($channel == 'false') {
                     $this->failedProviders[] = get_class($provider);

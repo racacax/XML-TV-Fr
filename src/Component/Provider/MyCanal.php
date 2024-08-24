@@ -7,7 +7,6 @@ namespace racacax\XmlTv\Component\Provider;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\Psr7\Response;
-use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -16,9 +15,9 @@ use racacax\XmlTv\ValueObject\Program;
 // Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
 class MyCanal extends AbstractProvider implements ProviderInterface
 {
-    protected static $apiKey = [];
-    protected $region = 'fr';
-    protected $proxy = null;
+    protected static array $apiKey = [];
+    protected string $region = 'fr';
+    protected mixed $proxy = null;
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         if(isset($extraParam['mycanal_proxy'])) {
@@ -66,7 +65,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $json = json_decode((string)$response['1']->getBody(), true);
         $json2 = json_decode((string)$response['2']->getBody(), true);
 
-        if (!isset($json['timeSlices']) || empty($json['timeSlices'])) {
+        if (empty($json['timeSlices'])) {
             return false;
         }
 
@@ -86,7 +85,6 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $promises = [];
         foreach ($all as $index => $program) {
             $percent = round($index * 100 / $count, 2) . ' %';
-            Logger::updateLine(' ' . $percent);
             $this->setStatus($percent);
             $url = $program['onClick']['URLPage'];
             if(!is_null($this->proxy)) {
@@ -104,7 +102,6 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         }
 
         foreach ($all as $index => $program) {
-            Logger::updateLine(' '.round($index * 100 / $count, 2).' %');
             $responseBody = null;
             if(!is_null($response[$program['onClick']['URLPage']])) {
                 $responseBody = $response[$program['onClick']['URLPage']]->getBody();
@@ -119,28 +116,13 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
             $parentalRating = $detail['episodes']['contents'][0]['parentalRatings'][0]['value'] ?? @$detail['detail']['informations']['parentalRatings'][0]['value'];
 
-            switch ($parentalRating) {
-                case '2':
-                    $csa = '-10';
-
-                    break;
-                case '3':
-                    $csa = '-12';
-
-                    break;
-                case '4':
-                    $csa = '-16';
-
-                    break;
-                case '5':
-                    $csa = '-18';
-
-                    break;
-                default:
-                    $csa = 'Tout public';
-
-                    break;
-            }
+            $csa = match ($parentalRating) {
+                '2' => '-10',
+                '3' => '-12',
+                '4' => '-16',
+                '5' => '-18',
+                default => 'Tout public',
+            };
 
             $icon = $detail['episodes']['contents'][0]['URLImage'] ?? @$detail['detail']['informations']['URLImage'];
             $icon = str_replace(['{resolutionXY}', '{imageQualityPercentage}'], ['640x360', '80'], $icon ?? '');

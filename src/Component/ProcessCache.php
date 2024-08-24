@@ -15,12 +15,12 @@ class ProcessCache
             $this->path = 'var/status';
         }
     }
-    public function save(string $fileName, string $content)
+    public function save(string $fileName, string $content): void
     {
         @mkdir($this->path, 0777, true);
         file_put_contents($this->path.'/'.$fileName, $content);
     }
-    public function pop(string $fileName)
+    public function pop(string $fileName): bool|string
     {
         $content = file_get_contents($this->path.'/'.$fileName);
         unlink($this->path.'/'.$fileName);
@@ -28,7 +28,7 @@ class ProcessCache
         return $content;
     }
 
-    public function exists(string $fileName)
+    public function exists(string $fileName): bool
     {
         return file_exists($this->path.'/'.$fileName);
     }

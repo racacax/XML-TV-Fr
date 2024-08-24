@@ -6,6 +6,7 @@ namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ChannelFactory;
+use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProcessCache;
 use racacax\XmlTv\ValueObject\Channel;
 
@@ -54,6 +55,8 @@ abstract class AbstractProvider
         $this->status = $status;
         if(defined('CHANNEL_PROCESS')) {
             (new ProcessCache('status'))->save(CHANNEL_PROCESS, $this->status);
+        } else {
+            Logger::updateLine(' '.$status);
         }
     }
 
