@@ -45,13 +45,14 @@ class CacheFile
         ];
     }
 
-    public function has(string $key): bool
+    public function has(string $key, bool $preventClear = false): bool
     {
         if (isset($this->listFile[$key])) {
             return true;
         }
         $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
-        if ($this->forceTodayGrab && strpos($key, date('Y-m-d')) !== false && !isset($this->createdKeys[$key])) {
+        $allowClear = !$preventClear && $this->forceTodayGrab;
+        if ($allowClear && str_contains($key, date('Y-m-d')) && !isset($this->createdKeys[$key])) {
             @unlink($fileName);
             $this->createdKeys[$key] = true;
 
@@ -69,9 +70,9 @@ class CacheFile
         return false;
     }
 
-    public function get(string $key): string
+    public function get(string $key, bool $preventClear = false): string
     {
-        if (!$this->has($key)) {
+        if (!$this->has($key, $preventClear)) {
             throw new \Exception("Cache '$key' not found");
         }
 

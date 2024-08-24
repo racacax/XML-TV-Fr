@@ -307,10 +307,10 @@ class Generator
                 ));
             }
             foreach ($listCacheKey as $keyCache) {
-                if (!$this->cache->has($keyCache)) {
+                if (!$this->cache->has($keyCache, true)) {
                     continue;
                 }
-                $cache = $this->cache->get($keyCache);
+                $cache = $this->cache->get($keyCache, true);
                 $channelId = explode('_', $keyCache)[0];
                 if(array_key_exists($channelId, $listAliases)) {
                     $cache = str_replace('channel="'.$channelId.'"', 'channel="'.$listAliases[$channelId].'"', $cache);
