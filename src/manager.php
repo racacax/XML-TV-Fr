@@ -24,6 +24,7 @@ define('CHANNEL_PROCESS', $argv[4]);
 $provider = new $providerClass($client, null, $data['extraParams']);
 
 try {
+    date_default_timezone_set('Europe/Paris');
     $obj = $provider->constructEpg($data['key'], $argv[2]);
 } catch(Throwable $e) {
     $obj = false;
