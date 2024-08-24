@@ -51,9 +51,9 @@ class Logger
 
     public static function debug(string $content): void
     {
-        if (self::$level !== 'debug') {
-            return;
-        }
+        //        if (self::$level !== 'debug') {
+        //            return;
+        //        }
         $log_path = self::$debugFolder . DIRECTORY_SEPARATOR . 'logs'.date('YmdHis').'.json';
         file_put_contents($log_path, $content);
         self::log("\e[36m[LOGS] \e[39m Export des logs vers $log_path\n");
