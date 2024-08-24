@@ -315,6 +315,7 @@ class Generator
                 if(array_key_exists($channelId, $listAliases)) {
                     $cache = str_replace('channel="'.$channelId.'"', 'channel="'.$listAliases[$channelId].'"', $cache);
                 }
+
                 try {
                     $this->exporter->addProgramsAsString(
                         $cache

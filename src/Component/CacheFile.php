@@ -87,6 +87,7 @@ class CacheFile
         }
         $file = $this->listFile[$key]['file'];
         unset($this->listFile[$key]);
+
         return unlink($file);
     }
 
