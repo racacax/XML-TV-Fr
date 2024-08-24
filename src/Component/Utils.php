@@ -9,15 +9,15 @@ class Utils
     /**
      * @var class-string<ProviderInterface>[]|null
      */
-    private static $providers;
+    private static ?array $providers;
 
-    public static function getProviders()
+    public static function getProviders(): ?array
     {
         if (isset(self::$providers)) {
             return self::$providers;
         }
 
-        $files = glob(__DIR__.'/Provider/*.php');
+        $files = glob(__DIR__ . '/Provider/*.php');
         foreach ($files as $provider) {
             require_once $provider;
         }
@@ -26,7 +26,7 @@ class Utils
             get_declared_classes(),
             function ($className) {
                 return
-                    strpos($className, 'racacax\\') === 0 &&
+                    str_starts_with($className, 'racacax\\') &&
                     in_array(ProviderInterface::class, class_implements($className));
             }
         ));
@@ -41,7 +41,7 @@ class Utils
         return end($tmp);
     }
 
-    public static function getContent($url, $headers)
+    public static function getContent($url, $headers): bool|string
     {
         $timeout = 3;
         $ch = curl_init($url);
@@ -70,58 +70,37 @@ class Utils
     public static function hasOneThreadRunning(array $threads): bool
     {
         foreach ($threads as $thread) {
-            if($thread->isRunning()) {
+            if ($thread->isRunning()) {
                 return true;
             }
         }
+
         return false;
     }
 
-    public static function colorize($content, $color=null)
+    public static function colorize($content, $color = null): string
     {
 
         // if a color is set use the color set.
-        if(!empty($color))
-        {
+        if (!empty($color)) {
             // if our color string is not a numeric value
-            if(!is_numeric($color))
-            {
+            if (!is_numeric($color)) {
                 //lowercase our string value.
                 $c = strtolower($color);
 
-            }
-            else
-            {
-                // check if our color value is not empty.
-                if(!empty($color))
-                {
-
-                    $c = $color;
-
-                }
-                else
-                {
-                    // no color was set so lets pick a random one...
-                    $c = rand(1,14);
-
-                }
-
+            } else {
+                $c = $color;
             }
 
-        }
-        else    // no color argument was passed, so lets pick a random one w00t
-        {
-
-            $c = rand(1,14);
-
+        } else {    // no color argument was passed, so lets pick a random one w00t
+            $c = rand(1, 14);
         }
 
         $cheader = '';
         $cfooter = "\033[0m";
 
         // let check which color code was used so we can then wrap our content.
-        switch($c)
-        {
+        switch ($c) {
 
             case 1:
             case 'red':
@@ -196,6 +175,8 @@ class Utils
                 break;
 
             case 10:
+            case 'light cyan':
+            case 14:
             case 'light green':
 
                 // color code header.
@@ -227,21 +208,9 @@ class Utils
 
                 break;
 
-            case 14:
-            case 'light cyan':
-
-                // color code header.
-                $cheader .= "\033[92m";
-
-                break;
-
         }
 
-        // wrap our content.
-        $content = $cheader.$content.$cfooter;
-
-        //return our new content.
-        return $content;
+        return $cheader . $content . $cfooter;
 
 
     }
@@ -249,7 +218,7 @@ class Utils
     public static function startCmd($cmd): void
     {
         if (str_starts_with(php_uname(), 'Windows')) {
-            pclose(popen('start /B '. $cmd, 'r'));
+            pclose(popen('start /B ' . $cmd, 'r'));
         } else {
             exec($cmd . ' > /dev/null &');
         }
@@ -258,7 +227,7 @@ class Utils
 
     public static function recurseRmdir($dir): bool
     {
-        if(file_exists($dir) && is_dir($dir)) {
+        if (file_exists($dir) && is_dir($dir)) {
             $files = array_diff(scandir($dir), ['.', '..']);
             foreach ($files as $file) {
                 (is_dir("$dir/$file") && !is_link("$dir/$file")) ? self::recurseRmdir("$dir/$file") : unlink("$dir/$file");
@@ -266,6 +235,7 @@ class Utils
 
             return rmdir($dir);
         }
+
         return false;
     }
 }
