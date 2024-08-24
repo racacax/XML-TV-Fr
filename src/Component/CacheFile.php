@@ -79,6 +79,17 @@ class CacheFile
         return file_get_contents($this->listFile[$key]['file']);
     }
 
+
+    public function clear(string $key): bool
+    {
+        if (!$this->has($key)) {
+            throw new \Exception("Cache '$key' not found");
+        }
+        $file = $this->listFile[$key]['file'];
+        unset($this->listFile[$key]);
+        return unlink($file);
+    }
+
     public function clearCache(int $maxCacheDay): void
     {
         $files = glob($this->basePath.DIRECTORY_SEPARATOR.'*');

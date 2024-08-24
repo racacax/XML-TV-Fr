@@ -315,9 +315,13 @@ class Generator
                 if(array_key_exists($channelId, $listAliases)) {
                     $cache = str_replace('channel="'.$channelId.'"', 'channel="'.$listAliases[$channelId].'"', $cache);
                 }
-                $this->exporter->addProgramsAsString(
-                    $cache
-                );
+                try {
+                    $this->exporter->addProgramsAsString(
+                        $cache
+                    );
+                } catch(\Throwable $e) {
+                    $this->cache->clear($keyCache);
+                }
             }
             $this->exporter->stopExport();
         }

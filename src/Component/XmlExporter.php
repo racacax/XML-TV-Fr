@@ -73,14 +73,9 @@ class XmlExporter
 
     public function addProgramsAsString(string $programs)
     {
-        try {
-            $root = simplexml_load_string("<root>$programs</root>");
-            foreach ($root->children() as $child) {
-                $this->content->documentElement->appendChild($this->content->importNode(dom_import_simplexml($child), true));
-            }
-        } catch (\Throwable $e) {
-            echo $programs;
-            throw $e;
+        $root = simplexml_load_string("<root>$programs</root>");
+        foreach ($root->children() as $child) {
+            $this->content->documentElement->appendChild($this->content->importNode(dom_import_simplexml($child), true));
         }
     }
 
