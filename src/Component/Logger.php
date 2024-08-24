@@ -10,7 +10,7 @@ class Logger
     /**
      * @var string
      */
-    private static $debugFolder = __DIR__.'/../../var/logs';
+    private static $debugFolder = __DIR__ . '/../../var/logs';
     /**
      * @var string
      */
@@ -20,12 +20,14 @@ class Logger
     {
         self::$level = $level;
     }
+
     public static function setLogFolder(string $path): void
     {
         @mkdir($path, 0777, true);
 
         self::$debugFolder = rtrim($path, DIRECTORY_SEPARATOR);
     }
+
     public static function getLastLog(): string
     {
         return self::$lastLog;
@@ -44,17 +46,17 @@ class Logger
     public static function updateLine(string $content): void
     {
         $previousLog = self::$lastLog;
-        self::log("\r".self::$lastLog . $content);
+        self::log("\r" . self::$lastLog . $content);
 
         self::$lastLog = $previousLog;
     }
 
     public static function debug(string $content): void
     {
-        //        if (self::$level !== 'debug') {
-        //            return;
-        //        }
-        $log_path = self::$debugFolder . DIRECTORY_SEPARATOR . 'logs'.date('YmdHis').'.json';
+        if (self::$level !== 'debug') {
+            return;
+        }
+        $log_path = self::$debugFolder . DIRECTORY_SEPARATOR . 'logs' . date('YmdHis') . '.json';
         file_put_contents($log_path, $content);
         self::log("\e[36m[LOGS] \e[39m Export des logs vers $log_path\n");
     }
@@ -66,7 +68,7 @@ class Logger
             function ($file) {
                 unlink($file);
             },
-            glob(self::$debugFolder.DIRECTORY_SEPARATOR.'*')
+            glob(self::$debugFolder . DIRECTORY_SEPARATOR . '*')
         );
     }
 

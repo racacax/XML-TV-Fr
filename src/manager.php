@@ -35,10 +35,6 @@ if ($obj === false || $obj->getProgramCount() === 0) {
     $formatter = new XmlFormatter();
     $data = $formatter->formatChannel($obj, $provider);
 }
-
-try {
-    $root = simplexml_load_string("<root>$data</root>");
-    (new ProcessCache('cache'))->save($argv[4], $data);
-} catch (Throwable $e) {
-    (new ProcessCache('cache'))->save($argv[4], 'false');
-}
+(new ProcessCache('cache'))->save($argv[4].'.lock', '');
+(new ProcessCache('cache'))->save($argv[4], $data);
+(new ProcessCache('cache'))->pop($argv[4].'.lock');

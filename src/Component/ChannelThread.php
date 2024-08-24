@@ -128,6 +128,9 @@ class ChannelThread
                         }
                         delay(0.01);
                     } else {
+                        while($cacheInstance->exists($fileName.'.lock')) {
+                            continue;
+                        }
                         $channel = $cacheInstance->pop($fileName);
                         $this->manager->removeChannelFromProvider($providerClass, $this->channel);
 

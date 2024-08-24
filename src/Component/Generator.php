@@ -235,10 +235,10 @@ class Generator
                         }
                     }
                 }
-
                 Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
                 $logsFinal[$guide['channels']] = $manager->getLogs();
             }
+            Logger::setLogLevel($logLevel);
             Logger::debug(json_encode($logsFinal));
         };
         $future = async($fn);
