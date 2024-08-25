@@ -22,7 +22,7 @@ $generator = $configurator->getGenerator();
 date_default_timezone_set('Europe/Paris');
 $params = array_slice($argv, 2);
 if(!in_array("--skip-generation", $params)) {
-    $generator->generateEpg();
+    $generator->generate();
 }
 $generator->exportEpg($configurator->getOutputPath());
 if(!in_array('--keep-cache', $params)) {

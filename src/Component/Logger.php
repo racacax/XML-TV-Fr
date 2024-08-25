@@ -6,15 +6,11 @@ namespace racacax\XmlTv\Component;
 
 class Logger
 {
-    private static $level = 'none';
-    /**
-     * @var string
-     */
-    private static $debugFolder = __DIR__ . '/../../var/logs';
-    /**
-     * @var string
-     */
-    private static $lastLog;
+    private static string $level = 'none';
+    private static string $debugFolder = __DIR__ . '/../../var/logs';
+    private static string $lastLog;
+
+    private static array $logFile = [];
 
     public static function setLogLevel(string $level): void
     {
@@ -51,14 +47,48 @@ class Logger
         self::$lastLog = $previousLog;
     }
 
-    public static function debug(string $content): void
+    public static function save(): void
     {
         if (self::$level !== 'debug') {
             return;
         }
         $log_path = self::$debugFolder . DIRECTORY_SEPARATOR . 'logs' . date('YmdHis') . '.json';
-        file_put_contents($log_path, $content);
+        file_put_contents($log_path, json_encode(self::$logFile));
         self::log("\e[36m[LOGS] \e[39m Export des logs vers $log_path\n");
+    }
+
+    public static function addChannelEntry(string $channelFile, string $channel, string $date): void
+    {
+        if(!isset(self::$logFile[$channelFile]['channels'][$date][$channel])) {
+            self::$logFile[$channelFile]['channels'][$date][$channel] = [
+                'success' => false,
+                'provider' => null,
+                'cache' => false,
+                'failed_providers' => [],
+            ];
+        }
+    }
+    public static function addChannelFailedProvider(string $channelFile, string $channel, string $date, string $provider): void
+    {
+        self::addChannelEntry($channelFile, $channel, $date);
+        self::$logFile[$channelFile]['channels'][$date][$channel]['failed_providers'][] = $provider;
+        self::$logFile[$channelFile]['failed_providers'][$provider] = true;
+    }
+    public static function setChannelSuccessfulProvider(string $channelFile, string $channel, string $date, string $provider, bool $isCache = false): void
+    {
+        self::addChannelEntry($channelFile, $channel, $date);
+        self::$logFile[$channelFile]['channels'][$date][$channel]['success'] = true;
+        self::$logFile[$channelFile]['channels'][$date][$channel]['provider'] = $provider;
+        self::$logFile[$channelFile]['channels'][$date][$channel]['cache'] = $isCache;
+    }
+
+    public static function addAdditionalError(string $channelFile, string $error, string $message): void
+    {
+        if(!isset(self::$logFile[$channelFile]['additional_errors'])) {
+            self::$logFile[$channelFile]['additional_errors'] = [
+            ];
+        }
+        self::$logFile[$channelFile]['additional_errors'][] = ['error' => $error, 'message' => $message];
     }
 
 

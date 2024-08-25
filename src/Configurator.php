@@ -8,7 +8,9 @@ use GuzzleHttp\Client;
 use racacax\XmlTv\Component\CacheFile;
 use racacax\XmlTv\Component\Generator;
 use racacax\XmlTv\Component\Logger;
+use racacax\XmlTv\Component\MultiThreadedGenerator;
 use racacax\XmlTv\Component\ProviderInterface;
+use racacax\XmlTv\Component\SingleThreadedGenerator;
 use racacax\XmlTv\Component\Utils;
 use racacax\XmlTv\Component\XmlExporter;
 
@@ -266,15 +268,20 @@ class Configurator
     /**
      * @return int
      */
-    public function getThreads(): int
+    public function getNbThreads(): int
     {
         return $this->nbThreads;
     }
 
-    public function getGenerator()
+    public function getGenerator(): Generator
     {
         $begin = new \DateTimeImmutable(date('Y-m-d', strtotime('-1 day')));
-        $generator = new Generator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this->enableDummy, $this->nbThreads, $this->extraParams);
+        if($this->getNbThreads() == 1) {
+            $class = SingleThreadedGenerator::class;
+        } else {
+            $class = MultiThreadedGenerator::class;
+        }
+        $generator = new $class($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this->enableDummy, $this->nbThreads, $this->extraParams);
         $generator->setProviders(
             $this->getProviders(
                 $this->getDefaultClient()

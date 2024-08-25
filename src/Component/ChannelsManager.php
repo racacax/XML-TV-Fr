@@ -12,7 +12,6 @@ class ChannelsManager
     private array $providersUsed;
     private array $providersFailedByChannel;
     private array $datesGatheredByChannel;
-    private array $logs;
     private int $channelsCount;
     private int $channelsDone;
 
@@ -25,19 +24,17 @@ class ChannelsManager
         $this->channels = array_keys($channels);
         $this->providersUsed = [];
         $this->providersFailedByChannel = [];
-        $this->logs = ['channels' => [], 'xml' => [],'failed_providers' => []];
-        ;
     }
 
-    public function incrChannelsDone()
+    public function incrChannelsDone(): void
     {
         $this->channelsDone++;
     }
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->channelsDone.' / '.$this->channelsCount;
     }
-    public function removeChannelFromProvider(string $provider, string $channel)
+    public function removeChannelFromProvider(string $provider, string $channel): void
     {
         if(isset($this->providersUsed[$provider])) {
             if(($key = array_search($channel, $this->providersUsed[$provider])) !== false) {
@@ -46,18 +43,18 @@ class ChannelsManager
         }
     }
 
-    public function hasRemainingChannels()
+    public function hasRemainingChannels(): bool
     {
         return count($this->channels) > 0;
     }
 
     //TODO : Add limit in config
-    public function canUseProvider(string $provider)
+    public function canUseProvider(string $provider): bool
     {
         return !isset($this->providersUsed[$provider]) || count($this->providersUsed[$provider]) == 0;
     }
 
-    public function addChannelToProvider(string $provider, string $channel)
+    public function addChannelToProvider(string $provider, string $channel): void
     {
         if(!isset($this->providersUsed[$provider])) {
             $this->providersUsed[$provider] = [];
@@ -65,12 +62,12 @@ class ChannelsManager
         $this->providersUsed[$provider][] = $channel;
     }
 
-    public function hasAnyRemainingChannel()
+    public function hasAnyRemainingChannel(): bool
     {
         return count($this->channels) > 0;
     }
 
-    public function addChannel(string $channel, array $providersFailed, array $datesGathered)
+    public function addChannel(string $channel, array $providersFailed, array $datesGathered): void
     {
         $this->channels[] = $channel;
         $this->providersFailedByChannel[$channel] = $providersFailed;
@@ -131,27 +128,5 @@ class ChannelsManager
             'datesGathered' => $this->datesGatheredByChannel[$key] ?? [],
             'extraParams' => $this->generator->getExtraParams()
         ];
-    }
-
-    public function getLogs()
-    {
-        return $this->logs;
-    }
-
-    public function setLogInfo(string $date, $channel, $key, $value)
-    {
-        if (!isset($this->logs['channels'][$date][$channel])) {
-            $this->logs['channels'][$date][$channel] = [
-                'success' => false,
-                'provider' => null,
-                'cache' => false,
-                'failed_providers' => [],
-            ];
-        }
-        $this->logs['channels'][$date][$channel][$key] = $value;
-    }
-    public function addFailedProvider(string $provider)
-    {
-        $this->logs['failed_providers'][$provider] = true;
     }
 }
