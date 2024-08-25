@@ -8,7 +8,7 @@ class Logger
 {
     private static string $level = 'none';
     private static string $debugFolder = __DIR__ . '/../../var/logs';
-    private static string $lastLog;
+    private static string $lastLog = "";
 
     private static array $logFile = [];
 
