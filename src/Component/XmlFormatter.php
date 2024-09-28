@@ -12,10 +12,7 @@ use racacax\XmlTv\StaticComponent\RatingPicto;
  */
 class XmlFormatter
 {
-    /**
-     * @var RatingPicto
-     */
-    private $ratingPicto;
+    private RatingPicto $ratingPicto;
 
     public function __construct()
     {
@@ -49,7 +46,7 @@ class XmlFormatter
     }
 
 
-    private function listToMark($list, $tagName, $stringIfEmpty = null)
+    private function listToMark($list, $tagName, $stringIfEmpty = null): string
     {
         $content = [];
         foreach ($list as $elem) {
@@ -116,7 +113,7 @@ class XmlFormatter
                '</rating>';
     }
 
-    private function stringAsXML($string)
+    private function stringAsXML($string): string
     {
         return str_replace('"', '&quot;', htmlspecialchars($string, ENT_XML1));
     }

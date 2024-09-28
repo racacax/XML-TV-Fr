@@ -36,7 +36,7 @@ class PlutoTV extends AbstractProvider implements ProviderInterface
     }
 
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         if (!$this->channelExists($channel) || empty($sessionToken = $this->getSessionToken())) {
             return false;

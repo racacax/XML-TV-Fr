@@ -40,7 +40,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         return self::$apiKey[$this->region];
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {

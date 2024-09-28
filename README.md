@@ -7,7 +7,7 @@ Site web et documentation : https://xmltvfr.fr/
 
 # Prérequis
 
-PHP >=7.1.0 avec les extensions
+PHP >=8.0 avec les extensions
  - curl
  - zip
  - mbstring
@@ -45,14 +45,15 @@ Le fichier config.json est au format JSON.
   "enable_zip": true // Activer la compression zip (true|false),
   "enable_dummy" : false, // Afficher un EPG mire en cas d'absence de guide pour une chaine 
   "custom_priority_orders" : {"Telerama": 0.2, "UltraNature": 0.5}, // Modifier l'ordre de priorité pour certains services globalement
-  "guides_to_generate" : [{"channels": "config/channels.json", "filename": "xmltv.xml"}] // liste des XML à générer. Pour chaque élément, `channels` indique le fichier des chaines et `filename` le nom du fichier de sortie
+  "guides_to_generate" : [{"channels": "config/channels.json", "filename": "xmltv.xml"}] // liste des XML à générer. Pour chaque élément, `channels` indique le fichier des chaines et `filename` le nom du fichier de sortie,
+  "nb_threads": 3 // Nombre de threads en parallèle. Par défaut 1. Le multithreading nécessite la possibilité d'utiliser shell
 }
 ```
 
 # Lancer le script
 Pour démarrer la récupération du guide des programmes, lancez cette commande dans votre terminal (dans le dossier du programme).
 ```shell
-php example/script_all.php
+php manager.php export
 ```
 # Générer le fichier channels.json
 Il est possible de générer depuis votre navigateur le fichier channels.json. Pour cela, placez vous dans le dossier de travail du programme et lancez cette commande

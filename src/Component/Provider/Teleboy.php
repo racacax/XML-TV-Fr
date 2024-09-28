@@ -21,7 +21,7 @@ class Teleboy extends AbstractProvider implements ProviderInterface
     }
 
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {

@@ -2,10 +2,14 @@
 
 namespace racacax\XmlTv\Component;
 
+use Exception;
 use racacax\XmlTv\ValueObject\DummyChannel;
 
 class SingleThreadedGenerator extends Generator
 {
+    /**
+     * @throws Exception
+     */
     protected function generateEpg(): void
     {
         foreach ($this->guides as $guide) {

@@ -4,24 +4,21 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
+use Exception;
+
 class CacheFile
 {
-    /**
-     * @var string
-     */
-    private $basePath;
+    private string $basePath;
 
-    private $listFile = [];
+    private array $listFile = [];
     /**
      * This var store all key created during the current process
-     * @var array
      */
-    private $createdKeys = [];
+    private array $createdKeys = [];
     /**
      * This bool help to ignore (and remove) the cache of the day
-     * @var bool
      */
-    private $forceTodayGrab;
+    private bool $forceTodayGrab;
 
     public function __construct(string $basePath, bool $forceTodayGrab)
     {
@@ -31,12 +28,15 @@ class CacheFile
         $this->forceTodayGrab = $forceTodayGrab;
     }
 
-    public function store(string $key, string $content)
+    /**
+     * @throws Exception
+     */
+    public function store(string $key, string $content): void
     {
         $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
 
         if (false === file_put_contents($fileName, $content)) {
-            throw new \Exception('Impossible to cache : ' . $key);
+            throw new Exception('Impossible to cache : ' . $key);
         }
         $this->createdKeys[$key] = true;
         $this->listFile[$key] = [
@@ -70,20 +70,26 @@ class CacheFile
         return false;
     }
 
+    /**
+     * @throws Exception
+     */
     public function get(string $key, bool $preventClear = false): string
     {
         if (!$this->has($key, $preventClear)) {
-            throw new \Exception("Cache '$key' not found");
+            throw new Exception("Cache '$key' not found");
         }
 
         return file_get_contents($this->listFile[$key]['file']);
     }
 
 
+    /**
+     * @throws Exception
+     */
     public function clear(string $key): bool
     {
         if (!$this->has($key)) {
-            throw new \Exception("Cache '$key' not found");
+            throw new Exception("Cache '$key' not found");
         }
         $file = $this->listFile[$key]['file'];
         unset($this->listFile[$key]);

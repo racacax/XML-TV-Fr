@@ -7,5 +7,5 @@ $commands = [
 ];
 echo "\033[1mListe des commandes\n\n";
 foreach ($commands as $command => $desc) {
-    echo "\033[1m".$command." : \033[0m".$desc."\n\n";
+    echo "\033[1m".$command."\t\033[0m".$desc."\n\n";
 }

@@ -17,7 +17,7 @@ class SixPlay extends AbstractProvider implements ProviderInterface
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_6play.json'), $priority ?? 0.2);
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {

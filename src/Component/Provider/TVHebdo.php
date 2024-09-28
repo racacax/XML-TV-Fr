@@ -24,7 +24,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
         }
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         //@todo: use datetime with timezone instead of update timezone

@@ -26,7 +26,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         $this->cache = new ProviderCache('telecablesat');
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {

@@ -24,7 +24,7 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
 
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = ChannelFactory::createChannel($channel);
         if (!$this->channelExists($channel)) {
