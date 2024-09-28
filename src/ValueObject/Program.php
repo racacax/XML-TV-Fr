@@ -77,7 +77,7 @@ class Program
     public function addCredit($name, $type = 'guest'): void
     {
         if (!empty($name)) {
-            if(!in_array($type, ['actor', 'director', 'writer', 'producer',
+            if (!in_array($type, ['actor', 'director', 'writer', 'producer',
                 'composer', 'editor', 'presenter', 'commentator', 'adapter'])) {
                 $type = 'guest';
             }
@@ -179,7 +179,7 @@ class Program
                 return $this->getStartFormatted();
             }
         } else {
-            if(!$this->start) {
+            if (!$this->start) {
                 return '20001212121200 +0100';
             }
             if (\DateTimeImmutable::class === get_class($this->start)) {

@@ -16,7 +16,6 @@ use racacax\XmlTv\Component\Provider\PlutoTV;
 use racacax\XmlTv\Component\Provider\Proximus;
 use racacax\XmlTv\Component\Provider\SFR;
 use racacax\XmlTv\Component\Provider\SixPlay;
-use racacax\XmlTv\Component\Provider\Skweek;
 use racacax\XmlTv\Component\Provider\Tebeosud;
 use racacax\XmlTv\Component\Provider\Tele7Jours;
 use racacax\XmlTv\Component\Provider\Teleboy;
@@ -58,7 +57,7 @@ class ProvidersTest extends TestCase
         [Voo::class, ['channels' => ['TF1.fr']]],
         [TVHebdo::class, ['channels' => ['RDS.ca']]],
     ];
-    private static array $IGNORED_PROVIDERS = [PlutoTV::class, Skweek::class, Teleboy::class];
+    private static array $IGNORED_PROVIDERS = [PlutoTV::class, Teleboy::class];
 
     /**
      * All Providers must have at least a channel to gather or to have specifically been ignored
@@ -125,7 +124,7 @@ class ProvidersTest extends TestCase
     {
         $data = self::$TESTED_PROVIDERS_CHANNELS;
         $array = [];
-        foreach($data as $testItem) {
+        foreach ($data as $testItem) {
             $exp = explode('\\', $testItem[0]);
             $array[end($exp)] = $testItem;
         }

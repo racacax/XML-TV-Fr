@@ -18,7 +18,7 @@ class Bouygues extends AbstractProvider implements ProviderInterface
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_bouygues.json'), $priority ?? 0.9);
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel|bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
@@ -26,7 +26,7 @@ class Bouygues extends AbstractProvider implements ProviderInterface
         }
 
         $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date))), true);
-        if (!isset($json['channel'][0]['event']) || empty($json['channel'][0]['event'])) {
+        if (empty($json['channel'][0]['event'])) {
             return false;
         }
 
@@ -38,28 +38,13 @@ class Bouygues extends AbstractProvider implements ProviderInterface
             if (isset($program['parentalGuidance'])) {
                 $csa = explode('.', $program['parentalGuidance']);
 
-                switch ((int)end($csa)) {
-                    case 2:
-                        $csa = '-10';
-
-                        break;
-                    case 3:
-                        $csa = '-12';
-
-                        break;
-                    case 4:
-                        $csa = '-16';
-
-                        break;
-                    case 5:
-                        $csa = '-18';
-
-                        break;
-                    default:
-                        $csa = 'Tout public';
-
-                        break;
-                }
+                $csa = match ((int)end($csa)) {
+                    2 => '-10',
+                    3 => '-12',
+                    4 => '-16',
+                    5 => '-18',
+                    default => 'Tout public',
+                };
             } else {
                 $csa = 'Tout public';
             }

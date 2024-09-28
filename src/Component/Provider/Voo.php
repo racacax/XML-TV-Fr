@@ -18,7 +18,7 @@ class Voo extends AbstractProvider implements ProviderInterface
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_voo.json'), $priority ?? 0.85);
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {

@@ -20,8 +20,13 @@ $configurator = Configurator::initFromConfigFile(
 );
 $generator = $configurator->getGenerator();
 date_default_timezone_set('Europe/Paris');
-$generator->generateEpg();
+$params = array_slice($argv, 2);
+if(!in_array("--skip-generation", $params)) {
+    $generator->generate();
+}
 $generator->exportEpg($configurator->getOutputPath());
-$generator->clearCache($configurator->getCacheMaxDays());
+if(!in_array('--keep-cache', $params)) {
+    $generator->clearCache($configurator->getCacheMaxDays());
+}
 
 //Logger::clearLog();

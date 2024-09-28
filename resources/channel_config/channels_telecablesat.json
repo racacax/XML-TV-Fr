@@ -232,7 +232,7 @@
   "CinePlusClub.fr": {
     "page": 5,
     "id": "285",
-    "alt": "Cin\u00e9+ Club"
+    "alt": "Cin\u00e9+Club"
   },
   "CinePlusClassic.fr": {
     "page": 5,
@@ -248,21 +248,6 @@
     "page": 5,
     "id": "1562",
     "alt": "Paramount Channel"
-  },
-  "OCSMax.fr": {
-    "page": 5,
-    "id": "730",
-    "alt": "OCS Max"
-  },
-  "OCSPulp.fr": {
-    "page": 5,
-    "id": "732",
-    "alt": "OCS Pulp"
-  },
-  "OCSGeants.fr": {
-    "page": 5,
-    "id": "734",
-    "alt": "OCS G\u00e9ants"
   },
   "Action.fr": {
     "page": 5,
@@ -285,17 +270,17 @@
     "alt": "A+ International France"
   },
   "NollywoodTV.fr": {
-    "page": 6,
+    "page": 5,
     "id": "1461",
     "alt": "Nollywood TV"
   },
   "PlanetePlus.fr": {
-    "page": 6,
+    "page": 5,
     "id": "147",
     "alt": "Plan\u00e8te+"
   },
   "PLANETEJustice.fr": {
-    "page": 6,
+    "page": 5,
     "id": "662",
     "alt": "Plan\u00e8te+ Crime Investigation"
   },
@@ -345,17 +330,17 @@
     "alt": "Discovery Investigation"
   },
   "Seasons.fr": {
-    "page": 7,
+    "page": 6,
     "id": "173",
     "alt": "Seasons"
   },
   "KTO.fr": {
-    "page": 7,
+    "page": 6,
     "id": "110",
     "alt": "KTO"
   },
   "Equidia.fr": {
-    "page": 7,
+    "page": 6,
     "id": "64",
     "alt": "Equidia"
   },
@@ -405,17 +390,17 @@
     "alt": "Demain TV"
   },
   "LaChaineParlementaire.fr": {
-    "page": 8,
+    "page": 7,
     "id": "234",
     "alt": "La Cha\u00eene parlementaire"
   },
   "LCI.fr": {
-    "page": 8,
+    "page": 7,
     "id": "112",
     "alt": "LCI - La Cha\u00eene Info"
   },
   "CNews.fr": {
-    "page": 8,
+    "page": 7,
     "id": "226",
     "alt": "CNEWS"
   },
@@ -465,17 +450,17 @@
     "alt": "beIN SPORTS 1"
   },
   "beINSPORTS2.fr": {
-    "page": 9,
+    "page": 8,
     "id": "1304",
     "alt": "beIN SPORTS 2"
   },
   "beINSPORTS3.fr": {
-    "page": 9,
+    "page": 8,
     "id": "1335",
     "alt": "beIN SPORTS 3"
   },
   "beINSPORTSMAX4.fr": {
-    "page": 9,
+    "page": 8,
     "id": "1336",
     "alt": "beIN SPORTS MAX 4"
   },
@@ -525,17 +510,17 @@
     "alt": "RMC Sport 2"
   },
   "RMCSportAccess1.fr": {
-    "page": 10,
+    "page": 9,
     "id": "2095",
     "alt": "RMC Sport Access 1"
   },
   "RMCSportLive10.fr": {
-    "page": 10,
+    "page": 9,
     "id": "2673",
     "alt": "RMC Sport Live 10"
   },
   "RMCSportLive11.fr": {
-    "page": 10,
+    "page": 9,
     "id": "2674",
     "alt": "RMC Sport Live 11"
   },
@@ -585,17 +570,17 @@
     "alt": "L'Equipe"
   },
   "InfosportPlus.fr": {
-    "page": 11,
+    "page": 10,
     "id": "94",
     "alt": "Infosport+"
   },
   "ABMoteurs.fr": {
-    "page": 11,
+    "page": 10,
     "id": "15",
     "alt": "Automoto"
   },
   "GolfPlus.fr": {
-    "page": 11,
+    "page": 10,
     "id": "1295",
     "alt": "Golf+"
   },
@@ -645,17 +630,17 @@
     "alt": "Stingray Brava"
   },
   "StingrayDjazz.fr": {
-    "page": 12,
+    "page": 11,
     "id": "1357",
     "alt": "Stingray Djazz"
   },
   "StingrayFestival.fr": {
-    "page": 12,
+    "page": 11,
     "id": "2090",
     "alt": "Stingray Festival 4K"
   },
   "Melody.fr": {
-    "page": 12,
+    "page": 11,
     "id": "265",
     "alt": "Melody"
   },
@@ -705,17 +690,17 @@
     "alt": "Nickelod\u00e9on"
   },
   "NickelodeonJunior.fr": {
-    "page": 13,
+    "page": 12,
     "id": "888",
     "alt": "Nickelodeon Junior"
   },
   "TeleToonPlus.fr": {
-    "page": 13,
+    "page": 12,
     "id": "197",
     "alt": "T\u00e9l\u00e9Toon+"
   },
   "CartoonNetwork.fr": {
-    "page": 13,
+    "page": 12,
     "id": "36",
     "alt": "Cartoon Network"
   },
@@ -765,22 +750,22 @@
     "alt": "Rai Due"
   },
   "RAI3.it": {
-    "page": 14,
+    "page": 13,
     "id": "155",
     "alt": "Rai Tre"
   },
   "BBCEntertainment.uk": {
-    "page": 14,
+    "page": null,
     "id": "18",
-    "alt": "BBC Entertainment"
+    "alt": null
   },
   "RTPI.pt": {
-    "page": 14,
+    "page": 13,
     "id": "169",
     "alt": "RTPI"
   },
   "TVE.es": {
-    "page": 14,
+    "page": 13,
     "id": "208",
     "alt": "TVE"
   },
@@ -825,22 +810,22 @@
     "alt": "CNN"
   },
   "DWEnglish.de": {
-    "page": 15,
+    "page": 14,
     "id": "61",
     "alt": "DW (English)"
   },
   "LaTrois.be": {
-    "page": 15,
+    "page": 14,
     "id": "892",
     "alt": "La Trois"
   },
   "ZDF.de": {
-    "page": 15,
+    "page": 14,
     "id": "219",
     "alt": "ZDF"
   },
   "RTLTVI.be": {
-    "page": 15,
+    "page": 14,
     "id": "168",
     "alt": "RTL TVI"
   },
@@ -885,22 +870,22 @@
     "alt": "BX1"
   },
   "CanalC.be": {
-    "page": 16,
+    "page": 15,
     "id": "389",
     "alt": "Canal C"
   },
   "CANALZ.be": {
-    "page": 16,
+    "page": 15,
     "id": "936",
     "alt": "Canal Z"
   },
   "CanalZoom.be": {
-    "page": 16,
+    "page": 15,
     "id": "386",
     "alt": "Canal Zoom"
   },
   "Canvas.fr": {
-    "page": 16,
+    "page": 15,
     "id": "24",
     "alt": "Canvas"
   },
@@ -945,22 +930,22 @@
     "alt": "Eleven Sports 2"
   },
   "ElevenSports3FR.be": {
-    "page": 17,
+    "page": 16,
     "id": "2381",
     "alt": "Eleven Sports 3"
   },
   "Nickelodeon.be": {
-    "page": 17,
+    "page": 16,
     "id": "1968",
     "alt": "Nickelod\u00e9on Wallonia"
   },
   "NoTele.be": {
-    "page": 17,
+    "page": 16,
     "id": "1833",
     "alt": "NoT\u00e9l\u00e9"
   },
   "NickJr.be": {
-    "page": 17,
+    "page": 16,
     "id": "832",
     "alt": "Nick Jr"
   },
@@ -1005,22 +990,22 @@
     "alt": "T\u00e9l\u00e9 Sambre"
   },
   "TVCom.be": {
-    "page": 18,
+    "page": 17,
     "id": "385",
     "alt": "TV COM"
   },
   "TVLux.be": {
-    "page": 18,
+    "page": 17,
     "id": "392",
     "alt": "TV Lux"
   },
   "VEDIA.ch": {
-    "page": 18,
+    "page": 17,
     "id": "391",
     "alt": "VEDIA"
   },
   "VooFoot.be": {
-    "page": 18,
+    "page": 17,
     "id": "1144",
     "alt": "Voo Foot"
   },
@@ -1065,22 +1050,22 @@
     "alt": "8 Mont-Blanc"
   },
   "BFMGrandLille.fr": {
-    "page": 19,
+    "page": 18,
     "id": "930",
     "alt": "BFM Grand Lille"
   },
   "MirabelleTV.fr": {
-    "page": 19,
+    "page": 18,
     "id": "1045",
-    "alt": "Vi\u00e0MoselleTV"
+    "alt": "Moselle TV"
   },
   "Telenantes.fr": {
-    "page": 19,
+    "page": 18,
     "id": "491",
     "alt": "T\u00e9l\u00e9nantes"
   },
   "TeleLyonMetropole.fr": {
-    "page": 19,
+    "page": 18,
     "id": "116",
     "alt": "BFM Lyon M\u00e9tropole"
   },
@@ -1125,22 +1110,22 @@
     "alt": "ATV Guadeloupe"
   },
   "ATVGuyane.fr": {
-    "page": 20,
+    "page": 19,
     "id": "1531",
     "alt": "ATV Guyane"
   },
   "ATVMartinique.fr": {
-    "page": 20,
+    "page": 19,
     "id": "295",
     "alt": "ATV Martinique"
   },
   "Guadeloupe1.fr": {
-    "page": 20,
+    "page": 19,
     "id": "329",
     "alt": "Guadeloupe la 1\u00e8re"
   },
   "Guyane1.fr": {
-    "page": 20,
+    "page": 19,
     "id": "260",
     "alt": "Guyane la 1\u00e8re"
   },
@@ -1167,7 +1152,7 @@
   "Reunion1.fr": {
     "page": 20,
     "id": "245",
-    "alt": "R\u00e9union la 1\u00e8re"
+    "alt": "R\u00e9union la1\u00e8re"
   },
   "StPierreEtMiquelon1.fr": {
     "page": 20,
@@ -1185,22 +1170,22 @@
     "alt": "XXL"
   },
   "PinkTV.fr": {
-    "page": 21,
+    "page": 20,
     "id": "406",
     "alt": "Pink TV"
   },
   "DorcelTV.fr": {
-    "page": 21,
+    "page": 20,
     "id": "560",
     "alt": "Dorcel TV"
   },
   "HustlerTV.fr": {
-    "page": 21,
+    "page": 20,
     "id": "416",
     "alt": "Hustler TV"
   },
   "ManX.fr": {
-    "page": 21,
+    "page": 20,
     "id": "683",
     "alt": "Man-X"
   },
@@ -1237,7 +1222,7 @@
   "France3Centre.fr": {
     "page": 21,
     "id": "1928",
-    "alt": "France 3 Centre-Val de Loire"
+    "alt": "France3 Centre-Val de Loire"
   },
   "France3ChampagneArdenne.fr": {
     "page": 21,
@@ -1245,22 +1230,22 @@
     "alt": "France 3 Champagne-Ardennes"
   },
   "France3CorseViaStella.fr": {
-    "page": 22,
+    "page": 21,
     "id": "308",
-    "alt": "France 3 Corse Via Stella"
+    "alt": "France 3 CorseVia Stella"
   },
   "France3CotedAzur.fr": {
-    "page": 22,
+    "page": 21,
     "id": "1931",
     "alt": "France 3 C\u00f4te d'Azur"
   },
   "France3FrancheComte.fr": {
-    "page": 22,
+    "page": 21,
     "id": "1932",
     "alt": "France 3 Franche-Comt\u00e9"
   },
   "France3Languedoc.fr": {
-    "page": 22,
+    "page": 21,
     "id": "1934",
     "alt": "France 3 Languedoc-Roussillon"
   },
@@ -1305,22 +1290,22 @@
     "alt": "France 3 Pays de la Loire"
   },
   "France3Picardie.fr": {
-    "page": 23,
+    "page": 22,
     "id": "1941",
     "alt": "France 3 Picardie"
   },
   "France3PoitouCharentes.fr": {
-    "page": 23,
+    "page": 22,
     "id": "1942",
     "alt": "France 3 Poitou-Charentes"
   },
   "France3ProvenceAlpes.fr": {
-    "page": 23,
+    "page": 22,
     "id": "1943",
     "alt": "France 3 Provence-Alpes"
   },
   "France3RhoneAlpes.fr": {
-    "page": 23,
+    "page": 22,
     "id": "1944",
     "alt": "France 3 Rh\u00f4ne-Alpes"
   },

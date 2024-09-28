@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
+use racacax\XmlTv\Component\ProviderCache;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -13,15 +14,15 @@ use racacax\XmlTv\ValueObject\Program;
 // Original script by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/SFR.php
 class SFR extends AbstractProvider implements ProviderInterface
 {
-    private $jsonPerDay;
+    private ProviderCache $jsonPerDay;
 
     public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_sfr.json'), $priority ?? 0.85);
-        $this->jsonPerDay = [];
+        $this->jsonPerDay = new ProviderCache('sfrCache');
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel|bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
@@ -29,13 +30,13 @@ class SFR extends AbstractProvider implements ProviderInterface
         }
 
         $channelId = $this->getChannelsList()[$channel];
-
-        if (!isset($this->jsonPerDay[$date])) {
+        $arrayPerDay = $this->jsonPerDay->getArray();
+        if (!isset($arrayPerDay[$date])) {
             $content = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
             $json = json_decode($content, true);
-            $this->jsonPerDay[$date] = $json;
+            $this->jsonPerDay->setArrayKey($date, $json);
         } else {
-            $json = $this->jsonPerDay[$date];
+            $json = $arrayPerDay[$date];
         }
 
         if ($json === false) {
@@ -43,35 +44,20 @@ class SFR extends AbstractProvider implements ProviderInterface
         }
         $programs = @$json['epg'];
 
-        if (!isset($programs[$channelId]) || empty($programs[$channelId])) {
+        if (empty($programs[$channelId])) {
             return false;
         }
 
 
         foreach ($programs[$channelId] as $program) {
             if (isset($program['moralityLevel'])) {
-                switch ($program['moralityLevel']) {
-                    case '2':
-                        $csa = '-10';
-
-                        break;
-                    case '3':
-                        $csa = '-12';
-
-                        break;
-                    case '4':
-                        $csa = '-16';
-
-                        break;
-                    case '5':
-                        $csa = '-18';
-
-                        break;
-                    default:
-                        $csa = 'Tout public';
-
-                        break;
-                }
+                $csa = match ($program['moralityLevel']) {
+                    '2' => '-10',
+                    '3' => '-12',
+                    '4' => '-16',
+                    '5' => '-18',
+                    default => 'Tout public',
+                };
             } else {
                 $csa = 'Tout public';
             }

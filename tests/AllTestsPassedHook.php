@@ -23,35 +23,35 @@ class AllTestsPassedHook implements AfterLastTestHook, AfterSuccessfulTestHook
 
     public function executeAfterIncompleteTest(string $test, string $message, float $time): void
     {
-        if(!str_contains($test, 'testIntegrity')) {
+        if (!str_contains($test, 'testIntegrity')) {
             $this->allTestsPassed = false;
         }
     }
 
     public function executeAfterRiskyTest(string $test, string $message, float $time): void
     {
-        if(!str_contains($test, 'testIntegrity')) {
+        if (!str_contains($test, 'testIntegrity')) {
             $this->allTestsPassed = false;
         }
     }
 
     public function executeAfterSkippedTest(string $test, string $message, float $time): void
     {
-        if(!str_contains($test, 'testIntegrity')) {
+        if (!str_contains($test, 'testIntegrity')) {
             $this->allTestsPassed = false;
         }
     }
 
     public function executeAfterTestFailure(string $test, string $message, float $time): void
     {
-        if(!str_contains($test, 'testIntegrity')) {
+        if (!str_contains($test, 'testIntegrity')) {
             $this->allTestsPassed = false;
         }
     }
 
     public function executeAfterTestError(string $test, string $message, float $time): void
     {
-        if(!str_contains($test, 'testIntegrity')) {
+        if (!str_contains($test, 'testIntegrity')) {
             $this->allTestsPassed = false;
         }
     }
@@ -70,7 +70,7 @@ class AllTestsPassedHook implements AfterLastTestHook, AfterSuccessfulTestHook
     }
     private function allTestsSucceeded(): void
     {
-        if($this->isRunningFullSuite()) {
+        if ($this->isRunningFullSuite()) {
             echo 'Integrity hash generated';
             file_put_contents('integrity.sha256', Utils::generateHash());
         }

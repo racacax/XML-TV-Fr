@@ -5,31 +5,44 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component;
 
 use racacax\XmlTv\StaticComponent\ChannelInformation;
-use racacax\XmlTv\ValueObject\DummyChannel;
 
-class Generator
+abstract class Generator
 {
-    private $listDate = [];
+    /**
+     * @var array
+     */
+    protected array $extraParams;
+
+    /**
+     * @var array
+     */
+    protected array $listDate = [];
     /**
      * @var bool
      */
-    private $createEpgIfNotFound;
+    protected bool $createEpgIfNotFound;
     /**
      * @var XmlExporter
      */
-    private $exporter;
+    protected XmlExporter $exporter;
     /**
      * @var XmlFormatter
      */
-    private $formatter;
+    protected XmlFormatter $formatter;
     /**
      * @var CacheFile
      */
-    private $cache;
+    protected CacheFile $cache;
+    /**
+     * @var int
+     */
+    protected int $nbThreads;
 
-    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, bool $createEpgIfNotFound)
+    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, bool $createEpgIfNotFound, int $nbThreads, array $extraParams)
     {
         $this->createEpgIfNotFound = $createEpgIfNotFound;
+        $this->extraParams = $extraParams;
+        $this->nbThreads = $nbThreads;
         $current = new \DateTime();
         $current->setTimestamp($start->getTimestamp());
         while ($current <= $stop) {
@@ -39,13 +52,13 @@ class Generator
     }
 
 
-    public $guides;
+    public array $guides;
     /**
      * @var ProviderInterface[] list of all provider
      */
-    private $providers;
+    protected array $providers;
 
-    public function addGuides(array $guidesAsArray)
+    public function addGuides(array $guidesAsArray): void
     {
         $this->guides = $guidesAsArray;
     }
@@ -53,7 +66,7 @@ class Generator
     /**
      * @param ProviderInterface[] $providers
      */
-    public function setProviders(array $providers)
+    public function setProviders(array $providers): void
     {
         $this->providers = $providers;
     }
@@ -71,88 +84,51 @@ class Generator
             $this->providers,
             function (ProviderInterface $provider) use ($list) {
                 return
-                   in_array(Utils::extractProviderName($provider), $list, true) ||
-                   in_array(get_class($provider), $list, true)
-                ;
+                    in_array(Utils::extractProviderName($provider), $list, true) ||
+                    in_array(get_class($provider), $list, true);
             }
         );
     }
 
-    public function generateEpg()
+    public function getExtraParams(): array
     {
-        $logsFinal = [];
-        foreach ($this->guides as $guide) {
-            $channels = json_decode(file_get_contents($guide['channels']), true);
-            Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
-
-
-            $logs = ['channels' => [], 'xml' => [],'failed_providers' => []];
-            $countChannel = 0;
-            foreach ($channels as $channelKey => $channelInfo) {
-                $countChannel++;
-                $providers = $this->getProviders($channelInfo['priority'] ?? []);
-                foreach ($this->listDate as $date) {
-                    $cacheKey = sprintf('%s_%s.xml', $channelKey, $date);
-                    if (!isset($logs['channels'][$date][$channelKey])) {
-                        $logs['channels'][$date][$channelKey] = [
-                            'success' => false,
-                            'provider' => null,
-                            'cache' => false,
-                            'failed_providers' => [],
-                        ];
-                    }
-                    Logger::log(sprintf("\e[95m[EPG GRAB] \e[39m%s (%d/%d) : %s", $channelKey, $countChannel, count($channels), $date));
-
-                    if ($this->cache->has($cacheKey)) {
-                        Logger::log(" | \e[33mOK \e[39m- From Cache ".chr(10));
-                        $logs['channels'][$date][$channelKey]['success'] = true;
-                        $logs['channels'][$date][$channelKey]['cache'] = true;
-
-                        continue;
-                    }
-                    $channelFound = false;
-                    foreach ($providers as $provider) {
-                        $old_zone = date_default_timezone_get();
-
-                        try {
-                            $channel = @$provider->constructEPG($channelKey, $date);
-                        } catch(\Throwable $e) {
-                            $channel = false;
-                        }
-                        date_default_timezone_set($old_zone);
-                        if ($channel === false || $channel->getProgramCount() === 0) {
-                            $logs['channels'][$date][$channelKey]['failed_providers'][] = get_class($provider);
-                            $logs['failed_providers'][get_class($provider)] = true;
-
-                            continue;
-                        }
-
-                        $channelFound = true;
-                        $logs['channels'][$date][$channelKey] = [
-                            'success' => true,
-                            'provider' => get_class($provider),
-                            'cache' => false,
-                        ];
-                        $this->cache->store($cacheKey, $this->formatter->formatChannel($channel, $provider));
-                        Logger::log(" | \e[32mOK\e[39m - ".Utils::extractProviderName($provider).chr(10));
-
-                        break ;
-                    }
-
-                    if (!$channelFound) {
-                        if ($this->createEpgIfNotFound) {
-                            $this->cache->store($cacheKey, $this->formatter->formatChannel(new DummyChannel($channelKey, $date), null));
-                        }
-                        Logger::log(" | \e[31mHS\e[39m".chr(10));
-                    }
-                }
-            }
-            Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
-            $logsFinal[$guide['channels']] = $logs;
-        }
-        Logger::debug(json_encode($logsFinal));
+        return $this->extraParams;
     }
-    public function exportEpg(string $exportPath)
+
+    abstract protected function generateEpg(): void;
+
+    public function generate(): void
+    {
+        ProviderCache::clearCache();
+        $this->generateEpg();
+        ProviderCache::clearCache();
+        Logger::save();
+    }
+
+    public function getCache(): CacheFile
+    {
+        return $this->cache;
+    }
+
+    public function createEpgIfNotFound(): bool
+    {
+        return $this->createEpgIfNotFound;
+    }
+
+    public function getFormatter(): XmlFormatter
+    {
+        return $this->formatter;
+    }
+
+    public function getListDate(): array
+    {
+        return $this->listDate;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function exportEpg(string $exportPath): void
     {
         @mkdir($exportPath, 0777, true);
 
@@ -166,7 +142,7 @@ class Generator
                 $icon = $channelInfo['icon'] ?? $defaultInfo->getDefaultIcon($channelKey);
                 $name = $channelInfo['name'] ?? $defaultInfo->getDefaultName($channelKey) ?? $channelKey;
                 $alias = $channelInfo['alias'] ?? $channelKey;
-                if($alias != $channelKey) {
+                if ($alias != $channelKey) {
                     $listAliases[$channelKey] = $alias;
                 }
                 $this->exporter->addChannel($alias, $name, $icon);
@@ -178,35 +154,40 @@ class Generator
                 ));
             }
             foreach ($listCacheKey as $keyCache) {
-                if (!$this->cache->has($keyCache)) {
+                if (!$this->cache->has($keyCache, true)) {
                     continue;
                 }
-                $cache = $this->cache->get($keyCache);
+                $cache = $this->cache->get($keyCache, true);
                 $channelId = explode('_', $keyCache)[0];
-                if(array_key_exists($channelId, $listAliases)) {
-                    $cache = str_replace('channel="'.$channelId.'"', 'channel="'.$listAliases[$channelId].'"', $cache);
+                if (array_key_exists($channelId, $listAliases)) {
+                    $cache = str_replace('channel="' . $channelId . '"', 'channel="' . $listAliases[$channelId] . '"', $cache);
                 }
-                $this->exporter->addProgramsAsString(
-                    $cache
-                );
+
+                try {
+                    $this->exporter->addProgramsAsString(
+                        $cache
+                    );
+                } catch (\Throwable $e) {
+                    $this->cache->clear($keyCache);
+                }
             }
             $this->exporter->stopExport();
         }
     }
 
-    public function setExporter(XmlExporter $exporter)
+    public function setExporter(XmlExporter $exporter): void
     {
         $this->exporter = $exporter;
         $this->formatter = $exporter->getFormatter();
     }
 
 
-    public function setCache(CacheFile $cache)
+    public function setCache(CacheFile $cache): void
     {
         $this->cache = $cache;
     }
 
-    public function clearCache(int $maxCacheDay)
+    public function clearCache(int $maxCacheDay): void
     {
         $this->cache->clearCache($maxCacheDay);
     }

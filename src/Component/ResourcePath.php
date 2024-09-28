@@ -9,11 +9,11 @@ class ResourcePath
     /**
      * @var ResourcePath|null
      */
-    private static $instance;
+    private static ?ResourcePath $instance;
     /**
      * @var string
      */
-    private $resourcePath;
+    private string $resourcePath;
 
     private function __construct()
     {
@@ -50,7 +50,7 @@ class ResourcePath
         );
     }
 
-    public function getRatingPictoPath()
+    public function getRatingPictoPath(): string
     {
         return implode(
             DIRECTORY_SEPARATOR,
