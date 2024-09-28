@@ -35,13 +35,13 @@ class SingleThreadedGenerator extends Generator
                     $channelFound = false;
                     foreach ($providers as $provider) {
                         $old_zone = date_default_timezone_get();
-                        if(!$provider->channelExists($channelKey)) {
+                        if (!$provider->channelExists($channelKey)) {
                             continue;
                         }
 
                         try {
                             $channel = @$provider->constructEPG($channelKey, $date);
-                        } catch(\Throwable $e) {
+                        } catch (\Throwable $e) {
                             $channel = false;
                         }
                         date_default_timezone_set($old_zone);

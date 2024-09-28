@@ -32,7 +32,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             $this->setStatus(round($index * 100 / $count, 2).' %');
             preg_match('/href="(.*?)" title="(.*?)"/', $li, $titlehref);
             preg_match('/srcset="(.*?)"/', $li, $img);
-            if(!isset($img[1])) {
+            if (!isset($img[1])) {
                 $img = '';
             } else {
                 $img = str_replace('64x90', '640x360', explode(' ', $img[1])[0]);

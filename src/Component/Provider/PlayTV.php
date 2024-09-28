@@ -43,15 +43,15 @@ class PlayTV extends AbstractProvider implements ProviderInterface
             $program->addCategory($category);
             $program->addDesc($attrs['texts']['long'] ?? $attrs['texts']['short'] ?? 'Aucune description');
             $program->addTitle($val['title']);
-            if(isset($val['subtitle'])) {
+            if (isset($val['subtitle'])) {
                 $program->addSubtitle($val['subtitle']);
             }
-            if(isset($attrs['episode'])) {
+            if (isset($attrs['episode'])) {
                 $program->setEpisodeNum($attrs['season'] ?? '1', $attrs['episode']);
             }
             $images = $attrs['images'] ?? [];
             $image = $images['large'][0]['url'] ?? $images['thumbnail'][0]['url'] ?? null;
-            if(isset($image)) {
+            if (isset($image)) {
                 $program->setIcon($image);
             }
 

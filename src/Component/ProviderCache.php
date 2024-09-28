@@ -16,7 +16,7 @@ class ProviderCache
 
     public function getContent(): string|null
     {
-        if(file_exists(self::$PATH.$this->file)) {
+        if (file_exists(self::$PATH.$this->file)) {
             return file_get_contents(self::$PATH.$this->file);
         }
 

@@ -20,7 +20,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
     protected mixed $proxy = null;
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        if(isset($extraParam['mycanal_proxy'])) {
+        if (isset($extraParam['mycanal_proxy'])) {
             $this->proxy = $extraParam['mycanal_proxy'];
         }
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal.json'), $priority ?? 0.7);
@@ -28,10 +28,10 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
     protected function getApiKey()
     {
-        if(!isset(self::$apiKey[$this->region])) {
+        if (!isset(self::$apiKey[$this->region])) {
             $result = $this->getContentFromURL('https://www.canalplus.com/' . $this->region . '/programme-tv/');
             $token = @explode('"', explode('"token":"', $result)[1])[0];
-            if(empty($token)) {
+            if (empty($token)) {
                 throw new \Exception('Impossible to retrieve MyCanal API Key');
             }
             self::$apiKey[$this->region] = $token;
@@ -87,7 +87,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             $percent = round($index * 100 / $count, 2) . ' %';
             $this->setStatus($percent);
             $url = $program['onClick']['URLPage'];
-            if(!is_null($this->proxy)) {
+            if (!is_null($this->proxy)) {
                 $url = $this->proxy[0].urlencode(base64_encode($url)).$this->proxy[1];
             }
 
@@ -103,10 +103,10 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
         foreach ($all as $index => $program) {
             $responseBody = null;
-            if(!is_null($response[$program['onClick']['URLPage']])) {
+            if (!is_null($response[$program['onClick']['URLPage']])) {
                 $responseBody = $response[$program['onClick']['URLPage']]->getBody();
             }
-            if(!is_null($responseBody)) {
+            if (!is_null($responseBody)) {
                 $detail = json_decode((string)$responseBody, true);
             } else {
                 $detail = [];
@@ -170,7 +170,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $day = round(($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400);
 
         $url = 'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->getApiKey() . '/' . $channelId . '/broadcasts/day/'. $day;
-        if(!is_null($this->proxy)) {
+        if (!is_null($this->proxy)) {
             $url = $this->proxy[0].urlencode(base64_encode($url)).$this->proxy[1];
         }
 

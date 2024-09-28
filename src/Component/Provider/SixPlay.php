@@ -25,12 +25,12 @@ class SixPlay extends AbstractProvider implements ProviderInterface
         }
         $page = 1;
         $channelId = $this->channelsList[$channelObj->getId()];
-        while(!is_null($page)) {
+        while (!is_null($page)) {
             $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date), $page)), true);
             if (empty($json[$channelId])) {
                 return false;
             }
-            if(count($json[$channelId]) < 100) {
+            if (count($json[$channelId]) < 100) {
                 $page = null;
             } else {
                 $page++;
@@ -38,15 +38,15 @@ class SixPlay extends AbstractProvider implements ProviderInterface
             foreach ($json[$channelId] as $program) {
                 $genre = 'Inconnu';
 
-                if(isset($program['csa']) && $program['csa']['age'] > 0) {
+                if (isset($program['csa']) && $program['csa']['age'] > 0) {
                     $csa = strval(-$program['csa']['age']);
                 } else {
                     $csa = 'Tout public';
                 }
 
                 $image = null;
-                foreach($program['images'] as $im) {
-                    if($im['role'] == 'vignette') {
+                foreach ($program['images'] as $im) {
+                    if ($im['role'] == 'vignette') {
                         $image = 'https://images.6play.fr/v2/images/'.$im['id'].'/raw';
 
                         break;

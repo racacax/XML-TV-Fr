@@ -124,7 +124,7 @@ class ProvidersTest extends TestCase
     {
         $data = self::$TESTED_PROVIDERS_CHANNELS;
         $array = [];
-        foreach($data as $testItem) {
+        foreach ($data as $testItem) {
             $exp = explode('\\', $testItem[0]);
             $array[end($exp)] = $testItem;
         }

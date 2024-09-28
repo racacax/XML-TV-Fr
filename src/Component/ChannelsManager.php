@@ -36,8 +36,8 @@ class ChannelsManager
     }
     public function removeChannelFromProvider(string $provider, string $channel): void
     {
-        if(isset($this->providersUsed[$provider])) {
-            if(($key = array_search($channel, $this->providersUsed[$provider])) !== false) {
+        if (isset($this->providersUsed[$provider])) {
+            if (($key = array_search($channel, $this->providersUsed[$provider])) !== false) {
                 unset($this->providersUsed[$provider][$key]);
             }
         }
@@ -56,7 +56,7 @@ class ChannelsManager
 
     public function addChannelToProvider(string $provider, string $channel): void
     {
-        if(!isset($this->providersUsed[$provider])) {
+        if (!isset($this->providersUsed[$provider])) {
             $this->providersUsed[$provider] = [];
         }
         $this->providersUsed[$provider][] = $channel;
@@ -78,7 +78,7 @@ class ChannelsManager
     {
         $providers = $this->generator->getProviders($this->info['priority'] ?? []);
         $f = $this->providersFailedByChannel[$key] ?? [];
-        if(count($f) > 0) {
+        if (count($f) > 0) {
             $failedProviders = $this->generator->getProviders($f);
         } else {
             $failedProviders = [];
@@ -104,9 +104,9 @@ class ChannelsManager
     {
         $maxLoop = count($this->channels);
         $key = null;
-        for($i = 0; $i < $maxLoop; $i++) {
+        for ($i = 0; $i < $maxLoop; $i++) {
             $tmpKey = array_shift($this->channels);
-            if($this->isChannelAvailable($tmpKey)) {
+            if ($this->isChannelAvailable($tmpKey)) {
                 $key = $tmpKey;
 
                 break;
@@ -118,7 +118,7 @@ class ChannelsManager
                 );
             }
         }
-        if(!isset($key)) {
+        if (!isset($key)) {
             return [];
         }
 

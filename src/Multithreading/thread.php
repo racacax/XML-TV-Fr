@@ -14,7 +14,7 @@ $providerClass = null;
 $data = json_decode(base64_decode($argv[3]), true);
 foreach ($providers as $provider) {
     $e = explode('\\', $provider);
-    if(end($e) == $argv[1]) {
+    if (end($e) == $argv[1]) {
         $providerClass = $provider;
 
         break;
@@ -26,7 +26,7 @@ $provider = new $providerClass($client, null, $data['extraParams']);
 try {
     date_default_timezone_set('Europe/Paris');
     $obj = $provider->constructEpg($data['key'], $argv[2]);
-} catch(Throwable $e) {
+} catch (Throwable $e) {
     $obj = false;
 }
 if ($obj === false || $obj->getProgramCount() === 0) {

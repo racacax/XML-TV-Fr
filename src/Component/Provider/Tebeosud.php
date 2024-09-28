@@ -35,17 +35,17 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
         preg_match_all("/<span class='video-card-date'>(.*?)<\/span>/s", $res1, $titles);
         preg_match_all("/<div class='program-card-content'> <img .*?src='(.*?)'.*?>/s", $res1, $images);
         preg_match_all("/<p class='programm-card-duree'>.*?<span>(.*?)<\/span>.*?<\/p>/s", $res1, $durations);
-        if(count($titles[1]) == 0) {
+        if (count($titles[1]) == 0) {
             return false;
         }
-        for($i = 0; $i < count($titles[1]); $i++) {
+        for ($i = 0; $i < count($titles[1]); $i++) {
             $start = strtotime($date.' '.$hours[1][$i]);
-            if($i == count($titles) - 1) {
+            if ($i == count($titles) - 1) {
                 $end = $start + intval(explode(':', end($durations[1]))[0]) * 60;
-            } elseif(isset($hours[1][$i + 1])) {
+            } elseif (isset($hours[1][$i + 1])) {
                 $end = strtotime($date.' '.$hours[1][$i + 1]);
             }
-            if(!isset($end)) {
+            if (!isset($end)) {
                 continue;
             }
             $program = new Program($start, $end);

@@ -276,7 +276,7 @@ class Configurator
     public function getGenerator(): Generator
     {
         $begin = new \DateTimeImmutable(date('Y-m-d', strtotime('-1 day')));
-        if($this->getNbThreads() == 1) {
+        if ($this->getNbThreads() == 1) {
             $class = SingleThreadedGenerator::class;
         } else {
             $class = MultiThreadedGenerator::class;

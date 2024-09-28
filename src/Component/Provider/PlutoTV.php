@@ -41,7 +41,7 @@ class PlutoTV extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel) || empty($sessionToken = $this->getSessionToken())) {
             return false;
         }
-        if($date != date('Y-m-d')) { # Pluto TV only displays EPG for one day
+        if ($date != date('Y-m-d')) { # Pluto TV only displays EPG for one day
             return false;
         }
         $channelObj = ChannelFactory::createChannel($channel);

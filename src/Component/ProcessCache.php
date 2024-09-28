@@ -9,7 +9,7 @@ class ProcessCache
     private string $path;
     public function __construct($mode = 'cache')
     {
-        if($mode == 'cache') {
+        if ($mode == 'cache') {
             $this->path = 'var/process';
         } else {
             $this->path = 'var/status';

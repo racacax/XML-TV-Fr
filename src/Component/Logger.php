@@ -59,7 +59,7 @@ class Logger
 
     public static function addChannelEntry(string $channelFile, string $channel, string $date): void
     {
-        if(!isset(self::$logFile[$channelFile]['channels'][$date][$channel])) {
+        if (!isset(self::$logFile[$channelFile]['channels'][$date][$channel])) {
             self::$logFile[$channelFile]['channels'][$date][$channel] = [
                 'success' => false,
                 'provider' => null,
@@ -84,7 +84,7 @@ class Logger
 
     public static function addAdditionalError(string $channelFile, string $error, string $message): void
     {
-        if(!isset(self::$logFile[$channelFile]['additional_errors'])) {
+        if (!isset(self::$logFile[$channelFile]['additional_errors'])) {
             self::$logFile[$channelFile]['additional_errors'] = [
             ];
         }

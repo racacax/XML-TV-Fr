@@ -53,7 +53,7 @@ abstract class AbstractProvider
     public function setStatus(string $status)
     {
         $this->status = $status;
-        if(defined('CHANNEL_PROCESS')) {
+        if (defined('CHANNEL_PROCESS')) {
             (new ProcessCache('status'))->save(CHANNEL_PROCESS, $this->status);
         } else {
             Logger::updateLine(' '.$status);

@@ -49,12 +49,12 @@ class ChannelThread
 
     public function __toString()
     {
-        if(!$this->hasStarted || !$this->isRunning) {
+        if (!$this->hasStarted || !$this->isRunning) {
             return Utils::colorize('En pause...', 'yellow');
         }
         $str = $this->getChannel().' - '.$this->getDate().' - '.$this->getProvider();
         $status = $this->getStatus();
-        if(isset($status)) {
+        if (isset($status)) {
             $str .= ' '.$status;
         }
 
@@ -71,7 +71,7 @@ class ChannelThread
         $cacheInstance = new ProcessCache('cache');
         $statusInstance = new ProcessCache('status');
         $providers = $this->generator->getProviders($this->info['priority'] ?? []);
-        if(count($this->failedProviders) > 0) {
+        if (count($this->failedProviders) > 0) {
             $failedProviders = $this->generator->getProviders($this->failedProviders);
         } else {
             $failedProviders = [];
@@ -95,13 +95,13 @@ class ChannelThread
             }
             $channelFound = false;
             foreach ($providers as $provider) {
-                if(in_array($provider, $failedProviders)) {
+                if (in_array($provider, $failedProviders)) {
                     continue;
                 }
                 $providerClass = Utils::extractProviderName($provider);
-                if(!$provider->channelExists($this->channel)) {
+                if (!$provider->channelExists($this->channel)) {
                     continue;
-                } elseif(!$this->manager->canUseProvider($providerClass)) {
+                } elseif (!$this->manager->canUseProvider($providerClass)) {
                     $this->manager->addChannel($this->channel, $this->failedProviders, $this->datesGathered);
 
                     return;
@@ -121,13 +121,13 @@ class ChannelThread
                 Utils::startCmd($cmd);
                 $channel = 'false';
                 while (true) {
-                    if(!$cacheInstance->exists($fileName)) {
-                        if($statusInstance->exists($fileName)) {
+                    if (!$cacheInstance->exists($fileName)) {
+                        if ($statusInstance->exists($fileName)) {
                             $this->status = Utils::colorize($statusInstance->pop($fileName), 'magenta');
                         }
                         delay(0.001);
                     } else {
-                        while($cacheInstance->exists($fileName.'.lock')) {
+                        while ($cacheInstance->exists($fileName.'.lock')) {
                             delay(0.001);
                         }
                         $channel = $cacheInstance->pop($fileName);
@@ -165,7 +165,7 @@ class ChannelThread
 
     public function start(): void
     {
-        if(!$this->isRunning) {
+        if (!$this->isRunning) {
             $this->isRunning = true;
             $fn = function () {
                 $this->run();
@@ -181,7 +181,7 @@ class ChannelThread
 
     public function getChannel(): ?string
     {
-        if(isset($this->channel)) {
+        if (isset($this->channel)) {
             return $this->channel;
         }
 
@@ -190,7 +190,7 @@ class ChannelThread
 
     public function getStatus(): ?string
     {
-        if(isset($this->status)) {
+        if (isset($this->status)) {
             return $this->status;
         }
 
@@ -199,7 +199,7 @@ class ChannelThread
 
     public function getDate(): ?string
     {
-        if(isset($this->date)) {
+        if (isset($this->date)) {
             return $this->date;
         }
 

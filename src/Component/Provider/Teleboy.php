@@ -33,18 +33,18 @@ class Teleboy extends AbstractProvider implements ProviderInterface
             ['x-teleboy-apikey' => $this->getAPIKey()]
         );
         $json = json_decode($content, true);
-        if(empty($json['data']['items'])) {
+        if (empty($json['data']['items'])) {
             return false;
         }
-        foreach($json['data']['items'] as $item) {
+        foreach ($json['data']['items'] as $item) {
             $programObj = new Program(strtotime($item['begin']), strtotime($item['end']));
             $programObj->addTitle($item['title']);
-            if(!empty($item['subtitle'])) {
+            if (!empty($item['subtitle'])) {
                 $programObj->addSubtitle($item['subtitle']);
             }
             $programObj->addDesc(@$item['short_description'] ?? 'Aucune description');
             $programObj->addCategory(@$item['genre']['name_fr'] ?? 'Inconnu');
-            if(!empty($item['primary_image'])) {
+            if (!empty($item['primary_image'])) {
                 $programObj->setIcon($item['primary_image']['base_path'].'raw/'.$item['primary_image']['hash'].'.jpg');
             }
             $channelObj->addProgram($programObj);
@@ -57,10 +57,10 @@ class Teleboy extends AbstractProvider implements ProviderInterface
 
     public function getAPIKey()
     {
-        if(self::$API_KEY == '') {
+        if (self::$API_KEY == '') {
             $content = $this->getContentFromURL('https://www.teleboy.ch/fr/');
             $key = explode("'", explode('tvapiKey:', $content)[1])[1];
-            if(empty($key)) {
+            if (empty($key)) {
                 throw new Exception('API Error');
             }
             self::$API_KEY = $key;

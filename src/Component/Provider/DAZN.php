@@ -72,7 +72,7 @@ class DAZN extends AbstractProvider implements ProviderInterface
                 ['startTime' => $start, 'endTime' => $end, 'prefix' => ''],
                 ['startTime' => max($end, $startCurrentDate), 'endTime' => $endCurrentDate, 'prefix' => 'Match précédent : ']];
             foreach ($entries as $entry) {
-                if($entry['startTime'] > $endCurrentDate || $entry['endTime'] < $startCurrentDate) {
+                if ($entry['startTime'] > $endCurrentDate || $entry['endTime'] < $startCurrentDate) {
                     continue;
                 }
                 $program = new Program($entry['startTime'], $entry['endTime']);
@@ -116,7 +116,7 @@ class DAZN extends AbstractProvider implements ProviderInterface
         foreach ($matches as $match) {
             $startTime = strtotime($match['date']);
             $endTime = $startTime + self::$MATCH_DURATION;
-            if(is_null($lastMatch) || $lastMatch['endTime'] <= $startTime) {
+            if (is_null($lastMatch) || $lastMatch['endTime'] <= $startTime) {
                 $lastMatch = ['startTime' => $startTime, 'endTime' => $endTime, 'matches' => [['startTime' => $startTime, 'title' => $this->getProgramTitle($match)]]];
             } else {
                 $lastMatch['endTime'] = $endTime;
@@ -125,14 +125,14 @@ class DAZN extends AbstractProvider implements ProviderInterface
             }
             $groupedMatches[] = $lastMatch;
         }
-        foreach($groupedMatches as $groupedMatch) {
+        foreach ($groupedMatches as $groupedMatch) {
             $start = $groupedMatch['startTime'];
             $end = $groupedMatch['endTime'];
-            if($end < $startCurrentDate) {
+            if ($end < $startCurrentDate) {
                 continue;
             }
             $titles = array_map(function ($match) { return $match['title']; }, $groupedMatch['matches']);
-            if(count($titles) == 1) {
+            if (count($titles) == 1) {
                 $title = $titles[0];
             } else {
                 $title = 'Multiplex';
@@ -142,7 +142,7 @@ class DAZN extends AbstractProvider implements ProviderInterface
                 ['startTime' => $start, 'endTime' => $end, 'value' => $title]];
 
             foreach ($entries as $entry) {
-                if($entry['startTime'] > $endCurrentDate || $entry['endTime'] < $startCurrentDate || $entry['startTime']  === $entry['endTime']) {
+                if ($entry['startTime'] > $endCurrentDate || $entry['endTime'] < $startCurrentDate || $entry['startTime']  === $entry['endTime']) {
                     continue;
                 }
                 $lastEndTime = $entry['endTime'];
