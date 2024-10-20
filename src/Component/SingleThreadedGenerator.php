@@ -27,7 +27,7 @@ class SingleThreadedGenerator extends Generator
                     Logger::log(sprintf("\e[95m[EPG GRAB] \e[39m%s (%d/%d) : %s", $channelKey, $countChannel, count($channels), $date));
 
                     if ($this->cache->has($cacheKey)) {
-                        Logger::log(" | \e[33mOK \e[39m- From Cache ".chr(10));
+                        Logger::log(" | \e[33mOK \e[39m- From Cache " . chr(10));
                         Logger::setChannelSuccessfulProvider($guide['channels'], $channelKey, $date, 'Cache', true);
 
                         continue;
@@ -54,16 +54,22 @@ class SingleThreadedGenerator extends Generator
                         $channelFound = true;
                         Logger::setChannelSuccessfulProvider($guide['channels'], $channelKey, $date, get_class($provider));
                         $this->cache->store($cacheKey, $this->formatter->formatChannel($channel, $provider));
-                        Logger::log(" | \e[32mOK\e[39m - ".Utils::extractProviderName($provider).chr(10));
+                        Logger::log(" | \e[32mOK\e[39m - " . Utils::extractProviderName($provider) . chr(10));
 
-                        break ;
+                        break;
                     }
 
                     if (!$channelFound) {
-                        if ($this->createEpgIfNotFound) {
-                            $this->cache->store($cacheKey, $this->formatter->formatChannel(new DummyChannel($channelKey, $date), null));
+                        if ($this->cache->has($cacheKey, true)) {
+                            Logger::setChannelSuccessfulProvider($guide['channels'], $channelKey, $date, 'Forced Cache', true);
+                            Logger::log(" | \e[33mOK \e[39m- From Cache (Forced)" . chr(10));
+                        } else {
+                            if ($this->createEpgIfNotFound) {
+                                $this->cache->store($cacheKey, $this->formatter->formatChannel(new DummyChannel($channelKey, $date), null));
+                            }
+                            Logger::log(" | \e[31mHS\e[39m" . chr(10));
                         }
-                        Logger::log(" | \e[31mHS\e[39m".chr(10));
+
                     }
                 }
             }

@@ -53,9 +53,7 @@ class CacheFile
         $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
         $allowClear = !$preventClear && $this->forceTodayGrab;
         if ($allowClear && str_contains($key, date('Y-m-d')) && !isset($this->createdKeys[$key])) {
-            @unlink($fileName);
             $this->createdKeys[$key] = true;
-
             return false;
         }
         if (file_exists($fileName)) {

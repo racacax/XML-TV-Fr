@@ -153,7 +153,9 @@ class ChannelThread
             }
 
             if (!$channelFound) {
-                if ($this->generator->createEpgIfNotFound()) {
+                if ($cache->has($cacheKey, true)) {
+                    Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, 'Forced Cache', true);
+                } elseif ($this->generator->createEpgIfNotFound()) {
                     $cache->store($cacheKey, $this->generator->getFormatter()->formatChannel(new DummyChannel($this->channel, $date), null));
                 }
             }
