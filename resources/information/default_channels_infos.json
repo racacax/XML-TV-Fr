@@ -6456,5 +6456,41 @@
   "CanalPlusLive19.fr": {
     "icon": "https://thumb.canalplus.pro/http/unsafe/204x152/filters:quality(80)/canalplus-cdn.canal-plus.io/p1/channel/1153/canal-ouah/CHN43FN/CHN43FN_1153_20240910-GuM-",
     "name": "Canal+ Live 19"
+  },
+  "RMCJiraiDormirChezVous.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCJDCVmononew.png",
+    "name": "RMC J'irai dormir chez vous"
+  },
+  "BFMGrandsReportages.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFMGRANDSREPORTAGESmono.png",
+    "name": "BFM Grands Reportages"
+  },
+  "RMCTalkSport.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCTALKSPORTmono.png",
+    "name": "RMC Talk Sport"
+  },
+  "RMCTalkInfo.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCTALKINFOmono.png",
+    "name": "RMC Talk Info"
+  },
+  "RMCWOW.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCWOWmono.png",
+    "name": "RMC WOW"
+  },
+  "RMCMystere.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCMYSTERESmono.png",
+    "name": "RMC Mystère"
+  },
+  "RMCAlerteSecours.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCALERTESECOURSmono.png",
+    "name": "RMC Alerte Secours"
+  },
+  "RMCMecanic.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCMECANICmono.png",
+    "name": "RMC Mecanic"
+  },
+  "BFM2.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFM2coul.png",
+    "name": "BFM 2"
   }
 }
