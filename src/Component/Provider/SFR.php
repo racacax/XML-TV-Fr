@@ -14,12 +14,13 @@ use racacax\XmlTv\ValueObject\Program;
 // Original script by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/SFR.php
 class SFR extends AbstractProvider implements ProviderInterface
 {
-    private ProviderCache $jsonPerDay;
+    protected ProviderCache $jsonPerDay;
 
-    public function __construct(Client $client, ?float $priority = null)
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_sfr.json'), $priority ?? 0.85);
-        $this->jsonPerDay = new ProviderCache('sfrCache');
+        $file = $extraParam['provider'] ?? 'sfr';
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_'.$file.'.json'), $priority ?? 0.85);
+        $this->jsonPerDay = new ProviderCache($file.'Cache');
     }
 
     public function constructEPG(string $channel, string $date): Channel|bool

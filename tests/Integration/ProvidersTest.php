@@ -14,6 +14,7 @@ use racacax\XmlTv\Component\Provider\Orange;
 use racacax\XmlTv\Component\Provider\PlayTV;
 use racacax\XmlTv\Component\Provider\PlutoTV;
 use racacax\XmlTv\Component\Provider\Proximus;
+use racacax\XmlTv\Component\Provider\RMC;
 use racacax\XmlTv\Component\Provider\SFR;
 use racacax\XmlTv\Component\Provider\SixPlay;
 use racacax\XmlTv\Component\Provider\Tebeosud;
@@ -37,6 +38,7 @@ use racacax\XmlTv\ValueObject\Channel;
 class ProvidersTest extends TestCase
 {
     private static array $TESTED_PROVIDERS_CHANNELS = [
+        [RMC::class, ['channels' => ['BFMTV.fr']]],
         [Bouygues::class, ['channels' => ['TF1.fr']]],
         [DAZN::class, ['channels' => ['DAZNLigue1.fr']]],
         [ICIRadioCanadaTele::class, ['channels' => ['CBAFT.ca']]],
