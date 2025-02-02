@@ -1,0 +1,6 @@
+<!-- racacax\XmlTv\Component\Provider\DummyProvider -->
+<programme start="20241208000000 +0100" stop="20241208010000 +0100" channel="TestChannel.fr">
+<title lang="fr">My Title</title>
+<desc lang="fr">Aucune description</desc>
+<category lang="fr">Inconnu</category>
+</programme>

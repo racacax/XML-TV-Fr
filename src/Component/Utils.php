@@ -238,4 +238,9 @@ class Utils
 
         return false;
     }
+
+    public static function getThreadCommand(string $providerClass, string $date, string $channelInfo, string $fileName, string $generatorId): string {
+        $p = PHP_BINARY;
+        return "$p src/Multithreading/thread.php $providerClass $date ".base64_encode($channelInfo)." $fileName $generatorId";
+    }
 }

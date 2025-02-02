@@ -116,8 +116,7 @@ class ChannelThread
                 flush();
                 $bytes = random_bytes(10);
                 $fileName = bin2hex($bytes);
-                $p = PHP_BINARY;
-                $cmd = "$p src/Multithreading/thread.php $providerClass $date ".base64_encode($this->getChannelInfo())." $fileName $this->generatorId";
+                $cmd = Utils::getThreadCommand($providerClass, $date, $this->getChannelInfo(), $fileName, $this->generatorId);
                 Utils::startCmd($cmd);
                 $channel = 'false';
                 while (true) {

@@ -57,6 +57,8 @@ php manager.php export
 ```
 # Générer le fichier channels.json
 Il est possible de générer depuis votre navigateur le fichier channels.json. Pour cela, placez vous dans le dossier de travail du programme et lancez cette commande
+
+Note : Cette option sera supprimée dans de futures versions.
 ```shell
 php -S localhost:8080 -t tools
 ```

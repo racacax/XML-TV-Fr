@@ -35,6 +35,7 @@ if ($obj === false || $obj->getProgramCount() === 0) {
     $formatter = new XmlFormatter();
     $data = $formatter->formatChannel($obj, $provider);
 }
+// Lock file present to avoid main thread to read file while thread is still writing content into it
 (new ProcessCache('cache'))->save($argv[4].'.lock', '');
 (new ProcessCache('cache'))->save($argv[4], $data);
 (new ProcessCache('cache'))->pop($argv[4].'.lock');
