@@ -48,7 +48,7 @@ class Proximus extends AbstractProvider implements ProviderInterface
         return self::$VERSION;
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
@@ -66,28 +66,13 @@ class Proximus extends AbstractProvider implements ProviderInterface
 
         foreach ($programs as $program) {
             if (!empty($program['program']['VCHIP'])) {
-                switch ($program['program']['VCHIP']) {
-                    case '10':
-                        $csa = '-10';
-
-                        break;
-                    case '12':
-                        $csa = '-12';
-
-                        break;
-                    case '16':
-                        $csa = '-16';
-
-                        break;
-                    case '18':
-                        $csa = '-18';
-
-                        break;
-                    default:
-                        $csa = 'Tout public';
-
-                        break;
-                }
+                $csa = match ($program['program']['VCHIP']) {
+                    '10' => '-10',
+                    '12' => '-12',
+                    '16' => '-16',
+                    '18' => '-18',
+                    default => 'Tout public',
+                };
             } else {
                 $csa = 'Tout public';
             }

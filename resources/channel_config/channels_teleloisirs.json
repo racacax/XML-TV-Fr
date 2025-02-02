@@ -279,9 +279,9 @@
   "3SAT.de": "programme-3sat-10501.html",
   "Bloomberg.uk": "programme-bloomberg-10502.html",
   "CanalPlusPremierLeague.fr": "programme-canalplus-premier-league-10506.html",
-  "CanalPlusTop14.fr": "programme-canalplus-top-14-10507.html",
-  "CanalPlusFormula1.fr": "programme-canalplus-formula-1-10503.html",
-  "CanalPlusMotoGP.fr": "programme-canalplus-moto-gp-10505.html",
+  "CanalPlusLive1.fr": "programme-canalplus-formula-1-10503.html",
+  "CanalPlusLive2.fr": "programme-canalplus-top-14-10507.html",
+  "CanalPlusLive3.fr": "programme-canalplus-moto-gp-10505.html",
   "CanalPlusLigue1.fr": "programme-canalplus-ligue-1-10504.html",
   "ProSieben.de": "programme-pro7-11501.html",
   "StingrayClassica.fr": "programme-stingray-classica-11503.html",
@@ -295,5 +295,6 @@
   "DorcelTV.fr": "programme-dorcel-tv-11524.html",
   "DorcelXXX.fr": "programme-dorcel-xxx-11525.html",
   "ColmaxTV.fr": "programme-colmax-tv-11523.html",
-  "CanalPlusBoxOffice.fr": "programme-canalplus-box-office-11522.html"
+  "CanalPlusBoxOffice.fr": "programme-canalplus-box-office-11522.html",
+  "CStarHitsFrance.fr": "programme-cstar-hits-france-489.html"
 }

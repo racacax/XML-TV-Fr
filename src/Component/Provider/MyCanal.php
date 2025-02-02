@@ -7,7 +7,6 @@ namespace racacax\XmlTv\Component\Provider;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\Psr7\Response;
-use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -16,12 +15,12 @@ use racacax\XmlTv\ValueObject\Program;
 // Edited by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/MyCanal.php
 class MyCanal extends AbstractProvider implements ProviderInterface
 {
-    protected static $apiKey = [];
-    protected $region = 'fr';
-    protected $proxy = null;
+    protected static array $apiKey = [];
+    protected string $region = 'fr';
+    protected mixed $proxy = null;
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        if(isset($extraParam['mycanal_proxy'])) {
+        if (isset($extraParam['mycanal_proxy'])) {
             $this->proxy = $extraParam['mycanal_proxy'];
         }
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal.json'), $priority ?? 0.7);
@@ -29,10 +28,10 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
     protected function getApiKey()
     {
-        if(!isset(self::$apiKey[$this->region])) {
+        if (!isset(self::$apiKey[$this->region])) {
             $result = $this->getContentFromURL('https://www.canalplus.com/' . $this->region . '/programme-tv/');
             $token = @explode('"', explode('"token":"', $result)[1])[0];
-            if(empty($token)) {
+            if (empty($token)) {
                 throw new \Exception('Impossible to retrieve MyCanal API Key');
             }
             self::$apiKey[$this->region] = $token;
@@ -41,7 +40,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         return self::$apiKey[$this->region];
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
@@ -66,7 +65,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $json = json_decode((string)$response['1']->getBody(), true);
         $json2 = json_decode((string)$response['2']->getBody(), true);
 
-        if (!isset($json['timeSlices']) || empty($json['timeSlices'])) {
+        if (empty($json['timeSlices'])) {
             return false;
         }
 
@@ -85,9 +84,10 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $begin = microtime(true);
         $promises = [];
         foreach ($all as $index => $program) {
-            Logger::updateLine(' ' . round($index * 100 / $count, 2) . ' %');
+            $percent = round($index * 100 / $count, 2) . ' %';
+            $this->setStatus($percent);
             $url = $program['onClick']['URLPage'];
-            if(!is_null($this->proxy)) {
+            if (!is_null($this->proxy)) {
                 $url = $this->proxy[0].urlencode(base64_encode($url)).$this->proxy[1];
             }
 
@@ -102,12 +102,11 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         }
 
         foreach ($all as $index => $program) {
-            Logger::updateLine(' '.round($index * 100 / $count, 2).' %');
             $responseBody = null;
-            if(!is_null($response[$program['onClick']['URLPage']])) {
+            if (!is_null($response[$program['onClick']['URLPage']])) {
                 $responseBody = $response[$program['onClick']['URLPage']]->getBody();
             }
-            if(!is_null($responseBody)) {
+            if (!is_null($responseBody)) {
                 $detail = json_decode((string)$responseBody, true);
             } else {
                 $detail = [];
@@ -117,28 +116,13 @@ class MyCanal extends AbstractProvider implements ProviderInterface
 
             $parentalRating = $detail['episodes']['contents'][0]['parentalRatings'][0]['value'] ?? @$detail['detail']['informations']['parentalRatings'][0]['value'];
 
-            switch ($parentalRating) {
-                case '2':
-                    $csa = '-10';
-
-                    break;
-                case '3':
-                    $csa = '-12';
-
-                    break;
-                case '4':
-                    $csa = '-16';
-
-                    break;
-                case '5':
-                    $csa = '-18';
-
-                    break;
-                default:
-                    $csa = 'Tout public';
-
-                    break;
-            }
+            $csa = match ($parentalRating) {
+                '2' => '-10',
+                '3' => '-12',
+                '4' => '-16',
+                '5' => '-18',
+                default => 'Tout public',
+            };
 
             $icon = $detail['episodes']['contents'][0]['URLImage'] ?? @$detail['detail']['informations']['URLImage'];
             $icon = str_replace(['{resolutionXY}', '{imageQualityPercentage}'], ['640x360', '80'], $icon ?? '');
@@ -186,7 +170,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         $day = round(($date->getTimestamp() - strtotime(date('Y-m-d'))) / 86400);
 
         $url = 'https://hodor.canalplus.pro/api/v2/mycanal/channels/' . $this->getApiKey() . '/' . $channelId . '/broadcasts/day/'. $day;
-        if(!is_null($this->proxy)) {
+        if (!is_null($this->proxy)) {
             $url = $this->proxy[0].urlencode(base64_encode($url)).$this->proxy[1];
         }
 

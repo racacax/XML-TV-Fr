@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
-use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -18,7 +17,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_teleloisirs.json'), $priority ?? 0.6);
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
@@ -30,10 +29,10 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
         $count = count($lis);
 
         foreach ($lis as $index => $li) {
-            Logger::updateLine(' '.round($index * 100 / $count, 2).' %');
+            $this->setStatus(round($index * 100 / $count, 2).' %');
             preg_match('/href="(.*?)" title="(.*?)"/', $li, $titlehref);
             preg_match('/srcset="(.*?)"/', $li, $img);
-            if(!isset($img[1])) {
+            if (!isset($img[1])) {
                 $img = '';
             } else {
                 $img = str_replace('64x90', '640x360', explode(' ', $img[1])[0]);

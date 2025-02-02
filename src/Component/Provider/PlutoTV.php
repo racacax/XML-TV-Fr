@@ -6,7 +6,6 @@ namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ChannelFactory;
-use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -37,12 +36,12 @@ class PlutoTV extends AbstractProvider implements ProviderInterface
     }
 
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         if (!$this->channelExists($channel) || empty($sessionToken = $this->getSessionToken())) {
             return false;
         }
-        if($date != date('Y-m-d')) { # Pluto TV only displays EPG for one day
+        if ($date != date('Y-m-d')) { # Pluto TV only displays EPG for one day
             return false;
         }
         $channelObj = ChannelFactory::createChannel($channel);
@@ -50,7 +49,7 @@ class PlutoTV extends AbstractProvider implements ProviderInterface
         $headers = ['Authorization' => 'Bearer '.$sessionToken];
         $count = 6;
         for ($i = 0; $i < $count; $i++) {
-            Logger::updateLine(' '.round($i * 100 / $count, 2).' %');
+            $this->setStatus(round($i * 100 / $count, 2).' %');
             $hour = str_pad(strval($i * 4), 2, '0', STR_PAD_LEFT);
             $content = $this->getContentFromURL(
                 sprintf($this->generateUrl($channelObj, new \DateTimeImmutable($date)), $hour),

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
-use racacax\XmlTv\Component\Logger;
+use racacax\XmlTv\Component\ProviderCache;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -13,7 +13,7 @@ use racacax\XmlTv\ValueObject\Program;
 
 class Telecablesat extends AbstractProvider implements ProviderInterface
 {
-    private static $cache = []; // multiple channels are on the same page
+    private ProviderCache $cache; // multiple channels are on the same page
     private static $BASE_URL = 'https://tv-programme.telecablesat.fr';
     private $loopCounter = 0;
     private static $proxy = ['',''];
@@ -23,9 +23,10 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         if (isset($extraParam['telecablesat_proxy'])) {
             self::$proxy = $extraParam['telecablesat_proxy'];
         }
+        $this->cache = new ProviderCache('telecablesat');
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
@@ -37,22 +38,25 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         if (isset(self::$proxy[0]) && !empty(self::$proxy[0])) {
             $channel_url = urlencode(base64_encode($channel_url));
         }
-        if (!isset(self::$cache[md5($channel_url)])) {
+        $cacheArray = $this->cache->getArray();
+        $channelUrlHash = md5($channel_url);
+        if (!isset($cacheArray[$channelUrlHash])) {
             $res1 = $this->getContentFromURL(self::$proxy[0].$channel_url.self::$proxy[1]);
             if (empty($res1)) {
                 $this->loopCounter++;
                 if ($this->loopCounter > 3) {
                     return false;
                 }
-                Logger::updateLine(" \e[31mRate limited, waiting 30s ($this->loopCounter)\e[39m");
+                $this->setStatus("\e[31mRate limited, waiting 30s ($this->loopCounter)\e[39m");
                 sleep(30);
 
                 return $this->constructEPG($channel, $date);
             }
-            self::$cache[md5($channel_url)] = $res1;
+            $cacheArray[$channelUrlHash] = $res1;
+            $this->cache->setArrayKey($channelUrlHash, $res1);
         }
         $this->loopCounter = 0;
-        $content = self::$cache[md5($channel_url)];
+        $content = $cacheArray[$channelUrlHash];
         preg_match_all('/logos_chaines\/(.*?).png" title="(.*?)"/', $content, $channels);
         $channel_index = array_search($channel_id, $channels[1]);
         if ($channel_index >= 0) {
@@ -68,7 +72,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                 }
                 $retry_counter = 0;
                 for ($i = 0; $i < $count; $i++) {
-                    Logger::updateLine(' '.round($i * 100 / $count, 2).' %');
+                    $this->setStatus(round($i * 100 / $count, 2).' %');
                     $channelObj->addProgram(
                         $program = new Program(intval($times[1][$i]), intval($times[2][$i]))
                     );
@@ -91,7 +95,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                             continue;
                         }
                         $channelObj->popLastProgram();
-                        Logger::updateLine(" \e[31mRate limited, waiting 30s ($retry_counter)\e[39m");
+                        $this->setStatus("\e[31mRate limited, waiting 30s ($retry_counter)\e[39m");
                         sleep(30); // if we are rate limited by website
                         $i--;
 

@@ -33,7 +33,7 @@ class Orange extends AbstractProvider implements ProviderInterface
         $this->timezone = new \DateTimeZone('Europe/Paris');
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = ChannelFactory::createChannel($channel);
         if (!$this->channelExists($channel)) {

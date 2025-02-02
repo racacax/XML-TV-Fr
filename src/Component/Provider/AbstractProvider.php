@@ -6,6 +6,8 @@ namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ChannelFactory;
+use racacax\XmlTv\Component\Logger;
+use racacax\XmlTv\Component\ProcessCache;
 use racacax\XmlTv\ValueObject\Channel;
 
 abstract class AbstractProvider
@@ -25,6 +27,8 @@ abstract class AbstractProvider
      */
     protected static $priority;
 
+    protected string $status;
+
     public function __construct(Client $client, string $jsonPath, float $priority)
     {
         if (empty($this->channelsList) && file_exists($jsonPath)) {
@@ -38,11 +42,22 @@ abstract class AbstractProvider
         //todo: to improve
         self::$priority[static::class] = $priority;
         $this->client = $client;
+        $this->status = '';
     }
 
     public static function getPriority(): float
     {
         return self::$priority[static::class];
+    }
+
+    public function setStatus(string $status)
+    {
+        $this->status = $status;
+        if (defined('CHANNEL_PROCESS')) {
+            (new ProcessCache('status'))->save(CHANNEL_PROCESS, $this->status);
+        } else {
+            Logger::updateLine(' '.$status);
+        }
     }
 
     /**

@@ -24,7 +24,7 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
 
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = ChannelFactory::createChannel($channel);
         if (!$this->channelExists($channel)) {
@@ -52,7 +52,7 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
             $program->addCategory(end($exp));
             $exp = explode('>', $desc[1][1]);
             $desc = end($exp);
-            if(empty($desc)) {
+            if (empty($desc)) {
                 $desc = 'Aucune description';
             }
             $program->addDesc($desc);

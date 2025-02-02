@@ -6,26 +6,11 @@ namespace racacax\XmlTv\Component;
 
 class XmlExporter
 {
-    /**
-     * @var XmlFormatter
-     */
-    private $formatter;
-    /**
-     * @var \DOMDocument
-     */
-    private $content;
-    /**
-     * @var array
-     */
-    private $outputFormat;
-    /**
-     * @var string|null
-     */
-    private $sevenZipPath;
-    /**
-     * @var string
-     */
-    private $filePath;
+    private XmlFormatter $formatter;
+    private \DOMDocument $content;
+    private array $outputFormat;
+    private ?string $sevenZipPath;
+    private string $filePath;
 
     public function __construct(array $outputFormat, ?string $sevenZipPath)
     {
@@ -40,7 +25,7 @@ class XmlExporter
     }
 
 
-    public function startExport(string $filePath)
+    public function startExport(string $filePath): void
     {
         $this->filePath = $filePath;
 
@@ -49,14 +34,14 @@ class XmlExporter
         $this->content->formatOutput = true;
         $this->content->loadXML('<?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE tv SYSTEM "resources/validation/xmltv.dtd">
-    <!-- Generated with XML TV Fr v2.13.1 -->
+    <!-- Generated with XML TV Fr v3.0.0dev3 -->
     <tv/>');
         $this->content->documentElement->setAttribute('source-info-url', 'https://github.com/racacax/XML-TV-Fr');
         $this->content->documentElement->setAttribute('source-info-name', 'XML TV Fr');
         $this->content->documentElement->setAttribute('generator-info-name', 'XML TV Fr');
         $this->content->documentElement->setAttribute('generator-info-url', 'https://github.com/racacax/XML-TV-Fr');
     }
-    public function addChannel($channelKey, $name, $icon)
+    public function addChannel($channelKey, $name, $icon): void
     {
         $channel = new \SimpleXMLElement('<channel/>');
         $channel->addAttribute('id', $channelKey);
@@ -71,7 +56,7 @@ class XmlExporter
         $this->content->documentElement->appendChild($this->content->importNode(dom_import_simplexml($channel), true));
     }
 
-    public function addProgramsAsString(string $programs)
+    public function addProgramsAsString(string $programs): void
     {
         $root = simplexml_load_string("<root>$programs</root>");
         foreach ($root->children() as $child) {
@@ -79,7 +64,7 @@ class XmlExporter
         }
     }
 
-    public function stopExport()
+    public function stopExport(): void
     {
         $this->content->loadXML($this->content->saveXML());
 

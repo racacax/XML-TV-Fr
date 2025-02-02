@@ -32,7 +32,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
         return hash_hmac('sha1', $url, self::$HASH_KEY);
     }
 
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
