@@ -19,13 +19,19 @@ class CacheFile
      * This bool help to ignore (and remove) the cache of the day
      */
     private bool $forceTodayGrab;
+    private int $minTimeRange;
+    public static int $NO_CACHE = 0;
+    public static int $OBSOLETE_CACHE = 1;
+    public static int $PARTIAL_CACHE = 2;
+    public static int $FULL_CACHE = 3;
 
-    public function __construct(string $basePath, bool $forceTodayGrab)
+    public function __construct(string $basePath, bool $forceTodayGrab, int $minTimeRange)
     {
         @mkdir($basePath, 0777, true);
 
         $this->basePath = rtrim($basePath, DIRECTORY_SEPARATOR);
         $this->forceTodayGrab = $forceTodayGrab;
+        $this->minTimeRange = $minTimeRange;
     }
 
     /**
@@ -41,44 +47,54 @@ class CacheFile
         $this->createdKeys[$key] = true;
         $this->listFile[$key] = [
             'file' => $fileName,
-            'key' => $key
+            'key' => $key,
+            'state' => $this->has($key)
         ];
     }
 
-    public function has(string $key, bool $preventClear = false): bool
+    private function getFileName(string $key): string
+    {
+        return $this->basePath . DIRECTORY_SEPARATOR . $key;
+    }
+    private function getFileContent(string $key): string
+    {
+
+        return file_get_contents($this->getFileName($key));
+    }
+
+    public function has(string $key): int
     {
         if (isset($this->listFile[$key])) {
-            return true;
-        }
-        $fileName = $this->basePath . DIRECTORY_SEPARATOR . $key;
-        $allowClear = !$preventClear && $this->forceTodayGrab;
-        if ($allowClear && str_contains($key, date('Y-m-d')) && !isset($this->createdKeys[$key])) {
-            $this->createdKeys[$key] = true;
-
-            return false;
-        }
-        if (file_exists($fileName)) {
-            $this->listFile[$key] = [
-                'file' => $fileName,
-                'key' => $key
-            ];
-
-            return true;
+            return ($this->listFile[$key]['state']);
         }
 
-        return false;
+        if (str_contains($key, date('Y-m-d')) && $this->forceTodayGrab && !isset($this->createdKeys[$key])) {
+            return self::$OBSOLETE_CACHE;
+        }
+        if (file_exists($this->getFileName($key))) {
+            $timeRange = Utils::getTimeRangeFromXMLString($this->getFileContent($key));
+
+            $cacheState = self::$FULL_CACHE;
+            if ($timeRange < $this->minTimeRange) {
+                $cacheState = self::$PARTIAL_CACHE;
+            }
+
+            return $cacheState;
+        }
+
+        return self::$NO_CACHE;
     }
 
     /**
      * @throws Exception
      */
-    public function get(string $key, bool $preventClear = false): string
+    public function get(string $key): string
     {
-        if (!$this->has($key, $preventClear)) {
+        if (!$this->has($key)) {
             throw new Exception("Cache '$key' not found");
         }
 
-        return file_get_contents($this->listFile[$key]['file']);
+        return $this->getFileContent($key);
     }
 
 

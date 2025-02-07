@@ -245,4 +245,17 @@ class Utils
 
         return "$p src/Multithreading/thread.php $providerClass $date ".base64_encode($channelInfo)." $fileName $generatorId";
     }
+
+    public static function getTimeRangeFromXMLString(string $xmlContent): int
+    {
+        preg_match_all('/start="(.*?)"/', $xmlContent, $startDates);
+        $startDates = array_map('strtotime', $startDates[1]);
+        preg_match_all('/stop="(.*?)"/', $xmlContent, $endDates);
+        $endDates = array_map('strtotime', $endDates[1]);
+        if (count($endDates) == 0 || count($startDates) == 0) {
+            return 0;
+        }
+
+        return max($endDates) - min($startDates);
+    }
 }
