@@ -107,7 +107,7 @@ class Cogeco extends AbstractProvider implements ProviderInterface
             $duration = intval(explode('(', explode(' ', $details[1][2])[0])[1]);
             $endTimeObj = $startTimeObj->modify('+'.$duration.' minutes');
             $program = new Program($startTimeObj->getTimestamp(), $endTimeObj->getTimestamp());
-            $program->addTitle(trim($title[1] ?? 'Aucun titre'));
+            $program->addTitle(trim($title[1]));
             $program->addSubtitle(trim($subtitle[1] ?? 'Aucun sous-titre'));
             $program->setIcon('https:'.($img[1] ?? ''));
             $program->addDesc($description[1] ?? 'Aucune description');
