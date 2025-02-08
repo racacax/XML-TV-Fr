@@ -154,7 +154,7 @@ abstract class Generator
                 ));
             }
             foreach ($listCacheKey as $keyCache) {
-                if (!$this->cache->has($keyCache)) {
+                if (!$this->cache->getState($keyCache)) {
                     continue;
                 }
                 $cache = $this->cache->get($keyCache);

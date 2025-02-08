@@ -88,7 +88,7 @@ class ChannelThread
             $this->date = $date." ($progress/$total)";
             $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
 
-            if ($cache->has($cacheKey) == CacheFile::$FULL_CACHE) {
+            if ($cache->getState($cacheKey) == CacheFile::$FULL_CACHE) {
                 Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, 'Cache', true);
 
                 continue;
@@ -152,7 +152,7 @@ class ChannelThread
             }
 
             if (!$channelFound) {
-                if ($cache->has($cacheKey)) {
+                if ($cache->getState($cacheKey)) {
                     Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, 'Forced Cache', true);
                 } elseif ($this->generator->createEpgIfNotFound()) {
                     $cache->store($cacheKey, $this->generator->getFormatter()->formatChannel(new DummyChannel($this->channel, $date), null));

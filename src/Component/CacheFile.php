@@ -48,7 +48,7 @@ class CacheFile
         $this->listFile[$key] = [
             'file' => $fileName,
             'key' => $key,
-            'state' => $this->has($key)
+            'state' => $this->getState($key)
         ];
     }
 
@@ -62,16 +62,16 @@ class CacheFile
         return file_get_contents($this->getFileName($key));
     }
 
-    public function has(string $key): int
+    public function getState(string $key): int
     {
         if (isset($this->listFile[$key])) {
             return ($this->listFile[$key]['state']);
         }
-
+        $exists = file_exists($this->getFileName($key));
         if (str_contains($key, date('Y-m-d')) && $this->forceTodayGrab && !isset($this->createdKeys[$key])) {
-            return self::$OBSOLETE_CACHE;
+            return $exists ? self::$OBSOLETE_CACHE : self::$NO_CACHE;
         }
-        if (file_exists($this->getFileName($key))) {
+        if ($exists) {
             $timeRange = Utils::getTimeRangeFromXMLString($this->getFileContent($key));
 
             $cacheState = self::$FULL_CACHE;
@@ -90,7 +90,7 @@ class CacheFile
      */
     public function get(string $key): string
     {
-        if (!$this->has($key)) {
+        if (!$this->getState($key)) {
             throw new Exception("Cache '$key' not found");
         }
 
@@ -103,11 +103,13 @@ class CacheFile
      */
     public function clear(string $key): bool
     {
-        if (!$this->has($key)) {
+        if (!$this->getState($key)) {
             throw new Exception("Cache '$key' not found");
         }
-        $file = $this->listFile[$key]['file'];
-        unset($this->listFile[$key]);
+        $file = $this->getFileName($key);
+        if (in_array($key, $this->listFile)) {
+            unset($this->listFile[$key]);
+        }
 
         return unlink($file);
     }

@@ -30,9 +30,9 @@ class CacheFileTest extends TestCase
         $cache = new CacheFile($this->testFolder, false, 0);
         $fileName = $this->generateCacheFileName();
         $content = uniqid();
-        $this->assertEquals($cache->has($fileName), CacheFile::$NO_CACHE);
+        $this->assertEquals($cache->getState($fileName), CacheFile::$NO_CACHE);
         $cache->store($fileName, $content);
-        $this->assertEquals($cache->has($fileName), CacheFile::$FULL_CACHE);
+        $this->assertEquals($cache->getState($fileName), CacheFile::$FULL_CACHE);
         $this->assertSame($content, $cache->get($fileName));
     }
 
@@ -43,7 +43,7 @@ class CacheFileTest extends TestCase
         $content = uniqid();
         // create file
         file_put_contents($this->testFolder.'/'.$fileName, $content);
-        $this->assertEquals($cache->has($fileName), CacheFile::$FULL_CACHE);
+        $this->assertEquals($cache->getState($fileName), CacheFile::$FULL_CACHE);
         $this->assertSame($content, $cache->get($fileName));
     }
     public function testCacheWithMinTimeRange(): void
@@ -53,7 +53,7 @@ class CacheFileTest extends TestCase
         $content = uniqid();
         // create file
         file_put_contents($this->testFolder.'/'.$fileName, $content);
-        $this->assertEquals($cache->has($fileName), CacheFile::$PARTIAL_CACHE);
+        $this->assertEquals($cache->getState($fileName), CacheFile::$PARTIAL_CACHE);
         $this->assertSame($content, $cache->get($fileName));
     }
 
@@ -64,7 +64,7 @@ class CacheFileTest extends TestCase
         $content = uniqid();
         // create file
         file_put_contents($this->testFolder.'/'.$fileName, $content);
-        $this->assertEquals($cache->has($fileName), CacheFile::$OBSOLETE_CACHE);
+        $this->assertEquals($cache->getState($fileName), CacheFile::$OBSOLETE_CACHE);
     }
 
 
