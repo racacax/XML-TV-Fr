@@ -6,6 +6,7 @@ namespace racacax\XmlTvTest\Integration;
 
 use PHPUnit\Framework\TestCase;
 use racacax\XmlTv\Component\Provider\Bouygues;
+use racacax\XmlTv\Component\Provider\Cogeco;
 use racacax\XmlTv\Component\Provider\DAZN;
 use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
 use racacax\XmlTv\Component\Provider\MyCanal;
@@ -38,6 +39,7 @@ use racacax\XmlTv\ValueObject\Channel;
 class ProvidersTest extends TestCase
 {
     private static array $TESTED_PROVIDERS_CHANNELS = [
+        [Cogeco::class, ['channels' => ['CBFT.ca']]],
         [RMC::class, ['channels' => ['BFMTV.fr']]],
         [Bouygues::class, ['channels' => ['TF1.fr']]],
         [DAZN::class, ['channels' => ['DAZNLigue1.fr']]],

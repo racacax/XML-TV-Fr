@@ -26,7 +26,7 @@ class SingleThreadedGenerator extends Generator
                     $cacheKey = sprintf('%s_%s.xml', $channelKey, $date);
                     Logger::log(sprintf("\e[95m[EPG GRAB] \e[39m%s (%d/%d) : %s", $channelKey, $countChannel, count($channels), $date));
 
-                    if ($this->cache->has($cacheKey)) {
+                    if ($this->cache->getState($cacheKey) == CacheFile::$FULL_CACHE) {
                         Logger::log(" | \e[33mOK \e[39m- From Cache " . chr(10));
                         Logger::setChannelSuccessfulProvider($guide['channels'], $channelKey, $date, 'Cache', true);
 
@@ -60,7 +60,7 @@ class SingleThreadedGenerator extends Generator
                     }
 
                     if (!$channelFound) {
-                        if ($this->cache->has($cacheKey, true)) {
+                        if ($this->cache->getState($cacheKey)) {
                             Logger::setChannelSuccessfulProvider($guide['channels'], $channelKey, $date, 'Forced Cache', true);
                             Logger::log(" | \e[33mOK \e[39m- From Cache (Forced)" . chr(10));
                         } else {

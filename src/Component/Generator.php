@@ -154,10 +154,10 @@ abstract class Generator
                 ));
             }
             foreach ($listCacheKey as $keyCache) {
-                if (!$this->cache->has($keyCache, true)) {
+                if (!$this->cache->getState($keyCache)) {
                     continue;
                 }
-                $cache = $this->cache->get($keyCache, true);
+                $cache = $this->cache->get($keyCache);
                 $channelId = explode('_', $keyCache)[0];
                 if (array_key_exists($channelId, $listAliases)) {
                     $cache = str_replace('channel="' . $channelId . '"', 'channel="' . $listAliases[$channelId] . '"', $cache);

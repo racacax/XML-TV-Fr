@@ -27,34 +27,44 @@ class CacheFileTest extends TestCase
 
     public function testCache(): void
     {
-        $cache = new CacheFile($this->testFolder, false);
+        $cache = new CacheFile($this->testFolder, false, 0);
         $fileName = $this->generateCacheFileName();
         $content = uniqid();
-        $this->assertFalse($cache->has($fileName));
+        $this->assertEquals($cache->getState($fileName), CacheFile::$NO_CACHE);
         $cache->store($fileName, $content);
-        $this->assertTrue($cache->has($fileName));
+        $this->assertEquals($cache->getState($fileName), CacheFile::$FULL_CACHE);
         $this->assertSame($content, $cache->get($fileName));
     }
 
     public function testCacheWithoutForceTodayGrab(): void
     {
-        $cache = new CacheFile($this->testFolder, false);
+        $cache = new CacheFile($this->testFolder, false, 0);
         $fileName = $this->generateCacheFileName();
         $content = uniqid();
         // create file
         file_put_contents($this->testFolder.'/'.$fileName, $content);
-        $this->assertTrue($cache->has($fileName));
+        $this->assertEquals($cache->getState($fileName), CacheFile::$FULL_CACHE);
+        $this->assertSame($content, $cache->get($fileName));
+    }
+    public function testCacheWithMinTimeRange(): void
+    {
+        $cache = new CacheFile($this->testFolder, false, 3600);
+        $fileName = $this->generateCacheFileName();
+        $content = uniqid();
+        // create file
+        file_put_contents($this->testFolder.'/'.$fileName, $content);
+        $this->assertEquals($cache->getState($fileName), CacheFile::$PARTIAL_CACHE);
         $this->assertSame($content, $cache->get($fileName));
     }
 
     public function testInvalidationCache(): void
     {
-        $cache = new CacheFile($this->testFolder, true);
+        $cache = new CacheFile($this->testFolder, true, 0);
         $fileName = $this->generateCacheFileName();
         $content = uniqid();
         // create file
         file_put_contents($this->testFolder.'/'.$fileName, $content);
-        $this->assertFalse($cache->has($fileName));
+        $this->assertEquals($cache->getState($fileName), CacheFile::$OBSOLETE_CACHE);
     }
 
 

@@ -50,6 +50,7 @@ class Configurator
     private array $providerList;
 
     private int $nbThreads;
+    private int $minTimeRange;
 
     /**
      * @param int $nbDays Number of days XML TV will try to get EPG
@@ -85,6 +86,7 @@ class Configurator
         ?string $zipBinPath = null,
         bool    $forceTodayGrab = false,
         int     $nbThreads = 1,
+        int     $minTimeRange = 22 * 3600,
         array   $extraParams = []
     ) {
         if (isset($timeLimit)) {
@@ -109,6 +111,7 @@ class Configurator
         $this->forceTodayGrab = $forceTodayGrab;
         $this->extraParams = $extraParams;
         $this->nbThreads = $nbThreads;
+        $this->minTimeRange = $minTimeRange;
     }
 
     public static function initFromConfigFile(string $filePath): self
@@ -149,6 +152,7 @@ class Configurator
             $data['7zip_path'] ?? null,
             $data['force_todays_grab'] ?? false,
             $data['nb_threads'] ?? 1,
+            $data['min_timerange'] ?? 22 * 3600, # 22h
             $data['extra_params'] ?? []
         );
     }
@@ -273,6 +277,11 @@ class Configurator
         return $this->nbThreads;
     }
 
+    public function getMinTimeRange(): int
+    {
+        return $this->minTimeRange;
+    }
+
     public function getGenerator(): Generator
     {
         $begin = new \DateTimeImmutable(date('Y-m-d', strtotime('-1 day')));
@@ -303,7 +312,7 @@ class Configurator
         }
 
         $generator->setExporter(new XmlExporter($outputFormat, $this->zipBinPath));
-        $generator->setCache(new CacheFile('var/cache', $this->forceTodayGrab));
+        $generator->setCache(new CacheFile('var/cache', $this->forceTodayGrab, $this->minTimeRange));
         $generator->addGuides($this->guidesToGenerate);
 
 

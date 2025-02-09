@@ -18,7 +18,7 @@ class ICIRadioCanadaTele extends AbstractProvider implements ProviderInterface
 {
     public function __construct(Client $client, ?float $priority = null)
     {
-        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_iciradiocanada.json'), $priority ?? 0.6);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_iciradiocanada.json'), $priority ?? 0.65);
     }
 
     public function constructEPG(string $channel, string $date): Channel|bool

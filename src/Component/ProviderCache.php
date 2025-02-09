@@ -10,7 +10,6 @@ class ProviderCache
     private string $file;
     public function __construct(string $file)
     {
-        @mkdir(self::$PATH, 0777, true);
         $this->file = $file;
     }
 
@@ -41,6 +40,7 @@ class ProviderCache
 
     public function setContent(string $content): void
     {
+        @mkdir(self::$PATH, 0777, true);
         file_put_contents(self::$PATH.$this->file, $content);
     }
 
