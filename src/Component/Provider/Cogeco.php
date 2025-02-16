@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use Exception;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ProviderCache;
 use racacax\XmlTv\Component\ProviderInterface;
@@ -13,18 +14,38 @@ use racacax\XmlTv\ValueObject\Program;
 
 /*
  * @author Racacax
- * @version 0.1 : 08/02/2024
+ * @version 0.2 : 15/02/2024
  */
 class Cogeco extends AbstractProvider implements ProviderInterface
 {
     protected ProviderCache $jsonPerDay;
-    protected static string $COOKIE_VALUE = '823D';
+    protected static string $COOKIE_VALUE = '823D'; // for Toronto Postal Code
+    protected static array $CATEGORIES_BY_CSS = ['tvm_td_grd_s' => 'Sport', 'tvm_td_grd_r' => 'Télé-Réalité', 'tvm_td_grd_m' => 'Cinéma']; // Color codes for these categories
+    protected static array $CATEGORIES_IN_TITLE = ['Cinéma']; // Some titles are only present in subtitles and has the category as a title
     public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_cogeco.json'), $priority ?? 0.61);
         $this->jsonPerDay = new ProviderCache('cogecoCache');
     }
 
+    protected function hasCategoryAsTitle(string $title)
+    {
+        return in_array($title, self::$CATEGORIES_IN_TITLE);
+    }
+    protected function getCategory(string $html)
+    {
+        foreach (self::$CATEGORIES_BY_CSS as $cssClass => $category) {
+            if (str_contains($html, $cssClass)) {
+                return $category;
+            }
+        }
+
+        return 'Inconnu';
+    }
+
+    /**
+     * @throws Exception
+     */
     public function constructEPG(string $channel, string $date): Channel|bool
     {
         $channelObj = parent::constructEPG($channel, $date);
@@ -38,6 +59,7 @@ class Cogeco extends AbstractProvider implements ProviderInterface
             return false;
         }
         $programsPaths = [];
+        $programCategories = [];
         $count = 4;
         $span = 6;
         for ($i = 0; $i < $count; $i++) {
@@ -63,13 +85,16 @@ class Cogeco extends AbstractProvider implements ProviderInterface
             $found = false;
             foreach ($channelRows as $channelRow) {
                 preg_match('/tvm_txt_chan_name">(.*?)<\/span>/', $channelRow, $channelIdName);
+                preg_match('/tvm_txt_chan_num">(.*?)<\/span>/', $channelRow, $channelNumber);
                 $channelIdName = $channelIdName[1];
-                if ($channelIdName == $channelId) {
+                $channelNumber = intval($channelNumber[1]);
+                if ($channelIdName == $channelId || $channelNumber == $channelId) {
                     $found = true;
-                    preg_match_all('/prgm_details\((.*?)\)/', $channelRow, $paths);
-                    foreach ($paths[1] as $path) {
+                    preg_match_all('/class=\"(.*?)\".*?onclick=\"prgm_details\((.*?)\)/', $channelRow, $paths);
+                    foreach ($paths[2] as $key => $path) {
                         if (!in_array($path, $programsPaths)) {
                             $programsPaths[] = $path;
+                            $programCategories[] = $this->getCategory($paths[1][$key]);
                         }
                     }
 
@@ -107,9 +132,18 @@ class Cogeco extends AbstractProvider implements ProviderInterface
             $duration = intval(explode('(', explode(' ', $details[1][2])[0])[1]);
             $endTimeObj = $startTimeObj->modify('+'.$duration.' minutes');
             $program = new Program($startTimeObj->getTimestamp(), $endTimeObj->getTimestamp());
-            $program->addTitle(trim($title[1]));
-            $program->addSubtitle(trim($subtitle[1] ?? 'Aucun sous-titre'));
-            $program->setIcon('https:'.($img[1] ?? ''));
+            $title = trim($title[1]);
+            $subtitle = trim($subtitle[1] ?? '');
+            if ($this->hasCategoryAsTitle($title) && strlen($subtitle) > 0) {
+                $program->addTitle($subtitle);
+            } else {
+                $program->addTitle($title);
+                if (strlen($subtitle) > 0) {
+                    $program->addSubtitle($subtitle);
+                }
+            }
+            $program->setIcon('https:'.(str_replace('240x135', '1280x720', $img[1] ?? '')));
+            $program->addCategory($programCategories[$index]);
             $program->addDesc($description[1] ?? 'Aucune description');
             $channelObj->addProgram($program);
         }

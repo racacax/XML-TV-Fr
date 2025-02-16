@@ -27,6 +27,7 @@ use racacax\XmlTv\Component\Provider\Telerama;
 use racacax\XmlTv\Component\Provider\TV5;
 use racacax\XmlTv\Component\Provider\TV5Global;
 use racacax\XmlTv\Component\Provider\TVHebdo;
+use racacax\XmlTv\Component\Provider\VirginPlus;
 use racacax\XmlTv\Component\Provider\Voo;
 use racacax\XmlTv\Component\Utils;
 use racacax\XmlTv\Component\XmlFormatter;
@@ -39,6 +40,7 @@ use racacax\XmlTv\ValueObject\Channel;
 class ProvidersTest extends TestCase
 {
     private static array $TESTED_PROVIDERS_CHANNELS = [
+        [VirginPlus::class, ['channels' => ['CBFT.ca']]],
         [Cogeco::class, ['channels' => ['CBFT.ca']]],
         [RMC::class, ['channels' => ['BFMTV.fr']]],
         [Bouygues::class, ['channels' => ['TF1.fr']]],
