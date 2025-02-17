@@ -87,7 +87,7 @@ class Cogeco extends AbstractProvider implements ProviderInterface
                 preg_match('/tvm_txt_chan_name">(.*?)<\/span>/', $channelRow, $channelIdName);
                 preg_match('/tvm_txt_chan_num">(.*?)<\/span>/', $channelRow, $channelNumber);
                 $channelIdName = $channelIdName[1];
-                $channelNumber = intval($channelNumber[1]);
+                $channelNumber = str_replace('&nbsp;', '', $channelNumber[1]);
                 if ($channelIdName == $channelId || $channelNumber == $channelId) {
                     $found = true;
                     preg_match_all('/class=\"(.*?)\".*?onclick=\"prgm_details\((.*?)\)/', $channelRow, $paths);

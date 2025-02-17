@@ -70,13 +70,15 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
 
                 return;
             }
-            $cache->setArrayKey('hasFailed', true);
             $message = 'Unknown error';
         } catch (\Throwable $e) {
             $message = $e->getMessage();
         }
+        $cache->setArrayKey('hasFailed', true);
         // If we fail to configure provider, it will just get ignored
-        echo Utils::colorize(sprintf("Failed to configure Virgin Plus provider: %s\n", $message), 'red');
+        if (!defined('CHANNEL_PROCESS')) {
+            echo Utils::colorize(sprintf("Failed to configure Virgin Plus provider: %s\n", $message), 'red');
+        }
     }
 
     /**
@@ -156,8 +158,8 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
                 if (@$program['episodeTitle']) {
                     $programObj->addSubtitle($program['episodeTitle']);
                 }
-                $rating = explode('-', $program['rating']);
-                $rating = end($rating) ?? '';
+                $rating = explode('-', $program['rating'] ?? '');
+                $rating = end($rating);
                 $ratingSystem = Utils::getCanadianRatingSystem($rating, $program['language']);
                 if ($ratingSystem) {
                     $programObj->setRating($rating, $ratingSystem);
