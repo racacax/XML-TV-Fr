@@ -62,9 +62,8 @@ abstract class AbstractProvider
 
     /**
      * @return Channel|false
-     * @deprecated it will be removed
      */
-    public function constructEPG(string $channel, string $date)
+    public function constructEPG(string $channel, string $date): Channel|bool
     {
         return ChannelFactory::createChannel($channel);
     }

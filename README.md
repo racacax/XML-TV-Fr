@@ -46,7 +46,8 @@ Le fichier config.json est au format JSON.
   "enable_dummy" : false, // Afficher un EPG mire en cas d'absence de guide pour une chaine 
   "custom_priority_orders" : {"Telerama": 0.2, "UltraNature": 0.5}, // Modifier l'ordre de priorité pour certains services globalement
   "guides_to_generate" : [{"channels": "config/channels.json", "filename": "xmltv.xml"}] // liste des XML à générer. Pour chaque élément, `channels` indique le fichier des chaines et `filename` le nom du fichier de sortie,
-  "nb_threads": 3 // Nombre de threads en parallèle. Par défaut 1. Le multithreading nécessite la possibilité d'utiliser shell
+  "nb_threads": 3, // Nombre de threads en parallèle. Par défaut 1. Le multithreading nécessite la possibilité d'utiliser shell
+  "min_timerange": 79200 // (22h) Plage horaire minimum d'un fichier de cache pour qu'il soit considéré complet (évite les fichiers partiels). 
 }
 ```
 
