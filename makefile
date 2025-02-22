@@ -1,6 +1,6 @@
 
 PHONY: quality
-quality: cs-fix test phpstan
+quality: cs-fix phpstan test
 
 
 PHONY: cs-fix

@@ -9,6 +9,7 @@ use racacax\XmlTv\Component\Provider\Bouygues;
 use racacax\XmlTv\Component\Provider\Cogeco;
 use racacax\XmlTv\Component\Provider\DAZN;
 use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
+use racacax\XmlTv\Component\Provider\LEquipeLive;
 use racacax\XmlTv\Component\Provider\MyCanal;
 use racacax\XmlTv\Component\Provider\NouvelObs;
 use racacax\XmlTv\Component\Provider\Orange;
@@ -63,7 +64,7 @@ class ProvidersTest extends TestCase
         [Voo::class, ['channels' => ['TF1.fr']]],
         [TVHebdo::class, ['channels' => ['RDS.ca']]],
     ];
-    private static array $IGNORED_PROVIDERS = [PlutoTV::class, Teleboy::class];
+    private static array $IGNORED_PROVIDERS = [PlutoTV::class, Teleboy::class, LEquipeLive::class];
 
     /**
      * All Providers must have at least a channel to gather or to have specifically been ignored
