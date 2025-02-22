@@ -7578,5 +7578,37 @@
   "TSN4KS.ca": {
     "name": "TSN4KS",
     "icon": "https:\/\/cdn.tvpassport.com\/image\/station\/640x360\/spacer.gif"
+  },
+  "LEquipeLive1.fr": {
+    "name": "L'Equipe Live 1",
+    "icon": "https:\/\/i.imgur.com\/vxoiXmc.png"
+  },
+  "LEquipeLive2.fr": {
+    "name": "L'Equipe Live 2",
+    "icon": "https:\/\/i.imgur.com\/vxoiXmc.png"
+  },
+  "LEquipeLive3.fr": {
+    "name": "L'Equipe Live 3",
+    "icon": "https:\/\/i.imgur.com\/vxoiXmc.png"
+  },
+  "LEquipeLive4.fr": {
+    "name": "L'Equipe Live 4",
+    "icon": "https:\/\/i.imgur.com\/vxoiXmc.png"
+  },
+  "LEquipeLive5.fr": {
+    "name": "L'Equipe Live 5",
+    "icon": "https:\/\/i.imgur.com\/vxoiXmc.png"
+  },
+  "LEquipeLive6.fr": {
+    "name": "L'Equipe Live 6",
+    "icon": "https:\/\/i.imgur.com\/vxoiXmc.png"
+  },
+  "LEquipeLive7.fr": {
+    "name": "L'Equipe Live 7",
+    "icon": "https:\/\/i.imgur.com\/vxoiXmc.png"
+  },
+  "LEquipeLiveFoot.fr": {
+    "name": "L'Equipe Live Foot",
+    "icon": "https:\/\/i.imgur.com\/vxoiXmc.png"
   }
 }
