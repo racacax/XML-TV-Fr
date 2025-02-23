@@ -248,6 +248,10 @@ class Utils
 
     public static function getTimeRangeFromXMLString(string $xmlContent): int
     {
+        /*
+         * Returns the difference between earliest start time and latest start time
+         * of an XML cache file, in seconds.
+        */
         preg_match_all('/start="(.*?)"/', $xmlContent, $startDates);
         $startDates = array_map('strtotime', $startDates[1]);
         preg_match_all('/stop="(.*?)"/', $xmlContent, $endDates);
@@ -257,5 +261,16 @@ class Utils
         }
 
         return max($endDates) - min($startDates);
+    }
+
+    public static function getCanadianRatingSystem(string $rating, $lang = 'fr'): ?string
+    {
+        if (in_array($rating, ['PG', '14A', '18A', 'R', 'A']) || ($rating == 'G' && $lang == 'en')) {
+            return 'CHVRS';
+        } elseif (in_array($rating, ['G', '13', '16', '18'])) {
+            return 'RCQ';
+        }
+
+        return null;
     }
 }

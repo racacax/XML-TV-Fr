@@ -30,8 +30,6 @@ class Configurator
 
     private bool $enableXz;
 
-    private int $xmlCacheDays;
-
     private bool $enableDummy;
 
     private array $customPriorityOrders;
@@ -62,7 +60,6 @@ class Configurator
      * @param bool $enableGz enable gz compression for the XMLTV
      * @param bool $enableZip enable zip compression for the XMLTV
      * @param bool $enableXz enable XZ compression for the XMLTV (need 7zip)
-     * @param int $xmlCacheDays How many days old XML are stored
      * @param bool $enableDummy Add a dummy EPG if channel not found
      * @param array $customPriorityOrders Add a custom priority order for a provider globally
      * @param array|string[][] $guides_to_generate list of xmltv to generate
@@ -79,7 +76,6 @@ class Configurator
         bool    $enableGz = true,
         bool    $enableZip = true,
         bool    $enableXz = false,
-        int     $xmlCacheDays = 5,
         bool    $enableDummy = false,
         array   $customPriorityOrders = [],
         array   $guides_to_generate = [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
@@ -103,7 +99,6 @@ class Configurator
         $this->enableGz = $enableGz;
         $this->enableZip = $enableZip;
         $this->enableXz = $enableXz;
-        $this->xmlCacheDays = $xmlCacheDays;
         $this->enableDummy = $enableDummy;
         $this->customPriorityOrders = $customPriorityOrders;
         $this->guidesToGenerate = $guides_to_generate;
@@ -145,7 +140,6 @@ class Configurator
             $data['enable_gz'] ?? true,
             $data['enable_zip'] ?? true,
             $data['enable_xz'] ?? false,
-            $data['xml_cache_days'] ?? 5,
             $data['enable_dummy'] ?? false,
             $data['custom_priority_orders'] ?? [],
             $data['guides_to_generate'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
@@ -195,14 +189,6 @@ class Configurator
     public function isEnableXz(): bool
     {
         return $this->enableXz;
-    }
-
-    /**
-     * @return int
-     */
-    public function getXmlCacheDays(): int
-    {
-        return $this->xmlCacheDays;
     }
 
     /**
@@ -312,7 +298,7 @@ class Configurator
         }
 
         $generator->setExporter(new XmlExporter($outputFormat, $this->zipBinPath));
-        $generator->setCache(new CacheFile('var/cache', $this->forceTodayGrab, $this->minTimeRange));
+        $generator->setCache(new CacheFile('var/cache', $this));
         $generator->addGuides($this->guidesToGenerate);
 
 

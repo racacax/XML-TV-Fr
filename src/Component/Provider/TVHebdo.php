@@ -122,11 +122,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
             preg_match('/src="(.*?)"/', $img_zone, $img_url);
             $program->setIcon(@$img_url[1]);
             if (isset($rating) && strlen($rating) > 0 && strlen($rating) < 4) {
-                if (in_array($rating, ['PG', '14A', '18A', 'R', 'A']) || ($rating == 'G' && $lang == 'en')) {
-                    $rating_system = 'CHVRS';
-                } elseif (in_array($rating, ['G', '13', '16', '18'])) {
-                    $rating_system = 'RCQ';
-                }
+                $rating_system = \racacax\XmlTv\Component\Utils::getCanadianRatingSystem($rating, $lang);
                 if (isset($rating_system)) {
                     $program->setRating($rating, $rating_system);
                 }

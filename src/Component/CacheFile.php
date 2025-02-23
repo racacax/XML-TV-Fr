@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component;
 
 use Exception;
+use racacax\XmlTv\Configurator;
 
 class CacheFile
 {
@@ -18,20 +19,18 @@ class CacheFile
     /**
      * This bool help to ignore (and remove) the cache of the day
      */
-    private bool $forceTodayGrab;
-    private int $minTimeRange;
+    private Configurator $config;
     public static int $NO_CACHE = 0;
     public static int $OBSOLETE_CACHE = 1;
     public static int $PARTIAL_CACHE = 2;
     public static int $FULL_CACHE = 3;
 
-    public function __construct(string $basePath, bool $forceTodayGrab, int $minTimeRange)
+    public function __construct(string $basePath, Configurator $config)
     {
         @mkdir($basePath, 0777, true);
 
         $this->basePath = rtrim($basePath, DIRECTORY_SEPARATOR);
-        $this->forceTodayGrab = $forceTodayGrab;
-        $this->minTimeRange = $minTimeRange;
+        $this->config = $config;
     }
 
     /**
@@ -68,14 +67,14 @@ class CacheFile
             return ($this->listFile[$key]['state']);
         }
         $exists = file_exists($this->getFileName($key));
-        if (str_contains($key, date('Y-m-d')) && $this->forceTodayGrab && !isset($this->createdKeys[$key])) {
+        if (str_contains($key, date('Y-m-d')) && $this->config->isForceTodayGrab() && !isset($this->createdKeys[$key])) {
             return $exists ? self::$OBSOLETE_CACHE : self::$NO_CACHE;
         }
         if ($exists) {
             $timeRange = Utils::getTimeRangeFromXMLString($this->getFileContent($key));
 
             $cacheState = self::$FULL_CACHE;
-            if ($timeRange < $this->minTimeRange) {
+            if ($timeRange < $this->config->getMinTimeRange()) {
                 $cacheState = self::$PARTIAL_CACHE;
             }
 

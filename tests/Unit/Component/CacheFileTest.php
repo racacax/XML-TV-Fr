@@ -6,13 +6,14 @@ namespace racacax\XmlTvTest\Unit\Component;
 
 use PHPUnit\Framework\TestCase;
 use racacax\XmlTv\Component\CacheFile;
+use racacax\XmlTv\Configurator;
 
 class CacheFileTest extends TestCase
 {
     /**
      * @var string
      */
-    private $testFolder = 'var/test';
+    private string $testFolder = 'var/test';
 
     public function setUp(): void
     {
@@ -27,7 +28,8 @@ class CacheFileTest extends TestCase
 
     public function testCache(): void
     {
-        $cache = new CacheFile($this->testFolder, false, 0);
+        $config = new Configurator(forceTodayGrab: false, minTimeRange: 0);
+        $cache = new CacheFile($this->testFolder, $config);
         $fileName = $this->generateCacheFileName();
         $content = uniqid();
         $this->assertEquals($cache->getState($fileName), CacheFile::$NO_CACHE);
@@ -38,7 +40,8 @@ class CacheFileTest extends TestCase
 
     public function testCacheWithoutForceTodayGrab(): void
     {
-        $cache = new CacheFile($this->testFolder, false, 0);
+        $config = new Configurator(forceTodayGrab: false, minTimeRange: 0);
+        $cache = new CacheFile($this->testFolder, $config);
         $fileName = $this->generateCacheFileName();
         $content = uniqid();
         // create file
@@ -48,7 +51,8 @@ class CacheFileTest extends TestCase
     }
     public function testCacheWithMinTimeRange(): void
     {
-        $cache = new CacheFile($this->testFolder, false, 3600);
+        $config = new Configurator(forceTodayGrab: false, minTimeRange: 3600);
+        $cache = new CacheFile($this->testFolder, $config);
         $fileName = $this->generateCacheFileName();
         $content = uniqid();
         // create file
@@ -59,7 +63,8 @@ class CacheFileTest extends TestCase
 
     public function testInvalidationCache(): void
     {
-        $cache = new CacheFile($this->testFolder, true, 0);
+        $config = new Configurator(forceTodayGrab: true, minTimeRange: 0);
+        $cache = new CacheFile($this->testFolder, $config);
         $fileName = $this->generateCacheFileName();
         $content = uniqid();
         // create file
