@@ -6,6 +6,7 @@ namespace racacax\XmlTv\Component;
 
 use Exception;
 use racacax\XmlTv\Configurator;
+use racacax\XmlTv\ValueObject\EPGEnum;
 
 class CacheFile
 {
@@ -20,10 +21,6 @@ class CacheFile
      * This bool help to ignore (and remove) the cache of the day
      */
     private Configurator $config;
-    public static int $NO_CACHE = 0;
-    public static int $OBSOLETE_CACHE = 1;
-    public static int $PARTIAL_CACHE = 2;
-    public static int $FULL_CACHE = 3;
 
     public function __construct(string $basePath, Configurator $config)
     {
@@ -68,20 +65,20 @@ class CacheFile
         }
         $exists = file_exists($this->getFileName($key));
         if (str_contains($key, date('Y-m-d')) && $this->config->isForceTodayGrab() && !isset($this->createdKeys[$key])) {
-            return $exists ? self::$OBSOLETE_CACHE : self::$NO_CACHE;
+            return $exists ? EPGEnum::$OBSOLETE_CACHE : EPGEnum::$NO_CACHE;
         }
         if ($exists) {
             $timeRange = Utils::getTimeRangeFromXMLString($this->getFileContent($key));
 
-            $cacheState = self::$FULL_CACHE;
+            $cacheState = EPGEnum::$FULL_CACHE;
             if ($timeRange < $this->config->getMinTimeRange()) {
-                $cacheState = self::$PARTIAL_CACHE;
+                $cacheState = EPGEnum::$PARTIAL_CACHE;
             }
 
             return $cacheState;
         }
 
-        return self::$NO_CACHE;
+        return EPGEnum::$NO_CACHE;
     }
 
     /**

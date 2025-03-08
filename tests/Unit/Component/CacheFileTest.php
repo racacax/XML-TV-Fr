@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTvTest\Unit\Component;
 
+use racacax\XmlTv\ValueObject\EPGEnum;
 use PHPUnit\Framework\TestCase;
 use racacax\XmlTv\Component\CacheFile;
 use racacax\XmlTv\Configurator;
@@ -32,9 +33,9 @@ class CacheFileTest extends TestCase
         $cache = new CacheFile($this->testFolder, $config);
         $fileName = $this->generateCacheFileName();
         $content = uniqid();
-        $this->assertEquals($cache->getState($fileName), CacheFile::$NO_CACHE);
+        $this->assertEquals($cache->getState($fileName), EPGEnum::$NO_CACHE);
         $cache->store($fileName, $content);
-        $this->assertEquals($cache->getState($fileName), CacheFile::$FULL_CACHE);
+        $this->assertEquals($cache->getState($fileName), EPGEnum::$FULL_CACHE);
         $this->assertSame($content, $cache->get($fileName));
     }
 
@@ -46,7 +47,7 @@ class CacheFileTest extends TestCase
         $content = uniqid();
         // create file
         file_put_contents($this->testFolder.'/'.$fileName, $content);
-        $this->assertEquals($cache->getState($fileName), CacheFile::$FULL_CACHE);
+        $this->assertEquals($cache->getState($fileName), EPGEnum::$FULL_CACHE);
         $this->assertSame($content, $cache->get($fileName));
     }
     public function testCacheWithMinTimeRange(): void
@@ -57,7 +58,7 @@ class CacheFileTest extends TestCase
         $content = uniqid();
         // create file
         file_put_contents($this->testFolder.'/'.$fileName, $content);
-        $this->assertEquals($cache->getState($fileName), CacheFile::$PARTIAL_CACHE);
+        $this->assertEquals($cache->getState($fileName), EPGEnum::$PARTIAL_CACHE);
         $this->assertSame($content, $cache->get($fileName));
     }
 
@@ -69,7 +70,7 @@ class CacheFileTest extends TestCase
         $content = uniqid();
         // create file
         file_put_contents($this->testFolder.'/'.$fileName, $content);
-        $this->assertEquals($cache->getState($fileName), CacheFile::$OBSOLETE_CACHE);
+        $this->assertEquals($cache->getState($fileName), EPGEnum::$OBSOLETE_CACHE);
     }
 
 

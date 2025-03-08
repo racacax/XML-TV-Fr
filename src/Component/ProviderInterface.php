@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component;
 
 use DateTimeImmutable;
+use racacax\XmlTv\Configurator;
 use racacax\XmlTv\ValueObject\Channel;
 
 interface ProviderInterface
@@ -27,4 +28,5 @@ interface ProviderInterface
      * @return string
      */
     public function generateUrl(Channel $channel, DateTimeImmutable $date): string;
+    public function getChannelStateFromTimes(array $startTimes, array $endTimes, Configurator $config): int;
 }

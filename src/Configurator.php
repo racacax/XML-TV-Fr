@@ -276,7 +276,7 @@ class Configurator
         } else {
             $class = MultiThreadedGenerator::class;
         }
-        $generator = new $class($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this->enableDummy, $this->nbThreads, $this->extraParams);
+        $generator = new $class($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this);
         $generator->setProviders(
             $this->getProviders(
                 $this->getDefaultClient()

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use racacax\XmlTv\ValueObject\EPGEnum;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ChannelFactory;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\ProcessCache;
+use racacax\XmlTv\Configurator;
 use racacax\XmlTv\ValueObject\Channel;
 
 abstract class AbstractProvider
@@ -109,5 +111,18 @@ abstract class AbstractProvider
         }
 
         return $response->getBody()->getContents();
+    }
+
+
+    public function getChannelStateFromTimes(array $startTimes, array $endTimes, Configurator $config): int
+    {
+        if (count($startTimes) == 0) {
+            return EPGEnum::$NO_CACHE;
+        }
+        if (max($endTimes) - min($startTimes) > $config->getMinTimeRange()) {
+            return EPGEnum::$FULL_CACHE;
+        } else {
+            return EPGEnum::$PARTIAL_CACHE;
+        }
     }
 }

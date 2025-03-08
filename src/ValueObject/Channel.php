@@ -34,7 +34,24 @@ class Channel
         $this->programs = [];
     }
 
+    public function getStartTimes(): array
+    {
+        $startTimes = [];
+        foreach ($this->programs as $program) {
+            $startTimes[] = strtotime($program->getStartFormatted());
+        }
 
+        return $startTimes;
+    }
+    public function getEndTimes(): array
+    {
+        $endTimes = [];
+        foreach ($this->programs as $program) {
+            $endTimes[] = strtotime($program->getEndFormatted());
+        }
+
+        return $endTimes;
+    }
     /**
      * @return string
      */
@@ -67,6 +84,13 @@ class Channel
                 return $program1->getStart() <=> $program2->getStart();
             }
         );
+    }
+
+    public function getLatestStartDate()
+    {
+        $startTimes = $this->getStartTimes();
+
+        return max($startTimes);
     }
 
     /**
