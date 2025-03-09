@@ -29,4 +29,5 @@ interface ProviderInterface
      */
     public function generateUrl(Channel $channel, DateTimeImmutable $date): string;
     public function getChannelStateFromTimes(array $startTimes, array $endTimes, Configurator $config): int;
+    public static function getMinMaxDate(string $date): array;
 }

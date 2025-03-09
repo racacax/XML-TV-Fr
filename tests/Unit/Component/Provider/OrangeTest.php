@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use racacax\XmlTv\Component\Provider\Orange;
+use racacax\XmlTv\Component\ProviderCache;
 use racacax\XmlTv\Component\XmlFormatter;
 use racacax\XmlTv\ValueObject\Channel;
 
@@ -19,6 +20,7 @@ class OrangeTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        ProviderCache::clearCache();
 
         $this->client = $this->createMock(Client::class);
     }
@@ -27,7 +29,14 @@ class OrangeTest extends TestCase
     {
         // fake all HttpClient
         $this->client
-            ->expects($this->exactly(1))
+            ->expects($this->at(0))
+            ->method('get')
+            ->willReturn(
+                new Response(200, [], null)
+            )
+        ;
+        $this->client
+            ->expects($this->at(1))
             ->method('get')
             ->willReturn(
                 new Response(200, [], file_get_contents('./tests/Ressources/Provider/Orange/tf1.json'))
@@ -35,7 +44,7 @@ class OrangeTest extends TestCase
         ;
 
         $provider = $this->getInstance();
-        $channelObj = $provider->constructEPG('TF1.fr', date('Y-m-d'));
+        $channelObj = $provider->constructEPG('TF1.fr', '2022-01-31');
 
         $this->assertNotEmpty($channelObj);
         /** @var Channel $channelObj */

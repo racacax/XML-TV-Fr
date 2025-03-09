@@ -29,7 +29,8 @@ class PlayTV extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $response = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
+        [$minDate] = $this->getMinMaxDate($date);
+        $response = $this->getContentFromURL($this->generateUrl($channelObj, $minDate));
         $json = json_decode($response, true);
         if (empty($json['data'])) {
             return false;
@@ -64,11 +65,13 @@ class PlayTV extends AbstractProvider implements ProviderInterface
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
         $channelId = $this->channelsList[$channel->getId()];
+        $startDate = $date->setTimezone(new \DateTimeZone('UTC'));
+        $endDate = $startDate->modify('+1 day');
 
         return  'https://api.playtv.fr/broadcasts?'.http_build_query([
             'include' => 'media',
             'filter[channel_id]' => $channelId,
-            'filter[airing_between]' => $date->format("Y-m-d\T00:00:00\Z").','.$date->format("Y-m-d\T23:59:59\Z")
+            'filter[airing_between]' => $startDate->format("Y-m-d\TH:i:s\Z").','.$endDate->format("Y-m-d\TH:i:s\Z")
         ]);
     }
 }

@@ -64,7 +64,14 @@ class Proximus extends AbstractProvider implements ProviderInterface
             return false;
         }
 
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
         foreach ($programs as $program) {
+            $startDate = new \DateTimeImmutable('@'.strtotime($program['programScheduleStart']));
+            if ($startDate < $minDate) {
+                continue;
+            } elseif ($startDate > $maxDate) {
+                break;
+            }
             if (!empty($program['program']['VCHIP'])) {
                 $csa = match ($program['program']['VCHIP']) {
                     '10' => '-10',

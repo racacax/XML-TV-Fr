@@ -18,18 +18,64 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_tele7jours.json'), $priority ?? 0.6);
     }
 
+    private function getProgramList(array $response, string $date): array
+    {
+        $programList = [];
+        $lastIndex = -1;
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
+        $currentCursor = (new \DateTimeImmutable($date))->modify('-1 day')->modify('+20 hours');
+        for ($i = 0; $i <= 6; $i++) {
+            $content = (string)$response[$i]->getBody();
+            $content = str_replace('$.la.t7.epg.grid.showDiffusions(', '', $content);
+            $content = str_replace('127,101,', '', $content);
+            $content = str_replace(');', '', $content);
+            $json = json_decode($content, true);
+            if (!isset($json)) {
+                return $programList;
+            }
+            if (!isset($json['grille']['aDiffusion'])) {
+                return $programList;
+            }
+            foreach ($json['grille']['aDiffusion'] as $val) {
+                [$hour, $minute] = explode('h', $val['heureDif']);
+                $startDate = $currentCursor->setTime(intval($hour), intval($minute));
+                if ($startDate < $currentCursor) {
+                    $startDate = $startDate->modify('+1 day');
+                }
+                $currentCursor = $startDate;
+                if ($lastIndex > -1) {
+                    $programList[$lastIndex]['endTime'] = $startDate->getTimestamp();
+                }
+                if ($startDate < $minDate) {
+                    continue;
+                } elseif ($startDate > $maxDate) {
+                    return $programList;
+                }
+                $val['startTime'] = $startDate->getTimestamp();
+                $programList[] = $val;
+                $lastIndex = $lastIndex + 1;
+            }
+        }
+
+        return $programList;
+    }
+
     public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $tableau = [];
-
         $promises = [];
+        $currentDate = new \DateTimeImmutable($date);
+        $url = sprintf(
+            $this->generateUrl($channelObj, $currentDate->modify('-1 day')),
+            6
+        );
+        $promises[0] = $this->client->getAsync($url);
         for ($i = 1; $i <= 6; $i++) {
             $url = sprintf(
-                $this->generateUrl($channelObj, new \DateTimeImmutable($date)),
+                $this->generateUrl($channelObj, $currentDate),
                 $i
             );
             $promises[$i] = $this->client->getAsync($url);
@@ -41,60 +87,22 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             return false;
         }
 
-        $pl = 0;
-        $v = 0;
-        for ($i = 1; $i <= 6; $i++) {
-            $get = (string)$response[$i]->getBody();
-            $get = str_replace('$.la.t7.epg.grid.showDiffusions(', '', $get);
-            $get = str_replace('127,101,', '', $get);
-            $get = str_replace(');', '', $get);
-            $get2 = $get;
-            $get = json_decode($get, true);
-            if (!isset($get)) {
-                return false;
+        $programList = $this->getProgramList($response, $date);
+        foreach ($programList as $program) {
+            $programObj = new Program($program['startTime'], $program['endTime']);
+            $programObj->addTitle($program['titre']);
+            $programObj->addCategory($program['nature']);
+            $programObj->addSubtitle($program['soustitre']);
+            if ($program['numEpi'] > 0) {
+                $programObj->setEpisodeNum($program['saison'], $program['numEpi']);
             }
-
-            $pop = 0;
-            if (!isset($get['grille']['aDiffusion'])) {
-                return false;
-            }
-            foreach ($get['grille']['aDiffusion'] as $val) {
-                $h = $val['heureDif'];
-                $h = str_replace('h', ':', $h);
-                if ($h[0] . $h[1] < $v && $i == 6) {
-                    $pl += 86400;
+            $programObj->setIcon($program['photo']);
+            foreach ($program['participant'] ?? [] as $categoryParticipant) {
+                foreach ($categoryParticipant ?? [] as $participant) {
+                    $programObj->addCredit($participant);
                 }
-                $v = $h[0] . $h[1];
-                if (strlen($val['soustitre']) > 2) {
-                    $subtitle = $val['soustitre'];
-                } else {
-                    $subtitle = '';
-                }
-                $tableau[] = (strtotime($date . ' ' . $h) + $pl) . ' || ' . $val['titre'] . ' || ' . $subtitle . ' || ' . $val['nature'] . ' || ' . $val['photo'] . ' || ' . $val['saison'] . ' || ' . $val['numEpi'];
-                $tableau = array_values(array_unique($tableau));
-                $pop++;
             }
-        }
-
-        for ($i2 = 0; $i2 < count($tableau) - 1; $i2++) {
-            $o = explode(' || ', $tableau[$i2]);
-            $o2 = explode(' || ', $tableau[$i2 + 1]);
-
-            $program = new Program($o[0], $o2[0]);
-            $program->addTitle($o[1]);
-            $program->addDesc('Aucune description');
-            $program->addCategory($o[3]);
-            if (!empty($o[2])) {
-                $program->addSubtitle($o[2]);
-            }
-            $program->setIcon($o[4]);
-            if ($o[5]) {
-                if ($o[6] == '') {
-                    $o[6] = '1';
-                }
-                $program->setEpisodeNum($o[5], $o[6]);
-            }
-            $channelObj->addProgram($program);
+            $channelObj->addProgram($programObj);
         }
 
         return $channelObj;

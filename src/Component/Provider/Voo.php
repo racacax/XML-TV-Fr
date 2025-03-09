@@ -25,9 +25,11 @@ class Voo extends AbstractProvider implements ProviderInterface
             return false;
         }
 
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
+
         try {
             $response = $this->client->post(
-                $this->generateUrl($channelObj, new \DateTimeImmutable($date)),
+                $this->generateUrl($channelObj, $minDate),
                 [
                     'body' => '<SubQueryOptions><QueryOption path="Titles">/Props/Name,Pictures,ShortSynopsis,LongSynopsis,Genres,Events,SeriesCount,SeriesCollection</QueryOption><QueryOption path="Titles/Events">/Props/IsAvailable</QueryOption><QueryOption path="Products">/Props/ListPrice,OfferPrice,CouponCount,Name,EntitlementState,IsAvailable</QueryOption><QueryOption path="Channels">/Props/Products</QueryOption><QueryOption path="Channels/Products">/Filter/EntitlementEnd>2018-01-27T14:40:43Z/Props/EntitlementEnd,EntitlementState</QueryOption></SubQueryOptions>'
                 ]
@@ -41,6 +43,12 @@ class Voo extends AbstractProvider implements ProviderInterface
         }
         foreach ($json['Events']['Event'] as $event) {
             $start = strtotime($event['AvailabilityStart']);
+            $startDate = new \DateTimeImmutable('@'.$start);
+            if ($startDate < $minDate) {
+                continue;
+            } elseif ($startDate > $maxDate) {
+                break;
+            }
             $end = strtotime($event['AvailabilityEnd']);
             $program = new Program($start, $end);
             $program->addTitle($event['Titles']['Title'][0]['Name']);
@@ -57,8 +65,9 @@ class Voo extends AbstractProvider implements ProviderInterface
 
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
     {
-        $date_start = $date->format('Y-m-d\T00:00:00\Z');
-        $date_end = $date->modify('+1 days')->format('Y-m-d\T00:00:00\Z');
+        $date = $date->setTimezone(new \DateTimeZone('UTC'));
+        $date_start = $date->format('Y-m-d\TH:i:s\Z');
+        $date_end = $date->modify('+2 days')->format('Y-m-d\TH:i:s\Z');
 
         return 'https://publisher.voomotion.be/traxis/web/Channel/' . $this->channelsList[$channel->getId()] . '/Events/Filter/AvailabilityEnd%3C=' . $date_end . '%26%26AvailabilityStart%3E=' .$date_start.'/Sort/AvailabilityStart/Props/IsAvailable,Products,AvailabilityEnd,AvailabilityStart,ChannelId,AspectRatio,DurationInSeconds,Titles,Channels?output=json&Language=fr&Method=PUT';
     }

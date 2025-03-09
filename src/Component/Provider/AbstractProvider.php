@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use racacax\XmlTv\Component\ProviderCache;
 use racacax\XmlTv\ValueObject\EPGEnum;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ChannelFactory;
@@ -83,15 +84,30 @@ abstract class AbstractProvider
         return isset($this->channelsList[$channel]);
     }
 
+    public static function getMinMaxDate(string $date): array
+    {
+        $minStart = new \DateTimeImmutable($date, new \DateTimeZone('Europe/Paris'));
+        $maxStart = $minStart->modify('+1 day');
+
+        return [$minStart, $maxStart];
+    }
+
     /**
      * @param string $url
      * @param array<string, string> $headers
      * @return string
      */
-    protected function getContentFromURL(string $url, array $headers = []): string
+    protected function getContentFromURL(string $url, array $headers = [], bool $ignoreCache = false): string
     {
         if (empty($headers['User-Agent'])) {
             $headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0';
+        }
+        $cache = new ProviderCache(md5($url.json_encode($headers)));
+        if (!$ignoreCache) {
+            $content = $cache->getContent();
+            if (!empty($content)) {
+                return $content;
+            }
         }
 
         try {
@@ -109,8 +125,10 @@ abstract class AbstractProvider
             // No error accepted
             return '';
         }
+        $content = $response->getBody()->getContents();
+        $cache->setContent($content);
 
-        return $response->getBody()->getContents();
+        return $content;
     }
 
 

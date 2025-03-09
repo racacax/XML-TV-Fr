@@ -63,28 +63,13 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
             if (isset($image[1])) {
                 $program->setIcon(str_replace('/p/p/', '/p/g/', $image[1]));
             }
-            switch ($csa[1] ?? '') {
-                case '2':
-                    $csa = '-10';
-
-                    break;
-                case '3':
-                    $csa = '-12';
-
-                    break;
-                case '4':
-                    $csa = '-16';
-
-                    break;
-                case '5':
-                    $csa = '-18';
-
-                    break;
-                default:
-                    $csa = 'Tout public';
-
-                    break;
-            }
+            $csa = match ($csa[1] ?? '') {
+                '2' => '-10',
+                '3' => '-12',
+                '4' => '-16',
+                '5' => '-18',
+                default => 'Tout public',
+            };
             $program->setRating($csa);
 
             $channelObj->addProgram($program);

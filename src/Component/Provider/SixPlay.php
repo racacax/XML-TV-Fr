@@ -25,6 +25,7 @@ class SixPlay extends AbstractProvider implements ProviderInterface
         }
         $page = 1;
         $channelId = $this->channelsList[$channelObj->getId()];
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
         while (!is_null($page)) {
             $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date), $page)), true);
             if (empty($json[$channelId])) {
@@ -36,6 +37,14 @@ class SixPlay extends AbstractProvider implements ProviderInterface
                 $page++;
             }
             foreach ($json[$channelId] as $program) {
+                $startDate = new \DateTimeImmutable('@'.strtotime($program['real_diffusion_start_date']));
+                if ($startDate < $minDate) {
+                    continue;
+                } elseif ($startDate > $maxDate) {
+                    $page = null;
+
+                    break;
+                }
                 $genre = 'Inconnu';
 
                 if (isset($program['csa']) && $program['csa']['age'] > 0) {
