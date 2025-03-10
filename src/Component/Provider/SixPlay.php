@@ -29,7 +29,7 @@ class SixPlay extends AbstractProvider implements ProviderInterface
         while (!is_null($page)) {
             $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date), $page)), true);
             if (empty($json[$channelId])) {
-                return false;
+                break;
             }
             if (count($json[$channelId]) < 100) {
                 $page = null;
@@ -71,7 +71,6 @@ class SixPlay extends AbstractProvider implements ProviderInterface
                 $channelObj->addProgram($programObj);
             }
         }
-
 
         return $channelObj;
     }
