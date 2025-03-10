@@ -23,7 +23,7 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         $programList = [];
         $lastIndex = -1;
         [$minDate, $maxDate] = $this->getMinMaxDate($date);
-        $currentCursor = (new \DateTimeImmutable($date))->modify('-1 day')->modify('+20 hours');
+        $currentCursor = (new \DateTimeImmutable($date))->modify('-1 day')->modify('+4 hours');
         for ($i = 0; $i <= 6; $i++) {
             $content = (string)$response[$i]->getBody();
             $content = str_replace('$.la.t7.epg.grid.showDiffusions(', '', $content);
