@@ -3132,10 +3132,6 @@
     "name": "SAMIRATV",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSgWMkr3IZpIPCy0_1ZAssd6-Q0OYJmKJgKKTQmN5syYxT48-PjS-kw3KE8xQ&amp;s"
   },
-  "SAT1.de": {
-    "name": "SAT1",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSdmp5mtzhVopBvT4JkNw8j7FrC4IUKELA-YtB5Nz_tOISI-B3dyufjm5pt1Q&amp;s"
-  },
   "SC1.ca": {
     "name": "SC1",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRV_NDKMf3Syx4PX3FGywddf8v_3HKkUoqXQztQhixSg-2GaR4UXUvUykpzvg&amp;s"
@@ -6115,7 +6111,7 @@
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/Arryadia_color.png",
     "name": "Arryadia"
   },
-  "MaurienneTV.ar": {
+  "MaurienneTV.fr": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/mauriennetv100x100.png",
     "name": "MAURIENNE TV"
   },

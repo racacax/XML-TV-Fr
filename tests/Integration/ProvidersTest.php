@@ -12,9 +12,9 @@ use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
 use racacax\XmlTv\Component\Provider\LEquipeLive;
 use racacax\XmlTv\Component\Provider\MyCanal;
 use racacax\XmlTv\Component\Provider\NouvelObs;
+use racacax\XmlTv\Component\Provider\Oqee;
 use racacax\XmlTv\Component\Provider\Orange;
 use racacax\XmlTv\Component\Provider\PlayTV;
-use racacax\XmlTv\Component\Provider\PlutoTV;
 use racacax\XmlTv\Component\Provider\Proximus;
 use racacax\XmlTv\Component\Provider\RMC;
 use racacax\XmlTv\Component\Provider\SFR;
@@ -63,8 +63,9 @@ class ProvidersTest extends TestCase
         [TV5Global::class, ['channels' => ['TV5MondeAsie.fr']]],
         [Voo::class, ['channels' => ['TF1.fr']]],
         [TVHebdo::class, ['channels' => ['RDS.ca']]],
+        [Oqee::class, ['channels' => ['TF1.fr']]],
     ];
-    private static array $IGNORED_PROVIDERS = [PlutoTV::class, Teleboy::class, LEquipeLive::class];
+    private static array $IGNORED_PROVIDERS = [Teleboy::class, LEquipeLive::class];
 
     /**
      * All Providers must have at least a channel to gather or to have specifically been ignored
