@@ -87,7 +87,7 @@ abstract class AbstractProvider
     public static function getMinMaxDate(string $date): array
     {
         $minStart = new \DateTimeImmutable($date, new \DateTimeZone('Europe/Paris'));
-        $maxStart = $minStart->modify('+1 day');
+        $maxStart = $minStart->modify('+1 day')->modify('-1 second');
 
         return [$minStart, $maxStart];
     }

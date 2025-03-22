@@ -130,16 +130,14 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date): Channel|bool
     {
         $channelObj = parent::constructEPG($channel, $date);
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
         if (!$this->channelExists($channel) || !$this->isConfigured) {
             return false;
         }
+        $minStart = (new \DateTimeImmutable($date))->modify('-1 day')->modify('+12 hours');
         date_default_timezone_set('America/Toronto'); // To stay consistent with other Canadian providers
         $channelId = $this->getChannelsList()[$channel];
-        $minStart = new \DateTimeImmutable($date);
-        $maxStart = $minStart->modify('+1 day');
-        if ($minStart < new \DateTimeImmutable(date('Y-m-d'))) {
-            return false;
-        }
+        $maxStart = $minStart->modify('+2 days');
         $blocks = $this->getBlocksInformation($channelId, $minStart, $maxStart);
         $blockCount = count($blocks);
         foreach ($blocks as $blockIndex => $block) {
@@ -150,8 +148,10 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
             }
             foreach ($programs as $index => $program) {
                 $startDate = new \DateTimeImmutable($program['startTime']);
-                if ($startDate < $minStart || $startDate > $maxStart) {
+                if ($startDate < $minDate) {
                     continue;
+                } elseif ($startDate > $maxDate) {
+                    return $channelObj;
                 }
                 $programObj = new Program(strtotime($program['startTime']), strtotime($program['endTime']));
                 $programObj->addTitle($program['title']);

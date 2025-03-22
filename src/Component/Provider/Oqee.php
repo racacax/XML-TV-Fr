@@ -34,22 +34,22 @@ class Oqee extends AbstractProvider implements ProviderInterface
                 return false;
             }
 
-            foreach ($json['result']['entries'] as $entrie) {
-                $startDate = new \DateTimeImmutable('@'.$entrie['live']['start']);
+            foreach ($json['result']['entries'] as $entry) {
+                $startDate = new \DateTimeImmutable('@'.$entry['live']['start']);
                 if ($startDate < $minDate) {
                     continue;
                 } elseif ($startDate > $maxDate) {
                     return $channelObj;
                 }
-                $program = new Program(date('YmdHis O', $entrie['live']['start']), date('YmdHis O', $entrie['live']['end']));
-                $program->addTitle($entrie['live']['title']);
-                $program->addSubtitle($entrie['live']['sub_title']);
-                $program->addDesc($entrie['live']['description']);
-                $program->addCategory($entrie['live']['category']);
-                $program->addCategory($entrie['live']['sub_category']);
-                $icon = str_replace('h%d', 'h1080', $entrie['pictures']['main']);
+                $program = new Program(date('YmdHis O', $entry['live']['start']), date('YmdHis O', $entry['live']['end']));
+                $program->addTitle($entry['live']['title']);
+                $program->addSubtitle(@$entry['live']['sub_title']);
+                $program->addDesc(@$entry['live']['description']);
+                $program->addCategory(@$entry['live']['category']);
+                $program->addCategory(@$entry['live']['sub_category']);
+                $icon = str_replace('h%d', 'h1080', @$entry['pictures']['main'] ?? '');
                 $program->setIcon($icon);
-                $program->setRating('-'. $entrie['live']['parental_rating']);
+                $program->setRating('-'. $entry['live']['parental_rating']);
                 $channelObj->addProgram($program);
             }
         }

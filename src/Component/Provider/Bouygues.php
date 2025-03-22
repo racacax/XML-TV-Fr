@@ -77,7 +77,7 @@ class Bouygues extends AbstractProvider implements ProviderInterface
         return $channelObj;
     }
 
-    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    public function generateUrl(Channel $channel, $date): string
     {
         $param = [
             'profile' => 'detailed',
