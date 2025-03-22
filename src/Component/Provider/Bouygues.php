@@ -24,8 +24,9 @@ class Bouygues extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
 
-        $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date))), true);
+        $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, $minDate, $maxDate)), true);
         if (empty($json['channel'][0]['event'])) {
             return false;
         }
@@ -56,7 +57,14 @@ class Bouygues extends AbstractProvider implements ProviderInterface
                     $subGenre = null;
                 }
             }
-            $programObj = new Program(strtotime($program['startTime']), strtotime($program['endTime']));
+            $startTime = strtotime($program['startTime']);
+            $startDate = new \DateTimeImmutable('@' . $startTime);
+            if($startDate < $minDate) {
+                continue;
+            } elseif($startDate > $maxDate) {
+                return $channelObj;
+            }
+            $programObj = new Program($startTime, strtotime($program['endTime']));
             if (isset($program['programInfo']['character'])) {
                 foreach ($program['programInfo']['character'] as $intervenant) {
                     $programObj->addCredit($intervenant['firstName'] . ' ' . $intervenant['lastName'], $this->getCreditType($intervenant['function']));
@@ -77,14 +85,14 @@ class Bouygues extends AbstractProvider implements ProviderInterface
         return $channelObj;
     }
 
-    public function generateUrl(Channel $channel, $date): string
+    public function generateUrl(Channel $channel, \DateTimeImmutable $minDate,  \DateTimeImmutable $maxDate): string
     {
         $param = [
             'profile' => 'detailed',
             'epgChannelNumber' => $this->channelsList[$channel->getId()],
-            'eventCount' => 999,
-            'startTime' => $date->format('Y-m-d\T04:00:00\Z'),
-            'endTime' => $date->modify('+1 days')->format('Y-m-d\T03:59:59\Z')
+            'eventCount' => 9999,
+            'startTime' => $minDate->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d\TH:i:s\Z'),
+            'endTime' => $maxDate->setTimezone(new \DateTimeZone('UTC'))->modify("+12 hours")->format('Y-m-d\TH:i:s\Z')
         ];
 
         return 'https://epg.cms.pfs.bouyguesbox.fr/cms/sne/live/epg/events.json?' . http_build_query($param);
