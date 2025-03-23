@@ -723,7 +723,7 @@
     "id": 783,
     "region": "fr"
   },
-  "EvenementsSports4KUHD.fr": {
+  "EvenementsSports4KUHDAlt.fr": {
     "id": 872,
     "region": "fr"
   },
@@ -847,10 +847,6 @@
     "id": 1077,
     "region": "fr"
   },
-  "DAZN1.fr": {
-    "id": 1077,
-    "region": "fr"
-  },
   "DAZN2.fr": {
     "id": 1155,
     "region": "fr"
@@ -871,7 +867,6 @@
     "id": 770,
     "region": "ch"
   },
-  "RTSDeux.ch": {
   "RTSDeux.ch": {
     "id": 771,
     "region": "ch"

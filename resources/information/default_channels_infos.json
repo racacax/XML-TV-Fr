@@ -4311,10 +4311,6 @@
     "name": "DAZN 1",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1077\/canal-ouah\/CHN43FB\/CHN43FB_1077_20231002"
   },
-  "DAZN1.fr": {
-    "name": "DAZN 1",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1077\/canal-ouah\/CHN43FB\/CHN43FB_1077_20231002"
-  },
   "DAZN2.fr": {
     "name": "DAZN 2",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1155\/canal-ouah\/CHN43FB\/CHN43FN_1155_20240813-FjVl"
@@ -7707,8 +7703,8 @@
     "name": "Nashville 24/24",
     "icon": "https://i.imgur.com/WhhW940.png"
   },
-  "ScenesDeMenage2424.fr": {
-    "name": "Scènes de Ménage 2424",
+  "ScenesDeMenages2424.fr": {
+    "name": "Scènes de Ménages 2424",
     "icon": "https://i.imgur.com/lSLHtkm.png"
   },
   "SF2424.fr": {
