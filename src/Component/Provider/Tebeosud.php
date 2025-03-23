@@ -41,7 +41,7 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
         for ($i = 0; $i < count($titles[1]); $i++) {
             $start = strtotime($date.' '.$hours[1][$i]);
             if ($i == count($titles) - 1) {
-                $end = $start + 60;
+                $end = $start + 3600;
             } elseif (isset($hours[1][$i + 1])) {
                 $end = strtotime($date.' '.$hours[1][$i + 1]);
             }

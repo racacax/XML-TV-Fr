@@ -59,9 +59,9 @@ class Bouygues extends AbstractProvider implements ProviderInterface
             }
             $startTime = strtotime($program['startTime']);
             $startDate = new \DateTimeImmutable('@' . $startTime);
-            if($startDate < $minDate) {
+            if ($startDate < $minDate) {
                 continue;
-            } elseif($startDate > $maxDate) {
+            } elseif ($startDate > $maxDate) {
                 return $channelObj;
             }
             $programObj = new Program($startTime, strtotime($program['endTime']));
@@ -85,14 +85,14 @@ class Bouygues extends AbstractProvider implements ProviderInterface
         return $channelObj;
     }
 
-    public function generateUrl(Channel $channel, \DateTimeImmutable $minDate,  \DateTimeImmutable $maxDate): string
+    public function generateUrl(Channel $channel, \DateTimeImmutable $minDate, \DateTimeImmutable $maxDate): string
     {
         $param = [
             'profile' => 'detailed',
             'epgChannelNumber' => $this->channelsList[$channel->getId()],
             'eventCount' => 9999,
             'startTime' => $minDate->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d\TH:i:s\Z'),
-            'endTime' => $maxDate->setTimezone(new \DateTimeZone('UTC'))->modify("+12 hours")->format('Y-m-d\TH:i:s\Z')
+            'endTime' => $maxDate->setTimezone(new \DateTimeZone('UTC'))->modify('+12 hours')->format('Y-m-d\TH:i:s\Z')
         ];
 
         return 'https://epg.cms.pfs.bouyguesbox.fr/cms/sne/live/epg/events.json?' . http_build_query($param);
