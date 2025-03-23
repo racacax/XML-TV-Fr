@@ -1010,7 +1010,7 @@
   },
   "Casa.ca": {
     "name": "Casa",
-    "icon": "https:\/\/cdn.tvpassport.com\/image\/station\/640x360\/spacer.gif"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/CASA_logo.svg/1280px-CASA_logo.svg.png"
   },
   "ChaineEvenement.fr": {
     "name": "Chaine Evenement",
@@ -7718,5 +7718,24 @@
   "IncroyablesTransformations2424.fr": {
     "name": "Incroyables Transformations 24\/24",
     "icon": "https:\/\/assets-bundle.6cloud.fr\/m6\/18\/svg-sprite\/marginless.svg#fast14"
+  "AutoPlusTV.fr": {
+    "name": "Auto Plus TV",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_AUTOPLUS_61b02519b4.png"
+  },
+  "ChevalTV.fr": {
+    "name": "Cheval TV",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_LOGO_CHEVAL_TV_NOIR_SUR_FOND_BLANC_1059ad89bb.jpg"
+  },
+  "MarmitonTV.fr": {
+    "name": "Marmiton TV",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_Logo_Marmiton_TV_bis_8e336d6d66.png"
+  },
+  "TRACEAyiti.fr": {
+    "name": "Trace Ayiti",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_trace_ayiti_94de0df748.png"
+  },
+  "TopSanteTV.fr": {
+    "name": "Top Santé TV",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_top_sante_ea66c2d6c5.jpg"
   }
 }

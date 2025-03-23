@@ -39,19 +39,32 @@ class Orange extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $response = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
+        $startDate = new \DateTimeImmutable($date);
+
+        $responseDayBefore = $this->getContentFromURL($this->generateUrl($channelObj, $startDate->modify('-1 day')));
+        $response = $this->getContentFromURL($this->generateUrl($channelObj, $startDate));
         if (false !== strpos($response, 'Invalid request') || false !== strpos($response, '504 Gateway Time-out')) {
             return false;
         }
-        $json = json_decode($response, true);
+        $jsonDayBefore = @json_decode($responseDayBefore, true);
+        $json = @json_decode($response, true);
         if (empty($json) || isset($json['code'])) {
             return false;
         }
+        if (!empty($jsonDayBefore)) {
+            $json = array_merge($jsonDayBefore, $json);
+        }
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
         foreach ($json as $val) {
             if (empty($val['diffusionDate']) || empty($val['duration'])) {
                 continue;
             }
             $begin = (new \DateTimeImmutable('@'.$val['diffusionDate']))->setTimezone($this->timezone);
+            if ($begin < $minDate) {
+                continue;
+            } elseif ($begin > $maxDate) {
+                break;
+            }
             $program = new Program($begin, $begin->modify(sprintf('+%d seconds', $val['duration'])));
 
             $program->addDesc($val['synopsis']);

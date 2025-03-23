@@ -126,7 +126,7 @@ class ChannelsManager
             'key' => $key, 'info' => $this->channelsInfo[$key],
             'failedProviders' => $this->providersFailedByChannel[$key] ?? [],
             'datesGathered' => $this->datesGatheredByChannel[$key] ?? [],
-            'extraParams' => $this->generator->getExtraParams()
+            'extraParams' => $this->generator->getConfigurator()->getExtraParams()
         ];
     }
 }

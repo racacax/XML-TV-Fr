@@ -82,6 +82,11 @@ class Logger
         self::$logFile[$channelFile]['channels'][$date][$channel]['cache'] = $isCache;
     }
 
+    public static function hasChannelSuccessfulProvider(string $channelFile, string $channel, string $date): bool
+    {
+        return @(self::$logFile[$channelFile]['channels'][$date][$channel]['success']) ?? false;
+    }
+
     public static function addAdditionalError(string $channelFile, string $error, string $message): void
     {
         if (!isset(self::$logFile[$channelFile]['additional_errors'])) {
