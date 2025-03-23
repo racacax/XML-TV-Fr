@@ -3,6 +3,86 @@
     "id": 900,
     "region": "fr"
   },
+  "DiscoveryChannel.fr": {
+    "id": 174,
+    "region": "fr"
+  },
+  "beINSPORTS1.fr": {
+    "id": 381,
+    "region": "fr"
+  },
+  "beINSPORTS2.fr": {
+    "id": 384,
+    "region": "fr"
+  },
+  "beINSPORTS3.fr": {
+    "id": 516,
+    "region": "fr"
+  },
+  "beINSPORTSMAX4.fr": {
+    "id": 596,
+    "region": "fr"
+  },
+  "beINSPORTSMAX5.fr": {
+    "id": 597,
+    "region": "fr"
+  },
+  "beINSPORTSMAX6.fr": {
+    "id": 598,
+    "region": "fr"
+  },
+  "beINSPORTSMAX7.fr": {
+    "id": 599,
+    "region": "fr"
+  },
+  "TVMonaco.fr": {
+    "id": 1076,
+    "region": "fr"
+  },
+  "SportEnFrance.fr": {
+    "id": 1080,
+    "region": "fr"
+  },
+  "CanalPlusBoxOfficeUHD.fr": {
+    "id": 1079,
+    "region": "fr"
+  },
+  "FranceTVSeries.fr": {
+    "id": 1092,
+    "region": "fr"
+  },
+  "FranceTVDocs.fr": {
+    "id": 1159,
+    "region": "fr"
+  },
+  "France2UHD.fr": {
+    "id": 1159,
+    "region": "fr"
+  },
+  "Toonami.fr": {
+    "id": 1095,
+    "region": "fr"
+  },
+  "Boing.fr": {
+    "id": 1096,
+    "region": "fr"
+  },
+  "TLC.fr": {
+    "id": 1097,
+    "region": "fr"
+  },
+  "DiscoveryScience.fr": {
+    "id": 1097,
+    "region": "fr"
+  },
+  "ViaGrandParis.fr": {
+    "id": 1102,
+    "region": "fr"
+  },
+  "DiscoveryInvestigation.fr": {
+    "id": 1098,
+    "region": "fr"
+  },
   "France2.fr": {
     "id": 26,
     "region": "fr"
@@ -23,26 +103,6 @@
     "id": 154,
     "region": "fr"
   },
-  "Classica.fr": {
-    "id": 165,
-    "region": "fr"
-  },
-  "Penthouse.fr": {
-    "id": 167,
-    "region": "fr"
-  },
-  "DiegoTV.fr": {
-    "id": 184,
-    "region": "fr"
-  },
-  "DoraTV.fr": {
-    "id": 185,
-    "region": "fr"
-  },
-  "BobTV.fr": {
-    "id": 196,
-    "region": "fr"
-  },
   "CanalPlusKIDS.fr": {
     "id": 259,
     "region": "fr"
@@ -51,20 +111,8 @@
     "id": 268,
     "region": "fr"
   },
-  "DisneyJunior.fr": {
-    "id": 274,
-    "region": "fr"
-  },
-  "DisneyChannel.fr": {
-    "id": 282,
-    "region": "fr"
-  },
   "ChaineEvenement.fr": {
     "id": 289,
-    "region": "fr"
-  },
-  "NatGeoWild.fr": {
-    "id": 290,
     "region": "fr"
   },
   "Teva.fr": {
@@ -77,10 +125,6 @@
   },
   "W9.fr": {
     "id": 296,
-    "region": "fr"
-  },
-  "NationalGeographic.fr": {
-    "id": 302,
     "region": "fr"
   },
   "France24.fr": {
@@ -111,32 +155,12 @@
     "id": 362,
     "region": "fr"
   },
-  "OCSMax.fr": {
-    "id": 372,
-    "region": "fr"
-  },
   "TCM.fr": {
     "id": 374,
     "region": "fr"
   },
   "GolfPlus.fr": {
     "id": 378,
-    "region": "fr"
-  },
-  "beINSPORTS1.fr": {
-    "id": 977,
-    "region": "fr"
-  },
-  "beINSPORTS2.fr": {
-    "id": 978,
-    "region": "fr"
-  },
-  "Djazz.fr": {
-    "id": 407,
-    "region": "fr"
-  },
-  "NonStopPeople.fr": {
-    "id": 434,
     "region": "fr"
   },
   "Eurosport2.fr": {
@@ -151,20 +175,8 @@
     "id": 451,
     "region": "fr"
   },
-  "OCSPulp.fr": {
-    "id": 466,
-    "region": "fr"
-  },
-  "OCSGeants.fr": {
-    "id": 468,
-    "region": "fr"
-  },
   "MTV.fr": {
     "id": 470,
-    "region": "fr"
-  },
-  "RTFrance.fr": {
-    "id": 479,
     "region": "fr"
   },
   "JOne.fr": {
@@ -195,10 +207,6 @@
     "id": 513,
     "region": "fr"
   },
-  "beINSPORTS3.fr": {
-    "id": 979,
-    "region": "fr"
-  },
   "Nickelodeon4Teen.fr": {
     "id": 518,
     "region": "fr"
@@ -219,14 +227,6 @@
     "id": 526,
     "region": "fr"
   },
-  "NollywoodTV.fr": {
-    "id": 527,
-    "region": "fr"
-  },
-  "Boing.fr": {
-    "id": 529,
-    "region": "fr"
-  },
   "Boomerang.fr": {
     "id": 530,
     "region": "fr"
@@ -241,10 +241,6 @@
   },
   "Equidia.fr": {
     "id": 540,
-    "region": "fr"
-  },
-  "FootPlus24.fr": {
-    "id": 542,
     "region": "fr"
   },
   "France3.fr": {
@@ -283,10 +279,6 @@
     "id": 554,
     "region": "fr"
   },
-  "LibidoTV.fr": {
-    "id": 555,
-    "region": "fr"
-  },
   "MCM.fr": {
     "id": 556,
     "region": "fr"
@@ -321,10 +313,6 @@
   },
   "Multisports6.fr": {
     "id": 567,
-    "region": "fr"
-  },
-  "NRJ12.fr": {
-    "id": 568,
     "region": "fr"
   },
   "NRJHits.fr": {
@@ -371,6 +359,10 @@
     "id": 591,
     "region": "fr"
   },
+  "Nickelodeonplus1.fr": {
+    "id": 680,
+    "region": "fr"
+  },
   "GameOne.fr": {
     "id": 592,
     "region": "fr"
@@ -381,34 +373,6 @@
   },
   "RMCDecouverte.fr": {
     "id": 595,
-    "region": "fr"
-  },
-  "beINSPORTSMAX4.fr": {
-    "id": 980,
-    "region": "fr"
-  },
-  "beINSPORTSMAX5.fr": {
-    "id": 981,
-    "region": "fr"
-  },
-  "beINSPORTSMAX6.fr": {
-    "id": 982,
-    "region": "fr"
-  },
-  "beINSPORTSMAX7.fr": {
-    "id": 983,
-    "region": "fr"
-  },
-  "beINSPORTSMAX8.fr": {
-    "id": 603,
-    "region": "fr"
-  },
-  "beINSPORTSMAX9.fr": {
-    "id": 604,
-    "region": "fr"
-  },
-  "beINSPORTSMAX10.fr": {
-    "id": 605,
     "region": "fr"
   },
   "AB1.fr": {
@@ -423,10 +387,6 @@
     "id": 613,
     "region": "fr"
   },
-  "ScienceEtVieTV.fr": {
-    "id": 614,
-    "region": "fr"
-  },
   "XXL.fr": {
     "id": 616,
     "region": "fr"
@@ -437,10 +397,6 @@
   },
   "BET.fr": {
     "id": 628,
-    "region": "fr"
-  },
-  "MTVHits.fr": {
-    "id": 629,
     "region": "fr"
   },
   "AstroCenter.fr": {
@@ -467,10 +423,6 @@
     "id": 638,
     "region": "fr"
   },
-  "ColmaxTV.fr": {
-    "id": 643,
-    "region": "fr"
-  },
   "BFMBusiness.fr": {
     "id": 645,
     "region": "fr"
@@ -491,10 +443,6 @@
     "id": 653,
     "region": "fr"
   },
-  "CliqueTV.fr": {
-    "id": 665,
-    "region": "fr"
-  },
   "FranceInfo.fr": {
     "id": 670,
     "region": "fr"
@@ -503,16 +451,8 @@
     "id": 672,
     "region": "fr"
   },
-  "TraceAfrica.fr": {
-    "id": 674,
-    "region": "fr"
-  },
   "AlJazeeraEnglish.uk": {
     "id": 675,
-    "region": "fr"
-  },
-  "Viceland.fr": {
-    "id": 677,
     "region": "fr"
   },
   "Museum.fr": {
@@ -521,22 +461,6 @@
   },
   "ChasseEtPeche.fr": {
     "id": 681,
-    "region": "fr"
-  },
-  "Toonami.fr": {
-    "id": 683,
-    "region": "fr"
-  },
-  "PenthouseBlack.fr": {
-    "id": 686,
-    "region": "fr"
-  },
-  "NovelasTV.fr": {
-    "id": 693,
-    "region": "fr"
-  },
-  "WarnerTV.fr": {
-    "id": 694,
     "region": "fr"
   },
   "CStarHitsFrance.fr": {
@@ -553,54 +477,6 @@
   },
   "RMCSport2.fr": {
     "id": 733,
-    "region": "fr"
-  },
-  "RMCSportLive5.fr": {
-    "id": 756,
-    "region": "fr"
-  },
-  "RMCSportLive6.fr": {
-    "id": 757,
-    "region": "fr"
-  },
-  "RMCSportLive7.fr": {
-    "id": 758,
-    "region": "fr"
-  },
-  "RMCSportLive8.fr": {
-    "id": 759,
-    "region": "fr"
-  },
-  "RMCSportLive9.fr": {
-    "id": 760,
-    "region": "fr"
-  },
-  "RMCSportLive10.fr": {
-    "id": 761,
-    "region": "fr"
-  },
-  "RMCSportLive11.fr": {
-    "id": 762,
-    "region": "fr"
-  },
-  "RMCSportLive12.fr": {
-    "id": 763,
-    "region": "fr"
-  },
-  "RMCSportLive13.fr": {
-    "id": 764,
-    "region": "fr"
-  },
-  "RMCSportLive14.fr": {
-    "id": 765,
-    "region": "fr"
-  },
-  "RMCSportLive3.fr": {
-    "id": 766,
-    "region": "fr"
-  },
-  "RMCSportLive4.fr": {
-    "id": 767,
     "region": "fr"
   },
   "Canal9.fr": {
@@ -623,32 +499,8 @@
     "id": 815,
     "region": "fr"
   },
-  "CanalPlusTop14.fr": {
-    "id": 816,
-    "region": "fr"
-  },
   "ES1.fr": {
     "id": 819,
-    "region": "fr"
-  },
-  "AlticeStudio.fr": {
-    "id": 820,
-    "region": "fr"
-  },
-  "CanalPlusMotoGP.fr": {
-    "id": 823,
-    "region": "fr"
-  },
-  "CanalPlusFormula1.fr": {
-    "id": 824,
-    "region": "fr"
-  },
-  "BSmartTV.fr": {
-    "id": 849,
-    "region": "fr"
-  },
-  "JacquieMichelTV.fr": {
-    "id": 850,
     "region": "fr"
   },
   "TEST1": {
@@ -657,14 +509,6 @@
   },
   "TEST2": {
     "id": 877,
-    "region": "fr"
-  },
-  "EVENEMENTALACARTE.fr": {
-    "id": 882,
-    "region": "fr"
-  },
-  "CanalPlusLigue1.fr": {
-    "id": 894,
     "region": "fr"
   },
   "CanalPlusDocs.fr": {
@@ -767,6 +611,10 @@
     "id": 943,
     "region": "fr"
   },
+  "France3NoA.fr": {
+    "id": 998,
+    "region": "fr"
+  },
   "CanalPlus.fr": {
     "id": 601,
     "region": "fr"
@@ -855,47 +703,27 @@
     "id": 1153,
     "region": "fr"
   },
-  "CHAINE340": {
-    "id": 340,
-    "region": "fr"
-  },
-  "CHAINE477": {
-    "id": 477,
-    "region": "fr"
-  },
   "CHAINE639": {
     "id": 639,
     "region": "fr"
   },
-  "CHAINE656": {
-    "id": 656,
-    "region": "fr"
-  },
-  "CHAINE734": {
-    "id": 734,
-    "region": "fr"
-  },
-  "CHAINE735": {
-    "id": 735,
-    "region": "fr"
-  },
-  "CHAINE780": {
+  "3SAT.de": {
     "id": 780,
     "region": "fr"
   },
-  "CHAINE781": {
+  "ARD.de": {
     "id": 781,
     "region": "fr"
   },
-  "CHAINE782": {
+  "RAI1.it": {
     "id": 782,
     "region": "fr"
   },
-  "CHAINE783": {
+  "ORF1.at": {
     "id": 783,
     "region": "fr"
   },
-  "CHAINE872": {
+  "EvenementsSports4KUHD.fr": {
     "id": 872,
     "region": "fr"
   },
@@ -921,34 +749,6 @@
   },
   "CHAINE975": {
     "id": 975,
-    "region": "fr"
-  },
-  "CHAINE985": {
-    "id": 985,
-    "region": "fr"
-  },
-  "CHAINE986": {
-    "id": 986,
-    "region": "fr"
-  },
-  "CHAINE987": {
-    "id": 987,
-    "region": "fr"
-  },
-  "CHAINE988": {
-    "id": 988,
-    "region": "fr"
-  },
-  "CHAINE989": {
-    "id": 989,
-    "region": "fr"
-  },
-  "CHAINE990": {
-    "id": 990,
-    "region": "fr"
-  },
-  "CHAINE991": {
-    "id": 991,
     "region": "fr"
   },
   "CanalPlusCinema.fr": {
@@ -983,7 +783,7 @@
     "id": 398,
     "region": "fr"
   },
-  "C8.fr": {
+  "TPMP.fr": {
     "id": 450,
     "region": "fr"
   },
@@ -1023,6 +823,10 @@
     "id": 581,
     "region": "fr"
   },
+  "TeleTOONplus1.fr": {
+    "id": 582,
+    "region": "fr"
+  },
   "PLANETEJustice.fr": {
     "id": 587,
     "region": "fr"
@@ -1035,10 +839,6 @@
     "id": 692,
     "region": "fr"
   },
-  "CHAINE828": {
-    "id": 828,
-    "region": "fr"
-  },
   "CanalPlusBoxOffice.fr": {
     "id": 1074,
     "region": "fr"
@@ -1047,10 +847,31 @@
     "id": 1077,
     "region": "fr"
   },
+  "DAZN1.fr": {
+    "id": 1077,
+    "region": "fr"
+  },
+  "DAZN2.fr": {
+    "id": 1155,
+    "region": "fr"
+  },
+  "DAZN3.fr": {
+    "id": 1156,
+    "region": "fr"
+  },
+  "DAZN4.fr": {
+    "id": 1157,
+    "region": "fr"
+  },
+  "DAZN5.fr": {
+    "id": 1158,
+    "region": "fr"
+  },
   "RTSUn.ch": {
     "id": 770,
     "region": "ch"
   },
+  "RTSDeux.ch": {
   "RTSDeux.ch": {
     "id": 771,
     "region": "ch"
@@ -1087,28 +908,8 @@
     "id": 779,
     "region": "ch"
   },
-  "OCSMax.ch": {
-    "id": 787,
-    "region": "ch"
-  },
-  "OCSChoc.ch": {
-    "id": 788,
-    "region": "ch"
-  },
-  "OCSGeants.ch": {
-    "id": 789,
-    "region": "ch"
-  },
-  "OCSCity.ch": {
-    "id": 790,
-    "region": "ch"
-  },
   "CStar.ch": {
     "id": 832,
-    "region": "ch"
-  },
-  "CanalPlusSport2.ch": {
-    "id": 861,
     "region": "ch"
   },
   "CanalPlusUHD.ch": {
@@ -1135,10 +936,6 @@
     "id": 825,
     "region": "ch"
   },
-  "CanalPlusDecale.ch": {
-    "id": 826,
-    "region": "ch"
-  },
   "CanalPlusCinema.ch": {
     "id": 827,
     "region": "ch"
@@ -1151,7 +948,7 @@
     "id": 830,
     "region": "ch"
   },
-  "C8.ch": {
+  "TPMP.ch": {
     "id": 831,
     "region": "ch"
   },
