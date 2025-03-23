@@ -1228,8 +1228,12 @@
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/ID100x100.png"
   },
   "DiscoveryScience.fr": {
-    "name": "Discovery Science",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-1374.png"
+    "name": "TLC",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1097\/canal-ouah\/CHN43FN\/CHN43FN_1097_20240611-7qUQ"
+  },
+  "TLC.fr": {
+    "name": "TLC",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1097\/canal-ouah\/CHN43FN\/CHN43FN_1097_20240611-7qUQ"
   },
   "DisneyChannel.be": {
     "name": "Disney Channel (Belgique)",
@@ -1592,6 +1596,10 @@
     "name": "France 2",
     "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/342\/icon320_light.png?v2023_48_0"
   },
+  "France2UHD.fr": {
+    "name": "France 2 UHD",
+    "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/6\/68\/France_2_UHD_%282024%29.png"
+  },
   "France24.fr": {
     "name": "France 24",
     "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/147\/icon320_light.png?v2023_48_0"
@@ -1719,6 +1727,10 @@
   "France3RhoneAlpes.fr": {
     "name": "France 3 - Rh\u00f4ne-Alpes",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/79236644"
+  },
+  "France3NoA.fr": {
+    "name": "France 3 - NoA",
+    "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/fr\/thumb\/8\/8a\/Logo_France_3_NoA_%282018%29.svg\/1200px-Logo_France_3_NoA_%282018%29.svg.png"
   },
   "France4.fr": {
     "name": "France 4",
@@ -4283,6 +4295,10 @@
     "name": "CANAL+ BOX OFFICE",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1074\/canal-ouah\/CHN43FB\/CHN43FB_1074_29082023"
   },
+  "CanalPlusBoxOfficeUHD.fr": {
+    "name": "CANAL+ BOX OFFICE UHD",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1074\/canal-ouah\/CHN43FB\/CHN43FB_1074_29082023"
+  },
   "CanalPlusGrandEcran.fr": {
     "name": "Canal+ Grand Ecran",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/900\/canal-ouah\/CHN43FB\/CHN43FB_900_29082023"
@@ -4294,6 +4310,26 @@
   "DAZN.fr": {
     "name": "DAZN 1",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1077\/canal-ouah\/CHN43FB\/CHN43FB_1077_20231002"
+  },
+  "DAZN1.fr": {
+    "name": "DAZN 1",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1077\/canal-ouah\/CHN43FB\/CHN43FB_1077_20231002"
+  },
+  "DAZN2.fr": {
+    "name": "DAZN 2",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1155\/canal-ouah\/CHN43FB\/CHN43FN_1155_20240813-FjVl"
+  },
+  "DAZN3.fr": {
+    "name": "DAZN 3",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1156\/canal-ouah\/CHN43FB\/CHN43FN_1156_20240813-UxAQ"
+  },
+  "DAZN4.fr": {
+    "name": "DAZN 4",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1157\/canal-ouah\/CHN43FB\/CHN43FN_1157_20240904-VPvq"
+  },
+  "DAZN5.fr": {
+    "name": "DAZN 5",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1158\/canal-ouah\/CHN43FB\/CHN43FN_1158_20240904-4nWl"
   },
   "DAZNLigue1.fr": {
     "name": "DAZN Ligue 1 - Multiplex",
@@ -5853,7 +5889,7 @@
   },
   "ViaGrandParis.fr": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/LEFIGARO100x100couleur.png",
-    "name": "Figaro TV IDF"
+    "name": "Le Figaro TV"
   },
   "FixandFoxi.af": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/FOXETFOXI100x100color.png",
@@ -7682,5 +7718,29 @@
   "IncroyablesTransformations2424.fr": {
     "name": "Incroyables Transformations 24/24",
     "icon": "https://i.imgur.com/tHI2Ewu.png"
+  },
+  "TPMP.fr": {
+    "name": "TPMP",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/450\/canal-ouah\/CHN43FN\/CHN43FN_450_20211018-K9zs"
+  },
+  "TPMP.ch": {
+    "name": "TPMP",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/450\/canal-ouah\/CHN43FN\/CHN43FN_450_20211018-K9zs"
+  },
+  "ORF1.at": {
+    "name": "ORF 1",
+    "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/b\/b2\/ORF_1_2019.svg\/1200px-ORF_1_2019.svg.png"
+  },
+  "TVMonaco.fr": {
+    "name": "TV Monaco",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1076\/canal-ouah\/CHN43FN\/CHN43FN_1076_20230919"
+  },
+  "FranceTVSeries.fr": {
+    "name": "France TV S&eacute;ries",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1092\/canal-ouah\/CHN43FN\/CHN43FN_1092_20240425-h_ne"
+  },
+  "FranceTVDocs.fr": {
+    "name": "France TV Docs",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1159\/canal-ouah\/CHN43FN\/CHN43FN_1159_20241119-_Ehj"
   }
 }
