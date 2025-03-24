@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
+use DateTimeZone;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Utils;
 use racacax\XmlTv\Component\ProviderInterface;
@@ -13,7 +14,10 @@ use racacax\XmlTv\ValueObject\Program;
 
 class TVHebdo extends AbstractProvider implements ProviderInterface
 {
-    private $proxy;
+    private mixed $proxy;
+    private bool $enableDetails;
+    private DateTimeZone $timezone;
+
 
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
@@ -22,61 +26,63 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
         if (isset($extraParam['tvhebdo_proxy'])) {
             $this->proxy = $extraParam['tvhebdo_proxy'];
         }
+        $this->enableDetails = $extraParam['tvhebdo_enable_details'] ?? true;
+        $this->timezone = new \DateTimeZone('America/Montreal');
     }
 
-    public function constructEPG(string $channel, string $date): Channel | bool
+    public function getDataPerDay(Channel $channelObj, \DateTimeImmutable $dateObj)
     {
-        $channelObj = parent::constructEPG($channel, $date);
-        //@todo: use datetime with timezone instead of update timezone
-        $timezone = new \DateTimeZone('America/Montreal');
-
-        if (!$this->channelExists($channel)) {
-            return false;
-        }
-        $res1 = $this->getContentFromURL(
-            $this->generateUrl($channelObj, new \DateTimeImmutable($date)),
+        $content = $this->getContentFromURL(
+            $this->generateUrl($channelObj, $dateObj),
             ['Referer' => $this->proxy]
         );
-        $res1 = str_replace('href="/', 'href="http://'.explode('/', $this->proxy[0])[2].'/', $res1);
-        $res1 = html_entity_decode($res1, ENT_QUOTES);
-        @$res1 = explode('Mes<br>alertes courriel', $res1)[1];
-        if (empty($res1)) {
-            return false;
+        $content = str_replace('href="/', 'href="http://'.explode('/', $this->proxy[0])[2].'/', $content);
+        $content = html_entity_decode($content, ENT_QUOTES);
+        @$content = explode('Mes<br>alertes courriel', $content)[1];
+        if (empty($content)) {
+            return [];
         }
-        preg_match_all('/class="heure"\>(.*?)\<\/td\>/', $res1, $time);
-        preg_match_all('/class="titre"\>.*?href="(.*?)"\>(.*?)\<\/a\>/', $res1, $titre);
-
-        $t8 = json_encode($time);
-        $t9 = json_encode($titre);
-        $t8 = $t8.'|||||||||||||||||||||||'.$t9;
-        if (strlen($t8) <= 100) {
-            return false;
+        preg_match_all('/class="heure"\>(.*?)\<\/td\>/', $content, $time);
+        preg_match_all('/class="titre"\>.*?href="(.*?)"\>(.*?)\<\/a\>/', $content, $titlesAndUrls);
+        if (count($time[1]) != count($titlesAndUrls[1])) {
+            return [];
+        }
+        $data = [];
+        for ($i = 0; $i < count($titlesAndUrls[1]); $i++) {
+            $startDate = new \DateTimeImmutable($dateObj->format('Y-m-d').' '.$time[1][$i], $this->timezone);
+            $data[] = ['startDate' => $startDate, 'title' => $titlesAndUrls[2][$i], 'url' => $titlesAndUrls[1][$i]];
         }
 
-        $count = count($titre[2]);
-
-        $promises = [];
-        $promisesResolved = 0;
-        for ($j = 0;$j < $count;$j++) {
-            $url = $titre[1][$j];
-            $promise = $this->client->getAsync($url);
-            $promise->then(function () use (&$promisesResolved, $count) {
-                $promisesResolved++;
-                $this->setStatus(round($promisesResolved * 100 / $count, 2).' %');
-            });
-            $promises[$url] = $promise;
+        return $data;
+    }
+    public function fetchPrograms(Channel $channelObj, string $date)
+    {
+        $dateObj = new \DateTimeImmutable($date);
+        $dateDayBefore = $dateObj->modify('-1 day');
+        $data = array_merge($this->getDataPerDay($channelObj, $dateDayBefore), $this->getDataPerDay($channelObj, $dateObj));
+        $programsWithDetailUrl = [];
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
+        for ($i = 0; $i < count($data); $i++) {
+            if ($data[$i]['startDate'] < $minDate) {
+                continue;
+            } elseif ($data[$i]['startDate'] > $maxDate) {
+                return $programsWithDetailUrl;
+            }
+            $program = new Program($data[$i]['startDate'], @$data[$i + 1]['startDate'] ?? ($data[$i]['startDate']->modify('+1 hour')));
+            $program->addTitle($data[$i]['title']);
+            $programsWithDetailUrl[] = [$program, $data[$i]['url']];
+            $channelObj->addProgram($program);
         }
-        $response = Utils::all($promises)->wait();
 
-        for ($j = 0;$j < $count;$j++) {
-            $dateStart = (new \DateTimeImmutable($date.' '.$time[1][$j], $timezone))->getTimestamp();
-            $titreProgram = $titre[2][$j];
-            $url = $titre[1][$j];
-            $content = (string)$response[$url]->getBody();
+        return $programsWithDetailUrl;
+    }
+
+    public function fillProgramDetails(Program $program, string $content)
+    {
+        try {
             $infos = str_replace("\n", ' ', explode('</h4>', explode('<h4>', $content)[1] ?? '')[0]);
             $infos = explode(' - ', $infos);
             $genre = @trim($infos[0] ?? '');
-            $duration = @intval(explode(' ', @trim($infos[1] ?? ''))[0]);
             $lang = @trim(strtolower($infos[2] ?? ''));
             $potentialYear = @strval(intval(@trim($infos[3] ?? '')));
             if (@trim($infos[3] ?? '') == $potentialYear) {
@@ -95,8 +101,6 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
                 $desc .= "\n\nAnnée : ".$year;
             }
             $intervenants = @explode('</p>', explode('<p id="dd_inter">', $content)[1] ?? '')[0];
-            $program = new Program($dateStart, $dateStart + $duration * 60);
-            $program->addTitle($titreProgram, $lang);
             $desc = str_replace('<br />', "\n", $desc.$intervenants);
             $tmp_desc = '';
             $splited_desc = explode("\n", $desc);
@@ -118,16 +122,43 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
                     $program->addCredit($line, $current_role);
                 }
             }
-            $img_zone = explode('<div id="dd_votes_container">', explode('<div id="dd_votes">', $content)[1] ?? '')[0];
-            preg_match('/src="(.*?)"/', $img_zone, $img_url);
-            $program->setIcon(@$img_url[1]);
+            $program->setIcon('https://i.imgur.com/5CHM14O.png');
             if (isset($rating) && strlen($rating) > 0 && strlen($rating) < 4) {
                 $rating_system = \racacax\XmlTv\Component\Utils::getCanadianRatingSystem($rating, $lang);
                 if (isset($rating_system)) {
                     $program->setRating($rating, $rating_system);
                 }
             }
-            $channelObj->addProgram($program);
+        } catch (\Throwable) {
+            // We allow details to fail
+        }
+    }
+    public function fillDetails(array $programsWithDetailUrl)
+    {
+        $count = count($programsWithDetailUrl);
+        $promises = [];
+        $promisesResolved = 0;
+        for ($j = 0;$j < $count;$j++) {
+            [$program, $url] = $programsWithDetailUrl[$j];
+            $promise = $this->client->getAsync($url);
+            $promise->then(function ($response) use (&$promisesResolved, $count, $program) {
+                $promisesResolved++;
+                $this->setStatus(round($promisesResolved * 100 / $count, 2).' %');
+                $this->fillProgramDetails($program, $response->getBody()->getContents() ?? '');
+            });
+            $promises[$url] = $promise;
+        }
+        Utils::all($promises)->wait();
+    }
+    public function constructEPG(string $channel, string $date): Channel | bool
+    {
+        $channelObj = parent::constructEPG($channel, $date);
+        if (!$this->channelExists($channel)) {
+            return false;
+        }
+        $programsWithDetailUrl = $this->fetchPrograms($channelObj, $date);
+        if ($this->enableDetails) {
+            $this->fillDetails($programsWithDetailUrl);
         }
 
         return $channelObj;

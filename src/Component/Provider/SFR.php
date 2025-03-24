@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use GuzzleHttp\Client;
-use racacax\XmlTv\Component\ProviderCache;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -14,13 +13,10 @@ use racacax\XmlTv\ValueObject\Program;
 // Original script by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/SFR.php
 class SFR extends AbstractProvider implements ProviderInterface
 {
-    protected ProviderCache $jsonPerDay;
-
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         $file = $extraParam['provider'] ?? 'sfr';
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_'.$file.'.json'), $priority ?? 0.85);
-        $this->jsonPerDay = new ProviderCache($file.'Cache');
     }
 
     public function constructEPG(string $channel, string $date): Channel|bool
@@ -31,26 +27,36 @@ class SFR extends AbstractProvider implements ProviderInterface
         }
 
         $channelId = $this->getChannelsList()[$channel];
-        $arrayPerDay = $this->jsonPerDay->getArray();
-        if (!isset($arrayPerDay[$date])) {
-            $content = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
-            $json = json_decode($content, true);
-            $this->jsonPerDay->setArrayKey($date, $json);
-        } else {
-            $json = $arrayPerDay[$date];
-        }
+        $selectedDate = new \DateTimeImmutable($date);
+        $contentDayBefore = $this->getContentFromURL($this->generateUrl($channelObj, $selectedDate->modify('-1 day')));
+        $content = $this->getContentFromURL($this->generateUrl($channelObj, $selectedDate));
+        $jsonDayBefore = json_decode($contentDayBefore, true);
+        $json = json_decode($content, true);
 
         if ($json === false) {
             return false;
         }
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
+        $programsDayBefore = @$jsonDayBefore['epg'];
         $programs = @$json['epg'];
 
-        if (empty($programs[$channelId])) {
+        $programsForChannel = $programs[$channelId];
+        if (empty($programsForChannel)) {
             return false;
         }
 
+        if (!empty($programsDayBefore[$channelId])) {
+            $programsForChannel = array_merge($programsDayBefore[$channelId], $programsForChannel);
+        }
 
-        foreach ($programs[$channelId] as $program) {
+
+        foreach ($programsForChannel as $program) {
+            $startDate = new \DateTimeImmutable('@'.($program['startDate'] / 1000));
+            if ($startDate < $minDate) {
+                continue;
+            } elseif ($startDate > $maxDate) {
+                break;
+            }
             if (isset($program['moralityLevel'])) {
                 $csa = match ($program['moralityLevel']) {
                     '2' => '-10',

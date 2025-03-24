@@ -6,7 +6,6 @@ namespace racacax\XmlTv\Component\Provider;
 
 use Exception;
 use GuzzleHttp\Client;
-use racacax\XmlTv\Component\ProviderCache;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
@@ -18,14 +17,12 @@ use racacax\XmlTv\ValueObject\Program;
  */
 class Cogeco extends AbstractProvider implements ProviderInterface
 {
-    protected ProviderCache $jsonPerDay;
     protected static string $COOKIE_VALUE = '823D'; // for Toronto Postal Code
     protected static array $CATEGORIES_BY_CSS = ['tvm_td_grd_s' => 'Sport', 'tvm_td_grd_r' => 'Télé-Réalité', 'tvm_td_grd_m' => 'Cinéma']; // Color codes for these categories
     protected static array $CATEGORIES_IN_TITLE = ['Cinéma']; // Some titles are only present in subtitles and has the category as a title
     public function __construct(Client $client, ?float $priority = null)
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_cogeco.json'), $priority ?? 0.61);
-        $this->jsonPerDay = new ProviderCache('cogecoCache');
     }
 
     protected function hasCategoryAsTitle(string $title)
@@ -52,29 +49,24 @@ class Cogeco extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        date_default_timezone_set('America/Toronto');
         $channelId = $this->getChannelsList()[$channel];
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
+        date_default_timezone_set('America/Toronto');
         $minStart = new \DateTimeImmutable($date);
         if ($minStart < new \DateTimeImmutable(date('Y-m-d'))) {
             return false;
         }
+        $count = 6;
+        $span = 6;
+        $minStart = $minStart->modify('-1 day')->modify('+'.($span * 2).' hours');
         $programsPaths = [];
         $programCategories = [];
-        $count = 4;
-        $span = 6;
         for ($i = 0; $i < $count; $i++) {
             $percent = '| Main data (1/2) : '.round($i * 100 / ($count), 2) . ' %';
             $this->setStatus($percent);
-            $arrayPerDay = $this->jsonPerDay->getArray();
             $start = $minStart->modify('+'.($span * $i).' hours');
-            $key = strval($start->getTimestamp());
-            if (!isset($arrayPerDay[$key])) {
-                $content = $this->getContentFromURL($this->generateUrl($channelObj, $start), ['Cookie' => 'TVMDS_Cookie='.self::$COOKIE_VALUE]);
-                $json = json_decode($content, true);
-                $this->jsonPerDay->setArrayKey($key, $json);
-            } else {
-                $json = $arrayPerDay[$key];
-            }
+            $content = $this->getContentFromURL($this->generateUrl($channelObj, $start), ['Cookie' => 'TVMDS_Cookie='.self::$COOKIE_VALUE]);
+            $json = json_decode($content, true);
             $html = @$json['data'];
             if (!$html) {
                 return false;
@@ -126,8 +118,10 @@ class Cogeco extends AbstractProvider implements ProviderInterface
                 $startTimeObj = $startTimeObj->modify('+1 day');
             }
             $currentCursor = $startTimeObj;
-            if ($currentCursor < $minStart) { // program is from the day before
+            if ($currentCursor < $minStart || $currentCursor < $minDate) { // program is from the day before
                 continue;
+            } elseif ($currentCursor > $maxDate) {
+                return $channelObj;
             }
             $duration = intval(explode('(', explode(' ', $details[1][2])[0])[1]);
             $endTimeObj = $startTimeObj->modify('+'.$duration.' minutes');

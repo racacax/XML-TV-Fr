@@ -36,7 +36,11 @@ class Teleboy extends AbstractProvider implements ProviderInterface
         if (empty($json['data']['items'])) {
             return false;
         }
+        [$minDate] = $this->getMinMaxDate($date);
         foreach ($json['data']['items'] as $item) {
+            if (new \DateTimeImmutable('@'.strtotime($item['begin'])) < $minDate) {
+                continue;
+            }
             $programObj = new Program(strtotime($item['begin']), strtotime($item['end']));
             $programObj->addTitle($item['title']);
             if (!empty($item['subtitle'])) {

@@ -6,10 +6,12 @@ namespace racacax\XmlTv\Component\Provider;
 
 use DateTime;
 use DateTimeImmutable;
+use racacax\XmlTv\ValueObject\EPGEnum;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ProviderCache;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
+use racacax\XmlTv\Configurator;
 use racacax\XmlTv\ValueObject\Channel;
 use racacax\XmlTv\ValueObject\Program;
 
@@ -78,6 +80,15 @@ class LEquipeLive extends AbstractProvider implements ProviderInterface
         }
 
         return $channelObj;
+    }
+
+    public function getChannelStateFromTimes(array $startTimes, array $endTimes, Configurator $config): int
+    {
+        if (count($startTimes) > 0) {
+            return EPGEnum::$FULL_CACHE;
+        }
+
+        return EPGEnum::$NO_CACHE;
     }
 
     private function formatTime(string $time): int

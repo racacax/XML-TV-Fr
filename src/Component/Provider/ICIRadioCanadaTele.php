@@ -27,12 +27,21 @@ class ICIRadioCanadaTele extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-
-        $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date))), true);
+        $dateObj = new \DateTimeImmutable($date);
+        $jsonPreviousDay = json_decode($this->getContentFromURL($this->generateUrl($channelObj, $dateObj->modify('-1 day'))), true);
+        $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, $dateObj)), true);
         if (!isset($json['data']['broadcasts'])) {
             return false;
         }
-        foreach ($json['data']['broadcasts'] as $broadcast) {
+        $programs = array_merge(@$jsonPreviousDay['data']['broadcasts'] ?? [], $json['data']['broadcasts']);
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
+        foreach ($programs as $broadcast) {
+            $startDate = new \DateTimeImmutable('@'.strtotime($broadcast['startsAt']));
+            if ($startDate < $minDate) {
+                continue;
+            } elseif ($startDate > $maxDate) {
+                return $channelObj;
+            }
             $program = new Program(strtotime($broadcast['startsAt']), strtotime($broadcast['endsAt']));
             $program->addCategory($broadcast['subtheme']);
             $program->setIcon(str_replace('{0}', '635', str_replace('{1}', '16x9', @$broadcast['pircture']['url'] ?? '')));

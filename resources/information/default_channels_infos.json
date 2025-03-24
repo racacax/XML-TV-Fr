@@ -1010,7 +1010,7 @@
   },
   "Casa.ca": {
     "name": "Casa",
-    "icon": "https:\/\/cdn.tvpassport.com\/image\/station\/640x360\/spacer.gif"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/CASA_logo.svg/1280px-CASA_logo.svg.png"
   },
   "ChaineEvenement.fr": {
     "name": "Chaine Evenement",
@@ -1228,8 +1228,12 @@
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/ID100x100.png"
   },
   "DiscoveryScience.fr": {
-    "name": "Discovery Science",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-1374.png"
+    "name": "TLC",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1097\/canal-ouah\/CHN43FN\/CHN43FN_1097_20240611-7qUQ"
+  },
+  "TLC.fr": {
+    "name": "TLC",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1097\/canal-ouah\/CHN43FN\/CHN43FN_1097_20240611-7qUQ"
   },
   "DisneyChannel.be": {
     "name": "Disney Channel (Belgique)",
@@ -1591,6 +1595,10 @@
   "France2.fr": {
     "name": "France 2",
     "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/342\/icon320_light.png?v2023_48_0"
+  },
+  "France2UHD.fr": {
+    "name": "France 2 UHD",
+    "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/6\/68\/France_2_UHD_%282024%29.png"
   },
   "France24.fr": {
     "name": "France 24",
@@ -3132,10 +3140,6 @@
     "name": "SAMIRATV",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSgWMkr3IZpIPCy0_1ZAssd6-Q0OYJmKJgKKTQmN5syYxT48-PjS-kw3KE8xQ&amp;s"
   },
-  "SAT1.de": {
-    "name": "SAT1",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSdmp5mtzhVopBvT4JkNw8j7FrC4IUKELA-YtB5Nz_tOISI-B3dyufjm5pt1Q&amp;s"
-  },
   "SC1.ca": {
     "name": "SC1",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRV_NDKMf3Syx4PX3FGywddf8v_3HKkUoqXQztQhixSg-2GaR4UXUvUykpzvg&amp;s"
@@ -4287,6 +4291,10 @@
     "name": "CANAL+ BOX OFFICE",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1074\/canal-ouah\/CHN43FB\/CHN43FB_1074_29082023"
   },
+  "CanalPlusBoxOfficeUHD.fr": {
+    "name": "CANAL+ BOX OFFICE UHD",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1074\/canal-ouah\/CHN43FB\/CHN43FB_1074_29082023"
+  },
   "CanalPlusGrandEcran.fr": {
     "name": "Canal+ Grand Ecran",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/900\/canal-ouah\/CHN43FB\/CHN43FB_900_29082023"
@@ -4298,6 +4306,22 @@
   "DAZN.fr": {
     "name": "DAZN 1",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1077\/canal-ouah\/CHN43FB\/CHN43FB_1077_20231002"
+  },
+  "DAZN2.fr": {
+    "name": "DAZN 2",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1155\/canal-ouah\/CHN43FB\/CHN43FN_1155_20240813-FjVl"
+  },
+  "DAZN3.fr": {
+    "name": "DAZN 3",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1156\/canal-ouah\/CHN43FB\/CHN43FN_1156_20240813-UxAQ"
+  },
+  "DAZN4.fr": {
+    "name": "DAZN 4",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1157\/canal-ouah\/CHN43FB\/CHN43FN_1157_20240904-VPvq"
+  },
+  "DAZN5.fr": {
+    "name": "DAZN 5",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1158\/canal-ouah\/CHN43FB\/CHN43FN_1158_20240904-4nWl"
   },
   "DAZNLigue1.fr": {
     "name": "DAZN Ligue 1 - Multiplex",
@@ -5857,7 +5881,7 @@
   },
   "ViaGrandParis.fr": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/LEFIGARO100x100couleur.png",
-    "name": "Figaro TV IDF"
+    "name": "Le Figaro TV"
   },
   "FixandFoxi.af": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/FOXETFOXI100x100color.png",
@@ -6115,7 +6139,7 @@
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/Arryadia_color.png",
     "name": "Arryadia"
   },
-  "MaurienneTV.ar": {
+  "MaurienneTV.fr": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/mauriennetv100x100.png",
     "name": "MAURIENNE TV"
   },
@@ -7610,5 +7634,105 @@
   "LEquipeLiveFoot.fr": {
     "name": "L'Equipe Live Foot",
     "icon": "https:\/\/i.imgur.com\/vxoiXmc.png"
+  },
+  "AutoPlusTV.fr": {
+    "name": "Auto Plus TV",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_AUTOPLUS_61b02519b4.png"
+  },
+  "ChevalTV.fr": {
+    "name": "Cheval TV",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_LOGO_CHEVAL_TV_NOIR_SUR_FOND_BLANC_1059ad89bb.jpg"
+  },
+  "MarmitonTV.fr": {
+    "name": "Marmiton TV",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_Logo_Marmiton_TV_bis_8e336d6d66.png"
+  },
+  "TRACEAyiti.fr": {
+    "name": "Trace Ayiti",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_trace_ayiti_94de0df748.png"
+  },
+  "TopSanteTV.fr": {
+    "name": "Top Santé TV",
+    "icon": "https://freebox.cdn.scw.iliad.fr/large_top_sante_ea66c2d6c5.jpg"
+  },
+  "LesMarseillais2424.fr": {
+    "name": "Les Marsellais 24/24",
+    "icon": "https://i.imgur.com/eI9fjaY.png"
+  },
+  "Turbo2424.fr": {
+    "name": "Turbo 24/24",
+    "icon": "https://i.imgur.com/FtT302g.png"
+  },
+  "Beyblade2424.fr": {
+    "name": "Beyblade Burst 24/24",
+    "icon": "https://i.imgur.com/f6qSH4p.png"
+  },
+  "NFL.fr": {
+    "name": "NFL",
+    "icon": "https://i.imgur.com/9DYKO3R.png"
+  },
+  "Telefilms2424.fr": {
+    "name": "Téléfilms 24/24",
+    "icon": "https://i.imgur.com/MHWglYD.png"
+  },
+  "TelefilmsRomance2424.fr": {
+    "name": "Téléfilms Romance 24/24",
+    "icon": "https://i.imgur.com/3c5IMZ5.png"
+  },
+  "ZoneInterdite2424.fr": {
+    "name": "Zone Interdite 24/24",
+    "icon": "https://i.imgur.com/Tga6YU3.png"
+  },
+  "EnquetesCriminelles2424.fr": {
+    "name": "Enquetes Criminelles 24/24",
+    "icon": "https://i.imgur.com/BhT1VQo.png"
+  },
+  "Telenovelas2424.fr": {
+    "name": "Télénovelas 24/24",
+    "icon": "https://i.imgur.com/EyOyvuc.png"
+  },
+  "LesReinesDuShopping2424.fr": {
+    "name": "Les Reines du Shopping 24/24",
+    "icon": "https://i.imgur.com/NiIDN66.png"
+  },
+  "Nashville2424.fr": {
+    "name": "Nashville 24/24",
+    "icon": "https://i.imgur.com/WhhW940.png"
+  },
+  "ScenesDeMenages2424.fr": {
+    "name": "Scènes de Ménages 2424",
+    "icon": "https://i.imgur.com/lSLHtkm.png"
+  },
+  "SF2424.fr": {
+    "name": "SF 24/24",
+    "icon": "https://i.imgur.com/7IGx5tt.png"
+  },
+  "IncroyablesTransformations2424.fr": {
+    "name": "Incroyables Transformations 24/24",
+    "icon": "https://i.imgur.com/tHI2Ewu.png"
+  },
+  "TPMP.fr": {
+    "name": "TPMP",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/450\/canal-ouah\/CHN43FN\/CHN43FN_450_20211018-K9zs"
+  },
+  "TPMP.ch": {
+    "name": "TPMP",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/450\/canal-ouah\/CHN43FN\/CHN43FN_450_20211018-K9zs"
+  },
+  "ORF1.at": {
+    "name": "ORF 1",
+    "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/b\/b2\/ORF_1_2019.svg\/1200px-ORF_1_2019.svg.png"
+  },
+  "TVMonaco.fr": {
+    "name": "TV Monaco",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1076\/canal-ouah\/CHN43FN\/CHN43FN_1076_20230919"
+  },
+  "FranceTVSeries.fr": {
+    "name": "France TV S&eacute;ries",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1092\/canal-ouah\/CHN43FN\/CHN43FN_1092_20240425-h_ne"
+  },
+  "FranceTVDocs.fr": {
+    "name": "France TV Docs",
+    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1159\/canal-ouah\/CHN43FN\/CHN43FN_1159_20241119-_Ehj"
   }
 }

@@ -26,11 +26,12 @@ class Program
 
     /**
      * Program constructor.
-     * @param \DateTimeImmutable|string|number $start
-     * @param \DateTimeImmutable|string|number $end
      */
     public function __construct($start, $end)
     {
+        if (is_null($start) || is_null($end)) {
+            throw new \ValueError('Start and end dates must not be null');
+        }
         $this->start = $start;
         $this->end = $end;
         $this->titles = [];
@@ -281,7 +282,9 @@ class Program
      */
     public function setRating($rating, $system = 'CSA'): void
     {
-        $this->rating = [$rating, $system];
+        if (isset($rating)) {
+            $this->rating = [$rating, $system];
+        }
     }
 
     /**

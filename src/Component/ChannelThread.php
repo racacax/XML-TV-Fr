@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
+use racacax\XmlTv\ValueObject\EPGEnum;
 use racacax\XmlTv\ValueObject\DummyChannel;
 
 use function Amp\async;
@@ -88,7 +89,7 @@ class ChannelThread
             $this->date = $date." ($progress/$total)";
             $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
 
-            if ($cache->getState($cacheKey) == CacheFile::$FULL_CACHE) {
+            if ($cache->getState($cacheKey) == EPGEnum::$FULL_CACHE) {
                 Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, 'Cache', true);
 
                 continue;
@@ -145,16 +146,29 @@ class ChannelThread
                 }
 
                 $channelFound = true;
-                Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, get_class($provider));
+                [$startTimes, $endTimes] = Utils::getStartAndEndDatesFromXMLString($channel);
+                $state = $provider->getChannelStateFromTimes($startTimes, $endTimes, $this->generator->getConfigurator());
+                if ($state == EPGEnum::$PARTIAL_CACHE) {
+                    if (($cache->getState($cacheKey) != EPGEnum::$NO_CACHE)) {
+                        $cacheContent = $cache->get($cacheKey);
+                        [$cacheStartTimes, $_] = Utils::getStartAndEndDatesFromXMLString($cacheContent);
+                        if (max($cacheStartTimes) > max($startTimes)) {
+                            continue;
+                        }
+                    }
+                    Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, get_class($provider).' (Partial)');
+                } else {
+                    Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, get_class($provider));
+                }
                 $cache->store($cacheKey, $channel);
 
                 break;
             }
 
-            if (!$channelFound) {
+            if (!$channelFound && !Logger::hasChannelSuccessfulProvider($this->channelsFile, $this->channel, $date)) {
                 if ($cache->getState($cacheKey)) {
                     Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, 'Forced Cache', true);
-                } elseif ($this->generator->createEpgIfNotFound()) {
+                } elseif ($this->generator->getConfigurator()->isEnableDummy()) {
                     $cache->store($cacheKey, $this->generator->getFormatter()->formatChannel(new DummyChannel($this->channel, $date), null));
                 }
             }

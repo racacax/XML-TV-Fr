@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
+use racacax\XmlTv\Configurator;
 use racacax\XmlTv\StaticComponent\ChannelInformation;
 
 abstract class Generator
@@ -11,16 +12,8 @@ abstract class Generator
     /**
      * @var array
      */
-    protected array $extraParams;
-
-    /**
-     * @var array
-     */
     protected array $listDate = [];
-    /**
-     * @var bool
-     */
-    protected bool $createEpgIfNotFound;
+
     /**
      * @var XmlExporter
      */
@@ -33,16 +26,12 @@ abstract class Generator
      * @var CacheFile
      */
     protected CacheFile $cache;
-    /**
-     * @var int
-     */
-    protected int $nbThreads;
 
-    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, bool $createEpgIfNotFound, int $nbThreads, array $extraParams)
+    protected Configurator $configurator;
+
+    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, Configurator $configurator)
     {
-        $this->createEpgIfNotFound = $createEpgIfNotFound;
-        $this->extraParams = $extraParams;
-        $this->nbThreads = $nbThreads;
+        $this->configurator = $configurator;
         $current = new \DateTime();
         $current->setTimestamp($start->getTimestamp());
         while ($current <= $stop) {
@@ -90,11 +79,6 @@ abstract class Generator
         );
     }
 
-    public function getExtraParams(): array
-    {
-        return $this->extraParams;
-    }
-
     abstract protected function generateEpg(): void;
 
     public function generate(): void
@@ -109,12 +93,10 @@ abstract class Generator
     {
         return $this->cache;
     }
-
-    public function createEpgIfNotFound(): bool
+    public function getConfigurator(): Configurator
     {
-        return $this->createEpgIfNotFound;
+        return $this->configurator;
     }
-
     public function getFormatter(): XmlFormatter
     {
         return $this->formatter;

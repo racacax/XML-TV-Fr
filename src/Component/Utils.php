@@ -246,16 +246,23 @@ class Utils
         return "$p src/Multithreading/thread.php $providerClass $date ".base64_encode($channelInfo)." $fileName $generatorId";
     }
 
+    public static function getStartAndEndDatesFromXMLString(string $xmlContent): array
+    {
+        preg_match_all('/start="(.*?)"/', $xmlContent, $startDates);
+        $startDates = array_map('strtotime', $startDates[1]);
+        preg_match_all('/stop="(.*?)"/', $xmlContent, $endDates);
+        $endDates = array_map('strtotime', $endDates[1]);
+
+        return [$startDates, $endDates];
+    }
+
     public static function getTimeRangeFromXMLString(string $xmlContent): int
     {
         /*
          * Returns the difference between earliest start time and latest start time
          * of an XML cache file, in seconds.
         */
-        preg_match_all('/start="(.*?)"/', $xmlContent, $startDates);
-        $startDates = array_map('strtotime', $startDates[1]);
-        preg_match_all('/stop="(.*?)"/', $xmlContent, $endDates);
-        $endDates = array_map('strtotime', $endDates[1]);
+        [$startDates, $endDates] = self::getStartAndEndDatesFromXMLString($xmlContent);
         if (count($endDates) == 0 || count($startDates) == 0) {
             return 0;
         }

@@ -39,13 +39,25 @@ class Telerama extends AbstractProvider implements ProviderInterface
             return false;
         }
 
+        $contentDayBefore = $this->getContentFromURL($this->generateUrl($channelObj, (new \DateTimeImmutable($date))->modify('-1 day')));
         $content = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
+        $jsonDayBefore = json_decode($contentDayBefore, true);
         $json = json_decode($content, true);
 
         if (!isset($json['donnees'])) {
             return false;
         }
+        if (!empty($jsonDayBefore['donnees'])) {
+            $json['donnees'] = array_merge($jsonDayBefore['donnees'], $json['donnees']);
+        }
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
         foreach ($json['donnees'] as $donnee) {
+            $startDate = new \DateTimeImmutable('@'.strtotime($donnee['horaire']['debut']));
+            if ($startDate < $minDate) {
+                continue;
+            } elseif ($startDate > $maxDate) {
+                break;
+            }
             $program = new Program(strtotime($donnee['horaire']['debut']), strtotime($donnee['horaire']['fin']));
             $descri = $donnee['resume'];
             if (isset($donnee['serie'])) {
