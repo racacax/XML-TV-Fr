@@ -93,11 +93,11 @@ class MultiThreadedGenerator extends Generator
             $this->startThreadWatcher($generatorId);
             $guidesCount = count($this->guides);
             foreach ($this->guides as $index => $guide) {
-                $channels = json_decode(file_get_contents($guide['channels']), true);
+                $channels = Utils::getChannelsFromGuide($guide);
                 $threads = [];
                 $manager = new ChannelsManager($channels, $this);
                 for ($i = 0; $i < $this->configurator->getNbThreads(); $i++) {
-                    $threads[] = new ChannelThread($manager, $this, $generatorId, $guide['channels']);
+                    $threads[] = new ChannelThread($manager, $this, $generatorId, $guide['filename']);
                 }
                 $view = $this->getUIClosure($threads, $manager, $guide, $logLevel, $index, $guidesCount);
                 async($view);

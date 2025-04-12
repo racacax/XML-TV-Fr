@@ -75,7 +75,7 @@ class DAZN extends AbstractProvider implements ProviderInterface
                 if ($entry['startTime'] > $endCurrentDate || $entry['endTime'] < $startCurrentDate) {
                     continue;
                 }
-                $program = new Program($entry['startTime'], $entry['endTime']);
+                $program = Program::withTimestamp($entry['startTime'], $entry['endTime']);
                 $program->addCategory('Football');
                 $program->addDesc("Ligue 1 - Semaine ${week}");
                 $program->addTitle($entry['prefix'] . $this->getProgramTitle($match));
@@ -146,7 +146,7 @@ class DAZN extends AbstractProvider implements ProviderInterface
                     continue;
                 }
                 $lastEndTime = $entry['endTime'];
-                $program = new Program($entry['startTime'], $entry['endTime']);
+                $program = Program::withTimestamp($entry['startTime'], $entry['endTime']);
                 $program->addCategory('Football');
                 $program->addDesc("Ligue 1 - Semaine $week :\n".implode("\n", $titles));
                 $program->addTitle($entry['value']);

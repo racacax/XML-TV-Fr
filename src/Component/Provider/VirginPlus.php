@@ -153,7 +153,7 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
                 } elseif ($startDate > $maxDate) {
                     return $channelObj;
                 }
-                $programObj = new Program(strtotime($program['startTime']), strtotime($program['endTime']));
+                $programObj = Program::withTimestamp(strtotime($program['startTime']), strtotime($program['endTime']));
                 $programObj->addTitle($program['title']);
                 if (@$program['episodeTitle']) {
                     $programObj->addSubtitle($program['episodeTitle']);
@@ -204,7 +204,7 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
 
         return sprintf(
             self::$BASE_URL.'epg/v3/byBlockVersion/schedules?tvService=volt&epgChannelMap=MAP_TORONTO&callSign=%s&startTime=%s&endTime=%s&blockVersion=%s',
-            $channelId,
+            urlencode($channelId),
             urlencode($fromTime),
             urlencode($toTime),
             $blockVersion

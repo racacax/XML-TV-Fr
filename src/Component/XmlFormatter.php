@@ -28,7 +28,7 @@ class XmlFormatter
         }
 
         foreach ($channel->getPrograms() as $program) {
-            $content[] = '<programme start="'.$program->getStartFormatted().'" stop="'. $program->getEndFormatted().'" channel="'.$channel->getId().'">';
+            $content[] = '<programme start="'.$this->formatDate($program->getStart()).'" stop="'. $this->formatDate($program->getEnd()).'" channel="'.$channel->getId().'">';
             $content[] = $this->listToMark($program->getTitles(), 'title', 'Aucun titre');
             $content[] = $this->listToMark($program->getSubtitles(), 'sub-title');
             $content[] = $this->listToMark($program->getDescs(), 'desc', 'Aucune description');
@@ -36,9 +36,9 @@ class XmlFormatter
             $content[] = $this->listToMark($program->getCategories(), 'category', 'Inconnu');
             $content[] = $this->buildIcon($program->getIcon());
             $content[] = $this->buildEpisodeNum($program->getEpisodeNum());
+            $content[] = $this->buildPreviouslyShown($program->getPreviouslyShown());
+            $content[] = $this->buildNew($program->getIsNew());
             $content[] = $this->buildRating($program->getRating());
-            //$content[] = $this->buildYear($program->getYear());
-
             $content[] = '</programme>';
         }
 
@@ -92,13 +92,25 @@ class XmlFormatter
         return '';
     }
 
-    public function buildYear(?string $year): string
+    private function buildNew(?bool $isNew): string
     {
-        if (!isset($year)) {
-            return '';
+        if ($isNew) {
+            return '<new />';
         }
 
-        return '<year>'.$this->stringAsXML($year).'</year>';
+        return '';
+    }
+
+    private function buildPreviouslyShown(?array $previouslyShown): string
+    {
+        if (!is_null($previouslyShown)) {
+            $channel = !empty($previouslyShown['channel']) ? ' channel="'.$previouslyShown['channel'].'"' : '';
+            $start = !empty($previouslyShown['channel']) ? ' start="'.$this->formatDate($previouslyShown['start']).'"' : '';
+
+            return "<previously-shown$start$channel />";
+        }
+
+        return '';
     }
 
     private function buildRating($rating): string
@@ -116,5 +128,11 @@ class XmlFormatter
     private function stringAsXML($string): string
     {
         return str_replace('"', '&quot;', htmlspecialchars($string, ENT_XML1));
+    }
+
+
+    private function formatDate(\DateTimeInterface $date): string
+    {
+        return $date->format('YmdHis O');
     }
 }

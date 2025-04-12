@@ -136,7 +136,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                         } elseif ($startDate > $maxDate) {
                             break;
                         }
-                        $program = new Program(intval($times[1][$i]), intval($times[2][$i]));
+                        $program = Program::withTimestamp(intval($times[1][$i]), intval($times[2][$i]));
                         $program->addTitle(trim($genresAndTitles[2][$i] ?? ''));
                         $program->addCategory(trim($genresAndTitles[1][$i] ?? ''));
                         $program->setIcon('https:'.$imgs[1][$i]);

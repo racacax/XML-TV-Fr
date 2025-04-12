@@ -9,19 +9,19 @@ class Channel
     /**
      * @var string
      */
-    private $id;
+    private string $id;
     /**
      * @var string|null
      */
-    private $icon;
+    private ?string $icon;
     /**
      * @var string|null
      */
-    private $name;
+    private ?string $name;
     /**
      * @var Program[]
      */
-    private $programs;
+    private array $programs;
 
     /**
      * Channel constructor.
@@ -38,7 +38,7 @@ class Channel
     {
         $startTimes = [];
         foreach ($this->programs as $program) {
-            $startTimes[] = strtotime($program->getStartFormatted());
+            $startTimes[] = $program->getStart()->getTimestamp();
         }
 
         return $startTimes;
@@ -47,7 +47,7 @@ class Channel
     {
         $endTimes = [];
         foreach ($this->programs as $program) {
-            $endTimes[] = strtotime($program->getEndFormatted());
+            $endTimes[] = $program->getEnd()->getTimestamp();
         }
 
         return $endTimes;

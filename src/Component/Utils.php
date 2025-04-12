@@ -280,4 +280,20 @@ class Utils
 
         return null;
     }
+
+    public static function getChannelsFromGuide(array $guide)
+    {
+        if (is_string($guide['channels'])) {
+            return json_decode(file_get_contents($guide['channels']), true);
+        } elseif (is_array($guide['channels'])) {
+            $channels_arrays = [];
+            foreach ($guide['channels'] as $channelFile) {
+                $channels_arrays[] = json_decode(file_get_contents($channelFile), true) ?? [];
+            }
+
+            return array_merge(...$channels_arrays);
+        } else {
+            return [];
+        }
+    }
 }

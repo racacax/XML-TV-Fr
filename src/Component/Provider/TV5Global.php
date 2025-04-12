@@ -77,7 +77,7 @@ class TV5Global extends AbstractProvider implements ProviderInterface
                 } elseif ($startDateObj > $maxDate) {
                     return $channelObj;
                 }
-                $program = new Program($startDate, $endDate);
+                $program = Program::withTimestamp($startDate, $endDate);
                 $program->addTitle($title[1] ?? 'Aucun titre');
                 $program->addDesc($summary[1]);
                 $program->addCategory($genre[1] ?? 'Inconnu');

@@ -14,8 +14,8 @@ class SingleThreadedGenerator extends Generator
     protected function generateEpg(): void
     {
         foreach ($this->guides as $guide) {
-            $channels = json_decode(file_get_contents($guide['channels']), true);
-            Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", $guide['channels'], count($channels)));
+            $channels = Utils::getChannelsFromGuide($guide);
+            Logger::log(sprintf("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes (%s - %d chaines)\n", json_encode($guide['channels']), count($channels)));
 
 
             $countChannel = 0;
@@ -23,13 +23,14 @@ class SingleThreadedGenerator extends Generator
                 $countChannel++;
                 $providers = $this->getProviders($channelInfo['priority'] ?? []);
                 foreach ($this->listDate as $date) {
-                    Logger::addChannelEntry($guide['channels'], $channelKey, $date);
+                    Logger::addChannelEntry($guide['filename'], $channelKey, $date);
                     $cacheKey = sprintf('%s_%s.xml', $channelKey, $date);
                     Logger::log(sprintf("\e[95m[EPG GRAB] \e[39m%s (%d/%d) : %s", $channelKey, $countChannel, count($channels), $date));
 
                     if ($this->cache->getState($cacheKey) == EPGEnum::$FULL_CACHE) {
-                        Logger::log(" | \e[33mOK \e[39m- From Cache " . chr(10));
-                        Logger::setChannelSuccessfulProvider($guide['channels'], $channelKey, $date, 'Cache', true);
+                        $providerName = $this->cache->getProviderName($cacheKey);
+                        Logger::log(" | \e[33mOK \e[39m- $providerName (Cache) " . chr(10));
+                        Logger::setChannelSuccessfulProvider($guide['filename'], $channelKey, $date, $providerName, true);
 
                         continue;
                     }
@@ -51,7 +52,7 @@ class SingleThreadedGenerator extends Generator
                         }
                         date_default_timezone_set($old_zone);
                         if ($channel === false || $channel->getProgramCount() === 0) {
-                            Logger::addChannelFailedProvider($guide['channels'], $channelKey, $date, get_class($provider));
+                            Logger::addChannelFailedProvider($guide['filename'], $channelKey, $date, get_class($provider));
 
                             continue;
                         }
@@ -73,22 +74,23 @@ class SingleThreadedGenerator extends Generator
                         if ($chosenChannelState === EPGEnum::$PARTIAL_CACHE) {
                             if ($this->cache->getState($cacheKey) <= EPGEnum::$PARTIAL_CACHE) {
                                 Logger::log(" | \e[32mOK\e[39m - " . Utils::extractProviderName($chosenChannelProvider).' (Partial)' . chr(10));
-                                Logger::setChannelSuccessfulProvider($guide['channels'], $channelKey, $date, get_class($chosenChannelProvider).' (Partial)');
+                                Logger::setChannelSuccessfulProvider($guide['filename'], $channelKey, $date, get_class($chosenChannelProvider).' (Partial)');
                                 $this->cache->store($cacheKey, $this->formatter->formatChannel($chosenChannel, $chosenChannelProvider));
                             } else {
                                 $channelFound = false;
                             }
                         } elseif ($chosenChannelState === EPGEnum::$FULL_CACHE) {
                             Logger::log(" | \e[32mOK\e[39m - " . Utils::extractProviderName($chosenChannelProvider) . chr(10));
-                            Logger::setChannelSuccessfulProvider($guide['channels'], $channelKey, $date, get_class($chosenChannelProvider));
+                            Logger::setChannelSuccessfulProvider($guide['filename'], $channelKey, $date, get_class($chosenChannelProvider));
                             $this->cache->store($cacheKey, $this->formatter->formatChannel($chosenChannel, $chosenChannelProvider));
                         }
                     }
 
                     if (!$channelFound) {
                         if ($this->cache->getState($cacheKey)) {
-                            Logger::setChannelSuccessfulProvider($guide['channels'], $channelKey, $date, 'Forced Cache', true);
-                            Logger::log(" | \e[33mOK \e[39m- From Cache (Forced)" . chr(10));
+                            $providerName = $this->cache->getProviderName($cacheKey);
+                            Logger::setChannelSuccessfulProvider($guide['filename'], $channelKey, $date, "$providerName - Forced", true);
+                            Logger::log(" | \e[33mOK \e[39m- $providerName (Forced Cache)" . chr(10));
                         } else {
                             if ($this->configurator->isEnableDummy()) {
                                 $this->cache->store($cacheKey, $this->formatter->formatChannel(new DummyChannel($channelKey, $date), null));

@@ -140,7 +140,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         }
 
         foreach ($programList as $program) {
-            $programObj = new Program($program['startTime']->getTimestamp(), $program['endTime']->getTimestamp());
+            $programObj = new Program($program['startTime'], $program['endTime']);
             $programObj->addTitle($program['title']);
             $programObj->addSubtitle(@$program['subTitle']);
             $programObj->addDesc(@$program['description']);
@@ -148,7 +148,6 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             $programObj->addCategory(@$program['genre']);
             $programObj->addCategory(@$program['genreDetailed']);
             $programObj->setIcon(@$program['icon']);
-            $programObj->setYear(@$program['year']);
             $programObj->setRating(@$program['csa']);
             $channelObj->addProgram($programObj);
         }

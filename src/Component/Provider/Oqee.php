@@ -41,7 +41,7 @@ class Oqee extends AbstractProvider implements ProviderInterface
                 } elseif ($startDate > $maxDate) {
                     return $channelObj;
                 }
-                $program = new Program(date('YmdHis O', $entry['live']['start']), date('YmdHis O', $entry['live']['end']));
+                $program = Program::withTimestamp($entry['live']['start'], $entry['live']['end']);
                 $program->addTitle($entry['live']['title']);
                 $program->addSubtitle(@$entry['live']['sub_title']);
                 $program->addDesc(@$entry['live']['description']);

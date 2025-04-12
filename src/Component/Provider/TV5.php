@@ -50,7 +50,7 @@ class TV5 extends AbstractProvider implements ProviderInterface
             return false;
         }
         foreach ($json['data'] as $val) {
-            $program = new Program(strtotime($val['utcstart'] . '+00:00'), strtotime($val['utcend'] . '+00:00'));
+            $program = Program::withTimestamp(strtotime($val['utcstart'] . '+00:00'), strtotime($val['utcend'] . '+00:00'));
             $program->addTitle($val['title']);
             $program->addDesc((!empty($val['description'])) ? $val['description'] : 'Pas de description');
             $program->addCategory($val['category']);

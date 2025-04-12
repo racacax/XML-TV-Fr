@@ -57,6 +57,16 @@ class CacheFile
 
         return file_get_contents($this->getFileName($key));
     }
+    public function getProviderName(string $key): string
+    {
+        $f = fopen($this->getFileName($key), 'r');
+        $line = fgets($f) ?? 'Inconnu';
+        fclose($f);
+        $splited = explode('<!-- racacax\XmlTv\Component\Provider\\', $line);
+        $end = end($splited);
+
+        return explode(' -->', $end)[0];
+    }
 
     public function getState(string $key): int
     {

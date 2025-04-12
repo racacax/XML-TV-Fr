@@ -58,13 +58,13 @@ class Bouygues extends AbstractProvider implements ProviderInterface
                 }
             }
             $startTime = strtotime($program['startTime']);
-            $startDate = new \DateTimeImmutable('@' . $startTime);
+            $startDate = new \DateTimeImmutable('@' . strtotime($program['startTime']));
             if ($startDate < $minDate) {
                 continue;
             } elseif ($startDate > $maxDate) {
                 return $channelObj;
             }
-            $programObj = new Program($startTime, strtotime($program['endTime']));
+            $programObj = Program::withTimestamp($startTime, strtotime($program['endTime']));
             if (isset($program['programInfo']['character'])) {
                 foreach ($program['programInfo']['character'] as $intervenant) {
                     $programObj->addCredit($intervenant['firstName'] . ' ' . $intervenant['lastName'], $this->getCreditType($intervenant['function']));
@@ -78,7 +78,6 @@ class Bouygues extends AbstractProvider implements ProviderInterface
             $programObj->addCategory($subGenre);
             $programObj->setIcon(isset($program['media'][0]['url']) ? 'https://img.bouygtel.fr' . $program['media'][0]['url'] : null);
             $programObj->setRating($csa);
-            $programObj->setYear(@$program['programInfo']['productionDate']);
             $channelObj->addProgram($programObj);
         }
 
