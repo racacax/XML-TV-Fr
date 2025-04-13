@@ -1,0 +1,878 @@
+{
+  "RTLTVI.be": {
+    "id": 410,
+    "name": "RTL tvi"
+  },
+  "ClubRTL.be": {
+    "id": 396,
+    "name": "RTL club"
+  },
+  "PlugRTL.be": {
+    "id": 428,
+    "name": "RTL plug"
+  },
+  "LaUne.be": {
+    "id": 409,
+    "name": "La Une"
+  },
+  "LaDeux.be": {
+    "id": 412,
+    "name": "Tipik"
+  },
+  "LaTrois.be": {
+    "id": 457,
+    "name": "La Trois"
+  },
+  "TF1.fr": {
+    "id": 413,
+    "name": "TF1"
+  },
+  "France2.fr": {
+    "id": 402,
+    "name": "France 2"
+  },
+  "France3.fr": {
+    "id": 400,
+    "name": "France 3"
+  },
+  "France4.fr": {
+    "id": 399,
+    "name": "France 4"
+  },
+  "France5.fr": {
+    "id": 395,
+    "name": "France 5"
+  },
+  "C8.fr": {
+    "id": 448,
+    "name": "C8"
+  },
+  "Arte.be": {
+    "id": 467,
+    "name": "Arte Belgique"
+  },
+  "AB3.fr": {
+    "id": 424,
+    "name": "AB3 Channel"
+  },
+  "PickxPlusF.be": {
+    "id": 604,
+    "name": "Pickx+"
+  },
+  "TMC.fr": {
+    "id": 414,
+    "name": "TMC"
+  },
+  "DisneyChannel.be": {
+    "id": 379,
+    "name": "Disney Channel Wallonia"
+  },
+  "TV5MondeAlt.fr": {
+    "id": 422,
+    "name": "TV5 monde"
+  },
+  "Action.fr": {
+    "id": 385,
+    "name": "Action"
+  },
+  "Be1.be": {
+    "id": 391,
+    "name": "Be1"
+  },
+  "BeCine.be": {
+    "id": 444,
+    "name": "BeCiné"
+  },
+  "BeSeries.be": {
+    "id": 445,
+    "name": "BeSéries"
+  },
+  "Eurosport1.fr": {
+    "id": 398,
+    "name": "Eurosport 1"
+  },
+  "Eurosport2.fr": {
+    "id": 447,
+    "name": "Eurosport 2"
+  },
+  "DAZN.fr": {
+    "id": 380,
+    "name": "DAZN1"
+  },
+  "DAZN2.fr": {
+    "id": 381,
+    "name": "DAZN2"
+  },
+  "DAZN3.fr": {
+    "id": 2381,
+    "name": "DAZN3"
+  },
+  "DAZNProLeague1.fr": {
+    "id": 3033,
+    "name": "DAZN Pro League 1"
+  },
+  "DAZNProLeague2.fr": {
+    "id": 3034,
+    "name": "DAZN Pro League 2"
+  },
+  "DAZNProLeague3.fr": {
+    "id": 3035,
+    "name": "DAZN Pro League 3"
+  },
+  "VOOSportWorld1.be": {
+    "id": 442,
+    "name": "VooSport World1"
+  },
+  "VOOSportWorld2.be": {
+    "id": 443,
+    "name": "VooSport World2"
+  },
+  "VOOSportWorld3.be": {
+    "id": 451,
+    "name": "VooSport World3"
+  },
+  "VooFoot.be": {
+    "id": 465,
+    "name": "Voo Foot"
+  },
+  "M6.fr": {
+    "id": 404,
+    "name": "M6"
+  },
+  "13eRue.fr": {
+    "id": 383,
+    "name": "13ème Rue"
+  },
+  "ABXploreFR.fr": {
+    "id": 426,
+    "name": "AB Xplore"
+  },
+  "LN24.be": {
+    "id": 378,
+    "name": "LN 24"
+  },
+  "Syfy.fr": {
+    "id": 452,
+    "name": "Syfy"
+  },
+  "W9.fr": {
+    "id": 591,
+    "name": "W9"
+  },
+  "TCM.fr": {
+    "id": 411,
+    "name": "TCM Cinéma"
+  },
+  "TvBreizh.fr": {
+    "id": 420,
+    "name": "TV Breizh"
+  },
+  "Gulli.fr": {
+    "id": 453,
+    "name": "Gulli"
+  },
+  "Nickelodeon.be": {
+    "id": 382,
+    "name": "Nickelodéon Wallonia"
+  },
+  "CanalZoom.be": {
+    "id": 432,
+    "name": "Canal Zoom"
+  },
+  "MaTele.be": {
+    "id": 439,
+    "name": "MAtélé"
+  },
+  "NoTele.be": {
+    "id": 377,
+    "name": "NoTélé"
+  },
+  "BX1.be": {
+    "id": 429,
+    "name": "BX1"
+  },
+  "TeleSambre.be": {
+    "id": 430,
+    "name": "Télésambre"
+  },
+  "RTC.be": {
+    "id": 436,
+    "name": "Qu4tre Liège Média"
+  },
+  "TVLux.be": {
+    "id": 438,
+    "name": "TV Lux"
+  },
+  "TeleMB.be": {
+    "id": 433,
+    "name": "Télé MB"
+  },
+  "TVCom.be": {
+    "id": 431,
+    "name": "TVCom Brabant-Wallon"
+  },
+  "NationalGeographic.fr": {
+    "id": 423,
+    "name": "National Geographic"
+  },
+  "Animaux.fr": {
+    "id": 386,
+    "name": "Animaux"
+  },
+  "ScienceEtVieTV.fr": {
+    "id": 507,
+    "name": "Science et vie"
+  },
+  "Vedia.be": {
+    "id": 437,
+    "name": "Vedia"
+  },
+  "VRT1.be": {
+    "id": 389,
+    "name": "VRT 1"
+  },
+  "VTM.be": {
+    "id": 418,
+    "name": "VTM"
+  },
+  "VTM2.be": {
+    "id": 403,
+    "name": "VTM 2"
+  },
+  "VTM3.be": {
+    "id": 462,
+    "name": "Vitaya"
+  },
+  "Play4.be": {
+    "id": 417,
+    "name": "Play4"
+  },
+  "Play5.be": {
+    "id": 455,
+    "name": "Play5"
+  },
+  "Ketnet.be": {
+    "id": 373,
+    "name": "VRT Ketnet"
+  },
+  "KetnetCanvas.be": {
+    "id": 390,
+    "name": "VRT Canvas"
+  },
+  "NPO1.nl": {
+    "id": 459,
+    "name": "NPO 1"
+  },
+  "NPO2.nl": {
+    "id": 460,
+    "name": "NPO 2"
+  },
+  "NPO3.nl": {
+    "id": 461,
+    "name": "NPO 3"
+  },
+  "RAI1.it": {
+    "id": 408,
+    "name": "RAI 1"
+  },
+  "BBC1.uk": {
+    "id": 469,
+    "name": "BBC1"
+  },
+  "BBC2.uk": {
+    "id": 470,
+    "name": "BBC2"
+  },
+  "2MMaroc.fr": {
+    "id": 606,
+    "name": "2M Maroc"
+  },
+  "RTPI.pt": {
+    "id": 607,
+    "name": "RTP 1"
+  },
+  "TVE.es": {
+    "id": 605,
+    "name": "TVE Internacional"
+  },
+  "ZDF.de": {
+    "id": 538,
+    "name": "ZDF"
+  },
+  "DasErste.de": {
+    "id": 387,
+    "name": "Das Erste"
+  },
+  "DiscoveryChannel.fr": {
+    "id": 440,
+    "name": "Discovery Channel"
+  },
+  "France24.fr": {
+    "id": 491,
+    "name": "France 24"
+  },
+  "AntenneCentre.be": {
+    "id": 434,
+    "name": "Actu Antenne Centre TV"
+  },
+  "BFMTV.fr": {
+    "id": 489,
+    "name": "BFM TV"
+  },
+  "CNews.fr": {
+    "id": 480,
+    "name": "CNews"
+  },
+  "CanalZ.fr": {
+    "id": 463,
+    "name": "Canal Z"
+  },
+  "DisneyJunior.fr": {
+    "id": 486,
+    "name": "Disney Junior"
+  },
+  "LCI.fr": {
+    "id": 478,
+    "name": "LCI"
+  },
+  "beINSPORTS1.fr": {
+    "id": 494,
+    "name": "beIN SPORTS 1"
+  },
+  "beINSPORTS2.fr": {
+    "id": 495,
+    "name": "beIN SPORTS 2"
+  },
+  "beINSPORTS3.fr": {
+    "id": 496,
+    "name": "beIN SPORTS 3"
+  },
+  "MTV.fr": {
+    "id": 406,
+    "name": "MTV"
+  },
+  "NRJHits.fr": {
+    "id": 518,
+    "name": "NRJ Hits"
+  },
+  "NickJr.be": {
+    "id": 456,
+    "name": "Nick Jr."
+  },
+  "IDF1.fr": {
+    "id": 636,
+    "name": "20 Minutes TV"
+  },
+  "3SAT.de": {
+    "id": 637,
+    "name": "3sat"
+  },
+  "AB1.fr": {
+    "id": 468,
+    "name": "AB1"
+  },
+  "Arte.fr": {
+    "id": 590,
+    "name": "Arte"
+  },
+  "CNN.uk": {
+    "id": 612,
+    "name": "CNN"
+  },
+  "CStar.fr": {
+    "id": 450,
+    "name": "CSTAR"
+  },
+  "CSTARHD.fr": {
+    "id": 633,
+    "name": "CSTAR HD"
+  },
+  "CanalPlusCinema.fr": {
+    "id": 610,
+    "name": "Canal+ Cinéma(s)"
+  },
+  "CanalPlusSeries.fr": {
+    "id": 632,
+    "name": "Canal+ Séries"
+  },
+  "DisneyChannel.fr": {
+    "id": 472,
+    "name": "Disney Channel"
+  },
+  "Equidia.fr": {
+    "id": 473,
+    "name": "Equidia"
+  },
+  "Gong.fr": {
+    "id": 631,
+    "name": "Gong"
+  },
+  "Histoire.fr": {
+    "id": 401,
+    "name": "Histoire TV"
+  },
+  "InfosportPlus.fr": {
+    "id": 476,
+    "name": "Infosport+"
+  },
+  "LaChaineMeteo.fr": {
+    "id": 479,
+    "name": "La Chaîne Météo"
+  },
+  "LuxeTV.fr": {
+    "id": 629,
+    "name": "Luxe TV/Luxe TV HD"
+  },
+  "MCM.fr": {
+    "id": 508,
+    "name": "MCM"
+  },
+  "MTVBase.fr": {
+    "id": 616,
+    "name": "MTV Base"
+  },
+  "MTVHits.fr": {
+    "id": 530,
+    "name": "MTV Hits France"
+  },
+  "MezzoLiveHD.fr": {
+    "id": 458,
+    "name": "Mezzo Live HD"
+  },
+  "NRJ12.fr": {
+    "id": 592,
+    "name": "NRJ 12"
+  },
+  "NatGeoWild.fr": {
+    "id": 519,
+    "name": "National Geographic Wild"
+  },
+  "OCSGeants.fr": {
+    "id": 527,
+    "name": "OCS Géants HD"
+  },
+  "OCSMax.fr": {
+    "id": 520,
+    "name": "OCS Max"
+  },
+  "ParamountChannel.fr": {
+    "id": 528,
+    "name": "Paramount Network"
+  },
+  "PlanetePlus.fr": {
+    "id": 407,
+    "name": "Planète+"
+  },
+  "PLANETEJustice.fr": {
+    "id": 622,
+    "name": "Planète+ Crime"
+  },
+  "RFMTV.fr": {
+    "id": 512,
+    "name": "RFM TV"
+  },
+  "RMCDecouverte.fr": {
+    "id": 525,
+    "name": "RMC Découverte"
+  },
+  "RMCSport1.fr": {
+    "id": 533,
+    "name": "RMC Sport 1"
+  },
+  "Numero23.fr": {
+    "id": 526,
+    "name": "RMC Story"
+  },
+  "RTL.de": {
+    "id": 608,
+    "name": "RTL"
+  },
+  "RTSDeux.ch": {
+    "id": 510,
+    "name": "RTS 2"
+  },
+  "serieclub.fr": {
+    "id": 611,
+    "name": "Série Club"
+  },
+  "TF1SeriesFilms.fr": {
+    "id": 374,
+    "name": "TF1 Séries Films"
+  },
+  "NT1.fr": {
+    "id": 593,
+    "name": "TFX"
+  },
+  "TLC.fr": {
+    "id": 497,
+    "name": "TLC France"
+  },
+  "TV5Monde.fr": {
+    "id": 416,
+    "name": "TV5 Monde FBS"
+  },
+  "TeleToonPlus.fr": {
+    "id": 415,
+    "name": "Télétoon+"
+  },
+  "UshuaiaTV.fr": {
+    "id": 449,
+    "name": "Ushuaïa TV"
+  },
+  "Toonami.fr": {
+    "id": 582,
+    "name": "Warner TV Next"
+  },
+  "6ter.fr": {
+    "id": 595,
+    "name": "6ter"
+  },
+  "8MontBlanc.fr": {
+    "id": 543,
+    "name": "8 Mont Blanc"
+  },
+  "ABMoteurs.fr": {
+    "id": 388,
+    "name": "Automoto"
+  },
+  "BBCEntertainment.uk": {
+    "id": 537,
+    "name": "BBC Entertainment"
+  },
+  "BET.fr": {
+    "id": 634,
+    "name": "BET"
+  },
+  "BFMBusiness.fr": {
+    "id": 625,
+    "name": "BFM Business"
+  },
+  "LaChaineNormande.fr": {
+    "id": 583,
+    "name": "BFM Normandie"
+  },
+  "Boomerang.fr": {
+    "id": 487,
+    "name": "Boomerang"
+  },
+  "CanalJ.fr": {
+    "id": 392,
+    "name": "Canal J"
+  },
+  "CanalPlus.fr": {
+    "id": 589,
+    "name": "Canal+"
+  },
+  "CanalPlusDocs.fr": {
+    "id": 504,
+    "name": "Canal+ DOCS"
+  },
+  "CanalPlusGrandEcran.fr": {
+    "id": 506,
+    "name": "Canal+ Grand Ecran"
+  },
+  "CanalPlusKIDS.fr": {
+    "id": 505,
+    "name": "Canal+ KIDS"
+  },
+  "CanalPlusSport.fr": {
+    "id": 599,
+    "name": "Canal+ Sport"
+  },
+  "CanalPlusSport360.fr": {
+    "id": 600,
+    "name": "Canal+ Sport 360"
+  },
+  "CartoonNetwork.fr": {
+    "id": 393,
+    "name": "Cartoon Network"
+  },
+  "Cartoonito.fr": {
+    "id": 598,
+    "name": "Cartoonito"
+  },
+  "ChasseEtPeche.fr": {
+    "id": 394,
+    "name": "Chasse & Pêche"
+  },
+  "CinePlusClassic.fr": {
+    "id": 485,
+    "name": "Ciné+ Classic"
+  },
+  "CinePlusClassic.be": {
+    "id": 446,
+    "name": "Ciné+ Classic Belgique"
+  },
+  "CinePlusEmotion.fr": {
+    "id": 482,
+    "name": "Ciné+ Emotion"
+  },
+  "CinePlusFamiz.fr": {
+    "id": 488,
+    "name": "Ciné+ Family"
+  },
+  "CinePlusClub.fr": {
+    "id": 484,
+    "name": "Ciné+ Festival"
+  },
+  "CinePlusFrisson.fr": {
+    "id": 483,
+    "name": "Ciné+ Frisson"
+  },
+  "CinePlusFrisson.be": {
+    "id": 427,
+    "name": "Ciné+ Frisson Belgique"
+  },
+  "CinePlusPremier.be": {
+    "id": 425,
+    "name": "Ciné+ Premier Belgique"
+  },
+  "ComedyCentral.fr": {
+    "id": 503,
+    "name": "Comedy Central"
+  },
+  "ComediePlus.fr": {
+    "id": 397,
+    "name": "Comédie+"
+  },
+  "CrimeDistrict.fr": {
+    "id": 635,
+    "name": "Crime District"
+  },
+  "DemainTV.fr": {
+    "id": 471,
+    "name": "Demain TV"
+  },
+  "DiscoveryInvestigation.fr": {
+    "id": 501,
+    "name": "Discovery Investigation"
+  },
+  "Dreamworks.fr": {
+    "id": 597,
+    "name": "Dreamworks"
+  },
+  "EEntertainment.fr": {
+    "id": 441,
+    "name": "E!"
+  },
+  "Euronews.fr": {
+    "id": 614,
+    "name": "EuroNews"
+  },
+  "Eurochannel.fr": {
+    "id": 628,
+    "name": "Eurochannel"
+  },
+  "Franceinfo.fr": {
+    "id": 499,
+    "name": "Franceinfo"
+  },
+  "GongMax.fr": {
+    "id": 621,
+    "name": "Gong Max"
+  },
+  "LEquipe21.fr": {
+    "id": 555,
+    "name": "L'Equipe"
+  },
+  "LaChaineParlementaire.fr": {
+    "id": 539,
+    "name": "LCP"
+  },
+  "LCP100.fr": {
+    "id": 624,
+    "name": "LCP 100%"
+  },
+  "M6Music.fr": {
+    "id": 516,
+    "name": "M6 Music"
+  },
+  "MCMTop.fr": {
+    "id": 617,
+    "name": "MCM TOP"
+  },
+  "Mangas.fr": {
+    "id": 609,
+    "name": "Mangas"
+  },
+  "Melody.fr": {
+    "id": 513,
+    "name": "Melody"
+  },
+  "Mezzo.fr": {
+    "id": 405,
+    "name": "Mezzo"
+  },
+  "NauticalChannel.fr": {
+    "id": 542,
+    "name": "Nautical Channel"
+  },
+  "Nickelodeon.fr": {
+    "id": 619,
+    "name": "Nickelodéon"
+  },
+  "OCSPulp.fr": {
+    "id": 521,
+    "name": "OCS Pulp"
+  },
+  "ParisPremiere.fr": {
+    "id": 602,
+    "name": "Paris Première"
+  },
+  "PlaneteAction.fr": {
+    "id": 618,
+    "name": "Planète+ Aventure"
+  },
+  "PolarPlus.fr": {
+    "id": 532,
+    "name": "Polar+"
+  },
+  "RTL9.fr": {
+    "id": 601,
+    "name": "RTL 9"
+  },
+  "RTSUn.ch": {
+    "id": 511,
+    "name": "RTS 1"
+  },
+  "Seasons.fr": {
+    "id": 615,
+    "name": "Seasons"
+  },
+  "TL7SaintEtienne.fr": {
+    "id": 552,
+    "name": "TL7"
+  },
+  "TIJI.fr": {
+    "id": 421,
+    "name": "Tiji"
+  },
+  "TouteHistoire.fr": {
+    "id": 384,
+    "name": "Toute L'Histoire"
+  },
+  "Trek.fr": {
+    "id": 376,
+    "name": "Trek"
+  },
+  "Telenantes.fr": {
+    "id": 545,
+    "name": "Télénantes"
+  },
+  "Telesud.fr": {
+    "id": 544,
+    "name": "Télésud"
+  },
+  "Teva.fr": {
+    "id": 603,
+    "name": "Téva"
+  },
+  "WarnerTV.fr": {
+    "id": 587,
+    "name": "Warner TV"
+  },
+  "Weo.fr": {
+    "id": 550,
+    "name": "Wéo"
+  },
+  "Alsace20.fr": {
+    "id": 490,
+    "name": "BFM Alsace"
+  },
+  "TeleLyonMetropole.fr": {
+    "id": 613,
+    "name": "BFM Lyon"
+  },
+  "BFMParis.fr": {
+    "id": 626,
+    "name": "BFM Paris"
+  },
+  "BipTV.fr": {
+    "id": 500,
+    "name": "BIP TV (creuse)"
+  },
+  "Bouke.be": {
+    "id": 435,
+    "name": "Boukè"
+  },
+  "Canal32.fr": {
+    "id": 492,
+    "name": "Canal 32"
+  },
+  "Ginx.fr": {
+    "id": 620,
+    "name": "GINX eSports TV"
+  },
+  "GameOne.fr": {
+    "id": 475,
+    "name": "Game One"
+  },
+  "KTO.fr": {
+    "id": 477,
+    "name": "KTO"
+  },
+  "TV8MoselleEst.fr": {
+    "id": 523,
+    "name": "Moselle TV"
+  },
+  "MyzenTV.fr": {
+    "id": 623,
+    "name": "Myzen TV"
+  },
+  "CinePlusPremier.fr": {
+    "id": 481,
+    "name": "OCS"
+  },
+  "OLTV.fr": {
+    "id": 517,
+    "name": "OLTV"
+  },
+  "ParamountChannelDecale.fr": {
+    "id": 531,
+    "name": "Paramount Channel Décalé"
+  },
+  "PIWI.fr": {
+    "id": 514,
+    "name": "Piwi+"
+  },
+  "ProSieben.de": {
+    "id": 638,
+    "name": "Pro7"
+  },
+  "Proximus11.be": {
+    "id": 464,
+    "name": "Proximus 11"
+  },
+  "RMCSport2.fr": {
+    "id": 534,
+    "name": "RMC Sport 2"
+  },
+  "SWR.de": {
+    "id": 509,
+    "name": "SWR-Fernsehen"
+  },
+  "Sat1.de": {
+    "id": 639,
+    "name": "Sat.1 (DE)"
+  },
+  "SportEnFrance.fr": {
+    "id": 536,
+    "name": "Sport en France TV"
+  },
+  "StingrayDjazz.fr": {
+    "id": 630,
+    "name": "Stingray DJazz"
+  },
+  "TVVendee.fr": {
+    "id": 553,
+    "name": "TV Vendée"
+  },
+  "TeleGrenobleIsere.fr": {
+    "id": 546,
+    "name": "Télé Grenoble Isère"
+  },
+  "TelePaese.fr": {
+    "id": 558,
+    "name": "Télé Paese (Creuse)"
+  }
+}

@@ -90,7 +90,8 @@ class ChannelThread
             $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
 
             if ($cache->getState($cacheKey) == EPGEnum::$FULL_CACHE) {
-                Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, 'Cache', true);
+                $providerName = $cache->getProviderName($cacheKey);
+                Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $providerName, true);
 
                 continue;
             }
@@ -167,7 +168,8 @@ class ChannelThread
 
             if (!$channelFound && !Logger::hasChannelSuccessfulProvider($this->channelsFile, $this->channel, $date)) {
                 if ($cache->getState($cacheKey)) {
-                    Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, 'Forced Cache', true);
+                    $providerName = $cache->getProviderName($cacheKey);
+                    Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $providerName.' - Forced', true);
                 } elseif ($this->generator->getConfigurator()->isEnableDummy()) {
                     $cache->store($cacheKey, $this->generator->getFormatter()->formatChannel(new DummyChannel($this->channel, $date), null));
                 }

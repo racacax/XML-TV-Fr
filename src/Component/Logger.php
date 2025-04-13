@@ -42,8 +42,10 @@ class Logger
     public static function updateLine(string $content): void
     {
         $previousLog = self::$lastLog;
-        self::log("\r" . self::$lastLog . $content);
-
+        $content = "\r" . self::$lastLog . $content;
+        $content = substr($content, 0, 100);
+        self::log("\r".str_repeat(' ', 100));
+        self::log($content);
         self::$lastLog = $previousLog;
     }
 
