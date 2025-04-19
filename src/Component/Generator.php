@@ -115,7 +115,7 @@ abstract class Generator
         @mkdir($exportPath, 0777, true);
 
         foreach ($this->guides as $guide) {
-            $channels = Utils::getChannelsFromGuide($guide);;
+            $channels = Utils::getChannelsFromGuide($guide);
             $defaultInfo = ChannelInformation::getInstance();
             $this->exporter->startExport($exportPath . $guide['filename']);
             $listCacheKey = [];

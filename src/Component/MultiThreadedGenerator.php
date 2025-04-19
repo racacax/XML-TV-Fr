@@ -24,17 +24,25 @@ class MultiThreadedGenerator extends Generator
         return function () use ($threads, $manager, $guide, $logLevel, $index, $guidesCount) {
             if ($logLevel != 'none') {
                 while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) {
-                    echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
-                    echo Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue');
-                    echo Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus().'   |   '.
-                        Utils::colorize('Fichier :', 'cyan')." {$guide['channels']} ($index/$guidesCount)\n";
+                    $layoutLength = Utils::getMaxTerminalLength();
+                    $eventLength = max(count($threads), 5);
+                    $layout = new Layout();
+                    $layout->addLine([Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue')], [$layoutLength]);
+                    $layout->addLine([Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus().'   |   '.
+                        Utils::colorize('Fichier :', 'cyan')." {$guide['filename']} ($index/$guidesCount)"], [$layoutLength]);
+                    $columnLengths = [intval($layoutLength / 2), intval($layoutLength / 2)];
+                    $layout->addLine(['Threads:', 'Derniers évènements:'], $columnLengths);
                     $i = 1;
+                    $column1 = [];
                     foreach ($threads as $thread) {
-                        echo "Thread $i : ";
-                        echo $thread;
-                        echo "\n";
+                        $column1[] = "Thread $i : ".$thread;
                         $i++;
                     }
+                    $column2 = $manager->getLatestEvents($eventLength);
+                    for ($i = 0; $i < max(count($column1), count($column2)); $i++) {
+                        $layout->addLine([isset($column1[$i]) ? $column1[$i] : '', @$column2[$i] ?? ''], $columnLengths);
+                    }
+                    $layout->display();
                     delay(0.1); // permet d'alterner entre l'affichage et la manipulation des threads
                 }
             }

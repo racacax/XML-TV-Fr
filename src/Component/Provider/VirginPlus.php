@@ -186,7 +186,7 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
             // Not managing to retrieve details isn't fatal since necessary information are in the main request
             return;
         }
-        $program->addDesc($programDetails['description']);
+        $program->addDesc(@$programDetails['description']);
         $program->setEpisodeNum(@$programDetails['seasonNumber'], @$programDetails['episodeNumber']);
         foreach ($programDetails['categories'] as $category) {
             $program->addCategory($category['category']);

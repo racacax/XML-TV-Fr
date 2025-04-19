@@ -297,7 +297,19 @@ class Utils
         }
     }
 
-    public static function slugify(string $string): string {
+    public static function slugify(string $string): string
+    {
         return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string)));
+    }
+
+    public static function getMaxTerminalLength(): int
+    {
+        try {
+            exec('tput cols', $_cols);
+
+            return intval($_cols[0]);
+        } catch (\Throwable) {
+            return 200;
+        }
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\ValueObject;
 
 use DateTimeImmutable;
-use DateTimeInterface;
+use DateTime;
 use DateTimeZone;
 
 class Program
@@ -25,8 +25,8 @@ class Program
      */
     private array $categories;
     private ?string $icon;
-    private DateTimeInterface $start;
-    private DateTimeInterface $end;
+    private DateTime|DateTimeImmutable $start;
+    private DateTime|DateTimeImmutable $end;
     private ?string $episodeNum;
 
     /**
@@ -46,7 +46,7 @@ class Program
 
     private ?bool $isNew;
     /**
-     * @var array{start: ?DateTimeInterface, channel: ?string} | null
+     * @var array{start: ?DateTimeImmutable, channel: ?string} | null
      */
     private ?array $previouslyShown;
 
@@ -68,7 +68,7 @@ class Program
     /**
      * Program constructor.
      */
-    public function __construct(DateTimeInterface $start, DateTimeInterface $end)
+    public function __construct(DateTime|DateTimeImmutable $start, DateTime|DateTimeImmutable $end)
     {
         if ($start > $end) {
             throw new \ValueError('Start date must be before end date');
@@ -101,7 +101,7 @@ class Program
         return $this->previouslyShown;
     }
 
-    public function setPreviouslyShown(bool $isPreviouslyShown, ?DateTimeInterface $start = null, ?string $channel = null): void
+    public function setPreviouslyShown(bool $isPreviouslyShown, DateTime|DateTimeImmutable $start = null, ?string $channel = null): void
     {
         if (!$isPreviouslyShown) {
             $this->previouslyShown = null;
@@ -228,17 +228,17 @@ class Program
     }
 
     /**
-     * @return DateTimeInterface
+     * @return DateTime|DateTimeImmutable
      */
-    public function getStart(): DateTimeInterface
+    public function getStart(): DateTime|DateTimeImmutable
     {
         return $this->start;
     }
 
     /**
-     * @return DateTimeInterface
+     * @return DateTime|DateTimeImmutable
      */
-    public function getEnd(): DateTimeInterface
+    public function getEnd(): DateTime|DateTimeImmutable
     {
         return $this->end;
     }

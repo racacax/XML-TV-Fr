@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component\Provider;
 
-use _PHPStan_d5312c05b\Nette\Neon\Exception;
 use DateTimeImmutable;
+use Exception;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
@@ -16,60 +16,64 @@ use racacax\XmlTv\ValueObject\Program;
 class SudInfo extends AbstractProvider implements ProviderInterface
 {
     private static string $BUILD_ID;
-    private static array $HEADERS = ["Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-"Accept-Encoding" => "gzip, deflate, br, zstd",
-"Accept-Language" => "fr-FR,fr-CA;q=0.8,en;q=0.5,en-US;q=0.3",
-"Connection" => "keep-alive",
-"DNT" => "1",
-"Host" => "programmestv.sudinfo.be",
-"Priority" => "u=0, i",
-"Sec-Fetch-Dest" => "document",
-"Sec-Fetch-Mode" => "navigate",
-"Sec-Fetch-Site" => "cross-site",
-"Sec-GPC" => "1",
-"TE" => "trailers",
-"Upgrade-Insecure-Requests" => "1",
-"User-Agent" => "Mozilla/5.0 (X11; Linux x86_64; rv:137.0) Gecko/20100101 Firefox/137.0"];
+    private static array $HEADERS = ['Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Encoding' => 'gzip, deflate, br, zstd',
+        'Accept-Language' => 'fr-FR,fr-CA;q=0.8,en;q=0.5,en-US;q=0.3',
+        'Connection' => 'keep-alive',
+        'DNT' => '1',
+        'Host' => 'programmestv.sudinfo.be',
+        'Priority' => 'u=0, i',
+        'Sec-Fetch-Dest' => 'document',
+        'Sec-Fetch-Mode' => 'navigate',
+        'Sec-Fetch-Site' => 'cross-site',
+        'Sec-GPC' => '1',
+        'TE' => 'trailers',
+        'Upgrade-Insecure-Requests' => '1',
+        'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:137.0) Gecko/20100101 Firefox/137.0'];
     private static array $DAYS = ['Mon' => 'lundi', 'Tue' => 'mardi', 'Wed', 'mercredi', 'Thu' => 'jeudi', 'Fri' => 'vendredi', 'Sat' => 'samedi', 'Sun' => 'dimanche'];
     private bool $enableDetails;
-    private static string $BASE_URL = "https://programmestv.sudinfo.be";
-    public function __construct(Client $client, ?float $priority = null)
+    private static string $BASE_URL = 'https://programmestv.sudinfo.be';
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_sudinfo.json'), $priority ?? 0.5);
         $this->enableDetails = $extraParam['sudinfo_enable_details'] ?? true;
     }
-    private function getBuildId(): string {
-        if(!isset(self::$BUILD_ID)) {
-            $content = $this->getContentFromURL(self::$BASE_URL."/programme-tv/ce-soir", self::$HEADERS);
+    private function getBuildId(): string
+    {
+        if (!isset(self::$BUILD_ID)) {
+            $content = $this->getContentFromURL(self::$BASE_URL.'/programme-tv/ce-soir', self::$HEADERS);
             preg_match('/"buildId":"(.*?)"/', $content, $match);
-            if(empty($match[1])) {
-                throw new Exception("Cannot retrieve build id");
+            if (empty($match[1])) {
+                throw new Exception('Cannot retrieve build id');
             }
             self::$BUILD_ID = $match[1];
         }
+
         return self::$BUILD_ID;
     }
 
-    private function getDayLabel(DateTimeImmutable $date): string {
+    private function getDayLabel(DateTimeImmutable $date): string
+    {
         $date = $date->setTime(0, 0, 0);
         $dateYmd = $date->format('Y-m-d');
         $today = (new DateTimeImmutable())->setTime(0, 0, 0);
-        $weekAfter = $today->modify("+6 days");
+        $weekAfter = $today->modify('+6 days');
         $yesterday = $today->modify('-1 day');
-        if($date < $yesterday) {
-            throw new Exception("Date is too early !");
-        } elseif($dateYmd == $yesterday->format('Y-m-d')) {
-            return "hier";
-        } elseif($dateYmd == $today->format('Y-m-d')) {
-            return "aujourdhui";
+        if ($date < $yesterday) {
+            throw new Exception('Date is too early !');
+        } elseif ($dateYmd == $yesterday->format('Y-m-d')) {
+            return 'hier';
+        } elseif ($dateYmd == $today->format('Y-m-d')) {
+            return 'aujourdhui';
         } else {
             $dateDay = @self::$DAYS[$date->format('D')];
-            if(empty($dateDay)) {
-                throw new Exception("Invalid day date !");
+            if (empty($dateDay)) {
+                throw new Exception('Invalid day date !');
             }
-            if($date > $weekAfter) {
-                $dateDay.="prochain";
+            if ($date > $weekAfter) {
+                $dateDay .= 'prochain';
             }
+
             return $dateDay;
         }
     }
@@ -90,22 +94,22 @@ class SudInfo extends AbstractProvider implements ProviderInterface
             foreach (@($json['pageProps'] ?? [])['content'] ?? [] as $program) {
                 $startDate = new DateTimeImmutable('@'.strtotime($program['airingStartDateTime']));
                 $endDate = new DateTimeImmutable('@'.strtotime($program['airingEndDateTime']));
-                if($startDate < $minDate) {
+                if ($startDate < $minDate) {
                     continue;
-                } elseif($startDate > $maxDate) {
+                } elseif ($startDate > $maxDate) {
                     break;
                 }
                 $programObj = new Program($startDate, $endDate);
-                $programsWithSlug[] = ['slug'=> $program['slug'], 'obj' => $programObj];
+                $programsWithSlug[] = ['slug' => $program['slug'], 'obj' => $programObj];
                 $channelObj->addProgram($programObj);
                 $programObj->addTitle($program['title']);
                 $programObj->addSubtitle($program['subTitle']);
                 $programObj->addCategory(@($program['contentSubCategory'] ?? [])['name']);
                 $images = @$program['images'] ?? [];
-                $programObj->setIcon(@($images[1] ?? $images[0])["url"]);
+                $programObj->setIcon(@($images[1] ?? $images[0])['url']);
             }
         }
-        if($this->enableDetails) {
+        if ($this->enableDetails) {
             $this->addDetails($programsWithSlug, $buildId);
         }
 
@@ -113,24 +117,26 @@ class SudInfo extends AbstractProvider implements ProviderInterface
         return $channelObj;
     }
 
-    private function addCasting(array $casting, Program $programObj): void {
+    private function addCasting(array $casting, Program $programObj): void
+    {
         foreach ($casting as $cast) {
             $str = '';
-            if(isset($cast['firstname'])) {
+            if (isset($cast['firstname'])) {
                 $str .= $cast['firstname'];
             }
-            if(isset($cast['lastname'])) {
-                $str .= " ".$cast['lastname'];
+            if (isset($cast['lastname'])) {
+                $str .= ' '.$cast['lastname'];
             }
-            if(isset($cast['role'])) {
-                $str .= " (".$cast['role'].")";
+            if (isset($cast['role'])) {
+                $str .= ' ('.$cast['role'].')';
             }
             $programObj->addCredit($str, $this->getCreditFromCastFunction(@($cast['castFunction'] ?? [])['name'] ?? ''));
         }
 
     }
 
-    private function getCreditFromCastFunction(string $castFunction) {
+    private function getCreditFromCastFunction(string $castFunction)
+    {
         return match($castFunction) {
             'Acteur' => 'actor',
             'Producteur' => 'producer',
@@ -141,7 +147,8 @@ class SudInfo extends AbstractProvider implements ProviderInterface
             default => 'guest'
         };
     }
-    private function addDetails(array $programsWithSlug, string $buildId) {
+    private function addDetails(array $programsWithSlug, string $buildId)
+    {
         $count = count($programsWithSlug);
         foreach ($programsWithSlug as $key => $programWithSlug) {
             $this->setStatus('Details | ('.$key.'/'.$count.')');
@@ -167,9 +174,10 @@ class SudInfo extends AbstractProvider implements ProviderInterface
     }
     public function generateUrlFromSlug(string $slug, string $buildId): string
     {
-        $splited = explode("/", $slug);
+        $splited = explode('/', $slug);
         $slug1 = $splited[2];
         $slug2 = $splited[3];
+
         return self::$BASE_URL."/_next/data/$buildId$slug.json?slug=$slug1&slug=$slug2";
     }
 

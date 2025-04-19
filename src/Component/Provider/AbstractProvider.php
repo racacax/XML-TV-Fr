@@ -143,4 +143,9 @@ abstract class AbstractProvider
             return EPGEnum::$PARTIAL_CACHE;
         }
     }
+
+    public function __toString()
+    {
+        return get_class($this);
+    }
 }
