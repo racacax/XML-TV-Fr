@@ -222,7 +222,7 @@ class ChannelThread
             $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
 
             $results = $this->gatherData($date);
-            if ($results['skipped']) {
+            if (@$results['skipped']) {
                 $this->manager->addChannel($this->channel, $this->failedProviders, $this->datesGathered);
 
                 return;
@@ -233,7 +233,7 @@ class ChannelThread
                 Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $results['provider'], $results['isCache']);
             } elseif ($cache->getState($cacheKey)) {
                 $providerName = $cache->getProviderName($cacheKey);
-                Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $providerName.' - Forced', $results['isCache']);
+                Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $providerName.' - Forced', true);
             } elseif ($this->generator->getConfigurator()->isEnableDummy()) {
                 $cache->store($cacheKey, $this->generator->getFormatter()->formatChannel(new DummyChannel($this->channel, $date), null));
             }
