@@ -20,7 +20,7 @@ class Layout
         $this->linesColumnLayouts[] = $layout;
     }
 
-    public function resetScreen(): void
+    public static function resetScreen(): void
     {
         echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
     }
@@ -28,7 +28,7 @@ class Layout
     {
         $clean = preg_replace('/\e\[[0-9;]*m/', '', $string);
 
-        return strlen($clean);
+        return mb_strwidth($clean, 'UTF-8');
     }
 
     private function displayLine(int $i): void
@@ -50,11 +50,38 @@ class Layout
         }
         echo "\n";
     }
-    public function display(): void
+
+    private function getLineCount(): int
     {
-        $this->resetScreen();
+        $lines = array_map(function ($line) { return join(' ', $line); }, $this->lines);
+        $result = explode("\n", join("\n", $lines));
+
+        return count($result);
+    }
+    private function moveCursorUp(int $cursorPosition): void
+    {
+        echo "\033[{$cursorPosition}A";
+    }
+    private function clearLine(): void
+    {
+        echo "\033[2K";
+    }
+
+    /**
+     * Display lines and return where next cursor position should be
+     * @param int $cursorPosition
+     * @return int
+     */
+    public function display(int $cursorPosition): int
+    {
+        if ($cursorPosition > 0) {
+            $this->moveCursorUp($cursorPosition);
+        }
         for ($i = 0; $i < count($this->lines); $i++) {
+            $this->clearLine();
             $this->displayLine($i);
         }
+
+        return $this->getLineCount();
     }
 }

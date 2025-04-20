@@ -51,7 +51,7 @@ class ChannelThread
     public function __toString()
     {
         if (!$this->hasStarted || !$this->isRunning) {
-            return Utils::colorize('En pause...', 'yellow');
+            return Utils::colorize('En pause...', 'yellow').' '.TerminalIcon::pause();
         }
         $str = $this->getChannel().' - '.$this->getDate().' - '.$this->getProvider();
         $status = $this->getStatus();
@@ -59,7 +59,7 @@ class ChannelThread
             $str .= ' '.$status;
         }
 
-        return $str;
+        return $str.' '.TerminalIcon::spinner();
     }
 
     private function getChannelInfo(): string
@@ -105,6 +105,15 @@ class ChannelThread
         }
     }
 
+    /**
+     * Get data for selected provider for selected channel and selected date
+     * @param string $providerName
+     * @param ProviderInterface $provider
+     * @param string $date
+     * @param string $cacheKey
+     * @return array
+     * @throws \Random\RandomException
+     */
     private function getDataFromProvider(string $providerName, ProviderInterface $provider, string $date, string $cacheKey): array
     {
         $cache = $this->generator->getCache();
@@ -125,6 +134,10 @@ class ChannelThread
         } else {
             [$startTimes, $endTimes] = Utils::getStartAndEndDatesFromXMLString($providerResult);
             $state = $provider->getChannelStateFromTimes($startTimes, $endTimes, $this->generator->getConfigurator());
+            /**
+             * If we retrieve partial data. We check if existing cache (if any) is worse or better than those data.
+             * If cache is better, we consider that current provider failed to gather data
+             */
             if ($state == EPGEnum::$PARTIAL_CACHE) {
                 if (($cache->getState($cacheKey) != EPGEnum::$NO_CACHE)) {
                     $cacheContent = $cache->get($cacheKey);
@@ -143,6 +156,13 @@ class ChannelThread
             }
         }
     }
+
+    /**
+     * Gather channel information for selected day.
+     * Will look for cache file and browse providers in order
+     * @param string $date
+     * @return array Information about status (success, cache, partial, provider and if gathering has been skipped)
+     */
     private function gatherData(string $date): array
     {
         $cache = $this->generator->getCache();
@@ -165,9 +185,9 @@ class ChannelThread
                 }
                 $this->status = Utils::colorize('En cours...', 'magenta');
 
-                $results = $this->getDataFromProvider($providerName, $provider, $date, $cacheKey);
-                if ($results['success']) {
-                    $currentResult = $results;
+                $result = $this->getDataFromProvider($providerName, $provider, $date, $cacheKey);
+                if ($result['success']) {
+                    $currentResult = $result;
                 }
                 if (!@$currentResult['isPartial']) {
                     return $currentResult;
@@ -178,36 +198,51 @@ class ChannelThread
         return $currentResult;
     }
 
-    private function getStatusString(array $results, string $cacheKey): string
+    /**
+     * @param array $result
+     * @param string $cacheKey
+     * @return string Colorized string like: OK - ProviderName, OK (Cache) - ProviderName, HS, ...
+     * Note: Only the status is colorized, provider name isn't
+     */
+    private function getStatusString(array $result, string $cacheKey): string
     {
         $cache = $this->generator->getCache();
         $providerName = '';
-        if ($results['success']) {
-            $providerName = ' - '.$results['provider'];
+        $emoji = TerminalIcon::success();
+        if ($result['success']) {
+            $providerName = ' - '.$result['provider'];
             $statusString = 'OK';
             $color = 'green';
-            if (@$results['isPartial']) {
+            if (@$result['isPartial']) {
                 $statusString .= ' (Partial)';
-                $color = 'orange';
+                $color = 'yellow';
             }
-            if (@$results['isCache']) {
+            if (@$result['isCache']) {
                 $providerName = ' - '.$cache->getProviderName($cacheKey);
                 $statusString .= ' (Cache)';
-                $color = 'yellow';
+                $color = 'light yellow';
             }
         } else {
             if ($cache->getState($cacheKey)) {
                 $providerName = ' - '.$cache->getProviderName($cacheKey);
                 $statusString = 'OK (Forced Cache)';
-                $color = 'orange';
+                $color = 'yellow';
             } else {
+                $emoji = TerminalIcon::error();
                 $statusString = 'HS';
                 $color = 'red';
             }
         }
 
-        return Utils::colorize($statusString, $color).$providerName;
+        return Utils::colorize($statusString, $color).$providerName.' '.$emoji;
     }
+
+    /**
+     * Run thread for current channel.
+     * Will go through all dates remaining to gather and all providers each day (depending on cache)
+     * @return void
+     * @throws \Exception
+     */
     private function run(): void
     {
         $cache = $this->generator->getCache();
@@ -221,16 +256,16 @@ class ChannelThread
             $this->date = $date." ($progress/$total)";
             $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
 
-            $results = $this->gatherData($date);
-            if (@$results['skipped']) {
+            $result = $this->gatherData($date);
+            if (@$result['skipped']) {
                 $this->manager->addChannel($this->channel, $this->failedProviders, $this->datesGathered);
 
                 return;
             }
-            $statusString = $this->getStatusString($results, $cacheKey);
+            $statusString = $this->getStatusString($result, $cacheKey);
             $this->addEvent($date, $statusString);
-            if ($results['success']) {
-                Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $results['provider'], $results['isCache']);
+            if ($result['success']) {
+                Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $result['provider'], $result['isCache']);
             } elseif ($cache->getState($cacheKey)) {
                 $providerName = $cache->getProviderName($cacheKey);
                 Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $providerName.' - Forced', true);
@@ -244,7 +279,7 @@ class ChannelThread
         $this->manager->incrChannelsDone();
     }
 
-    private function addEvent(string $date, string $statusInfo)
+    private function addEvent(string $date, string $statusInfo): void
     {
         $this->manager->addEvent(($this->channel ?? '').' : '.$date.' | '.$statusInfo);
     }

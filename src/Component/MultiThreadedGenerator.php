@@ -23,6 +23,7 @@ class MultiThreadedGenerator extends Generator
     {
         return function () use ($threads, $manager, $guide, $logLevel, $index, $guidesCount) {
             if ($logLevel != 'none') {
+                $cursorPosition = 0;
                 while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) {
                     $layoutLength = Utils::getMaxTerminalLength();
                     $eventLength = max(count($threads), 5);
@@ -42,7 +43,7 @@ class MultiThreadedGenerator extends Generator
                     for ($i = 0; $i < max(count($column1), count($column2)); $i++) {
                         $layout->addLine([isset($column1[$i]) ? $column1[$i] : '', @$column2[$i] ?? ''], $columnLengths);
                     }
-                    $layout->display();
+                    $cursorPosition = $layout->display($cursorPosition);
                     delay(0.1); // permet d'alterner entre l'affichage et la manipulation des threads
                 }
             }
