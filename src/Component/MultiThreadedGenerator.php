@@ -21,18 +21,23 @@ class MultiThreadedGenerator extends Generator
      */
     protected function getUIClosure(array $threads, ChannelsManager $manager, array $guide, string $logLevel, int $index, int $guidesCount): Closure
     {
+        Layout::showCursorOnExit();
+
         return function () use ($threads, $manager, $guide, $logLevel, $index, $guidesCount) {
             if ($logLevel != 'none') {
                 $cursorPosition = 0;
-                while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) {
+                Layout::hideCursor();
+                $hasThreadRunning = true;
+                while ($hasThreadRunning) {
                     $layoutLength = Utils::getMaxTerminalLength();
                     $eventLength = max(count($threads), 5);
                     $layout = new Layout();
                     $layout->addLine([Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue')], [$layoutLength]);
                     $layout->addLine([Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus().'   |   '.
                         Utils::colorize('Fichier :', 'cyan')." {$guide['filename']} ($index/$guidesCount)"], [$layoutLength]);
+                    $layout->addLine([' '], [1]);
                     $columnLengths = [intval($layoutLength / 2), intval($layoutLength / 2)];
-                    $layout->addLine(['Threads:', 'Derniers évènements:'], $columnLengths);
+                    $layout->addLine([Utils::colorize('Threads:', 'light blue'), Utils::colorize('Derniers évènements:', 'light blue')], $columnLengths);
                     $i = 1;
                     $column1 = [];
                     foreach ($threads as $thread) {
@@ -44,6 +49,7 @@ class MultiThreadedGenerator extends Generator
                         $layout->addLine([isset($column1[$i]) ? $column1[$i] : '', @$column2[$i] ?? ''], $columnLengths);
                     }
                     $cursorPosition = $layout->display($cursorPosition);
+                    $hasThreadRunning = $manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads);
                     delay(0.1); // permet d'alterner entre l'affichage et la manipulation des threads
                 }
             }
@@ -92,6 +98,7 @@ class MultiThreadedGenerator extends Generator
                 }
             }
         }
+        delay(0.5); // Let UI thread write the last frame
     }
     protected function generateEpg(): void
     {

@@ -14,6 +14,32 @@ class Layout
         $this->linesColumnLayouts = [];
     }
 
+    /**
+     * Disables Terminal cursor
+     * @return void
+     */
+    public static function hideCursor(): void
+    {
+        echo "\033[?25l";
+    }
+
+    private static function showCursor(): void
+    {
+        echo "\033[?25h";
+    }
+
+    /**
+     * @return void
+     */
+    public static function showCursorOnExit(): void
+    {
+        register_shutdown_function(function () { self::showCursor(); });
+        pcntl_async_signals(true);
+        pcntl_signal(SIGINT, function ($_) {
+            self::showCursor();
+            exit;
+        });
+    }
     public function addLine(array $columns, array $layout): void
     {
         $this->lines[] = $columns;
@@ -37,7 +63,7 @@ class Layout
         $layout = $this->linesColumnLayouts[$i];
         for ($j = 0; $j < count($layout); $j++) {
             $columnLength = $layout[$j];
-            $column = str_replace("\t", ' ', $line[$j]);
+            $column = $line[$j];
             $currentColumnLength = $this->getVisibleLength($column);
             while ($currentColumnLength > $columnLength) {
                 $column = substr($column, 0, -1);
@@ -77,11 +103,17 @@ class Layout
         if ($cursorPosition > 0) {
             $this->moveCursorUp($cursorPosition);
         }
+        $lineCount = $this->getLineCount();
         for ($i = 0; $i < count($this->lines); $i++) {
-            $this->clearLine();
             $this->displayLine($i);
         }
+        if ($lineCount < $cursorPosition) {
+            for ($i = $lineCount; $i < $cursorPosition; $i++) {
+                $this->clearLine();
+                echo "\n";
+            }
+        }
 
-        return $this->getLineCount();
+        return $lineCount;
     }
 }
