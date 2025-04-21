@@ -53,6 +53,7 @@ class Layout
     public static function getVisibleLength(string $string): int
     {
         $clean = preg_replace('/\e\[[0-9;]*m/', '', $string);
+        $clean = Utils::replaceBuggyWidthCharacters($clean);
 
         return mb_strwidth($clean, 'UTF-8');
     }
@@ -112,6 +113,7 @@ class Layout
                 $this->clearLine();
                 echo "\n";
             }
+            $lineCount = $cursorPosition;
         }
 
         return $lineCount;

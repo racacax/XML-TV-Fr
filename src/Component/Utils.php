@@ -312,4 +312,22 @@ class Utils
             return 200;
         }
     }
+
+    /**
+     * mb_strwidth may return wrong width for some emojis. We replace those emojis with corresponding width as spaces
+     * to properly calculate the width afterwards
+     * @param string $string
+     * @return string
+     */
+    public static function replaceBuggyWidthCharacters(string $string): string
+    {
+        $elems = [['chars' => [TerminalIcon::success(), TerminalIcon::error(), TerminalIcon::pause()], 'width' => 2]];
+        foreach ($elems as $elem) {
+            foreach ($elem['chars'] as $char) {
+                $string = str_replace($char, str_repeat(' ', $elem['width']), $string);
+            }
+        }
+
+        return $string;
+    }
 }

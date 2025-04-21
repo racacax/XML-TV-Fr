@@ -9,6 +9,7 @@ use function Amp\delay;
 
 class MultiThreadedGenerator extends Generator
 {
+    private int $cursorPosition = 0;
     /**
      * Fonction d'affichage de l'UI
      * @param array $threads
@@ -25,17 +26,17 @@ class MultiThreadedGenerator extends Generator
 
         return function () use ($threads, $manager, $guide, $logLevel, $index, $guidesCount) {
             if ($logLevel != 'none') {
-                $cursorPosition = 0;
                 Layout::hideCursor();
                 $hasThreadRunning = true;
                 while ($hasThreadRunning) {
                     $layoutLength = Utils::getMaxTerminalLength();
                     $eventLength = max(count($threads), 5);
                     $layout = new Layout();
-                    $layout->addLine([Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue')], [$layoutLength]);
+                    $layout->addLine([Utils::colorize('XML TV Fr - Génération des fichiers XMLTV', 'light blue')], [$layoutLength]);
+                    $layout->addLine([' '], [$layoutLength]);
                     $layout->addLine([Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus().'   |   '.
                         Utils::colorize('Fichier :', 'cyan')." {$guide['filename']} ($index/$guidesCount)"], [$layoutLength]);
-                    $layout->addLine([' '], [1]);
+                    $layout->addLine([' '], [$layoutLength]);
                     $columnLengths = [intval($layoutLength / 2), intval($layoutLength / 2)];
                     $layout->addLine([Utils::colorize('Threads:', 'light blue'), Utils::colorize('Derniers évènements:', 'light blue')], $columnLengths);
                     $i = 1;
@@ -48,7 +49,7 @@ class MultiThreadedGenerator extends Generator
                     for ($i = 0; $i < max(count($column1), count($column2)); $i++) {
                         $layout->addLine([isset($column1[$i]) ? $column1[$i] : '', @$column2[$i] ?? ''], $columnLengths);
                     }
-                    $cursorPosition = $layout->display($cursorPosition);
+                    $this->cursorPosition = $layout->display($this->cursorPosition);
                     $hasThreadRunning = $manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads);
                     delay(0.1); // permet d'alterner entre l'affichage et la manipulation des threads
                 }
