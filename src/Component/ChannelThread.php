@@ -189,7 +189,7 @@ class ChannelThread
                 if ($result['success']) {
                     $currentResult = $result;
                 }
-                if (!@$currentResult['isPartial']) {
+                if (!@$currentResult['isPartial'] && $result['success']) {
                     return $currentResult;
                 }
             }
