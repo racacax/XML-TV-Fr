@@ -10,7 +10,6 @@ use racacax\XmlTv\Component\Generator;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\MultiThreadedGenerator;
 use racacax\XmlTv\Component\ProviderInterface;
-use racacax\XmlTv\Component\SingleThreadedGenerator;
 use racacax\XmlTv\Component\Utils;
 use racacax\XmlTv\Component\XmlExporter;
 
@@ -271,12 +270,8 @@ class Configurator
     public function getGenerator(): Generator
     {
         $begin = new \DateTimeImmutable(date('Y-m-d', strtotime('-1 day')));
-        if ($this->getNbThreads() == 1) {
-            $class = SingleThreadedGenerator::class;
-        } else {
-            $class = MultiThreadedGenerator::class;
-        }
-        $generator = new $class($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this);
+
+        $generator = new MultiThreadedGenerator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this);
         $generator->setProviders(
             $this->getProviders(
                 $this->getDefaultClient()

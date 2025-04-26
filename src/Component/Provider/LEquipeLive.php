@@ -101,7 +101,7 @@ class LEquipeLive extends AbstractProvider implements ProviderInterface
         if (count($time) == 1) {
             return strtotime(date('Y-m-d').' '.$time[0]);
         }
-        $enDay = $this->DAYS[$time[0]];
+        $enDay = @$this->DAYS[$time[0]];
         $date = $this->daysDate[$enDay];
 
         return strtotime($date.' '.$time[1]);

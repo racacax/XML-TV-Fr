@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
+use Throwable;
+
 class Utils
 {
     /**
@@ -32,6 +34,37 @@ class Utils
         ));
 
         return self::$providers = $listProvider;
+    }
+
+    public static function getProvider(string $providerName): ?string
+    {
+        $providers = self::getProviders();
+        foreach ($providers as $provider) {
+            $e = explode('\\', $provider);
+            if (end($e) == $providerName) {
+                return $provider;
+            }
+        }
+
+        return null;
+    }
+
+    public static function getChannelDataFromProvider(ProviderInterface $provider, string $channelId, string $date): string
+    {
+        try {
+            date_default_timezone_set('Europe/Paris');
+            $obj = $provider->constructEpg($channelId, $date);
+        } catch (Throwable $_) {
+            $obj = false;
+        }
+        if ($obj === false || $obj->getProgramCount() === 0) {
+            $data = 'false';
+        } else {
+            $formatter = new XmlFormatter();
+            $data = $formatter->formatChannel($obj, $provider);
+        }
+
+        return $data;
     }
 
     public static function extractProviderName(ProviderInterface $provider): string
@@ -215,15 +248,6 @@ class Utils
 
     }
 
-    public static function startCmd($cmd): void
-    {
-        if (str_starts_with(php_uname(), 'Windows')) {
-            pclose(popen('start /B ' . $cmd, 'r'));
-        } else {
-            exec($cmd . ' > /dev/null &');
-        }
-    }
-
 
     public static function recurseRmdir($dir): bool
     {
@@ -237,13 +261,6 @@ class Utils
         }
 
         return false;
-    }
-
-    public static function getThreadCommand(string $providerClass, string $date, string $channelInfo, string $fileName, string $generatorId): string
-    {
-        $p = PHP_BINARY;
-
-        return "$p src/Multithreading/thread.php $providerClass $date ".base64_encode($channelInfo)." $fileName $generatorId";
     }
 
     public static function getStartAndEndDatesFromXMLString(string $xmlContent): array

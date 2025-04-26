@@ -8,8 +8,6 @@ use racacax\XmlTv\Component\ProviderCache;
 use racacax\XmlTv\ValueObject\EPGEnum;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ChannelFactory;
-use racacax\XmlTv\Component\Logger;
-use racacax\XmlTv\Component\ProcessCache;
 use racacax\XmlTv\Configurator;
 use racacax\XmlTv\ValueObject\Channel;
 
@@ -29,8 +27,7 @@ abstract class AbstractProvider
      * @var array<string, float>
      */
     protected static $priority;
-
-    protected string $status;
+    private ?\Amp\Sync\Channel $workerChannel;
 
     public function __construct(Client $client, string $jsonPath, float $priority)
     {
@@ -45,7 +42,12 @@ abstract class AbstractProvider
         //todo: to improve
         self::$priority[static::class] = $priority;
         $this->client = $client;
-        $this->status = '';
+        $this->workerChannel = null;
+    }
+
+    public function setWorkerChannel(\Amp\Sync\Channel $channel): void
+    {
+        $this->workerChannel = $channel;
     }
 
     public static function getPriority(): float
@@ -53,14 +55,9 @@ abstract class AbstractProvider
         return self::$priority[static::class];
     }
 
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
-        $this->status = $status;
-        if (defined('CHANNEL_PROCESS')) {
-            (new ProcessCache('status'))->save(CHANNEL_PROCESS, $this->status);
-        } else {
-            Logger::updateLine(' '.$status);
-        }
+        $this->workerChannel?->send($status);
     }
 
     /**

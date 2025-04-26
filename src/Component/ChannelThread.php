@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
+use Amp\Sync\Channel;
 use racacax\XmlTv\ValueObject\EPGEnum;
 use racacax\XmlTv\ValueObject\DummyChannel;
 
 use function Amp\async;
 use function Amp\delay;
+use function Amp\Parallel\Worker\getWorker;
 
 class ChannelThread
 {
-    private ?string $channel;
-    private ?string $provider = null;
-    private ?array $info;
-    private ?array $failedProviders;
-    private ?array $datesGathered;
-    private ?array $extraParams;
-    private ChannelsManager $manager;
-    private Generator $generator;
-    private string $status;
-    private string $date;
-    private bool $isRunning;
-    private bool $hasStarted;
-    private string $generatorId;
-    private string $channelsFile;
+    protected ?string $channel;
+    protected ?string $provider = null;
+    protected ?array $info;
+    protected ?array $failedProviders;
+    protected ?array $datesGathered;
+    protected ?array $extraParams;
+    protected ChannelsManager $manager;
+    protected Generator $generator;
+    protected string $status;
+    protected string $date;
+    protected bool $isRunning;
+    protected bool $hasStarted;
+    protected string $generatorId;
+    protected string $channelsFile;
 
     public function __construct(ChannelsManager $manager, Generator $generator, string $generatorId, string $channelsFile)
     {
@@ -62,16 +64,11 @@ class ChannelThread
         return $str.' '.TerminalIcon::spinner();
     }
 
-    private function getChannelInfo(): string
-    {
-        return json_encode(['key' => $this->channel, 'info' => $this->info, 'extraParams' => $this->extraParams]);
-    }
-
 
     /**
      * @return ProviderInterface[]
      */
-    private function getRemainingProviders(): array
+    protected function getRemainingProviders(): array
     {
         $providers = $this->generator->getProviders($this->info['priority'] ?? []);
         $providers = array_filter($providers, fn ($provider) => $provider->channelExists($this->channel));
@@ -84,25 +81,32 @@ class ChannelThread
         return array_diff($providers, $failedProviders);
     }
 
-    private function waitForCompletion(string $fileName, string $providerName): void
+    private function getLastMessage(Channel $workerChannel): ?string
     {
-        $cacheInstance = new ProcessCache('cache');
-        $statusInstance = new ProcessCache('status');
-        while (true) {
-            if (!$cacheInstance->exists($fileName)) {
-                if ($statusInstance->exists($fileName)) {
-                    $this->status = Utils::colorize($statusInstance->pop($fileName), 'magenta');
-                }
-                delay(0.001);
-            } else {
-                while ($cacheInstance->exists($fileName.'.lock')) {
-                    delay(0.001);
-                }
-                $this->manager->removeChannelFromProvider($providerName, $this->channel);
-
-                return;
-            }
+        try {
+            return $workerChannel->receive();
+        } catch (\Throwable $_) {
+            return null;
         }
+    }
+
+    protected function getProviderResult(string $providerName, string $date): string
+    {
+        $worker = getWorker();
+        $task = new ProviderTask($providerName, $date, $this->channel, $this->extraParams);
+        $execution = $worker->submit($task);
+        $future = $execution->getFuture();
+        $workerChannel = $execution->getChannel();
+        while (!$future->isComplete()) {
+            $lastMessage = $this->getLastMessage($workerChannel);
+            if (!empty($lastMessage)) {
+                $this->status = Utils::colorize($lastMessage, 'magenta');
+            }
+            delay(0);
+        }
+        $this->manager->removeChannelFromProvider($providerName, $this->channel);
+
+        return $execution->await();
     }
 
     /**
@@ -114,18 +118,11 @@ class ChannelThread
      * @return array
      * @throws \Random\RandomException
      */
-    private function getDataFromProvider(string $providerName, ProviderInterface $provider, string $date, string $cacheKey): array
+    protected function getDataFromProvider(string $providerName, ProviderInterface $provider, string $date, string $cacheKey): array
     {
         $cache = $this->generator->getCache();
-        $cacheInstance = new ProcessCache('cache');
         flush();
-        $bytes = random_bytes(10);
-        $fileName = bin2hex($bytes);
-        $cmd = Utils::getThreadCommand($providerName, $date, $this->getChannelInfo(), $fileName, $this->generatorId);
-        Utils::startCmd($cmd);
-
-        $this->waitForCompletion($fileName, $providerName);
-        $providerResult = $cacheInstance->pop($fileName);
+        $providerResult = $this->getProviderResult($providerName, $date);
         if ($providerResult == 'false') {
             $this->failedProviders[] = $providerName;
             Logger::addChannelFailedProvider($this->channelsFile, $this->channel, $date, get_class($provider));
@@ -163,7 +160,7 @@ class ChannelThread
      * @param string $date
      * @return array Information about status (success, cache, partial, provider and if gathering has been skipped)
      */
-    private function gatherData(string $date): array
+    protected function gatherData(string $date): array
     {
         $cache = $this->generator->getCache();
         $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
@@ -204,7 +201,7 @@ class ChannelThread
      * @return string Colorized string like: OK - ProviderName, OK (Cache) - ProviderName, HS, ...
      * Note: Only the status is colorized, provider name isn't
      */
-    private function getStatusString(array $result, string $cacheKey): string
+    protected function getStatusString(array $result, string $cacheKey): string
     {
         $cache = $this->generator->getCache();
         $providerName = '';
@@ -243,7 +240,7 @@ class ChannelThread
      * @return void
      * @throws \Exception
      */
-    private function run(): void
+    protected function run(): void
     {
         $cache = $this->generator->getCache();
         $dates = $this->generator->getListDate();
@@ -279,7 +276,7 @@ class ChannelThread
         $this->manager->incrChannelsDone();
     }
 
-    private function addEvent(string $date, string $statusInfo): void
+    protected function addEvent(string $date, string $statusInfo): void
     {
         $this->manager->addEvent(($this->channel ?? '').' : '.$date.' | '.$statusInfo);
     }

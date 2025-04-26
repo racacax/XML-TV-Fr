@@ -51,24 +51,10 @@ class MultiThreadedGenerator extends Generator
                     }
                     $this->cursorPosition = $layout->display($this->cursorPosition);
                     $hasThreadRunning = $manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads);
-                    delay(0.1); // permet d'alterner entre l'affichage et la manipulation des threads
+                    delay(0.1); // refresh rate 1 tenth. We don't need a refresh rate higher than that.
                 }
             }
         };
-    }
-
-    /**
-     * Vérifie si le processus principal est toujours en cours et tue tous les threads enfants si celui-ci est arrêté
-     * @param string $generatorId
-     * @return void
-     */
-    protected function startThreadWatcher(string $generatorId): void
-    {
-        $p = PHP_BINARY;
-        $pid = getmypid();
-        $encodedId = base64_encode($generatorId);
-        $cmd = "$p src/Multithreading/thread_watcher.php $pid $encodedId";
-        Utils::startCmd($cmd);
     }
 
     /**
@@ -83,7 +69,7 @@ class MultiThreadedGenerator extends Generator
         $threadsStack = array_values($threads);
         while ($manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads)) { // Necessary if one channel fails
 
-            delay(0.001); // permet d'alterner entre l'affichage et la manipulation des threads
+            delay(0); // permet d'alterner entre l'affichage et la manipulation des threads
             for ($i = 0; $i < count($threads); $i++) {
                 $thread = $threadsStack[0];
                 unset($threadsStack[0]);
@@ -107,7 +93,6 @@ class MultiThreadedGenerator extends Generator
         $fn = function () use ($generatorId) {
             $logLevel = Logger::getLogLevel();
             Logger::setLogLevel('none');
-            $this->startThreadWatcher($generatorId);
             $guidesCount = count($this->guides);
             foreach ($this->guides as $index => $guide) {
                 $channels = Utils::getChannelsFromGuide($guide);
