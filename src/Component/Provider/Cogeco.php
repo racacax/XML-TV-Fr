@@ -62,7 +62,7 @@ class Cogeco extends AbstractProvider implements ProviderInterface
         $programsPaths = [];
         $programCategories = [];
         for ($i = 0; $i < $count; $i++) {
-            $percent = '| Main data (1/2) : '.round($i * 100 / ($count), 2) . ' %';
+            $percent = 'Main data (1/2) : '.round($i * 100 / ($count), 2) . ' %';
             $this->setStatus($percent);
             $start = $minStart->modify('+'.($span * $i).' hours');
             $content = $this->getContentFromURL($this->generateUrl($channelObj, $start), ['Cookie' => 'TVMDS_Cookie='.self::$COOKIE_VALUE]);
@@ -101,7 +101,7 @@ class Cogeco extends AbstractProvider implements ProviderInterface
         $currentCursor = $minStart->modify('-1 day')->modify('+1 minute');
         $count = count($programsPaths);
         foreach ($programsPaths as $index => $path) {
-            $percent = '| Details (2/2) : '.round($index * 100 / $count, 2) . ' %';
+            $percent = 'Details (2/2) : '.round($index * 100 / $count, 2) . ' %';
             $this->setStatus($percent);
             $content = $this->getContentFromURL($this->generateProgramDetailsUrl($path));
             preg_match('/txt_showtitle bold">(.*?)<\/h3>/s', $content, $title);

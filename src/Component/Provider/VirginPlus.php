@@ -179,7 +179,7 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
     private function addDetails(Program $program, int $index, int $programCount, int $blockIndex, int $blockCount, string $programId): void
     {
         $blockNumber = $blockIndex + 1;
-        $percent = " | ($blockNumber/$blockCount) ". round($index * 100 / ($programCount), 2) . ' %';
+        $percent = "($blockNumber/$blockCount) ". round($index * 100 / ($programCount), 2) . ' %';
         $this->setStatus($percent);
         $programDetails = @json_decode($this->getContentFromURL(self::$BASE_URL.'epg/v3/programs/'.$programId, self::$HEADERS), true);
         if (!$programDetails) {
