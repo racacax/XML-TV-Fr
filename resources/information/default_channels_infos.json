@@ -7734,5 +7734,33 @@
   "FranceTVDocs.fr": {
     "name": "France TV Docs",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/1159\/canal-ouah\/CHN43FN\/CHN43FN_1159_20241119-_Ehj"
+  },
+  "TVPitchounKidsMusic.fr": {
+    "name": "TV Pitchoun Kids Music",
+    "icon": "https://cdn-proxymedia-digicert.tv-fr-cdn.orange.net/api/v1/images/2090%2Flogos/v2/logos/livetv_tv_pitchoun_kids_music/20250228_175515/mobileAppliDark/logo_183x183.png"
+  },
+  "JournalDuGolfTV.fr": {
+    "name": "Journal du Golf TV",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Journal_du_golf_tv.png/220px-Journal_du_golf_tv.png"
+  },
+  "France24.es": {
+    "name": "France 24 (Espanol)",
+    "icon": "https://cdn-proxymedia-digicert.tv-fr-cdn.orange.net/api/v1/images/2090%2Flogos/v2/logos/livetv_france24_espagnol/20220922_114506/mobileAppliDark/logo_183x183.png"
+  },
+  "ETVTelevisionCaraibeenne.fr": {
+    "name": "ETV Télévision Caraïbéenne",
+    "icon": "https://cdn-proxymedia-digicert.tv-fr-cdn.orange.net/api/v1/images/2090%2Flogos/v2/logos/livetv_etv/20240116_143755/mobileAppliDark/logo_183x183.png"
+  },
+  "RAIItalia.it": {
+    "name": "RAI Italia",
+    "icon": "https://static.wikia.nocookie.net/dreamfiction/images/7/74/Rai_Italia_-_Logo_2017.png"
+  },
+  "TF14K.fr": {
+    "name": "TF1 4K",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Tf14k-logo.png/640px-Tf14k-logo.png"
+  },
+  "M64K.fr": {
+    "name": "M6 4K",
+    "icon": "https://upload.wikimedia.org/wikipedia/fr/d/df/M6_4K.png"
   }
 }

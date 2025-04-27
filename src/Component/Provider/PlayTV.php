@@ -36,7 +36,7 @@ class PlayTV extends AbstractProvider implements ProviderInterface
             return false;
         }
         foreach ($json['data'] as $val) {
-            $program = new Program(strtotime($val['start_at']), strtotime($val['end_at']));
+            $program = Program::withTimestamp(strtotime($val['start_at']), strtotime($val['end_at']));
 
             $attrs = $val['media']['attrs'] ?? [];
             $category = $val['media']['path'][0]['category'] ?? 'Inconnu';

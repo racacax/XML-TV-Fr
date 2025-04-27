@@ -19,6 +19,7 @@ use racacax\XmlTv\Component\Provider\Proximus;
 use racacax\XmlTv\Component\Provider\RMC;
 use racacax\XmlTv\Component\Provider\SFR;
 use racacax\XmlTv\Component\Provider\SixPlay;
+use racacax\XmlTv\Component\Provider\SudInfo;
 use racacax\XmlTv\Component\Provider\Tebeosud;
 use racacax\XmlTv\Component\Provider\Tele7Jours;
 use racacax\XmlTv\Component\Provider\Teleboy;
@@ -64,6 +65,7 @@ class ProvidersTest extends TestCase
         [Voo::class, ['channels' => ['TF1.fr']]],
         [TVHebdo::class, ['channels' => ['RDS.ca']]],
         [Oqee::class, ['channels' => ['TF1.fr']]],
+        [SudInfo::class, ['channels' => ['TF1.fr']]],
     ];
     private static array $IGNORED_PROVIDERS = [Teleboy::class, LEquipeLive::class];
 

@@ -50,7 +50,7 @@ class Voo extends AbstractProvider implements ProviderInterface
                 break;
             }
             $end = strtotime($event['AvailabilityEnd']);
-            $program = new Program($start, $end);
+            $program = Program::withTimestamp($start, $end);
             $program->addTitle($event['Titles']['Title'][0]['Name']);
             $program->addDesc(@$event['Titles']['Title'][0]['LongSynopsis']);
             $program->addCategory(@$event['Titles']['Title'][0]['Genres']['Genre'][0]['Value']);

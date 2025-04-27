@@ -4,58 +4,127 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\ValueObject;
 
+use DateTimeImmutable;
+use DateTime;
+use DateTimeZone;
+
 class Program
 {
-    private $titles;
-    private $descs;
-    private $categories;
-    private $icon;
     /**
-     * @var \DateTimeImmutable|string|number
+     * @var array<array{name: string, lang: string}>
      */
-    private $start;
+    private array $titles;
+
     /**
-     * @var \DateTimeImmutable|string|number
+     * @var array<array{name: string, lang: string}>
      */
-    private $end;
-    private $episode_num;
-    private $subtitles;
-    private $rating;
-    private $credits;
-    private $year;
+    private array $descs;
+
+    /**
+     * @var array<array{name: string, lang: string}>
+     */
+    private array $categories;
+    private ?string $icon;
+    private DateTime|DateTimeImmutable $start;
+    private DateTime|DateTimeImmutable $end;
+    private ?string $episodeNum;
+
+    /**
+     * @var array<array{name: string, lang: string}>
+     */
+    private array $subtitles;
+
+    /**
+     * @var array{string, string} | null
+     */
+    private ?array $rating;
+
+    /**
+     * @var array<array{name: string, type: string}>
+     */
+    private array $credits;
+
+    private ?bool $isNew;
+    /**
+     * @var array{start: ?DateTimeImmutable, channel: ?string} | null
+     */
+    private ?array $previouslyShown;
+
+
+    /**
+     * Constructs a program with Unix timestamps as parameters
+     * @param int $start
+     * @param int $end
+     * @return Program
+     */
+    public static function withTimestamp(int $start, int $end): Program
+    {
+        $startDate = new DateTimeImmutable("@$start");
+        $endDate = new DateTimeImmutable("@$end");
+
+        return new Program($startDate, $endDate);
+    }
 
     /**
      * Program constructor.
      */
-    public function __construct($start, $end)
+    public function __construct(DateTime|DateTimeImmutable $start, DateTime|DateTimeImmutable $end)
     {
-        if (is_null($start) || is_null($end)) {
-            throw new \ValueError('Start and end dates must not be null');
+        if ($start > $end) {
+            throw new \ValueError('Start date must be before end date');
         }
-        $this->start = $start;
-        $this->end = $end;
+        $this->start = (clone $start)->setTimezone(new DateTimeZone('Europe/Paris'));
+        $this->end = (clone $end)->setTimezone(new DateTimeZone('Europe/Paris'));
         $this->titles = [];
         $this->categories = [];
         $this->descs = [];
         $this->subtitles = [];
         $this->credits = [];
+        $this->episodeNum = null;
+        $this->icon = null;
+        $this->rating = null;
+        $this->isNew = null;
+        $this->previouslyShown = null;
+    }
+
+    public function getIsNew(): ?bool
+    {
+        return $this->isNew;
+    }
+
+    public function setIsNew(?bool $isNew): void
+    {
+        $this->isNew = $isNew;
+    }
+    public function getPreviouslyShown(): ?array
+    {
+        return $this->previouslyShown;
+    }
+
+    public function setPreviouslyShown(bool $isPreviouslyShown, DateTime|DateTimeImmutable $start = null, ?string $channel = null): void
+    {
+        if (!$isPreviouslyShown) {
+            $this->previouslyShown = null;
+        } else {
+            $this->previouslyShown = ['start' => $start, 'channel' => $channel];
+        }
     }
 
 
     /**
-     * @return mixed
+     * @return array<array{name: string, lang: string}>
      */
-    public function getTitles()
+    public function getTitles(): array
     {
         return $this->titles;
     }
 
     /**
      * Ajout d'un titre
-     * @param string $title
+     * @param string|null $title
      * @param string $lang
      */
-    public function addTitle($title, $lang = 'fr'): void
+    public function addTitle(?string $title, string $lang = 'fr'): void
     {
         if (!empty($title)) {
             $this->titles[] = ['name' => $title, 'lang' => $lang];
@@ -63,19 +132,17 @@ class Program
     }
 
     /**
-     * @return mixed
+     * @return array<array{name: string, lang: string}>
      */
-    public function getDescs()
+    public function getDescs(): array
     {
         return $this->descs;
     }
 
     /**
      * Ajout d'un crédit (acteur, présentateur, ...)
-     * @param mixed $name
-     * @param mixed $type
      */
-    public function addCredit($name, $type = 'guest'): void
+    public function addCredit(?string $name, $type = 'guest'): void
     {
         if (!empty($name)) {
             if (!in_array($type, ['actor', 'director', 'writer', 'producer',
@@ -87,9 +154,9 @@ class Program
     }
 
     /**
-     * @return mixed
+     * @return array<array{name: string, type: string}>
      */
-    public function getCredits()
+    public function getCredits(): array
     {
         usort($this->credits, function ($a, $b) {
             $priority = [
@@ -105,8 +172,8 @@ class Program
                 'guest' => 10
             ];
 
-            $priorityA = isset($priority[$a['type']]) ? $priority[$a['type']] : PHP_INT_MAX;
-            $priorityB = isset($priority[$b['type']]) ? $priority[$b['type']] : PHP_INT_MAX;
+            $priorityA = $priority[$a['type']] ?? PHP_INT_MAX;
+            $priorityB = $priority[$b['type']] ?? PHP_INT_MAX;
 
             return $priorityA - $priorityB;
         });
@@ -116,10 +183,8 @@ class Program
 
     /**
      * Ajout d'un synopsis
-     * @param mixed $desc
-     * @param string $lang
      */
-    public function addDesc($desc, $lang = 'fr'): void
+    public function addDesc(?string $desc, $lang = 'fr'): void
     {
         if (!empty($desc)) {
             $this->descs[] = ['name' => $desc, 'lang' => $lang];
@@ -127,17 +192,19 @@ class Program
     }
 
     /**
-     * @return mixed
+     * @return array<array{name: string, lang: string}>
      */
-    public function getCategories()
+    public function getCategories(): array
     {
         return $this->categories;
     }
 
     /**
-     * @param mixed $category
+     * @param string|null $category
+     * @param $lang
+     * @return void
      */
-    public function addCategory($category, $lang = 'fr'): void
+    public function addCategory(?string $category, $lang = 'fr'): void
     {
         if (!empty($category)) {
             $this->categories[] = ['name' => $category, 'lang' => $lang];
@@ -145,94 +212,49 @@ class Program
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getIcon()
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
 
     /**
      * Définition de l'icone du programme
-     * @param mixed $icon
      */
-    public function setIcon($icon): void
+    public function setIcon(?string $icon): void
     {
         $this->icon = $icon;
     }
 
     /**
-     * @return mixed
+     * @return DateTime|DateTimeImmutable
      */
-    public function getStart()
+    public function getStart(): DateTime|DateTimeImmutable
     {
         return $this->start;
     }
 
-    public function getStartFormatted(): string
-    {
-        if (is_int($this->start)) {
-            return date('YmdHis O', $this->start);
-        } elseif (is_string($this->start)) {
-            if (intval($this->start) == $this->start) {
-                $this->start = intval($this->start);
-
-                return $this->getStartFormatted();
-            }
-        } else {
-            if (!$this->start) {
-                return '20001212121200 +0100';
-            }
-            if (\DateTimeImmutable::class === get_class($this->start)) {
-                return $this->start->format('YmdHis O');
-            }
-        }
-
-        return $this->start;
-    }
-
     /**
-     * @return mixed
+     * @return DateTime|DateTimeImmutable
      */
-    public function getEnd()
+    public function getEnd(): DateTime|DateTimeImmutable
     {
         return $this->end;
     }
 
-    public function getEndFormatted(): string
-    {
-        if (is_int($this->end)) {
-            //Timezone issue
-            return date('YmdHis O', $this->end);
-        } elseif (is_string($this->end)) {
-            if (intval($this->end) == $this->end) {
-                $this->end = intval($this->end);
-
-                return $this->getEndFormatted();
-            }
-        } else {
-            if (\DateTimeImmutable::class === get_class($this->end)) {
-                return $this->end->format('YmdHis O');
-            }
-        }
-
-        return $this->end;
-    }
-
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getEpisodeNum()
+    public function getEpisodeNum(): ?string
     {
-        return $this->episode_num;
+        return $this->episodeNum;
     }
 
     /**
      * Définition de la saison et de l'épisode du programme
-     * @param mixed $season
-     * @param mixed $episode
      */
-    public function setEpisodeNum($season, $episode): void
+    public function setEpisodeNum(string|int|null $season, string|int|null $episode): void
     {
         if (!isset($season) && !isset($episode)) {
             return;
@@ -245,23 +267,21 @@ class Program
         if ($episode < 0) {
             $episode = 0;
         }
-        $this->episode_num = $season . '.' . $episode;
+        $this->episodeNum = $season . '.' . $episode;
     }
 
     /**
-     * @return mixed
+     * @return array<array{name: string, lang: string}>
      */
-    public function getSubtitles()
+    public function getSubtitles(): array
     {
         return $this->subtitles;
     }
 
     /**
      * Ajout d'un sous-titre au programme
-     * @param mixed $subtitle
-     * @param string $lang
      */
-    public function addSubtitle($subtitle, $lang = 'fr'): void
+    public function addSubtitle(?string $subtitle, $lang = 'fr'): void
     {
         if (!empty($subtitle)) {
             $this->subtitles[] = ['name' => $subtitle, 'lang' => $lang];
@@ -269,40 +289,20 @@ class Program
     }
 
     /**
-     * @return mixed
+     * @return array{string, string}|null
      */
-    public function getRating()
+    public function getRating(): ?array
     {
         return $this->rating;
     }
 
     /**
      * Définition du rating du programme (CSA -10 ans par exemple)
-     * @param mixed $rating
      */
-    public function setRating($rating, $system = 'CSA'): void
+    public function setRating(string|int|null $rating, $system = 'CSA'): void
     {
         if (isset($rating)) {
             $this->rating = [$rating, $system];
-        }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getYear()
-    {
-        return $this->year;
-    }
-
-    /**
-     * Définition de l'année du programme
-     * @param mixed $year
-     */
-    public function setYear($year): void
-    {
-        if (!empty($year)) {
-            $this->year = $year;
         }
     }
 }

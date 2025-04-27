@@ -83,7 +83,7 @@ class Proximus extends AbstractProvider implements ProviderInterface
             } else {
                 $csa = 'Tout public';
             }
-            $programObj = new Program(strtotime($program['programScheduleStart']), strtotime($program['programScheduleEnd']));
+            $programObj = Program::withTimestamp(strtotime($program['programScheduleStart']), strtotime($program['programScheduleEnd']));
             $programObj->addTitle($program['program']['title'] ?? 'Aucun titre');
             $programObj->addDesc(@$program['program']['description'] ?? 'Aucune description');
             $programObj->addCategory(@$program['category'] ?? 'Inconnu');

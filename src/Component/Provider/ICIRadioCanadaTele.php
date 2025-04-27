@@ -42,7 +42,7 @@ class ICIRadioCanadaTele extends AbstractProvider implements ProviderInterface
             } elseif ($startDate > $maxDate) {
                 return $channelObj;
             }
-            $program = new Program(strtotime($broadcast['startsAt']), strtotime($broadcast['endsAt']));
+            $program = Program::withTimestamp(strtotime($broadcast['startsAt']), strtotime($broadcast['endsAt']));
             $program->addCategory($broadcast['subtheme']);
             $program->setIcon(str_replace('{0}', '635', str_replace('{1}', '16x9', @$broadcast['pircture']['url'] ?? '')));
             $program->addTitle($broadcast['title']);

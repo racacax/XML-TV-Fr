@@ -19,7 +19,7 @@ class DummyProvider extends AbstractProvider implements ProviderInterface
     {
         $channelObj = new Channel($channel, '', 'TestChannel');
         if ($channel == 'TestChannel.fr') {
-            $program = new Program(strtotime($date.' 00:00'), strtotime($date.' 01:00'));
+            $program = Program::withTimestamp(strtotime($date.' 00:00'), strtotime($date.' 01:00'));
             $program->addTitle('My Title');
             $channelObj->addProgram($program);
 

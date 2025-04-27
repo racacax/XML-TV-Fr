@@ -89,7 +89,7 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
 
         $programList = $this->getProgramList($response, $date);
         foreach ($programList as $program) {
-            $programObj = new Program($program['startTime'], $program['endTime']);
+            $programObj = Program::withTimestamp($program['startTime'], $program['endTime']);
             $programObj->addTitle($program['titre']);
             $programObj->addCategory($program['nature']);
             $programObj->addSubtitle($program['soustitre']);

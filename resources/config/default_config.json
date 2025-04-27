@@ -13,5 +13,6 @@
   "guides_to_generate": [{"channels": "config/channels.json", "filename": "xmltv.xml"}],
   "7zip_path": null,
   "force_todays_grab": false,
-  "nb_threads": 1
+  "nb_threads": 1,
+  "ui": "MultiColumnUI"
 }

@@ -14,6 +14,7 @@ class ChannelsManager
     private array $datesGatheredByChannel;
     private int $channelsCount;
     private int $channelsDone;
+    private array $events;
 
     public function __construct(array $channels, Generator $generator)
     {
@@ -24,6 +25,18 @@ class ChannelsManager
         $this->channels = array_keys($channels);
         $this->providersUsed = [];
         $this->providersFailedByChannel = [];
+        $this->events = [];
+    }
+
+    public function addEvent(string $event): void
+    {
+        $this->events[] = $event;
+    }
+    public function getLatestEvents(int $number): array
+    {
+        $slice = min(count($this->events), $number);
+
+        return array_slice($this->events, -$slice, $number);
     }
 
     public function incrChannelsDone(): void

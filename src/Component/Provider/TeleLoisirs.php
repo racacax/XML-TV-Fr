@@ -53,7 +53,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                 $duration = 60 * intval($duration[0]);
             }
             $startDate = strtotime($date . ' ' . str_replace('h', ':', $hour));
-            $program = new Program($startDate, $startDate + $duration);
+            $program = Program::withTimestamp($startDate, $startDate + $duration);
             //@todo: add async
             $detail = $this->getContentFromURL($titlehref[1]);
             $detailJson = @explode('<script type="application/ld+json">', $detail)[1];
@@ -67,7 +67,6 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                         $synopsis .= "\nNote : ".$detailJson['review']['reviewRating']['ratingValue'].'/5';
                     }
                 }
-                $program->setYear(@$detailJson['dateCreated']);
                 $program->setEpisodeNum(@$detailJson['partOfSeason']['seasonNumber'], @$detailJson['episodeNumber']);
                 foreach ($detailJson as $key => $value) {
                     if (in_array($key, ['actor', 'director'])) {

@@ -61,7 +61,7 @@ class SixPlay extends AbstractProvider implements ProviderInterface
                         break;
                     }
                 }
-                $programObj = new Program(strtotime($program['real_diffusion_start_date']), strtotime($program['real_diffusion_end_date']));
+                $programObj = Program::withTimestamp(strtotime($program['real_diffusion_start_date']), strtotime($program['real_diffusion_end_date']));
                 $programObj->addTitle($program['title']);
                 $programObj->addSubtitle(@$program['subtitle']);
                 $programObj->addDesc(@$program['description']);

@@ -70,7 +70,7 @@ class LEquipeLive extends AbstractProvider implements ProviderInterface
         for ($i = 0; $i < count($channelItems); $i++) {
             if ($channelItems[$i]['time'] >= $minTime && $channelItems[$i]['time'] <= $maxTime) {
                 $endTime = min(@$channelItems[$i + 1]['time'] ?? PHP_INT_MAX, $channelItems[$i]['time'] + 7200);
-                $program = new Program($channelItems[$i]['time'], $endTime);
+                $program = Program::withTimestamp($channelItems[$i]['time'], $endTime);
                 $program->addTitle($channelItems[$i]['title']);
                 $program->addSubtitle($channelItems[$i]['subtitle']);
                 $program->addCategory('Sports');
@@ -101,7 +101,7 @@ class LEquipeLive extends AbstractProvider implements ProviderInterface
         if (count($time) == 1) {
             return strtotime(date('Y-m-d').' '.$time[0]);
         }
-        $enDay = $this->DAYS[$time[0]];
+        $enDay = @$this->DAYS[$time[0]];
         $date = $this->daysDate[$enDay];
 
         return strtotime($date.' '.$time[1]);

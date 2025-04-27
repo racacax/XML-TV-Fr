@@ -46,7 +46,7 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
             preg_match('/prog" \/>(.*?)<br\/>/', $val, $category);
             preg_match('/<span class="b">Saison (.*?) : Episode (.*?)<\/span>/', $val, $season);
             $start = $date . ' ' . str_replace('h', ':', $start[1]);
-            $program = new Program(strtotime($start), strtotime($start) + intval($duration) * 60);
+            $program = Program::withTimestamp(strtotime($start), strtotime($start) + intval($duration[1]) * 60);
 
             $exp = explode('>', $category[1] ?? 'Inconnu');
             $program->addCategory(end($exp));

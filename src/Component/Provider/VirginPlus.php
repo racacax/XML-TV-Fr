@@ -153,7 +153,7 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
                 } elseif ($startDate > $maxDate) {
                     return $channelObj;
                 }
-                $programObj = new Program(strtotime($program['startTime']), strtotime($program['endTime']));
+                $programObj = Program::withTimestamp(strtotime($program['startTime']), strtotime($program['endTime']));
                 $programObj->addTitle($program['title']);
                 if (@$program['episodeTitle']) {
                     $programObj->addSubtitle($program['episodeTitle']);
@@ -179,14 +179,14 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
     private function addDetails(Program $program, int $index, int $programCount, int $blockIndex, int $blockCount, string $programId): void
     {
         $blockNumber = $blockIndex + 1;
-        $percent = " | ($blockNumber/$blockCount) ". round($index * 100 / ($programCount), 2) . ' %';
+        $percent = "($blockNumber/$blockCount) ". round($index * 100 / ($programCount), 2) . ' %';
         $this->setStatus($percent);
         $programDetails = @json_decode($this->getContentFromURL(self::$BASE_URL.'epg/v3/programs/'.$programId, self::$HEADERS), true);
         if (!$programDetails) {
             // Not managing to retrieve details isn't fatal since necessary information are in the main request
             return;
         }
-        $program->addDesc($programDetails['description']);
+        $program->addDesc(@$programDetails['description']);
         $program->setEpisodeNum(@$programDetails['seasonNumber'], @$programDetails['episodeNumber']);
         foreach ($programDetails['categories'] as $category) {
             $program->addCategory($category['category']);
@@ -204,7 +204,7 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
 
         return sprintf(
             self::$BASE_URL.'epg/v3/byBlockVersion/schedules?tvService=volt&epgChannelMap=MAP_TORONTO&callSign=%s&startTime=%s&endTime=%s&blockVersion=%s',
-            $channelId,
+            urlencode($channelId),
             urlencode($fromTime),
             urlencode($toTime),
             $blockVersion

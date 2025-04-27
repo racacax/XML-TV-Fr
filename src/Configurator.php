@@ -10,7 +10,8 @@ use racacax\XmlTv\Component\Generator;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\MultiThreadedGenerator;
 use racacax\XmlTv\Component\ProviderInterface;
-use racacax\XmlTv\Component\SingleThreadedGenerator;
+use racacax\XmlTv\Component\UI\MultiColumnUI;
+use racacax\XmlTv\Component\UI\UI;
 use racacax\XmlTv\Component\Utils;
 use racacax\XmlTv\Component\XmlExporter;
 
@@ -49,6 +50,7 @@ class Configurator
 
     private int $nbThreads;
     private int $minTimeRange;
+    private UI $ui;
 
     /**
      * @param int $nbDays Number of days XML TV will try to get EPG
@@ -83,7 +85,8 @@ class Configurator
         bool    $forceTodayGrab = false,
         int     $nbThreads = 1,
         int     $minTimeRange = 22 * 3600,
-        array   $extraParams = []
+        array   $extraParams = [],
+        ?UI   $ui = null
     ) {
         if (isset($timeLimit)) {
             set_time_limit($timeLimit);
@@ -107,6 +110,7 @@ class Configurator
         $this->extraParams = $extraParams;
         $this->nbThreads = $nbThreads;
         $this->minTimeRange = $minTimeRange;
+        $this->ui = $ui ?? new MultiColumnUI();
     }
 
     public static function initFromConfigFile(string $filePath): self
@@ -147,7 +151,8 @@ class Configurator
             $data['force_todays_grab'] ?? false,
             $data['nb_threads'] ?? 1,
             $data['min_timerange'] ?? 22 * 3600, # 22h
-            $data['extra_params'] ?? []
+            $data['extra_params'] ?? [],
+            Utils::getUI($data['ui'] ?? 'MultiColumnUI')
         );
     }
 
@@ -157,6 +162,11 @@ class Configurator
     public function getNbDays(): int
     {
         return $this->nbDays;
+    }
+
+    public function getUI(): UI
+    {
+        return $this->ui;
     }
 
     /**
@@ -271,12 +281,8 @@ class Configurator
     public function getGenerator(): Generator
     {
         $begin = new \DateTimeImmutable(date('Y-m-d', strtotime('-1 day')));
-        if ($this->getNbThreads() == 1) {
-            $class = SingleThreadedGenerator::class;
-        } else {
-            $class = MultiThreadedGenerator::class;
-        }
-        $generator = new $class($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this);
+
+        $generator = new MultiThreadedGenerator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this);
         $generator->setProviders(
             $this->getProviders(
                 $this->getDefaultClient()

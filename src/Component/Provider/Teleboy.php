@@ -41,7 +41,7 @@ class Teleboy extends AbstractProvider implements ProviderInterface
             if (new \DateTimeImmutable('@'.strtotime($item['begin'])) < $minDate) {
                 continue;
             }
-            $programObj = new Program(strtotime($item['begin']), strtotime($item['end']));
+            $programObj = Program::withTimestamp(strtotime($item['begin']), strtotime($item['end']));
             $programObj->addTitle($item['title']);
             if (!empty($item['subtitle'])) {
                 $programObj->addSubtitle($item['subtitle']);

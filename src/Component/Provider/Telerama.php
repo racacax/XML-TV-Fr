@@ -58,7 +58,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
             } elseif ($startDate > $maxDate) {
                 break;
             }
-            $program = new Program(strtotime($donnee['horaire']['debut']), strtotime($donnee['horaire']['fin']));
+            $program = Program::withTimestamp(strtotime($donnee['horaire']['debut']), strtotime($donnee['horaire']['fin']));
             $descri = $donnee['resume'];
             if (isset($donnee['serie'])) {
                 $descri = 'Saison ' . $donnee['serie']['saison'] . ' Episode ' . $donnee['serie']['numero_episode'] . chr(10) . $descri;
@@ -75,7 +75,6 @@ class Telerama extends AbstractProvider implements ProviderInterface
             }
             if (isset($donnee['annee_realisation'])) {
                 $descri .= chr(10) . 'Année de réalisation : ' . $donnee['annee_realisation'];
-                $program->setYear($donnee['annee_realisation']);
             }
             $descri = str_replace('<P>', '', $descri);
             $descri = str_replace('</P>', '', $descri);

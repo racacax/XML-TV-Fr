@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
+use racacax\XmlTv\Component\UI\MultiColumnUI;
+use racacax\XmlTv\Component\UI\ProgressiveUI;
+use racacax\XmlTv\Component\UI\UI;
+use Throwable;
+
 class Utils
 {
     /**
@@ -32,6 +37,37 @@ class Utils
         ));
 
         return self::$providers = $listProvider;
+    }
+
+    public static function getProvider(string $providerName): ?string
+    {
+        $providers = self::getProviders();
+        foreach ($providers as $provider) {
+            $e = explode('\\', $provider);
+            if (end($e) == $providerName) {
+                return $provider;
+            }
+        }
+
+        return null;
+    }
+
+    public static function getChannelDataFromProvider(ProviderInterface $provider, string $channelId, string $date): string
+    {
+        try {
+            date_default_timezone_set('Europe/Paris');
+            $obj = $provider->constructEpg($channelId, $date);
+        } catch (Throwable $_) {
+            $obj = false;
+        }
+        if ($obj === false || $obj->getProgramCount() === 0) {
+            $data = 'false';
+        } else {
+            $formatter = new XmlFormatter();
+            $data = $formatter->formatChannel($obj, $provider);
+        }
+
+        return $data;
     }
 
     public static function extractProviderName(ProviderInterface $provider): string
@@ -215,15 +251,6 @@ class Utils
 
     }
 
-    public static function startCmd($cmd): void
-    {
-        if (str_starts_with(php_uname(), 'Windows')) {
-            pclose(popen('start /B ' . $cmd, 'r'));
-        } else {
-            exec($cmd . ' > /dev/null &');
-        }
-    }
-
 
     public static function recurseRmdir($dir): bool
     {
@@ -237,13 +264,6 @@ class Utils
         }
 
         return false;
-    }
-
-    public static function getThreadCommand(string $providerClass, string $date, string $channelInfo, string $fileName, string $generatorId): string
-    {
-        $p = PHP_BINARY;
-
-        return "$p src/Multithreading/thread.php $providerClass $date ".base64_encode($channelInfo)." $fileName $generatorId";
     }
 
     public static function getStartAndEndDatesFromXMLString(string $xmlContent): array
@@ -279,5 +299,78 @@ class Utils
         }
 
         return null;
+    }
+
+    /**
+     * Merge all channels file used from a guide. If a channel is present in multiple file, the information from the latest file will be used
+     * @param array $guide
+     * @return array|mixed
+     */
+    public static function getChannelsFromGuide(array $guide)
+    {
+        if (is_string($guide['channels'])) {
+            return json_decode(file_get_contents($guide['channels']), true);
+        } elseif (is_array($guide['channels'])) {
+            $channels_arrays = [];
+            foreach ($guide['channels'] as $channelFile) {
+                $channels_arrays[] = json_decode(file_get_contents($channelFile), true) ?? [];
+            }
+
+            return array_merge(...$channels_arrays);
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * Converts a string into a slug. It should be lowercase, with spaces becoming dashes
+     * @param string $string
+     * @return string
+     */
+    public static function slugify(string $string): string
+    {
+        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string)));
+    }
+
+    /**
+     * /!\ Only works on Linux/Mac. If any error occurs, 200 columns will be used.
+     * @return int Number of columns available in the terminal
+     */
+    public static function getMaxTerminalLength(): int
+    {
+        try {
+            exec('tput cols', $_cols);
+
+            return intval($_cols[0]);
+        } catch (\Throwable) {
+            return 200;
+        }
+    }
+
+    /**
+     * mb_strwidth may return wrong width for some emojis. We replace those emojis with corresponding width as spaces
+     * to properly calculate the width afterwards
+     * @param string $string
+     * @return string
+     */
+    public static function replaceBuggyWidthCharacters(string $string): string
+    {
+        $elems = [['chars' => [TerminalIcon::success(), TerminalIcon::error(), TerminalIcon::pause()], 'width' => 2]];
+        foreach ($elems as $elem) {
+            foreach ($elem['chars'] as $char) {
+                $string = str_replace($char, str_repeat(' ', $elem['width']), $string);
+            }
+        }
+
+        return $string;
+    }
+
+    public static function getUI(string $ui): UI
+    {
+        if ($ui === 'MultiColumnUI') {
+            return new MultiColumnUI();
+        } else {
+            return new ProgressiveUI();
+        }
     }
 }
