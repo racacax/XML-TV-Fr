@@ -36,11 +36,13 @@ class Layout
     public static function showCursorOnExit(): void
     {
         register_shutdown_function(function () { self::showCursor(); });
-        pcntl_async_signals(true);
-        pcntl_signal(SIGINT, function ($_) {
-            self::showCursor();
-            exit;
-        });
+        if (function_exists('pcntl_async_signals')) {
+            pcntl_async_signals(true);
+            pcntl_signal(SIGINT, function ($_) {
+                self::showCursor();
+                exit;
+            });
+        }
     }
     public function addLine(array $columns, array $layout): void
     {
