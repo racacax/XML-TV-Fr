@@ -19,7 +19,7 @@ class MultiColumnUI implements UI
                 Layout::hideCursor();
                 $hasThreadRunning = true;
                 while ($hasThreadRunning) {
-                    $layoutLength = Utils::getMaxTerminalLength();
+                    $layoutLength = @Utils::getMaxTerminalLength();
                     $eventLength = max(count($threads), 5);
                     $layout = new Layout();
                     $layout->addLine([Utils::colorize('XML TV Fr - Génération des fichiers XMLTV', 'light blue')], [$layoutLength]);

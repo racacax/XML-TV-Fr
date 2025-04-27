@@ -333,18 +333,45 @@ class Utils
     }
 
     /**
-     * /!\ Only works on Linux/Mac. If any error occurs, 200 columns will be used.
      * @return int Number of columns available in the terminal
      */
     public static function getMaxTerminalLength(): int
     {
         try {
-            exec('tput cols', $_cols);
+        $descriptorspec = [
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w'],
+        ];
+        $process = proc_open('tput cols', $descriptorspec, $pipes);
 
-            return intval($_cols[0]);
-        } catch (\Throwable) {
-            return 200;
+        if (is_resource($process)) {
+            $output = stream_get_contents($pipes[1]);
+            fclose($pipes[1]);
+            fclose($pipes[2]);
+            proc_close($process);
+
+            if (is_numeric(trim($output))) {
+                return (int) trim($output);
+            }
         }
+
+        if (stripos(PHP_OS_FAMILY, 'Windows') !== false) {
+            $process = proc_open('mode con', $descriptorspec, $pipes);
+            if (is_resource($process)) {
+                $output = stream_get_contents($pipes[1]);
+                fclose($pipes[1]);
+                fclose($pipes[2]);
+                proc_close($process);
+                $exp = explode(':', $output);
+                $columns = trim(explode("\n", @$exp[3] ?? '')[0]);
+                if(!empty($columns)) {
+                    return (int) $columns;
+                }
+            }
+        } } catch(Throwable $_) {
+
+        }
+        return 180;
     }
 
     /**

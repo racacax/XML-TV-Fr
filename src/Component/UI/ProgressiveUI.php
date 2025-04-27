@@ -23,7 +23,7 @@ class ProgressiveUI implements UI
                 echo Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue');
                 echo Utils::colorize('Fichier :', 'cyan')." {$guide['filename']} ($index/$guidesCount)\n";
                 while ($hasThreadRunning) {
-                    $layoutLength = Utils::getMaxTerminalLength();
+                    $layoutLength = @Utils::getMaxTerminalLength();
                     $events = $manager->getLatestEvents(PHP_INT_MAX);
                     $count = count($events);
                     $layout = new Layout();
