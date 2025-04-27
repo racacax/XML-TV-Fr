@@ -2,61 +2,11 @@
 
 namespace racacax\XmlTv\Component;
 
-use Closure;
-
 use function Amp\async;
 use function Amp\delay;
 
 class MultiThreadedGenerator extends Generator
 {
-    private int $cursorPosition = 0;
-    /**
-     * Fonction d'affichage de l'UI
-     * @param array $threads
-     * @param ChannelsManager $manager
-     * @param array $guide
-     * @param string $logLevel
-     * @param int $index
-     * @param int $guidesCount
-     * @return Closure
-     */
-    protected function getUIClosure(array $threads, ChannelsManager $manager, array $guide, string $logLevel, int $index, int $guidesCount): Closure
-    {
-        Layout::showCursorOnExit();
-
-        return function () use ($threads, $manager, $guide, $logLevel, $index, $guidesCount) {
-            if ($logLevel != 'none') {
-                Layout::hideCursor();
-                $hasThreadRunning = true;
-                while ($hasThreadRunning) {
-                    $layoutLength = Utils::getMaxTerminalLength();
-                    $eventLength = max(count($threads), 5);
-                    $layout = new Layout();
-                    $layout->addLine([Utils::colorize('XML TV Fr - Génération des fichiers XMLTV', 'light blue')], [$layoutLength]);
-                    $layout->addLine([' '], [$layoutLength]);
-                    $layout->addLine([Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus().'   |   '.
-                        Utils::colorize('Fichier :', 'cyan')." {$guide['filename']} ($index/$guidesCount)"], [$layoutLength]);
-                    $layout->addLine([' '], [$layoutLength]);
-                    $columnLengths = [intval($layoutLength / 2), intval($layoutLength / 2)];
-                    $layout->addLine([Utils::colorize('Threads:', 'light blue'), Utils::colorize('Derniers évènements:', 'light blue')], $columnLengths);
-                    $i = 1;
-                    $column1 = [];
-                    foreach ($threads as $thread) {
-                        $column1[] = "Thread $i : ".$thread;
-                        $i++;
-                    }
-                    $column2 = $manager->getLatestEvents($eventLength);
-                    for ($i = 0; $i < max(count($column1), count($column2)); $i++) {
-                        $layout->addLine([isset($column1[$i]) ? $column1[$i] : '', @$column2[$i] ?? ''], $columnLengths);
-                    }
-                    $this->cursorPosition = $layout->display($this->cursorPosition);
-                    $hasThreadRunning = $manager->hasRemainingChannels() || Utils::hasOneThreadRunning($threads);
-                    delay(0.1); // refresh rate 1 tenth. We don't need a refresh rate higher than that.
-                }
-            }
-        };
-    }
-
     /**
      * Boucle ordonnant la génération de l'EPG de chaque chaine. Les chaines/dates seront affectées à chaque thread en fonction
      * de la disponibilité des providers
@@ -94,6 +44,7 @@ class MultiThreadedGenerator extends Generator
             $logLevel = Logger::getLogLevel();
             Logger::setLogLevel('none');
             $guidesCount = count($this->guides);
+            $ui = $this->configurator->getUI();
             foreach ($this->guides as $index => $guide) {
                 $channels = Utils::getChannelsFromGuide($guide);
                 $threads = [];
@@ -101,7 +52,7 @@ class MultiThreadedGenerator extends Generator
                 for ($i = 0; $i < $this->configurator->getNbThreads(); $i++) {
                     $threads[] = new ChannelThread($manager, $this, $generatorId, $guide['filename']);
                 }
-                $view = $this->getUIClosure($threads, $manager, $guide, $logLevel, $index, $guidesCount);
+                $view = $ui->getClosure($threads, $manager, $guide, $logLevel, $index, $guidesCount);
                 async($view);
                 $this->generateChannels($threads, $manager);
             }

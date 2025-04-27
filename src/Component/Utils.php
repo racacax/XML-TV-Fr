@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
+use racacax\XmlTv\Component\UI\MultiColumnUI;
+use racacax\XmlTv\Component\UI\ProgressiveUI;
+use racacax\XmlTv\Component\UI\UI;
 use Throwable;
 
 class Utils
@@ -298,6 +301,11 @@ class Utils
         return null;
     }
 
+    /**
+     * Merge all channels file used from a guide. If a channel is present in multiple file, the information from the latest file will be used
+     * @param array $guide
+     * @return array|mixed
+     */
     public static function getChannelsFromGuide(array $guide)
     {
         if (is_string($guide['channels'])) {
@@ -314,11 +322,20 @@ class Utils
         }
     }
 
+    /**
+     * Converts a string into a slug. It should be lowercase, with spaces becoming dashes
+     * @param string $string
+     * @return string
+     */
     public static function slugify(string $string): string
     {
         return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $string)));
     }
 
+    /**
+     * /!\ Only works on Linux/Mac. If any error occurs, 200 columns will be used.
+     * @return int Number of columns available in the terminal
+     */
     public static function getMaxTerminalLength(): int
     {
         try {
@@ -346,5 +363,14 @@ class Utils
         }
 
         return $string;
+    }
+
+    public static function getUI(string $ui): UI
+    {
+        if ($ui === 'MultiColumnUI') {
+            return new MultiColumnUI();
+        } else {
+            return new ProgressiveUI();
+        }
     }
 }

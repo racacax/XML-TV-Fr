@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace racacax\XmlTv\Component;
+namespace racacax\XmlTv\Component\UI;
+
+use racacax\XmlTv\Component\Utils;
 
 class Layout
 {

@@ -7,6 +7,11 @@ use Amp\Parallel\Worker\Task;
 use Amp\Sync\Channel;
 use racacax\XmlTv\Configurator;
 
+/**
+ * Async thread gathering epg data for a channel on a specific day for a specific provider
+ * Returns formatted XML if success
+ * Returns false if not success
+ */
 class ProviderTask implements Task
 {
     public function __construct(

@@ -58,7 +58,7 @@ class Bouygues extends AbstractProvider implements ProviderInterface
                 }
             }
             $startTime = strtotime($program['startTime']);
-            $startDate = new \DateTimeImmutable('@' . strtotime($program['startTime']));
+            $startDate = new \DateTimeImmutable('@' . $startTime);
             if ($startDate < $minDate) {
                 continue;
             } elseif ($startDate > $maxDate) {
