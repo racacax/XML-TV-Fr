@@ -39,23 +39,19 @@ class MultiThreadedGenerator extends Generator
     }
     protected function generateEpg(): void
     {
-        $generatorId = bin2hex(random_bytes(10));
-        $fn = function () use ($generatorId) {
+        $fn = function () {
             $logLevel = Logger::getLogLevel();
             Logger::setLogLevel('none');
-            $guidesCount = count($this->guides);
             $ui = $this->configurator->getUI();
-            foreach ($this->guides as $index => $guide) {
-                $channels = Utils::getChannelsFromGuide($guide);
-                $threads = [];
-                $manager = new ChannelsManager($channels, $this);
-                for ($i = 0; $i < $this->configurator->getNbThreads(); $i++) {
-                    $threads[] = new ChannelThread($manager, $this, $generatorId, $guide['filename']);
-                }
-                $view = $ui->getClosure($threads, $manager, $guide, $logLevel, $index, $guidesCount);
-                async($view);
-                $this->generateChannels($threads, $manager);
+            $channels = Utils::getAllMergedChannels($this->guides);
+            $threads = [];
+            $manager = new ChannelsManager($channels, $this);
+            for ($i = 0; $i < $this->configurator->getNbThreads(); $i++) {
+                $threads[] = new ChannelThread($manager, $this);
             }
+            $view = $ui->getClosure($threads, $manager, $logLevel);
+                async($view);
+            $this->generateChannels($threads, $manager);
             Logger::setLogLevel($logLevel);
             Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");
         };

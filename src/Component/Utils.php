@@ -322,6 +322,14 @@ class Utils
         }
     }
 
+    public static function getAllMergedChannels(array $guides): array {
+        $channelsArrays = [];
+        foreach ($guides as $guide) {
+            $channelsArrays[] = self::getChannelsFromGuide($guide);
+        }
+        return array_merge(...$channelsArrays);
+    }
+
     /**
      * Converts a string into a slug. It should be lowercase, with spaces becoming dashes
      * @param string $string

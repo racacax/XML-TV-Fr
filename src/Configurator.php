@@ -14,10 +14,14 @@ use racacax\XmlTv\Component\UI\MultiColumnUI;
 use racacax\XmlTv\Component\UI\UI;
 use racacax\XmlTv\Component\Utils;
 use racacax\XmlTv\Component\XmlExporter;
+use racacax\XmlTv\ValueObject\EPGDate;
 
 class Configurator
 {
-    private int $nbDays;
+    /**
+     * @var array<EPGDate>
+     */
+    private array $epgDates;
 
     private string $outputPath;
 
@@ -53,7 +57,7 @@ class Configurator
     private UI $ui;
 
     /**
-     * @param int $nbDays Number of days XML TV will try to get EPG
+     * @param array<EPGDate> $epgDates Fetch policy for each day gathered by XMLTV
      * @param string $outputPath Where xmltv files are stored
      * @param null|int $timeLimit time limit for the EPG grab (0 = unlimited)
      * @param null|int $memoryLimit memory limit for the EPG grab (-1 = unlimited)
@@ -69,7 +73,7 @@ class Configurator
      * @param bool $forceTodayGrab ignore cache for today
      */
     public function __construct(
-        int     $nbDays = 8,
+        array   $epgDates = [],
         string  $outputPath = './var/export/',
         ?int    $timeLimit = null,
         ?int    $memoryLimit = null,
@@ -95,7 +99,7 @@ class Configurator
             ini_set('memory_limit', (string)$memoryLimit);
         }
 
-        $this->nbDays = $nbDays;
+        $this->epgDates = $epgDates;
         $this->outputPath = $outputPath;
         $this->cacheMaxDays = $cache_max_days;
         $this->deleteRawXml = $deleteRawXml;
@@ -113,6 +117,9 @@ class Configurator
         $this->ui = $ui ?? new MultiColumnUI();
     }
 
+    /**
+     * @throws \DateMalformedStringException
+     */
     public static function initFromConfigFile(string $filePath): self
     {
         if (!file_exists($filePath)) {
@@ -135,7 +142,7 @@ class Configurator
         Logger::log("\n");
 
         return new Configurator(
-            $data['days'] ?? 8,
+            EPGDate::createFromConfigEntry($data['fetch_policies'] ?? []),
             $data['output_path'] ?? './xmltv',
             $data['time_limit'] ?? null,
             $data['memory_limit'] ?? null,
@@ -156,13 +163,6 @@ class Configurator
         );
     }
 
-    /**
-     * @return int
-     */
-    public function getNbDays(): int
-    {
-        return $this->nbDays;
-    }
 
     public function getUI(): UI
     {
@@ -282,7 +282,7 @@ class Configurator
     {
         $begin = new \DateTimeImmutable(date('Y-m-d', strtotime('-1 day')));
 
-        $generator = new MultiThreadedGenerator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this);
+        $generator = new MultiThreadedGenerator($this);
         $generator->setProviders(
             $this->getProviders(
                 $this->getDefaultClient()
@@ -309,6 +309,11 @@ class Configurator
 
 
         return $generator;
+    }
+
+    public function getEpgDates(): array
+    {
+        return $this->epgDates;
     }
 
     /**

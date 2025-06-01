@@ -6,13 +6,10 @@ namespace racacax\XmlTv\Component;
 
 use racacax\XmlTv\Configurator;
 use racacax\XmlTv\StaticComponent\ChannelInformation;
+use racacax\XmlTv\ValueObject\EPGDate;
 
 abstract class Generator
 {
-    /**
-     * @var array
-     */
-    protected array $listDate = [];
 
     /**
      * @var XmlExporter
@@ -29,15 +26,9 @@ abstract class Generator
 
     protected Configurator $configurator;
 
-    public function __construct(\DateTimeImmutable $start, \DateTimeImmutable $stop, Configurator $configurator)
+    public function __construct(Configurator $configurator)
     {
         $this->configurator = $configurator;
-        $current = new \DateTime();
-        $current->setTimestamp($start->getTimestamp());
-        while ($current <= $stop) {
-            $this->listDate[] = $current->format('Y-m-d');
-            $current->modify('+1 day');
-        }
     }
 
 
@@ -86,7 +77,7 @@ abstract class Generator
         ProviderCache::clearCache();
         $this->generateEpg();
         ProviderCache::clearCache();
-        Logger::save();
+        Logger::save($this->guides);
     }
 
     public function getCache(): CacheFile
@@ -100,11 +91,6 @@ abstract class Generator
     public function getFormatter(): XmlFormatter
     {
         return $this->formatter;
-    }
-
-    public function getListDate(): array
-    {
-        return $this->listDate;
     }
 
     /**
@@ -129,10 +115,10 @@ abstract class Generator
                 }
                 $this->exporter->addChannel($alias, $name, $icon);
                 $listCacheKey = array_merge($listCacheKey, array_map(
-                    function (string $date) use ($channelKey) {
-                        return sprintf('%s_%s.xml', $channelKey, $date);
+                    function (EPGDate $epgDate) use ($channelKey) {
+                        return sprintf('%s_%s.xml', $channelKey, $epgDate->getFormattedDate());
                     },
-                    $this->listDate
+                    $this->configurator->getEpgDates()
                 ));
             }
             foreach ($listCacheKey as $keyCache) {

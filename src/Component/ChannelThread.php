@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component;
 
 use Amp\Sync\Channel;
+use racacax\XmlTv\ValueObject\EPGDate;
 use racacax\XmlTv\ValueObject\EPGEnum;
 use racacax\XmlTv\ValueObject\DummyChannel;
 
@@ -26,23 +27,19 @@ class ChannelThread
     protected string $date;
     protected bool $isRunning;
     protected bool $hasStarted;
-    protected string $generatorId;
-    protected string $channelsFile;
 
-    public function __construct(ChannelsManager $manager, Generator $generator, string $generatorId, string $channelsFile)
+    public function __construct(ChannelsManager $manager, Generator $generator)
     {
         $this->manager = $manager;
         $this->generator = $generator;
         $this->isRunning = false;
         $this->hasStarted = false;
-        $this->generatorId = $generatorId;
-        $this->channelsFile = $channelsFile;
     }
 
     public function setChannel(array $channelInfo): void
     {
         $this->hasStarted = false;
-        $this->status = "\e[35mDémarrage...e[39m";
+        $this->status = "\e[35mDémarrage...\e[39m";
         $this->channel = $channelInfo['key'];
         $this->info = $channelInfo['info'];
         $this->failedProviders = $channelInfo['failedProviders'];
@@ -125,7 +122,7 @@ class ChannelThread
         $providerResult = $this->getProviderResult($providerName, $date);
         if ($providerResult == 'false') {
             $this->failedProviders[] = $providerName;
-            Logger::addChannelFailedProvider($this->channelsFile, $this->channel, $date, get_class($provider));
+            Logger::addChannelFailedProvider($this->channel, $date, get_class($provider));
 
             return ['success' => false];
         } else {
@@ -160,15 +157,20 @@ class ChannelThread
      * @param string $date
      * @return array Information about status (success, cache, partial, provider and if gathering has been skipped)
      */
-    protected function gatherData(string $date): array
+    protected function gatherData(EPGDate $epgDate): array
     {
+        $date = $epgDate->getFormattedDate();
         $cache = $this->generator->getCache();
         $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
         $currentResult = ['success' => false];
-        if ($cache->getState($cacheKey) == EPGEnum::$FULL_CACHE) {
-            $providerName = $cache->getProviderName($cacheKey);
-
-            return ['success' => true, 'provider' => $providerName, 'isCache' => true, 'skipped' => false];
+        $cacheState = $cache->getState($cacheKey);
+        if($epgDate->getCachePolicy() == EPGDate::$CACHE_ONLY || ($cacheState == EPGEnum::$FULL_CACHE && $epgDate->getCachePolicy() == EPGDate::$CACHE_FIRST)) {
+            if($cacheState == EPGEnum::$NO_CACHE) {
+                return ['success' => false,  'isCache' => false, 'skipped' => false];
+            } else {
+                $providerName = $cache->getProviderName($cacheKey);
+                return ['success' => true, 'provider' => $providerName, 'isCache' => true, 'isPartial' => $cacheState == EPGEnum::$PARTIAL_CACHE, 'skipped' => false];
+            }
         } else {
             $providers = $this->getRemainingProviders();
             foreach ($providers as $provider) {
@@ -243,17 +245,18 @@ class ChannelThread
     protected function run(): void
     {
         $cache = $this->generator->getCache();
-        $dates = $this->generator->getListDate();
-        $total = count($dates);
-        $dates = array_diff($dates, $this->datesGathered);
-        $progress = $total - count($dates);
-        foreach ($dates as $date) {
-            Logger::addChannelEntry($this->channelsFile, $this->channel, $date);
+        $epgDates = $this->generator->getConfigurator()->getEpgDates();
+        $total = count($epgDates);
+        $epgDates = array_diff($epgDates, $this->datesGathered);
+        $progress = $total - count($epgDates);
+        foreach ($epgDates as $epgDate) {
+            $date = $epgDate->getFormattedDate();
+            Logger::addChannelEntry($this->channel, $date);
             $progress++;
             $this->date = $date." ($progress/$total)";
             $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
 
-            $result = $this->gatherData($date);
+            $result = $this->gatherData($epgDate);
             if (@$result['skipped']) {
                 $this->manager->addChannel($this->channel, $this->failedProviders, $this->datesGathered);
 
@@ -262,14 +265,14 @@ class ChannelThread
             $statusString = $this->getStatusString($result, $cacheKey);
             $this->addEvent($date, $statusString);
             if ($result['success']) {
-                Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $result['provider'], $result['isCache']);
+                Logger::setChannelSuccessfulProvider($this->channel, $date, $result['provider'], $result['isCache']);
             } elseif ($cache->getState($cacheKey)) {
                 $providerName = $cache->getProviderName($cacheKey);
-                Logger::setChannelSuccessfulProvider($this->channelsFile, $this->channel, $date, $providerName.' - Forced', true);
+                Logger::setChannelSuccessfulProvider($this->channel, $date, $providerName.' - Forced', true);
             } elseif ($this->generator->getConfigurator()->isEnableDummy()) {
                 $cache->store($cacheKey, $this->generator->getFormatter()->formatChannel(new DummyChannel($this->channel, $date), null));
             }
-            $this->datesGathered[] = $date;
+            $this->datesGathered[] = $epgDate;
             $this->failedProviders = [];
         }
 
