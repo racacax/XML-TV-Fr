@@ -1,18 +1,25 @@
 {
-  "days" : 8,
-  "cache_max_days": 8,
+  "fetch_policies": {
+    "cache-first": [1,2,3,4,5,6,7],
+    "network-first": [0],
+    "cache-only": [-2,-1]
+  },
+  "cache_ttl": 8,
   "output_path": "var/export/",
   "time_limit": null,
   "memory_limit": -1,
+  "export_handlers": [{
+    "class": "GZExport",
+    "params": {}
+  }, {
+    "class": "ZIPExport",
+    "params": {}
+  }],
   "delete_raw_xml": false,
-  "enable_gz": true,
-  "enable_xz":false,
-  "enable_zip": true,
   "enable_dummy":  false,
-  "custom_priority_orders": {},
-  "guides_to_generate": [{"channels": "config/channels.json", "filename": "xmltv.xml"}],
-  "7zip_path": null,
-  "force_todays_grab": false,
+  "priority_orders": {},
+  "extra_params": [],
+  "guides": [{"channels": ["config/channels.json"], "filename": "xmltv"}],
   "nb_threads": 1,
   "ui": "MultiColumnUI"
 }

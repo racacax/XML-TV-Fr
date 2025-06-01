@@ -10,11 +10,11 @@ use function Amp\delay;
 class MultiColumnUI implements UI
 {
     private int $cursorPosition = 0;
-    public function getClosure(array $threads, ChannelsManager $manager, array $guide, string $logLevel, int $index, int $guidesCount): \Closure
+    public function getClosure(array $threads, ChannelsManager $manager, string $logLevel): \Closure
     {
         Layout::showCursorOnExit();
 
-        return function () use ($threads, $manager, $guide, $logLevel, $index, $guidesCount) {
+        return function () use ($threads, $manager, $logLevel) {
             if ($logLevel != 'none') {
                 Layout::hideCursor();
                 $hasThreadRunning = true;
@@ -24,8 +24,7 @@ class MultiColumnUI implements UI
                     $layout = new Layout();
                     $layout->addLine([Utils::colorize('XML TV Fr - Génération des fichiers XMLTV', 'light blue')], [$layoutLength]);
                     $layout->addLine([' '], [$layoutLength]);
-                    $layout->addLine([Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus().'   |   '.
-                        Utils::colorize('Fichier :', 'cyan')." {$guide['filename']} ($index/$guidesCount)"], [$layoutLength]);
+                    $layout->addLine([Utils::colorize('Chaines récupérées : ', 'cyan').$manager->getStatus()], [$layoutLength]);
                     $layout->addLine([' '], [$layoutLength]);
                     $columnLengths = [intval($layoutLength / 2), intval($layoutLength / 2)];
                     $layout->addLine([Utils::colorize('Threads:', 'light blue'), Utils::colorize('Derniers évènements:', 'light blue')], $columnLengths);
