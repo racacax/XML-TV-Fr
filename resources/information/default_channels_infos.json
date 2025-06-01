@@ -7762,5 +7762,9 @@
   "M64K.fr": {
     "name": "M6 4K",
     "icon": "https://upload.wikimedia.org/wikipedia/fr/d/df/M6_4K.png"
+  },
+  "T18.fr": {
+    "name": "T18",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Logo_de_la_chaine_T18.svg/langfr-250px-Logo_de_la_chaine_T18.svg.png"
   }
 }
