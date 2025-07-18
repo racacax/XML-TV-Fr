@@ -7766,5 +7766,9 @@
   "T18.fr": {
     "name": "T18",
     "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Logo_de_la_chaine_T18.svg/langfr-250px-Logo_de_la_chaine_T18.svg.png"
+  },
+  "RTLDistrict.be": {
+    "name": "RTL District",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/RTL_District_Logo_2024.svg/1200px-RTL_District_Logo_2024.svg.png"
   }
 }

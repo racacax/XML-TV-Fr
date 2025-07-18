@@ -86,8 +86,8 @@ class Proximus extends AbstractProvider implements ProviderInterface
             $programObj = Program::withTimestamp(strtotime($program['programScheduleStart']), strtotime($program['programScheduleEnd']));
             $programObj->addTitle($program['program']['title'] ?? 'Aucun titre');
             $programObj->addDesc(@$program['program']['description'] ?? 'Aucune description');
-            $programObj->addCategory(@$program['category'] ?? 'Inconnu');
-            $programObj->addCategory(@$program['subCategory'] ?? 'Inconnu');
+            $programObj->addCategory($this->formatCategory(@$program['category'] ?? 'Inconnu'));
+            $programObj->addCategory($this->formatCategory(@$program['subCategory'] ?? 'Inconnu'));
             if (isset($program['program']['posterFileName'])) {
                 $programObj->setIcon('https://experience-cache.proximustv.be/posterserver/poster/EPG/' . $program['program']['posterFileName']);
             }
@@ -97,6 +97,13 @@ class Proximus extends AbstractProvider implements ProviderInterface
         }
 
         return $channelObj;
+    }
+
+    private function formatCategory(string $category)
+    {
+        $split = explode('C.', $category);
+
+        return end($split);
     }
 
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
