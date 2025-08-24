@@ -30,6 +30,7 @@ La structure d'un item se fait comme ceci :
 Les champs name, icon, alias et priority sont optionnels. 
 Le champ priority donne un ordre de priorité différent de celui par défaut en indiquant les noms des services (nom des classes dans le dossier classes). Dans l'exemple, Service1 sera appelé en premier et Service2 ne sera appelé que si Service1 échoue. Par exemple si on met en priorité Télérama puis Orange, Télérama sera lancé. Si aucun programme n'est trouvé sur Télérama, Orange est lancé, sinon on continue. Si aucun programme n'est trouvé sur tous les services, la chaine est indiquée HS pour le jour concerné.
 Le champ alias permet de donner un ID alternatif à une chaine que celui renseigné par défaut. Si le champ est absent, c'est l'ID par défaut renseigné dans XML TV Fr qui sera affiché.
+
 ## Configuration du programme (config/config.json)
 
 Le fichier config.json est au format JSON. 
@@ -53,11 +54,13 @@ Le fichier config.json est au format JSON.
 ```
 
 # Lancer le script
+
 Pour démarrer la récupération du guide des programmes, lancez cette commande dans votre terminal (dans le dossier du programme).
 ```shell
 php manager.php export
 ```
 # Générer le fichier channels.json
+
 Il est possible de générer depuis votre navigateur le fichier channels.json. Pour cela, placez vous dans le dossier de travail du programme et lancez cette commande
 
 Note : Cette option sera supprimée dans de futures versions.
@@ -67,11 +70,15 @@ php -S localhost:8080 -t tools
 Note : le port 8080 peut être changé par un autre.
 
 Ouvrez ensuite dans votre navigateur http://localhost:8080/ (port à modifier en fonction de celui indiqué dans la commande au dessus).
+
 # Sortie
 
 ## Logs
+
 Les logs sont stockés dans le dossier logs au format JSON. Les derniers logs sont accessibles via le navigateur à l'adresse http://localhost:8080/logs.php (à condition d'avoir lancé la commande précédente).
+
 ## XML TV
+
 Les fichiers de sorties XML sont stockés dans le dossier xmltv au format XML, ZIP et GZ.
 Cette commande indiquera si le dernier fichier XML généré est valide.
 
@@ -110,3 +117,32 @@ Exemple :
 
 Attention, le nom de la classe du service doit correspondre à son nom de fichier. Bien que PHP, contrairement à Java autorise des noms différents, le programme ici ne le permet pas.
 
+# Utilisation de Docker
+
+Vous pouvez utiliser XML TV Fr avec Docker. 
+
+Un fichier [Dockerfile](./Dockerfile) à la racine du projet vous permet d'installer et configurer XML TV Fr en une seule commande.
+
+## Construire l'image
+
+```bash
+docker build -t xmltvfr .
+```
+
+## Volume de sortie
+
+Pour récupérer le fichier xml, zip, gz vous devez monter un volume de sortie de type `bind mount`
+
+Commencez par céer un répertoir cible par exemple `/tmp/output`
+
+Utilisez ensuite l'option `-v` pour monter le volume avec le répertoir de destination du fichier XML lors du lancement du script. 
+
+Voir [Lancer le script avec Docker](#lancer-le-script-avec-docker) juste en dessous
+
+## Lancer le script avec Docker
+
+```bash
+docker run -v /tmp/output:/var/export xmltvfr
+```
+
+Après avoir lancé cette commande, vous retrouverez vos fichiers dans le répertoire `/tmp/output` de la machine hôte.
