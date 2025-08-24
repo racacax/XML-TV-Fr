@@ -4,9 +4,11 @@ RUN apt update
 
 RUN apt install -y php php-mbstring php-curl php-zip php-xml
 
-COPY . .
+COPY . /app
 
 RUN apt install -y composer
+
+WORKDIR /app
 
 RUN composer install
 

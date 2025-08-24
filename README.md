@@ -5,7 +5,10 @@ XML TV Fr est un service permettant de récupérer un guide des programmes au fo
 Site web et documentation : https://xmltvfr.fr/
 
 
-# Prérequis
+# Installation
+
+## Natif
+Pour installer XML TV Fr, vous devez posséder:
 
 PHP >=8.0 avec les extensions
  - curl
@@ -13,8 +16,23 @@ PHP >=8.0 avec les extensions
  - mbstring
  - xml
  - json
+
+Ainsi que Composer.
  
 Un `composer install` est requis pour utiliser le script.  
+
+## Utilisation de Docker
+
+Vous pouvez utiliser XML TV Fr avec Docker.
+
+Un fichier [Dockerfile](./Dockerfile) à la racine du projet vous permet d'installer et configurer XML TV Fr en une seule commande.
+
+### Construire l'image
+Pour construire l'image, tapez la commande:
+```bash
+docker build -t xmltvfr .
+```
+Note: Cette commande doit être lancée après chaque mise à jour de XML TV Fr.
 
 # Configuration
 
@@ -54,11 +72,18 @@ Le fichier config.json est au format JSON.
 ```
 
 # Lancer le script
-
+## Natif
 Pour démarrer la récupération du guide des programmes, lancez cette commande dans votre terminal (dans le dossier du programme).
 ```shell
 php manager.php export
 ```
+## Docker
+Pour récupérer votre XML, tapez la commande:
+```bash
+docker run -v ./var/export:/app/var/export -v ./config/:/app/config xmltvfr
+```
+Vous pouvez remplacer **./var/export** par le dossier de sortie que vous souhaitez.
+
 # Générer le fichier channels.json
 
 Il est possible de générer depuis votre navigateur le fichier channels.json. Pour cela, placez vous dans le dossier de travail du programme et lancez cette commande
@@ -116,33 +141,3 @@ Exemple :
 ```
 
 Attention, le nom de la classe du service doit correspondre à son nom de fichier. Bien que PHP, contrairement à Java autorise des noms différents, le programme ici ne le permet pas.
-
-# Utilisation de Docker
-
-Vous pouvez utiliser XML TV Fr avec Docker. 
-
-Un fichier [Dockerfile](./Dockerfile) à la racine du projet vous permet d'installer et configurer XML TV Fr en une seule commande.
-
-## Construire l'image
-
-```bash
-docker build -t xmltvfr .
-```
-
-## Volume de sortie
-
-Pour récupérer le fichier xml, zip, gz vous devez monter un volume de sortie de type `bind mount`
-
-Commencez par céer un répertoir cible par exemple `/tmp/output`
-
-Utilisez ensuite l'option `-v` pour monter le volume avec le répertoir de destination du fichier XML lors du lancement du script. 
-
-Voir [Lancer le script avec Docker](#lancer-le-script-avec-docker) juste en dessous
-
-## Lancer le script avec Docker
-
-```bash
-docker run -v /tmp/output:/var/export xmltvfr
-```
-
-Après avoir lancé cette commande, vous retrouverez vos fichiers dans le répertoire `/tmp/output` de la machine hôte.
