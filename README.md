@@ -5,7 +5,10 @@ XML TV Fr est un service permettant de récupérer un guide des programmes au fo
 Site web et documentation : https://xmltvfr.fr/
 
 
-# Prérequis
+# Installation
+
+## Natif
+Pour installer XML TV Fr, vous devez posséder:
 
 PHP >=8.0 avec les extensions
  - curl
@@ -13,8 +16,23 @@ PHP >=8.0 avec les extensions
  - mbstring
  - xml
  - json
+
+Ainsi que Composer.
  
 Un `composer install` est requis pour utiliser le script.  
+
+## Utilisation de Docker
+
+Vous pouvez utiliser XML TV Fr avec Docker.
+
+Un fichier [Dockerfile](./Dockerfile) à la racine du projet vous permet d'installer et configurer XML TV Fr en une seule commande.
+
+### Construire l'image
+Pour construire l'image, tapez la commande:
+```bash
+docker build -t xmltvfr .
+```
+Note: Cette commande doit être lancée après chaque mise à jour de XML TV Fr.
 
 # Configuration
 
@@ -30,6 +48,7 @@ La structure d'un item se fait comme ceci :
 Les champs name, icon, alias et priority sont optionnels. 
 Le champ priority donne un ordre de priorité différent de celui par défaut en indiquant les noms des services (nom des classes dans le dossier classes). Dans l'exemple, Service1 sera appelé en premier et Service2 ne sera appelé que si Service1 échoue. Par exemple si on met en priorité Télérama puis Orange, Télérama sera lancé. Si aucun programme n'est trouvé sur Télérama, Orange est lancé, sinon on continue. Si aucun programme n'est trouvé sur tous les services, la chaine est indiquée HS pour le jour concerné.
 Le champ alias permet de donner un ID alternatif à une chaine que celui renseigné par défaut. Si le champ est absent, c'est l'ID par défaut renseigné dans XML TV Fr qui sera affiché.
+
 ## Configuration du programme (config/config.json)
 
 Le fichier config.json est au format JSON. 
@@ -53,11 +72,20 @@ Le fichier config.json est au format JSON.
 ```
 
 # Lancer le script
+## Natif
 Pour démarrer la récupération du guide des programmes, lancez cette commande dans votre terminal (dans le dossier du programme).
 ```shell
 php manager.php export
 ```
+## Docker
+Pour récupérer votre XML, tapez la commande:
+```bash
+docker run -v ./var/export:/app/var/export -v ./config/:/app/config xmltvfr
+```
+Vous pouvez remplacer **./var/export** par le dossier de sortie que vous souhaitez.
+
 # Générer le fichier channels.json
+
 Il est possible de générer depuis votre navigateur le fichier channels.json. Pour cela, placez vous dans le dossier de travail du programme et lancez cette commande
 
 Note : Cette option sera supprimée dans de futures versions.
@@ -67,11 +95,15 @@ php -S localhost:8080 -t tools
 Note : le port 8080 peut être changé par un autre.
 
 Ouvrez ensuite dans votre navigateur http://localhost:8080/ (port à modifier en fonction de celui indiqué dans la commande au dessus).
+
 # Sortie
 
 ## Logs
+
 Les logs sont stockés dans le dossier logs au format JSON. Les derniers logs sont accessibles via le navigateur à l'adresse http://localhost:8080/logs.php (à condition d'avoir lancé la commande précédente).
+
 ## XML TV
+
 Les fichiers de sorties XML sont stockés dans le dossier xmltv au format XML, ZIP et GZ.
 Cette commande indiquera si le dernier fichier XML généré est valide.
 
@@ -109,4 +141,3 @@ Exemple :
 ```
 
 Attention, le nom de la classe du service doit correspondre à son nom de fichier. Bien que PHP, contrairement à Java autorise des noms différents, le programme ici ne le permet pas.
-
