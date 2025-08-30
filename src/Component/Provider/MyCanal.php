@@ -93,7 +93,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             $url = $program['URLPage'];
             $promises[] = $this->client->getAsync($url)->then(function ($response) use (&$programList, $index) {
                 $detail = json_decode($response->getBody()->getContents(), true);
-                $programList[$index]['title'] = @$detail['tracking']['dataLayer']['content_title'] ?? $programList[$index]['title'] ?? 'Aucun titre';
+                $programList[$index]['title'] = @$detail['detail']['informations']['title'] ?? $programList[$index]['title'] ?? 'Aucun titre';
                 $programList[$index]['subTitle'] = @$detail['episodes']['contents'][0]['subtitle'] ?? $programList[$index]['subTitle'];
                 $programList[$index]['description'] = @$detail['episodes']['contents'][0]['summary'] ?? @$detail['detail']['informations']['summary'];
                 $programList[$index]['season'] = @$detail['detail']['selectedEpisode']['seasonNumber'];
