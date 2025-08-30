@@ -2774,5 +2774,13 @@
   "Polynesie1.fr": {
     "id": 200046,
     "region": "pf"
+  },
+  "T18.fr": {
+    "id": 1167,
+    "region": "fr"
+  },
+  "NOVO19.fr": {
+    "id": 1168,
+    "region": "fr"
   }
 }
