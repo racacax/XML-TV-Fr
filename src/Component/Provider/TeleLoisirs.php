@@ -94,7 +94,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                 } else {
                     $tag = 'guest';
                 }
-                if (!isset($detailJson)) {
+                if (!isset($detailJson) && ($this->enableDetails || $tag != 'guest')) {
                     $program->addCredit($name, $tag);
                 }
                 $synopsis .= $name . " ($role), ";

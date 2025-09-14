@@ -119,7 +119,9 @@ class Telerama extends AbstractProvider implements ProviderInterface
                             $libelle = 'director';
                         }
                     }
-                    $program->addCredit($intervenant['prenom'] . ' ' . $intervenant['nom'] . $role, $libelle);
+                    if ($this->enableDetails || $libelle != 'guest') {
+                        $program->addCredit($intervenant['prenom'] . ' ' . $intervenant['nom'] . $role, $libelle);
+                    }
                 }
                 $keys = array_keys($intervenants);
                 for ($i = 0; $i < count($intervenants); $i++) {

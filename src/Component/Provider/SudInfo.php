@@ -130,7 +130,10 @@ class SudInfo extends AbstractProvider implements ProviderInterface
             if (isset($cast['role'])) {
                 $str .= ' ('.$cast['role'].')';
             }
-            $programObj->addCredit($str, $this->getCreditFromCastFunction(@($cast['castFunction'] ?? [])['name'] ?? ''));
+            $castFunction = @($cast['castFunction'] ?? [];
+            if ($this->enableDetails || $castFunction != 'guest') {
+                $programObj->addCredit($str, $this->getCreditFromCastFunction($castFunction)['name'] ?? ''));
+            }
         }
 
     }
