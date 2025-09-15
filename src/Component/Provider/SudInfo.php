@@ -132,7 +132,7 @@ class SudInfo extends AbstractProvider implements ProviderInterface
             }
             $castFunction = @$cast['castFunction']['name'] ?? '';
             $credit = $this->getCreditFromCastFunction($castFunction);
-            if ($credit !== 'guest') {
+            if ($this->enableDetails || $credit !== 'guest') {
                 $programObj->addCredit($str, $credit);
             }
         }
