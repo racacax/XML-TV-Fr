@@ -20,7 +20,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
     private static $PAGE = 1;
     private bool $enableDetails;
 
-    public function __construct(Client $client, ?float $priority = null)
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_telerama.json'), $priority ?? 0.80);
         $this->enableDetails = $extraParam['telerama_enable_details'] ?? true;

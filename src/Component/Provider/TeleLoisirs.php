@@ -14,7 +14,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
 {
     private bool $enableDetails;
 
-    public function __construct(Client $client, ?float $priority = null)
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_teleloisirs.json'), $priority ?? 0.6);
         $this->enableDetails = $extraParam['teleloisirs_enable_details'] ?? true;
