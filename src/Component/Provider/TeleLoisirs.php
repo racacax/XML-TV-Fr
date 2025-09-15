@@ -12,9 +12,12 @@ use racacax\XmlTv\ValueObject\Program;
 
 class TeleLoisirs extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(Client $client, ?float $priority = null)
+    private bool $enableDetails;
+
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_teleloisirs.json'), $priority ?? 0.6);
+        $this->enableDetails = $extraParam['teleloisirs_enable_details'] ?? true;
     }
 
     public function constructEPG(string $channel, string $date): Channel | bool
@@ -94,7 +97,7 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                 } else {
                     $tag = 'guest';
                 }
-                if (!isset($detailJson)) {
+                if (!isset($detailJson) && ($this->enableDetails || $tag != 'guest')) {
                     $program->addCredit($name, $tag);
                 }
                 $synopsis .= $name . " ($role), ";

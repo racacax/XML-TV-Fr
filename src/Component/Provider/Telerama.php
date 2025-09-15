@@ -18,10 +18,12 @@ class Telerama extends AbstractProvider implements ProviderInterface
     private static $HOST = 'http://api.telerama.fr';
     private static $NB_PAGE = '800000';
     private static $PAGE = 1;
+    private bool $enableDetails;
 
-    public function __construct(Client $client, ?float $priority = null)
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_telerama.json'), $priority ?? 0.80);
+        $this->enableDetails = $extraParam['telerama_enable_details'] ?? true;
     }
     public function signature($url)
     {
@@ -119,7 +121,9 @@ class Telerama extends AbstractProvider implements ProviderInterface
                             $libelle = 'director';
                         }
                     }
-                    $program->addCredit($intervenant['prenom'] . ' ' . $intervenant['nom'] . $role, $libelle);
+                    if ($this->enableDetails || $libelle != 'guest') {
+                        $program->addCredit($intervenant['prenom'] . ' ' . $intervenant['nom'] . $role, $libelle);
+                    }
                 }
                 $keys = array_keys($intervenants);
                 for ($i = 0; $i < count($intervenants); $i++) {
