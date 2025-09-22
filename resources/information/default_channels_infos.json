@@ -25,7 +25,7 @@
   },
   "6ter.fr": {
     "name": "6ter",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/367\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/0/07/6ter.png"
   },
   "8MontBlanc.fr": {
     "name": "8 Mont Blanc",
@@ -233,7 +233,7 @@
   },
   "Arte.fr": {
     "name": "Arte",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/330\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Arte_Logo_2017.svg/103px-Arte_Logo_2017.svg.png"
   },
   "AsongaTV.af": {
     "name": "Asonga TV",
@@ -301,7 +301,7 @@
   },
   "BFMTV.fr": {
     "name": "BFM TV",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/368\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/9/96/Logo_de_BFM_TV.jpg"
   },
   "BLUEZOOM.ch": {
     "name": "blue Zoom fr",
@@ -1022,7 +1022,7 @@
   },
   "Cherie25.fr": {
     "name": "Ch\u00e9rie 25",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/371\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Ch%C3%A9rie_25_2015_logo.svg/600px-Ch%C3%A9rie_25_2015_logo.svg.png?uselang=fr"
   },
   "CheriflaTV.af": {
     "name": "CHERIFLA TV",
@@ -1594,7 +1594,7 @@
   },
   "France2.fr": {
     "name": "France 2",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/342\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/France_2_2018.svg/960px-France_2_2018.svg.png"
   },
   "France2UHD.fr": {
     "name": "France 2 UHD",
@@ -1602,7 +1602,7 @@
   },
   "France24.fr": {
     "name": "France 24",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/147\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/fr/thumb/2/24/Logos_FRANCE24_RVB_2013.svg/141px-Logos_FRANCE24_RVB_2013.svg.png"
   },
   "France24En.fr": {
     "name": "France 24 En",
@@ -1614,7 +1614,7 @@
   },
   "France3.fr": {
     "name": "France 3",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/58\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/France_3_2018.svg/langfr-250px-France_3_2018.svg.png"
   },
   "France3Alpes.fr": {
     "name": "France 3 - Alpes",
@@ -1730,11 +1730,11 @@
   },
   "France4.fr": {
     "name": "France 4",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/288\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/France_4_2018.svg/512px-France_4_2018.svg.png"
   },
   "France5.fr": {
     "name": "France 5",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/80\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/France_5_2018.svg/langfr-250px-France_5_2018.svg.png"
   },
   "FranceCulture.fr": {
     "name": "France Culture",
@@ -1822,7 +1822,7 @@
   },
   "Gulli.fr": {
     "name": "Gulli",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/270\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Gulli_logo_2023.png/960px-Gulli_logo_2023.png"
   },
   "Guyane1.fr": {
     "name": "Guyane 1\u00e8re",
@@ -2006,7 +2006,7 @@
   },
   "LCI.fr": {
     "name": "LCI",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/462\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/fr/thumb/3/38/LCI_-_Logo_%28Ao%C3%BBt_2017%29.svg/620px-LCI_-_Logo_%28Ao%C3%BBt_2017%29.svg.png"
   },
   "LCM.fr": {
     "name": "LCM",
@@ -2026,7 +2026,7 @@
   },
   "LEquipe21.fr": {
     "name": "La chaine l\u2019\u00c9quipe",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/373\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/La_cha%C3%AEne_l%27Equipe_-_logo_2016.png/960px-La_cha%C3%AEne_l%27Equipe_-_logo_2016.png"
   },
   "LFMTV.ch": {
     "name": "CARAC 3 HD",
@@ -2106,7 +2106,7 @@
   },
   "M6.fr": {
     "name": "M6",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/312\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Logo_M6_%282020%2C_fond_clair%29.svg/512px-Logo_M6_%282020%2C_fond_clair%29.svg.png"
   },
   "M6Boutique.fr": {
     "name": "M6 Boutique",
@@ -2542,7 +2542,7 @@
   },
   "Numero23.fr": {
     "name": "RMC STORY",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/376\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/fr/thumb/3/3e/RMC_Story_logo_2018.svg/572px-RMC_Story_logo_2018.svg.png"
   },
   "OCSChoc.ch": {
     "name": "OCS Choc (Suisse)",
@@ -2870,7 +2870,7 @@
   },
   "RMCDecouverte.fr": {
     "name": "RMC D\u00e9couverte",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/380\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_RMC_D%C3%A9couverte_2017.svg/512px-Logo_RMC_D%C3%A9couverte_2017.svg.png?uselang=fr"
   },
   "RMCSport1.fr": {
     "name": "RMC Sport 1",
@@ -3445,11 +3445,11 @@
   },
   "TF1.fr": {
     "name": "TF1",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/308\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Logo_TF1_2013.svg/512px-Logo_TF1_2013.svg.png"
   },
   "TF1SeriesFilms.fr": {
     "name": "TF1 S\u00e9ries-Films",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/372\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/fr/thumb/4/4b/TF1_S%C3%A9ries_Films_logo_2020.svg/512px-TF1_S%C3%A9ries_Films_logo_2020.svg.png"
   },
   "TF1plus1.fr": {
     "name": "TF1 + 1",
@@ -3501,7 +3501,7 @@
   },
   "TMC.fr": {
     "name": "TMC",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/383\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/fr/thumb/a/a8/TMC_logo_2016.svg/512px-TMC_logo_2016.svg.png"
   },
   "TMCplus1.fr": {
     "name": "TMC + 1",
@@ -4021,7 +4021,7 @@
   },
   "W9.fr": {
     "name": "W9",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/268\/icon320_light.png?v2023_48_0"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/W9_2018.svg/512px-W9_2018.svg.png"
   },
   "WALFTV.sn": {
     "name": "WALFTV",
