@@ -25,7 +25,7 @@
   },
   "6ter.fr": {
     "name": "6ter",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/367\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/367\/icon320_light.png?v2023_48_0"
   },
   "8MontBlanc.fr": {
     "name": "8 Mont Blanc",
@@ -233,7 +233,7 @@
   },
   "Arte.fr": {
     "name": "Arte",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/330\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/330\/icon320_light.png?v2023_48_0"
   },
   "AsongaTV.af": {
     "name": "Asonga TV",
@@ -301,11 +301,11 @@
   },
   "BFMTV.fr": {
     "name": "BFM TV",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/368\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/368\/icon320_light.png?v2023_48_0"
   },
   "BLUEZOOM.ch": {
     "name": "blue Zoom fr",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/517\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/517\/icon320_light.png?v2023_48_0"
   },
   "BNNB.ca": {
     "name": "BNNB",
@@ -393,7 +393,7 @@
   },
   "C8.ch": {
     "name": "C8",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/321\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/321\/icon320_light.png?v2023_48_0"
   },
   "C8.fr": {
     "name": "C8",
@@ -405,7 +405,7 @@
   },
   "CANALALPHANE.ch": {
     "name": "Canal Alpha Neuch\u00e2tel",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/299\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/299\/icon320_light.png?v2023_48_0"
   },
   "CANALQ.pt": {
     "name": "CANALQ",
@@ -747,7 +747,7 @@
   },
   "CStar.ch": {
     "name": "CSTAR",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/422\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/422\/icon320_light.png?v2023_48_0"
   },
   "CStar.fr": {
     "name": "CStar",
@@ -786,7 +786,7 @@
   },
   "Canal9.fr": {
     "name": "Canal9",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/408\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/408\/icon320_light.png?v2023_48_0"
   },
   "CanalC.be": {
     "name": "CanalC",
@@ -1442,7 +1442,7 @@
   },
   "Euronews.fr": {
     "name": "Euronews",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/196\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/196\/icon320_light.png?v2023_48_0"
   },
   "Eurosport1.fr": {
     "name": "Eurosport 1",
@@ -1594,7 +1594,7 @@
   },
   "France2.fr": {
     "name": "France 2",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/342\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/342\/icon320_light.png?v2023_48_0"
   },
   "France2UHD.fr": {
     "name": "France 2 UHD",
@@ -1602,7 +1602,7 @@
   },
   "France24.fr": {
     "name": "France 24",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/147\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/147\/icon320_light.png?v2023_48_0"
   },
   "France24En.fr": {
     "name": "France 24 En",
@@ -1614,7 +1614,7 @@
   },
   "France3.fr": {
     "name": "France 3",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/58\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/58\/icon320_light.png?v2023_48_0"
   },
   "France3Alpes.fr": {
     "name": "France 3 - Alpes",
@@ -1730,11 +1730,11 @@
   },
   "France4.fr": {
     "name": "France 4",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/288\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/288\/icon320_light.png?v2023_48_0"
   },
   "France5.fr": {
     "name": "France 5",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/80\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/80\/icon320_light.png?v2023_48_0"
   },
   "FranceCulture.fr": {
     "name": "France Culture",
@@ -1822,7 +1822,7 @@
   },
   "Gulli.fr": {
     "name": "Gulli",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/270\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/270\/icon320_light.png?v2023_48_0"
   },
   "Guyane1.fr": {
     "name": "Guyane 1\u00e8re",
@@ -1886,7 +1886,7 @@
   },
   "I24news.fr": {
     "name": "i24 news",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/449\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/449\/icon320_light.png?v2023_48_0"
   },
   "ICIARTV.ca": {
     "name": "ICI ARTV",
@@ -1990,7 +1990,7 @@
   },
   "KTO.fr": {
     "name": "KTO",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/458\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/458\/icon320_light.png?v2023_48_0"
   },
   "KZTV.fr": {
     "name": "KZTV",
@@ -2006,7 +2006,7 @@
   },
   "LCI.fr": {
     "name": "LCI",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/462\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/462\/icon320_light.png?v2023_48_0"
   },
   "LCM.fr": {
     "name": "LCM",
@@ -2026,11 +2026,11 @@
   },
   "LEquipe21.fr": {
     "name": "La chaine l\u2019\u00c9quipe",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/373\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/373\/icon320_light.png?v2023_48_0"
   },
   "LFMTV.ch": {
     "name": "CARAC 3 HD",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/520\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/520\/icon320_light.png?v2023_48_0"
   },
   "LIBIDOTV.af": {
     "name": "LIBIDOTV",
@@ -2074,7 +2074,7 @@
   },
   "LaTele.ch": {
     "name": "La T\u00e9l\u00e9",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/297\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/297\/icon320_light.png?v2023_48_0"
   },
   "LaTrois.be": {
     "name": "La Trois",
@@ -2090,7 +2090,7 @@
   },
   "LemanBleu.ch": {
     "name": "L\u00e9man Bleu",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/296\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/296\/icon320_light.png?v2023_48_0"
   },
   "LibidoTV.fr": {
     "name": "LibidoTV",
@@ -2106,7 +2106,7 @@
   },
   "M6.fr": {
     "name": "M6",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/312\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/312\/icon320_light.png?v2023_48_0"
   },
   "M6Boutique.fr": {
     "name": "M6 Boutique",
@@ -2450,7 +2450,7 @@
   },
   "NRJ12.fr": {
     "name": "NRJ12",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/374\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/374\/icon320_light.png?v2023_48_0"
   },
   "NRJHits.fr": {
     "name": "NRJ Hits",
@@ -2542,7 +2542,7 @@
   },
   "Numero23.fr": {
     "name": "RMC STORY",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/376\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/376\/icon320_light.png?v2023_48_0"
   },
   "OCSChoc.ch": {
     "name": "OCS Choc (Suisse)",
@@ -2590,7 +2590,7 @@
   },
   "ONETV.ch": {
     "name": "CARAC 2 CH HD",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/521\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/521\/icon320_light.png?v2023_48_0"
   },
   "ORTB.bj": {
     "name": "ORTB",
@@ -2870,7 +2870,7 @@
   },
   "RMCDecouverte.fr": {
     "name": "RMC D\u00e9couverte",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/380\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/380\/icon320_light.png?v2023_48_0"
   },
   "RMCSport1.fr": {
     "name": "RMC Sport 1",
@@ -3086,11 +3086,11 @@
   },
   "RTSDeux.ch": {
     "name": "RTS Deux",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/305\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/305\/icon320_light.png?v2023_48_0"
   },
   "RTSUn.ch": {
     "name": "RTS Un",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/331\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/331\/icon320_light.png?v2023_48_0"
   },
   "RWD.ca": {
     "name": "RWD",
@@ -3126,7 +3126,7 @@
   },
   "RougeTV.ch": {
     "name": "CARAC 1 HD",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/365\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/365\/icon320_light.png?v2023_48_0"
   },
   "RwandaTV.af": {
     "name": "RwandaTV",
@@ -3289,11 +3289,11 @@
   },
   "SRF1.ch": {
     "name": "SRF 1",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/303\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/303\/icon320_light.png?v2023_48_0"
   },
   "SRF2.ch": {
     "name": "SRF zwei",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/304\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/304\/icon320_light.png?v2023_48_0"
   },
   "SSCR.ca": {
     "name": "SSCR",
@@ -3329,7 +3329,7 @@
   },
   "Sat1.de": {
     "name": "Sat.1",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/360\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/360\/icon320_light.png?v2023_48_0"
   },
   "SavaneTV.af": {
     "name": "SavaneTV",
@@ -3445,11 +3445,11 @@
   },
   "TF1.fr": {
     "name": "TF1",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/308\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/308\/icon320_light.png?v2023_48_0"
   },
   "TF1SeriesFilms.fr": {
     "name": "TF1 S\u00e9ries-Films",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/372\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/372\/icon320_light.png?v2023_48_0"
   },
   "TF1plus1.fr": {
     "name": "TF1 + 1",
@@ -3501,7 +3501,7 @@
   },
   "TMC.fr": {
     "name": "TMC",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/383\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/383\/icon320_light.png?v2023_48_0"
   },
   "TMCplus1.fr": {
     "name": "TMC + 1",
@@ -3601,7 +3601,7 @@
   },
   "TV5Monde.fr": {
     "name": "TV5 Monde",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/61\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/61\/icon320_light.png?v2023_48_0"
   },
   "TV5MondeAfrique.fr": {
     "name": "TV5 Monde Afrique",
@@ -4021,7 +4021,7 @@
   },
   "W9.fr": {
     "name": "W9",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/268\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/268\/icon320_light.png?v2023_48_0"
   },
   "WALFTV.sn": {
     "name": "WALFTV",
@@ -4141,7 +4141,7 @@
   },
   "ZDF.de": {
     "name": "ZDF",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/306\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/306\/icon320_light.png?v2023_48_0"
   },
   "ZESHD.ca": {
     "name": "ZESHD",
@@ -4241,47 +4241,47 @@
   },
   "CARAC4.ch": {
     "name": "CARAC4",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/527\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/527\/icon320_light.png?v2023_48_0"
   },
   "CanalAlphaJura.ch": {
     "name": "Canal Alpha Jura",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/525\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/525\/icon320_light.png?v2023_48_0"
   },
   "TVM3.ch": {
     "name": "TVM3",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/385\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/385\/icon320_light.png?v2023_48_0"
   },
   "franceinfo.fr": {
     "name": "franceinfo",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/437\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/437\/icon320_light.png?v2023_48_0"
   },
   "TV5.ch": {
     "name": "TV5",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/507\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/507\/icon320_light.png?v2023_48_0"
   },
   "beCuriousTV.ch": {
     "name": "beCuriousTV",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/402\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/402\/icon320_light.png?v2023_48_0"
   },
   "3Plus.ch": {
     "name": "3+",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/350\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/350\/icon320_light.png?v2023_48_0"
   },
   "SRFinfo.ch": {
     "name": "SRF info",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/5\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/5\/icon320_light.png?v2023_48_0"
   },
   "DasErste.de": {
     "name": "Das Erste",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/309\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/309\/icon320_light.png?v2023_48_0"
   },
   "RTL.de": {
     "name": "RTL",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/356\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/356\/icon320_light.png?v2023_48_0"
   },
   "ProSiebenSchweiz.ch": {
     "name": "ProSieben Schweiz",
-    "icon": "https:\/\/www.teleboy.ch\/assets\/stations\/354\/icon320_light.png?v2023_48_0"
+    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/354\/icon320_light.png?v2023_48_0"
   },
   "DisneyPlus.fr": {
     "name": "Disney+",
