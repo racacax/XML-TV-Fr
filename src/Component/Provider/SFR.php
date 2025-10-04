@@ -69,7 +69,7 @@ class SFR extends AbstractProvider implements ProviderInterface
                 $csa = 'Tout public';
             }
             $programObj = Program::withTimestamp($program['startDate'] / 1000, $program['endDate'] / 1000);
-            $programObj->addTitle($program['title'] ?? '');
+            $programObj->addTitle($program['eventName'] ?? $program['title'] ?? '');
             $programObj->addSubtitle(@$program['subTitle']);
             $programObj->setEpisodeNum(@$program['seasonNumber'], @$program['episodeNumber']);
             $programObj->addDesc(@$program['description']);
