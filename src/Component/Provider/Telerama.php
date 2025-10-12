@@ -12,24 +12,18 @@ use racacax\XmlTv\ValueObject\Program;
 
 class Telerama extends AbstractProvider implements ProviderInterface
 {
-    private static $API_CLE = 'apitel-g4aatlgif6qzf'; // apitel-5304b49c90511
-    private static $HASH_KEY = 'uIF59SZhfrfm5Gb'; // Eufea9cuweuHeif
-    private static $APPAREIL = 'android_tablette';
-    private static $HOST = 'http://api.telerama.fr';
-    private static $NB_PAGE = '800000';
-    private static $PAGE = 1;
+    private static string $HOST = 'https://apps.telerama.fr/tlr/v1/free-android-phone/';
+    private static string $USER_AGENT = 'TLR/4.11 (free; fr; ABTest 322) Android/13/33 (tablet; Galaxy Tab S6 Samsung Device)';
+    private bool $enableDetails;
 
-    public function __construct(Client $client, ?float $priority = null)
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_telerama.json'), $priority ?? 0.80);
-    }
-    public function signature($url)
-    {
-        foreach (['=', '?', '&'] as $char) {
-            $url = str_replace($char, '', $url);
+        if (isset($extraParam['telerama_enable_details'])) {
+            $this->enableDetails = $extraParam['telerama_enable_details'];
+        } else {
+            $this->enableDetails = true;
         }
-
-        return hash_hmac('sha1', $url, self::$HASH_KEY);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_telerama.json'), $priority ?? 0.4);
     }
 
     public function constructEPG(string $channel, string $date): Channel | bool
@@ -38,128 +32,101 @@ class Telerama extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
+        $channelId = $this->getChannelsList()[$channel];
 
-        $contentDayBefore = $this->getContentFromURL($this->generateUrl($channelObj, (new \DateTimeImmutable($date))->modify('-1 day')));
-        $content = $this->getContentFromURL($this->generateUrl($channelObj, new \DateTimeImmutable($date)));
+        $contentDayBefore = $this->getContentFromURL($this->generateUrl((new \DateTimeImmutable($date))->modify('-1 day')), ['User-Agent: '.self::$USER_AGENT]);
+        $content = $this->getContentFromURL($this->generateUrl(new \DateTimeImmutable($date)), ['User-Agent: '.self::$USER_AGENT]);
         $jsonDayBefore = json_decode($contentDayBefore, true);
         $json = json_decode($content, true);
 
-        if (!isset($json['donnees'])) {
-            return false;
-        }
-        if (!empty($jsonDayBefore['donnees'])) {
-            $json['donnees'] = array_merge($jsonDayBefore['donnees'], $json['donnees']);
-        }
-        [$minDate, $maxDate] = $this->getMinMaxDate($date);
-        foreach ($json['donnees'] as $donnee) {
-            $startDate = new \DateTimeImmutable('@'.strtotime($donnee['horaire']['debut']));
-            if ($startDate < $minDate) {
-                continue;
-            } elseif ($startDate > $maxDate) {
-                break;
-            }
-            $program = Program::withTimestamp(strtotime($donnee['horaire']['debut']), strtotime($donnee['horaire']['fin']));
-            $descri = $donnee['resume'];
-            if (isset($donnee['serie'])) {
-                $descri = 'Saison ' . $donnee['serie']['saison'] . ' Episode ' . $donnee['serie']['numero_episode'] . chr(10) . $descri;
-                $program->setEpisodeNum($donnee['serie']['saison'], $donnee['serie']['numero_episode']);
-            }
-            if (isset($donnee['soustitre']) && !empty($donnee['soustitre'])) {
-                $program->addSubtitle($donnee['soustitre']);
-            }
-            if (isset($donnee['vignettes']['grande169'])) {
-                $program->setIcon($donnee['vignettes']['grande169']);
-            }
-            if (isset($donnee['critique'])) {
-                $descri .= chr(10) . $donnee['critique'];
-            }
-            if (isset($donnee['annee_realisation'])) {
-                $descri .= chr(10) . 'Année de réalisation : ' . $donnee['annee_realisation'];
-            }
-            $descri = str_replace('<P>', '', $descri);
-            $descri = str_replace('</P>', '', $descri);
-            $descri = str_replace('<I>', '', $descri);
-            $descri = str_replace('</I>', '', $descri);
+        $channelPrograms = array_merge(@$jsonDayBefore['channels'][$channelId]['broadcasts'] ?? [], @$json['channels'][$channelId]['broadcasts'] ?? []);
+        $count = count($channelPrograms);
+        foreach ($channelPrograms as $index => $program) {
+            $percent = round($index * 100 / $count, 2) . ' %';
+            $this->setStatus($percent);
+            [$minDate, $maxDate] = $this->getMinMaxDate($date);
+            $programStartDate = new \DateTimeImmutable('@'.strtotime($program['start_date']));
 
-            if (isset($donnee['intervenants'])) {
-                $intervenants = [];
-                foreach ($donnee['intervenants'] as $intervenant) {
-                    if (!$intervenant['libelle']) {
-                        $intervenant['libelle'] = 'Avec';
-                    }
-                    $intervenants[$intervenant['libelle']][] = $intervenant['prenom'] . ' ' . $intervenant['nom'];
-                    $libelle = 'guest';
-                    $role = '';
-                    if ($intervenant['libelle'] == 'Présentateur vedette' || $intervenant['libelle'] == 'Autre présentateur') {
-                        $libelle = 'presenter';
-                    }
-                    if ($intervenant['libelle'] == 'Acteur') {
-                        $libelle = 'actor';
-                        if ($intervenant['role'] == '') {
-                            $role = ' (' . $intervenant['role'] . ')';
-                        }
-                    }
-                    if ($intervenant['libelle'] == 'Réalisateur') {
-                        $libelle = 'director';
-                    }
-                    if ($intervenant['libelle'] == 'Scénariste' || $intervenant['libelle'] == 'Origine Scénario' || $intervenant['libelle'] == 'Scénario') {
-                        $libelle = 'writer';
-                    }
-                    if ($intervenant['libelle'] == 'Créateur') {
-                        $libelle = 'editor';
-                    }
-                    if ($intervenant['libelle'] == 'Musique') {
-                        $libelle = 'composer';
-                    }
-                    if ($intervenant['libelle'] == '') {
-                        if ($intervenant['role'] != '') {
-                            $libelle = 'actor';
-                            $role = ' (' . $intervenant['role'] . ')';
-                        } else {
-                            $libelle = 'director';
-                        }
-                    }
-                    $program->addCredit($intervenant['prenom'] . ' ' . $intervenant['nom'] . $role, $libelle);
-                }
-                $keys = array_keys($intervenants);
-                for ($i = 0; $i < count($intervenants); $i++) {
-                    $int = '';
-                    $a = $intervenants[$keys[$i]];
-                    $b = '';
-                    foreach ($a as $intervenant) {
-                        $int = $int . $b . $intervenant;
-                        $b = ', ';
-                    }
-                    $descri .= chr(10) . $keys[$i] . ' : ' . $int;
-                }
+            if ($programStartDate < $minDate) {
+                continue;
+            } elseif ($programStartDate > $maxDate) {
+                return $channelObj;
             }
-            $program->addTitle($donnee['titre']);
-            $program->addDesc(!empty($descri) ? $descri : 'Pas de description');
-            $program->addCategory($donnee['genre_specifique']);
-            if ($donnee['csa'] == 'TP') {
-                $rating = 'Tout public';
-            } else {
-                $rating = '-'.$donnee['csa'];
-            }
-            $program->setRating($rating);
-            $channelObj->addProgram($program);
+            $channelObj->addProgram($this->generateProgram($program));
         }
 
         return $channelObj;
     }
 
-    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    private function generateProgram(array $program): Program
+    {
+        $programObj = Program::withTimestamp(strtotime($program['start_date']), strtotime($program['end_date']));
+        $programObj->addTitle($program['title'] ?? 'Aucun titre');
+        $programObj->addCategory(ucfirst($program['type'] ?? 'Aucune catégorie'));
+        $img = $program['illustration']['url'];
+        if ($img) {
+            $img = str_replace('{{height}}', '720', str_replace('{{width}}', '1280', $img));
+            $programObj->setIcon($img);
+        }
+        foreach ([10,12,16,18] as $csaRating) {
+            if (in_array("moins-de-$csaRating", $program['flags'] ?? [])) {
+                $programObj->setRating($csaRating);
+            }
+        }
+        if ($this->enableDetails && !empty($program['deeplink'])) {
+            $this->assignDetails($programObj, $program['deeplink']);
+        }
+
+        return $programObj;
+    }
+
+    private function getElementValue(string $content, string $element)
+    {
+        preg_match('/<p class="sheet__info-item-label">'.$element.'<\/p>.*?<p class="sheet__info-item-value">(.*?)<\/p>/', $content, $matches);
+
+        return $matches[1];
+    }
+
+    private function assignDetails(Program $programObj, string $deeplink)
+    {
+
+        $details = @json_decode($this->getContentFromURL(self::$HOST.str_replace('tlrm://', '', $deeplink), ['User-Agent: '.self::$USER_AGENT]), true);
+        $content = @$details['templates']['raw_content']['content'];
+        if ($content) {
+            $season = $this->getElementValue($content, 'Saison');
+            $episode = explode('/', $this->getElementValue($content, 'Épisode') ?? '')[0];
+            if (!empty($season) || !empty($episode)) {
+                $programObj->setEpisodeNum($season, $episode);
+            }
+            preg_match('/<p class="sheet__synopsis-content">(.*?)<\/p>/', $content, $synopsis);
+            $synopsis = $synopsis[1];
+            $programObj->addDesc($synopsis);
+            preg_match('/<p class="article__page-subtitle">(.*?)<\/p>/', $content, $subtitle);
+            $subtitle = $subtitle[1];
+            $programObj->addSubtitle($subtitle);
+            $subtitle2 = $this->getElementValue($content, 'Titre de l’épisode');
+            $programObj->addSubtitle($subtitle2);
+            $scenario = $this->getElementValue($content, 'Scénario');
+            $programObj->addCredit($scenario, 'writer');
+            $director = $this->getElementValue($content, 'Réalisateur');
+            $programObj->addCredit($director, 'director');
+            $genre = $this->getElementValue($content, 'Genre');
+            $presenter = $this->getElementValue($content, 'Présentateur');
+            $programObj->addCredit($presenter, 'presenter');
+            $programObj->addCategory($genre);
+            preg_match_all('/<p class="sheet__info-item-label sheet__info-item-label--casting">(.*?)<\/p>.*?<p class="sheet__info-item-value">(.*?)<\/p>/', $content, $casting);
+            for ($i = 0; $i < count($casting[0]); $i++) {
+                $programObj->addCredit($casting[1][$i].' ('.$casting[2][$i].')', 'actor');
+            }
+        }
+    }
+
+    public function generateUrl(\DateTimeImmutable $date): string
     {
         $url = sprintf(
-            '/v1/programmes/grille?appareil=%s&date=%s&id_chaines=%s&nb_par_page=%s&page=%s',
-            self::$APPAREIL,
+            'tv-program/grid?date=%s',
             $date->format('Y-m-d'),
-            $this->channelsList[$channel->getId()],
-            self::$NB_PAGE,
-            self::$PAGE
         );
-        $hash = self::signature($url);
-        $url .= '&api_cle=' .  self::$API_CLE . '&api_signature=' . $hash;
 
         return self::$HOST . $url;
     }
