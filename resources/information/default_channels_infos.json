@@ -391,14 +391,6 @@
     "name": "Business 24",
     "icon": "https:\/\/www.climate-chance.org\/wp-content\/uploads\/2020\/10\/business-24-logo.png"
   },
-  "C8.ch": {
-    "name": "C8",
-    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/321\/icon320_light.png?v2023_48_0"
-  },
-  "C8.fr": {
-    "name": "C8",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-445.png"
-  },
   "CANALALGERIE.af": {
     "name": "Canal Alg\u00e9rie",
     "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/fr\/4\/46\/Canal_Alg%C3%A9rie_Logo.png"
@@ -2448,10 +2440,6 @@
     "name": "NPO3",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTUgDc9lewSd7T-Pb7cX3zb9bv6y-T_vAJRQcyhDMAbsuH-ld0QIDVwJeVlBA&amp;s"
   },
-  "NRJ12.fr": {
-    "name": "NRJ12",
-    "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/374\/icon320_light.png?v2023_48_0"
-  },
   "NRJHits.fr": {
     "name": "NRJ Hits",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/21522999"
@@ -4427,10 +4415,6 @@
     "name": "MABOKE TV",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180973\/canal-ouah\/CHN43FB\/myCANAL_MABOKETV_640x4801"
   },
-  "C8.af": {
-    "name": "C8",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/70881913"
-  },
   "E.af": {
     "name": "E!",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180036\/canal-ouah\/CHN43FB\/ENTERTAINMENT_FB_myCANAL_640x480"
@@ -5299,10 +5283,6 @@
     "name": "NOVELAS TV",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/92753990"
   },
-  "C8.frdrom": {
-    "name": "C8",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/64697051"
-  },
   "W9.frdrom": {
     "name": "W9",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160140\/canal-ouah\/CHN43FB\/w9fb"
@@ -5314,10 +5294,6 @@
   "Tfx.frdrom": {
     "name": "TFX",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/66745742"
-  },
-  "Nrj12.frdrom": {
-    "name": "NRJ 12",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/21522998"
   },
   "Cstar.frdrom": {
     "name": "CSTAR",

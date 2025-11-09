@@ -1223,10 +1223,6 @@
     "id": 180116,
     "region": "bf"
   },
-  "C8.af": {
-    "id": 180120,
-    "region": "bf"
-  },
   "RTB.af": {
     "id": 180121,
     "region": "bf"
@@ -2311,10 +2307,6 @@
     "id": 160119,
     "region": "mg"
   },
-  "C8.frdrom": {
-    "id": 160120,
-    "region": "mg"
-  },
   "CanalPlusSport2Hd\t.frdrom": {
     "id": 160124,
     "region": "mg"
@@ -2409,10 +2401,6 @@
   },
   "TraceAfrica.frdrom": {
     "id": 160214,
-    "region": "mg"
-  },
-  "Nrj12.frdrom": {
-    "id": 160216,
     "region": "mg"
   },
   "Cstar.frdrom": {

@@ -43,10 +43,6 @@
     "id": 395,
     "name": "France 5"
   },
-  "C8.fr": {
-    "id": 448,
-    "name": "C8"
-  },
   "Arte.be": {
     "id": 467,
     "name": "Arte Belgique"
@@ -438,10 +434,6 @@
   "MezzoLiveHD.fr": {
     "id": 458,
     "name": "Mezzo Live HD"
-  },
-  "NRJ12.fr": {
-    "id": 592,
-    "name": "NRJ 12"
   },
   "NatGeoWild.fr": {
     "id": 519,
