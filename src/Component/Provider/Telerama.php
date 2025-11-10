@@ -63,6 +63,9 @@ class Telerama extends AbstractProvider implements ProviderInterface
         $programObj = Program::withTimestamp(strtotime($program['start_date']), strtotime($program['end_date']));
         $programObj->addTitle($program['title'] ?? 'Aucun titre');
         $programObj->addCategory(ucfirst($program['type'] ?? 'Aucune catégorie'));
+        if ($program['is_inedit']) {
+            $programObj->addCustomTag('premiere');
+        }
         $img = $program['illustration']['url'];
         if ($img) {
             $img = str_replace('{{height}}', '720', str_replace('{{width}}', '1280', $img));

@@ -37,6 +37,7 @@ class XmlFormatter
             $content[] = $this->buildIcon($program->getIcon());
             $content[] = $this->buildEpisodeNum($program->getEpisodeNum());
             $content[] = $this->buildPreviouslyShown($program->getPreviouslyShown());
+            $content[] = $this->buildCustomTags($program->getCustomTags());
             $content[] = $this->buildNew($program->getIsNew());
             $content[] = $this->buildRating($program->getRating());
             $content[] = '</programme>';
@@ -99,6 +100,24 @@ class XmlFormatter
         }
 
         return '';
+    }
+    private function buildCustomTags(array $customTags): string
+    {
+        $tags = '';
+        foreach ($customTags as $customTag) {
+            $attrs = $customTag['attrs'] ?? [];
+            $attrs_str = '';
+            foreach ($attrs as $attr) {
+                $attrs_str = $attr['key'].'="'.$attr['value'].'" '.$attrs_str;
+            }
+            if (!empty($customTag['value'])) {
+                $tags .= '<'.$customTag['name'].' '.$attrs_str.'>'.$customTag['value'].'</'.$customTag['name'].'>';
+            } else {
+                $tags .= '<'.$customTag['name'].' '.$attrs_str.'/>';
+            }
+        }
+
+        return $tags;
     }
 
     private function buildPreviouslyShown(?array $previouslyShown): string

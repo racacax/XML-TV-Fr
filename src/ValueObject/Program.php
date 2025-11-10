@@ -50,6 +50,8 @@ class Program
      */
     private ?array $previouslyShown;
 
+    private ?array $customTags;
+
 
     /**
      * Constructs a program with Unix timestamps as parameters
@@ -85,6 +87,7 @@ class Program
         $this->rating = null;
         $this->isNew = null;
         $this->previouslyShown = null;
+        $this->customTags = [];
     }
 
     public function getIsNew(): ?bool
@@ -99,6 +102,15 @@ class Program
     public function getPreviouslyShown(): ?array
     {
         return $this->previouslyShown;
+    }
+
+    public function addCustomTag(string $name, ?string $value = null, ?array $attrs = null): void
+    {
+        $this->customTags[] = ['name' => $name, 'value' => $value, 'attrs' => $attrs];
+    }
+    public function getCustomTags(): ?array
+    {
+        return $this->customTags;
     }
 
     public function setPreviouslyShown(bool $isPreviouslyShown, DateTime|DateTimeImmutable $start = null, ?string $channel = null): void
