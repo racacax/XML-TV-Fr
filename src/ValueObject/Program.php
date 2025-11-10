@@ -50,9 +50,6 @@ class Program
      */
     private ?array $previouslyShown;
 
-    /**
-     * @var array{name: string, value: string | null, attrs: array{key: string, value: string} | null} | null
-     */
     private ?array $customTags;
 
 
