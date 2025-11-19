@@ -101,6 +101,10 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                 $desc .= "\n";
             }
             $program->addDesc($desc);
+
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -145,7 +149,10 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                             $program
                         );
                         if ($this->enableDetails) {
-                            $this->addDetails($program, self::$BASE_URL.$links[1][$i]);
+                            $result = $this->addDetails($program, self::$BASE_URL.$links[1][$i]);
+                            if (!$result) {
+                                break;
+                            }
                             sleep(3);
                         }
                     }
