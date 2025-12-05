@@ -139,6 +139,9 @@ class Cogeco extends AbstractProvider implements ProviderInterface
             $program->setIcon('https:'.(str_replace('240x135', '1280x720', $img[1] ?? '')));
             $program->addCategory($programCategories[$index]);
             $program->addDesc($description[1] ?? 'Aucune description');
+            if (str_contains($content, '(NOUVEAU)')) {
+                $program->addCustomTag('premiere');
+            }
             $channelObj->addProgram($program);
         }
 

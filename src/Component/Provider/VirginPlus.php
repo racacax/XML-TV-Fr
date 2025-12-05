@@ -158,6 +158,9 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
                 if (@$program['episodeTitle']) {
                     $programObj->addSubtitle($program['episodeTitle']);
                 }
+                if ($program['new']) {
+                    $programObj->addCustomTag('premiere');
+                }
                 $rating = explode('-', $program['rating'] ?? '');
                 $rating = end($rating);
                 $ratingSystem = Utils::getCanadianRatingSystem($rating, $program['language']);

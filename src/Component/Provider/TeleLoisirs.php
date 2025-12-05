@@ -106,6 +106,12 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             $program->addCategory($genreFormat);
             $program->setIcon($img);
             $program->addDesc($synopsis);
+            if (str_contains($li, 'mainBroadcastCard-rebroadcast')) {
+                $program->setPreviouslyShown(true);
+            }
+            if (str_contains($li, 'mainBroadcastCard-new')) {
+                $program->addCustomTag('premiere');
+            }
 
             $channelObj->addProgram($program);
         }

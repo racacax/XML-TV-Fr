@@ -122,7 +122,7 @@ abstract class AbstractProvider
             // No error accepted
             return '';
         }
-        $content = $response->getBody()->getContents();
+        $content = html_entity_decode($response->getBody()->getContents(), ENT_QUOTES);
         $cache->setContent($content);
 
         return $content;
