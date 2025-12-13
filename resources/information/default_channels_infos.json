@@ -7790,5 +7790,13 @@
   "NOVO19.fr": {
     "name": "NOVO19",
     "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Logo_NOVO19_-_2025.svg/330px-Logo_NOVO19_-_2025.svg.png"
+  },
+  "CNewsPrime.fr": {
+    "name": "CNews Prime",
+    "icon": "https://thumb.canalplus.pro/http/unsafe/%7BresolutionXY%7D/filters:quality(%7BimageQualityPercentage%7D)/canalplus-cdn.canal-plus.io/p1/channel/1172/canal-ouah/CHN43FN/CHN43FN_1172_20251124-f2op"
+  },
+  "Europe1TV.fr": {
+    "name": "Europe 1 TV",
+    "icon": "https://wbo.s.woopic.com/magtv-bucket-wbo/media/Europe1TV.png"
   }
 }

@@ -19,6 +19,35 @@ class SFR extends AbstractProvider implements ProviderInterface
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_'.$file.'.json'), $priority ?? 0.85);
     }
 
+    private function fixBrokenJson(string $json): string
+    {
+        // Sometimes, SFR JSON is invalid and " are not escaped.
+        $fields = ['description', 'title', 'longSynopsis'];
+        foreach ($fields as $field) {
+            $json = preg_replace_callback(
+                '/("'.$field.'"\s*:\s*")(.+?)("(?=\s*[},]))/s',
+                function ($m) {
+                    $value = preg_replace('/(?<!\\\\)"/', '\\"', $m[2]);
+
+                    return $m[1] . $value . $m[3];
+                },
+                $json
+            );
+        }
+
+        return $json;
+    }
+
+    private function parseJSON(string $string): ?array
+    {
+        $parsed = json_decode($string, true);
+        if (!$parsed) {
+            $parsed = json_decode($this->fixBrokenJson($string), true);
+        }
+
+        return $parsed;
+    }
+
     public function constructEPG(string $channel, string $date): Channel|bool
     {
         $channelObj = parent::constructEPG($channel, $date);
@@ -30,10 +59,10 @@ class SFR extends AbstractProvider implements ProviderInterface
         $selectedDate = new \DateTimeImmutable($date);
         $contentDayBefore = $this->getContentFromURL($this->generateUrl($channelObj, $selectedDate->modify('-1 day')));
         $content = $this->getContentFromURL($this->generateUrl($channelObj, $selectedDate));
-        $jsonDayBefore = json_decode($contentDayBefore, true);
-        $json = json_decode($content, true);
+        $jsonDayBefore = $this->parseJSON($contentDayBefore);
+        $json = $this->parseJSON($content);
 
-        if ($json === false) {
+        if (!$json) {
             return false;
         }
         [$minDate, $maxDate] = $this->getMinMaxDate($date);

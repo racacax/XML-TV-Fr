@@ -17,11 +17,52 @@ use racacax\XmlTv\ValueObject\Program;
 
 class TV5Global extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(Client $client, ?float $priority = null)
+    private bool $enableDetails;
+    private static $HEADERS = [
+        'Host' => 'latina.tv5monde.com',
+        'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:146.0) Gecko/20100101 Firefox/146.0',
+        'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language' => 'fr-FR,fr-CA;q=0.8,en;q=0.5,en-US;q=0.3',
+        'Accept-Encoding' => 'gzip, deflate, br, zstd',
+        'Alt-Used' => 'latina.tv5monde.com',
+        'Connection' => 'keep-alive',
+        'Upgrade-Insecure-Requests' => '1',
+        'Sec-Fetch-Dest' => 'document',
+        'Sec-Fetch-Mode' => 'navigate',
+        'Sec-Fetch-Site' => 'none',
+        'Sec-Fetch-User' => '?1',
+        'Priority' => 'u=0, i'
+    ];
+    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_tv5global.json'), $priority ?? 0.6);
+
+        if (isset($extraParam['tv5global_enable_details'])) {
+            $this->enableDetails = $extraParam['tv5global_enable_details'];
+        } else {
+            $this->enableDetails = true;
+        }
     }
 
+    private function addDetails(Program $program, string $url): void
+    {
+        try {
+            $content = $this->getContentFromURL($url, self::$HEADERS);
+            preg_match('/class="field-label-inline">Saison<\/span>.*?<span>(.*?)<\/span>/s', $content, $season);
+            preg_match('/class="field__label">Épisode<\/div>.*?<div class="field__item">(.*?)<\/div>/s', $content, $episode);
+            preg_match('/field--type-text-with-summary.*?">(.*?)<\/div>/s', $content, $summary);
+
+            if ($episode[1]) {
+                $program->setEpisodeNum(intval($season[1] ?? '1'), intval($episode[1]));
+            }
+            if (!str_contains($summary[1], 'googletag')) {
+                $program->addDesc(strip_tags($summary[1]));
+            }
+        } catch (\Throwable) {
+            // We allow failures on fetching details
+            return;
+        }
+    }
     public function constructEPG(string $channel, string $date): Channel | bool
     {
         $channelObj = parent::constructEPG($channel, $date);
@@ -31,71 +72,66 @@ class TV5Global extends AbstractProvider implements ProviderInterface
         }
 
         [$minDate, $maxDate] = $this->getMinMaxDate($date);
-        $dateObj = new \DateTime($date);
-        $dateObj->modify('-1 day');
-        for ($i = 0; $i < 3; $i++) {
-            $content = html_entity_decode($this->getContentFromURL($this->generateUrl($channelObj, $dateObj), [
-                'Host' => 'www.tv5monde.com',
-                'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0',
-                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-                'Accept-Language' => 'fr-FR,fr-CA;q=0.8,en;q=0.5,en-US;q=0.3',
-                'DNT' => '1',
-                'Sec-GPC' => '1',
-                'Connection' => 'keep-alive',
-                'Upgrade-Insecure-Requests' => '1',
-                'Sec-Fetch-Dest' => 'document',
-                'Sec-Fetch-Mode' => 'navigate',
-                'Sec-Fetch-Site' => 'none',
-                'Sec-Fetch-User' => '?1',
-                'Priority' => 'u=1'
-            ]));
-            $programs = explode('<li class="hourly-list', $content);
-            unset($programs[0]);
-            $timezone = explode('<div class="filter-country select">', $content)[1];
-            $timezone = explode('</li>', explode('class="active"', $timezone)[1])[0];
-            $timezone = explode('"', explode('selected-timezone=', $timezone)[1])[0];
-            date_default_timezone_set($timezone);
-            foreach ($programs as $p) {
-                preg_match('/<p class="time-start">(.*?)<\/p>/s', $p, $startTime);
-                preg_match('/<p class="time-duration">(.*?)<\/p>/s', $p, $duration);
-                preg_match('/<p class="program-type">(.*?)<\/p>/s', $p, $genre);
-                preg_match('/<h4 class="program-title">(.*?)<\/h4>/s', $p, $title);
-                preg_match('/<p class="program-summary">(.*?)<\/p>/s', $p, $summary);
-                preg_match('/src="(.*?)"/', $p, $image);
-                $startDate = strtotime($dateObj->format('Y-m-d') . ' ' . $startTime[1]);
-                if (str_contains($duration[1], 'mn')) {
-                    $duration[1] = intval(explode('mn', $duration[1])[0]) * 60;
-                } else {
-                    $duration[1] = explode('h', $duration[1]);
-                    $duration[1] = intval($duration[1][0]) * 3600 + intval($duration[1][1]) * 60;
-                }
-                $endDate = $startDate + $duration[1];
-                $summary[1] = str_replace('<br />', '', $summary[1] ?? '');
-                $startDateObj = new \DateTime('@'.$startDate);
-                if ($startDateObj < $minDate) {
-                    continue;
-                } elseif ($startDateObj > $maxDate) {
-                    return $channelObj;
-                }
-                $program = Program::withTimestamp($startDate, $endDate);
-                $program->addTitle($title[1] ?? 'Aucun titre');
-                $program->addDesc($summary[1]);
-                $program->addCategory($genre[1] ?? 'Inconnu');
-                if (!empty($image)) {
-                    $program->setIcon($image[1]);
-                }
-                $channelObj->addProgram($program);
+        $dateObj = new \DateTimeImmutable($date);
+        $content = $this->getContentFromURL($this->generateUrl($channelObj, $dateObj), self::$HEADERS);
+
+        // Renaming container class containing all programs
+        $dayBefore = $dateObj->modify('-1 day')->format('Y-m-d');
+        $dayAfter = $dateObj->modify('+1 day')->format('Y-m-d');
+        $content = str_replace("jour-$dayBefore", 'PROGRAM_SPLIT', $content);
+        $content = str_replace("jour-$date", 'PROGRAM_SPLIT', $content);
+        $content = str_replace("jour-$dayAfter", 'PROGRAM_SPLIT', $content);
+        $programs = explode('PROGRAM_SPLIT', $content);
+
+        $count = count($programs);
+        for ($i = 1; $i < $count - 1; $i++) {
+            $percent = round($i * 100 / $count, 2) . ' %';
+            $this->setStatus($percent);
+            $p = $programs[$i];
+            preg_match('/datetime="(.*?)"/s', $p, $startTime);
+            preg_match('/datetime="(.*?)"/s', $programs[$i + 1], $endTime);
+            preg_match('/field-categorie.*?field-content">(.*?)<\/div>/s', $p, $genre);
+            preg_match('/field-title.*?field-content">(.*?)<\/span>/s', $p, $titleOrSubtitle);
+            preg_match('/field-serie.*?field-content">(.*?)<\/span>/s', $p, $title);
+            preg_match('/data-src="(.*?)"/', $p, $image);
+            preg_match('/href="(.*?)"/', $p, $href);
+            $startTimeObj = new \DateTime('@'.strtotime($startTime[1]));
+            $endTimeObj = new \DateTime('@'.strtotime($endTime[1]));
+
+            if ($startTimeObj < $minDate) {
+                continue;
+            } elseif ($startTimeObj > $maxDate) {
+                return $channelObj;
             }
-            $dateObj->modify('+1 day');
+            $program = new Program($startTimeObj, $endTimeObj);
+            if ($title[1]) {
+                $program->addTitle($title[1]);
+                $program->addSubTitle($titleOrSubtitle[1] ?? 'Aucun sous-titre');
+            } else {
+                $program->addTitle($titleOrSubtitle[1] ?? 'Aucun titre');
+            }
+            if ($this->enableDetails && $href[1]) {
+                $this->addDetails($program, $this->getRootDomain($channelObj).$href[1]);
+            }
+            $program->addCategory($genre[1] ?? 'Inconnu');
+            if (!empty($image[1])) {
+                $program->setIcon($this->getRootDomain($channelObj).$image[1]);
+            }
+            $channelObj->addProgram($program);
         }
 
         return $channelObj;
     }
 
-    public function generateUrl(Channel $channel, $date): string
+    private function getRootDomain(Channel $channel): string
     {
         $channel_id = $this->channelsList[$channel->getId()];
 
-        return 'https://www.tv5monde.com/tv/programmes/' . $channel_id . '?day=' . $date->format('Y-m-d');
+        return 'https://'.$channel_id.'.tv5monde.com';
+    }
+
+    public function generateUrl(Channel $channel, $date): string
+    {
+        return $this->getRootDomain($channel).'/fr/guide-tv?day=' . $date->format('Y-m-d');
     }
 }
