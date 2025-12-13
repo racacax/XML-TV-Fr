@@ -1,10 +1,6 @@
 {
-  "TV5MondeAfrique.fr":"1-TV5MONDE-Afrique",
-  "TV5MondeAmeriqueLatine.fr":"2-TV5MONDE-Amerique-latine-et-Caraibes",
-  "TV5MondeAsie.fr":"3-TV5MONDE-Asie",
-  "TV5MondeEtatsUnis.fr":"4-TV5MONDE-Etats-Unis",
-  "TV5MondeEurope.fr":"5-TV5MONDE-Europe",
-  "TV5Monde.fr":"6-TV5MONDE-France-Belgique-Suisse-Monaco",
-  "TV5MondeMaghrebOrient.fr":"7-TV5MONDE-Maghreb-Orient",
-  "TV5MondePacifique.fr":"8-TV5MONDE-Pacifique"
+  "TV5MondeAmeriqueLatine.fr":"latina",
+  "TV5MondeEtatsUnis.fr":"usa",
+  "TV5MondeEurope.fr":"europe",
+  "TV5MondeMaghrebOrient.fr":"maghreb-orient"
 }
