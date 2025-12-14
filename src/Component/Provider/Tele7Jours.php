@@ -14,7 +14,7 @@ use racacax\XmlTv\ValueObject\Program;
 
 class Tele7Jours extends AbstractProvider implements ProviderInterface
 {
-    private static array $DAYS = ['Mon' => 'lundi', 'Tue' => 'mardi', 'Wed', 'mercredi', 'Thu' => 'jeudi', 'Fri' => 'vendredi', 'Sat' => 'samedi', 'Sun' => 'dimanche'];
+    private static array $DAYS = ['Mon' => 'lundi', 'Tue' => 'mardi', 'Wed' => 'mercredi', 'Thu' => 'jeudi', 'Fri' => 'vendredi', 'Sat' => 'samedi', 'Sun' => 'dimanche'];
     private bool $enableDetails;
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {

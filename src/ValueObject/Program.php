@@ -51,6 +51,8 @@ class Program
     private ?array $previouslyShown;
 
     private ?array $customTags;
+    private ?string $starRating;
+    private ?array $review;
 
 
     /**
@@ -88,6 +90,8 @@ class Program
         $this->isNew = null;
         $this->previouslyShown = null;
         $this->customTags = [];
+        $this->starRating = null;
+        $this->review = null;
     }
 
     public function getIsNew(): ?bool
@@ -108,6 +112,25 @@ class Program
     {
         $this->customTags[] = ['name' => $name, 'value' => $value, 'attrs' => $attrs];
     }
+
+    public function setStarRating(int $stars, int $totalStars): void
+    {
+        $this->starRating = "$stars/$totalStars";
+    }
+    public function getStarRating(): ?string
+    {
+        return $this->starRating;
+    }
+
+    public function setReview(string $review, string $source = null, string $reviewer = null): void
+    {
+        $this->review = ['review' => $review, 'source' => $source, 'reviewer' => $reviewer];
+    }
+    public function getReview(): ?array
+    {
+        return $this->review;
+    }
+
     public function getCustomTags(): ?array
     {
         return $this->customTags;

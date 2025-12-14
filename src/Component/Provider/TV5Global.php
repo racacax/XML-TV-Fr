@@ -10,21 +10,14 @@ use racacax\XmlTv\Component\ResourcePath;
 use racacax\XmlTv\ValueObject\Channel;
 use racacax\XmlTv\ValueObject\Program;
 
-/*
- * @author Racacax
- * @version 0.1 : 25/02/2023
- */
-
 class TV5Global extends AbstractProvider implements ProviderInterface
 {
     private bool $enableDetails;
-    private static $HEADERS = [
-        'Host' => 'latina.tv5monde.com',
+    private static array $HEADERS = [
         'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:146.0) Gecko/20100101 Firefox/146.0',
         'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language' => 'fr-FR,fr-CA;q=0.8,en;q=0.5,en-US;q=0.3',
         'Accept-Encoding' => 'gzip, deflate, br, zstd',
-        'Alt-Used' => 'latina.tv5monde.com',
         'Connection' => 'keep-alive',
         'Upgrade-Insecure-Requests' => '1',
         'Sec-Fetch-Dest' => 'document',

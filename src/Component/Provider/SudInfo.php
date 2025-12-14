@@ -30,7 +30,7 @@ class SudInfo extends AbstractProvider implements ProviderInterface
         'TE' => 'trailers',
         'Upgrade-Insecure-Requests' => '1',
         'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:137.0) Gecko/20100101 Firefox/137.0'];
-    private static array $DAYS = ['Mon' => 'lundi', 'Tue' => 'mardi', 'Wed', 'mercredi', 'Thu' => 'jeudi', 'Fri' => 'vendredi', 'Sat' => 'samedi', 'Sun' => 'dimanche'];
+    private static array $DAYS = ['Mon' => 'lundi', 'Tue' => 'mardi', 'Wed' => 'mercredi', 'Thu' => 'jeudi', 'Fri' => 'vendredi', 'Sat' => 'samedi', 'Sun' => 'dimanche'];
     private bool $enableDetails;
     private static string $BASE_URL = 'https://programmestv.sudinfo.be';
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
