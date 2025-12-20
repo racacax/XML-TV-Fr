@@ -72,12 +72,12 @@ class Tele2Semaines extends AbstractProvider implements ProviderInterface
             return false;
         }
         $count = count($programs);
-        for ($i = 1; $i < $count; $i++) {
+        for ($i = 1; $i <= $count; $i++) {
             $percent = round($i * 100 / $count, 2) . ' %';
             $this->setStatus($percent);
             preg_match('/class="broadcastCard-start" datetime="(.*?)"/s', $programs[$i], $start);
             $start = $start[1];
-            if ($i == $count - 1) {
+            if ($i == $count) {
                 $end = $endLastProgram[1];
             } else {
                 preg_match('/class="broadcastCard-start" datetime="(.*?)"/s', $programs[$i + 1], $end);

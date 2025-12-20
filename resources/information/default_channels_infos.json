@@ -355,10 +355,6 @@
     "name": "Bel RTL",
     "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/fr\/1\/1a\/Bel_RTL_logo_2018.png"
   },
-  "BelRTLTV.be": {
-    "name": "Bel RTL TV",
-    "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/fr\/1\/1a\/Bel_RTL_logo_2018.png"
-  },
   "BloombergUKEurope.uk": {
     "name": "Bloomberg PAN-European",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-410.png"
@@ -872,14 +868,6 @@
     "name": "Canal+ Comedie Ouest HD",
     "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/fr\/2\/2c\/Canal%2Bcom%C3%A9die.png"
   },
-  "CanalPlusDecale.ch": {
-    "name": "Canal+ Decale Suisse",
-    "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/fr\/9\/91\/Canal%2B_D%C3%A9cal%C3%A9_2013.svg"
-  },
-  "CanalPlusDecale.fr": {
-    "name": "Canal+ Decale",
-    "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/fr\/9\/91\/Canal%2B_D%C3%A9cal%C3%A9_2013.svg"
-  },
   "CanalPlusSport360.fr": {
     "name": "Canal+ Sport 360",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/83\/canal-ouah\/CHN43FB\/CHN43FB_83_29082023"
@@ -904,17 +892,9 @@
     "name": "Canal+ Family Ouest",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180403\/canal-ouah\/CHN43FB\/CANALFAMILY_OUEST_myCANAL_640x480"
   },
-  "CanalPlusFormula1.fr": {
-    "name": "Canal+ Formula 1",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/94543775"
-  },
   "CanalPlusLigue1.fr": {
     "name": "CANAL+ Ligue 1 Uber Eats",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/894\/canal-ouah\/CHN43FB\/CHN43FB_894_20231002"
-  },
-  "CanalPlusMotoGP.fr": {
-    "name": "Canal+ MotoGP",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/94543760"
   },
   "CanalPlusPolynesie.fr": {
     "name": "Canal+ Polynesie",
@@ -963,10 +943,6 @@
   "CanalPlusSport4.af": {
     "name": "Canal+ Sport 4",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180393\/canal-ouah\/CHN43FB\/CplusSport_4_FN"
-  },
-  "CanalPlusTop14.fr": {
-    "name": "Canal+ Top14",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/93843465"
   },
   "CanalPlusUHD.ch": {
     "name": "Canal+ UHD (Suisse)",
@@ -1094,10 +1070,6 @@
   "ClassicaEnglish.uk": {
     "name": "ClassicaEnglish"
   },
-  "CliqueTV.fr": {
-    "name": "Clique TV",
-    "icon": "https:\/\/www.offremedia.com\/sites\/default\/files\/vignette\/article\/nl1908-logo-clique.png"
-  },
   "ClubRTL.be": {
     "name": "Club RTL",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-50.png"
@@ -1203,10 +1175,6 @@
     "name": "DemainTV",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-57.png"
   },
-  "DiegoTV.fr": {
-    "name": "Diego TV",
-    "icon": "https:\/\/photos.tf1.fr\/450\/225\/diego-logo_programme-b04f07-0@1x.png"
-  },
   "DigitalCongo.af": {
     "name": "Digital Congo",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180380\/canal-ouah\/CHN43FB\/DIGITALCONGO_myCANAL_640x480"
@@ -1258,14 +1226,6 @@
   "DisneyXD.fr": {
     "name": "Disney XD",
     "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/8\/82\/Logo_Disney_XD.svg\/1200px-Logo_Disney_XD.svg.png"
-  },
-  "Djazz.fr": {
-    "name": "Djazz",
-    "icon": "https:\/\/upload.wikimedia.org\/wikipedia\/en\/f\/fb\/Djazz.TV_logo.png"
-  },
-  "DoraTV.fr": {
-    "name": "Dora TV",
-    "icon": "https:\/\/fanart.tv\/api\/download.php?type=download&image=1937u00a7ion=1"
   },
   "DorcelCentre.af": {
     "name": "DorcelCentre",
@@ -1363,10 +1323,6 @@
   "EVAHD.ca": {
     "name": "EVAHD",
     "icon": "https:\/\/static.wixstatic.com\/media\/5a8361_55e32d9b3558461b9b37d11ee8a61769~mv2.png\/v1\/fill\/w_250,h_209,al_c\/5a8361_55e32d9b3558461b9b37d11ee8a61769~mv2.png"
-  },
-  "EVENEMENTALACARTE.fr": {
-    "name": "EVENEMENTALACARTE",
-    "icon": "https:\/\/graphiste.com\/assets\/logo-square-e9f8c74eaa34b52c68130dc8dc0d5d17fc240639bc55d769c18cf6bff85d0b3d.jpg"
   },
   "EWTN.ca": {
     "name": "EWTN",
@@ -1492,10 +1448,6 @@
     "name": "Evenements Sports 4K UHD",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/74042707"
   },
-  "Extreme.fr": {
-    "name": "Extreme",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTyD6N1JKykjZ8WcwhzSHa95A8hGT-kc6A0Bc4araK9IhFYrscaSNYME3yhJg&s"
-  },
   "FAIRCH.ca": {
     "name": "FAIRCH"
   },
@@ -1579,10 +1531,6 @@
   "FoodNetwork.uk": {
     "name": "FoodNetwork",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQM5JRNBndfqdZfMYb-lkDOWDvZ_ZtPQcHfNlKTKZob204Zi9SVrJ95zjsG8yI&amp;s"
-  },
-  "FootPlus24.fr": {
-    "name": "Foot+ 24\\\/24",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcThWfJnEcbDllVvtfDShsOlxgIyz6YzCeW4exvoQlFvc78WITFQ0HgYxSREfO0&amp;s"
   },
   "France2.fr": {
     "name": "France 2",
@@ -1728,21 +1676,9 @@
     "name": "France 5",
     "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/80\/icon320_light.png?v2023_48_0"
   },
-  "FranceCulture.fr": {
-    "name": "France Culture",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT7GFEorI9BBeH07uv-9JAufNGX7t7nkmYEEmPjTxNX3Hq4Xmus1HEbOCIAl60&amp;s"
-  },
   "FranceInfo.fr": {
     "name": "franceinfo:",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-2111.png"
-  },
-  "FranceInter.fr": {
-    "name": "France Inter",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRB5UVF_BXoTerKLJl9gZAQrImrOySGvA8fU_w6jY4mNULIr1Wm1n8pFrsiyLI&amp;s"
-  },
-  "FranceMusique.fr": {
-    "name": "France Musique",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcROs9yOO5NZt2YcwiXQhzmE1V9HTcLoDArm4giVegoR_d9I-LFvJz7mM17clg&amp;s"
   },
   "FranceO.fr": {
     "name": "France \u00d4",
@@ -1787,10 +1723,6 @@
   "Ginx.fr": {
     "name": "Ginx",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-563.png"
-  },
-  "GolfChannel.fr": {
-    "name": "Golf Channel",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/Golf_Channel_color.png"
   },
   "GolfPlus.fr": {
     "name": "Golf+",
@@ -1944,10 +1876,6 @@
     "name": "J-One",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-1585.png"
   },
-  "JacquieMichelTV.fr": {
-    "name": "JacquieMichelTV",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSzxDmtZcURR5xpHihu5Yb4irxdGCKJk8XUX90Q_-XEAdXV2WQKrCtdy5qWcic&amp;s"
-  },
   "Joe.be": {
     "name": "Joe",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcReKANt52JLrEq1NtUAplALll6ZqkcY_EOWiZvvKuRXdzmckhKcy4ev3YBMKA&amp;s"
@@ -2100,10 +2028,6 @@
     "name": "M6",
     "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/312\/icon320_light.png?v2023_48_0"
   },
-  "M6Boutique.fr": {
-    "name": "M6 Boutique",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRk2om6PoNzL0XvnSunvba-wXS9Q5OyWUZ7hOzLz_ZesJfUf9CbKe2kyCMyf_0&amp;s"
-  },
   "M6Music.fr": {
     "name": "M6 Music",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-453.png"
@@ -2248,10 +2172,6 @@
     "name": "MaTele",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQU-fw_3XheZXvJcMifXn55ypj6IQI0IIgNL1zhQjptujNtglQJQaAbhOLA2pA&amp;s"
   },
-  "MadrasFMTV.fr": {
-    "name": "MadrasFMTV",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQYQebBXi9q5eaxhnOzHzBYRiEC5M6uNVh-zvBtjA_N0fwRchCC1KcoL0VpJM8&amp;s"
-  },
   "ManX.fr": {
     "name": "ManX",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/41071287"
@@ -2288,17 +2208,9 @@
     "name": "MezzoLiveHD",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-907.png"
   },
-  "Mint.be": {
-    "name": "Mint",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT7FvJn6TZsjm91KULaBhwfwFWVRxTh_GrPUkqk5XEcIoCZMqUmRmgghUbXxg&amp;s"
-  },
   "MirabelleTV.fr": {
     "name": "VIA Mirabelle",
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/VIA_Mirabelle_color.png"
-  },
-  "MoiEtCie.ca": {
-    "name": "MoiEtCie",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcR9-9gU0MTtwnuchtR8ZHNQQV3u3hvgwN54ItNJ7Xv1G7qpPBxvblKVqu1Ejw&amp;s"
   },
   "MoliereTV.af": {
     "name": "MoliereTV",
@@ -2308,38 +2220,6 @@
     "name": "MotorVision TV",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQuEKF4mLTy1d2W3Jw4NQR47ODPSzbhQkjli_roOyw8xlF7pJsf-8jbcXwY3iI&amp;s"
   },
-  "MotorsportTV.fr": {
-    "name": "Motorsport TV",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQO8-iiHhRzto4D5-LFS010RSKtMmIiWuC1Ep2dKFmPYeqN6MOzzgqNNmuxOjc&amp;s"
-  },
-  "Multisports.fr": {
-    "name": "Multisports",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-98.png"
-  },
-  "Multisports1.fr": {
-    "name": "Multisports 1",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-101.png"
-  },
-  "Multisports2.fr": {
-    "name": "Multisports 2",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-102.png"
-  },
-  "Multisports3.fr": {
-    "name": "Multisports 3",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-103.png"
-  },
-  "Multisports4.fr": {
-    "name": "Multisports 4",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-104.png"
-  },
-  "Multisports5.fr": {
-    "name": "Multisports 5",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-105.png"
-  },
-  "Multisports6.fr": {
-    "name": "Multisports 6",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-106.png"
-  },
   "Museum.fr": {
     "name": "MUSEUM TV",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-1072.png"
@@ -2347,10 +2227,6 @@
   "Musiq3.be": {
     "name": "Musiq3",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRg50TQKRYXFGmg57_RuV4FsZVh2sgKnyzYL6YpPJpQWBvubEjnqonpk7DwBpU&amp;s"
-  },
-  "MyCuisine.fr": {
-    "name": "My Cuisine",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/My_Cuisine_color.png"
   },
   "MyZenTV.fr": {
     "name": "My Zen TV",
@@ -2512,10 +2388,6 @@
     "name": "Nollywood TV",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-1461.png"
   },
-  "NonStopPeople.fr": {
-    "name": "NonStopPeople",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRpJ18-90tpy2pwaSM2qRVlIyO8zHigA_0nOnGiVm9nZP0GoB2rIVpcjkaP7A&amp;s"
-  },
   "NouvelleCaledonie.fr": {
     "name": "NouvelleCaledonie",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSco5lDLkQBwweilyVo8AVaFiJ6ARhm2zsixWWjzcLKMl9gbfMYN2FVCVjCzA&amp;s"
@@ -2532,38 +2404,6 @@
     "name": "RMC STORY",
     "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/376\/icon320_light.png?v2023_48_0"
   },
-  "OCSChoc.ch": {
-    "name": "OCS Choc (Suisse)",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/788\/canal-ouah\/CHN43FB\/OCSPULP_POURFB_myCANAL_640x480"
-  },
-  "OCSPulp.fr": {
-    "name": "OCS Pulp",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-732.png"
-  },
-  "OCSCity.ch": {
-    "name": "OCS City (Suisse)",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSwdLVIL-vXQbYqV3S3FF2fwbN3F5IBqh0X5r93cAERw13TGDhBbJpNf9INdnU&amp;s"
-  },
-  "OCSCity.fr": {
-    "name": "OCS City",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTAsDgUN3E5AnomiP6pceh1QH99cA7lT3WDm_CtW_-26ZLfd-x16_tzebxUWug&amp;s"
-  },
-  "OCSGeants.ch": {
-    "name": "OCS Geants (Suisse)",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/86033293"
-  },
-  "OCSGeants.fr": {
-    "name": "OCS Geants",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-734.png"
-  },
-  "OCSMax.ch": {
-    "name": "OCS Max (Suisse)",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/86033288"
-  },
-  "OCSMax.fr": {
-    "name": "OCS Max",
-    "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-730.png"
-  },
   "OLN.ca": {
     "name": "OLN",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQgPkzQzgKuzrtDWHsBoWnQU3zHdA2Tnry0P2G-9ixZ4raDwXd6boVIewDQOxU&amp;s"
@@ -2571,10 +2411,6 @@
   "OLTV.fr": {
     "name": "OLPLAY",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-463.png"
-  },
-  "OMTV.fr": {
-    "name": "OMTV",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQ1JBheSuY_32zqjAgZqMCk0L-HVNg5BxY7JNx3kMhcVYeZHDQRZFF-7ref&amp;s"
   },
   "ONETV.ch": {
     "name": "CARAC 2 CH HD",
@@ -2615,10 +2451,6 @@
   "OlympiaTV.fr": {
     "name": "OlympiaTV",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/93985302"
-  },
-  "Onzeo.fr": {
-    "name": "Onzeo",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRZRdPVOUqsls55IaHmfqb6aQpbQpU8-QddzSctoJ9w4frUqvQ5DF8k-sZN6A&amp;s"
   },
   "P2HD.ca": {
     "name": "P2HD",
@@ -2735,10 +2567,6 @@
   "PlugRTL.be": {
     "name": "Plug RTL",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-377.png"
-  },
-  "Polar.fr": {
-    "name": "Polar",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQuRMxZsN7u11WtiQ1f5pS1K2vhx72bydqC2d1V-uRExneLdl4DSlIvHksBidI&amp;s"
   },
   "PolarPlus.fr": {
     "name": "Polar+",
@@ -2872,77 +2700,13 @@
     "name": "RMC Sport Live 3",
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/RMCSPORTLIVE3100x100.png"
   },
-  "RMCSport4.fr": {
-    "name": "RMC Sport Live 4",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/RMCSPORTLIVE4100x100.png"
-  },
   "RMCSportAccess1.fr": {
     "name": "RMC Sport Access",
     "icon": "https:\/\/focus.telerama.fr\/500x500\/0000\/00\/01\/clear-2095.png"
   },
-  "RMCSportAccess2.fr": {
-    "name": "RMC Sport Access 2",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQiHbMcpHFMsYskW-BLQGJLBVgspHj60Z4mQi7BUVR6KT9e_MFXK8Tx9a3xqA&amp;s"
-  },
-  "RMCSportAccess3.fr": {
-    "name": "RMC Sport Access 3",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSV2QhXMfH3NqERn-KEsBIn4zPyOZ65Wvr-4iG1Fr5Vt_aUaXMMsg0eP6VJzw&amp;s"
-  },
-  "RMCSportLive10.fr": {
-    "name": "RMC Sport Live 10",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/RMC_Sport_Live_10_color.png"
-  },
-  "RMCSportLive11.fr": {
-    "name": "RMC Sport Live 11",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/RMC_Sport_Live_11_color.png"
-  },
-  "RMCSportLive12.fr": {
-    "name": "RMC Sport Live 12",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/RMC_Sport_Live_12_color.png"
-  },
-  "RMCSportLive13.fr": {
-    "name": "RMC Sport Live 13",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/LIVE13couleur100x100.png"
-  },
-  "RMCSportLive14.fr": {
-    "name": "RMC Sport Live 14",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/LIVE14couleur100x100.png"
-  },
-  "RMCSportLive15.fr": {
-    "name": "RMC Sport Live 15",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/LIVE15couleur100x100.png"
-  },
-  "RMCSportLive16.fr": {
-    "name": "RMC Sport Live 16",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/LIVE16couleur100x100.png"
-  },
   "RMCSportLive3.fr": {
     "name": "RMC Sport Live 3",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSV2QhXMfH3NqERn-KEsBIn4zPyOZ65Wvr-4iG1Fr5Vt_aUaXMMsg0eP6VJzw&amp;s"
-  },
-  "RMCSportLive4.fr": {
-    "name": "RMC Sport Live 4",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRttEO2Ntw3VQKA2KUW4olSC5BxtABzN8uNmqwmP6Zqa2jkQGLfyKxZhqJx7A&amp;s"
-  },
-  "RMCSportLive5.fr": {
-    "name": "RMC Sport Live 5",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/RMC_Sport_Live_5_color.png"
-  },
-  "RMCSportLive6.fr": {
-    "name": "RMC Sport Live 6",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/RMC_Sport_Live_6_color.png"
-  },
-  "RMCSportLive7.fr": {
-    "name": "RMC Sport Live 7",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/RMC_Sport_Live_7_color.png"
-  },
-  "RMCSportLive8.fr": {
-    "name": "RMC Sport Live 8",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/RMC_Sport_Live_8_color.png"
-  },
-  "RMCSportLive9.fr": {
-    "name": "RMC Sport Live 9",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/RMC_Sport_Live_9_color.png"
   },
   "RMCSportNews.fr": {
     "name": "RMC Sport News",
@@ -3019,10 +2783,6 @@
   "RTD.af": {
     "name": "RTD",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQk5JGaLVKdXYNk5siY-rwas5jQdeGyLye0ImLkpBP1LbPIpwDXINr8R9FzqQ&amp;s"
-  },
-  "RTFrance.fr": {
-    "name": "RT France",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSDZUH-Ey7nMDV_kkV0m0VQF0jGeOAkjsMsoiXcMkD-j5Q7fPNh8uvz9GTluos&amp;s"
   },
   "RTG.af": {
     "name": "RTG",
@@ -3359,10 +3119,6 @@
     "name": "StadAfric",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcT7cah1HdKrBPpH9qLUEn7fz0KSeYDptUiAXloMpzlTnzJ8PZosjus8kZWn9w&amp;s"
   },
-  "StingrayBrava.fr": {
-    "name": "StingrayBrava",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcREpnax6WyD0q5axmv8YH7OttPXf-EoWhZ2VWkEJVO32qWETGz9EmO4-Ks0YQ&amp;s"
-  },
   "StingrayClassica.fr": {
     "name": "StingrayClassica",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSeSsCnOCBUiW49RdSaIMxahFOTfZDqO4xpuI9mEmnEwPop7PjfjhqwDerWJ5U&amp;s"
@@ -3490,10 +3246,6 @@
   "TMC.fr": {
     "name": "TMC",
     "icon": "https:\/\/static.teleboy.ch\/shared\/stations\/383\/icon320_light.png?v2023_48_0"
-  },
-  "TMCplus1.fr": {
-    "name": "TMC + 1",
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/TMC_1_color.png"
   },
   "TOONA.ca": {
     "name": "TOONA",
@@ -3879,10 +3631,6 @@
     "name": "UNIC",
     "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRovZ0IWfSSQDERczKxTY7PU37hUKWc2c9RNVaghzTyx9-SCQLiOd-itwsJYA&amp;s"
   },
-  "UltraNature.fr": {
-    "name": "Ultra Nature",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQ6JjtjW7ytw_fGBbbZycAu1H-6TAAlK_Vt_DPWZx5mPU6s_tNreli-_RMFvw&amp;s"
-  },
   "Unis.ca": {
     "name": "Unis",
     "icon": "https:\/\/cdn.tvpassport.com\/image\/station\/640x360\/v2\/s90112_h15_ab.png"
@@ -3966,10 +3714,6 @@
   "VarAzur.fr": {
     "name": "BFM TOULON VAR",
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/NEUFBFMTOULONVAR100x100.png"
-  },
-  "Viceland.fr": {
-    "name": "Viceland",
-    "icon": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcTbkFC4dnEj-CUM-PCXGNoqd7M0fPM0VdgrrdrrFCWJkJRfz4QNGJElXahOmw&amp;s"
   },
   "Vier.be": {
     "name": "Vier",
@@ -4366,18 +4110,6 @@
   "CanalPlusSport5.af": {
     "name": "CANAL+ SPORT 5",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180394\/canal-ouah\/CHN43FB\/CplusSport_5_FN"
-  },
-  "CanalPlusTop14.af": {
-    "name": "CANAL+ TOP 14",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180739\/canal-ouah\/CHN43FB\/TOP14"
-  },
-  "CanalPlusFormula1.af": {
-    "name": "CANAL+ FORMULA1",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180744\/canal-ouah\/CHN43FB\/formula1"
-  },
-  "CanalPlusMotoGp.af": {
-    "name": "CANAL+ MOTO GP",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/180743\/canal-ouah\/CHN43FB\/motogp"
   },
   "CanalPlusPremiereCentre.af": {
     "name": "CANAL+ PREMIERE CENTRE",
@@ -5447,14 +5179,6 @@
     "name": "BEIN SPORTS 3 HD",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/48979952"
   },
-  "CanalPlusFormula1.frdrom": {
-    "name": "CANAL+ FORMULA1",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160744\/canal-ouah\/CHN43FB\/formula1"
-  },
-  "CanalPlusMotoGp.frdrom": {
-    "name": "CANAL+ MOTO GP",
-    "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/canalplus-cdn.canal-plus.io\/p1\/channel\/160743\/canal-ouah\/CHN43FB\/motogp"
-  },
   "PiwiPlus.frdrom": {
     "name": "PIWI+",
     "icon": "https:\/\/thumb.canalplus.pro\/http\/unsafe\/{resolutionXY}\/filters:quality({imageQualityPercentage})\/img-hapi.canalplus.pro:80\/ServiceImage\/ImageID\/21523009"
@@ -5754,10 +5478,6 @@
   "AllFlamenco.es": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/AllFlamenco100x100.png",
     "name": "ALL FLAMENCO_"
-  },
-  "RMCSportLive18.fr": {
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/100x100colorRMCSPORTLIVE18color.png",
-    "name": "RMC Sport Live 18"
   },
   "Boing.fr": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/CARTOONITO100x100Couleur.png",
@@ -6262,10 +5982,6 @@
   "HelwaTV.af": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/100x100couleur.png",
     "name": "HELWA TV"
-  },
-  "RMCSportLive17.fr": {
-    "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/img\/apps\/chaines\/logos\/LIVE17couleur100x100.png",
-    "name": "RMC Sport Live 17"
   },
   "DubaiTV.ar": {
     "icon": "https:\/\/static-cdn.tv.sfr.net\/data\/logos\/tv_services\/Dubai_TV_color.png",

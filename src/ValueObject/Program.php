@@ -113,7 +113,7 @@ class Program
         $this->customTags[] = ['name' => $name, 'value' => $value, 'attrs' => $attrs];
     }
 
-    public function setStarRating(int $stars, int $totalStars): void
+    public function setStarRating(int|float $stars, int $totalStars): void
     {
         $this->starRating = "$stars/$totalStars";
     }
