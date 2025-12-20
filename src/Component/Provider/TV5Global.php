@@ -7,29 +7,23 @@ namespace racacax\XmlTv\Component\Provider;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\ResourcePath;
+use racacax\XmlTv\Component\Utils;
 use racacax\XmlTv\ValueObject\Channel;
 use racacax\XmlTv\ValueObject\Program;
-
-/*
- * @author Racacax
- * @version 0.1 : 25/02/2023
- */
 
 class TV5Global extends AbstractProvider implements ProviderInterface
 {
     private bool $enableDetails;
-    private static $HEADERS = [
-        'Host' => 'latina.tv5monde.com',
+    private static array $HEADERS = [
         'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:146.0) Gecko/20100101 Firefox/146.0',
         'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language' => 'fr-FR,fr-CA;q=0.8,en;q=0.5,en-US;q=0.3',
         'Accept-Encoding' => 'gzip, deflate, br, zstd',
-        'Alt-Used' => 'latina.tv5monde.com',
-        'Connection' => 'keep-alive',
         'Upgrade-Insecure-Requests' => '1',
         'Sec-Fetch-Dest' => 'document',
         'Sec-Fetch-Mode' => 'navigate',
         'Sec-Fetch-Site' => 'none',
+        'Sec-GPC' => '1',
         'Sec-Fetch-User' => '?1',
         'Priority' => 'u=0, i'
     ];
@@ -44,6 +38,22 @@ class TV5Global extends AbstractProvider implements ProviderInterface
         }
     }
 
+    private function getContentOrRetry(string $url, string $rootDomain): string
+    {
+        $endUrl = '';
+        for ($i = 0; $i < 5; $i++) {
+            $content = $this->getContentFromURL($url.$endUrl, array_merge(self::$HEADERS, ['Host' => $rootDomain]), true);
+            if (!str_contains($content, '502 Bad Gateway')) {
+                return $content;
+            }
+            $try = $i + 2;
+            $this->setStatus(Utils::colorize("Erreur 502, essai n°$try...", 'red'));
+            $endUrl = $endUrl.'&';
+            sleep(5);
+        }
+
+        return '';
+    }
     private function addDetails(Program $program, string $url): void
     {
         try {
@@ -73,7 +83,7 @@ class TV5Global extends AbstractProvider implements ProviderInterface
 
         [$minDate, $maxDate] = $this->getMinMaxDate($date);
         $dateObj = new \DateTimeImmutable($date);
-        $content = $this->getContentFromURL($this->generateUrl($channelObj, $dateObj), self::$HEADERS);
+        $content = $this->getContentOrRetry($this->generateUrl($channelObj, $dateObj), $this->getRootDomain($channelObj));
 
         // Renaming container class containing all programs
         $dayBefore = $dateObj->modify('-1 day')->format('Y-m-d');
@@ -84,6 +94,7 @@ class TV5Global extends AbstractProvider implements ProviderInterface
         $programs = explode('PROGRAM_SPLIT', $content);
 
         $count = count($programs);
+
         for ($i = 1; $i < $count - 1; $i++) {
             $percent = round($i * 100 / $count, 2) . ' %';
             $this->setStatus($percent);
@@ -111,11 +122,11 @@ class TV5Global extends AbstractProvider implements ProviderInterface
                 $program->addTitle($titleOrSubtitle[1] ?? 'Aucun titre');
             }
             if ($this->enableDetails && $href[1]) {
-                $this->addDetails($program, $this->getRootDomain($channelObj).$href[1]);
+                $this->addDetails($program, 'https://'.$this->getRootDomain($channelObj).$href[1]);
             }
             $program->addCategory($genre[1] ?? 'Inconnu');
             if (!empty($image[1])) {
-                $program->setIcon($this->getRootDomain($channelObj).$image[1]);
+                $program->setIcon('https://'.$this->getRootDomain($channelObj).$image[1]);
             }
             $channelObj->addProgram($program);
         }
@@ -127,11 +138,11 @@ class TV5Global extends AbstractProvider implements ProviderInterface
     {
         $channel_id = $this->channelsList[$channel->getId()];
 
-        return 'https://'.$channel_id.'.tv5monde.com';
+        return $channel_id.'.tv5monde.com';
     }
 
     public function generateUrl(Channel $channel, $date): string
     {
-        return $this->getRootDomain($channel).'/fr/guide-tv?day=' . $date->format('Y-m-d');
+        return 'https://'.$this->getRootDomain($channel).'/tv-guide?day=' . $date->format('Y-m-d');
     }
 }

@@ -17,6 +17,20 @@ class Oqee extends AbstractProvider implements ProviderInterface
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_oqee.json'), $priority ?? 0.5);
     }
 
+    private function getCustomMatchTitle(string $currentTitle, string $desc): string
+    {
+        /**
+         * Ligue 1+ channels have the match only in description.
+         * It has a consistent description we can use to append it to title.
+         */
+        preg_match('/opposant (.*?) et (.*?)\./s', $desc, $teams);
+        if ($teams[1] && $teams[2]) {
+            return "$currentTitle | $teams[1] / $teams[2]";
+        }
+
+        return $currentTitle;
+    }
+
     public function constructEPG(string $channel, string $date): Channel|bool
     {
         $dateObj = new \DateTimeImmutable($date.' 00:00 +00:00');
@@ -42,9 +56,14 @@ class Oqee extends AbstractProvider implements ProviderInterface
                     return $channelObj;
                 }
                 $program = Program::withTimestamp($entry['live']['start'], $entry['live']['end']);
-                $program->addTitle($entry['live']['title']);
+                $title = $entry['live']['title'];
+                $desc = @$entry['live']['description'] ?? 'Aucune description';
+                if (str_starts_with($channel, 'Ligue1Plus')) {
+                    $title = $this->getCustomMatchTitle($title, $desc);
+                }
+                $program->addTitle($title);
                 $program->addSubtitle(@$entry['live']['sub_title']);
-                $program->addDesc(@$entry['live']['description']);
+                $program->addDesc($desc);
                 $program->addCategory(@$entry['live']['category']);
                 $program->addCategory(@$entry['live']['sub_category']);
                 $icon = str_replace('h%d', 'h1080', @$entry['pictures']['main'] ?? '');

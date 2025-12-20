@@ -10,6 +10,7 @@ use racacax\XmlTv\Component\Provider\Cogeco;
 use racacax\XmlTv\Component\Provider\DAZN;
 use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
 use racacax\XmlTv\Component\Provider\LEquipeLive;
+use racacax\XmlTv\Component\Provider\LInternaute;
 use racacax\XmlTv\Component\Provider\MyCanal;
 use racacax\XmlTv\Component\Provider\NouvelObs;
 use racacax\XmlTv\Component\Provider\Oqee;
@@ -21,6 +22,7 @@ use racacax\XmlTv\Component\Provider\SFR;
 use racacax\XmlTv\Component\Provider\SixPlay;
 use racacax\XmlTv\Component\Provider\SudInfo;
 use racacax\XmlTv\Component\Provider\Tebeosud;
+use racacax\XmlTv\Component\Provider\Tele2Semaines;
 use racacax\XmlTv\Component\Provider\Tele7Jours;
 use racacax\XmlTv\Component\Provider\Teleboy;
 use racacax\XmlTv\Component\Provider\Telecablesat;
@@ -61,11 +63,13 @@ class ProvidersTest extends TestCase
         [TeleLoisirs::class, ['channels' => ['TF1.fr']]],
         [Telerama::class, ['channels' => ['TF1.fr']]],
         [TV5::class, ['channels' => ['TV5MondeAsie.fr']]],
-        [TV5Global::class, ['channels' => ['TV5MondeAsie.fr']]],
+        [TV5Global::class, ['channels' => ['TV5MondeEurope.fr']]],
         [Voo::class, ['channels' => ['TF1.fr']]],
         [TVHebdo::class, ['channels' => ['RDS.ca']]],
         [Oqee::class, ['channels' => ['TF1.fr']]],
         [SudInfo::class, ['channels' => ['TF1.fr']]],
+        [Tele2Semaines::class, ['channels' => ['TF1.fr']]],
+        [LInternaute::class, ['channels' => ['TF1.fr']]],
     ];
     private static array $IGNORED_PROVIDERS = [Teleboy::class, LEquipeLive::class];
 

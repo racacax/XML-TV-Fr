@@ -291,30 +291,6 @@
     "id": 560,
     "region": "fr"
   },
-  "Multisports1.fr": {
-    "id": 562,
-    "region": "fr"
-  },
-  "Multisports2.fr": {
-    "id": 563,
-    "region": "fr"
-  },
-  "Multisports3.fr": {
-    "id": 564,
-    "region": "fr"
-  },
-  "Multisports4.fr": {
-    "id": 565,
-    "region": "fr"
-  },
-  "Multisports5.fr": {
-    "id": 566,
-    "region": "fr"
-  },
-  "Multisports6.fr": {
-    "id": 567,
-    "region": "fr"
-  },
   "NRJHits.fr": {
     "id": 569,
     "region": "fr"
@@ -753,10 +729,6 @@
   },
   "CanalPlusCinema.fr": {
     "id": 198,
-    "region": "fr"
-  },
-  "CanalPlusDecale.fr": {
-    "id": 257,
     "region": "fr"
   },
   "CanalPlusSport360.fr": {
@@ -1839,20 +1811,8 @@
     "id": 180728,
     "region": "bf"
   },
-  "CanalPlusTop14.af": {
-    "id": 180739,
-    "region": "bf"
-  },
   "FarinWata.af": {
     "id": 180740,
-    "region": "bf"
-  },
-  "CanalPlusMotoGp.af": {
-    "id": 180743,
-    "region": "bf"
-  },
-  "CanalPlusFormula1.af": {
-    "id": 180744,
     "region": "bf"
   },
   "Kc2.af": {
@@ -2053,10 +2013,6 @@
   },
   "TraceChristmas.af": {
     "id": 180000,
-    "region": "bf"
-  },
-  "CliqueTV.af": {
-    "id": 180615,
     "region": "bf"
   },
   "Mbc1.frdrom": {
@@ -2463,18 +2419,6 @@
     "id": 160312,
     "region": "mg"
   },
-  "OcsMaxHd.frdrom": {
-    "id": 160316,
-    "region": "mg"
-  },
-  "OcsPulp.frdrom": {
-    "id": 160318,
-    "region": "mg"
-  },
-  "OcsGeants.frdrom": {
-    "id": 160319,
-    "region": "mg"
-  },
   "CinePlusClassic.frdrom": {
     "id": 160328,
     "region": "mg"
@@ -2623,18 +2567,6 @@
     "id": 160738,
     "region": "mg"
   },
-  "CanalPlusTop14.frdrom": {
-    "id": 160739,
-    "region": "mg"
-  },
-  "CanalPlusMotoGp.frdrom": {
-    "id": 160743,
-    "region": "mg"
-  },
-  "CanalPlusFormula1.frdrom": {
-    "id": 160744,
-    "region": "mg"
-  },
   "Novegasy.frdrom": {
     "id": 160799,
     "region": "mg"
@@ -2661,22 +2593,6 @@
   },
   "UtsavBharat.frdrom": {
     "id": 160943,
-    "region": "mg"
-  },
-  "Multisports1.frdrom": {
-    "id": 160955,
-    "region": "mg"
-  },
-  "Multisports2.frdrom": {
-    "id": 160956,
-    "region": "mg"
-  },
-  "Multisports3.frdrom": {
-    "id": 160957,
-    "region": "mg"
-  },
-  "Multisport4.frdrom": {
-    "id": 160958,
     "region": "mg"
   },
   "BfmTV.frdrom": {

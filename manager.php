@@ -1,5 +1,5 @@
 <?php
-$commands = ["export", "help"];
+$commands = ["export", "help", "fetch-channel"];
 if(in_array($argv[1], $commands)) {
     include "commands/".$argv[1].".php";
 } else {

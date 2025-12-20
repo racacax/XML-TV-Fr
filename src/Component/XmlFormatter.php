@@ -3,6 +3,7 @@
 namespace racacax\XmlTv\Component;
 
 use racacax\XmlTv\StaticComponent\RatingPicto;
+use SimpleXMLElement;
 
 /**
  * @author benoit
@@ -40,6 +41,8 @@ class XmlFormatter
             $content[] = $this->buildCustomTags($program->getCustomTags());
             $content[] = $this->buildNew($program->getIsNew());
             $content[] = $this->buildRating($program->getRating());
+            $content[] = $this->buildStarRating($program->getStarRating());
+            $content[] = $this->buildReview($program->getReview());
             $content[] = '</programme>';
         }
 
@@ -73,6 +76,33 @@ class XmlFormatter
         $str .= '</credits>';
 
         return $str;
+    }
+
+    private function buildStarRating(?string $starRating): string
+    {
+        if ($starRating) {
+            return '<star-rating><value>'.$starRating.'</value></star-rating>';
+        }
+
+        return '';
+    }
+
+    private function buildReview(?array $review): string
+    {
+        if ($review) {
+            $element = new SimpleXMLElement('<review type="text"></review>');
+            $element[0] = $review['review'];
+            if ($review['source']) {
+                $element->addAttribute('source', $review['source']);
+            }
+            if ($review['reviewer']) {
+                $element->addAttribute('reviewer', $review['reviewer']);
+            }
+
+            return preg_replace('/^<\?xml[^>]+\?>\s*/', '', $element->asXML());
+        }
+
+        return '';
     }
 
     private function buildEpisodeNum($episodeNum): string

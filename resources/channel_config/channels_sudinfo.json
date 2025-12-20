@@ -439,14 +439,6 @@
     "id": 519,
     "name": "National Geographic Wild"
   },
-  "OCSGeants.fr": {
-    "id": 527,
-    "name": "OCS Géants HD"
-  },
-  "OCSMax.fr": {
-    "id": 520,
-    "name": "OCS Max"
-  },
   "ParamountChannel.fr": {
     "id": 528,
     "name": "Paramount Network"
@@ -702,10 +694,6 @@
   "Nickelodeon.fr": {
     "id": 619,
     "name": "Nickelodéon"
-  },
-  "OCSPulp.fr": {
-    "id": 521,
-    "name": "OCS Pulp"
   },
   "ParisPremiere.fr": {
     "id": 602,

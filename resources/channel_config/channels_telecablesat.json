@@ -504,56 +504,6 @@
     "id": "2095",
     "alt": "RMC Sport Access 1"
   },
-  "RMCSportLive10.fr": {
-    "page": 9,
-    "id": "2673",
-    "alt": "RMC Sport Live 10"
-  },
-  "RMCSportLive11.fr": {
-    "page": 9,
-    "id": "2674",
-    "alt": "RMC Sport Live 11"
-  },
-  "RMCSportLive12.fr": {
-    "page": 10,
-    "id": "2675",
-    "alt": "RMC Sport Live 12"
-  },
-  "RMCSportLive13.fr": {
-    "page": 10,
-    "id": "2676",
-    "alt": "RMC Sport Live 13"
-  },
-  "RMCSportLive14.fr": {
-    "page": 10,
-    "id": "2677",
-    "alt": "RMC Sport Live 14"
-  },
-  "RMCSportLive5.fr": {
-    "page": 10,
-    "id": "2668",
-    "alt": "RMC Sport Live 5"
-  },
-  "RMCSportLive6.fr": {
-    "page": 10,
-    "id": "2669",
-    "alt": "RMC Sport Live 6"
-  },
-  "RMCSportLive7.fr": {
-    "page": 10,
-    "id": "2670",
-    "alt": "RMC Sport Live 7"
-  },
-  "RMCSportLive8.fr": {
-    "page": 10,
-    "id": "2671",
-    "alt": "RMC Sport Live 8"
-  },
-  "RMCSportLive9.fr": {
-    "page": 10,
-    "id": "2672",
-    "alt": "RMC Sport Live 9"
-  },
   "LEquipe21.fr": {
     "page": 10,
     "id": "1401",
@@ -573,11 +523,6 @@
     "page": 10,
     "id": "1295",
     "alt": "Golf+"
-  },
-  "GolfChannel.fr": {
-    "page": 11,
-    "id": "1166",
-    "alt": "Golf Channel"
   },
   "OLTV.fr": {
     "page": 11,
@@ -613,11 +558,6 @@
     "page": 11,
     "id": "128",
     "alt": "MTV"
-  },
-  "StingrayBrava.fr": {
-    "page": 11,
-    "id": "835",
-    "alt": "Stingray Brava"
   },
   "StingrayDjazz.fr": {
     "page": 11,
@@ -1308,10 +1248,5 @@
     "id": 3349,
     "page": 4,
     "alt": "Canal+ Grand Ecran"
-  },
-  "OCSCity.fr": {
-    "id": 733,
-    "page": 5,
-    "alt": "OCS City"
   }
 }
