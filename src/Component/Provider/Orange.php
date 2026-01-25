@@ -70,7 +70,7 @@ class Orange extends AbstractProvider implements ProviderInterface
             $program->addDesc($val['synopsis']);
             $program->addCategory($val['genre']);
             $program->addCategory($val['genreDetailed']);
-            $program->setIcon((!empty($val['covers']) ? ''.end($val['covers'])['url'] : ''));
+            $program->addIcon((!empty($val['covers']) ? ''.end($val['covers'])['url'] : ''));
             $program->setRating($this->convertCSACodeToString(@$val['csa']));
             if (!isset($val['season'])) {
                 $program->addTitle($val['title']);
@@ -83,7 +83,7 @@ class Orange extends AbstractProvider implements ProviderInterface
                 }
                 $program->addTitle($val['season']['serie']['title']);
                 $program->setEpisodeNum($val['season']['number'], $val['episodeNumber']);
-                $program->addSubtitle($val['title']);
+                $program->addSubTitle($val['title']);
             }
 
             $channelObj->addProgram($program);

@@ -55,16 +55,27 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             $startDate = strtotime($date . ' ' . str_replace('h', ':', $hour));
             $program = Program::withTimestamp($startDate, $startDate + $duration);
             //@todo: add async
-            $detail = $this->getContentFromURL($titlehref[1]);
+            $detail = $this->getContentFromURL('https://www.programme-tv.net'.$titlehref[1]);
             $detailJson = @explode('<script type="application/ld+json">', $detail)[1];
+
+            $synopsis = '';
             if (!empty($detailJson)) {
                 $detailJson = json_decode(explode('</script>', $detailJson)[0], true);
-                $synopsis = $detailJson['description'] ?? '';
+
+                if (isset($detailJson['description'])) {
+                    $synopsis = strip_tags($detailJson['description']);
+                }
+                if (isset($detailJson['dateCreated'])) {
+                    $program->setDate(strval($detailJson['dateCreated']));
+                }
+                if (isset($detailJson['countryOfOrigin'])) {
+                    $program->setCountry($detailJson['countryOfOrigin'], 'fr');
+                }
                 if (isset($detailJson['review'])) {
-                    $synopsis .= "\nCritique : \n";
-                    $synopsis .= @($detailJson['review']['description'] ?? $detailJson['review']['reviewBody']) ;
+                    $program->addReview($detailJson['review']['description'] ?? $detailJson['review']['reviewBody']);
+
                     if (isset($detailJson['review']['reviewRating'])) {
-                        $synopsis .= "\nNote : ".$detailJson['review']['reviewRating']['ratingValue'].'/5';
+                        $program->addStarRating($detailJson['review']['reviewRating']['ratingValue'], 5);
                     }
                 }
                 $program->setEpisodeNum(@$detailJson['partOfSeason']['seasonNumber'], @$detailJson['episodeNumber']);
@@ -76,42 +87,45 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
                     }
                 }
             } else {
-                $synopsis = @trim(explode('<', explode('<div class="defaultStyleContentTags">', $detail)[1] ?? '')[0]);
-            }
 
-            $participants = explode('figcaption class="personCard-mediaLegend', $detail);
-            unset($participants[0]);
-            if (!empty($participants)) {
-                $synopsis .= "\nAvec :\n";
-            }
-            foreach ($participants as $participant) {
-                $name = trim(explode('<', explode('>', $participant)[2] ?? '')[0]);
-                $role = trim(explode('<', explode('"personCard-mediaLegendRole">', $participant)[1] ?? '')[0]);
-                if ($role == 'Présentateur') {
-                    $tag = 'presenter';
-                } elseif ($role == 'Réalisateur') {
-                    $tag = 'director';
-                } else {
-                    $tag = 'guest';
+                preg_match('/<div class=\"synopsis-text\">(.*?)<\/div>/s', $detail, $synopsisMatch);
+                if (isset($synopsisMatch[1])) {
+                    $synopsis = strip_tags($synopsisMatch[1]);
                 }
-                if (!isset($detailJson)) {
+                $participants = explode('figcaption class="personCard-mediaLegend', $detail);
+                unset($participants[0]);
+                foreach ($participants as $participant) {
+                    $name = trim(explode('<', explode('>', $participant)[2] ?? '')[0]);
+                    $role = trim(explode('<', explode('"personCard-mediaLegendRole">', $participant)[1] ?? '')[0]);
+                    if ($role == 'Présentateur') {
+                        $tag = 'presenter';
+                    } elseif ($role == 'Réalisateur') {
+                        $tag = 'director';
+                    } else {
+                        $tag = 'guest';
+                    }
                     $program->addCredit($name, $tag);
                 }
-                $synopsis .= $name . " ($role), ";
             }
-            $synopsis = rtrim($synopsis, ', ');
             $program->addTitle($titlehref[2]);
-            $program->addSubtitle($subtitle);
+            $program->addSubTitle($subtitle);
             $program->addCategory($genre);
             $program->addCategory($genreFormat);
-            $program->setIcon($img);
-            $program->addDesc($synopsis);
+            $program->addIcon($img);
+            $program->addDesc(trim($synopsis));
             if (str_contains($li, 'mainBroadcastCard-rebroadcast')) {
-                $program->setPreviouslyShown(true);
+                $program->setPreviouslyShown();
             }
             if (str_contains($li, 'mainBroadcastCard-new')) {
-                $program->addCustomTag('premiere');
+                $program->setPremiere();
             }
+            if (str_contains($li, 'mainBroadcastCard-deaf')) {
+                $program->addSubtitles('teletext');
+            }
+            if (str_contains($li, 'mainBroadcastCard-audioDescription')) {
+                $program->setAudioDescribed();
+            }
+
 
             $channelObj->addProgram($program);
         }

@@ -103,10 +103,10 @@ class SudInfo extends AbstractProvider implements ProviderInterface
                 $programsWithSlug[] = ['slug' => $program['slug'], 'obj' => $programObj];
                 $channelObj->addProgram($programObj);
                 $programObj->addTitle($program['title']);
-                $programObj->addSubtitle($program['subTitle']);
+                $programObj->addSubTitle($program['subTitle']);
                 $programObj->addCategory(@($program['contentSubCategory'] ?? [])['name']);
                 $images = @$program['images'] ?? [];
-                $programObj->setIcon(@($images[1] ?? $images[0])['url']);
+                $programObj->addIcon(@($images[1] ?? $images[0])['url']);
             }
         }
         if ($this->enableDetails) {

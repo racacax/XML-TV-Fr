@@ -7,53 +7,26 @@ namespace racacax\XmlTv\ValueObject;
 use DateTimeImmutable;
 use DateTime;
 use DateTimeZone;
+use racacax\XmlTv\StaticComponent\RatingPicto;
 
-class Program
+class Program extends Tag
 {
-    /**
-     * @var array<array{name: string, lang: string}>
-     */
-    private array $titles;
-
-    /**
-     * @var array<array{name: string, lang: string}>
-     */
-    private array $descs;
-
-    /**
-     * @var array<array{name: string, lang: string}>
-     */
-    private array $categories;
-    private ?string $icon;
     private DateTime|DateTimeImmutable $start;
     private DateTime|DateTimeImmutable $end;
-    private ?string $episodeNum;
 
-    /**
-     * @var array<array{name: string, lang: string}>
-     */
-    private array $subtitles;
+    private static array $SORTED_CHILDREN = [
+        'title', 'sub-title', 'desc', 'credits', 'date',
+        'category', 'keyword', 'language', 'orig-language',
+        'length', 'icon', 'url', 'country', 'episode-num',
+        'video', 'audio', 'previously-shown', 'premiere',
+        'last-chance', 'new', 'subtitles', 'rating',
+        'star-rating', 'review', 'audio-described'
+    ];
 
-    /**
-     * @var array{string, string} | null
-     */
-    private ?array $rating;
-
-    /**
-     * @var array<array{name: string, type: string}>
-     */
-    private array $credits;
-
-    private ?bool $isNew;
-    /**
-     * @var array{start: ?DateTimeImmutable, channel: ?string} | null
-     */
-    private ?array $previouslyShown;
-
-    private ?array $customTags;
-    private ?string $starRating;
-    private ?array $review;
-
+    private static array $SORTED_CREDITS = [
+        'director', 'actor', 'writer', 'adapter', 'producer',
+        'composer', 'editor', 'presenter', 'commentator', 'guest'
+    ];
 
     /**
      * Constructs a program with Unix timestamps as parameters
@@ -79,80 +52,75 @@ class Program
         }
         $this->start = (clone $start)->setTimezone(new DateTimeZone('Europe/Paris'));
         $this->end = (clone $end)->setTimezone(new DateTimeZone('Europe/Paris'));
-        $this->titles = [];
-        $this->categories = [];
-        $this->descs = [];
-        $this->subtitles = [];
-        $this->credits = [];
-        $this->episodeNum = null;
-        $this->icon = null;
-        $this->rating = null;
-        $this->isNew = null;
-        $this->previouslyShown = null;
-        $this->customTags = [];
-        $this->starRating = null;
-        $this->review = null;
+
+        $attributes = [
+            'start' => $this->start->format('YmdHis O'),
+            'stop' => $this->end->format('YmdHis O')
+        ];
+        parent::__construct('programme', [], $attributes, self::$SORTED_CHILDREN);
     }
 
-    public function getIsNew(): ?bool
+    public function addStarRating(int|float $stars, int $totalStars, ?string $system = null): void
     {
-        return $this->isNew;
+        $this->addChild(new Tag('star-rating', ['value' => [new Tag('value', "$stars/$totalStars")]], ['system' => $system]));
     }
 
-    public function setIsNew(?bool $isNew): void
+    public function addReview(string $review, string $source = null, string $reviewer = null): void
     {
-        $this->isNew = $isNew;
+        $this->addChild(new Tag('review', $review, [
+            'source' => $source,
+            'reviewer' => $reviewer,
+            'type' => 'text'
+        ]));
     }
-    public function getPreviouslyShown(): ?array
+    public function addSubtitles(string $type, ?string $lang = null): void
     {
-        return $this->previouslyShown;
+        $attrs = ['type' => $type, 'lang' => $lang];
+        $this->addChild(new Tag('subtitles', null, $attrs));
     }
-
-    public function addCustomTag(string $name, ?string $value = null, ?array $attrs = null): void
+    public function addKeyword(string $keyword, ?string $lang = null): void
     {
-        $this->customTags[] = ['name' => $name, 'value' => $value, 'attrs' => $attrs];
+        $attrs = ['lang' => $lang];
+        $this->addChild(new Tag('keyword', $keyword, $attrs));
     }
-
-    public function setStarRating(int|float $stars, int $totalStars): void
-    {
-        $this->starRating = "$stars/$totalStars";
-    }
-    public function getStarRating(): ?string
-    {
-        return $this->starRating;
-    }
-
-    public function setReview(string $review, string $source = null, string $reviewer = null): void
-    {
-        $this->review = ['review' => $review, 'source' => $source, 'reviewer' => $reviewer];
-    }
-    public function getReview(): ?array
-    {
-        return $this->review;
-    }
-
-    public function getCustomTags(): ?array
-    {
-        return $this->customTags;
-    }
-
-    public function setPreviouslyShown(bool $isPreviouslyShown, DateTime|DateTimeImmutable $start = null, ?string $channel = null): void
-    {
-        if (!$isPreviouslyShown) {
-            $this->previouslyShown = null;
-        } else {
-            $this->previouslyShown = ['start' => $start, 'channel' => $channel];
-        }
-    }
-
 
     /**
-     * @return array<array{name: string, lang: string}>
+     * Define program as audio described
+     * Note: audio-described tag is not officially part of the XMLTV DTD. We add audio-description as
+     * keyword as well for compatibility with applications that do not support this tag.
+     * @return void
      */
-    public function getTitles(): array
+    public function setAudioDescribed(): void
     {
-        return $this->titles;
+        $this->setChild(new Tag('audio-described', null, []));
+        $keywords = $this->getChildren('keyword');
+        foreach ($keywords as $keyword) {
+            if (is_string($keyword) && $keyword == 'audio-description') {
+                return;
+            }
+        }
+        $this->addKeyword('audio-description');
     }
+
+
+
+
+    public function setPreviouslyShown(DateTime|DateTimeImmutable $start = null, ?string $channel = null): void
+    {
+        $this->setChild(new Tag('previously-shown', null, [
+            'start' => $start?->setTimezone(new DateTimeZone('Europe/Paris'))->format('YmdHis O'),
+            'channel' => $channel
+        ]));
+    }
+
+
+    public function setPremiere(string $value = null, string $lang = null): void
+    {
+        $this->setChild(new Tag('premiere', $value, [
+            'lang' => $lang
+        ]));
+    }
+
 
     /**
      * Ajout d'un titre
@@ -162,16 +130,8 @@ class Program
     public function addTitle(?string $title, string $lang = 'fr'): void
     {
         if (!empty($title)) {
-            $this->titles[] = ['name' => $title, 'lang' => $lang];
+            $this->addChild(new Tag('title', $title, ['lang' => $lang]));
         }
-    }
-
-    /**
-     * @return array<array{name: string, lang: string}>
-     */
-    public function getDescs(): array
-    {
-        return $this->descs;
     }
 
     /**
@@ -180,40 +140,18 @@ class Program
     public function addCredit(?string $name, $type = 'guest'): void
     {
         if (!empty($name)) {
-            if (!in_array($type, ['actor', 'director', 'writer', 'producer',
-                'composer', 'editor', 'presenter', 'commentator', 'adapter'])) {
+            if (!in_array($type, self::$SORTED_CREDITS)) {
                 $type = 'guest';
             }
-            $this->credits[] = ['name' => $name, 'type' => $type];
+            $credits = $this->getChildren('credits');
+            if (!empty($credits)) {
+                $creditTag = $credits[0];
+            } else {
+                $creditTag = new Tag('credits', null, [], self::$SORTED_CREDITS);
+                $this->setChild($creditTag);
+            }
+            $creditTag->addChild(new Tag($type, $name));
         }
-    }
-
-    /**
-     * @return array<array{name: string, type: string}>
-     */
-    public function getCredits(): array
-    {
-        usort($this->credits, function ($a, $b) {
-            $priority = [
-                'director' => 1,
-                'actor' => 2,
-                'writer' => 3,
-                'adapter' => 4,
-                'producer' => 5,
-                'composer' => 6,
-                'editor' => 7,
-                'presenter' => 8,
-                'commentator' => 9,
-                'guest' => 10
-            ];
-
-            $priorityA = $priority[$a['type']] ?? PHP_INT_MAX;
-            $priorityB = $priority[$b['type']] ?? PHP_INT_MAX;
-
-            return $priorityA - $priorityB;
-        });
-
-        return $this->credits;
     }
 
     /**
@@ -222,17 +160,20 @@ class Program
     public function addDesc(?string $desc, $lang = 'fr'): void
     {
         if (!empty($desc)) {
-            $this->descs[] = ['name' => $desc, 'lang' => $lang];
+            $this->addChild(new Tag('desc', $desc, ['lang' => $lang]));
         }
     }
 
-    /**
-     * @return array<array{name: string, lang: string}>
-     */
-    public function getCategories(): array
+    public function setDate(string $date): void
     {
-        return $this->categories;
+        $this->setChild(new Tag('date', $date, []));
     }
+
+    public function setCountry(string $country, ?string $lang = null): void
+    {
+        $this->setChild(new Tag('country', $country, ['lang' => $lang]));
+    }
+
 
     /**
      * @param string|null $category
@@ -242,24 +183,18 @@ class Program
     public function addCategory(?string $category, $lang = 'fr'): void
     {
         if (!empty($category)) {
-            $this->categories[] = ['name' => $category, 'lang' => $lang];
+            $this->addChild(new Tag('category', $category, ['lang' => $lang]));
         }
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getIcon(): ?string
-    {
-        return $this->icon;
     }
 
     /**
      * Définition de l'icone du programme
      */
-    public function setIcon(?string $icon): void
+    public function addIcon(?string $icon, string $width = null, string $height = null): void
     {
-        $this->icon = $icon;
+        if (!empty($icon)) {
+            $this->addChild(new Tag('icon', null, ['src' => $icon, 'width' => $width, 'height' => $height]));
+        }
     }
 
     /**
@@ -281,10 +216,6 @@ class Program
     /**
      * @return string|null
      */
-    public function getEpisodeNum(): ?string
-    {
-        return $this->episodeNum;
-    }
 
     /**
      * Définition de la saison et de l'épisode du programme
@@ -302,33 +233,17 @@ class Program
         if ($episode < 0) {
             $episode = 0;
         }
-        $this->episodeNum = $season . '.' . $episode;
-    }
-
-    /**
-     * @return array<array{name: string, lang: string}>
-     */
-    public function getSubtitles(): array
-    {
-        return $this->subtitles;
+        $this->setChild(new Tag('episode-num', "$season.$episode", ['system' => 'xmltv_ns']));
     }
 
     /**
      * Ajout d'un sous-titre au programme
      */
-    public function addSubtitle(?string $subtitle, $lang = 'fr'): void
+    public function addSubTitle(?string $subtitle, $lang = 'fr'): void
     {
         if (!empty($subtitle)) {
-            $this->subtitles[] = ['name' => $subtitle, 'lang' => $lang];
+            $this->addChild(new Tag('sub-title', $subtitle, ['lang' => $lang]));
         }
-    }
-
-    /**
-     * @return array{string, string}|null
-     */
-    public function getRating(): ?array
-    {
-        return $this->rating;
     }
 
     /**
@@ -337,7 +252,13 @@ class Program
     public function setRating(string|int|null $rating, $system = 'CSA'): void
     {
         if (isset($rating)) {
-            $this->rating = [$rating, $system];
+            $pictos = RatingPicto::getInstance();
+            $picto = $pictos->getPictoFromRatingSystem((string)$rating, $system);
+            $children = ['value' => [new Tag('value', (string) $rating)]];
+            if (isset($picto)) {
+                $children['icon'] = [new Tag('icon', null, ['src' => $picto])];
+            }
+            $this->setChild(new Tag('rating', $children, ['system' => $system]));
         }
     }
 }

@@ -54,7 +54,7 @@ class TV5 extends AbstractProvider implements ProviderInterface
             $program->addTitle($val['title']);
             $program->addDesc((!empty($val['description'])) ? $val['description'] : 'Pas de description');
             $program->addCategory($val['category']);
-            $program->setIcon(!empty($val['image']) ? '' . $val['image'] : '');
+            $program->addIcon(!empty($val['image']) ? '' . $val['image'] : '');
             if (isset($val['season'])) {
                 if ($val['season'] == '') {
                     $val['season'] = '1';
@@ -62,7 +62,7 @@ class TV5 extends AbstractProvider implements ProviderInterface
                 if ($val['episode'] == '') {
                     $val['episode'] = '1';
                 }
-                $program->addSubtitle($val['episode_name']);
+                $program->addSubTitle($val['episode_name']);
                 $program->setEpisodeNum($val['season'], $val['episode']);
             }
             $channelObj->addProgram($program);

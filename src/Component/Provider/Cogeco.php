@@ -133,14 +133,14 @@ class Cogeco extends AbstractProvider implements ProviderInterface
             } else {
                 $program->addTitle($title);
                 if (strlen($subtitle) > 0) {
-                    $program->addSubtitle($subtitle);
+                    $program->addSubTitle($subtitle);
                 }
             }
-            $program->setIcon('https:'.(str_replace('240x135', '1280x720', $img[1] ?? '')));
+            $program->addIcon('https:'.(str_replace('240x135', '1280x720', $img[1] ?? '')));
             $program->addCategory($programCategories[$index]);
             $program->addDesc($description[1] ?? 'Aucune description');
             if (str_contains($content, '(NOUVEAU)')) {
-                $program->addCustomTag('premiere');
+                $program->setPremiere();
             }
             $channelObj->addProgram($program);
         }

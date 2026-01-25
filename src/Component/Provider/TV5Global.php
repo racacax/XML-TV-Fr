@@ -126,7 +126,7 @@ class TV5Global extends AbstractProvider implements ProviderInterface
             }
             $program->addCategory($genre[1] ?? 'Inconnu');
             if (!empty($image[1])) {
-                $program->setIcon('https://'.$this->getRootDomain($channelObj).$image[1]);
+                $program->addIcon('https://'.$this->getRootDomain($channelObj).$image[1]);
             }
             $channelObj->addProgram($program);
         }

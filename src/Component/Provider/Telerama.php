@@ -64,12 +64,12 @@ class Telerama extends AbstractProvider implements ProviderInterface
         $programObj->addTitle($program['title'] ?? 'Aucun titre');
         $programObj->addCategory(ucfirst($program['type'] ?? 'Aucune catégorie'));
         if ($program['is_inedit']) {
-            $programObj->addCustomTag('premiere');
+            $programObj->setPremiere();
         }
         $img = $program['illustration']['url'];
         if ($img) {
             $img = str_replace('{{height}}', '720', str_replace('{{width}}', '1280', $img));
-            $programObj->setIcon($img);
+            $programObj->addIcon($img);
         }
         foreach ([10,12,16,18] as $csaRating) {
             if (in_array("moins-de-$csaRating", $program['flags'] ?? [])) {
@@ -106,9 +106,9 @@ class Telerama extends AbstractProvider implements ProviderInterface
             $programObj->addDesc($synopsis);
             preg_match('/<p class="article__page-subtitle">(.*?)<\/p>/', $content, $subtitle);
             $subtitle = $subtitle[1];
-            $programObj->addSubtitle($subtitle);
+            $programObj->addSubTitle($subtitle);
             $subtitle2 = $this->getElementValue($content, 'Titre de l’épisode');
-            $programObj->addSubtitle($subtitle2);
+            $programObj->addSubTitle($subtitle2);
             $scenario = $this->getElementValue($content, 'Scénario');
             $programObj->addCredit($scenario, 'writer');
             $director = $this->getElementValue($content, 'Réalisateur');

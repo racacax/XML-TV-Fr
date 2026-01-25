@@ -44,12 +44,12 @@ class Teleboy extends AbstractProvider implements ProviderInterface
             $programObj = Program::withTimestamp(strtotime($item['begin']), strtotime($item['end']));
             $programObj->addTitle($item['title']);
             if (!empty($item['subtitle'])) {
-                $programObj->addSubtitle($item['subtitle']);
+                $programObj->addSubTitle($item['subtitle']);
             }
             $programObj->addDesc(@$item['short_description'] ?? 'Aucune description');
             $programObj->addCategory(@$item['genre']['name_fr'] ?? 'Inconnu');
             if (!empty($item['primary_image'])) {
-                $programObj->setIcon($item['primary_image']['base_path'].'raw/'.$item['primary_image']['hash'].'.jpg');
+                $programObj->addIcon($item['primary_image']['base_path'].'raw/'.$item['primary_image']['hash'].'.jpg');
             }
             $channelObj->addProgram($programObj);
         }

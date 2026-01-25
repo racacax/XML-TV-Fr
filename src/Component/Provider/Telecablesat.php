@@ -66,10 +66,10 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
             preg_match('/<div class="label w40">.*?Présentateur.*?<\/div>.*?<div class="text w60">(.*?)<\/div>/s', $content, $presenter);
             preg_match('/<div class="overlayerpicture">.*?<img class="lazy" alt=".*?" data-src="(.*?)"/s', $content, $imgs);
             if (isset($subtitle[1])) {
-                $program->addSubtitle($subtitle[1]);
+                $program->addSubTitle($subtitle[1]);
             }
             if (isset($imgs[1])) {
-                $program->setIcon('https:'.$imgs[1]);
+                $program->addIcon('https:'.$imgs[1]);
             }
             $desc = '';
             if (!empty($resume[1])) {
@@ -143,7 +143,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                         $program = Program::withTimestamp(intval($times[1][$i]), intval($times[2][$i]));
                         $program->addTitle(trim($genresAndTitles[2][$i] ?? ''));
                         $program->addCategory(trim($genresAndTitles[1][$i] ?? ''));
-                        $program->setIcon('https:'.$imgs[1][$i]);
+                        $program->addIcon('https:'.$imgs[1][$i]);
                         $this->setStatus(round($i * 100 / $count, 2).' % ('.($urlIndex + 1).'/2)');
                         $channelObj->addProgram(
                             $program

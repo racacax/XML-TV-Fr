@@ -76,7 +76,7 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         }
         $programObj = new Program($startDateObj, $endTimeObj);
         if ($isPremiere) {
-            $programObj->addCustomTag('premiere');
+            $programObj->setPremiere();
         }
         $programObj->addTitle(trim(strip_tags($title[1])));
         $programObj->addCategory(trim(end($subDetailsSplit)));
@@ -95,13 +95,13 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             }
             if ($subtitleItems) {
                 $subtitle = join(' | ', $subtitleItems);
-                $programObj->addSubtitle($subtitle);
+                $programObj->addSubTitle($subtitle);
             }
         }
         if ($imgs[1]) {
             $imgs = explode(',', $imgs[1]);
             $img = explode(' ', trim(end($imgs)))[0];
-            $programObj->setIcon($img);
+            $programObj->addIcon($img);
         }
 
         if ($this->enableDetails && $url[1]) {
