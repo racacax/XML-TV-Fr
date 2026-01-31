@@ -115,7 +115,7 @@ class TV5Global extends AbstractProvider implements ProviderInterface
                 return $channelObj;
             }
             $program = new Program($startTimeObj, $endTimeObj);
-            if ($title[1]) {
+            if (@$title[1]) {
                 $program->addTitle($title[1]);
                 $program->addSubTitle($titleOrSubtitle[1] ?? 'Aucun sous-titre');
             } else {

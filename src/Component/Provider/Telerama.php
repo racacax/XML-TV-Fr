@@ -62,7 +62,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
     {
         $programObj = Program::withTimestamp(strtotime($program['start_date']), strtotime($program['end_date']));
         $programObj->addTitle($program['title'] ?? 'Aucun titre');
-        $programObj->addCategory(ucfirst($program['type'] ?? 'Aucune catégorie'));
+        $programObj->addCategory(ucfirst(strip_tags($program['type'] ?? 'Aucune catégorie')));
         if ($program['is_inedit']) {
             $programObj->setPremiere();
         }
@@ -76,6 +76,12 @@ class Telerama extends AbstractProvider implements ProviderInterface
                 $programObj->setRating($csaRating);
             }
         }
+        if (in_array('audiodescription', $program['flags'] ?? [])) {
+            $programObj->setAudioDescribed();
+        }
+        if (in_array('teletexte', $program['flags'] ?? [])) {
+            $programObj->addSubtitles('teletext');
+        }
         if ($this->enableDetails && !empty($program['deeplink'])) {
             $this->assignDetails($programObj, $program['deeplink']);
         }
@@ -87,7 +93,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
     {
         preg_match('/<p class="sheet__info-item-label">'.$element.'<\/p>.*?<p class="sheet__info-item-value">(.*?)<\/p>/', $content, $matches);
 
-        return $matches[1];
+        return @$matches[1];
     }
 
     private function assignDetails(Program $programObj, string $deeplink)
@@ -116,7 +122,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
             $genre = $this->getElementValue($content, 'Genre');
             $presenter = $this->getElementValue($content, 'Présentateur');
             $programObj->addCredit($presenter, 'presenter');
-            $programObj->addCategory($genre);
+            $programObj->addCategory(strip_tags($genre));
             preg_match_all('/<p class="sheet__info-item-label sheet__info-item-label--casting">(.*?)<\/p>.*?<p class="sheet__info-item-value">(.*?)<\/p>/', $content, $casting);
             for ($i = 0; $i < count($casting[0]); $i++) {
                 $programObj->addCredit($casting[1][$i].' ('.$casting[2][$i].')', 'actor');

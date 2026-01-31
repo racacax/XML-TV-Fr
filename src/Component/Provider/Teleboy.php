@@ -51,6 +51,22 @@ class Teleboy extends AbstractProvider implements ProviderInterface
             if (!empty($item['primary_image'])) {
                 $programObj->addIcon($item['primary_image']['base_path'].'raw/'.$item['primary_image']['hash'].'.jpg');
             }
+            if ($item['is_audio_description']) {
+                $programObj->setAudioDescribed();
+            }
+
+            if ($item['has_caption']) {
+                $programObj->addSubtitles('teletext');
+            }
+            if ($item['country']) {
+                $programObj->setCountry($item['country']);
+            }
+            if ($item['year']) {
+                $programObj->setDate($item['date']);
+            }
+            if ($item['new']) {
+                $programObj->setPremiere();
+            }
             $channelObj->addProgram($programObj);
         }
 

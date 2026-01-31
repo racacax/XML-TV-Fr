@@ -79,7 +79,7 @@ class Tag
     }
 
     /**
-     * @param array<string, array<Tag>>|string|null $value
+     * @param array<string, array<Tag>>|string $value
      * @return void
      */
     public function setValue(array|string $value): void
@@ -113,7 +113,7 @@ class Tag
                 }
             }
 
-            return "<{$this->name}{$attrs}>{$childrenXML}</{$this->name}>\n";
+            return "<{$this->name}{$attrs}>\n{$childrenXML}</{$this->name}>\n";
         }
 
         $escapedValue = htmlspecialchars($this->value, ENT_XML1 | ENT_COMPAT, 'UTF-8');

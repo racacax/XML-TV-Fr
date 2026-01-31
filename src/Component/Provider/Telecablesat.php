@@ -41,7 +41,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         return null;
     }
 
-    private function addDetails(Program &$program, string $url)
+    private function addDetails(Program &$program, string $url, string $diffusionId): bool
     {
         $content = $this->getContent($url);
         if (!empty($content)) {
@@ -65,6 +65,16 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
             preg_match_all('/span itemprop="actor">(.*?)<\/span>(.*?)</s', $content, $actors);
             preg_match('/<div class="label w40">.*?Présentateur.*?<\/div>.*?<div class="text w60">(.*?)<\/div>/s', $content, $presenter);
             preg_match('/<div class="overlayerpicture">.*?<img class="lazy" alt=".*?" data-src="(.*?)"/s', $content, $imgs);
+            preg_match("/<div data-chaine.*?data-diffusion='$diffusionId'>(.*?)<ul class=\"bouquets\">/s", $content, $diffusionInfo);
+
+            if (isset($diffusionInfo[1])) {
+                if (str_contains($diffusionInfo[1], 'class="ear"')) {
+                    $program->addSubtitles('teletext');
+                }
+                if (str_contains($diffusionInfo[1], 'class="eye"')) {
+                    $program->setAudioDescribed();
+                }
+            }
             if (isset($subtitle[1])) {
                 $program->addSubTitle($subtitle[1]);
             }
@@ -76,7 +86,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                 $desc .= trim($resume[1])."\n\n";
             }
             if (isset($critique[1])) {
-                $desc .= 'Critique : '.trim($critique[1])."\n\n";
+                $program->addReview(trim($critique[1]));
             }
             if (isset($directors[1])) {
                 $directors_split = explode(',', $directors[1]);
@@ -129,6 +139,7 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                     preg_match_all('/data-src="(.*?)"/', $channelContent, $imgs);
                     preg_match_all('/<div class="hour-type">.*?<\/span>(.*?)<\/div>.*?<span class="title">(.*?)<\/span>/', $channelContent, $genresAndTitles);
                     preg_match_all('/class="link" href="(.*?)"/', $channelContent, $links);
+                    preg_match_all('/data-diffusion="(.*?)"/', $channelContent, $diffusionIds);
                     $count = count($times[1]);
                     if (count($imgs[1]) != $count || count($genresAndTitles[1]) != $count || count($links[1]) != $count) {
                         return false;
@@ -143,18 +154,18 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                         $program = Program::withTimestamp(intval($times[1][$i]), intval($times[2][$i]));
                         $program->addTitle(trim($genresAndTitles[2][$i] ?? ''));
                         $program->addCategory(trim($genresAndTitles[1][$i] ?? ''));
-                        $program->addIcon('https:'.$imgs[1][$i]);
                         $this->setStatus(round($i * 100 / $count, 2).' % ('.($urlIndex + 1).'/2)');
                         $channelObj->addProgram(
                             $program
                         );
                         if ($this->enableDetails) {
-                            $result = $this->addDetails($program, self::$BASE_URL.$links[1][$i]);
+                            $result = $this->addDetails($program, self::$BASE_URL.$links[1][$i], $diffusionIds[1][$i]);
                             if (!$result) {
                                 break;
                             }
                             sleep(3);
                         }
+                        $program->addIcon('https:'.$imgs[1][$i]);
                     }
                 }
             }

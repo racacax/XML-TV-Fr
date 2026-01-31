@@ -80,7 +80,7 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         }
         $programObj->addTitle(trim(strip_tags($title[1])));
         $programObj->addCategory(trim(end($subDetailsSplit)));
-        if ($subtitleDetails[1]) {
+        if (@$subtitleDetails[1]) {
             $subtitleDetailsSplit = explode('|', $subtitleDetails[1]);
             $subtitleItems = [];
             foreach ($subtitleDetailsSplit as $subtitleDetail) {

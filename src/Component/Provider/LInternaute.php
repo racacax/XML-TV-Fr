@@ -57,7 +57,7 @@ class LInternaute extends AbstractProvider implements ProviderInterface
 
         $programObj = new Program($startDateObj, $endTimeObj);
         $programObj->addTitle(trim(strip_tags($title[1])));
-        if ($subtitle[1]) {
+        if (@$subtitle[1]) {
             $programObj->addSubtitle(trim(strip_tags($subtitle[1])));
         }
         $categorySplited = explode('-', $category[1]);

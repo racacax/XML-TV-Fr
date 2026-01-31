@@ -95,7 +95,7 @@ class Tele2Semaines extends AbstractProvider implements ProviderInterface
             $programObj->addTitle(trim(strip_tags($title[1])));
             $programObj->addDesc(trim(strip_tags($synopsis[1] ?? 'Aucune description')));
             $programObj->addCategory(trim(strip_tags($genre[1])));
-            if ($note[1]) {
+            if (@$note[1]) {
                 $programObj->addStarRating(intval($note[1]), intval($note[2]));
             }
             $src = str_replace('109x70', '1280x720', explode(' ', $src[1] ?? '')[0]);

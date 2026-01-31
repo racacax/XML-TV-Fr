@@ -85,6 +85,9 @@ class Orange extends AbstractProvider implements ProviderInterface
                 $program->setEpisodeNum($val['season']['number'], $val['episodeNumber']);
                 $program->addSubTitle($val['title']);
             }
+            if ($val['audioDescription']) {
+                $program->setAudioDescribed();
+            }
 
             $channelObj->addProgram($program);
         }
