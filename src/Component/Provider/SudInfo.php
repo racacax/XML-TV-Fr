@@ -103,10 +103,11 @@ class SudInfo extends AbstractProvider implements ProviderInterface
                 $programsWithSlug[] = ['slug' => $program['slug'], 'obj' => $programObj];
                 $channelObj->addProgram($programObj);
                 $programObj->addTitle($program['title']);
-                $programObj->addSubtitle($program['subTitle']);
+                $programObj->addSubTitle($program['subTitle']);
                 $programObj->addCategory(@($program['contentSubCategory'] ?? [])['name']);
                 $images = @$program['images'] ?? [];
-                $programObj->setIcon(@($images[1] ?? $images[0])['url']);
+                $img = str_replace('/square/', '/landscape/', @($images[0] ?? [])['url'] ?? '');
+                $programObj->addIcon(!empty($img) ? 'https://ipx-programmestv.sudinfo.be/_ipx/f_webp,sharpen_100,w_1280,h_720/'.$img : null);
             }
         }
         if ($this->enableDetails) {
@@ -159,6 +160,9 @@ class SudInfo extends AbstractProvider implements ProviderInterface
             $content = @$props['content'] ?? [];
             $programObj->addCategory(@($content['category'] ?? [])['name']);
             $programObj->addDesc(@(($content['texts'] ?? [])[0] ?? [])['detail']);
+            if (!empty($content['yearOfProduction'])) {
+                $programObj->setDate((string)$content['yearOfProduction']);
+            }
             $this->addCasting(@$content['casting'] ?? [], $programObj);
         }
         $this->setStatus('Terminé');

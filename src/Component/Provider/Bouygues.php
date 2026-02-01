@@ -27,6 +27,7 @@ class Bouygues extends AbstractProvider implements ProviderInterface
         [$minDate, $maxDate] = $this->getMinMaxDate($date);
 
         $json = json_decode($this->getContentFromURL($this->generateUrl($channelObj, $minDate, $maxDate)), true);
+
         if (empty($json['channel'][0]['event'])) {
             return false;
         }
@@ -71,13 +72,19 @@ class Bouygues extends AbstractProvider implements ProviderInterface
                 }
             }
             $programObj->addTitle($program['programInfo']['longTitle']);
-            $programObj->addSubtitle(@$program['programInfo']['secondaryTitle']);
+            $programObj->addSubTitle(@$program['programInfo']['secondaryTitle']);
             $programObj->addDesc(@$program['programInfo']['longSummary'] ?? @$program['programInfo']['shortSummary']);
             $programObj->setEpisodeNum(@$program['programInfo']['seriesInfo']['seasonNumber'], @$program['programInfo']['seriesInfo']['episodeNumber']);
             $programObj->addCategory($genre);
             $programObj->addCategory($subGenre);
-            $programObj->setIcon(isset($program['media'][0]['url']) ? 'https://img.bouygtel.fr' . $program['media'][0]['url'] : null);
+            $programObj->addIcon(isset($program['media'][0]['url']) ? 'https://img.bouygtel.fr' . $program['media'][0]['url'] : null);
             $programObj->setRating($csa);
+            if (isset($program['programInfo']['countryOfOrigin'])) {
+                $programObj->setCountry($program['programInfo']['countryOfOrigin'], 'fr');
+            }
+            if (isset($program['programInfo']['productionDate'])) {
+                $programObj->setDate(strval($program['programInfo']['productionDate']));
+            }
             $channelObj->addProgram($programObj);
         }
 

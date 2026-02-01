@@ -72,9 +72,9 @@ class LEquipeLive extends AbstractProvider implements ProviderInterface
                 $endTime = min(@$channelItems[$i + 1]['time'] ?? PHP_INT_MAX, $channelItems[$i]['time'] + 7200);
                 $program = Program::withTimestamp($channelItems[$i]['time'], $endTime);
                 $program->addTitle($channelItems[$i]['title']);
-                $program->addSubtitle($channelItems[$i]['subtitle']);
+                $program->addSubTitle($channelItems[$i]['subtitle']);
                 $program->addCategory('Sports');
-                $program->setIcon($channelItems[$i]['img']);
+                $program->addIcon($channelItems[$i]['img']);
                 $channelObj->addProgram($program);
             }
         }

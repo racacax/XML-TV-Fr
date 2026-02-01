@@ -95,11 +95,11 @@ class Tele2Semaines extends AbstractProvider implements ProviderInterface
             $programObj->addTitle(trim(strip_tags($title[1])));
             $programObj->addDesc(trim(strip_tags($synopsis[1] ?? 'Aucune description')));
             $programObj->addCategory(trim(strip_tags($genre[1])));
-            if ($note[1]) {
-                $programObj->setStarRating(intval($note[1]), intval($note[2]));
+            if (@$note[1]) {
+                $programObj->addStarRating(intval($note[1]), intval($note[2]));
             }
             $src = str_replace('109x70', '1280x720', explode(' ', $src[1] ?? '')[0]);
-            $programObj->setIcon($src);
+            $programObj->addIcon($src);
             $channelObj->addProgram($programObj);
             if ($href[1] && $this->enableDetails) {
                 $this->assignDetails($href[1], $programObj);
@@ -136,7 +136,7 @@ class Tele2Semaines extends AbstractProvider implements ProviderInterface
         }
         preg_match('/<div class="review-content">(.*?)<\/div>/s', $content, $review);
         if ($review[1]) {
-            $programObj->setReview($review[1], 'Tele 2 Semaines');
+            $programObj->addReview($review[1], 'Tele 2 Semaines');
         }
     }
 

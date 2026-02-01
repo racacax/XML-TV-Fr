@@ -63,10 +63,10 @@ class SixPlay extends AbstractProvider implements ProviderInterface
                 }
                 $programObj = Program::withTimestamp(strtotime($program['real_diffusion_start_date']), strtotime($program['real_diffusion_end_date']));
                 $programObj->addTitle($program['title']);
-                $programObj->addSubtitle(@$program['subtitle']);
+                $programObj->addSubTitle(@$program['subtitle']);
                 $programObj->addDesc(@$program['description']);
                 $programObj->addCategory($genre);
-                $programObj->setIcon($image);
+                $programObj->addIcon($image);
                 $programObj->setRating($csa);
                 $channelObj->addProgram($programObj);
             }

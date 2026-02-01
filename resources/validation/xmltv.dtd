@@ -230,7 +230,7 @@ Perhaps there is some better XML syntax we could use for that.
                      length?, icon*, url*, country*, episode-num*,
                      video?, audio?, previously-shown?, premiere?,
                      last-chance?, new?, subtitles*, rating*,
-                     star-rating*, review* )>
+                     star-rating*, review*, audio-described? )>
 <!ATTLIST programme start     CDATA #REQUIRED
                     stop      CDATA #IMPLIED
                     pdc-start CDATA #IMPLIED
@@ -240,6 +240,10 @@ Perhaps there is some better XML syntax we could use for that.
                     channel   CDATA #REQUIRED
                     clumpidx  CDATA "0/1" >
 
+<!-- Audio described programme (for visually impaired people).
+This tag is not official but used in a few clients (TVHeadend, ...).
+-->
+<!ELEMENT audio-described EMPTY>
 <!-- Programme title, eg 'The Simpsons'. -->
 <!ELEMENT title (#PCDATA)>
 <!ATTLIST title lang CDATA #IMPLIED>

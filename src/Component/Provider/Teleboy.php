@@ -44,12 +44,28 @@ class Teleboy extends AbstractProvider implements ProviderInterface
             $programObj = Program::withTimestamp(strtotime($item['begin']), strtotime($item['end']));
             $programObj->addTitle($item['title']);
             if (!empty($item['subtitle'])) {
-                $programObj->addSubtitle($item['subtitle']);
+                $programObj->addSubTitle($item['subtitle']);
             }
             $programObj->addDesc(@$item['short_description'] ?? 'Aucune description');
             $programObj->addCategory(@$item['genre']['name_fr'] ?? 'Inconnu');
             if (!empty($item['primary_image'])) {
-                $programObj->setIcon($item['primary_image']['base_path'].'raw/'.$item['primary_image']['hash'].'.jpg');
+                $programObj->addIcon($item['primary_image']['base_path'].'raw/'.$item['primary_image']['hash'].'.jpg');
+            }
+            if ($item['is_audio_description']) {
+                $programObj->setAudioDescribed();
+            }
+
+            if ($item['has_caption']) {
+                $programObj->addSubtitles('teletext');
+            }
+            if ($item['country']) {
+                $programObj->setCountry($item['country']);
+            }
+            if ($item['year']) {
+                $programObj->setDate($item['date']);
+            }
+            if ($item['new']) {
+                $programObj->setPremiere();
             }
             $channelObj->addProgram($programObj);
         }
@@ -79,6 +95,6 @@ class Teleboy extends AbstractProvider implements ProviderInterface
         $date_end = $date->format('Y-m-d+23:59:59');
         $channelId = $this->channelsList[$channel->getId()];
 
-        return "https://api.teleboy.ch/epg/broadcasts?begin=${date_start}&end=${date_end}&expand=flags,primary_image,genre,short_description&limit=9999&skip=0&sort=station&station=${channelId}";
+        return "https://api.teleboy.ch/epg/broadcasts?begin=$date_start&end=$date_end&expand=flags,primary_image,genre,short_description&limit=9999&skip=0&sort=station&station=$channelId";
     }
 }

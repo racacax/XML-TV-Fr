@@ -156,10 +156,10 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
                 $programObj = Program::withTimestamp(strtotime($program['startTime']), strtotime($program['endTime']));
                 $programObj->addTitle($program['title']);
                 if (@$program['episodeTitle']) {
-                    $programObj->addSubtitle($program['episodeTitle']);
+                    $programObj->addSubTitle($program['episodeTitle']);
                 }
                 if ($program['new']) {
-                    $programObj->addCustomTag('premiere');
+                    $programObj->setPremiere();
                 }
                 $rating = explode('-', $program['rating'] ?? '');
                 $rating = end($rating);
@@ -168,7 +168,7 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
                     $programObj->setRating($rating, $ratingSystem);
                 }
                 $programObj->addCategory(ucfirst(strtolower($program['showType'])));
-                $programObj->setIcon(sprintf(self::$BASE_URL.'artwork/v3/artworks/artworkSelection/ASSET/%s/%s/SHOWCARD_BACKGROUND/2048x1024', $program['programSupplierId']['supplier'], $program['programSupplierId']['supplierId']));
+                $programObj->addIcon(sprintf(self::$BASE_URL.'artwork/v3/artworks/artworkSelection/ASSET/%s/%s/SHOWCARD_BACKGROUND/2048x1024', $program['programSupplierId']['supplier'], $program['programSupplierId']['supplierId']));
                 if (!$this->disableDetails) {
                     $this->addDetails($programObj, $index, $programCount, $blockIndex, $blockCount, $program['programId']);
                 }
@@ -199,7 +199,7 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
         }
     }
 
-    public function generateUrl(Channel $channel, \DateTimeImmutable $fromDate, \DateTimeImmutable $toDate = null, int $blockVersion = 1): string
+    public function generateUrl(Channel $channel, \DateTimeImmutable $fromDate, ?\DateTimeImmutable $toDate = null, int $blockVersion = 1): string
     {
         $channelId = $this->channelsList[$channel->getId()];
         $fromTime = $fromDate->format('Y-m-d\TH:i:s\Z');

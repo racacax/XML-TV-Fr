@@ -61,10 +61,16 @@ class ICIRadioCanadaTele extends AbstractProvider implements ProviderInterface
                 return $channelObj;
             }
             $program = Program::withTimestamp(strtotime($broadcast['startsAt']), strtotime($programs[$index + 1]['startsAt']));
-            $program->addCategory($broadcast['subtheme']);
-            $program->setIcon(str_replace('{0}', '635', str_replace('{1}', '16x9', @$broadcast['image']['url'] ?? '')));
+            $program->addCategory(@$broadcast['subtheme']);
+            $program->addIcon(str_replace('{0}', '635', str_replace('{1}', '16x9', @$broadcast['image']['url'] ?? '')));
             $program->addTitle($broadcast['title']);
             $program->addDesc(strip_tags($broadcast['descriptionHtml'] ?? 'Aucune description'));
+            if ($broadcast['hasVideoDescription']) {
+                $program->setAudioDescribed();
+            }
+            if ($broadcast['hasClosedCaptions']) {
+                $program->addSubtitles('teletext');
+            }
             $channelObj->addProgram($program);
         }
 

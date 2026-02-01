@@ -51,7 +51,7 @@ class Tebeosud extends AbstractProvider implements ProviderInterface
             $program = Program::withTimestamp($start, $end);
             $program->addTitle(trim($titles[1][$i]));
             $program->addDesc('Aucune description');
-            $program->setIcon($images[1][$i]);
+            $program->addIcon($images[1][$i]);
             $program->addCategory('Inconnu');
 
             $channelObj->addProgram($program);

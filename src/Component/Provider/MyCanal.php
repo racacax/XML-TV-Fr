@@ -100,6 +100,9 @@ class MyCanal extends AbstractProvider implements ProviderInterface
                 $programList[$index]['episode'] = @$detail['detail']['selectedEpisode']['episodeNumber'];
                 $programList[$index]['genre'] = @$detail['tracking']['dataLayer']['genre'];
                 $programList[$index]['genreDetailed'] = @$detail['tracking']['dataLayer']['subgenre'];
+                $programList[$index]['closedCaptioning'] = @$detail['detail']['informations']['closedCaptioning'];
+                $programList[$index]['reviews'] = @$detail['detail']['informations']['reviews'];
+                $programList[$index]['productionYear'] = @$detail['detail']['informations']['productionYear'];
 
                 $icon = $detail['episodes']['contents'][0]['URLImage'] ?? @$detail['detail']['informations']['URLImage'];
                 $icon = str_replace(['{resolutionXY}', '{imageQualityPercentage}'], ['640x360', '80'], $icon ?? '');
@@ -142,13 +145,27 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         foreach ($programList as $program) {
             $programObj = new Program($program['startTime'], $program['endTime']);
             $programObj->addTitle($program['title']);
-            $programObj->addSubtitle(@$program['subTitle']);
+            $programObj->addSubTitle(@$program['subTitle']);
             $programObj->addDesc(@$program['description']);
             $programObj->setEpisodeNum(@$program['season'], @$program['episode']);
             $programObj->addCategory(@$program['genre']);
             $programObj->addCategory(@$program['genreDetailed']);
-            $programObj->setIcon(@$program['icon']);
+            $programObj->addIcon(@$program['icon']);
             $programObj->setRating(@$program['csa']);
+            if (@$program['productionYear']) {
+                $programObj->setDate(strval($program['productionYear']));
+            }
+            if (@$program['closedCaptioning']) {
+                $programObj->addSubtitles('teletext');
+            }
+            foreach (($program['reviews'] ?? []) as $review) {
+                if (@$review['review']) {
+                    $programObj->addReview($review['review'], $review['name']);
+                }
+                if (@$review['stars']['value']) {
+                    $programObj->addStarRating($review['stars']['value'], 5, $review['stars']['type']);
+                }
+            }
             $channelObj->addProgram($programObj);
         }
 

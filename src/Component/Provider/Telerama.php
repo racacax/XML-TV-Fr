@@ -62,19 +62,25 @@ class Telerama extends AbstractProvider implements ProviderInterface
     {
         $programObj = Program::withTimestamp(strtotime($program['start_date']), strtotime($program['end_date']));
         $programObj->addTitle($program['title'] ?? 'Aucun titre');
-        $programObj->addCategory(ucfirst($program['type'] ?? 'Aucune catégorie'));
+        $programObj->addCategory(ucfirst(strip_tags($program['type'] ?? 'Aucune catégorie')));
         if ($program['is_inedit']) {
-            $programObj->addCustomTag('premiere');
+            $programObj->setPremiere();
         }
         $img = $program['illustration']['url'];
         if ($img) {
             $img = str_replace('{{height}}', '720', str_replace('{{width}}', '1280', $img));
-            $programObj->setIcon($img);
+            $programObj->addIcon($img);
         }
         foreach ([10,12,16,18] as $csaRating) {
             if (in_array("moins-de-$csaRating", $program['flags'] ?? [])) {
                 $programObj->setRating($csaRating);
             }
+        }
+        if (in_array('audiodescription', $program['flags'] ?? [])) {
+            $programObj->setAudioDescribed();
+        }
+        if (in_array('teletexte', $program['flags'] ?? [])) {
+            $programObj->addSubtitles('teletext');
         }
         if ($this->enableDetails && !empty($program['deeplink'])) {
             $this->assignDetails($programObj, $program['deeplink']);
@@ -87,7 +93,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
     {
         preg_match('/<p class="sheet__info-item-label">'.$element.'<\/p>.*?<p class="sheet__info-item-value">(.*?)<\/p>/', $content, $matches);
 
-        return $matches[1];
+        return @$matches[1];
     }
 
     private function assignDetails(Program $programObj, string $deeplink)
@@ -106,9 +112,9 @@ class Telerama extends AbstractProvider implements ProviderInterface
             $programObj->addDesc($synopsis);
             preg_match('/<p class="article__page-subtitle">(.*?)<\/p>/', $content, $subtitle);
             $subtitle = $subtitle[1];
-            $programObj->addSubtitle($subtitle);
+            $programObj->addSubTitle($subtitle);
             $subtitle2 = $this->getElementValue($content, 'Titre de l’épisode');
-            $programObj->addSubtitle($subtitle2);
+            $programObj->addSubTitle($subtitle2);
             $scenario = $this->getElementValue($content, 'Scénario');
             $programObj->addCredit($scenario, 'writer');
             $director = $this->getElementValue($content, 'Réalisateur');
@@ -116,7 +122,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
             $genre = $this->getElementValue($content, 'Genre');
             $presenter = $this->getElementValue($content, 'Présentateur');
             $programObj->addCredit($presenter, 'presenter');
-            $programObj->addCategory($genre);
+            $programObj->addCategory(strip_tags($genre));
             preg_match_all('/<p class="sheet__info-item-label sheet__info-item-label--casting">(.*?)<\/p>.*?<p class="sheet__info-item-value">(.*?)<\/p>/', $content, $casting);
             for ($i = 0; $i < count($casting[0]); $i++) {
                 $programObj->addCredit($casting[1][$i].' ('.$casting[2][$i].')', 'actor');

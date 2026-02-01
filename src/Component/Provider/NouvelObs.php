@@ -61,7 +61,7 @@ class NouvelObs extends AbstractProvider implements ProviderInterface
                 $program->setEpisodeNum($season[1], explode('/', $season[2])[0]);
             }
             if (isset($image[1])) {
-                $program->setIcon(str_replace('/p/p/', '/p/g/', $image[1]));
+                $program->addIcon(str_replace('/p/p/', '/p/g/', $image[1]));
             }
             $csa = match ($csa[1] ?? '') {
                 '2' => '-10',

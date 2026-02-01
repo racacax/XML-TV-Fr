@@ -88,8 +88,14 @@ class Proximus extends AbstractProvider implements ProviderInterface
             $programObj->addDesc(@$program['program']['description'] ?? 'Aucune description');
             $programObj->addCategory($this->formatCategory(@$program['category'] ?? 'Inconnu'));
             $programObj->addCategory($this->formatCategory(@$program['subCategory'] ?? 'Inconnu'));
+            if (@$program['supportForVisuallyImpaired']) {
+                $programObj->setAudioDescribed();
+            }
+            if (@$program['supportForHearingImpaired']) {
+                $programObj->addSubtitles('teletext');
+            }
             if (isset($program['program']['posterFileName'])) {
-                $programObj->setIcon('https://experience-cache.cdi.streaming.proximustv.be/posterserver/poster/EPG/' . $program['program']['posterFileName']);
+                $programObj->addIcon('https://experience-cache.cdi.streaming.proximustv.be/posterserver/poster/EPG/' . $program['program']['posterFileName']);
             }
             $programObj->setRating($csa);
 

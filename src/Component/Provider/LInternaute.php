@@ -57,20 +57,20 @@ class LInternaute extends AbstractProvider implements ProviderInterface
 
         $programObj = new Program($startDateObj, $endTimeObj);
         $programObj->addTitle(trim(strip_tags($title[1])));
-        if ($subtitle[1]) {
+        if (@$subtitle[1]) {
             $programObj->addSubtitle(trim(strip_tags($subtitle[1])));
         }
         $categorySplited = explode('-', $category[1]);
         $programObj->addCategory(trim($categorySplited[1]));
 
         if ($img[1]) {
-            $programObj->setIcon($img[1]);
+            $programObj->addIcon($img[1]);
         }
 
         if ($this->enableDetails && $href[1]) {
             $this->addDetails($programObj, $href[1]);
         }
-        if (count($programObj->getDescs()) == 0) {
+        if (count($programObj->getChildren('desc')) == 0) {
             // Add summary only if details didn't load
             $programObj->addDesc(trim(strip_tags($desc[1])));
         }
@@ -164,7 +164,7 @@ class LInternaute extends AbstractProvider implements ProviderInterface
                 $stars = count(explode('fill="#FC0"', $content)) - 1;
             }
             if ($stars > 0) {
-                $programObj->setStarRating($stars, 5);
+                $programObj->addStarRating($stars, 5);
             }
 
             preg_match_all('/<div class="grid_line gutter grid--norwd">.*?<div class="grid_left w25">(.*?)<\/div>.*?<div class="grid_last">.*?<b>(.*?)<\/b>.*?<\/div>.*?<\/div>/s', $content, $credits);

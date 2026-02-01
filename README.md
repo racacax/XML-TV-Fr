@@ -128,9 +128,9 @@ Exemple :
         foreach($results as $result) {
             $program = $this->channelObj->addProgram(strtotime($result['start']), strtotime($result['end']));
             $program->addTitle($result["title"], "en"); // argument langue optionnel, par defaut = "fr"
-            $program->setIcon("myIconUrl");
+            $program->addIcon("myIconUrl");
             $program->addCategory(...)
-            $program->addSubtitle(...)
+            $program->addSubTitle(...)
             ...
         }
         if($error){

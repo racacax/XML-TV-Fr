@@ -34,7 +34,9 @@ class Oqee extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date): Channel|bool
     {
         $dateObj = new \DateTimeImmutable($date.' 00:00 +00:00');
-        $timestamps = array_map(function ($hour) use ($dateObj) { return $dateObj->modify("$hour hours"); }, ['-6', '+0', '+6', '+12', '+18', '+24']);
+        $timestamps = array_map(function ($hour) use ($dateObj) {
+            return $dateObj->modify("$hour hours");
+        }, ['-6', '+0', '+6', '+12', '+18', '+24']);
 
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
@@ -62,13 +64,16 @@ class Oqee extends AbstractProvider implements ProviderInterface
                     $title = $this->getCustomMatchTitle($title, $desc);
                 }
                 $program->addTitle($title);
-                $program->addSubtitle(@$entry['live']['sub_title']);
+                $program->addSubTitle(@$entry['live']['sub_title']);
                 $program->addDesc($desc);
                 $program->addCategory(@$entry['live']['category']);
                 $program->addCategory(@$entry['live']['sub_category']);
                 $icon = str_replace('h%d', 'h1080', @$entry['pictures']['main'] ?? '');
-                $program->setIcon($icon);
+                $program->addIcon($icon);
                 $program->setRating('-'. $entry['live']['parental_rating']);
+                if ($entry['live']['audio_description']) {
+                    $program->setAudioDescribed();
+                }
                 $channelObj->addProgram($program);
             }
         }

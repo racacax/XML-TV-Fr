@@ -122,7 +122,7 @@ class TVHebdo extends AbstractProvider implements ProviderInterface
                     $program->addCredit($line, $current_role);
                 }
             }
-            $program->setIcon('https://i.imgur.com/5CHM14O.png');
+            $program->addIcon('https://i.imgur.com/5CHM14O.png');
             if (isset($rating) && strlen($rating) > 0 && strlen($rating) < 4) {
                 $rating_system = \racacax\XmlTv\Component\Utils::getCanadianRatingSystem($rating, $lang);
                 if (isset($rating_system)) {
