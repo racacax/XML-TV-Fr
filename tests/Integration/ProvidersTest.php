@@ -7,7 +7,6 @@ namespace racacax\XmlTvTest\Integration;
 use PHPUnit\Framework\TestCase;
 use racacax\XmlTv\Component\Provider\Bouygues;
 use racacax\XmlTv\Component\Provider\Cogeco;
-use racacax\XmlTv\Component\Provider\DAZN;
 use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
 use racacax\XmlTv\Component\Provider\LEquipeLive;
 use racacax\XmlTv\Component\Provider\LInternaute;
@@ -48,7 +47,6 @@ class ProvidersTest extends TestCase
         [Cogeco::class, ['channels' => ['CBFT.ca']]],
         [RMC::class, ['channels' => ['BFMTV.fr']]],
         [Bouygues::class, ['channels' => ['TF1.fr']]],
-        [DAZN::class, ['channels' => ['DAZNLigue1.fr']]],
         [ICIRadioCanadaTele::class, ['channels' => ['CBAFT.ca']]],
         [MyCanal::class, ['channels' => ['TF1.fr']]],
         [NouvelObs::class, ['channels' => ['TF1.fr']]],
@@ -86,7 +84,9 @@ class ProvidersTest extends TestCase
         foreach (self::$TESTED_PROVIDERS_CHANNELS as $data) {
             $this->assertGreaterThanOrEqual(count($data[1]['channels']), 1);
         }
-        $testedProviders = array_merge(array_map(function ($p) { return $p[0]; }, self::$TESTED_PROVIDERS_CHANNELS), self::$IGNORED_PROVIDERS);
+        $testedProviders = array_merge(array_map(function ($p) {
+            return $p[0];
+        }, self::$TESTED_PROVIDERS_CHANNELS), self::$IGNORED_PROVIDERS);
         sort($testedProviders);
         sort($allProviders);
         $this->assertEquals($allProviders, $testedProviders);

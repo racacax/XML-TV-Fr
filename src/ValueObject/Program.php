@@ -65,7 +65,7 @@ class Program extends Tag
         $this->addChild(new Tag('star-rating', ['value' => [new Tag('value', "$stars/$totalStars")]], ['system' => $system]));
     }
 
-    public function addReview(string $review, string $source = null, string $reviewer = null): void
+    public function addReview(string $review, ?string $source = null, ?string $reviewer = null): void
     {
         $this->addChild(new Tag('review', $review, [
             'source' => $source,
@@ -105,7 +105,7 @@ class Program extends Tag
 
 
 
-    public function setPreviouslyShown(DateTime|DateTimeImmutable $start = null, ?string $channel = null): void
+    public function setPreviouslyShown(DateTime|DateTimeImmutable|null $start = null, ?string $channel = null): void
     {
         $this->setChild(new Tag('previously-shown', null, [
             'start' => $start?->setTimezone(new DateTimeZone('Europe/Paris'))->format('YmdHis O'),
@@ -114,7 +114,7 @@ class Program extends Tag
     }
 
 
-    public function setPremiere(string $value = null, string $lang = null): void
+    public function setPremiere(?string $value = null, ?string $lang = null): void
     {
         $this->setChild(new Tag('premiere', $value, [
             'lang' => $lang
@@ -190,7 +190,7 @@ class Program extends Tag
     /**
      * Définition de l'icone du programme
      */
-    public function addIcon(?string $icon, string $width = null, string $height = null): void
+    public function addIcon(?string $icon, ?string $width = null, ?string $height = null): void
     {
         if (!empty($icon)) {
             $this->addChild(new Tag('icon', null, ['src' => $icon, 'width' => $width, 'height' => $height]));

@@ -199,7 +199,7 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
         }
     }
 
-    public function generateUrl(Channel $channel, \DateTimeImmutable $fromDate, \DateTimeImmutable $toDate = null, int $blockVersion = 1): string
+    public function generateUrl(Channel $channel, \DateTimeImmutable $fromDate, ?\DateTimeImmutable $toDate = null, int $blockVersion = 1): string
     {
         $channelId = $this->channelsList[$channel->getId()];
         $fromTime = $fromDate->format('Y-m-d\TH:i:s\Z');

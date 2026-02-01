@@ -35,7 +35,9 @@ class Layout
      */
     public static function showCursorOnExit(): void
     {
-        register_shutdown_function(function () { self::showCursor(); });
+        register_shutdown_function(function () {
+            self::showCursor();
+        });
         if (function_exists('pcntl_async_signals')) {
             pcntl_async_signals(true);
             pcntl_signal(SIGINT, function ($_) {
@@ -84,7 +86,9 @@ class Layout
 
     private function getLineCount(): int
     {
-        $lines = array_map(function ($line) { return join(' ', $line); }, $this->lines);
+        $lines = array_map(function ($line) {
+            return join(' ', $line);
+        }, $this->lines);
         $result = explode("\n", join("\n", $lines));
 
         return count($result);

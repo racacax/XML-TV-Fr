@@ -20,7 +20,7 @@ class Tag
      * @param array<string, string> $attributes
      * @param array<int, string> $sortedChildren
      */
-    public function __construct(string $name, array|string $value = null, array $attributes = [], array $sortedChildren = [])
+    public function __construct(string $name, array|string|null $value = null, array $attributes = [], array $sortedChildren = [])
     {
         $this->name = $name;
         $this->attributes = $attributes;

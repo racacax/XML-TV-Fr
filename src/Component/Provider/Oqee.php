@@ -34,7 +34,9 @@ class Oqee extends AbstractProvider implements ProviderInterface
     public function constructEPG(string $channel, string $date): Channel|bool
     {
         $dateObj = new \DateTimeImmutable($date.' 00:00 +00:00');
-        $timestamps = array_map(function ($hour) use ($dateObj) { return $dateObj->modify("$hour hours"); }, ['-6', '+0', '+6', '+12', '+18', '+24']);
+        $timestamps = array_map(function ($hour) use ($dateObj) {
+            return $dateObj->modify("$hour hours");
+        }, ['-6', '+0', '+6', '+12', '+18', '+24']);
 
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {

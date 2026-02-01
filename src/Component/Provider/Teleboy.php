@@ -95,6 +95,6 @@ class Teleboy extends AbstractProvider implements ProviderInterface
         $date_end = $date->format('Y-m-d+23:59:59');
         $channelId = $this->channelsList[$channel->getId()];
 
-        return "https://api.teleboy.ch/epg/broadcasts?begin=${date_start}&end=${date_end}&expand=flags,primary_image,genre,short_description&limit=9999&skip=0&sort=station&station=${channelId}";
+        return "https://api.teleboy.ch/epg/broadcasts?begin=$date_start&end=$date_end&expand=flags,primary_image,genre,short_description&limit=9999&skip=0&sort=station&station=$channelId";
     }
 }
