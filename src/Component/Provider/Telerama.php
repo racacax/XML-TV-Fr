@@ -111,7 +111,7 @@ class Telerama extends AbstractProvider implements ProviderInterface
             $synopsis = $synopsis[1];
             $programObj->addDesc($synopsis);
             preg_match('/<p class="article__page-subtitle">(.*?)<\/p>/', $content, $subtitle);
-            $subtitle = $subtitle[1];
+            $subtitle = @$subtitle[1];
             $programObj->addSubTitle($subtitle);
             $subtitle2 = $this->getElementValue($content, 'Titre de l’épisode');
             $programObj->addSubTitle($subtitle2);

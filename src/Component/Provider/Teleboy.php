@@ -62,7 +62,7 @@ class Teleboy extends AbstractProvider implements ProviderInterface
                 $programObj->setCountry($item['country']);
             }
             if ($item['year']) {
-                $programObj->setDate($item['date']);
+                $programObj->setDate((string)$item['year']);
             }
             if ($item['new']) {
                 $programObj->setPremiere();

@@ -104,7 +104,7 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             $programObj->addIcon($img);
         }
 
-        if ($this->enableDetails && $url[1]) {
+        if ($this->enableDetails && isset($url[1])) {
             $this->addDetails($programObj, $url[1]);
         }
 

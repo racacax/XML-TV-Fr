@@ -135,7 +135,7 @@ class Tele2Semaines extends AbstractProvider implements ProviderInterface
             }
         }
         preg_match('/<div class="review-content">(.*?)<\/div>/s', $content, $review);
-        if ($review[1]) {
+        if (isset($review[1])) {
             $programObj->addReview($review[1], 'Tele 2 Semaines');
         }
     }
