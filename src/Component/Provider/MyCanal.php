@@ -18,17 +18,18 @@ class MyCanal extends AbstractProvider implements ProviderInterface
     protected static array $apiKey = [];
     protected string $region = 'fr';
     protected bool $enableDetails;
-    private static array $HEADERS = ['Accept'=>'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-'Accept-Language'=>'fr-FR,fr-CA;q=0.9,en;q=0.8,en-US;q=0.7',
-'Accept-Encoding'=>'gzip, deflate, br, zstd',
-'Sec-GPC'=>'1',
-'Connection'=>'keep-alive',
-'Upgrade-Insecure-Requests'=>'1',
-'Sec-Fetch-Dest'=>'document',
-'Sec-Fetch-Mode'=>'navigate',
-'Sec-Fetch-Site'=>'none',
-'Sec-Fetch-User'=>'?1',
-'Priority'=>'u=0, i'];
+    private static array $HEADERS = ['Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language' => 'fr-FR,fr-CA;q=0.9,en;q=0.8,en-US;q=0.7',
+        'Accept-Encoding' => 'gzip, deflate, br, zstd',
+        'Sec-GPC' => '1',
+        'Connection' => 'keep-alive',
+        'Upgrade-Insecure-Requests' => '1',
+        'Sec-Fetch-Dest' => 'document',
+        'Sec-Fetch-Mode' => 'navigate',
+        'Sec-Fetch-Site' => 'none',
+        'Sec-Fetch-User' => '?1',
+        'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0',
+        'Priority' => 'u=0, i'];
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
         if (isset($extraParam['mycanal_enable_details'])) {
@@ -102,9 +103,8 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             $percent = round($index * 100 / $count, 2) . ' %';
             $this->setStatus($percent);
             $url = $program['URLPage'];
-            $promises[] = $this->client->requestAsync('GET', $url, self::$HEADERS)->then(function ($response) use (&$programList, $index) {
+            $promises[] = $this->client->requestAsync('GET', $url, ['headers' => self::$HEADERS])->then(function ($response) use (&$programList, $index) {
                 $detail = json_decode($response->getBody()->getContents(), true);
-                print_r($detail);
                 $programList[$index]['title'] = @$detail['detail']['informations']['title'] ?? $programList[$index]['title'] ?? 'Aucun titre';
                 $programList[$index]['subTitle'] = @$detail['episodes']['contents'][0]['subtitle'] ?? $programList[$index]['subTitle'];
                 $programList[$index]['description'] = @$detail['episodes']['contents'][0]['summary'] ?? @$detail['detail']['informations']['summary'];
@@ -205,7 +205,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             $id = end($spl);
             if ($id == strval($channelInfo['id'])) {
                 if (isset($channelData['URLLogoChannel'])) {
-                    return str_replace('{imageQualityPercentage}', '100', str_replace('{resolutionXY}', '640x480', $channelData['URLLogoChannel'])).'.png';
+                    return str_replace('{imageQualityPercentage}', '100', str_replace('{resolutionXY}', '640x480', $channelData['URLLogoChannel'])).'?=.png';
                 }
 
                 break;

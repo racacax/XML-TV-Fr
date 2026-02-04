@@ -40,6 +40,13 @@ class Cogeco extends AbstractProvider implements ProviderInterface
         return 'Inconnu';
     }
 
+    private function getEPGData(\DateTimeImmutable $start): ?string
+    {
+        $content = $this->getContentFromURL($this->generateUrl($start), ['Cookie' => 'TVMDS_Cookie='.self::$COOKIE_VALUE]);
+        $json = json_decode($content, true);
+
+        return  @$json['data'];
+    }
     /**
      * @throws Exception
      */
@@ -65,9 +72,7 @@ class Cogeco extends AbstractProvider implements ProviderInterface
             $percent = 'Main data (1/2) : '.round($i * 100 / ($count), 2) . ' %';
             $this->setStatus($percent);
             $start = $minStart->modify('+'.($span * $i).' hours');
-            $content = $this->getContentFromURL($this->generateUrl($channelObj, $start), ['Cookie' => 'TVMDS_Cookie='.self::$COOKIE_VALUE]);
-            $json = json_decode($content, true);
-            $html = @$json['data'];
+            $html = $this->getEPGData($start);
             if (!$html) {
                 return false;
             }
@@ -159,12 +164,29 @@ class Cogeco extends AbstractProvider implements ProviderInterface
             self::$COOKIE_VALUE
         );
     }
-    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    public function generateUrl(\DateTimeImmutable $date): string
     {
         return sprintf(
             'https://tvmds.tvpassport.com/tvmds/cogeco/grid_v3/grid.php?subid=tvpassport&lu=%s&wd=1138&ht=100000&mode=json&style=blue&wid=wh&st=%s&ch=1&tz=EST5EDT&lang=fr-ca&ctrlpos=top&items=99999&filter=',
             self::$COOKIE_VALUE,
             $date->getTimestamp()
         );
+    }
+
+    public function getLogo(string $channelId): ?string
+    {
+        parent::getLogo($channelId);
+        $channelInfo = $this->channelsList[$channelId];
+        $data = $this->getEPGData((new \DateTimeImmutable())->setTime(0, 0, 0));
+        $splitContent = explode('<span class="hidden-phone tvm_txt_chan_name">'.$channelInfo.'</span>', $data)[0];
+        $expl = explode(' class="tvm_channel_row">', $splitContent);
+        $channelRow = end($expl);
+        preg_match('/img src="(.*?)"/s', $channelRow, $logo);
+        $logo = @$logo[1];
+        if ($logo && !str_contains($logo, 'spacer')) {
+            return str_replace('76x28', '640x480', 'https:'.$logo);
+        }
+
+        return null;
     }
 }
