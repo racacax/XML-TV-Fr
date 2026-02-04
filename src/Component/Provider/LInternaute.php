@@ -31,12 +31,15 @@ class LInternaute extends AbstractProvider implements ProviderInterface
     private function getDayLabel(DateTimeImmutable $date): string
     {
         $date = $date->setTime(0, 0, 0);
+        if ($date->format('Y-m-d') === date('Y-m-d')) {
+            return '';
+        }
         $month = self::$MONTHS[intval($date->format('m'))];
         $day = self::$DAYS[$date->format('D')];
         $dayNumber = $date->format('d');
         $year = $date->format('Y');
 
-        return "$day-$dayNumber-$month-$year";
+        return "-$day-$dayNumber-$month-$year";
     }
     private function parseProgram(string $date, string $p): Program
     {
@@ -63,7 +66,7 @@ class LInternaute extends AbstractProvider implements ProviderInterface
         $categorySplited = explode('-', $category[1]);
         $programObj->addCategory(trim($categorySplited[1]));
 
-        if ($img[1]) {
+        if (isset($img[1])) {
             $programObj->addIcon($img[1]);
         }
 
@@ -122,7 +125,7 @@ class LInternaute extends AbstractProvider implements ProviderInterface
     {
         $channelId = $this->channelsList[$channel->getId()];
 
-        return "https://www.linternaute.com/television/programme-$channelId-$dayLabel/";
+        return "https://www.linternaute.com/television/programme-$channelId$dayLabel/";
     }
 
     private function addCredits(Program $programObj, array $credits): void
@@ -158,7 +161,7 @@ class LInternaute extends AbstractProvider implements ProviderInterface
 
 
             preg_match('/<span class="app_stars__note">.*?<span>.*?<span>(.*?)<\/span>/s', $content, $preciseNote);
-            if ($preciseNote[1]) {
+            if (isset($preciseNote[1])) {
                 $stars = floatval($preciseNote[1]);
             } else {
                 $stars = count(explode('fill="#FC0"', $content)) - 1;
@@ -174,14 +177,14 @@ class LInternaute extends AbstractProvider implements ProviderInterface
             $this->addCredits($programObj, $credits);
 
             preg_match('/<span class="bu_tvprogram_broadcasting_pegi">(.*?)<\/span>/s', $content, $csa);
-            if ($csa[1]) {
+            if (isset($csa[1])) {
                 $programObj->setRating(-intval($csa[1]));
             }
 
             preg_match('/episode_navigation_locator--season".*?>Saison (\d+)<\/a>/s', $content, $season);
             preg_match('/bu_tvprogram_episode_navigation_locator--mobile.*?EP(\d+)<\/span>/s', $content, $episode);
 
-            if ($episode[1]) {
+            if (isset($episode[1])) {
                 $programObj->setEpisodeNum($season[1], $episode[1]);
             }
 

@@ -233,7 +233,7 @@ class Program extends Tag
         if ($episode < 0) {
             $episode = 0;
         }
-        $this->setChild(new Tag('episode-num', "$season.$episode", ['system' => 'xmltv_ns']));
+        $this->setChild(new Tag('episode-num', "$season.$episode.", ['system' => 'xmltv_ns']));
     }
 
     /**
