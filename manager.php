@@ -1,5 +1,5 @@
 <?php
-$commands = ["export", "help", "fetch-channel"];
+$commands = ["export", "help", "fetch-channel", "update-default-logos"];
 if(in_array($argv[1], $commands)) {
     include "commands/".$argv[1].".php";
 } else {

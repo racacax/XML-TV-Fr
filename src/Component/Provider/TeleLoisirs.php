@@ -148,4 +148,23 @@ class TeleLoisirs extends AbstractProvider implements ProviderInterface
             $this->channelsList[$channel->getId()]
         );
     }
+
+    public function getLogo(string $channel): ?string
+    {
+        parent::getLogo($channel);
+        $channelUrl = $this->channelsList[$channel];
+        $content = $this->getContentFromURL('https://www.programme-tv.net/_esi/channel-list/?bouquet=perso&modal=0');
+        $split = explode($channelUrl, $content);
+        if (count($split) > 1) {
+            $delimited = explode('</li>', $split[1])[0];
+            preg_match('/src="(.*?)"/', $delimited, $img);
+            if (isset($img[1])) {
+                $img = str_replace('/80/', '/100/', $img[1]);
+
+                return str_replace('34x34', '480x480', $img);
+            }
+        }
+
+        return null;
+    }
 }

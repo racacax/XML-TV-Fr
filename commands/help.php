@@ -10,7 +10,14 @@ $commands = [
     \t\tphp manager.php fetch-channel [CHANNEL] [PROVIDER] [DATE] [FILENAME]
 
     \tExample:
-    \t\tphp manager.php fetch-channel TF1.fr Orange 2025-12-14 content.xml"
+    \t\tphp manager.php fetch-channel TF1.fr Orange 2025-12-14 content.xml",
+    "update-default-logos" => "Mettre à jour tous les logos par défaut depuis un provider donné.
+    
+    \tUtilisation:
+    \t\tphp manager.php update-default-logos [PROVIDER]
+
+    \tExample:
+    \t\tphp manager.php update-default-logos MyCanal"
 ];
 echo "\033[1mListe des commandes\n\n";
 foreach ($commands as $command => $desc) {

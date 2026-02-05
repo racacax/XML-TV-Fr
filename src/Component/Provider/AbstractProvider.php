@@ -29,6 +29,7 @@ abstract class AbstractProvider
     protected static $priority;
     private ?\Amp\Sync\Channel $workerChannel;
 
+    // Todo: Add logo priority
     public function __construct(Client $client, string $jsonPath, float $priority)
     {
         if (empty($this->channelsList) && file_exists($jsonPath)) {
@@ -66,6 +67,15 @@ abstract class AbstractProvider
     public function constructEPG(string $channel, string $date): Channel|bool
     {
         return ChannelFactory::createChannel($channel);
+    }
+
+    public function getLogo(string $channel): ?string
+    {
+        if (!$this->channelExists($channel)) {
+            throw new \Exception("Channel $channel does not exist in this provider");
+        }
+
+        return null;
     }
 
     /**

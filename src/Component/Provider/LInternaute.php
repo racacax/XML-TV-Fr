@@ -19,7 +19,7 @@ class LInternaute extends AbstractProvider implements ProviderInterface
     private bool $enableDetails;
     public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
     {
-        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_linternaute.json'), $priority ?? 0.6);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_linternaute.json'), $priority ?? 0.45);
 
         if (isset($extraParam['linternaute_enable_details'])) {
             $this->enableDetails = $extraParam['linternaute_enable_details'];
