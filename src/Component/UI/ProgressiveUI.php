@@ -10,18 +10,17 @@ use function Amp\delay;
 class ProgressiveUI implements UI
 {
     private int $cursorPosition = 0;
-    public function getClosure(array $threads, ChannelsManager $manager, array $guide, string $logLevel, int $index, int $guidesCount): \Closure
+    public function getClosure(array $threads, ChannelsManager $manager, string $logLevel): \Closure
     {
         Layout::showCursorOnExit();
         $this->cursorPosition = 0;
 
-        return function () use ($threads, $manager, $guide, $logLevel, $index, $guidesCount) {
+        return function () use ($threads, $manager, $logLevel) {
             $eventsDisplayed = 0;
             if ($logLevel != 'none') {
                 Layout::hideCursor();
                 $hasThreadRunning = true;
                 echo Utils::colorize("XML TV Fr - Génération des fichiers XMLTV\n", 'light blue');
-                echo Utils::colorize('Fichier :', 'cyan')." {$guide['filename']} ($index/$guidesCount)\n";
                 while ($hasThreadRunning) {
                     $layoutLength = @Utils::getMaxTerminalLength();
                     $events = $manager->getLatestEvents(PHP_INT_MAX);

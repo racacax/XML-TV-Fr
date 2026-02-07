@@ -77,9 +77,6 @@ class CacheFile
             return ($this->listFile[$key]['state']);
         }
         $exists = file_exists($this->getFileName($key));
-        if (str_contains($key, date('Y-m-d')) && $this->config->isForceTodayGrab() && !isset($this->createdKeys[$key])) {
-            return $exists ? EPGEnum::$OBSOLETE_CACHE : EPGEnum::$NO_CACHE;
-        }
         if ($exists) {
             $timeRange = Utils::getTimeRangeFromXMLString($this->getFileContent($key));
 
