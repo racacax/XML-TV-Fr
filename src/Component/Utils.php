@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace racacax\XmlTv\Component;
 
+use DateTimeZone;
 use racacax\XmlTv\Component\UI\MultiColumnUI;
 use racacax\XmlTv\Component\UI\ProgressiveUI;
 use racacax\XmlTv\Component\UI\UI;
@@ -276,18 +277,26 @@ class Utils
         return [$startDates, $endDates];
     }
 
-    public static function getTimeRangeFromXMLString(string $xmlContent): int
+    public static function getTimeSpanFromStartAndEndTimes(array $startDates, array $endDates): int
     {
-        /*
-         * Returns the difference between earliest start time and latest start time
-         * of an XML cache file, in seconds.
-        */
-        [$startDates, $endDates] = self::getStartAndEndDatesFromXMLString($xmlContent);
         if (count($endDates) == 0 || count($startDates) == 0) {
             return 0;
         }
+        $date = new \DateTime('@'.min($startDates));
+        $timestampBeginning = $date->setTimezone(new DateTimezone('Europe/Paris'))->setTime(0, 0, 0)->getTimestamp();
 
-        return max($endDates) - min($startDates);
+        return max($endDates) - $timestampBeginning;
+    }
+
+    public static function getTimeSpanFromBeginningOfDay(string $xmlContent): int
+    {
+        /*
+         * Returns the difference between 00:00 and latest start time
+         * of an XML cache file, in seconds.
+        */
+        [$startDates, $endDates] = self::getStartAndEndDatesFromXMLString($xmlContent);
+
+        return self::getTimeSpanFromStartAndEndTimes($startDates, $endDates);
     }
 
     public static function getCanadianRatingSystem(string $rating, $lang = 'fr'): ?string
@@ -320,6 +329,16 @@ class Utils
         } else {
             return [];
         }
+    }
+
+    public static function getAllMergedChannels(array $guides): array
+    {
+        $channelsArrays = [];
+        foreach ($guides as $guide) {
+            $channelsArrays[] = self::getChannelsFromGuide($guide);
+        }
+
+        return array_merge(...$channelsArrays);
     }
 
     /**
@@ -401,5 +420,26 @@ class Utils
         } else {
             return new ProgressiveUI();
         }
+    }
+
+    public static function importExportMethods(): void
+    {
+        $files = glob(__DIR__ . '/Export/*.php');
+        foreach ($files as $method) {
+            require_once $method;
+        }
+    }
+
+    public static function getExportInstances(array $exportHandlers): array
+    {
+        $instances = [];
+        foreach ($exportHandlers as $handler) {
+            $className = 'racacax\\XmlTv\\Component\\Export\\' . $handler['class'];
+            if (class_exists($className)) {
+                $instances[] = new $className($handler['params'] ?? []);
+            }
+        }
+
+        return $instances;
     }
 }

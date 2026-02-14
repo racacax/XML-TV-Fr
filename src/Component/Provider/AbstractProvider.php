@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace racacax\XmlTv\Component\Provider;
 
 use racacax\XmlTv\Component\ProviderCache;
+use racacax\XmlTv\Component\Utils;
 use racacax\XmlTv\ValueObject\EPGEnum;
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\ChannelFactory;
@@ -144,7 +145,8 @@ abstract class AbstractProvider
         if (count($startTimes) == 0) {
             return EPGEnum::$NO_CACHE;
         }
-        if (max($endTimes) - min($startTimes) > $config->getMinTimeRange()) {
+
+        if (Utils::getTimeSpanFromStartAndEndTimes($startTimes, $endTimes) > $config->getMinEndTime()) {
             return EPGEnum::$FULL_CACHE;
         } else {
             return EPGEnum::$PARTIAL_CACHE;

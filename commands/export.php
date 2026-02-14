@@ -26,7 +26,7 @@ if(!in_array("--skip-generation", $params)) {
 }
 $generator->exportEpg($configurator->getOutputPath());
 if(!in_array('--keep-cache', $params)) {
-    $generator->clearCache($configurator->getCacheMaxDays());
+    $generator->clearCache($configurator->getCachePhysicalTTL());
 }
 
 //Logger::clearLog();

@@ -89,7 +89,8 @@ class ChannelsManager
 
     private function isChannelAvailable(string $key): bool
     {
-        $providers = $this->generator->getProviders($this->info['priority'] ?? []);
+        $info = $this->channelsInfo[$key] ?? [];
+        $providers = $this->generator->getProviders($info['priority'] ?? []);
         $f = $this->providersFailedByChannel[$key] ?? [];
         if (count($f) > 0) {
             $failedProviders = $this->generator->getProviders($f);

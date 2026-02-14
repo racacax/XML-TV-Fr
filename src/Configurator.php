@@ -6,6 +6,7 @@ namespace racacax\XmlTv;
 
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\CacheFile;
+use racacax\XmlTv\Component\Export\ExportInterface;
 use racacax\XmlTv\Component\Generator;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\MultiThreadedGenerator;
@@ -14,32 +15,40 @@ use racacax\XmlTv\Component\UI\MultiColumnUI;
 use racacax\XmlTv\Component\UI\UI;
 use racacax\XmlTv\Component\Utils;
 use racacax\XmlTv\Component\XmlExporter;
+use racacax\XmlTv\ValueObject\EPGDate;
 
 class Configurator
 {
-    private int $nbDays;
+    /**
+     * @var array<EPGDate>
+     */
+    private array $epgDates;
 
     private string $outputPath;
 
-    private int $cacheMaxDays;
+    /** @var int
+     * How many days a cache is considered valid. Can still be used
+     * in case of failure.
+     */
+    private int $cacheTTL;
+
+    /*
+     * How many days maximum cache can stay on disk.
+     */
+    private int $cachePhysicalTTL;
 
     private bool $deleteRawXml;
 
-    private bool $enableGz;
-
-    private bool $enableZip;
-
-    private bool $enableXz;
+    /**
+     * @var array ExportInterface[]
+     */
+    private array $exportHandlers;
 
     private bool $enableDummy;
 
-    private array $customPriorityOrders;
+    private array $priorityOrders;
 
-    private array $guidesToGenerate;
-
-    private ?string $zipBinPath;
-
-    private bool $forceTodayGrab;
+    private array $guides;
 
     private array $extraParams;
 
@@ -49,42 +58,36 @@ class Configurator
     private array $providerList;
 
     private int $nbThreads;
-    private int $minTimeRange;
+    private int $minEndTime;
     private UI $ui;
 
     /**
-     * @param int $nbDays Number of days XML TV will try to get EPG
+     * @param array<EPGDate> $epgDates Fetch policy for each day gathered by XMLTV
      * @param string $outputPath Where xmltv files are stored
      * @param null|int $timeLimit time limit for the EPG grab (0 = unlimited)
      * @param null|int $memoryLimit memory limit for the EPG grab (-1 = unlimited)
-     * @param int $cache_max_days after how many days do we clear cache (0 = no cache)
+     * @param int $cache_physical_ttl after how many days do we clear cache (0 = no cache)
+     * @param int $cache_ttl after how many days do we consider cache expired
      * @param bool $deleteRawXml delete xmltv.xml after EPG grab (if you want to provide only compressed XMLTV)
-     * @param bool $enableGz enable gz compression for the XMLTV
-     * @param bool $enableZip enable zip compression for the XMLTV
-     * @param bool $enableXz enable XZ compression for the XMLTV (need 7zip)
+     * @param array $exportHandlers List of handlers to export the XMLTV (ex: gz, zip, xz, etc.)
      * @param bool $enableDummy Add a dummy EPG if channel not found
-     * @param array $customPriorityOrders Add a custom priority order for a provider globally
-     * @param array|string[][] $guides_to_generate list of xmltv to generate
-     * @param string|null $zipBinPath path of 7zip binary
-     * @param bool $forceTodayGrab ignore cache for today
+     * @param array $priorityOrders Add a custom priority order for a provider globally
+     * @param array|string[][] $guides list of xmltv to generate
      */
     public function __construct(
-        int     $nbDays = 8,
+        array   $epgDates = [],
         string  $outputPath = './var/export/',
         ?int    $timeLimit = null,
         ?int    $memoryLimit = null,
-        int     $cache_max_days = 8,
+        int     $cache_physical_ttl = 8,
+        int     $cache_ttl = 8,
         bool    $deleteRawXml = false,
-        bool    $enableGz = true,
-        bool    $enableZip = true,
-        bool    $enableXz = false,
+        array    $exportHandlers = ['class' => 'GZExport', 'params' => []],
         bool    $enableDummy = false,
-        array   $customPriorityOrders = [],
-        array   $guides_to_generate = [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
-        ?string $zipBinPath = null,
-        bool    $forceTodayGrab = false,
+        array   $priorityOrders = [],
+        array   $guides = [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
         int     $nbThreads = 1,
-        int     $minTimeRange = 22 * 3600,
+        int     $minEndTime = 84600, # 23h30
         array   $extraParams = [],
         ?UI   $ui = null
     ) {
@@ -94,25 +97,24 @@ class Configurator
         if (isset($memoryLimit)) {
             ini_set('memory_limit', (string)$memoryLimit);
         }
-
-        $this->nbDays = $nbDays;
+        $this->epgDates = $epgDates;
         $this->outputPath = $outputPath;
-        $this->cacheMaxDays = $cache_max_days;
+        $this->cachePhysicalTTL = $cache_physical_ttl;
+        $this->cacheTTL = $cache_ttl;
         $this->deleteRawXml = $deleteRawXml;
-        $this->enableGz = $enableGz;
-        $this->enableZip = $enableZip;
-        $this->enableXz = $enableXz;
+        $this->exportHandlers = $exportHandlers;
         $this->enableDummy = $enableDummy;
-        $this->customPriorityOrders = $customPriorityOrders;
-        $this->guidesToGenerate = $guides_to_generate;
-        $this->zipBinPath = $zipBinPath;
-        $this->forceTodayGrab = $forceTodayGrab;
+        $this->priorityOrders = $priorityOrders;
+        $this->guides = $guides;
         $this->extraParams = $extraParams;
         $this->nbThreads = $nbThreads;
-        $this->minTimeRange = $minTimeRange;
+        $this->minEndTime = $minEndTime;
         $this->ui = $ui ?? new MultiColumnUI();
     }
 
+    /**
+     * @throws \DateMalformedStringException
+     */
     public static function initFromConfigFile(string $filePath): self
     {
         if (!file_exists($filePath)) {
@@ -134,35 +136,27 @@ class Configurator
         }
         Logger::log("\n");
 
+        Utils::importExportMethods();
+
         return new Configurator(
-            $data['days'] ?? 8,
+            EPGDate::createFromConfigEntry($data['fetch_policies'] ?? []),
             $data['output_path'] ?? './xmltv',
             $data['time_limit'] ?? null,
             $data['memory_limit'] ?? null,
-            $data['cache_max_days'] ?? 8,
+            $data['cache_physical_ttl'] ?? 8,
+            $data['cache_ttl'] ?? 8,
             $data['delete_raw_xml'] ?? false,
-            $data['enable_gz'] ?? true,
-            $data['enable_zip'] ?? true,
-            $data['enable_xz'] ?? false,
+            Utils::getExportInstances($data['export_handlers'] ?? ['class' => 'GZExport', 'params' => []]),
             $data['enable_dummy'] ?? false,
-            $data['custom_priority_orders'] ?? [],
-            $data['guides_to_generate'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
-            $data['7zip_path'] ?? null,
-            $data['force_todays_grab'] ?? false,
+            $data['priority_orders'] ?? [],
+            $data['guides'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
             $data['nb_threads'] ?? 1,
-            $data['min_timerange'] ?? 22 * 3600, # 22h
+            $data['min_endtime'] ?? 84600, # 23h30
             $data['extra_params'] ?? [],
             Utils::getUI($data['ui'] ?? 'MultiColumnUI')
         );
     }
 
-    /**
-     * @return int
-     */
-    public function getNbDays(): int
-    {
-        return $this->nbDays;
-    }
 
     public function getUI(): UI
     {
@@ -180,30 +174,6 @@ class Configurator
     /**
      * @return bool
      */
-    public function isEnableGz(): bool
-    {
-        return $this->enableGz;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEnableZip(): bool
-    {
-        return $this->enableZip;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEnableXz(): bool
-    {
-        return $this->enableXz;
-    }
-
-    /**
-     * @return bool
-     */
     public function isEnableDummy(): bool
     {
         return $this->enableDummy;
@@ -212,33 +182,17 @@ class Configurator
     /**
      * @return array
      */
-    public function getCustomPriorityOrders(): array
+    public function getPriorityOrders(): array
     {
-        return $this->customPriorityOrders;
+        return $this->priorityOrders;
     }
 
     /**
      * @return array|string[][]
      */
-    public function getGuidesToGenerate()
+    public function getGuides(): array
     {
-        return $this->guidesToGenerate;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getZipBinPath(): ?string
-    {
-        return $this->zipBinPath;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isForceTodayGrab(): bool
-    {
-        return $this->forceTodayGrab;
+        return $this->guides;
     }
 
     /**
@@ -260,9 +214,16 @@ class Configurator
     /**
      * @return int
      */
-    public function getCacheMaxDays(): int
+    public function getCacheTTL(): int
     {
-        return $this->cacheMaxDays;
+        return $this->cacheTTL;
+    }
+    /**
+     * @return int
+     */
+    public function getCachePhysicalTTL(): int
+    {
+        return $this->cachePhysicalTTL;
     }
 
     /**
@@ -273,42 +234,33 @@ class Configurator
         return $this->nbThreads;
     }
 
-    public function getMinTimeRange(): int
+    public function getMinEndTime(): int
     {
-        return $this->minTimeRange;
+        return $this->minEndTime;
     }
 
     public function getGenerator(): Generator
     {
         $begin = new \DateTimeImmutable(date('Y-m-d', strtotime('-1 day')));
 
-        $generator = new MultiThreadedGenerator($begin, $begin->add(new \DateInterval('P' . $this->nbDays . 'D')), $this);
+        $generator = new MultiThreadedGenerator($this);
         $generator->setProviders(
             $this->getProviders(
                 $this->getDefaultClient()
             )
         );
 
-        $outputFormat = [];
-        if (!$this->deleteRawXml) {
-            $outputFormat[] = 'xml';
-        }
-        if ($this->enableGz) {
-            $outputFormat[] = 'gz';
-        }
-        if ($this->enableXz && $this->zipBinPath) {
-            $outputFormat[] = 'xz';
-        }
-        if ($this->enableZip) {
-            $outputFormat[] = 'zip';
-        }
-
-        $generator->setExporter(new XmlExporter($outputFormat, $this->zipBinPath));
+        $generator->setExporter(new XmlExporter($this));
         $generator->setCache(new CacheFile('var/cache', $this));
-        $generator->addGuides($this->guidesToGenerate);
+        $generator->addGuides($this->guides);
 
 
         return $generator;
+    }
+
+    public function getEpgDates(): array
+    {
+        return $this->epgDates;
     }
 
     /**
@@ -325,7 +277,7 @@ class Configurator
         foreach ($providersClass as $providerClass) {
             $tmp = explode('\\', $providerClass);
             $name = end($tmp);
-            $providersObject[] = new $providerClass($client, $this->customPriorityOrders[$name] ?? null, $this->extraParams);
+            $providersObject[] = new $providerClass($client, $this->priorityOrders[$name] ?? null, $this->extraParams);
         }
 
         usort($providersObject, function (ProviderInterface $providerA, ProviderInterface $providerB) {
@@ -348,5 +300,13 @@ class Configurator
                 ],
             ]
         );
+    }
+
+    /*
+     * @return array<ExportInterface>
+     */
+    public function getExportHandlers(): array
+    {
+        return $this->exportHandlers;
     }
 }

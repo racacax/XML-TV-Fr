@@ -52,7 +52,7 @@ $channelsDefaultInfos = ChannelInformation::getInstance()->getChannelInfo();
 </style>
 </head>
 <body>
-<?php $guides = getConfig()->getGuidesToGenerate(); ?>
+<?php $guides = getConfig()->getGuides(); ?>
 Guide courant : <?php echo $guides[intval($_GET['index'])]['channels']; ?><br/>
 <?php if(count($guides) > 1) { ?>Autres listes de chaines disponibles : <?php }
 foreach($guides as $key=> $guide) {

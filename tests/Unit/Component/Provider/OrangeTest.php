@@ -27,18 +27,12 @@ class OrangeTest extends TestCase
 
     public function testProvider(): void
     {
-        // fake all HttpClient
+        // fake all HttpClient - using willReturnOnConsecutiveCalls instead of deprecated at()
         $this->client
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('get')
-            ->willReturn(
-                new Response(200, [], null)
-            )
-        ;
-        $this->client
-            ->expects($this->at(1))
-            ->method('get')
-            ->willReturn(
+            ->willReturnOnConsecutiveCalls(
+                new Response(200, [], null),
                 new Response(200, [], file_get_contents('./tests/Ressources/Provider/Orange/tf1.json'))
             )
         ;
