@@ -45,7 +45,7 @@ function getChannelsWithProvider($index=0) {
 }
 
 function getCurrentChannels($index=0) {
-    $channels = getConfig()->getguides()[$index]['channels'];
+    $channels = getConfig()->getGuides()[$index]['channels'];
     $json = json_decode(file_get_contents("../".$channels), true);
     return $json;
 }

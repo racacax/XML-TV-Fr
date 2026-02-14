@@ -4,18 +4,23 @@ namespace racacax\XmlTv\Component\Export;
 
 class ZipExport extends AbstractExport implements ExportInterface
 {
-    public function __construct(array $_)
+    /**
+     * @param array<mixed> $params Unused - required by ExportInterface
+     * @phpstan-param array<mixed> $params
+     */
+    public function __construct(array $params)
     {
+        unset($params);
     }
 
     public function export(string $exportPath, string $fileName, string $xmlContent): bool
     {
-        $this->setStatus("Export de $fileName.zip");
+        $this->setStatus("Export de $fileName.zip", 'cyan');
         $fullPath = $exportPath.$fileName.'.zip';
         $zip = new \ZipArchive();
 
         if (true !== $zip->open($fullPath, \ZipArchive::CREATE)) {
-            $this->setStatus("Impossible de créer le fichier $fileName.zip");
+            $this->setStatus("Impossible de créer le fichier $fileName.zip", 'red');
 
             return false;
         }

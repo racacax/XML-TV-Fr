@@ -6,6 +6,7 @@ namespace racacax\XmlTv;
 
 use GuzzleHttp\Client;
 use racacax\XmlTv\Component\CacheFile;
+use racacax\XmlTv\Component\Export\ExportInterface;
 use racacax\XmlTv\Component\Generator;
 use racacax\XmlTv\Component\Logger;
 use racacax\XmlTv\Component\MultiThreadedGenerator;
@@ -38,19 +39,16 @@ class Configurator
 
     private bool $deleteRawXml;
 
-    private bool $enableGz;
-
-    private bool $enableZip;
-
-    private bool $enableXz;
+    /**
+     * @var array ExportInterface[]
+     */
+    private array $exportHandlers;
 
     private bool $enableDummy;
 
     private array $priorityOrders;
 
     private array $guides;
-
-    private ?string $zipBinPath;
 
     private array $extraParams;
 
@@ -71,13 +69,10 @@ class Configurator
      * @param int $cache_physical_ttl after how many days do we clear cache (0 = no cache)
      * @param int $cache_ttl after how many days do we consider cache expired
      * @param bool $deleteRawXml delete xmltv.xml after EPG grab (if you want to provide only compressed XMLTV)
-     * @param bool $enableGz enable gz compression for the XMLTV
-     * @param bool $enableZip enable zip compression for the XMLTV
-     * @param bool $enableXz enable XZ compression for the XMLTV (need 7zip)
+     * @param array $exportHandlers List of handlers to export the XMLTV (ex: gz, zip, xz, etc.)
      * @param bool $enableDummy Add a dummy EPG if channel not found
      * @param array $priorityOrders Add a custom priority order for a provider globally
      * @param array|string[][] $guides list of xmltv to generate
-     * @param string|null $zipBinPath path of 7zip binary
      */
     public function __construct(
         array   $epgDates = [],
@@ -87,13 +82,10 @@ class Configurator
         int     $cache_physical_ttl = 8,
         int     $cache_ttl = 8,
         bool    $deleteRawXml = false,
-        bool    $enableGz = true, // TODO: Replace with export handlers
-        bool    $enableZip = true,
-        bool    $enableXz = false,
+        array    $exportHandlers = ['class' => 'GZExport', 'params' => []],
         bool    $enableDummy = false,
         array   $priorityOrders = [],
         array   $guides = [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
-        ?string $zipBinPath = null,
         int     $nbThreads = 1,
         int     $minEndTime = 84600, # 23h30
         array   $extraParams = [],
@@ -105,19 +97,15 @@ class Configurator
         if (isset($memoryLimit)) {
             ini_set('memory_limit', (string)$memoryLimit);
         }
-
         $this->epgDates = $epgDates;
         $this->outputPath = $outputPath;
         $this->cachePhysicalTTL = $cache_physical_ttl;
         $this->cacheTTL = $cache_ttl;
         $this->deleteRawXml = $deleteRawXml;
-        $this->enableGz = $enableGz;
-        $this->enableZip = $enableZip;
-        $this->enableXz = $enableXz;
+        $this->exportHandlers = $exportHandlers;
         $this->enableDummy = $enableDummy;
         $this->priorityOrders = $priorityOrders;
         $this->guides = $guides;
-        $this->zipBinPath = $zipBinPath;
         $this->extraParams = $extraParams;
         $this->nbThreads = $nbThreads;
         $this->minEndTime = $minEndTime;
@@ -148,6 +136,8 @@ class Configurator
         }
         Logger::log("\n");
 
+        Utils::importExportMethods();
+
         return new Configurator(
             EPGDate::createFromConfigEntry($data['fetch_policies'] ?? []),
             $data['output_path'] ?? './xmltv',
@@ -156,13 +146,10 @@ class Configurator
             $data['cache_physical_ttl'] ?? 8,
             $data['cache_ttl'] ?? 8,
             $data['delete_raw_xml'] ?? false,
-            $data['enable_gz'] ?? true,
-            $data['enable_zip'] ?? true,
-            $data['enable_xz'] ?? false,
+            Utils::getExportInstances($data['export_handlers'] ?? ['class' => 'GZExport', 'params' => []]),
             $data['enable_dummy'] ?? false,
             $data['priority_orders'] ?? [],
             $data['guides'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
-            $data['7zip_path'] ?? null,
             $data['nb_threads'] ?? 1,
             $data['min_endtime'] ?? 84600, # 23h30
             $data['extra_params'] ?? [],
@@ -187,30 +174,6 @@ class Configurator
     /**
      * @return bool
      */
-    public function isEnableGz(): bool
-    {
-        return $this->enableGz;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEnableZip(): bool
-    {
-        return $this->enableZip;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEnableXz(): bool
-    {
-        return $this->enableXz;
-    }
-
-    /**
-     * @return bool
-     */
     public function isEnableDummy(): bool
     {
         return $this->enableDummy;
@@ -227,17 +190,9 @@ class Configurator
     /**
      * @return array|string[][]
      */
-    public function getguides()
+    public function getGuides(): array
     {
         return $this->guides;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getZipBinPath(): ?string
-    {
-        return $this->zipBinPath;
     }
 
     /**
@@ -295,21 +250,7 @@ class Configurator
             )
         );
 
-        $outputFormat = [];
-        if (!$this->deleteRawXml) {
-            $outputFormat[] = 'xml';
-        }
-        if ($this->enableGz) {
-            $outputFormat[] = 'gz';
-        }
-        if ($this->enableXz && $this->zipBinPath) {
-            $outputFormat[] = 'xz';
-        }
-        if ($this->enableZip) {
-            $outputFormat[] = 'zip';
-        }
-
-        $generator->setExporter(new XmlExporter($outputFormat, $this->zipBinPath));
+        $generator->setExporter(new XmlExporter($this));
         $generator->setCache(new CacheFile('var/cache', $this));
         $generator->addGuides($this->guides);
 
@@ -359,5 +300,13 @@ class Configurator
                 ],
             ]
         );
+    }
+
+    /*
+     * @return array<ExportInterface>
+     */
+    public function getExportHandlers(): array
+    {
+        return $this->exportHandlers;
     }
 }

@@ -14,10 +14,6 @@ class CacheFile
 
     private array $listFile = [];
     /**
-     * This var store all key created during the current process
-     */
-    private array $createdKeys = [];
-    /**
      * This bool help to ignore (and remove) the cache of the day
      */
     private Configurator $config;
@@ -40,7 +36,6 @@ class CacheFile
         if (false === file_put_contents($fileName, $content)) {
             throw new Exception('Impossible to cache : ' . $key);
         }
-        $this->createdKeys[$key] = true;
         $this->listFile[$key] = [
             'file' => $fileName,
             'key' => $key,

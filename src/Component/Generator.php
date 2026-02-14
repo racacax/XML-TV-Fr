@@ -102,7 +102,7 @@ abstract class Generator
         foreach ($this->guides as $guide) {
             $channels = Utils::getChannelsFromGuide($guide);
             $defaultInfo = ChannelInformation::getInstance();
-            $this->exporter->startExport($exportPath . $guide['filename']);
+            $this->exporter->startExport($exportPath, $guide['filename']);
             $listCacheKey = [];
             $listAliases = [];
             foreach ($channels as $channelKey => $channelInfo) {

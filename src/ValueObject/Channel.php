@@ -101,7 +101,7 @@ class Channel
         return $this->programs;
     }
 
-    public function getProgramCount()
+    public function getProgramCount(): int
     {
         return count($this->getPrograms());
     }

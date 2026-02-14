@@ -421,4 +421,25 @@ class Utils
             return new ProgressiveUI();
         }
     }
+
+    public static function importExportMethods(): void
+    {
+        $files = glob(__DIR__ . '/Export/*.php');
+        foreach ($files as $method) {
+            require_once $method;
+        }
+    }
+
+    public static function getExportInstances(array $exportHandlers): array
+    {
+        $instances = [];
+        foreach ($exportHandlers as $handler) {
+            $className = 'racacax\\XmlTv\\Component\\Export\\' . $handler['class'];
+            if (class_exists($className)) {
+                $instances[] = new $className($handler['params'] ?? []);
+            }
+        }
+
+        return $instances;
+    }
 }

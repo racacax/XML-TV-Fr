@@ -40,7 +40,7 @@ class CommandLineExport extends AbstractExport implements ExportInterface
             1 => ['pipe', 'w'],
             2 => ['pipe', 'w'],
         ];
-        $this->setStatus('Commande lancée');
+        $this->setStatus('Commande lancée : '.$command, 'cyan');
         $process = proc_open($command, $descriptorspec, $pipes);
 
         if (is_resource($process)) {
@@ -48,9 +48,10 @@ class CommandLineExport extends AbstractExport implements ExportInterface
             fclose($pipes[1]);
             fclose($pipes[2]);
             proc_close($process);
-            $this->setStatus("Résultat: $output");
+            $success = !$this->successRegex || preg_match($this->successRegex, $output);
+            $this->setStatus($success ? 'Export réussi' : 'Echec de l\'export', $success ? 'green' : 'red');
 
-            return !$this->successRegex || preg_match($this->successRegex, $output);
+            return $success;
         }
 
         return false;
