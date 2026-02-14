@@ -10,7 +10,6 @@ use racacax\XmlTv\ValueObject\EPGDate;
 
 abstract class Generator
 {
-
     /**
      * @var XmlExporter
      */

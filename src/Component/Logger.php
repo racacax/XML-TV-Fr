@@ -59,16 +59,16 @@ class Logger
         foreach ($guides as $guide) {
             $guideChannels = array_keys(Utils::getChannelsFromGuide($guide));
             $filename = $guide['filename'];
-            if(!isset($formattedLogs[$filename])) {
-                $formattedLogs[$filename] = ["channels"=> [], "failed_providers"=> self::$logFile["failed_providers"] ?? []];
+            if (!isset($formattedLogs[$filename])) {
+                $formattedLogs[$filename] = ['channels' => [], 'failed_providers' => self::$logFile['failed_providers'] ?? []];
             }
-            foreach((self::$logFile["channels"] ?? []) as $date => $logChannels) {
-                if(!isset($formattedLogs[$filename]["channels"][$date])) {
-                    $formattedLogs[$filename]["channels"][$date] = [];
+            foreach ((self::$logFile['channels'] ?? []) as $date => $logChannels) {
+                if (!isset($formattedLogs[$filename]['channels'][$date])) {
+                    $formattedLogs[$filename]['channels'][$date] = [];
                 }
                 foreach ($logChannels as $logChannel => $value) {
-                    if(in_array($logChannel, $guideChannels)) {
-                        $formattedLogs[$filename]["channels"][$date][$logChannel] = $value;
+                    if (in_array($logChannel, $guideChannels)) {
+                        $formattedLogs[$filename]['channels'][$date][$logChannel] = $value;
                     }
                 }
             }

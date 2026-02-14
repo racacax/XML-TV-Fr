@@ -25,7 +25,16 @@ class Configurator
 
     private string $outputPath;
 
-    private int $cacheMaxDays;
+    /** @var int
+     * How many days a cache is considered valid. Can still be used
+     * in case of failure.
+     */
+    private int $cacheTTL;
+
+    /*
+     * How many days maximum cache can stay on disk.
+     */
+    private int $cachePhysicalTTL;
 
     private bool $deleteRawXml;
 
@@ -37,13 +46,11 @@ class Configurator
 
     private bool $enableDummy;
 
-    private array $customPriorityOrders;
+    private array $priorityOrders;
 
-    private array $guidesToGenerate;
+    private array $guides;
 
     private ?string $zipBinPath;
-
-    private bool $forceTodayGrab;
 
     private array $extraParams;
 
@@ -53,7 +60,7 @@ class Configurator
     private array $providerList;
 
     private int $nbThreads;
-    private int $minTimeRange;
+    private int $minEndTime;
     private UI $ui;
 
     /**
@@ -61,34 +68,34 @@ class Configurator
      * @param string $outputPath Where xmltv files are stored
      * @param null|int $timeLimit time limit for the EPG grab (0 = unlimited)
      * @param null|int $memoryLimit memory limit for the EPG grab (-1 = unlimited)
-     * @param int $cache_max_days after how many days do we clear cache (0 = no cache)
+     * @param int $cache_physical_ttl after how many days do we clear cache (0 = no cache)
+     * @param int $cache_ttl after how many days do we consider cache expired
      * @param bool $deleteRawXml delete xmltv.xml after EPG grab (if you want to provide only compressed XMLTV)
      * @param bool $enableGz enable gz compression for the XMLTV
      * @param bool $enableZip enable zip compression for the XMLTV
      * @param bool $enableXz enable XZ compression for the XMLTV (need 7zip)
      * @param bool $enableDummy Add a dummy EPG if channel not found
-     * @param array $customPriorityOrders Add a custom priority order for a provider globally
-     * @param array|string[][] $guides_to_generate list of xmltv to generate
+     * @param array $priorityOrders Add a custom priority order for a provider globally
+     * @param array|string[][] $guides list of xmltv to generate
      * @param string|null $zipBinPath path of 7zip binary
-     * @param bool $forceTodayGrab ignore cache for today
      */
     public function __construct(
         array   $epgDates = [],
         string  $outputPath = './var/export/',
         ?int    $timeLimit = null,
         ?int    $memoryLimit = null,
-        int     $cache_max_days = 8,
+        int     $cache_physical_ttl = 8,
+        int     $cache_ttl = 8,
         bool    $deleteRawXml = false,
-        bool    $enableGz = true,
+        bool    $enableGz = true, // TODO: Replace with export handlers
         bool    $enableZip = true,
         bool    $enableXz = false,
         bool    $enableDummy = false,
-        array   $customPriorityOrders = [],
-        array   $guides_to_generate = [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
+        array   $priorityOrders = [],
+        array   $guides = [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
         ?string $zipBinPath = null,
-        bool    $forceTodayGrab = false,
         int     $nbThreads = 1,
-        int     $minTimeRange = 22 * 3600,
+        int     $minEndTime = 84600, # 23h30
         array   $extraParams = [],
         ?UI   $ui = null
     ) {
@@ -101,19 +108,19 @@ class Configurator
 
         $this->epgDates = $epgDates;
         $this->outputPath = $outputPath;
-        $this->cacheMaxDays = $cache_max_days;
+        $this->cachePhysicalTTL = $cache_physical_ttl;
+        $this->cacheTTL = $cache_ttl;
         $this->deleteRawXml = $deleteRawXml;
         $this->enableGz = $enableGz;
         $this->enableZip = $enableZip;
         $this->enableXz = $enableXz;
         $this->enableDummy = $enableDummy;
-        $this->customPriorityOrders = $customPriorityOrders;
-        $this->guidesToGenerate = $guides_to_generate;
+        $this->priorityOrders = $priorityOrders;
+        $this->guides = $guides;
         $this->zipBinPath = $zipBinPath;
-        $this->forceTodayGrab = $forceTodayGrab;
         $this->extraParams = $extraParams;
         $this->nbThreads = $nbThreads;
-        $this->minTimeRange = $minTimeRange;
+        $this->minEndTime = $minEndTime;
         $this->ui = $ui ?? new MultiColumnUI();
     }
 
@@ -146,18 +153,18 @@ class Configurator
             $data['output_path'] ?? './xmltv',
             $data['time_limit'] ?? null,
             $data['memory_limit'] ?? null,
-            $data['cache_max_days'] ?? 8,
+            $data['cache_physical_ttl'] ?? 8,
+            $data['cache_ttl'] ?? 8,
             $data['delete_raw_xml'] ?? false,
             $data['enable_gz'] ?? true,
             $data['enable_zip'] ?? true,
             $data['enable_xz'] ?? false,
             $data['enable_dummy'] ?? false,
-            $data['custom_priority_orders'] ?? [],
-            $data['guides_to_generate'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
+            $data['priority_orders'] ?? [],
+            $data['guides'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
             $data['7zip_path'] ?? null,
-            $data['force_todays_grab'] ?? false,
             $data['nb_threads'] ?? 1,
-            $data['min_timerange'] ?? 22 * 3600, # 22h
+            $data['min_endtime'] ?? 84600, # 23h30
             $data['extra_params'] ?? [],
             Utils::getUI($data['ui'] ?? 'MultiColumnUI')
         );
@@ -212,17 +219,17 @@ class Configurator
     /**
      * @return array
      */
-    public function getCustomPriorityOrders(): array
+    public function getPriorityOrders(): array
     {
-        return $this->customPriorityOrders;
+        return $this->priorityOrders;
     }
 
     /**
      * @return array|string[][]
      */
-    public function getGuidesToGenerate()
+    public function getguides()
     {
-        return $this->guidesToGenerate;
+        return $this->guides;
     }
 
     /**
@@ -231,14 +238,6 @@ class Configurator
     public function getZipBinPath(): ?string
     {
         return $this->zipBinPath;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isForceTodayGrab(): bool
-    {
-        return $this->forceTodayGrab;
     }
 
     /**
@@ -260,9 +259,16 @@ class Configurator
     /**
      * @return int
      */
-    public function getCacheMaxDays(): int
+    public function getCacheTTL(): int
     {
-        return $this->cacheMaxDays;
+        return $this->cacheTTL;
+    }
+    /**
+     * @return int
+     */
+    public function getCachePhysicalTTL(): int
+    {
+        return $this->cachePhysicalTTL;
     }
 
     /**
@@ -273,9 +279,9 @@ class Configurator
         return $this->nbThreads;
     }
 
-    public function getMinTimeRange(): int
+    public function getMinEndTime(): int
     {
-        return $this->minTimeRange;
+        return $this->minEndTime;
     }
 
     public function getGenerator(): Generator
@@ -305,7 +311,7 @@ class Configurator
 
         $generator->setExporter(new XmlExporter($outputFormat, $this->zipBinPath));
         $generator->setCache(new CacheFile('var/cache', $this));
-        $generator->addGuides($this->guidesToGenerate);
+        $generator->addGuides($this->guides);
 
 
         return $generator;
@@ -330,7 +336,7 @@ class Configurator
         foreach ($providersClass as $providerClass) {
             $tmp = explode('\\', $providerClass);
             $name = end($tmp);
-            $providersObject[] = new $providerClass($client, $this->customPriorityOrders[$name] ?? null, $this->extraParams);
+            $providersObject[] = new $providerClass($client, $this->priorityOrders[$name] ?? null, $this->extraParams);
         }
 
         usort($providersObject, function (ProviderInterface $providerA, ProviderInterface $providerB) {

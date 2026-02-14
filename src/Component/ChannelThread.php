@@ -133,7 +133,7 @@ class ChannelThread
              * If cache is better, we consider that current provider failed to gather data
              */
             if ($state == EPGEnum::$PARTIAL_CACHE) {
-                if (($cache->getState($cacheKey) != EPGEnum::$NO_CACHE)) {
+                if (($cache->getState($cacheKey) > EPGEnum::$EXPIRED_CACHE)) {
                     $cacheContent = $cache->get($cacheKey);
                     [$cacheStartTimes, $_] = Utils::getStartAndEndDatesFromXMLString($cacheContent);
                     if (max($cacheStartTimes) > max($startTimes)) {
@@ -154,7 +154,7 @@ class ChannelThread
     /**
      * Gather channel information for selected day.
      * Will look for cache file and browse providers in order
-     * @param string $date
+     * @param EPGDate $epgDate
      * @return array Information about status (success, cache, partial, provider and if gathering has been skipped)
      */
     protected function gatherData(EPGDate $epgDate): array
@@ -164,11 +164,12 @@ class ChannelThread
         $cacheKey = sprintf('%s_%s.xml', $this->channel, $date);
         $currentResult = ['success' => false];
         $cacheState = $cache->getState($cacheKey);
-        if($epgDate->getCachePolicy() == EPGDate::$CACHE_ONLY || ($cacheState == EPGEnum::$FULL_CACHE && $epgDate->getCachePolicy() == EPGDate::$CACHE_FIRST)) {
-            if($cacheState == EPGEnum::$NO_CACHE) {
+        if ($epgDate->getCachePolicy() == EPGDate::$CACHE_ONLY || ($cacheState == EPGEnum::$FULL_CACHE && $epgDate->getCachePolicy() == EPGDate::$CACHE_FIRST)) {
+            if ($cacheState == EPGEnum::$NO_CACHE) {
                 return ['success' => false,  'isCache' => false, 'skipped' => false];
             } else {
                 $providerName = $cache->getProviderName($cacheKey);
+
                 return ['success' => true, 'provider' => $providerName, 'isCache' => true, 'isPartial' => $cacheState == EPGEnum::$PARTIAL_CACHE, 'skipped' => false];
             }
         } else {

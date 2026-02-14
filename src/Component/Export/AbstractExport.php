@@ -1,5 +1,7 @@
 <?php
+
 namespace racacax\XmlTv\Component\Export;
+
 class AbstractExport
 {
     protected string $status;
@@ -8,7 +10,8 @@ class AbstractExport
     {
         $this->status = $status;
     }
-    public function getStatus(): string {
+    public function getStatus(): string
+    {
         return $this->status;
     }
 }

@@ -1,5 +1,7 @@
 <?php
+
 namespace racacax\XmlTv\ValueObject;
+
 use DateTimeImmutable;
 
 class EPGDate
@@ -36,15 +38,16 @@ class EPGDate
      * @return array<EPGDate>
      * @throws \DateMalformedStringException
      */
-    public static function createFromConfigEntry(array $configEntry): array {
+    public static function createFromConfigEntry(array $configEntry): array
+    {
         $epgDates = [];
-        $baseDate = (new DateTimeImmutable("now", new \DateTimeZone("Europe/Paris")))->setTime(0, 0, 0);
+        $baseDate = (new DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')))->setTime(0, 0, 0);
         foreach ($configEntry as $key => $dates) {
-            if($key === "cache-only") {
+            if ($key === 'cache-only') {
                 $cachePolicy = self::$CACHE_ONLY;
-            } elseif($key === "cache-first") {
-                    $cachePolicy = self::$CACHE_FIRST;
-                } elseif($key === "network-first") {
+            } elseif ($key === 'cache-first') {
+                $cachePolicy = self::$CACHE_FIRST;
+            } elseif ($key === 'network-first') {
                 $cachePolicy = self::$NETWORK_FIRST;
             } else {
                 throw new \InvalidArgumentException("Invalid configuration key: $key");
@@ -53,11 +56,14 @@ class EPGDate
                 $epgDates[] = new EPGDate($baseDate->modify("$date days"), $cachePolicy);
             }
         }
-        usort($epgDates, function (EPGDate $a, EPGDate $b): int { return $a->getDate() > $b->getDate() ? 1 : -1; });
+        usort($epgDates, function (EPGDate $a, EPGDate $b): int {
+            return $a->getDate() > $b->getDate() ? 1 : -1;
+        });
+
         return $epgDates;
     }
     public function __toString(): string
     {
-        return $this->getFormattedDate()." - ".$this->getCachePolicy();
+        return $this->getFormattedDate().' - '.$this->getCachePolicy();
     }
 }

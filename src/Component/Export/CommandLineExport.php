@@ -1,6 +1,6 @@
 <?php
-namespace racacax\XmlTv\Component\Export;
 
+namespace racacax\XmlTv\Component\Export;
 
 /**
  * To use it in config, add this to export_handlers:
@@ -17,17 +17,16 @@ namespace racacax\XmlTv\Component\Export;
  */
 class CommandLineExport extends AbstractExport implements ExportInterface
 {
-
     private string $command;
     private string $extension;
     private ?string $successRegex;
     public function __construct(array $params)
     {
-        if(!isset($params['command'])) {
+        if (!isset($params['command'])) {
             throw new \Exception('Missing "command" parameter for class CommandLineExport');
         }
         $this->command = $params['command'];
-        $this->extension = @$params['extension'] ?$params['extension'] : 'Inconnue';
+        $this->extension = @$params['extension'] ? $params['extension'] : 'Inconnue';
         $this->successRegex = @$params['success_regex'];
     }
 
@@ -41,7 +40,7 @@ class CommandLineExport extends AbstractExport implements ExportInterface
             1 => ['pipe', 'w'],
             2 => ['pipe', 'w'],
         ];
-        $this->setStatus("Commande lancée");
+        $this->setStatus('Commande lancée');
         $process = proc_open($command, $descriptorspec, $pipes);
 
         if (is_resource($process)) {
@@ -50,11 +49,14 @@ class CommandLineExport extends AbstractExport implements ExportInterface
             fclose($pipes[2]);
             proc_close($process);
             $this->setStatus("Résultat: $output");
+
             return !$this->successRegex || preg_match($this->successRegex, $output);
         }
+
         return false;
     }
-    public function getExtension() : string {
+    public function getExtension(): string
+    {
         return $this->extension;
     }
 }

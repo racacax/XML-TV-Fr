@@ -70,7 +70,7 @@ class CacheFileTest extends TestCase
         $content = uniqid();
         // create file
         file_put_contents($this->testFolder.'/'.$fileName, $content);
-        $this->assertEquals($cache->getState($fileName), EPGEnum::$OBSOLETE_CACHE);
+        $this->assertEquals($cache->getState($fileName), EPGEnum::$EXPIRED_CACHE);
     }
 
 

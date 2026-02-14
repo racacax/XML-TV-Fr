@@ -50,7 +50,7 @@ class MultiThreadedGenerator extends Generator
                 $threads[] = new ChannelThread($manager, $this);
             }
             $view = $ui->getClosure($threads, $manager, $logLevel);
-                async($view);
+            async($view);
             $this->generateChannels($threads, $manager);
             Logger::setLogLevel($logLevel);
             Logger::log("\e[95m[EPG GRAB] \e[39mRécupération du guide des programmes terminée...\n");

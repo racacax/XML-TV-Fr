@@ -1,9 +1,9 @@
 <?php
+
 namespace racacax\XmlTv\Component\Export;
 
 class ZipExport extends AbstractExport implements ExportInterface
 {
-
     public function __construct(array $_)
     {
     }
@@ -16,14 +16,17 @@ class ZipExport extends AbstractExport implements ExportInterface
 
         if (true !== $zip->open($fullPath, \ZipArchive::CREATE)) {
             $this->setStatus("Impossible de créer le fichier $fileName.zip");
+
             return false;
         }
         $zip->addFromString($fileName.'.xml', $xmlContent);
         $zip->close();
-        $this->setStatus("Export ZIP réussi");
+        $this->setStatus('Export ZIP réussi');
+
         return true;
     }
-    public function getExtension() : string {
+    public function getExtension(): string
+    {
         return 'zip';
     }
 }

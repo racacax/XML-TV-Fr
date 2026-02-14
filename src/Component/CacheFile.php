@@ -78,10 +78,12 @@ class CacheFile
         }
         $exists = file_exists($this->getFileName($key));
         if ($exists) {
-            $timeRange = Utils::getTimeRangeFromXMLString($this->getFileContent($key));
-
+            if (round((strtotime('now') - filemtime($this->getFileName($key))) / 86400) > $this->config->getCacheTTL()) {
+                return EPGEnum::$EXPIRED_CACHE;
+            }
+            $timeRange = Utils::getTimeSpanFromBeginningOfDay($this->getFileContent($key));
             $cacheState = EPGEnum::$FULL_CACHE;
-            if ($timeRange < $this->config->getMinTimeRange()) {
+            if ($timeRange < $this->config->getMinEndTime()) {
                 $cacheState = EPGEnum::$PARTIAL_CACHE;
             }
 
