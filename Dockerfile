@@ -14,7 +14,10 @@ RUN apt update && apt install -y \
     zip \
     pcntl \
     intl \
-    xml && rm -rf /var/lib/apt/lists/*
+    xml \
+ && pecl install pcov \
+ && docker-php-ext-enable pcov \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 

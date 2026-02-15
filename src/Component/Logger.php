@@ -24,6 +24,15 @@ class Logger
         self::$debugFolder = rtrim($path, DIRECTORY_SEPARATOR);
     }
 
+    /**
+     * Reset logger state - useful for testing
+     */
+    public static function reset(): void
+    {
+        self::$logFile = [];
+        self::$lastLog = '';
+    }
+
     public static function getLastLog(): string
     {
         return self::$lastLog;

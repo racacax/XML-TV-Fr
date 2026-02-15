@@ -10,6 +10,9 @@ class ProviderCache
     private string $file;
     public function __construct(string $file)
     {
+        $file = str_replace(['../', '..' . DIRECTORY_SEPARATOR, '/', '\\'], '_', $file);
+        $file = basename($file);
+
         $this->file = $file;
     }
 
@@ -27,7 +30,9 @@ class ProviderCache
     {
         $content = $this->getContent() ?? '[]';
 
-        return json_decode($content, true);
+        $result = json_decode($content, true);
+
+        return is_array($result) ? $result : [];
     }
 
 

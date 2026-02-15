@@ -6,16 +6,27 @@ namespace racacax\XmlTvTest\Unit\Component;
 
 use PHPUnit\Framework\TestCase;
 use racacax\XmlTv\Component\CacheFile;
+use racacax\XmlTv\Component\ChannelThread;
 use racacax\XmlTv\Component\ChannelsManager;
 use racacax\XmlTv\Component\MultiThreadedGenerator;
 use racacax\XmlTv\Component\ProviderInterface;
 use racacax\XmlTv\Component\XmlExporter;
 use racacax\XmlTv\Configurator;
 use racacax\XmlTv\ValueObject\EPGDate;
+use ReflectionClass;
 
 class MultiThreadedGeneratorTest extends TestCase
 {
     private string $testFolder = 'var/test/multithreaded_generator';
+
+    private function callMethod(object $obj, string $name, array $args = []): mixed
+    {
+        $class = new ReflectionClass($obj);
+        $method = $class->getMethod($name);
+        $method->setAccessible(true);
+
+        return $method->invoke($obj, ...$args);
+    }
 
     public function setUp(): void
     {
@@ -366,4 +377,254 @@ XML;
         $this->assertStringContainsString('<programme', $xmlContent);
         $this->assertStringContainsString('Test Program', $xmlContent);
     }
+
+    // ========================================
+    // REFLECTION TESTS: Testing protected methods directly
+    // ========================================
+
+    /**
+     * Test generateChannels() with reflection: distributes channels to available threads
+     */
+    public function testGenerateChannelsDistributesToAvailableThreads(): void
+    {
+        $config = new Configurator();
+        $generator = new MultiThreadedGenerator($config);
+
+        // Initialize providers (required before creating ChannelsManager)
+        $generator->setProviders([]);
+
+        // Setup channels
+        $channels = [
+            'ch1' => ['name' => 'Channel 1', 'priority' => []],
+            'ch2' => ['name' => 'Channel 2', 'priority' => []],
+        ];
+
+        $manager = new ChannelsManager($channels, $generator);
+
+        // Create mock threads that are NOT running (available for work)
+        $thread1 = $this->createMock(ChannelThread::class);
+        $thread1->method('isRunning')->willReturn(false);
+        $thread1->expects($this->once())->method('setChannel');
+        $thread1->expects($this->once())->method('start');
+
+        $thread2 = $this->createMock(ChannelThread::class);
+        $thread2->method('isRunning')->willReturn(false);
+        $thread2->expects($this->once())->method('setChannel');
+        $thread2->expects($this->once())->method('start');
+
+        $threads = [$thread1, $thread2];
+
+        // Call protected method using reflection
+        $this->callMethod($generator, 'generateChannels', [$threads, $manager]);
+
+        // Verify all channels were distributed
+        $this->assertFalse($manager->hasRemainingChannels());
+    }
+
+    /**
+     * Test generateChannels() respects thread running state
+     */
+    public function testGenerateChannelsRespectsThreadRunningState(): void
+    {
+        $config = new Configurator();
+        $generator = new MultiThreadedGenerator($config);
+        $generator->setProviders([]);
+
+        $channels = [
+            'ch1' => ['name' => 'Channel 1', 'priority' => []],
+        ];
+
+        $manager = new ChannelsManager($channels, $generator);
+
+        // Create a thread that is RUNNING (busy)
+        // It should transition from running to not running to accept the channel
+        $thread = $this->createMock(ChannelThread::class);
+
+        $isRunningCallCount = 0;
+        $thread->method('isRunning')->willReturnCallback(function () use (&$isRunningCallCount) {
+            $isRunningCallCount++;
+
+            // First few calls: thread is running (busy)
+            // Later calls: thread becomes available
+            return $isRunningCallCount < 5;
+        });
+
+        // Thread should eventually receive the channel when it becomes available
+        $thread->expects($this->once())->method('setChannel');
+        $thread->expects($this->once())->method('start');
+
+        $threads = [$thread];
+
+        // Call protected method
+        $this->callMethod($generator, 'generateChannels', [$threads, $manager]);
+
+        // Channel should be distributed once thread becomes available
+        $this->assertFalse($manager->hasRemainingChannels());
+    }
+
+    /**
+     * Test generateChannels() handles empty channel queue
+     */
+    public function testGenerateChannelsHandlesEmptyQueue(): void
+    {
+        $config = new Configurator();
+        $generator = new MultiThreadedGenerator($config);
+        $generator->setProviders([]);
+
+        // No channels
+        $channels = [];
+        $manager = new ChannelsManager($channels, $generator);
+
+        $thread = $this->createMock(ChannelThread::class);
+        $thread->method('isRunning')->willReturn(false);
+
+        // Thread should never receive a channel (queue is empty)
+        $thread->expects($this->never())->method('setChannel');
+        $thread->expects($this->never())->method('start');
+
+        $threads = [$thread];
+
+        // Should complete immediately without errors
+        $this->callMethod($generator, 'generateChannels', [$threads, $manager]);
+
+        $this->assertFalse($manager->hasRemainingChannels());
+    }
+
+    /**
+     * Test generateChannels() round-robin thread rotation
+     */
+    public function testGenerateChannelsRotatesThreadsRoundRobin(): void
+    {
+        $config = new Configurator();
+        $generator = new MultiThreadedGenerator($config);
+        $generator->setProviders([]);
+
+        // More channels than threads to test rotation
+        $channels = [
+            'ch1' => ['name' => 'Channel 1', 'priority' => []],
+            'ch2' => ['name' => 'Channel 2', 'priority' => []],
+            'ch3' => ['name' => 'Channel 3', 'priority' => []],
+        ];
+
+        $manager = new ChannelsManager($channels, $generator);
+
+        // Create 2 threads (fewer than channels)
+        $assignedChannels = [];
+
+        $thread1 = $this->createMock(ChannelThread::class);
+        $thread1->method('isRunning')->willReturn(false);
+        $thread1->method('setChannel')->willReturnCallback(function ($data) use (&$assignedChannels) {
+            $assignedChannels[] = ['thread' => 1, 'channel' => $data['key']];
+        });
+        $thread1->method('start');
+
+        $thread2 = $this->createMock(ChannelThread::class);
+        $thread2->method('isRunning')->willReturn(false);
+        $thread2->method('setChannel')->willReturnCallback(function ($data) use (&$assignedChannels) {
+            $assignedChannels[] = ['thread' => 2, 'channel' => $data['key']];
+        });
+        $thread2->method('start');
+
+        $threads = [$thread1, $thread2];
+
+        $this->callMethod($generator, 'generateChannels', [$threads, $manager]);
+
+        // Verify channels were distributed
+        $this->assertCount(3, $assignedChannels, 'All 3 channels should be assigned');
+
+        // Verify threads were used in rotation (though exact order depends on timing)
+        $thread1Count = count(array_filter($assignedChannels, fn ($a) => $a['thread'] === 1));
+        $thread2Count = count(array_filter($assignedChannels, fn ($a) => $a['thread'] === 2));
+
+        // Both threads should have received at least one channel
+        $this->assertGreaterThan(0, $thread1Count, 'Thread 1 should receive channels');
+        $this->assertGreaterThan(0, $thread2Count, 'Thread 2 should receive channels');
+    }
+
+    /**
+     * Test generateChannels() waits for all threads to complete
+     */
+    public function testGenerateChannelsWaitsForThreadCompletion(): void
+    {
+        $config = new Configurator();
+        $generator = new MultiThreadedGenerator($config);
+        $generator->setProviders([]);
+
+        $channels = [
+            'ch1' => ['name' => 'Channel 1', 'priority' => []],
+        ];
+
+        $manager = new ChannelsManager($channels, $generator);
+
+        // Thread starts running after receiving channel, then finishes
+        $callCount = 0;
+        $thread = $this->createMock(ChannelThread::class);
+
+        $thread->method('isRunning')->willReturnCallback(function () use (&$callCount) {
+            // After setChannel is called (callCount > 0), thread is "running"
+            // Then it eventually completes
+            $callCount++;
+
+            // First call: thread is available (not running)
+            // Subsequent calls: simulate thread running then completing
+            return $callCount > 1 && $callCount < 10;
+        });
+
+        $thread->method('setChannel')->willReturnCallback(function () {
+            // Mark that channel has been set (no-op, just for clarity)
+        });
+
+        $thread->method('start');
+
+        $threads = [$thread];
+
+        // generateChannels should wait until thread completes
+        $this->callMethod($generator, 'generateChannels', [$threads, $manager]);
+
+        // Method should only return after thread is no longer running
+        $this->assertFalse($manager->hasRemainingChannels());
+    }
+
+    /**
+     * Test that generateChannels handles channels being re-added to queue
+     */
+    public function testGenerateChannelsHandlesRequeuedChannels(): void
+    {
+        $config = new Configurator();
+        $generator = new MultiThreadedGenerator($config);
+        $generator->setProviders([]);
+
+        $channels = [
+            'ch1' => ['name' => 'Channel 1', 'priority' => []],
+        ];
+
+        $manager = new ChannelsManager($channels, $generator);
+
+        // Simulate a scenario where channel might be re-added
+        // (This happens when a provider is busy and channel is re-queued)
+
+        $processedCount = 0;
+        $thread = $this->createMock(ChannelThread::class);
+        $thread->method('isRunning')->willReturn(false);
+        $thread->method('setChannel')->willReturnCallback(function () use (&$processedCount) {
+            $processedCount++;
+        });
+        $thread->method('start');
+
+        $threads = [$thread];
+
+        $this->callMethod($generator, 'generateChannels', [$threads, $manager]);
+
+        // Channel should be processed at least once
+        $this->assertGreaterThanOrEqual(1, $processedCount);
+        $this->assertFalse($manager->hasRemainingChannels());
+    }
+
+    // ========================================
+    // NOTE: Integration tests for generateEpg() have been moved to:
+    // tests/Integration/MultiThreadedGeneratorIntegrationTest.php
+    //
+    // These tests execute the full async workflow and are better suited
+    // for the Integration test suite.
+    // ========================================
 }

@@ -70,12 +70,15 @@ class ChannelThread
         $providers = $this->generator->getProviders($this->info['priority'] ?? []);
         $providers = array_filter($providers, fn ($provider) => $provider->channelExists($this->channel));
         if (count($this->failedProviders) > 0) {
-            $failedProviders = $this->generator->getProviders($this->failedProviders);
-        } else {
-            $failedProviders = [];
+            $failedProviderNames = $this->failedProviders;
+            $providers = array_filter($providers, function ($provider) use ($failedProviderNames) {
+                $providerName = Utils::extractProviderName($provider);
+
+                return !in_array($providerName, $failedProviderNames);
+            });
         }
 
-        return array_diff($providers, $failedProviders);
+        return $providers;
     }
 
     private function getLastMessage(Channel $workerChannel): ?string

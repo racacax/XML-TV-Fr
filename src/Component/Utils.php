@@ -403,7 +403,10 @@ class Utils
      */
     public static function replaceBuggyWidthCharacters(string $string): string
     {
-        $elems = [['chars' => [TerminalIcon::success(), TerminalIcon::error(), TerminalIcon::pause()], 'width' => 2]];
+        $elems = [
+            ['chars' => [TerminalIcon::success(), TerminalIcon::error(), TerminalIcon::pause()], 'width' => 2],
+            ['chars' => TerminalIcon::$LOADING_PARTS, 'width' => 2]
+        ];
         foreach ($elems as $elem) {
             foreach ($elem['chars'] as $char) {
                 $string = str_replace($char, str_repeat(' ', $elem['width']), $string);

@@ -6,6 +6,7 @@ namespace racacax\XmlTv\Component;
 
 class TerminalIcon
 {
+    public static array $LOADING_PARTS = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏'];
     public static function pause(): string
     {
         return '⏸️';
@@ -17,10 +18,9 @@ class TerminalIcon
      */
     public static function spinner(): string
     {
-        $parts = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏'];
         $index = intval(microtime(true) * 10) % 10;
 
-        return $parts[$index];
+        return self::$LOADING_PARTS[$index];
     }
 
     public static function success(): string
