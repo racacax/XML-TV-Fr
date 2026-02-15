@@ -7,5 +7,5 @@ use racacax\XmlTv\Component\ChannelsManager;
 
 interface UI
 {
-    public function getClosure(array $threads, ChannelsManager $manager, array $guide, string $logLevel, int $index, int $guidesCount): Closure;
+    public function getClosure(array $threads, ChannelsManager $manager, string $logLevel): Closure;
 }

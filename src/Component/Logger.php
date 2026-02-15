@@ -24,6 +24,15 @@ class Logger
         self::$debugFolder = rtrim($path, DIRECTORY_SEPARATOR);
     }
 
+    /**
+     * Reset logger state - useful for testing
+     */
+    public static function reset(): void
+    {
+        self::$logFile = [];
+        self::$lastLog = '';
+    }
+
     public static function getLastLog(): string
     {
         return self::$lastLog;
@@ -49,20 +58,38 @@ class Logger
         self::$lastLog = $previousLog;
     }
 
-    public static function save(): void
+    public static function save(array $guides): void
     {
         if (self::$level !== 'debug') {
             return;
         }
         $log_path = self::$debugFolder . DIRECTORY_SEPARATOR . 'logs' . date('YmdHis') . '.json';
-        file_put_contents($log_path, json_encode(self::$logFile));
+        $formattedLogs = [];
+        foreach ($guides as $guide) {
+            $guideChannels = array_keys(Utils::getChannelsFromGuide($guide));
+            $filename = $guide['filename'];
+            if (!isset($formattedLogs[$filename])) {
+                $formattedLogs[$filename] = ['channels' => [], 'failed_providers' => self::$logFile['failed_providers'] ?? []];
+            }
+            foreach ((self::$logFile['channels'] ?? []) as $date => $logChannels) {
+                if (!isset($formattedLogs[$filename]['channels'][$date])) {
+                    $formattedLogs[$filename]['channels'][$date] = [];
+                }
+                foreach ($logChannels as $logChannel => $value) {
+                    if (in_array($logChannel, $guideChannels)) {
+                        $formattedLogs[$filename]['channels'][$date][$logChannel] = $value;
+                    }
+                }
+            }
+        }
+        file_put_contents($log_path, json_encode($formattedLogs));
         self::log("\e[36m[LOGS] \e[39m Export des logs vers $log_path\n");
     }
 
-    public static function addChannelEntry(string $channelFile, string $channel, string $date): void
+    public static function addChannelEntry(string $channel, string $date): void
     {
-        if (!isset(self::$logFile[$channelFile]['channels'][$date][$channel])) {
-            self::$logFile[$channelFile]['channels'][$date][$channel] = [
+        if (!isset(self::$logFile['channels'][$date][$channel])) {
+            self::$logFile['channels'][$date][$channel] = [
                 'success' => false,
                 'provider' => null,
                 'cache' => false,
@@ -70,32 +97,32 @@ class Logger
             ];
         }
     }
-    public static function addChannelFailedProvider(string $channelFile, string $channel, string $date, string $provider): void
+    public static function addChannelFailedProvider(string $channel, string $date, string $provider): void
     {
-        self::addChannelEntry($channelFile, $channel, $date);
-        self::$logFile[$channelFile]['channels'][$date][$channel]['failed_providers'][] = $provider;
-        self::$logFile[$channelFile]['failed_providers'][$provider] = true;
+        self::addChannelEntry($channel, $date);
+        self::$logFile['channels'][$date][$channel]['failed_providers'][] = $provider;
+        self::$logFile['failed_providers'][$provider] = true;
     }
-    public static function setChannelSuccessfulProvider(string $channelFile, string $channel, string $date, string $provider, bool $isCache = false): void
+    public static function setChannelSuccessfulProvider(string $channel, string $date, string $provider, bool $isCache = false): void
     {
-        self::addChannelEntry($channelFile, $channel, $date);
-        self::$logFile[$channelFile]['channels'][$date][$channel]['success'] = true;
-        self::$logFile[$channelFile]['channels'][$date][$channel]['provider'] = $provider;
-        self::$logFile[$channelFile]['channels'][$date][$channel]['cache'] = $isCache;
-    }
-
-    public static function hasChannelSuccessfulProvider(string $channelFile, string $channel, string $date): bool
-    {
-        return @(self::$logFile[$channelFile]['channels'][$date][$channel]['success']) ?? false;
+        self::addChannelEntry($channel, $date);
+        self::$logFile['channels'][$date][$channel]['success'] = true;
+        self::$logFile['channels'][$date][$channel]['provider'] = $provider;
+        self::$logFile['channels'][$date][$channel]['cache'] = $isCache;
     }
 
-    public static function addAdditionalError(string $channelFile, string $error, string $message): void
+    public static function hasChannelSuccessfulProvider(string $channel, string $date): bool
     {
-        if (!isset(self::$logFile[$channelFile]['additional_errors'])) {
-            self::$logFile[$channelFile]['additional_errors'] = [
+        return @(self::$logFile['channels'][$date][$channel]['success']) ?? false;
+    }
+
+    public static function addAdditionalError(string $error, string $message): void
+    {
+        if (!isset(self::$logFile['additional_errors'])) {
+            self::$logFile['additional_errors'] = [
             ];
         }
-        self::$logFile[$channelFile]['additional_errors'][] = ['error' => $error, 'message' => $message];
+        self::$logFile['additional_errors'][] = ['error' => $error, 'message' => $message];
     }
 
 

@@ -14,10 +14,6 @@ class CacheFile
 
     private array $listFile = [];
     /**
-     * This var store all key created during the current process
-     */
-    private array $createdKeys = [];
-    /**
      * This bool help to ignore (and remove) the cache of the day
      */
     private Configurator $config;
@@ -40,7 +36,6 @@ class CacheFile
         if (false === file_put_contents($fileName, $content)) {
             throw new Exception('Impossible to cache : ' . $key);
         }
-        $this->createdKeys[$key] = true;
         $this->listFile[$key] = [
             'file' => $fileName,
             'key' => $key,
@@ -77,14 +72,13 @@ class CacheFile
             return ($this->listFile[$key]['state']);
         }
         $exists = file_exists($this->getFileName($key));
-        if (str_contains($key, date('Y-m-d')) && $this->config->isForceTodayGrab() && !isset($this->createdKeys[$key])) {
-            return $exists ? EPGEnum::$OBSOLETE_CACHE : EPGEnum::$NO_CACHE;
-        }
         if ($exists) {
-            $timeRange = Utils::getTimeRangeFromXMLString($this->getFileContent($key));
-
+            if (round((strtotime('now') - filemtime($this->getFileName($key))) / 86400) > $this->config->getCacheTTL()) {
+                return EPGEnum::$EXPIRED_CACHE;
+            }
+            $timeRange = Utils::getTimeSpanFromBeginningOfDay($this->getFileContent($key));
             $cacheState = EPGEnum::$FULL_CACHE;
-            if ($timeRange < $this->config->getMinTimeRange()) {
+            if ($timeRange < $this->config->getMinEndTime()) {
                 $cacheState = EPGEnum::$PARTIAL_CACHE;
             }
 

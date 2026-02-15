@@ -95,8 +95,11 @@ class Program extends Tag
         $this->setChild(new Tag('audio-described', null, []));
         $keywords = $this->getChildren('keyword');
         foreach ($keywords as $keyword) {
-            if (is_string($keyword) && $keyword == 'audio-description') {
-                return;
+            if ($keyword instanceof Tag) {
+                $xml = $keyword->asXML();
+                if (str_contains($xml, 'audio-description')) {
+                    return;
+                }
             }
         }
         $this->addKeyword('audio-description');
