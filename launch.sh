@@ -13,7 +13,7 @@ for i in $(seq 1 $MAX_RETRIES); do
     echo "[launch] Attempt $i / $MAX_RETRIES — starting VPN session..."
 
     vopono exec -i eth0 --custom "./openvpn.ovpn" \
-        "php ./check_mycanal.php && php manager.php export"
+        "./php_commands.sh"
 
     EXIT_CODE=$?
 
@@ -31,4 +31,4 @@ done
 
 # All retries exhausted — run export anyway without the MyCanal check
 echo "[launch] MyCanal still blocked after $MAX_RETRIES attempts, running export anyway..."
-vopono exec -i eth0 --custom "./openvpn.ovpn" "php ./check_mycanal.php && php manager.php export"
+vopono exec -i eth0 --custom "./openvpn.ovpn" "./php_commands.sh"
