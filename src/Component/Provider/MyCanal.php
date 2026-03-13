@@ -82,7 +82,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_mycanal.json'), $priority ?? 0.7);
     }
 
-    protected function getApiKey()
+    public function getApiKey()
     {
         if (!isset(self::$apiKey[$this->region])) {
             $result = $this->getContentFromURL('https://hodor.canalplus.pro/api/v2/mycanal/authenticate.json/android/6.0?appLocation='.$this->region.'&offerZone='.self::$OFFER_ZONES[$this->region], self::$HEADERS, true);
