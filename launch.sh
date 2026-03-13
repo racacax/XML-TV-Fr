@@ -7,14 +7,13 @@
 # Exit code 2 from check_mycanal.php means "IP blocked, try again".
 # Any other non-zero exit code (export failure, etc.) stops the loop immediately.
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MAX_RETRIES=10
 
 for i in $(seq 1 $MAX_RETRIES); do
     echo "[launch] Attempt $i / $MAX_RETRIES — starting VPN session..."
 
-    vopono exec -i eth0 --custom "$SCRIPT_DIR/openvpn.ovpn" \
-        "php '$SCRIPT_DIR/check_mycanal.php' && php '$SCRIPT_DIR/manager.php' export"
+    vopono exec -i eth0 --custom "./openvpn.ovpn" \
+        "php ./check_mycanal.php && php manager.php export"
 
     EXIT_CODE=$?
 
@@ -32,4 +31,4 @@ done
 
 # All retries exhausted — run export anyway without the MyCanal check
 echo "[launch] MyCanal still blocked after $MAX_RETRIES attempts, running export anyway..."
-vopono exec -i eth0 --custom "$SCRIPT_DIR/openvpn.ovpn" "php '$SCRIPT_DIR/manager.php' export"
+vopono exec -i eth0 --custom "./openvpn.ovpn" "php ./check_mycanal.php && php manager.php export"
