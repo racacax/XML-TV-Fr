@@ -31,4 +31,4 @@ done
 
 # All retries exhausted — run export anyway without the MyCanal check
 echo "[launch] MyCanal still blocked after $MAX_RETRIES attempts, running export anyway..."
-vopono exec -i eth0 --custom "./openvpn.ovpn" "./php_commands.sh"
+vopono exec -i eth0 --custom "./openvpn.ovpn" "php manager.php export"
