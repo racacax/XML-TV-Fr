@@ -128,7 +128,10 @@ abstract class AbstractProvider
         @mkdir(dirname($cache->getLockPath()), 0777, true);
         $fp = fopen($cache->getLockPath(), 'c');
         if ($fp !== false) {
-            flock($fp, LOCK_EX);
+            if (!flock($fp, LOCK_EX | LOCK_NB)) {
+                $this->setStatus(Utils::colorize('Cache en attente...', 'yellow'));
+                flock($fp, LOCK_EX);
+            }
             // Another thread may have fetched and cached while we were waiting for the lock
             if (!$ignoreCache) {
                 $content = $cache->getContent();

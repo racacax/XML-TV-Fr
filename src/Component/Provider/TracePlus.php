@@ -91,7 +91,7 @@ class TracePlus extends AbstractProvider implements ProviderInterface
             if (isset($programme->icon) && isset($programme->icon['src'])) {
                 $iconSrc = (string) $programme->icon['src'];
                 if (!empty($iconSrc)) {
-                    $program->addIcon($iconSrc);
+                    $program->addIcon(str_replace('/test/', '/', $iconSrc));
                 }
             }
 

@@ -86,7 +86,7 @@ class Configurator
         int     $cache_physical_ttl = 8,
         int     $cache_ttl = 8,
         bool    $deleteRawXml = false,
-        array    $exportHandlers = ['class' => 'GZExport', 'params' => []],
+        array   $exportHandlers = ['class' => 'GZExport', 'params' => []],
         bool    $enableDummy = false,
         array   $priorityOrders = [],
         array   $guides = [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
