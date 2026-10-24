@@ -89,7 +89,7 @@
   },
   "AB3.fr": {
     "name": "AB3",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~deec8bc0a9e988af.png/480x480/quality/100/ab-3.png"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/AB3_2025.svg/500px-AB3_2025.svg.png"
   },
   "ABCAustralia.au": {
     "name": "ABC Australia",
@@ -104,8 +104,8 @@
     "icon": "https://static-cdn.tv.sfr.net/data/logos/tv_services/A_BOLA_TV_color.png"
   },
   "ABXploreFR.fr": {
-    "name": "ABXplore",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~055ec590f83aa135.png/480x480/quality/100/abxplore.png"
+    "name": "ABX",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/ABX_2025.svg/500px-ABX_2025.svg.png"
   },
   "ACTUATV.be": {
     "name": "Actua TV",
@@ -5288,6 +5288,10 @@
     "name": "NIGEZIE",
     "icon": "http://cdn.startimestv.com/banner/legacy/c_-615165407.png"
   },
+  "NinaNovelas.fr": {
+    "name": "Nina Novelas",
+    "icon": "https://www.nina-tv.com/images/logo.png"
+  },
   "NoTele.be": {
     "name": "NoTele",
     "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn5DeCglVcDc5jd-9ivBci4nCdZb9Qz4Qe68HyDF4s5lBfIp-Be7aD0-0_Fw&amp;s"
@@ -7012,8 +7016,8 @@
     "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180078/canal-ouah/CHN43FB/SYFY_FB_myCANAL_640x480?=.png"
   },
   "Syfy.fr": {
-    "name": "Syfy",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~fdf578c5513fc680.png/480x480/quality/100/syfy.png"
+    "name": "SciFi",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/SciFi_2026.svg/500px-SciFi_2026.svg.png"
   },
   "Syfy.frdrom": {
     "name": "SYFY",
@@ -7093,7 +7097,7 @@
   },
   "TF14k.fr": {
     "name": "TF1 4K",
-    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Tf14k-logo.png/640px-Tf14k-logo.png"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/62/Tf14k-logo.png"
   },
   "TF1SeriesFilms.af": {
     "name": "TF1 SERIES FILMS",
