@@ -247,6 +247,10 @@
     "name": "ANTENNEA",
     "icon": "https://st2.depositphotos.com/3682225/7554/v/600/depositphotos_75542581-stock-illustration-radar-vector-icon-satellite-dish.jpg"
   },
+  "AntenneReunionRadio.fr": {
+    "name": "Antenne Réunion Radio",
+    "icon": "https://proxies.antennereunion-production.eu-west-3.alphanetworks.tv/proxy/imgdata?type=100&objectId=2&languageId=fr"
+  },
   "APLA.ca": {
     "name": "APLA",
     "icon": "http://asso-apla.fr/wp-content/uploads/2014/07/cropped-lapla_logo_couleur-960x287.jpg"
@@ -2831,6 +2835,10 @@
   "EWTN.ca": {
     "name": "EWTN",
     "icon": "https://upload.wikimedia.org/wikipedia/fr/thumb/0/05/EWTN_logo.svg/1280px-EWTN_logo.svg.png"
+  },
+  "ExoTV.fr": {
+    "name": "Exo TV",
+    "icon": "https://proxies.antennereunion-production.eu-west-3.alphanetworks.tv/proxy/imgdata?type=100&objectId=69&languageId=fr"
   },
   "EXPHD.ca": {
     "name": "EXPHD"
@@ -6087,6 +6095,10 @@
   "RTLPlus.de": {
     "name": "RTL Plus",
     "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqT4x4ErWJn8ZyqTcGptBgX78IUaxmP88d5Gn-NR680nQ5RGeQqw-K1uFDQr8&amp;s"
+  },
+  "RTLReunion.fr": {
+    "name": "Antenne Réunion Radio",
+    "icon": "https://proxies.antennereunion-production.eu-west-3.alphanetworks.tv/proxy/imgdata?type=100&objectId=2&languageId=fr"
   },
   "RTLTVI.be": {
     "name": "RTL TVI",
