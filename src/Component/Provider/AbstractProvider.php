@@ -110,14 +110,15 @@ abstract class AbstractProvider
     /**
      * @param string $url
      * @param array<string, string> $headers
+     * @param string|null $body If set, a POST request with this body is sent instead of a GET one
      * @return string
      */
-    protected function getContentFromURL(string $url, array $headers = [], bool $ignoreCache = false, bool $decodeEntities = true): string
+    protected function getContentFromURL(string $url, array $headers = [], bool $ignoreCache = false, bool $decodeEntities = true, ?string $body = null): string
     {
         if (empty($headers['User-Agent'])) {
             $headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0';
         }
-        $cache = new ProviderCache(md5($url.json_encode($headers)));
+        $cache = new ProviderCache(md5($url.json_encode($headers).$body));
         if (!$ignoreCache) {
             $content = $cache->getContent();
             if (!empty($content)) {
@@ -145,14 +146,14 @@ abstract class AbstractProvider
         }
 
         try {
-            $response = $this->client->get(
-                $url,
-                [
-                    'headers' => $headers,
-                    'connect_timeout' => 1,
-                    'timeout' => 20
-                ]
-            );
+            $options = [
+                'headers' => $headers,
+                'connect_timeout' => 1,
+                'timeout' => 20
+            ];
+            $response = $body === null
+                ? $this->client->get($url, $options)
+                : $this->client->post($url, $options + ['body' => $body]);
         } catch (ConnectException $e) {
             if ($fp !== false) {
                 flock($fp, LOCK_UN);
