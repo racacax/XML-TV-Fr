@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace racacax\XmlTvTest\Integration;
 
 use PHPUnit\Framework\TestCase;
+use racacax\XmlTv\Component\Provider\AntenneReunion;
 use racacax\XmlTv\Component\Provider\Bouygues;
 use racacax\XmlTv\Component\Provider\Cogeco;
+use racacax\XmlTv\Component\Provider\ExternalXML;
 use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
 use racacax\XmlTv\Component\Provider\LInternaute;
 use racacax\XmlTv\Component\Provider\MyCanal;
 use racacax\XmlTv\Component\Provider\NouvelObs;
+use racacax\XmlTv\Component\Provider\OLPlay;
 use racacax\XmlTv\Component\Provider\Oqee;
 use racacax\XmlTv\Component\Provider\Orange;
 use racacax\XmlTv\Component\Provider\PlayTV;
@@ -22,6 +25,7 @@ use racacax\XmlTv\Component\Provider\Tebeosud;
 use racacax\XmlTv\Component\Provider\Tele2Semaines;
 use racacax\XmlTv\Component\Provider\Tele7Jours;
 use racacax\XmlTv\Component\Provider\StarTimesTV;
+use racacax\XmlTv\Component\Provider\Tivi5MondeUSA;
 use racacax\XmlTv\Component\Provider\TracePlus;
 use racacax\XmlTv\Component\Provider\Teleboy;
 use racacax\XmlTv\Component\Provider\Telecablesat;
@@ -69,6 +73,11 @@ class ProvidersTest extends TestCase
         [LInternaute::class, ['channels' => ['TF1.fr']]],
         [TracePlus::class, ['channels' => ['TraceUrban.fr']]],
         [StarTimesTV::class, ['channels' => ['ZeeOne.st']]],
+        [OLPlay::class, ['channels' => ['OLTV.fr']]],
+        [AntenneReunion::class, ['channels' => ['AntenneReunion.fr']]],
+        [ExternalXML::class, ['channels' => ['SonyOneFavoris.fr']]],
+        // Details need one request per episode, the grid is enough to test the provider
+        [Tivi5MondeUSA::class, ['channels' => ['Tivi5.fr'], 'extra_params' => ['tivi5mondeusa_enable_details' => false]]],
     ];
     private static array $IGNORED_PROVIDERS = [Teleboy::class];
 
@@ -100,7 +109,7 @@ class ProvidersTest extends TestCase
     {
         $channels = $data['channels'];
         $configurator = new Configurator();
-        $provider = new $provider($configurator->getDefaultClient());
+        $provider = new $provider($configurator->getDefaultClient(), null, $data['extra_params'] ?? []);
         $formatter = new XmlFormatter();
         $channelObj = null;
         $count = 0;
