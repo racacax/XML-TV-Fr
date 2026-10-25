@@ -32,6 +32,16 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         'Sec-Fetch-User' => '?1',
         'Priority' => 'u=0, i'];
 
+    private const CREDIT_TYPES = [
+        'de' => 'director',
+        'avec' => 'actor',
+        'produit par' => 'producer',
+        'présenté par' => 'presenter',
+        'musique' => 'composer',
+        'scénario' => 'writer',
+        'auteur' => 'writer',
+    ];
+
     private static array $OFFER_ZONES = [
         'fr' => 'cpfra',
         'bj' => 'cpafr',
@@ -157,6 +167,7 @@ class MyCanal extends AbstractProvider implements ProviderInterface
                 $programList[$index]['closedCaptioning'] = @$detail['detail']['informations']['closedCaptioning'];
                 $programList[$index]['reviews'] = @$detail['detail']['informations']['reviews'];
                 $programList[$index]['productionYear'] = @$detail['detail']['informations']['productionYear'];
+                $programList[$index]['personnalities'] = @$detail['detail']['informations']['personnalities'];
 
                 $icon = $detail['episodes']['contents'][0]['URLImage'] ?? @$detail['detail']['informations']['URLImage'];
                 $icon = str_replace(['{resolutionXY}', '{imageQualityPercentage}'], ['640x360', '80'], $icon ?? '');
@@ -180,6 +191,28 @@ class MyCanal extends AbstractProvider implements ProviderInterface
         } catch (\Throwable $t) {
             ##return false; We allow failures on details
         }
+    }
+
+    /**
+     * Converts the people of a program ("De :" => director, "Avec :" => actors, ...) into credits.
+     * Roles without equivalent in XMLTV (choreography, voices, ...) are ignored.
+     * @param array<int, array{prefix?: string, personnalitiesList?: array<int, array{title?: string}>}> $personnalities
+     * @return array<int, array{string, string}> List of [name, credit type]
+     */
+    public static function getCredits(array $personnalities): array
+    {
+        $credits = [];
+        foreach ($personnalities as $category) {
+            $role = mb_strtolower(trim(rtrim(trim($category['prefix'] ?? ''), ':')));
+            $type = self::CREDIT_TYPES[$role] ?? null;
+            foreach ($category['personnalitiesList'] ?? [] as $person) {
+                if ($type !== null && !empty($person['title'])) {
+                    $credits[] = [$person['title'], $type];
+                }
+            }
+        }
+
+        return $credits;
     }
 
     public function constructEPG(string $channel, string $date): Channel | bool
@@ -208,6 +241,9 @@ class MyCanal extends AbstractProvider implements ProviderInterface
             $programObj->setRating(@$program['csa']);
             if (@$program['productionYear']) {
                 $programObj->setDate(strval($program['productionYear']));
+            }
+            foreach (self::getCredits($program['personnalities'] ?? []) as [$name, $type]) {
+                $programObj->addCredit($name, $type);
             }
             if (@$program['closedCaptioning']) {
                 $programObj->addSubtitles('teletext');

@@ -45,7 +45,8 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
     {
         $content = $this->getContent($url);
         if (!empty($content)) {
-            $content = explode('<div class="top-menu">', $content)[1];
+            // The menu is not always delimited by the website: keep the whole page in that case
+            $content = explode('<div class="top-menu">', $content)[1] ?? $content;
             $content = explode('<h2>Prochains épisodes</h2>', $content)[0];
             $content = str_replace('<br>', "\n", $content);
             $content = str_replace('<br />', "\n", $content);

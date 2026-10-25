@@ -96,6 +96,13 @@ class Telerama extends AbstractProvider implements ProviderInterface
         return @$matches[1];
     }
 
+    private function addCredits(Program $programObj, ?string $names, string $type): void
+    {
+        foreach (explode(',', strip_tags($names ?? '')) as $name) {
+            $programObj->addCredit(trim($name), $type);
+        }
+    }
+
     private function assignDetails(Program $programObj, string $deeplink)
     {
 
@@ -115,13 +122,23 @@ class Telerama extends AbstractProvider implements ProviderInterface
             $programObj->addSubTitle($subtitle);
             $subtitle2 = $this->getElementValue($content, 'Titre de l’épisode');
             $programObj->addSubTitle($subtitle2);
-            $scenario = $this->getElementValue($content, 'Scénario');
-            $programObj->addCredit($scenario, 'writer');
-            $director = $this->getElementValue($content, 'Réalisateur');
-            $programObj->addCredit($director, 'director');
+            // Labels are singular or plural depending on the number of people
+            $this->addCredits($programObj, $this->getElementValue($content, 'Scénario'), 'writer');
+            $this->addCredits($programObj, $this->getElementValue($content, 'Scénariste'), 'writer');
+            $this->addCredits($programObj, $this->getElementValue($content, 'Scénaristes'), 'writer');
+            $this->addCredits($programObj, $this->getElementValue($content, 'Réalisateur'), 'director');
+            $this->addCredits($programObj, $this->getElementValue($content, 'Réalisateurs'), 'director');
+            $this->addCredits($programObj, $this->getElementValue($content, 'Musique'), 'composer');
             $genre = $this->getElementValue($content, 'Genre');
-            $presenter = $this->getElementValue($content, 'Présentateur');
-            $programObj->addCredit($presenter, 'presenter');
+            $this->addCredits($programObj, $this->getElementValue($content, 'Présentateur'), 'presenter');
+            $year = trim(strip_tags($this->getElementValue($content, 'Sortie') ?? ''));
+            if (preg_match('/^\d{4}$/', $year)) {
+                $programObj->setDate($year);
+            }
+            $country = trim(strip_tags($this->getElementValue($content, 'Pays') ?? ''));
+            if ($country !== '') {
+                $programObj->setCountry($country);
+            }
             $programObj->addCategory(strip_tags($genre));
             preg_match_all('/<p class="sheet__info-item-label sheet__info-item-label--casting">(.*?)<\/p>.*?<p class="sheet__info-item-value">(.*?)<\/p>/', $content, $casting);
             for ($i = 0; $i < count($casting[0]); $i++) {

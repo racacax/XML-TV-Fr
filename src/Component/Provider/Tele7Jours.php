@@ -52,7 +52,7 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             return $dateDay;
         }
     }
-    private function parseProgram(string $date, string $p): Program
+    private function parseProgram(string $date, string $p): ?Program
     {
         preg_match('/<div class="tvgrid-broadcast__details-time">(.*?)<\/div>/s', $p, $startTime);
         preg_match('/<div class="tvgrid-broadcast__details-title">(.*?)<\/div>/s', $p, $title);
@@ -67,12 +67,16 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         $isPremiere = false;
         foreach ($subDetailsSplit as $subDetail) {
             $subDetail = trim($subDetail);
-            if (str_ends_with($subDetail, 'mn')) {
-                $subDetail = str_replace('mn', ' minutes', $subDetail);
-                $endTimeObj = $startDateObj->modify("+$subDetail");
+            // The website writes durations as "41 mn" or "41 mins"
+            if (preg_match('/^(\d+)\s*(?:mn|mins?)$/', $subDetail, $duration)) {
+                $endTimeObj = $startDateObj->modify("+$duration[1] minutes");
             } elseif ($subDetail == 'Inédit') {
                 $isPremiere = true;
             }
+        }
+        if ($endTimeObj === null) {
+            // Without a duration, the end of the program is unknown
+            return null;
         }
         $programObj = new Program($startDateObj, $endTimeObj);
         if ($isPremiere) {
@@ -98,14 +102,15 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
                 $programObj->addSubTitle($subtitle);
             }
         }
-        if ($imgs[1]) {
+        if (!empty($imgs[1])) {
             $imgs = explode(',', $imgs[1]);
             $img = explode(' ', trim(end($imgs)))[0];
             $programObj->addIcon($img);
         }
 
         if ($this->enableDetails && isset($url[1])) {
-            $this->addDetails($programObj, $url[1]);
+            // Links of the grid are relative
+            $this->addDetails($programObj, str_starts_with($url[1], '/') ? 'https://www.programme-television.org' . $url[1] : $url[1]);
         }
 
         return $programObj;
@@ -139,6 +144,17 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         if ($details[1]) {
             $programObj->addDesc(strip_tags($details[1]));
         }
+        // "France - Belgique  - 2015": countries, then year
+        preg_match('/<h2 class="program-details__info-title">Production<\/h2>\s*<span class="program-details__info-text">(.*?)<\/span>/s', $content, $production);
+        if (!empty($production[1])) {
+            $parts = array_filter(array_map('trim', explode('-', strip_tags($production[1]))));
+            if (preg_match('/^\d{4}$/', (string) end($parts))) {
+                $programObj->setDate((string) array_pop($parts));
+            }
+            if (!empty($parts)) {
+                $programObj->setCountry(implode(' - ', $parts));
+            }
+        }
     }
     public function constructEPG(string $channel, string $date): Channel|bool
     {
@@ -157,7 +173,9 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             $this->setStatus($percent);
             $p = $programs[$i];
             $programObj = $this->parseProgram($date, $p);
-            $channelObj->addProgram($programObj);
+            if ($programObj !== null) {
+                $channelObj->addProgram($programObj);
+            }
 
         }
 
