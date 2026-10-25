@@ -20,6 +20,7 @@ use racacax\XmlTv\Component\Provider\PlayTV;
 use racacax\XmlTv\Component\Provider\Proximus;
 use racacax\XmlTv\Component\Provider\SFR;
 use racacax\XmlTv\Component\Provider\SixPlay;
+use racacax\XmlTv\Component\Provider\SRGSSR;
 use racacax\XmlTv\Component\Provider\SudInfo;
 use racacax\XmlTv\Component\Provider\Tebeosud;
 use racacax\XmlTv\Component\Provider\Tele2Semaines;
@@ -74,6 +75,7 @@ class ProvidersTest extends TestCase
         [TracePlus::class, ['channels' => ['TraceUrban.fr']]],
         [StarTimesTV::class, ['channels' => ['ZeeOne.st']]],
         [OLPlay::class, ['channels' => ['OLTV.fr']]],
+        [SRGSSR::class, ['channels' => ['RTSUn.ch']]],
         [AntenneReunion::class, ['channels' => ['AntenneReunion.fr']]],
         [ExternalXML::class, ['channels' => ['SonyOneFavoris.fr']]],
         // Details need one request per episode, the grid is enough to test the provider
