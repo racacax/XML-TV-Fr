@@ -1,0 +1,242 @@
+{
+  "TF1.fr": {
+    "id": 4,
+    "list": 299
+  },
+  "M6.fr": {
+    "id": 7,
+    "list": 299
+  },
+  "France2.fr": {
+    "id": 10,
+    "list": 299
+  },
+  "France3.fr": {
+    "id": 13,
+    "list": 299
+  },
+  "Arte.fr": {
+    "id": 16,
+    "list": 299
+  },
+  "France5.fr": {
+    "id": 19,
+    "list": 299
+  },
+  "TMC.fr": {
+    "id": 22,
+    "list": 299
+  },
+  "France4.fr": {
+    "id": 28,
+    "list": 299
+  },
+  "CanalPlus.fr": {
+    "id": 31,
+    "list": 302
+  },
+  "T18.fr": {
+    "id": 43,
+    "list": 299
+  },
+  "W9.fr": {
+    "id": 46,
+    "list": 299
+  },
+  "NT1.fr": {
+    "id": 49,
+    "list": 299
+  },
+  "LaChaineParlementaire.fr": {
+    "id": 55,
+    "list": 299
+  },
+  "CNews.fr": {
+    "id": 61,
+    "list": 299
+  },
+  "CStar.fr": {
+    "id": 64,
+    "list": 299
+  },
+  "Gulli.fr": {
+    "id": 67,
+    "list": 299
+  },
+  "LEquipe21.fr": {
+    "id": 73,
+    "list": 299
+  },
+  "TF1SeriesFilms.fr": {
+    "id": 76,
+    "list": 299
+  },
+  "6ter.fr": {
+    "id": 79,
+    "list": 299
+  },
+  "Numero23.fr": {
+    "id": 82,
+    "list": 299
+  },
+  "RMCDecouverte.fr": {
+    "id": 85,
+    "list": 299
+  },
+  "Cherie25.fr": {
+    "id": 88,
+    "list": 299
+  },
+  "LCI.fr": {
+    "id": 91,
+    "list": 299
+  },
+  "AB1.fr": {
+    "id": 100,
+    "list": 302
+  },
+  "Action.fr": {
+    "id": 106,
+    "list": 302
+  },
+  "beINSPORTS1.fr": {
+    "id": 109,
+    "list": 302
+  },
+  "beINSPORTS2.fr": {
+    "id": 112,
+    "list": 302
+  },
+  "CanalPlusCinema.fr": {
+    "id": 118,
+    "list": 302
+  },
+  "CanalPlusSeries.fr": {
+    "id": 127,
+    "list": 302
+  },
+  "CanalPlusSport.fr": {
+    "id": 130,
+    "list": 302
+  },
+  "CinePlusClassic.fr": {
+    "id": 139,
+    "list": 302
+  },
+  "CinePlusClub.fr": {
+    "id": 142,
+    "list": 302
+  },
+  "CinePlusEmotion.fr": {
+    "id": 145,
+    "list": 302
+  },
+  "CinePlusFamiz.fr": {
+    "id": 148,
+    "list": 302
+  },
+  "CinePlusFrisson.fr": {
+    "id": 151,
+    "list": 302
+  },
+  "CinePlusPremier.fr": {
+    "id": 154,
+    "list": 302
+  },
+  "ComediePlus.fr": {
+    "id": 157,
+    "list": 302
+  },
+  "DiscoveryChannel.fr": {
+    "id": 160,
+    "list": 302
+  },
+  "DisneyChannel.fr": {
+    "id": 163,
+    "list": 302
+  },
+  "DisneyCinema.fr": {
+    "id": 166,
+    "list": 302
+  },
+  "Eurosport1.fr": {
+    "id": 178,
+    "list": 302
+  },
+  "Eurosport2.fr": {
+    "id": 181,
+    "list": 302
+  },
+  "NationalGeographic.fr": {
+    "id": 184,
+    "list": 302
+  },
+  "NatGeoWild.fr": {
+    "id": 187,
+    "list": 302
+  },
+  "ParisPremiere.fr": {
+    "id": 205,
+    "list": 302
+  },
+  "PlanetePlus.fr": {
+    "id": 208,
+    "list": 302
+  },
+  "PLANETEJustice.fr": {
+    "id": 214,
+    "list": 302
+  },
+  "RMCSport1.fr": {
+    "id": 229,
+    "list": 302
+  },
+  "RMCSport2.fr": {
+    "id": 232,
+    "list": 302
+  },
+  "Teva.fr": {
+    "id": 241,
+    "list": 302
+  },
+  "TvBreizh.fr": {
+    "id": 244,
+    "list": 302
+  },
+  "Voyage.fr": {
+    "id": 253,
+    "list": 302
+  },
+  "RTL9.fr": {
+    "id": 295,
+    "list": 302
+  },
+  "PolarPlus.fr": {
+    "id": 307,
+    "list": 302
+  },
+  "CanalPlusFoot.fr": {
+    "id": 629,
+    "list": 302
+  },
+  "CanalPlusSport360.fr": {
+    "id": 632,
+    "list": 302
+  },
+  "TebeSud.fr": {
+    "id": 704,
+    "list": 299
+  },
+  "Tebeo.fr": {
+    "id": 707,
+    "list": 299
+  },
+  "TVRennes35Bretagne.fr": {
+    "id": 770,
+    "list": 299
+  },
+  "France3Bretagne.fr": {
+    "id": 773,
+    "list": 299
+  }
+}

@@ -96,7 +96,7 @@ class OuestFrance extends AbstractProvider implements ProviderInterface
                 preg_match('/class="infos[^"]*">(.*?)<\/p>/s', $block, $infos);
                 preg_match('/data-oflazyload=\'\{"src":"(.*?)"\}\'/', $block, $icon);
                 [$genre, $duration] = $this->parseInfos($infos[1] ?? '');
-                $start = $this->resolveStart($pageDate->setTime((int) $time[1], (int) $time[2]), $previousEnd);
+                $start = $this->resolveRepeatedHour($pageDate->setTime((int) $time[1], (int) $time[2]), $previousEnd);
                 // A program is on the page of the day before and on the one of the day only when the pages overlap
                 $previousEnd = $duration !== null ? $start->setTimestamp($start->getTimestamp() + $duration * 60) : null;
                 $programs[$start->getTimestamp()] = [
@@ -112,21 +112,6 @@ class OuestFrance extends AbstractProvider implements ProviderInterface
         ksort($programs);
 
         return array_values($programs);
-    }
-
-    /**
-     * The hour when the clocks go back (02:00 to 03:00 in October) exists twice and the guide only gives the time. The
-     * second one is the right one when the first one would start before the end of the previous program.
-     */
-    private function resolveStart(\DateTimeImmutable $start, ?\DateTimeImmutable $previousEnd): \DateTimeImmutable
-    {
-        $second = $start->setTimestamp($start->getTimestamp() + 3600);
-        $isRepeatedHour = $second->format('H:i') === $start->format('H:i') && $second->getOffset() !== $start->getOffset();
-        if ($isRepeatedHour && $previousEnd !== null && $start->getTimestamp() < $previousEnd->getTimestamp() - 120) {
-            return $second;
-        }
-
-        return $start;
     }
 
     /**

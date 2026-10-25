@@ -11,6 +11,7 @@ use racacax\XmlTv\Component\Provider\Cogeco;
 use racacax\XmlTv\Component\Provider\ExternalXML;
 use racacax\XmlTv\Component\Provider\FranceTV;
 use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
+use racacax\XmlTv\Component\Provider\LeTelegramme;
 use racacax\XmlTv\Component\Provider\LInternaute;
 use racacax\XmlTv\Component\Provider\MyCanal;
 use racacax\XmlTv\Component\Provider\NouvelObs;
@@ -81,6 +82,7 @@ class ProvidersTest extends TestCase
         [FranceTV::class, ['channels' => ['France2.fr']]],
         // Details need one request per program, the grid is enough to test the provider
         [OuestFrance::class, ['channels' => ['TF1.fr'], 'extra_params' => ['ouestfrance_enable_details' => false]]],
+        [LeTelegramme::class, ['channels' => ['TF1.fr']]],
         [AntenneReunion::class, ['channels' => ['AntenneReunion.fr']]],
         [ExternalXML::class, ['channels' => ['SonyOneFavoris.fr']]],
         // Details need one request per episode, the grid is enough to test the provider

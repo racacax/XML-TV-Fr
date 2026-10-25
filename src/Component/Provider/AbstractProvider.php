@@ -108,6 +108,22 @@ abstract class AbstractProvider
     }
 
     /**
+     * For guides that only give the time of the programs: the hour when the clocks go back (02:00 to 03:00 in October)
+     * exists twice. The second one is the right one when the first one would start before the end of the previous
+     * program (the end is only known when the guide gives a duration).
+     */
+    protected function resolveRepeatedHour(\DateTimeImmutable $start, ?\DateTimeImmutable $previousEnd): \DateTimeImmutable
+    {
+        $second = $start->setTimestamp($start->getTimestamp() + 3600);
+        $isRepeatedHour = $second->format('H:i') === $start->format('H:i') && $second->getOffset() !== $start->getOffset();
+        if ($isRepeatedHour && $previousEnd !== null && $start->getTimestamp() < $previousEnd->getTimestamp() - 120) {
+            return $second;
+        }
+
+        return $start;
+    }
+
+    /**
      * @param string $url
      * @param array<string, string> $headers
      * @param string|null $body If set, a POST request with this body is sent instead of a GET one
