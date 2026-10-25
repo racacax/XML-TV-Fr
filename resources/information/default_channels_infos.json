@@ -6503,6 +6503,26 @@
     "name": "SNWLH",
     "icon": "https://cdn.tvpassport.com/image/station/640x480/v2/s68946_h15_aa.png"
   },
+  "SonyOneFavoris.fr": {
+    "name": "Sony One Favoris",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/5fb26f0a-864e-44da-99c0-dd5cccd2a417/FR_FAST_Plex_Faves_logo_dark.png"
+  },
+  "SonyOneHitsAction.fr": {
+    "name": "Sony One Hits Action",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/a3ead00d-7fdc-4f0f-a531-1cc3af6863c5/FR_FAST_Plex_ActionHits_logo_dark.png"
+  },
+  "SonyOneHitsComedy.fr": {
+    "name": "Sony One Hits Comédie",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/fde6237a-3a8c-4d2a-b14f-ab390baeef69/FR_FAST_Plex_ComedyHits_logo_dark.png"
+  },
+  "SonyOneSeriesComedy.fr": {
+    "name": "Sony One Séries Comédie",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/5ed0013a-150b-42cf-8ea2-4a3369386946/FR_FAST_Plex_ComedyTV_logo_dark.png"
+  },
+  "SonyOneSeriesThriller.fr": {
+    "name": "Sony One Séries Thriller",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/f161e843-a9db-4a63-8058-2f46600f5ae7/FR_FAST_Plex_ThrillerTV_logo_dark.png"
+  },
   "SPARK.ca": {
     "name": "SPARK",
     "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrI0vyBwli99OnKuMCohQZJQTjUyC0LKrX7aBTSsuWFXo90o_CyBcysyBuEVc&amp;s"
