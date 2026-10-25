@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 use racacax\XmlTv\Component\Provider\Bouygues;
 use racacax\XmlTv\Component\Provider\Cogeco;
 use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
-use racacax\XmlTv\Component\Provider\LEquipeLive;
 use racacax\XmlTv\Component\Provider\LInternaute;
 use racacax\XmlTv\Component\Provider\MyCanal;
 use racacax\XmlTv\Component\Provider\NouvelObs;
@@ -71,7 +70,7 @@ class ProvidersTest extends TestCase
         [TracePlus::class, ['channels' => ['TraceUrban.fr']]],
         [StarTimesTV::class, ['channels' => ['ZeeOne.st']]],
     ];
-    private static array $IGNORED_PROVIDERS = [Teleboy::class, LEquipeLive::class];
+    private static array $IGNORED_PROVIDERS = [Teleboy::class];
 
     /**
      * All Providers must have at least a channel to gather or to have specifically been ignored
