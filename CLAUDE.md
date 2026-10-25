@@ -185,8 +185,8 @@ src/
 
 resources/
 ├── channel_config/         # Provider channel lists (JSON)
-├── config/                 # Default configurations
-├── information/            # Ratings, metadata
+├── config/                 # Default configurations (default_config.json, default_channels.json = default channel selection)
+├── information/            # Ratings, default_channels_infos.json (default name/icon of every channel)
 └── validation/             # XML validation
 
 config/                     # User configuration (git-ignored)
@@ -205,12 +205,43 @@ tools/                      # Web UI for channel selection (legacy)
 ## Development Notes
 
 ### Adding a New Provider
-1. Create class in `src/Component/Provider/` extending `AbstractProvider`
-2. Implement `constructEPG(string $channel, string $date): Channel|bool`
-3. Add channel list JSON in `resources/channel_config/channels_yourprovider.json`
-4. Set priority in constructor (compare with existing providers)
-5. Use `$this->getContentFromURL()` for HTTP requests (auto-cached)
-6. Class name must match filename
+1. Create class in `src/Component/Provider/` extending `AbstractProvider` and implementing `ProviderInterface` (class name must match filename; providers are auto-discovered by `Utils::getProviders()`, no registration)
+2. Constructor: `__construct(Client $client, ?float $priority = null, array $extraParam = [])` calling `parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_x.json'), $priority ?? 0.5)`
+3. Implement `constructEPG(string $channel, string $date): Channel|bool`: start with `$channelObj = parent::constructEPG($channel, $date)`, return `false` if `!$this->channelExists($channel)`, filter programs with `[$minDate, $maxDate] = $this->getMinMaxDate($date)` (Paris day, compare on the *start* of programs), return `false` when there is no program
+4. Add the channel list `resources/channel_config/channels_x.json` (`"ChannelID.fr": <value>`; the value can be a scalar, an object like MyCanal/SudInfo, or a list of objects like ExternalXML)
+5. Optional `getLogo(string $channel): ?string` (call `parent::getLogo()` first, it throws for unknown channels): used by `php manager.php update-default-logos <Provider>`
+6. Add unit tests (`tests/Unit/Component/Provider/XTest.php`, mock `GuzzleHttp\Client`) and one entry in `tests/Integration/ProvidersTest.php` (`[X::class, ['channels' => ['TF1.fr']]]`, optional `'extra_params'`). `testAllProvidersHaveBeenConsidered` fails if a provider is neither tested nor ignored. Removing a provider = delete class + channels json + test entries (+ any hook it needed in another provider)
+7. `docs/providers.md` is partly outdated (describes `addProgram`, `$post`...): trust the code. Document new `extra_params` in `docs/configuration.md`
+
+**Conventions**
+- Priority (higher = tried first): Orange .95, Bouygues .9, SFR .85, MyCanal .7, Telerama .4... Official/rich sources .7, approximate or video-oriented sources .2-.3
+- Option naming for `extra_params`: `<provider>_enable_details` (default `true`). A provider with one request per program must offer it
+- Channel IDs: **always reuse the existing ID** (grep `resources/channel_config/*.json`, `resources/information/default_channels_infos.json` and `resources/config/default_channels.json`) even if an issue proposes a slightly different one (`FranceInfo.fr` vs `Franceinfo.fr`, `PassionNovelas.af`...). Fallback between providers only works with identical IDs. New IDs need an entry in `default_channels_infos.json` (name + icon)
+- Instances are created per channel/date in worker processes (`ProviderTask`): never rely on in-memory state, use the HTTP cache
+
+**HTTP helpers (`AbstractProvider::getContentFromURL`)**
+- Signature: `(string $url, array $headers = [], bool $ignoreCache = false, bool $decodeEntities = true, ?string $body = null)`. A non-null `$body` sends a POST (JSON, form...); the cache key is `md5(url + headers + body)`, locked between threads
+- Pass `$decodeEntities = false` for JSON/XML (the default `html_entity_decode` corrupts them)
+- To make N channels/days share one download, send an identical request whatever the channel/day (fixed period, all channels) so the cache key is the same (OLPlay, AntenneReunion, ExternalXML, SRGSSR)
+- Failures return `''` (no exception): check emptiness. Only `ConnectException` throws `NetworkConnectionException`
+- Some sites deny requests without browser-like headers (Tivi5MondeUSA needs `Accept`, `Accept-Language`, `Accept-Encoding: gzip, deflate`, `Sec-Fetch-*`)
+
+**`Program` API (`src/ValueObject/Program.php`)**: `addTitle/addSubTitle/addDesc/addCategory($value, $lang = 'fr')`, `addIcon`, `setDate`, `setCountry`, `addCredit($name, $type)` (types: director, actor, writer, adapter, producer, composer, editor, presenter, commentator, guest; unknown types become guest, so map or skip them), `setEpisodeNum($season, $episode)` (**1-based**, writes xmltv_ns), `setRating($value, $system = 'CSA')` (`'-12'`, `'Tout public'`), `addSubtitles('teletext')`, `setAudioDescribed()`, `setPreviouslyShown()`, `setPremiere()`, `addKeyword()`, `addStarRating`, `addReview`. `Program` extends `Tag` (`new Tag($name, $value|array, $attributes)`, `addChild`), any XMLTV element can be built generically (see `ExternalXML`). Times are converted to Europe/Paris; use `new Program($start, $end)` with offset-aware `DateTimeImmutable`, or `Program::withTimestamp()`
+- Existing conventions: live => keyword `direct`, sign language => keyword `langue des signes`, subtitles => `teletext`
+
+**Providers added with notable designs** (use as models): `OLPlay` (POST JSON API, 2 shared requests), `AntenneReunion` (POST form + API key header, 1 shared request), `ExternalXML` (any XMLTV URL, gzip, list of sources per channel, `getLogo` from `<channel><icon>`), `Tivi5MondeUSA` (HTML via DOM/XPath, details optional), `SRGSSR` (official API, one request per business unit and day), `FranceTV` (video-based guide, titles rebuilt from slugs, low priority), `TracePlus::getLogo` (CMS GraphQL). `MyCanal` entries: `{"id": N, "region": "fr"}`
+
+### Logos and channel information
+- `resources/information/default_channels_infos.json` holds the default name/icon of every channel (**not** `resources/config/default_channels.json`, which is the default channel selection written to `config/channels.json`). Format: 2-space JSON with readable characters; keep it that way (the update command preserves it)
+- `php manager.php update-default-logos <Provider>` rewrites **all** channels known by the provider via `getLogo()`: for one channel only, use a one-off script calling `getLogo()` and write the file with the same formatting
+- Prefer official logos (provider CMS/API, Wikimedia Commons PNG thumbnails `.../thumb/x/xy/File.svg/500px-File.svg.png`). Check URLs return 200 and view the image
+
+### Investigating an issue / new source
+- `gh` is not installed: read issues with `curl https://api.github.com/repos/racacax/XML-TV-Fr/issues/N` (+ `/comments`). WebFetch summaries drop details (and may invent URLs): verify every URL from an issue with curl
+- Find undocumented APIs in the JS bundles of the website (grep endpoints, `post(`/`get(`, config objects such as `apiKey`, `platformCodename`, `languageId`) and test with curl; a 405 means POST, "Missing parameter" errors reveal required fields
+- To check whether a channel exists on a provider, use its own list/grid endpoint (SFR guide JSON, Telerama `tv-program/grid`, Orange `programs?epgIds=a,b,c` accepts many IDs and returns `channelId`, MyCanal `epgGrid`, PlayTV `channels`, TeleLoisirs `_esi/channel-list`) or fingerprint distinctive program titles. Orange/Bouygues/Telerama/Telecablesat/SFR share a platform ID space (e.g. `RMCDecouverte.fr` is `1400` everywhere), MyCanal/Oqee/PlayTV have their own
+- Timezones: always determine which times are real instants (ISO with offset, UTC `Z`) and which are local display times (e.g. tivi5mondeusa shows New York time but its `datetime` attributes are UTC). Test DST (Paris changes on the last Sunday of March/October) and prefer fixed non-DST dates in unit tests
+- Creating accounts/tokens on third-party services is denied by the permission classifier: do not retry, report it to the user
 
 ### Cache System
 **Two-layer caching:**
@@ -220,10 +251,11 @@ tools/                      # Web UI for channel selection (legacy)
    - Validity checked via `min_endtime` (last program must end after 23h30 of same day)
    - Retained for `cache_ttl` days (default 8)
 
-2. **HTTP Cache** (`var/provider_cache/`):
+2. **HTTP Cache** (`var/provider/`):
    - Caches provider HTTP responses via `ProviderCache`
-   - Cache key: MD5 of URL + headers
+   - Cache key: MD5 of URL + headers (+ body for POST)
    - Transparent caching for `getContentFromURL()` calls
+   - Cleared at the start and at the end of `Generator::generate()` (it only lives during one run); unit tests call `ProviderCache::clearCache()` in `setUp`/`tearDown`
 
 **Cache policies (fetch_policies):**
 - `cache-only`: Only read from EPG cache, skip if missing
@@ -231,15 +263,17 @@ tools/                      # Web UI for channel selection (legacy)
 - `network-first`: Always fetch fresh from provider (typical for today)
 
 ### Testing
-- Tests in `tests/` with PHPUnit 9.5
-- Integration tests validate generated XML structure
-- Hook `AllTestsPassedHook` runs after successful test runs
+- Tests in `tests/` with PHPUnit 9.5; `make quality` runs cs-fix, phpstan and the **unit** tests (integration tests are excluded and need network: `bin/phpunit tests/Integration/ProvidersTest.php --filter '...'`)
+- Provider unit tests mock `GuzzleHttp\Client` (`createMock(Client::class)`, `get`/`post` with `willReturnCallback` keyed by URL) and build fixtures inline relative to dates; to inject a channel list, use an anonymous subclass setting `$this->channelsList` before `parent::__construct` (the file is only read when the list is empty)
+- Hook `AllTestsPassedHook` regenerates `integrity.sha256` after test runs: it always shows as modified in `git status`
+- `ProvidersTest` prints "Failed to configure Virgin Plus provider" in some environments (pre-existing, unrelated)
 - Mock providers in `tests/Ressources/`
 
 ### Code Quality
-- PHP CS Fixer for style (`.php-cs-fixer.php`)
-- PHPStan level 4 for static analysis
+- PHP CS Fixer for style (`.php-cs-fixer.php`), PHPStan level 4 (`make phpstan`): `DOMXPath::evaluate`, `XMLReader::expand` etc. need type guards
 - PSR-4 autoloading with namespace `racacax\XmlTv`
+- Config: `Configurator::initFromConfigFile` rejects 3.x configs (keys `days`, `enable_gz`, ...) with an explicit error
+- Do not commit unless asked; end commit messages with the attribution line required by the session
 
 ### Docker
 - Multi-stage build in `Dockerfile`
