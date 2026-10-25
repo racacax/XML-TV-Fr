@@ -16,7 +16,6 @@ use racacax\XmlTv\Component\Provider\Oqee;
 use racacax\XmlTv\Component\Provider\Orange;
 use racacax\XmlTv\Component\Provider\PlayTV;
 use racacax\XmlTv\Component\Provider\Proximus;
-use racacax\XmlTv\Component\Provider\RMC;
 use racacax\XmlTv\Component\Provider\SFR;
 use racacax\XmlTv\Component\Provider\SixPlay;
 use racacax\XmlTv\Component\Provider\SudInfo;
@@ -47,7 +46,6 @@ class ProvidersTest extends TestCase
     private static array $TESTED_PROVIDERS_CHANNELS = [
         [VirginPlus::class, ['channels' => ['CBFT.ca']]],
         [Cogeco::class, ['channels' => ['CBFT.ca']]],
-        [RMC::class, ['channels' => ['BFMTV.fr']]],
         [Bouygues::class, ['channels' => ['TF1.fr']]],
         [ICIRadioCanadaTele::class, ['channels' => ['CBAFT.ca']]],
         [MyCanal::class, ['channels' => ['TF1.fr']]],
