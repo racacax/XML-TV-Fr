@@ -16,6 +16,7 @@ use racacax\XmlTv\Component\Provider\MyCanal;
 use racacax\XmlTv\Component\Provider\NouvelObs;
 use racacax\XmlTv\Component\Provider\OLPlay;
 use racacax\XmlTv\Component\Provider\Oqee;
+use racacax\XmlTv\Component\Provider\OuestFrance;
 use racacax\XmlTv\Component\Provider\Orange;
 use racacax\XmlTv\Component\Provider\PlayTV;
 use racacax\XmlTv\Component\Provider\Proximus;
@@ -78,6 +79,8 @@ class ProvidersTest extends TestCase
         [OLPlay::class, ['channels' => ['OLTV.fr']]],
         [SRGSSR::class, ['channels' => ['RTSUn.ch']]],
         [FranceTV::class, ['channels' => ['France2.fr']]],
+        // Details need one request per program, the grid is enough to test the provider
+        [OuestFrance::class, ['channels' => ['TF1.fr'], 'extra_params' => ['ouestfrance_enable_details' => false]]],
         [AntenneReunion::class, ['channels' => ['AntenneReunion.fr']]],
         [ExternalXML::class, ['channels' => ['SonyOneFavoris.fr']]],
         // Details need one request per episode, the grid is enough to test the provider
