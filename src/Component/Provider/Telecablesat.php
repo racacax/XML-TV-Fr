@@ -133,7 +133,8 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
             $content = $this->getContent($url);
             preg_match_all('/logos_chaines\/(.*?).png" title="(.*?)"/', $content, $channels);
             $channelIndex = array_search($channel_id, $channels[1]);
-            if ($channelIndex >= 0) {
+            // array_search returns false when the channel is not on the page (false >= 0 is true)
+            if ($channelIndex !== false) {
                 $channelContent = @explode('<div class="row">', explode("<div class='paging'>", $content)[0])[$channelIndex + 1];
                 if (!empty($channelContent)) {
                     preg_match_all('/data-start="(.*?)" data-end="(.*?)"/', $channelContent, $times);

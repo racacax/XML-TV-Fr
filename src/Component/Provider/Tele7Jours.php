@@ -58,7 +58,10 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         preg_match('/<div class="tvgrid-broadcast__details-title">(.*?)<\/div>/s', $p, $title);
         preg_match('/<div class="tvgrid-broadcast__details-season">(.*?)<\/div>/s', $p, $subtitleDetails);
         preg_match('/<div class="tvgrid-broadcast__subdetails">(.*?)<\/div>/s', $p, $subDetails);
-        preg_match('/srcset="(.*?)"/s', $p, $imgs);
+        // The poster is a protocol-relative <img src> (older markups used a srcset)
+        preg_match('/<div class="tvgrid-broadcast__poster">(.*?)<\/picture>/s', $p, $poster);
+        preg_match('/srcset="(.*?)"/s', $poster[1] ?? '', $imgs);
+        preg_match('/<img[^>]*?\ssrc="(.*?)"/s', $poster[1] ?? '', $posterSrc);
         preg_match('/href="(.*?)"/s', $p, $url);
         $startTime[1] = str_replace('h', ':', $startTime[1]);
         $startDateObj = new DateTimeImmutable($date.' '.$startTime[1]);
@@ -106,6 +109,8 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             $imgs = explode(',', $imgs[1]);
             $img = explode(' ', trim(end($imgs)))[0];
             $programObj->addIcon($img);
+        } elseif (!empty($posterSrc[1])) {
+            $programObj->addIcon(str_starts_with($posterSrc[1], '//') ? 'https:' . $posterSrc[1] : $posterSrc[1]);
         }
 
         if ($this->enableDetails && isset($url[1])) {

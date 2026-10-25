@@ -32,9 +32,12 @@ class Tele7JoursTest extends TestCase
     public function testDurationsInMinutesAndDetailsOfAMovie(): void
     {
         $item = fn (string $time, string $title, string $subDetails, string $href) => '<div class="tvgrid-broadcast__item">'
-            . '<a href="' . $href . '"><div class="tvgrid-broadcast__details-time">' . $time . '</div>'
+            . '<a class="tvgrid-broadcast__wrapper--link" href="' . $href . '"><div class="tvgrid-broadcast__details-time">' . $time . '</div>'
             . '<div class="tvgrid-broadcast__details-title">' . $title . '</div>'
-            . '<div class="tvgrid-broadcast__subdetails">' . $subDetails . '</div></a></div>';
+            . '<div class="tvgrid-broadcast__subdetails">' . $subDetails . '</div>'
+            . '<div class="tvgrid-broadcast__details-rating"><img src="https://cdn.example/icons/t7j.svg" alt="t7j"></div></a>'
+            . '<div class="tvgrid-broadcast__poster"><a href="' . $href . '"><picture class="tvgrid-broadcast__poster-picture">'
+            . '<img decoding="async" loading="lazy" src="//cdn.example/cache/poster' . md5($title) . '.jpg" alt="' . $title . '"></picture></a></div></div>';
         $grid = '<html>'
             . $item('21h00', 'La belle saison', 'Inédit | 101 mins | Films dramatiques', '/type/films/dramatiques/la-belle-saison-90241255')
             . $item('22h45', 'Une émission', '41 mn | Magazine', '/type/emissions/une-emission-1')
@@ -65,5 +68,8 @@ class Tele7JoursTest extends TestCase
         $this->assertStringContainsString('<date>2015</date>', $xml);
         $this->assertStringContainsString('<country>France - Belgique</country>', $xml);
         $this->assertStringContainsString('<director>Catherine Corsini</director>', $xml);
+        // Poster of the grid (not the icons of the details of the program)
+        $this->assertStringContainsString('<icon src="https://cdn.example/cache/poster' . md5('La belle saison') . '.jpg"/>', $xml);
+        $this->assertStringNotContainsString('t7j.svg', $xml);
     }
 }
