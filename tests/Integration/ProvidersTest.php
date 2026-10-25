@@ -9,6 +9,7 @@ use racacax\XmlTv\Component\Provider\AntenneReunion;
 use racacax\XmlTv\Component\Provider\Bouygues;
 use racacax\XmlTv\Component\Provider\Cogeco;
 use racacax\XmlTv\Component\Provider\ExternalXML;
+use racacax\XmlTv\Component\Provider\FranceTV;
 use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
 use racacax\XmlTv\Component\Provider\LInternaute;
 use racacax\XmlTv\Component\Provider\MyCanal;
@@ -76,6 +77,7 @@ class ProvidersTest extends TestCase
         [StarTimesTV::class, ['channels' => ['ZeeOne.st']]],
         [OLPlay::class, ['channels' => ['OLTV.fr']]],
         [SRGSSR::class, ['channels' => ['RTSUn.ch']]],
+        [FranceTV::class, ['channels' => ['France2.fr']]],
         [AntenneReunion::class, ['channels' => ['AntenneReunion.fr']]],
         [ExternalXML::class, ['channels' => ['SonyOneFavoris.fr']]],
         // Details need one request per episode, the grid is enough to test the provider
