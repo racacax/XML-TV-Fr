@@ -102,6 +102,7 @@ Certains providers acceptent des paramètres de configuration spécifiques trans
 | Paramètre | Provider | Type | Défaut | Description |
 |-----------|----------|------|--------|-------------|
 | `mycanal_enable_details` | MyCanal | booléen | `true` | Active la récupération des détails de programme (synopsis, casting, etc.). Désactiver accélère la récupération mais réduit la richesse des données. |
+| `tivi5mondeusa_enable_details` | Tivi5MondeUSA | booléen | `true` | Active la récupération de la saison, du numéro d'épisode et du synopsis (une requête par épisode et par série, environ 2 minutes par jour de programmes). Désactiver ne conserve que la grille. |
 
 ```json
 "extra_params": {
