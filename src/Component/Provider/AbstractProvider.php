@@ -30,6 +30,11 @@ abstract class AbstractProvider
      * @var array<string, float>
      */
     protected static $priority;
+    /**
+     * Minimum delay in seconds between two requests actually sent by this provider (cache hits do not count), shared by
+     * all the processes. 0 means no limit. For websites that are very sensitive to rate limit.
+     */
+    protected float $minRequestInterval = 0.0;
     private ?\Amp\Sync\Channel $workerChannel;
 
     // Todo: Add logo priority
@@ -107,6 +112,27 @@ abstract class AbstractProvider
         return [$minStart, $maxStart];
     }
 
+    private function throttle(): void
+    {
+        if ($this->minRequestInterval <= 0) {
+            return;
+        }
+        $state = new ProviderCache('throttle_' . md5(static::class));
+        @mkdir(dirname($state->getLockPath()), 0777, true);
+        $fp = fopen($state->getLockPath(), 'c');
+        if ($fp === false) {
+            return;
+        }
+        flock($fp, LOCK_EX);
+        $wait = (float) $state->getContent() + $this->minRequestInterval - microtime(true);
+        if ($wait > 0) {
+            usleep((int) ($wait * 1000000));
+        }
+        $state->setContent((string) microtime(true));
+        flock($fp, LOCK_UN);
+        fclose($fp);
+    }
+
     /**
      * For guides that only give the time of the programs: the hour when the clocks go back (02:00 to 03:00 in October)
      * exists twice. The second one is the right one when the first one would start before the end of the previous
@@ -160,6 +186,8 @@ abstract class AbstractProvider
                 }
             }
         }
+
+        $this->throttle();
 
         try {
             $options = [
