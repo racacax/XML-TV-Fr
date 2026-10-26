@@ -3502,5 +3502,13 @@
   "TESTAFRIQUE.af": {
     "id": "180364",
     "region": "bf"
+  },
+  "DogCatTV.fr": {
+    "id": "1201",
+    "region": "fr"
+  },
+  "CineWestern.fr": {
+    "id": "170037",
+    "region": "nc"
   }
 }

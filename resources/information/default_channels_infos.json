@@ -8730,5 +8730,13 @@
   "viaMaTele.fr": {
     "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/viamatele100x100couleur.png",
     "name": "Vià MATÉLÉ"
+  },
+  "DogCatTV.fr": {
+    "name": "Dog & Cat TV",
+    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/1201/canal-ouah/CHN43FB/DOGCATTV_ONLIGHT_640x480-W5Dx?=.png"
+  },
+  "CineWestern.fr": {
+    "name": "Ciné Western",
+    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/170037/canal-ouah/CHN43FB/CINEWESTERN_BLACK_640x480-KPVl?=.png"
   }
 }
