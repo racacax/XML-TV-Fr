@@ -72,4 +72,41 @@ class Tele7JoursTest extends TestCase
         $this->assertStringContainsString('<icon src="https://cdn.example/cache/poster' . md5('La belle saison') . '.jpg"/>', $xml);
         $this->assertStringNotContainsString('t7j.svg', $xml);
     }
+
+    public function testTheNightIsReadInTheGridOfTheDayBefore(): void
+    {
+        $item = fn (string $time, string $title, string $href) => '<div class="tvgrid-broadcast__item">'
+            . '<a class="tvgrid-broadcast__wrapper--link" href="' . $href . '"><div class="tvgrid-broadcast__details-time">' . $time . '</div>'
+            . '<div class="tvgrid-broadcast__details-title">' . $title . '</div>'
+            . '<div class="tvgrid-broadcast__subdetails">30 mins | Magazine</div></a></div>';
+        $pages = [
+            // The grid of a day goes from 05:00 to 05:00 on the next day
+            '/hier' => $item('21h00', 'La veille', '/p/veille') . $item('23h30', 'Nuit de la veille', '/p/nuit')
+                . $item('00h30', 'Après minuit', '/p/minuit') . $item('04h30', 'Fin de nuit', '/p/fin-de-nuit'),
+            '/' => $item('05h00', 'Matin', '/p/matin') . $item('21h00', 'Soir', '/p/soir')
+                . $item('23h50', 'Dernier', '/p/dernier') . $item('00h20', 'Lendemain', '/p/lendemain'),
+        ];
+        $client = $this->createMock(Client::class);
+        $client->method('get')->willReturnCallback(function (string $url) use ($pages) {
+            $this->requestedUrls[] = $url;
+            $path = parse_url($url, PHP_URL_PATH);
+
+            return new Response(200, [], str_contains($path, '/tv/chaines/') ? $pages['/' . ltrim(substr($path, strlen('/tv/chaines/tf1')), '/')] : '<html></html>');
+        });
+
+        $provider = new Tele7Jours($client, 1);
+        $channelObj = $provider->constructEPG('TF1.fr', date('Y-m-d'));
+        $xml = (new XmlFormatter())->formatChannel($channelObj, $provider);
+
+        preg_match_all('#<title lang="fr">(.*?)</title>#', $xml, $titles);
+        $this->assertSame(['Après minuit', 'Fin de nuit', 'Matin', 'Soir', 'Dernier'], $titles[1]);
+        // 00:30 and 04:30 of the grid of the day before are on the day, 00:20 of the grid of the day is on the day after
+        $this->assertStringContainsString('<programme start="' . date('Ymd') . '003000', $xml);
+        $this->assertStringContainsString('<programme start="' . date('Ymd') . '235000', $xml);
+        $this->assertContains('https://www.programme-television.org/tv/chaines/tf1/hier', $this->requestedUrls);
+        // Details are only requested for the programs of the day
+        $this->assertContains('https://www.programme-television.org/p/minuit', $this->requestedUrls);
+        $this->assertNotContains('https://www.programme-television.org/p/veille', $this->requestedUrls);
+        $this->assertNotContains('https://www.programme-television.org/p/lendemain', $this->requestedUrls);
+    }
 }

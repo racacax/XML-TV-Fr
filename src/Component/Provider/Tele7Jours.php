@@ -52,9 +52,8 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             return $dateDay;
         }
     }
-    private function parseProgram(string $date, string $p): ?Program
+    private function parseProgram(DateTimeImmutable $startDateObj, ?int $duration, string $p): ?Program
     {
-        preg_match('/<div class="tvgrid-broadcast__details-time">(.*?)<\/div>/s', $p, $startTime);
         preg_match('/<div class="tvgrid-broadcast__details-title">(.*?)<\/div>/s', $p, $title);
         preg_match('/<div class="tvgrid-broadcast__details-season">(.*?)<\/div>/s', $p, $subtitleDetails);
         preg_match('/<div class="tvgrid-broadcast__subdetails">(.*?)<\/div>/s', $p, $subDetails);
@@ -63,24 +62,13 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
         preg_match('/srcset="(.*?)"/s', $poster[1] ?? '', $imgs);
         preg_match('/<img[^>]*?\ssrc="(.*?)"/s', $poster[1] ?? '', $posterSrc);
         preg_match('/href="(.*?)"/s', $p, $url);
-        $startTime[1] = str_replace('h', ':', $startTime[1]);
-        $startDateObj = new DateTimeImmutable($date.' '.$startTime[1]);
         $subDetailsSplit = explode('|', $subDetails[1]);
-        $endTimeObj = null;
-        $isPremiere = false;
-        foreach ($subDetailsSplit as $subDetail) {
-            $subDetail = trim($subDetail);
-            // The website writes durations as "41 mn" or "41 mins"
-            if (preg_match('/^(\d+)\s*(?:mn|mins?)$/', $subDetail, $duration)) {
-                $endTimeObj = $startDateObj->modify("+$duration[1] minutes");
-            } elseif ($subDetail == 'Inédit') {
-                $isPremiere = true;
-            }
-        }
-        if ($endTimeObj === null) {
+        $isPremiere = in_array('Inédit', array_map('trim', $subDetailsSplit), true);
+        if ($duration === null) {
             // Without a duration, the end of the program is unknown
             return null;
         }
+        $endTimeObj = $startDateObj->setTimestamp($startDateObj->getTimestamp() + $duration * 60);
         $programObj = new Program($startDateObj, $endTimeObj);
         if ($isPremiere) {
             $programObj->setPremiere();
@@ -146,7 +134,7 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
                 }
             }
         }
-        if ($details[1]) {
+        if (!empty($details[1])) {
             $programObj->addDesc(strip_tags($details[1]));
         }
         // "France - Belgique  - 2015": countries, then year
@@ -161,31 +149,92 @@ class Tele7Jours extends AbstractProvider implements ProviderInterface
             }
         }
     }
+    /**
+     * The website only gives the time of the programs. The grid of a day goes from about 05:00 to about 05:00 on the next day:
+     * the date changes every time the time goes back, and the night of a day is at the end of the grid of the day before.
+     * @return array<int, array{start: DateTimeImmutable, duration: ?int, html: string}>
+     */
+    private function getEntries(Channel $channelObj, DateTimeImmutable $day): array
+    {
+        $entries = [];
+        $previousEnd = null;
+        foreach ([$day->modify('-1 day'), $day] as $pageDate) {
+            try {
+                $dayLabel = $this->getDayLabel($pageDate);
+            } catch (Exception $e) {
+                // The grid of the day before is not available for the oldest days
+                if ($pageDate == $day) {
+                    throw $e;
+                }
+
+                continue;
+            }
+            $content = $this->getContentFromURL($this->generateUrl($channelObj, $dayLabel));
+            $previousMinutes = null;
+            foreach (array_slice(explode('class="tvgrid-broadcast__item', $content), 1) as $block) {
+                if (!preg_match('/<div class="tvgrid-broadcast__details-time">\s*(\d{1,2})[h:](\d{2})\s*<\/div>/s', $block, $time)) {
+                    continue;
+                }
+                $minutes = (int) $time[1] * 60 + (int) $time[2];
+                // The time goes back by more than an hour when the date changes (it goes back by less when the clocks change)
+                if ($previousMinutes !== null && $minutes < $previousMinutes - 60) {
+                    $pageDate = $pageDate->modify('+1 day');
+                }
+                $previousMinutes = $minutes;
+                $start = $this->resolveRepeatedHour(
+                    new DateTimeImmutable($pageDate->format('Y-m-d') . sprintf(' %02d:%02d', $time[1], $time[2]), new \DateTimeZone('Europe/Paris')),
+                    $previousEnd
+                );
+                $duration = $this->getDuration($block);
+                $previousEnd = $duration !== null ? $start->setTimestamp($start->getTimestamp() + $duration * 60) : null;
+                $entries[$start->getTimestamp()] = ['start' => $start, 'duration' => $duration, 'html' => $block];
+            }
+        }
+        ksort($entries);
+
+        return array_values($entries);
+    }
+
+    /**
+     * The website writes durations as "41 mn" or "41 mins"
+     */
+    private function getDuration(string $block): ?int
+    {
+        if (!preg_match('/<div class="tvgrid-broadcast__subdetails">(.*?)<\/div>/s', $block, $subDetails)) {
+            return null;
+        }
+        foreach (explode('|', $subDetails[1]) as $subDetail) {
+            if (preg_match('/^\s*(\d+)\s*(?:mn|mins?)\s*$/', $subDetail, $duration)) {
+                return (int) $duration[1];
+            }
+        }
+
+        return null;
+    }
+
     public function constructEPG(string $channel, string $date): Channel|bool
     {
         $channelObj = parent::constructEPG($channel, $date);
         if (!$this->channelExists($channel)) {
             return false;
         }
-        [$minDate, $_] = $this->getMinMaxDate($date);
-        $dayLabel = $this->getDayLabel($minDate);
-        $content = $this->getContentFromURL($this->generateUrl($channelObj, $dayLabel));
-        $programs = explode('class="tvgrid-broadcast__item', $content);
+        [$minDate, $maxDate] = $this->getMinMaxDate($date);
+        // Details are only requested for the programs of the day
+        $entries = array_values(array_filter(
+            $this->getEntries($channelObj, $minDate),
+            fn (array $entry) => $entry['start'] >= $minDate && $entry['start'] <= $maxDate
+        ));
 
-        $count = count($programs);
-        for ($i = 1; $i < $count; $i++) {
-            $percent = round($i * 100 / $count, 2) . ' %';
-            $this->setStatus($percent);
-            $p = $programs[$i];
-            $programObj = $this->parseProgram($date, $p);
+        $count = count($entries);
+        foreach ($entries as $index => $entry) {
+            $this->setStatus(round($index * 100 / $count, 2) . ' %');
+            $programObj = $this->parseProgram($entry['start'], $entry['duration'], $entry['html']);
             if ($programObj !== null) {
                 $channelObj->addProgram($programObj);
             }
-
         }
 
-
-        return $channelObj;
+        return $channelObj->getProgramCount() > 0 ? $channelObj : false;
     }
 
     public function generateUrl(Channel $channel, string $dayLabel): string
