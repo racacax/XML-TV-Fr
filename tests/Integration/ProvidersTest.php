@@ -76,7 +76,7 @@ class ProvidersTest extends TestCase
         [Tele2Semaines::class, ['channels' => ['TF1.fr']]],
         [LInternaute::class, ['channels' => ['TF1.fr']]],
         [TracePlus::class, ['channels' => ['TraceUrban.fr']]],
-        [StarTimesTV::class, ['channels' => ['ZeeOne.st']]],
+        [StarTimesTV::class, ['channels' => ['ZeeOne.af']]],
         [OLPlay::class, ['channels' => ['OLTV.fr']]],
         [SRGSSR::class, ['channels' => ['RTSUn.ch']]],
         [FranceTV::class, ['channels' => ['France2.fr']]],
