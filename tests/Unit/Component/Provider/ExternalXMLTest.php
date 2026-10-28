@@ -123,6 +123,20 @@ class ExternalXMLTest extends TestCase
         $this->assertStringContainsString('start="20260715180000 +0200" stop="20260715190000 +0200"', $xml);
     }
 
+    public function testDatePlaceholdersAndOffsetOfUrl(): void
+    {
+        $xml = '<tv><programme start="20260714230000 +0000" stop="20260715010000 +0000" channel="x"><title>Night</title></programme></tv>';
+        $this->mockXml(['https://example.com/20260714.xml' => $xml]);
+
+        $provider = $this->createProvider();
+
+        $this->assertNotFalse($provider->constructEPG('DatedChannel.fr', '2026-07-15'));
+        $this->assertSame('https://example.com/20260714.xml', $this->requests[0][0]);
+        // Each day has its own file
+        $provider->constructEPG('DatedChannel.fr', '2026-07-16');
+        $this->assertSame('https://example.com/20260715.xml', $this->requests[1][0]);
+    }
+
     public function testNoProgramOrUnavailableSourceReturnsFalse(): void
     {
         $this->mockXml([self::FIRST_URL => $this->xml('main-id')]);
@@ -166,6 +180,7 @@ class ExternalXMLTest extends TestCase
             'FallbackChannel.fr' => [['url' => self::FIRST_URL, 'id' => 'unknown-id'], ['url' => 'https://example.com/other.xml', 'id' => 'x']],
             'NoLogo.fr' => [['url' => self::FIRST_URL, 'id' => 'other-id', 'headers' => ['X-Test' => 'test']]],
             'LocalChannel.fr' => [['url' => 'https://example.com/local.xml', 'id' => 'x', 'timezone' => 'America/New_York']],
+            'DatedChannel.fr' => [['url' => 'https://example.com/$year$month$day.xml', 'id' => 'x', 'date_offset' => -1]],
             'Unreachable.fr' => [['url' => 'https://example.com/404.xml', 'id' => 'x'], ['id' => 'missing-url']],
         ];
 

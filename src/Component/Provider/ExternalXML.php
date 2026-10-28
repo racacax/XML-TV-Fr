@@ -21,6 +21,10 @@ use racacax\XmlTv\ValueObject\Tag;
  *  - url: XMLTV file (gzip compressed files are supported). It is only downloaded once per generation, whatever
  *    the number of channels and days that use it (HTTP cache)
  *  - id: id of the channel in this XML (attribute channel of the programmes)
+ *    The placeholders $year, $month and $day are replaced by the requested day (for example
+ *    https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=549031). Such a file is downloaded once per day
+ *  - date_offset (optional): number of days added to the day used by the placeholders (-1 when the file of a day
+ *    starts at 00:00 UTC and covers several days: it then contains the whole Paris day, which starts the day before at 22:00 UTC)
  *  - headers (optional): HTTP headers sent with the request
  *  - timezone (optional): time zone of the dates without any offset (UTC by default, as stated by the XMLTV format)
  *
@@ -49,7 +53,7 @@ class ExternalXML extends AbstractProvider implements ProviderInterface
 
         [$minDate, $maxDate] = $this->getMinMaxDate($date);
         foreach ($this->getSources($channel) as $source) {
-            $xml = $this->getXml($source);
+            $xml = $this->getXml($source, $date);
             if ($xml === null) {
                 continue;
             }
@@ -74,7 +78,7 @@ class ExternalXML extends AbstractProvider implements ProviderInterface
         parent::getLogo($channel);
 
         foreach ($this->getSources($channel) as $source) {
-            $xml = $this->getXml($source);
+            $xml = $this->getXml($source, 'today');
             $reader = $xml !== null ? $this->createReader($xml) : null;
             while ($reader?->read()) {
                 if ($reader->nodeType === \XMLReader::ELEMENT && $reader->name === 'channel' && $reader->getAttribute('id') === $source['id']) {
@@ -109,14 +113,25 @@ class ExternalXML extends AbstractProvider implements ProviderInterface
         ));
     }
 
-    private function getXml(array $source): ?string
+    private function getXml(array $source, string $date): ?string
     {
-        $content = $this->getContentFromURL($source['url'], $source['headers'] ?? [], false, false);
+        $content = $this->getContentFromURL($this->resolveUrl($source, $date), $source['headers'] ?? [], false, false);
         if (str_starts_with($content, "\x1f\x8b")) {
             $content = gzdecode($content) ?: '';
         }
 
         return $content === '' ? null : $content;
+    }
+
+    private function resolveUrl(array $source, string $date): string
+    {
+        $day = new \DateTimeImmutable($date, new \DateTimeZone('Europe/Paris'));
+        $offset = (int) ($source['date_offset'] ?? 0);
+        if ($offset !== 0) {
+            $day = $day->modify(sprintf('%+d days', $offset));
+        }
+
+        return strtr($source['url'], ['$year' => $day->format('Y'), '$month' => $day->format('m'), '$day' => $day->format('d')]);
     }
 
     private function createReader(string $xml): \XMLReader

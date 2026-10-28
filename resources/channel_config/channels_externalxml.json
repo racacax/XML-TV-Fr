@@ -28,5 +28,93 @@
       "url": "https://i.mjh.nz/Plex/fr.xml.gz",
       "id": "6430aa45fc3be5947780904e-692228985cbe620c1f9b6bb9"
     }
+  ],
+  "RMCMystere.fr": [
+    {
+      "url": "https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=549031",
+      "id": "549031",
+      "date_offset": -1
+    },
+    {
+      "url": "https://i.mjh.nz/SamsungTVPlus/fr.xml.gz",
+      "id": "FR300006GF"
+    }
+  ],
+  "RMCWOW.fr": [
+    {
+      "url": "https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=549027",
+      "id": "549027",
+      "date_offset": -1
+    },
+    {
+      "url": "https://i.mjh.nz/SamsungTVPlus/fr.xml.gz",
+      "id": "FR300001M1"
+    }
+  ],
+  "RMCAlerteSecours.fr": [
+    {
+      "url": "https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=448550",
+      "id": "448550",
+      "date_offset": -1
+    },
+    {
+      "url": "https://i.mjh.nz/SamsungTVPlus/fr.xml.gz",
+      "id": "FR30000271"
+    }
+  ],
+  "RMCMecanic.fr": [
+    {
+      "url": "https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=549030",
+      "id": "549030",
+      "date_offset": -1
+    },
+    {
+      "url": "https://i.mjh.nz/SamsungTVPlus/fr.xml.gz",
+      "id": "FR300003ZB"
+    }
+  ],
+  "RMCTalkInfo.fr": [
+    {
+      "url": "https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=503638",
+      "id": "503638",
+      "date_offset": -1
+    },
+    {
+      "url": "https://i.mjh.nz/SamsungTVPlus/fr.xml.gz",
+      "id": "FR300005WY"
+    }
+  ],
+  "BFMGrandsReportages.fr": [
+    {
+      "url": "https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=448609",
+      "id": "448609",
+      "date_offset": -1
+    },
+    {
+      "url": "https://i.mjh.nz/SamsungTVPlus/fr.xml.gz",
+      "id": "FR300004J5"
+    }
+  ],
+  "BFM2.fr": [
+    {
+      "url": "https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=448549",
+      "id": "448549",
+      "date_offset": -1
+    },
+    {
+      "url": "https://i.mjh.nz/SamsungTVPlus/fr.xml.gz",
+      "id": "FR1400003Y0"
+    }
+  ],
+  "BFMJiraiDormirChezVous.fr": [
+    {
+      "url": "https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=448604",
+      "id": "448604",
+      "date_offset": -1
+    },
+    {
+      "url": "https://i.mjh.nz/SamsungTVPlus/fr.xml.gz",
+      "id": "FRBD4800001P4"
+    }
   ]
 }

@@ -755,6 +755,10 @@
     "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFMGRANDSREPORTAGESmono.png",
     "name": "BFM Grands Reportages"
   },
+  "BFMJiraiDormirChezVous.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCJDCVmononew.png",
+    "name": "RMC J'irai dormir chez vous"
+  },
   "BFMParis.fr": {
     "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/BFMPARISIDF100x100COULEURAVECCONTOUR.png",
     "name": "BFM PARIS ILE-DE-FRANCE"

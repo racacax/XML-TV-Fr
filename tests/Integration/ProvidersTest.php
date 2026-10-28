@@ -84,7 +84,7 @@ class ProvidersTest extends TestCase
         [OuestFrance::class, ['channels' => ['TF1.fr'], 'extra_params' => ['ouestfrance_enable_details' => false]]],
         [LeTelegramme::class, ['channels' => ['TF1.fr']]],
         [AntenneReunion::class, ['channels' => ['AntenneReunion.fr']]],
-        [ExternalXML::class, ['channels' => ['SonyOneFavoris.fr']]],
+        [ExternalXML::class, ['channels' => ['SonyOneFavoris.fr', 'RMCMystere.fr']]],
         // Details need one request per episode, the grid is enough to test the provider
         [Tivi5MondeUSA::class, ['channels' => ['Tivi5.fr'], 'extra_params' => ['tivi5mondeusa_enable_details' => false]]],
     ];
