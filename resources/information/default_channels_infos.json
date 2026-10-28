@@ -671,6 +671,10 @@
     "name": "BBCEHD",
     "icon": "https://cdn.tvpassport.com/image/station/640x480/v2/s53128_h15_ac.png"
   },
+  "BBCEarth.fr": {
+    "icon": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3200001NQ_20260505T035829SQUARE.png",
+    "name": "BBC Earth"
+  },
   "BBCEntertainment.uk": {
     "name": "BBC Entertainment",
     "icon": "https://focus.telerama.fr/500x500/0000/00/01/clear-18.png"
@@ -3535,6 +3539,10 @@
   "FranceTVSeries.fr": {
     "name": "France TV S&eacute;ries",
     "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/1092/canal-ouah/CHN43FB/CHN43FB_1092_20260126-de3E?=.png"
+  },
+  "FrequenceNovelas.fr": {
+    "icon": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBC800001X0_20260310T031725SQUARE.png",
+    "name": "Fréquence Novelas"
   },
   "FrissonsTV.ca": {
     "name": "Frissons TV",
@@ -7462,6 +7470,10 @@
   "TV5MondePacifiqueCatchup": {
     "name": "TV5 Monde Pacifique Catchup",
     "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfwyzYnqdbc-xu2PlOkApJ473yTyCpxfMzYWfSw9ajnUCdFW5DcEA1V9_hxSE&amp;s"
+  },
+  "TV5MondeVoyage.fr": {
+    "icon": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1800004EP_20251013T054046SQUARE.png",
+    "name": "TV5 Monde Voyage"
   },
   "TV5Style.fr": {
     "name": "TV5 Style",
