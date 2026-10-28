@@ -116,4 +116,31 @@ class ConfiguratorTest extends TestCase
 
         $this->assertEmpty($config->getProviderLimits());
     }
+
+    /**
+     * Test that a config without export_handlers falls back to the default GZ export
+     */
+    public function testDefaultExportHandlerWhenAbsentFromConfigFile(): void
+    {
+        $configFile = $this->testFolder.'/config.json';
+        file_put_contents($configFile, json_encode(['fetch_policies' => []]));
+
+        $config = Configurator::initFromConfigFile($configFile);
+
+        $this->assertCount(1, $config->getExportHandlers());
+    }
+
+    /**
+     * Test that a 3.x config file is rejected with an explicit message
+     */
+    public function testLegacyConfigFileIsRejected(): void
+    {
+        $configFile = $this->testFolder.'/config.json';
+        file_put_contents($configFile, json_encode(['days' => 8, 'enable_gz' => true, 'output_path' => 'var/export/']));
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageMatches('/format 3\.x.*days, enable_gz/');
+
+        Configurator::initFromConfigFile($configFile);
+    }
 }

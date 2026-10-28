@@ -25,5 +25,8 @@ foreach ($defaultChannelInfos as $key => $channelInfo) {
     } catch (\Exception $e) {
     }
 }
-file_put_contents($path, json_encode($defaultChannelInfos));
+// Keep the file format (2 spaces indentation, readable characters) to get a minimal diff
+$json = json_encode($defaultChannelInfos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+$json = preg_replace_callback('/^( {4})+/m', fn ($m) => str_repeat('  ', intdiv(strlen($m[0]), 4)), $json);
+file_put_contents($path, $json."\n");
 echo Utils::colorize("$count logos mis à jour", "green")."\n";

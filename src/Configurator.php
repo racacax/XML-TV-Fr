@@ -129,6 +129,7 @@ class Configurator
             throw new \Exception('Config file not found');
         }
         $data = json_decode(file_get_contents($filePath), true);
+        self::assertNotLegacyConfig($data ?? [], $filePath);
 
         Logger::log("\e[36m[CHARGEMENT] \e[39mChargement du fichier de config\n");
 
@@ -154,7 +155,7 @@ class Configurator
             $data['cache_physical_ttl'] ?? 8,
             $data['cache_ttl'] ?? 8,
             $data['delete_raw_xml'] ?? false,
-            Utils::getExportInstances($data['export_handlers'] ?? ['class' => 'GZExport', 'params' => []]),
+            Utils::getExportInstances($data['export_handlers'] ?? [['class' => 'GZExport', 'params' => []]]),
             $data['enable_dummy'] ?? false,
             $data['priority_orders'] ?? [],
             $data['guides'] ?? [['channels' => 'config/channels.json', 'filename' => 'xmltv.xml']],
@@ -167,6 +168,35 @@ class Configurator
         );
     }
 
+
+    private const LEGACY_CONFIG_KEYS = [
+        'days',
+        'cache_max_days',
+        'enable_gz',
+        'enable_xz',
+        'enable_zip',
+        'custom_priority_orders',
+        'guides_to_generate',
+        '7zip_path',
+        'force_todays_grab',
+    ];
+
+    /**
+     * Les configs 3.x ne sont plus compatibles avec la v4 : on arrête avant d'obtenir une erreur obscure.
+     */
+    private static function assertNotLegacyConfig(array $data, string $filePath): void
+    {
+        $legacyKeys = array_values(array_intersect(self::LEGACY_CONFIG_KEYS, array_keys($data)));
+        if (empty($legacyKeys)) {
+            return;
+        }
+
+        throw new \Exception(
+            "Le fichier de config $filePath est au format 3.x (paramètres obsolètes : " . implode(', ', $legacyKeys) . '). ' .
+            'Le format a changé en v4 : reportez vos paramètres dans un nouveau fichier ' .
+            'en partant de resources/config/default_config.json (voir docs/configuration.md).'
+        );
+    }
 
     public function getUI(): UI
     {

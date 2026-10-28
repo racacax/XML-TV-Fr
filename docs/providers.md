@@ -135,3 +135,27 @@ L'utilisateur peut alors configurer ce comportement dans son `config/config.json
 ```
 
 Documentez vos paramètres dans [docs/configuration.md](./configuration.md#paramètres-supplémentaires-extra_params).
+
+## Utiliser un fichier XMLTV externe (`ExternalXML`)
+
+Le provider `ExternalXML` permet d'utiliser n'importe quel fichier XMLTV (URL) comme source, sans écrire de provider. Les chaines sont déclarées dans `resources/channel_config/channels_externalxml.json` : chaque ID de chaine est associé à une liste de sources.
+
+```json
+{
+  "SonyOneFavoris.fr": [
+    {"url": "https://i.mjh.nz/Plex/fr.xml.gz", "id": "6430aa45fc3be5947780904e-692229df50fe592fd6d5b7e2"}
+  ]
+}
+```
+
+| Clé | Obligatoire | Description |
+|-----|-------------|-------------|
+| `url` | oui | URL du fichier XMLTV (les fichiers compressés en gzip sont supportés). Il n'est téléchargé qu'une fois par génération, quel que soit le nombre de chaines et de jours qui l'utilisent. |
+| `id` | oui | ID de la chaine dans ce fichier (attribut `channel` des programmes). |
+| `date_offset` | non | Nombre de jours ajouté au jour utilisé par les variables de l'URL (voir ci-dessous). Ex : `-1` pour un fichier qui débute à 00h00 UTC et couvre plusieurs jours (la journée de Paris débute la veille à 22h/23h UTC). |
+| `headers` | non | En-têtes HTTP à envoyer avec la requête. |
+| `timezone` | non | Fuseau horaire des dates sans décalage (UTC par défaut, comme le prévoit le format XMLTV). |
+
+L'URL peut contenir les variables `$year`, `$month` et `$day` (jour demandé, fuseau Europe/Paris), par exemple `https://epg.pw/api/epg.xml?lang=en&date=$year$month$day&channel_id=549031`. Dans ce cas, un fichier est téléchargé par jour.
+
+Les sources sont essayées dans l'ordre : la première qui contient des programmes pour le jour demandé est utilisée. Les programmes sont recopiés tels quels : tous les éléments et attributs XMLTV de la source (crédits, numéros d'épisode, classification, sous-titres, ...) sont conservés. Seuls les éléments vides sans information sont ignorés. Le logo de la chaine (`<icon>` de la balise `<channel>`) est utilisé par `php manager.php update-default-logos ExternalXML`.

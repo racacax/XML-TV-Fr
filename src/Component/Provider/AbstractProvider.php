@@ -30,6 +30,11 @@ abstract class AbstractProvider
      * @var array<string, float>
      */
     protected static $priority;
+    /**
+     * Minimum delay in seconds between two requests actually sent by this provider (cache hits do not count), shared by
+     * all the processes. 0 means no limit. For websites that are very sensitive to rate limit.
+     */
+    protected float $minRequestInterval = 0.0;
     private ?\Amp\Sync\Channel $workerChannel;
 
     // Todo: Add logo priority
@@ -107,17 +112,55 @@ abstract class AbstractProvider
         return [$minStart, $maxStart];
     }
 
+    private function throttle(): void
+    {
+        if ($this->minRequestInterval <= 0) {
+            return;
+        }
+        $state = new ProviderCache('throttle_' . md5(static::class));
+        @mkdir(dirname($state->getLockPath()), 0777, true);
+        $fp = fopen($state->getLockPath(), 'c');
+        if ($fp === false) {
+            return;
+        }
+        flock($fp, LOCK_EX);
+        $wait = (float) $state->getContent() + $this->minRequestInterval - microtime(true);
+        if ($wait > 0) {
+            usleep((int) ($wait * 1000000));
+        }
+        $state->setContent((string) microtime(true));
+        flock($fp, LOCK_UN);
+        fclose($fp);
+    }
+
+    /**
+     * For guides that only give the time of the programs: the hour when the clocks go back (02:00 to 03:00 in October)
+     * exists twice. The second one is the right one when the first one would start before the end of the previous
+     * program (the end is only known when the guide gives a duration).
+     */
+    protected function resolveRepeatedHour(\DateTimeImmutable $start, ?\DateTimeImmutable $previousEnd): \DateTimeImmutable
+    {
+        $second = $start->setTimestamp($start->getTimestamp() + 3600);
+        $isRepeatedHour = $second->format('H:i') === $start->format('H:i') && $second->getOffset() !== $start->getOffset();
+        if ($isRepeatedHour && $previousEnd !== null && $start->getTimestamp() < $previousEnd->getTimestamp() - 120) {
+            return $second;
+        }
+
+        return $start;
+    }
+
     /**
      * @param string $url
      * @param array<string, string> $headers
+     * @param string|null $body If set, a POST request with this body is sent instead of a GET one
      * @return string
      */
-    protected function getContentFromURL(string $url, array $headers = [], bool $ignoreCache = false, bool $decodeEntities = true): string
+    protected function getContentFromURL(string $url, array $headers = [], bool $ignoreCache = false, bool $decodeEntities = true, ?string $body = null): string
     {
         if (empty($headers['User-Agent'])) {
             $headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0';
         }
-        $cache = new ProviderCache(md5($url.json_encode($headers)));
+        $cache = new ProviderCache(md5($url.json_encode($headers).$body));
         if (!$ignoreCache) {
             $content = $cache->getContent();
             if (!empty($content)) {
@@ -144,15 +187,17 @@ abstract class AbstractProvider
             }
         }
 
+        $this->throttle();
+
         try {
-            $response = $this->client->get(
-                $url,
-                [
-                    'headers' => $headers,
-                    'connect_timeout' => 1,
-                    'timeout' => 20
-                ]
-            );
+            $options = [
+                'headers' => $headers,
+                'connect_timeout' => 1,
+                'timeout' => 20
+            ];
+            $response = $body === null
+                ? $this->client->get($url, $options)
+                : $this->client->post($url, $options + ['body' => $body]);
         } catch (ConnectException $e) {
             if ($fp !== false) {
                 flock($fp, LOCK_UN);

@@ -138,9 +138,9 @@ class Program extends Tag
     }
 
     /**
-     * Ajout d'un crédit (acteur, présentateur, ...)
+     * Ajout d'un crédit (acteur, présentateur, ...), avec éventuellement le rôle joué (attribut role)
      */
-    public function addCredit(?string $name, $type = 'guest'): void
+    public function addCredit(?string $name, $type = 'guest', ?string $role = null): void
     {
         if (!empty($name)) {
             if (!in_array($type, self::$SORTED_CREDITS)) {
@@ -153,7 +153,7 @@ class Program extends Tag
                 $creditTag = new Tag('credits', null, [], self::$SORTED_CREDITS);
                 $this->setChild($creditTag);
             }
-            $creditTag->addChild(new Tag($type, $name));
+            $creditTag->addChild(new Tag($type, $name, ['role' => $role]));
         }
     }
 

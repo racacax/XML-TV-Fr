@@ -38,7 +38,8 @@ class PlayTV extends AbstractProvider implements ProviderInterface
         foreach ($json['data'] as $val) {
             $program = Program::withTimestamp(strtotime($val['start_at']), strtotime($val['end_at']));
 
-            $attrs = $val['media']['attrs'] ?? [];
+            // The API renamed attrs to plurimedia_attrs
+            $attrs = $val['media']['plurimedia_attrs'] ?? $val['media']['attrs'] ?? [];
             $category = $val['media']['path'][0]['category'] ?? 'Inconnu';
             $category[0] = strtoupper($category[0]);
             $program->addCategory($category);
@@ -55,11 +56,42 @@ class PlayTV extends AbstractProvider implements ProviderInterface
             if (isset($image)) {
                 $program->addIcon($image);
             }
+            $this->addDetails($program, $val, $attrs);
 
             $channelObj->addProgram($program);
         }
 
         return $channelObj;
+    }
+
+    private function addDetails(Program $program, array $broadcast, array $attrs): void
+    {
+        if (!empty($attrs['production_year'])) {
+            $program->setDate((string) $attrs['production_year']);
+        }
+        $countries = array_filter(array_map(
+            fn ($code) => \Locale::getDisplayRegion('-' . $code, 'fr'),
+            $attrs['nationalities'] ?? []
+        ));
+        if (!empty($countries)) {
+            $program->setCountry(implode(' - ', $countries));
+        }
+        if (in_array($broadcast['certification'] ?? null, ['10', '12', '16', '18'], true)) {
+            $program->setRating('-' . $broadcast['certification']);
+        }
+        $flags = $broadcast['attributes'] ?? [];
+        if (in_array('Rediffusion', $flags, true)) {
+            $program->setPreviouslyShown();
+        }
+        if (in_array('Inédit', $flags, true) || in_array('Première diffusion', $flags, true)) {
+            $program->setPremiere();
+        }
+        if (in_array('Audiodescription', $flags, true)) {
+            $program->setAudioDescribed();
+        }
+        if (in_array('Direct', $flags, true)) {
+            $program->addKeyword('direct');
+        }
     }
 
     public function generateUrl(Channel $channel, \DateTimeImmutable $date): string

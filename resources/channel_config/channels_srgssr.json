@@ -1,0 +1,30 @@
+{
+  "RTSUn.ch": {
+    "businessUnit": "rts",
+    "id": "143932a79bb5a123a646b68b1d1188d7ae493e5b"
+  },
+  "RTSDeux.ch": {
+    "businessUnit": "rts",
+    "id": "d7dfff28deee44e1d3c49a3d37d36d492b29671b"
+  },
+  "SRF1.ch": {
+    "businessUnit": "srf",
+    "id": "23ffbe1b-65ce-4188-add2-c724186c2c9f"
+  },
+  "SRF2.ch": {
+    "businessUnit": "srf",
+    "id": "e4d5ad08-c1e8-46a3-bb58-4875051d60d2"
+  },
+  "SRFinfo.ch": {
+    "businessUnit": "srf",
+    "id": "34c2819e-e715-43d7-9026-40a443152a97"
+  },
+  "RSI1.ch": {
+    "businessUnit": "rsi",
+    "id": "la1"
+  },
+  "RSI2.ch": {
+    "businessUnit": "rsi",
+    "id": "la2"
+  }
+}

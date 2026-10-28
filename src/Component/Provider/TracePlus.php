@@ -101,6 +101,31 @@ class TracePlus extends AbstractProvider implements ProviderInterface
         return $channelObj;
     }
 
+    /**
+     * Channel logos come from the CMS of trace.plus (one request for all channels). Channels are matched
+     * through the slug of their EPG url.
+     */
+    public function getLogo(string $channel): ?string
+    {
+        parent::getLogo($channel);
+
+        $body = json_encode(['query' => '{ allChannel(first: 200) { items { epg logo { url } } } }']);
+        $headers = ['Content-Type' => 'application/json', 'umb-project-alias' => 'trace-backoffice'];
+        $response = json_decode($this->getContentFromURL('https://graphql.umbraco.io', $headers, false, false, $body), true);
+        foreach ($response['data']['allChannel']['items'] ?? [] as $item) {
+            if ($this->channelsList[$channel] === ($this->getSlugFromEpgUrl($item['epg'] ?? ''))) {
+                return $item['logo']['url'] ?? null;
+            }
+        }
+
+        return null;
+    }
+
+    private function getSlugFromEpgUrl(string $url): ?string
+    {
+        return preg_match('#/export/([^/]+)/epg\.xml#', $url, $matches) ? $matches[1] : null;
+    }
+
     public function generateUrl(string $slug): string
     {
         return 'https://filesapp.trace.tv/files/epg/export/' . $slug . '/epg.xml';

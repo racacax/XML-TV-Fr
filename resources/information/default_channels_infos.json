@@ -89,7 +89,7 @@
   },
   "AB3.fr": {
     "name": "AB3",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~deec8bc0a9e988af.png/480x480/quality/100/ab-3.png"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/AB3_2025.svg/500px-AB3_2025.svg.png"
   },
   "ABCAustralia.au": {
     "name": "ABC Australia",
@@ -104,8 +104,8 @@
     "icon": "https://static-cdn.tv.sfr.net/data/logos/tv_services/A_BOLA_TV_color.png"
   },
   "ABXploreFR.fr": {
-    "name": "ABXplore",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~055ec590f83aa135.png/480x480/quality/100/abxplore.png"
+    "name": "ABX",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/ABX_2025.svg/500px-ABX_2025.svg.png"
   },
   "ACTUATV.be": {
     "name": "Actua TV",
@@ -246,6 +246,10 @@
   "ANTENNEA.af": {
     "name": "ANTENNEA",
     "icon": "https://st2.depositphotos.com/3682225/7554/v/600/depositphotos_75542581-stock-illustration-radar-vector-icon-satellite-dish.jpg"
+  },
+  "AntenneReunionRadio.fr": {
+    "name": "Antenne Réunion Radio",
+    "icon": "https://proxies.antennereunion-production.eu-west-3.alphanetworks.tv/proxy/imgdata?type=100&objectId=2&languageId=fr"
   },
   "APLA.ca": {
     "name": "APLA",
@@ -667,6 +671,10 @@
     "name": "BBCEHD",
     "icon": "https://cdn.tvpassport.com/image/station/640x480/v2/s53128_h15_ac.png"
   },
+  "BBCEarth.fr": {
+    "icon": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR3200001NQ_20260505T035829SQUARE.png",
+    "name": "BBC Earth"
+  },
   "BBCEntertainment.uk": {
     "name": "BBC Entertainment",
     "icon": "https://focus.telerama.fr/500x500/0000/00/01/clear-18.png"
@@ -750,6 +758,10 @@
   "BFMGrandsReportages.fr": {
     "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300BFMGRANDSREPORTAGESmono.png",
     "name": "BFM Grands Reportages"
+  },
+  "BFMJiraiDormirChezVous.fr": {
+    "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/img300RMCJDCVmononew.png",
+    "name": "RMC J'irai dormir chez vous"
   },
   "BFMParis.fr": {
     "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/BFMPARISIDF100x100COULEURAVECCONTOUR.png",
@@ -2720,8 +2732,8 @@
     "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/50913/canal-ouah/CHN43FB/EDUCTV_RDC_640x480-Copie-HKdA?=.png"
   },
   "EEntertainment.fr": {
-    "name": "E! Entertainment",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~935480ccb24320a7.png/480x480/quality/100/e.png"
+    "name": "Bravo",
+    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~9f2fb42aa86020a9.png/480x480/quality/80/e.png"
   },
   "EHD.ca": {
     "name": "EHD",
@@ -2831,6 +2843,10 @@
   "EWTN.ca": {
     "name": "EWTN",
     "icon": "https://upload.wikimedia.org/wikipedia/fr/thumb/0/05/EWTN_logo.svg/1280px-EWTN_logo.svg.png"
+  },
+  "ExoTV.fr": {
+    "name": "Exo TV",
+    "icon": "https://proxies.antennereunion-production.eu-west-3.alphanetworks.tv/proxy/imgdata?type=100&objectId=69&languageId=fr"
   },
   "EXPHD.ca": {
     "name": "EXPHD"
@@ -3524,6 +3540,10 @@
     "name": "France TV S&eacute;ries",
     "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/1092/canal-ouah/CHN43FB/CHN43FB_1092_20260126-de3E?=.png"
   },
+  "FrequenceNovelas.fr": {
+    "icon": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FRBC800001X0_20260310T031725SQUARE.png",
+    "name": "Fréquence Novelas"
+  },
   "FrissonsTV.ca": {
     "name": "Frissons TV",
     "icon": "https://cdn.tvpassport.com/image/station/640x480/v2/s105852_h15_aa.png"
@@ -4003,6 +4023,10 @@
   "IMPACTTV.af": {
     "name": "IMPACT TV",
     "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180386/canal-ouah/CHN43FB/IMPACTTV_640x480-Xp_X?=.png"
+  },
+  "INA70s.fr": {
+    "name": "INA",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Logo_INA.svg/500px-Logo_INA.svg.png"
   },
   "IND1.ca": {
     "name": "IND1",
@@ -5288,6 +5312,10 @@
     "name": "NIGEZIE",
     "icon": "http://cdn.startimestv.com/banner/legacy/c_-615165407.png"
   },
+  "NinaNovelas.fr": {
+    "name": "Nina Novelas",
+    "icon": "https://www.nina-tv.com/images/logo.png"
+  },
   "NoTele.be": {
     "name": "NoTele",
     "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn5DeCglVcDc5jd-9ivBci4nCdZb9Qz4Qe68HyDF4s5lBfIp-Be7aD0-0_Fw&amp;s"
@@ -6084,6 +6112,10 @@
     "name": "RTL Plus",
     "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqT4x4ErWJn8ZyqTcGptBgX78IUaxmP88d5Gn-NR680nQ5RGeQqw-K1uFDQr8&amp;s"
   },
+  "RTLReunion.fr": {
+    "name": "Antenne Réunion Radio",
+    "icon": "https://proxies.antennereunion-production.eu-west-3.alphanetworks.tv/proxy/imgdata?type=100&objectId=2&languageId=fr"
+  },
   "RTLTVI.be": {
     "name": "RTL TVI",
     "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~8054f5248406c04a.png/480x480/quality/100/rtl-tvi.png"
@@ -6487,6 +6519,26 @@
     "name": "SNWLH",
     "icon": "https://cdn.tvpassport.com/image/station/640x480/v2/s68946_h15_aa.png"
   },
+  "SonyOneFavoris.fr": {
+    "name": "Sony One Favoris",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/5fb26f0a-864e-44da-99c0-dd5cccd2a417/FR_FAST_Plex_Faves_logo_dark.png"
+  },
+  "SonyOneHitsAction.fr": {
+    "name": "Sony One Hits Action",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/a3ead00d-7fdc-4f0f-a531-1cc3af6863c5/FR_FAST_Plex_ActionHits_logo_dark.png"
+  },
+  "SonyOneHitsComedy.fr": {
+    "name": "Sony One Hits Comédie",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/fde6237a-3a8c-4d2a-b14f-ab390baeef69/FR_FAST_Plex_ComedyHits_logo_dark.png"
+  },
+  "SonyOneSeriesComedy.fr": {
+    "name": "Sony One Séries Comédie",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/5ed0013a-150b-42cf-8ea2-4a3369386946/FR_FAST_Plex_ComedyTV_logo_dark.png"
+  },
+  "SonyOneSeriesThriller.fr": {
+    "name": "Sony One Séries Thriller",
+    "icon": "https://provider-static.plex.tv/epg/cms/production/f161e843-a9db-4a63-8058-2f46600f5ae7/FR_FAST_Plex_ThrillerTV_logo_dark.png"
+  },
   "SPARK.ca": {
     "name": "SPARK",
     "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrI0vyBwli99OnKuMCohQZJQTjUyC0LKrX7aBTSsuWFXo90o_CyBcysyBuEVc&amp;s"
@@ -6799,6 +6851,10 @@
     "name": "Sport en France",
     "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/1080/canal-ouah/CHN43FB/CHN43FB_1080_20240206-ykFF?=.png"
   },
+  "SportPlus.fr": {
+    "name": "Sport+",
+    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/72/canal-ouah/CHN43FB/CHN43FB_72_20261007-VG6S?=.png"
+  },
   "SsmTV.af": {
     "name": "SSM TV",
     "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180411/canal-ouah/CHN43FB/SSMTV_myCANAL_640x480?=.png"
@@ -7012,8 +7068,8 @@
     "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180078/canal-ouah/CHN43FB/SYFY_FB_myCANAL_640x480?=.png"
   },
   "Syfy.fr": {
-    "name": "Syfy",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~fdf578c5513fc680.png/480x480/quality/100/syfy.png"
+    "name": "SciFi",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/SciFi_2026.svg/500px-SciFi_2026.svg.png"
   },
   "Syfy.frdrom": {
     "name": "SYFY",
@@ -7093,7 +7149,7 @@
   },
   "TF14k.fr": {
     "name": "TF1 4K",
-    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Tf14k-logo.png/640px-Tf14k-logo.png"
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/6/62/Tf14k-logo.png"
   },
   "TF1SeriesFilms.af": {
     "name": "TF1 SERIES FILMS",
@@ -7233,11 +7289,11 @@
   },
   "TRACEAyiti.fr": {
     "name": "Trace Ayiti",
-    "icon": "https://freebox.cdn.scw.iliad.fr/large_trace_ayiti_94de0df748.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/a2yep4va/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-ayiti-haiti_1200x800_v1.jpg"
   },
   "TRACESportStars.fr": {
     "name": "TRACESportStars",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~d815841a915cc32f.png/480x480/quality/100/trace-sport-stars.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/ttibw1u5/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-sports-sports-celebrities_1200x800_v1.jpg"
   },
   "TRAV.ca": {
     "name": "TRAV",
@@ -7414,6 +7470,10 @@
   "TV5MondePacifiqueCatchup": {
     "name": "TV5 Monde Pacifique Catchup",
     "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfwyzYnqdbc-xu2PlOkApJ473yTyCpxfMzYWfSw9ajnUCdFW5DcEA1V9_hxSE&amp;s"
+  },
+  "TV5MondeVoyage.fr": {
+    "icon": "https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/FR1800004EP_20251013T054046SQUARE.png",
+    "name": "TV5 Monde Voyage"
   },
   "TV5Style.fr": {
     "name": "TV5 Style",
@@ -7897,11 +7957,11 @@
   },
   "Trace.ci": {
     "name": "TRACE IVOIRE",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180370/canal-ouah/CHN43FB/TRACEIVOIRE_640x480-2WgP?=.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/bf1boec4/logo_traceplus_trace-ivoire_eng_color_rgb.png"
   },
   "TraceAfrica.fr": {
     "name": "Trace Africa",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~cfa414c0987f9df9.png/480x480/quality/100/trace-africa.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/55qdwsip/01_2024_trace-_eng_tv_channels_logos_with_zone_inclusion_trace_africa_-_francophone_1200x800_v1-1.jpg"
   },
   "TraceAfrica.frdrom": {
     "name": "TRACE AFRICA",
@@ -7917,11 +7977,11 @@
   },
   "TraceBrasil.br": {
     "name": "TRACE BRASIL",
-    "icon": "https://media.umbraco.io/trace-backoffice/srvpyki2/01_2024_trace-_pt_tv-channels-logos-with-zone-inclusion_trace-brasil-brasil__1200x800_v1.png?anchor=center&mode=crop&upscale=false&format=webp&quality=50"
+    "icon": "https://media.umbraco.io/trace-backoffice/srvpyki2/01_2024_trace-_pt_tv-channels-logos-with-zone-inclusion_trace-brasil-brasil__1200x800_v1.png"
   },
   "TraceCaribbean.fr": {
     "name": "TRACE CARIBBEAN",
-    "icon": "https://static-cdn.tv.sfr.net/data/logos/tv_services/TRACE_CARIBBEAN_color.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/qluekida/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-caribbean-caribbean_1200x800_v1.jpg"
   },
   "TraceChristmas.af": {
     "name": "TRACE CHRISTMAS",
@@ -7933,10 +7993,10 @@
   },
   "TraceGospel.af": {
     "name": "Trace Gospel",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180620/canal-ouah/CHN43FB/TRACEGOSPEL_myCANAL_640x480?=.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/m5thaean/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-gospel-nigeria-east-africa_1200x800_v1.jpg"
   },
   "TraceGospel.fr": {
-    "icon": "https://static-cdn.tv.sfr.net/data/logos/tv_services/Trace_Gospel_color.png",
+    "icon": "https://media.umbraco.io/trace-backoffice/0nfbllov/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-gospel-africa-franco_1200x800_v1.jpg",
     "name": "Trace Gospel"
   },
   "TraceGospelROA.af": {
@@ -7945,47 +8005,47 @@
   },
   "TraceGospelSA.af": {
     "name": "TRACE GOSPEL (SA)",
-    "icon": "https://media.umbraco.io/trace-backoffice/u5kjb4ra/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-gospel-southern-africa_1200x800_v1.jpg?anchor=center&mode=crop&upscale=false&format=webp&quality=50"
+    "icon": "https://media.umbraco.io/trace-backoffice/u5kjb4ra/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-gospel-southern-africa_1200x800_v1.jpg"
   },
   "TraceJama.af": {
     "name": "TRACE JAMA",
-    "icon": "https://media.umbraco.io/trace-backoffice/wx4cscwp/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-jama-ghana_1200x800_v1.jpg?anchor=center&mode=crop&upscale=false&format=webp&quality=50"
+    "icon": "https://media.umbraco.io/trace-backoffice/wx4cscwp/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-jama-ghana_1200x800_v1.jpg"
   },
   "TraceKitoko.af": {
     "name": "Trace Kitoko",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180621/canal-ouah/CHN43FB/TRACEKITOKO_myCANAL640x480?=.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/t3iav1hu/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-kitoko-congo_1200x800_v1.png"
   },
   "TraceLatina.fr": {
     "name": "Trace Latina",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/{resolutionXY}/filters:quality({imageQualityPercentage})/canalplus-cdn.canal-plus.io/p1/channel/784/canal-ouah/CHN43FB/TRACELATINA_myCANAL_640x480"
+    "icon": "https://media.umbraco.io/trace-backoffice/gssla4u2/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-latina-latin-america_1200x800_v1.jpg"
   },
   "TraceMboa.af": {
     "name": "TRACE MBOA ",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180266/canal-ouah/CHN43FB/TRACEMBOA_myCANAL_640x480?=.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/su4mcbo3/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-mboa-cameroon_1200x800_v1.jpg"
   },
   "TraceMuzika.af": {
     "name": "TRACE MUZIKA",
-    "icon": "https://media.umbraco.io/trace-backoffice/bhljdj0m/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-muzika-ethiopia_1200x800_v1.jpg?anchor=center&mode=crop&upscale=false&format=webp&quality=50"
+    "icon": "https://media.umbraco.io/trace-backoffice/bhljdj0m/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-muzika-ethiopia_1200x800_v1.jpg"
   },
   "TraceMziki.af": {
     "name": "TRACE MZIKI",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/{resolutionXY}/filters:quality({imageQualityPercentage})/canalplus-cdn.canal-plus.io/p1/channel/180570/canal-ouah/CHN43FB/TRACEMZIKI_myCANAL640x480"
+    "icon": "https://media.umbraco.io/trace-backoffice/pssjpwr5/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-mziki-east-africa_1200x800_v1.jpg"
   },
   "TraceNaija.af": {
     "name": "TRACE NAIJA",
-    "icon": "https://media.umbraco.io/trace-backoffice/rkyl1h4s/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-naija-nigeria_1200x800_v1.jpg?anchor=center&mode=crop&upscale=false&format=webp&quality=50"
+    "icon": "https://media.umbraco.io/trace-backoffice/rkyl1h4s/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-naija-nigeria_1200x800_v1.jpg"
   },
   "TraceNgoma.af": {
     "name": "TRACE NGOMA",
-    "icon": "https://media.umbraco.io/trace-backoffice/wvyotsas/2025_tngo_channel_logo_traceplus_eng_1200x800.png?anchor=center&mode=crop&upscale=false&format=webp&quality=50"
+    "icon": "https://media.umbraco.io/trace-backoffice/wvyotsas/2025_tngo_channel_logo_traceplus_eng_1200x800.png"
   },
   "TraceTeranga.af": {
     "name": "TRACE TERANGA",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180714/canal-ouah/CHN43FB/TRACETERANGA_myCANAL_640x480?=.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/chbdvrsx/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-teranga_senegal-mail-gambia_1200x800_v1.jpg"
   },
   "TraceToca.fr": {
     "name": "Trace Toca",
-    "icon": "https://static-cdn.tv.sfr.net/data/logos/tv_services/Trace_Toca_color.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/aisj3x2s/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-toca_-angola-c-verde-mozambique_1200x800_v1.jpg"
   },
   "TraceTropical.fr": {
     "name": "Trace Tropical",
@@ -7993,31 +8053,31 @@
   },
   "TraceUK.uk": {
     "name": "TRACE UK",
-    "icon": "https://media.umbraco.io/trace-backoffice/lu0blq2l/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-uk-united-kingdom_1200x800_v1.jpg?anchor=center&mode=crop&upscale=false&format=webp&quality=50"
+    "icon": "https://media.umbraco.io/trace-backoffice/lu0blq2l/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-uk-united-kingdom_1200x800_v1.jpg"
   },
   "TraceUrban.fr": {
     "name": "Trace Urban",
-    "icon": "https://www.programme-tv.net/imgre/fit/~2~channel~b672a3a7ae0004dc.png/480x480/quality/100/trace-urban.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/5i4pv1b1/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-urban-france_1200x800_v1.jpg"
   },
   "TraceUrban.frdrom": {
     "name": "TRACE URBAN",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/160102/canal-ouah/CHN43FB/TRACEURBAN_myCANAL_640x480?=.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/r3mklqsu/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-urban-caribbean-indian-ocean_1200x800_v1.jpg"
   },
   "TraceUrbanAfrique.af": {
     "name": "Trace Urban Afrique",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/180186/canal-ouah/CHN43FB/TRACEURBAN_myCANAL_640x480?=.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/k1kj3mr4/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-urban-africa-franco_1200x800_v1.jpg"
   },
   "TraceUrbanInter.af": {
     "name": "TRACE URBAN (INTER)",
-    "icon": "https://media.umbraco.io/trace-backoffice/gbvclgv4/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-urban-international_1200x800_v1.jpg?anchor=center&mode=crop&upscale=false&format=webp&quality=50"
+    "icon": "https://media.umbraco.io/trace-backoffice/gbvclgv4/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-urban-international_1200x800_v1.jpg"
   },
   "TraceUrbanSA.af": {
     "name": "TRACE URBAN (SA)",
-    "icon": "https://media.umbraco.io/trace-backoffice/iuidd41o/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-urban-southern-africa_1200x800_v1.jpg?anchor=center&mode=crop&upscale=false&format=webp&quality=50"
+    "icon": "https://media.umbraco.io/trace-backoffice/iuidd41o/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-urban-southern-africa_1200x800_v1.jpg"
   },
   "TraceVanilla.frdrom": {
     "name": "TRACE VANILLA",
-    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/160800/canal-ouah/CHN43FB/TRACEVANILLA_myCANAL_640x480?=.png"
+    "icon": "https://media.umbraco.io/trace-backoffice/opupyuil/01_2024_trace-_eng_tv-channels-logos-with-zone-inclusion_trace-vanilla-indian-ocean_1200x800_v1.jpg"
   },
   "TravelChannel.uk": {
     "name": "Travel Channel",
@@ -8616,8 +8676,8 @@
     "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/21120/canal-ouah/CHN43FB/CHN43FB_EPGID_21120_15112021?=.png"
   },
   "beCuriousTV.ch": {
-    "name": "beCuriousTV",
-    "icon": "https://static.teleboy.ch/shared/stations/402/icon320_light.png?v2023_48_0"
+    "name": "CARAC 5",
+    "icon": "https://thumb.wikimedia.org/wikipedia/fr/thumb/c/c5/CARAC5_logo_2025.svg/langfr-3840px-CARAC5_logo_2025.svg.png"
   },
   "beINSPORTS1.fr": {
     "name": "beIN SPORTS 1",
@@ -8686,5 +8746,13 @@
   "viaMaTele.fr": {
     "icon": "https://static-cdn.tv.sfr.net/data/img/apps/chaines/logos/viamatele100x100couleur.png",
     "name": "Vià MATÉLÉ"
+  },
+  "DogCatTV.fr": {
+    "name": "Dog & Cat TV",
+    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/1201/canal-ouah/CHN43FB/DOGCATTV_ONLIGHT_640x480-W5Dx?=.png"
+  },
+  "CineWestern.fr": {
+    "name": "Ciné Western",
+    "icon": "https://thumb.canalplus.pro/http/unsafe/640x480/filters:quality(100)/canalplus-cdn.canal-plus.io/p1/channel/170037/canal-ouah/CHN43FB/CINEWESTERN_BLACK_640x480-KPVl?=.png"
   }
 }

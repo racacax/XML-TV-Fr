@@ -13,10 +13,9 @@ use racacax\XmlTv\ValueObject\Program;
 // Original script by lazel from https://github.com/lazel/XML-TV-Fr/blob/master/classes/SFR.php
 class SFR extends AbstractProvider implements ProviderInterface
 {
-    public function __construct(Client $client, ?float $priority = null, array $extraParam = [])
+    public function __construct(Client $client, ?float $priority = null)
     {
-        $file = $extraParam['provider'] ?? 'sfr';
-        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_'.$file.'.json'), $priority ?? 0.85);
+        parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_sfr.json'), $priority ?? 0.85);
     }
 
     private function fixBrokenJson(string $json): string

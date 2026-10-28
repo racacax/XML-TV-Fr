@@ -5,25 +5,31 @@ declare(strict_types=1);
 namespace racacax\XmlTvTest\Integration;
 
 use PHPUnit\Framework\TestCase;
+use racacax\XmlTv\Component\Provider\AntenneReunion;
 use racacax\XmlTv\Component\Provider\Bouygues;
 use racacax\XmlTv\Component\Provider\Cogeco;
+use racacax\XmlTv\Component\Provider\ExternalXML;
+use racacax\XmlTv\Component\Provider\FranceTV;
 use racacax\XmlTv\Component\Provider\ICIRadioCanadaTele;
-use racacax\XmlTv\Component\Provider\LEquipeLive;
+use racacax\XmlTv\Component\Provider\LeTelegramme;
 use racacax\XmlTv\Component\Provider\LInternaute;
 use racacax\XmlTv\Component\Provider\MyCanal;
 use racacax\XmlTv\Component\Provider\NouvelObs;
+use racacax\XmlTv\Component\Provider\OLPlay;
 use racacax\XmlTv\Component\Provider\Oqee;
+use racacax\XmlTv\Component\Provider\OuestFrance;
 use racacax\XmlTv\Component\Provider\Orange;
 use racacax\XmlTv\Component\Provider\PlayTV;
 use racacax\XmlTv\Component\Provider\Proximus;
-use racacax\XmlTv\Component\Provider\RMC;
 use racacax\XmlTv\Component\Provider\SFR;
 use racacax\XmlTv\Component\Provider\SixPlay;
+use racacax\XmlTv\Component\Provider\SRGSSR;
 use racacax\XmlTv\Component\Provider\SudInfo;
 use racacax\XmlTv\Component\Provider\Tebeosud;
 use racacax\XmlTv\Component\Provider\Tele2Semaines;
 use racacax\XmlTv\Component\Provider\Tele7Jours;
 use racacax\XmlTv\Component\Provider\StarTimesTV;
+use racacax\XmlTv\Component\Provider\Tivi5MondeUSA;
 use racacax\XmlTv\Component\Provider\TracePlus;
 use racacax\XmlTv\Component\Provider\Teleboy;
 use racacax\XmlTv\Component\Provider\Telecablesat;
@@ -47,7 +53,6 @@ class ProvidersTest extends TestCase
     private static array $TESTED_PROVIDERS_CHANNELS = [
         [VirginPlus::class, ['channels' => ['CBFT.ca']]],
         [Cogeco::class, ['channels' => ['CBFT.ca']]],
-        [RMC::class, ['channels' => ['BFMTV.fr']]],
         [Bouygues::class, ['channels' => ['TF1.fr']]],
         [ICIRadioCanadaTele::class, ['channels' => ['CBAFT.ca']]],
         [MyCanal::class, ['channels' => ['TF1.fr']]],
@@ -71,9 +76,19 @@ class ProvidersTest extends TestCase
         [Tele2Semaines::class, ['channels' => ['TF1.fr']]],
         [LInternaute::class, ['channels' => ['TF1.fr']]],
         [TracePlus::class, ['channels' => ['TraceUrban.fr']]],
-        [StarTimesTV::class, ['channels' => ['ZeeOne.st']]],
+        [StarTimesTV::class, ['channels' => ['ZeeOne.af']]],
+        [OLPlay::class, ['channels' => ['OLTV.fr']]],
+        [SRGSSR::class, ['channels' => ['RTSUn.ch']]],
+        [FranceTV::class, ['channels' => ['France2.fr']]],
+        // Details need one request per program, the grid is enough to test the provider
+        [OuestFrance::class, ['channels' => ['TF1.fr'], 'extra_params' => ['ouestfrance_enable_details' => false]]],
+        [LeTelegramme::class, ['channels' => ['TF1.fr']]],
+        [AntenneReunion::class, ['channels' => ['AntenneReunion.fr']]],
+        [ExternalXML::class, ['channels' => ['SonyOneFavoris.fr', 'RMCMystere.fr']]],
+        // Details need one request per episode, the grid is enough to test the provider
+        [Tivi5MondeUSA::class, ['channels' => ['Tivi5.fr'], 'extra_params' => ['tivi5mondeusa_enable_details' => false]]],
     ];
-    private static array $IGNORED_PROVIDERS = [Teleboy::class, LEquipeLive::class];
+    private static array $IGNORED_PROVIDERS = [Teleboy::class];
 
     /**
      * All Providers must have at least a channel to gather or to have specifically been ignored
@@ -103,7 +118,7 @@ class ProvidersTest extends TestCase
     {
         $channels = $data['channels'];
         $configurator = new Configurator();
-        $provider = new $provider($configurator->getDefaultClient());
+        $provider = new $provider($configurator->getDefaultClient(), null, $data['extra_params'] ?? []);
         $formatter = new XmlFormatter();
         $channelObj = null;
         $count = 0;

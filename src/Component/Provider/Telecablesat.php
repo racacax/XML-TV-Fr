@@ -21,6 +21,8 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         } else {
             $this->enableDetails = true;
         }
+        // The website is very sensitive to rate limit: one request per second at most
+        $this->minRequestInterval = (float) ($extraParam['telecablesat_request_interval'] ?? 1.0);
         parent::__construct($client, ResourcePath::getInstance()->getChannelPath('channels_telecablesat.json'), $priority ?? 0.55);
     }
 
@@ -45,7 +47,8 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
     {
         $content = $this->getContent($url);
         if (!empty($content)) {
-            $content = explode('<div class="top-menu">', $content)[1];
+            // The menu is not always delimited by the website: keep the whole page in that case
+            $content = explode('<div class="top-menu">', $content)[1] ?? $content;
             $content = explode('<h2>Prochains épisodes</h2>', $content)[0];
             $content = str_replace('<br>', "\n", $content);
             $content = str_replace('<br />', "\n", $content);
@@ -124,22 +127,31 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         if (!$this->channelExists($channel)) {
             return false;
         }
-        $channelContent = $this->channelsList[$channel];
-        $channel_id = $channelContent['id'];
-        $urls = [ $this->generateUrl($channelObj, (new \DateTimeImmutable($date))->modify('-1 day')),  $this->generateUrl($channelObj, new \DateTimeImmutable($date))];
+        $channel_id = $this->channelsList[$channel]['id'];
+        $configuredPage = (int) $this->channelsList[$channel]['page'];
+        $days = [(new \DateTimeImmutable($date))->modify('-1 day'), new \DateTimeImmutable($date)];
         [$minDate, $maxDate] = $this->getMinMaxDate($date);
-        foreach ($urls as $urlIndex => $url) {
-            $content = $this->getContent($url);
-            preg_match_all('/logos_chaines\/(.*?).png" title="(.*?)"/', $content, $channels);
-            $channelIndex = array_search($channel_id, $channels[1]);
-            if ($channelIndex >= 0) {
-                $channelContent = @explode('<div class="row">', explode("<div class='paging'>", $content)[0])[$channelIndex + 1];
-                if (!empty($channelContent)) {
-                    preg_match_all('/data-start="(.*?)" data-end="(.*?)"/', $channelContent, $times);
-                    preg_match_all('/data-src="(.*?)"/', $channelContent, $imgs);
-                    preg_match_all('/<div class="hour-type">.*?<\/span>(.*?)<\/div>.*?<span class="title">(.*?)<\/span>/', $channelContent, $genresAndTitles);
-                    preg_match_all('/class="link" href="(.*?)"/', $channelContent, $links);
-                    preg_match_all('/data-diffusion="(.*?)"/', $channelContent, $diffusionIds);
+        foreach ($days as $urlIndex => $day) {
+            // Channels move from a page to another when channels are added or removed: the closest pages are tried
+            $content = null;
+            $channelIndex = false;
+            foreach ($this->getPagesToTry($configuredPage) as $page) {
+                $content = (string) $this->getContent($this->generateUrl($channelObj, $day, $page));
+                preg_match_all('/logos_chaines\/(.*?).png" title="(.*?)"/', $content, $channels);
+                $channelIndex = array_search($channel_id, $channels[1]);
+                if ($channelIndex !== false) {
+                    break;
+                }
+            }
+            // array_search returns false when the channel is not on the page (false >= 0 is true)
+            if ($channelIndex !== false) {
+                $rowContent = @explode('<div class="row">', explode("<div class='paging'>", $content)[0])[$channelIndex + 1];
+                if (!empty($rowContent)) {
+                    preg_match_all('/data-start="(.*?)" data-end="(.*?)"/', $rowContent, $times);
+                    preg_match_all('/data-src="(.*?)"/', $rowContent, $imgs);
+                    preg_match_all('/<div class="hour-type">.*?<\/span>(.*?)<\/div>.*?<span class="title">(.*?)<\/span>/', $rowContent, $genresAndTitles);
+                    preg_match_all('/class="link" href="(.*?)"/', $rowContent, $links);
+                    preg_match_all('/data-diffusion="(.*?)"/', $rowContent, $diffusionIds);
                     $count = count($times[1]);
                     if (count($imgs[1]) != $count || count($genresAndTitles[1]) != $count || count($links[1]) != $count) {
                         return false;
@@ -163,7 +175,6 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
                             if (!$result) {
                                 break;
                             }
-                            sleep(3);
                         }
                         $program->addIcon('https:'.$imgs[1][$i]);
                     }
@@ -175,14 +186,22 @@ class Telecablesat extends AbstractProvider implements ProviderInterface
         return $channelObj;
     }
 
-    public function generateUrl(Channel $channel, \DateTimeImmutable $date): string
+    /**
+     * @return int[] The page of the channel, then the previous and the next ones
+     */
+    private function getPagesToTry(int $page): array
+    {
+        return array_values(array_filter([$page, $page - 1, $page + 1], fn (int $p) => $p >= 1));
+    }
+
+    public function generateUrl(Channel $channel, \DateTimeImmutable $date, ?int $page = null): string
     {
         $channelContent = $this->channelsList[$channel->getId()];
 
         return sprintf(
             'https://tv-programme.telecablesat.fr/programmes-tele/?date=%s&page=%s',
             $date->format('Y-m-d'),
-            $channelContent['page']
+            $page ?? $channelContent['page']
         );
     }
 }

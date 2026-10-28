@@ -44,13 +44,13 @@ class VirginPlus extends AbstractProvider implements ProviderInterface
 
         try {
             if (empty($currentCache)) {
-                $info = @json_decode($this->getContentFromURL(self::$BASE_URL.'epg/v3/epgInfo'), true);
+                $info = @json_decode($this->getContentFromURL(self::$BASE_URL.'epg/v3/epgInfo', self::$HEADERS), true);
                 if ($info) {
                     $this->epgFromDate = new \DateTimeImmutable($info['minStartTime']);
                     $this->epgToDate = new \DateTimeImmutable($info['maxEndTime']);
                     $this->blockDuration = $info['schedulesBlockHoursDuration'];
                     $version = $info['version'];
-                    $this->epgInfo = @json_decode($this->getContentFromURL(self::$BASE_URL."epg/v3/channels?tvService=volt&epgChannelMap=MAP_TORONTO&epgVersion=$version"), true) ?? [];
+                    $this->epgInfo = @json_decode($this->getContentFromURL(self::$BASE_URL."epg/v3/channels?tvService=volt&epgChannelMap=MAP_TORONTO&epgVersion=$version", self::$HEADERS), true) ?? [];
                     if ($this->epgInfo) {
                         $this->isConfigured = true;
                         $cache->setArrayKey('minStartTime', $info['minStartTime']);

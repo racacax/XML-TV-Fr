@@ -162,6 +162,21 @@ class ProgramTest extends TestCase
     }
 
     /**
+     * Test the role played by an actor
+     */
+    public function testAddCreditWithRole(): void
+    {
+        $program = $this->createBasicProgram();
+        $program->addCredit('Cécile de France', 'actor', 'Carole');
+        $program->addCredit('Izïa Higelin', 'actor');
+
+        $xml = $program->asXML();
+
+        $this->assertStringContainsString('<actor role="Carole">Cécile de France</actor>', $xml);
+        $this->assertStringContainsString('<actor>Izïa Higelin</actor>', $xml);
+    }
+
+    /**
      * Test credits are sorted according to DTD order
      */
     public function testCreditsSortedCorrectly(): void

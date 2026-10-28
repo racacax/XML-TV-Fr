@@ -74,6 +74,12 @@ class Oqee extends AbstractProvider implements ProviderInterface
                 if (@$entry['live']['audio_description']) {
                     $program->setAudioDescribed();
                 }
+                if (!empty($entry['live']['year'])) {
+                    $program->setDate((string) $entry['live']['year']);
+                }
+                if (!empty($entry['live']['subtitle_teletext'])) {
+                    $program->addSubtitles('teletext');
+                }
                 $channelObj->addProgram($program);
             }
         }
